@@ -7,6 +7,7 @@ import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
@@ -39,6 +40,7 @@ public enum EnumDinoFoodMob
 	Stegosaurus(null,50,3),
 	Dilophosaurus(null,25,2),
 	Brachiosaurus(null,80,5),
+	Spinosaurus(null,70,5),
 	;
     public Class preyClass;
     public int FoodValue;
@@ -71,6 +73,7 @@ public enum EnumDinoFoodMob
     	Stegosaurus.setDetails(EntityStegosaurus.class);
     	Dilophosaurus.setDetails(EntityDilophosaurus.class);
     	Brachiosaurus.setDetails(EntityBrachiosaurus.class);
+    	Spinosaurus.setDetails(EntitySpinosaurus.class);
     	
     }
 }

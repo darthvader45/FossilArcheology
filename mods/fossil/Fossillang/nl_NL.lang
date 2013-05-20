@@ -77,6 +77,7 @@
  Item.rawStegosaurus.Name=Stegosaurus Vlees
  Item.rawDilophosaurus.Name=Dilophosaurus Vlees
  Item.rawBrachiosaurus.Name=Brachiosaurus Vlees
+ Item.rawSpinosaurus.Name=Spinosaurus Vlees
  ##########Dino Egg Names
  Item.eggTriceratops.Name=Triceratops Ei
  Item.eggVelociraptor.Name=Velociraptor Ei
@@ -88,6 +89,7 @@
  Item.eggStegosaurus.Name=Stegosaurus Ei
  Item.eggDilophosaurus.Name=Dilophosaurus Ei
  Item.eggBrachiosaurus.Name=Brachiosaurus Ei
+ Item.eggSpinosaurus.Name=Spinosaurus Ei
  ##########Dino DNA Names
  Item.dnaTriceratops.Name=Triceratops DNA
  Item.dnaVelociraptor.Name=Velociraptor DNA
@@ -99,6 +101,7 @@
  Item.dnaStegosaurus.Name=Stegosaurus DNA
  Item.dnaDilophosaurus.Name=Dilophosaurus DNA
  Item.dnaBrachiosaurus.Name=Brachiosaurus DNA
+ Item.dnaSpinosaurus.Name=Spinosaurus DNA
  ##########Other DNA
  Item.dnaPig.Name=Varkens-DNA
  Item.dnaSheep.Name=Schapen-DNA
@@ -166,6 +169,7 @@ Status.Betrayed.Head= Deze
  Dino.Dilophosaurus=Dilophosaurus
  Dino.Brachiosaurus=Brachiosaurus
  Dino.Nautilus=Nautilus
+ Dino.Spinosaurus=Spinosaurus
  ##########Names of the Animals
  Animal.Mammoth=Mammoet
  Animal.SaberCat=Smilodon 

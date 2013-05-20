@@ -71,6 +71,7 @@ import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
+import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -328,7 +329,7 @@ public class Fossil implements IPacketHandler
 	public static Item dnaStegosaurus;
 	public static Item dnaDilophosaurus;
 	public static Item dnaBrachiosaurus;
-	//public static Item newDinoDNA;
+	public static Item dnaSpinosaurus;
 	//public static Item newDinoDNA;
 	//public static Item newDinoDNA;
 	//public static Item newDinoDNA;
@@ -365,7 +366,7 @@ public class Fossil implements IPacketHandler
 	public static Item eggStegosaurus;
 	public static Item eggDilophosaurus;
 	public static Item eggBrachiosaurus;
-	//public static Item eggNew;
+	public static Item eggSpinosaurus;
 	//public static Item eggNew;
 	//public static Item eggNew;
 	//public static Item eggNew;
@@ -403,6 +404,7 @@ public class Fossil implements IPacketHandler
 	public static Item rawStegosaurus;
 	public static Item rawDilophosaurus;
 	public static Item rawBrachiosaurus;
+	public static Item rawSpinosaurus;
 	public static Item cookedDinoMeat;
 	
 	//Config ID INTs
@@ -517,7 +519,7 @@ public class Fossil implements IPacketHandler
 	public static int dnaStegosaurusID;
 	public static int dnaDilophosaurusID;
 	public static int dnaBrachiosaurusID;
-	//public static int newDinoDNAID;
+	public static int dnaSpinosaurusID;
 	//public static int newDinoDNAID;
 	//public static int newDinoDNAID;
 	//public static int newDinoDNAID;
@@ -554,7 +556,7 @@ public class Fossil implements IPacketHandler
 	public static int eggStegosaurusID;
 	public static int eggDilophosaurusID;
 	public static int eggBrachiosaurusID;
-	//public static int eggNewID;
+	public static int eggSpinosaurusID;
 	//public static int eggNewID;
 	//public static int eggNewID;
 	//public static int eggNewID;
@@ -592,6 +594,7 @@ public class Fossil implements IPacketHandler
 	public static int rawStegosaurusID;
 	public static int rawDilophosaurusID;
 	public static int rawBrachiosaurusID;
+	public static int rawSpinosaurusID;
 	public static int cookedDinoMeatID;
 	
 	/*public static boolean Option_Gen_Palaeoraphe;
@@ -725,7 +728,7 @@ public class Fossil implements IPacketHandler
 		dnaStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaStegosaurus", 10067).getInt(10067);
 		dnaDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaDilophosaurus", 10068).getInt(10068);
 		dnaBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaBrachiosaurus", 10069).getInt(10069);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10070).getInt(10070);
+		dnaSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "SpinosaurusDNA", 10070).getInt(10070);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10071).getInt(10071);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10072).getInt(10072);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10073).getInt(10073);
@@ -762,7 +765,7 @@ public class Fossil implements IPacketHandler
 		eggStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggStegosaurus", 10098).getInt(10098);
 		eggDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggDilophosaurus", 10099).getInt(10099);
 		eggBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggBrachiosaurus", 10100).getInt(10100);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10101).getInt(10101);
+		eggSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggSpinosaurus", 10101).getInt(10101);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt(10102);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10103).getInt(10103);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10104).getInt(10104);
@@ -800,6 +803,7 @@ public class Fossil implements IPacketHandler
 		rawStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawStegosaurus", 10132).getInt(10132);
 		rawDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawDilophosaurus", 10133).getInt(10133);
 		rawBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawBrachiosaurus", 10134).getInt(10134);
+		rawSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawSpinosaurus", 10136).getInt(10136);		
 		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, "cookedDinoMeat", 10135).getInt(10135);
 		
 		/*Option_Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -927,7 +931,8 @@ public class Fossil implements IPacketHandler
 		eggStegosaurus = new ItemAncientEgg(eggStegosaurusID,7).setUnlocalizedName("eggStegosaurus").setCreativeTab(this.tabFMaterial);
 		eggDilophosaurus = new ItemAncientEgg(eggDilophosaurusID,8).setUnlocalizedName("eggDilophosaurus").setCreativeTab(this.tabFMaterial);
 		eggBrachiosaurus = new ItemAncientEgg(eggBrachiosaurusID,9).setUnlocalizedName("eggBrachiosaurus").setCreativeTab(this.tabFMaterial);
-		
+		eggSpinosaurus = new ItemAncientEgg(eggSpinosaurusID,10).setUnlocalizedName("eggSpinosaurus").setCreativeTab(this.tabFMaterial);
+
 		//DNA
 		//dna = new ItemDNA(dnaID);
 		dnaTriceratops = new ForgeItem(dnaTriceratopsID,"Triceratops_DNA").setUnlocalizedName("dnaTriceratops").setCreativeTab(this.tabFMaterial);
@@ -940,6 +945,7 @@ public class Fossil implements IPacketHandler
 		dnaStegosaurus = new ForgeItem(dnaStegosaurusID,"Stegosaurus_DNA").setUnlocalizedName("dnaStegosaurus").setCreativeTab(this.tabFMaterial);
 		dnaDilophosaurus = new ForgeItem(dnaDilophosaurusID,"Dilophosaurus_DNA").setUnlocalizedName("dnaDilophosaurus").setCreativeTab(this.tabFMaterial);
 		dnaBrachiosaurus = new ForgeItem(dnaBrachiosaurusID,"Brachiosaurus_DNA").setUnlocalizedName("dnaBrachiosaurus").setCreativeTab(this.tabFMaterial);
+		dnaSpinosaurus = new ForgeItem(dnaSpinosaurusID,"Spinosaurus_DNA").setUnlocalizedName("dnaSpinosaurus").setCreativeTab(this.tabFMaterial);
 
 		//animalDNA
 		//animalDNA = new ItemNonDinoDNA(animalDNAID);
@@ -971,6 +977,7 @@ public class Fossil implements IPacketHandler
 		rawStegosaurus = new ForgeFood(rawStegosaurusID, 3, 0.3F, true,"Stegosaurus_Meat").setUnlocalizedName("Stegosaurus Meat").setCreativeTab(this.tabFFood);
 		rawDilophosaurus = new ForgeFood(rawDilophosaurusID, 3, 0.3F, true,"Dilophosaurus_Meat").setUnlocalizedName("Dilophosaurus Meat").setCreativeTab(this.tabFFood);
 		rawBrachiosaurus = new ForgeFood(rawBrachiosaurusID, 3, 0.3F, true,"Brachiosaurus_Meat").setUnlocalizedName("Brachiosaurus Meat").setCreativeTab(this.tabFFood);
+		rawSpinosaurus = new ForgeFood(rawSpinosaurusID, 3, 0.3F, true,"Spinosaurus_Meat").setUnlocalizedName("Spinosaurus Meat").setCreativeTab(this.tabFFood);
 		cookedDinoMeat = new ForgeFood(cookedDinoMeatID, 8, 0.8F, true,"Dino_Steak").setUnlocalizedName("CookedDinoMeat").setCreativeTab(this.tabFFood);
 		cookedChickenSoup = new ForgeItem(cookedChickenSoupID,"Cooked_Chicken_Soup").setUnlocalizedName("ChickenSoup").setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
 		rawChickenSoup = new ForgeItem(rawChickenSoupID,"Raw_Chicken_Soup").setUnlocalizedName("RawChickenSoup").setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
@@ -1101,6 +1108,8 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.addName(rawStegosaurus, GetLangTextByKey("Item.rawStegosaurus.Name"));
         LanguageRegistry.addName(rawDilophosaurus, GetLangTextByKey("Item.rawDilophosaurus.Name"));
         LanguageRegistry.addName(rawBrachiosaurus, GetLangTextByKey("Item.rawBrachiosaurus.Name"));
+        LanguageRegistry.addName(rawSpinosaurus, GetLangTextByKey("Item.rawSpinosaurus.Name"));
+
         
 		
 		//Ancient Egg
@@ -1114,6 +1123,8 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(eggStegosaurus, GetLangTextByKey("Item.eggStegosaurus.Name"));
 		LanguageRegistry.addName(eggDilophosaurus, GetLangTextByKey("Item.eggDilophosaurus.Name"));
 		LanguageRegistry.addName(eggBrachiosaurus, GetLangTextByKey("Item.eggBrachiosaurus.Name"));
+		LanguageRegistry.addName(eggSpinosaurus, GetLangTextByKey("Item.eggSpinosaurus.Name"));
+
 		
 		//DNA
 		LanguageRegistry.addName(dnaTriceratops, GetLangTextByKey("Item.dnaTriceratops.Name"));
@@ -1126,6 +1137,8 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(dnaStegosaurus, GetLangTextByKey("Item.dnaStegosaurus.Name"));
 		LanguageRegistry.addName(dnaDilophosaurus, GetLangTextByKey("Item.dnaDilophosaurus.Name"));
 		LanguageRegistry.addName(dnaBrachiosaurus, GetLangTextByKey("Item.dnaBrachiosaurus.Name"));
+		LanguageRegistry.addName(dnaSpinosaurus, GetLangTextByKey("Item.dnaSpinosaurus.Name"));
+
 		
 		LanguageRegistry.addName(dnaPig, GetLangTextByKey("Item.dnaPig.Name"));
 		LanguageRegistry.addName(dnaSheep, GetLangTextByKey("Item.dnaSheep.Name"));
@@ -1158,6 +1171,7 @@ public class Fossil implements IPacketHandler
 		GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.bucketMilk, 'B', Item.sugar, 'C', Item.wheat, 'E', this.eggStegosaurus});
 		GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.bucketMilk, 'B', Item.sugar, 'C', Item.wheat, 'E', this.eggBrachiosaurus});
 		GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.bucketMilk, 'B', Item.sugar, 'C', Item.wheat, 'E', this.eggDilophosaurus});
+		GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"AAA", "BEB", "CCC", 'A', Item.bucketMilk, 'B', Item.sugar, 'C', Item.wheat, 'E', this.eggSpinosaurus});
 		GameRegistry.addRecipe(new ItemStack(skullStick, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Item.stick});
 		GameRegistry.addRecipe(new ItemStack(drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
 		GameRegistry.addRecipe(new ItemStack(feederIdle, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
@@ -1195,6 +1209,7 @@ public class Fossil implements IPacketHandler
 		GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, dnaTRex});
 		GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, dnaDilophosaurus});
 		GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, dnaVelociraptor});
+		GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, dnaSpinosaurus});
 		GameRegistry.addShapelessRecipe(new ItemStack(rawChickenSoup, 1, 0), new Object[] {Item.bucketEmpty, Item.chickenRaw});
 		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 1), new Object[] {new ItemStack(magicConch, 1, 0)});
 		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 2), new Object[] {new ItemStack(magicConch, 1, 1)});
@@ -1251,6 +1266,7 @@ public class Fossil implements IPacketHandler
         GameRegistry.addSmelting(rawPterosaur.itemID, new ItemStack(cookedDinoMeat), 3.0F);
         GameRegistry.addSmelting(rawMosasaurus.itemID, new ItemStack(cookedDinoMeat), 3.0F);
         GameRegistry.addSmelting(rawBrachiosaurus.itemID, new ItemStack(cookedDinoMeat), 3.0F);
+        GameRegistry.addSmelting(rawSpinosaurus.itemID, new ItemStack(cookedDinoMeat), 3.0F);
         GameRegistry.addSmelting(icedMeat.itemID, new ItemStack(Item.beefCooked), 3.0F);
 		
 		EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, 5, false);
@@ -1278,6 +1294,7 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntitySaberCat.class, 			"SaberCat", 			22, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityBrachiosaurus.class, 	"Brachiosaurus", 		23, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
 		
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();

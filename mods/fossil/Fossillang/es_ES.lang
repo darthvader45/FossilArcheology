@@ -77,6 +77,7 @@ Item.rawMosasaurus.Name=Carne de Mosasaurio
 Item.rawStegosaurus.Name=Carne de Estegosaurio
 Item.rawDilophosaurus.Name=Carne de Dilofosaurio
 Item.rawBrachiosaurus.Name=Braquiosaurio
+Item.rawSpinosaurus.Name=Carne de Spinosaurus
 ##########Dino Egg Names
 Item.eggTriceratops.Name=Huevo deTriceratops
 Item.eggVelociraptor.Name=Huevo de Velociraptor
@@ -88,6 +89,7 @@ Item.eggMosasaurus.Name=Huevo de Mosasaurio
 Item.eggStegosaurus.Name=Huevo de Estegosaurio
 Item.eggDilophosaurus.Name=Huevo de Dilofosaurio
 Item.eggBrachiosaurus.Name=Huevo de Braquiosaurio
+Item.eggSpinosaurus.Name=Huevo de Spinosaurus
 ##########Dino DNA Names
 Item.dnaTriceratops.Name=ADN de Triceratops
 Item.dnaVelociraptor.Name=ADN de Velociraptor
@@ -99,6 +101,7 @@ Item.dnaMosasaurus.Name=ADN de Mosasaurio
 Item.dnaStegosaurus.Name=ADN de Estegosaurio
 Item.dnaDilophosaurus.Name=ADN de Dilofosaurio
 Item.dnaBrachiosaurus.Name=ADN de Braquiosaurio
+Item.dnaSpinosaurus.Name=ADN de Spinosaurus
 ##########Other DNA
 Item.dnaPig.Name=ADN de Cerdo
 Item.dnaSheep.Name=ADN de Oveja
@@ -166,6 +169,7 @@ Dino.Stegosaurus=Stegosaurio
 Dino.Dilophosaurus=Dilophosaurio
 Dino.Brachiosaurus=Braquiosaurio
 Dino.Nautilus=Nautilo
+Dion.Spinosaurus=Spinosaurus
 ##########Names of the Animals
 Animal.Mammoth=Mamut
 Animal.SaberCat=Dientes de Sable

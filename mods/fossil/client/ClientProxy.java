@@ -24,6 +24,7 @@ import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPterosaur;
 import mods.fossil.entity.mob.EntitySaberCat;
+import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
@@ -35,6 +36,7 @@ import mods.fossil.entity.mob.ModelNautilus;
 import mods.fossil.entity.mob.ModelPigBoss;
 import mods.fossil.entity.mob.ModelPterosaurGround;
 import mods.fossil.entity.mob.ModelSaberCat;
+import mods.fossil.entity.mob.ModelSpinosaurus;
 import mods.fossil.entity.mob.ModelStegosaurus;
 import mods.fossil.entity.mob.ModelTRex;
 import mods.fossil.entity.mob.ModelTriceratops;
@@ -49,6 +51,7 @@ import mods.fossil.entity.mob.RenderPigBoss;
 import mods.fossil.entity.mob.RenderPlesiosaur;
 import mods.fossil.entity.mob.RenderPterosaur;
 import mods.fossil.entity.mob.RenderSaberCat;
+import mods.fossil.entity.mob.RenderSpinosaurus;
 import mods.fossil.entity.mob.RenderStegosaurus;
 import mods.fossil.entity.mob.RenderTRex;
 import mods.fossil.entity.mob.RenderTriceratops;
@@ -166,6 +169,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBiped(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrachiosaurus.class, new RenderBrachiosaurus(0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderMammoth(new ModelMammoth(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));
 
 		RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
 		

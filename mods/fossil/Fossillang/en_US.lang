@@ -77,6 +77,7 @@ Item.rawMosasaurus.Name=Mosasaurus Meat
 Item.rawStegosaurus.Name=Stegosaurus Meat
 Item.rawDilophosaurus.Name=Dilophosaurus Meat
 Item.rawBrachiosaurus.Name=Brachiosaurus Meat
+Item.rawSpinosaurus.Name=Spinosaurus Meat
 ##########Dino Egg Names
 Item.eggTriceratops.Name=Triceratops Egg
 Item.eggVelociraptor.Name=Velociraptor Egg
@@ -88,6 +89,7 @@ Item.eggMosasaurus.Name=Mosasaurus Egg
 Item.eggStegosaurus.Name=Stegosaurus Egg
 Item.eggDilophosaurus.Name=Dilophosaurus Egg
 Item.eggBrachiosaurus.Name=Brachiosaurus Egg
+Item.eggSpinosaurus.Name=Spinosaurus Egg
 ##########Dino DNA Names
 Item.dnaTriceratops.Name=Triceratops DNA
 Item.dnaVelociraptor.Name=Velociraptor DNA
@@ -99,6 +101,7 @@ Item.dnaMosasaurus.Name=Mosasaurus DNA
 Item.dnaStegosaurus.Name=Stegosaurus DNA
 Item.dnaDilophosaurus.Name=Dilophosaurus DNA
 Item.dnaBrachiosaurus.Name=Brachiosaurus DNA
+Item.dnaSpinosaurus.Name=Spinosaurus DNA
 ##########Other DNA
 Item.dnaPig.Name=Pig DNA
 Item.dnaSheep.Name=Sheep DNA
@@ -129,8 +132,8 @@ MGCName.Tail=
 DEggName.Head=Egg of 
 DEggName.Tail=
 #
-Achieve.PigBossOnEarth.Name=You broke the rule!!
-Achieve.PigBossOnEarth.Desc=Summoning Anu to the Earth.
+Achieve.PigBossOnEarth.Name=You broke the rules!
+Achieve.PigBossOnEarth.Desc=Summoned Anu.
 ##########Order.Head Order.x
 Order.Head=Order:
 Order.Stay=Stay
@@ -154,11 +157,11 @@ Status.Full=is full.
 Status.Nervous.Head=You made the little
 Status.Nervous=too nervous to hunt itself.
 Status.GemErrorYoung=TRex is still too young.
-Status.GemErrorHealth=The scrab cannot afford such strong life-energy.
+Status.GemErrorHealth=The scarab cannot afford such strong life-energy.
 ########## Name of the dino, only 11 digits
 Dino.Triceratops=Triceratops
 Dino.Velociraptor=Velociraptor
-Dino.TRex=T-Rex
+Dino.TRex=Tyrannosaurus
 Dino.Pterosaur=Pterosaur
 Dino.Plesiosaur=Plesiosaur
 Dino.Mosasaurus=Mosasaurus
@@ -166,13 +169,14 @@ Dino.Stegosaurus=Stegosaurus
 Dino.Dilophosaurus=Dilophosaurus
 Dino.Brachiosaurus=Brachiosaurus
 Dino.Nautilus=Nautilus
+Dino.Spinosaurus=Spinosaurus
 ##########Names of the Animals
 Animal.Mammoth=Mammoth
 Animal.SaberCat=Smilodon
 ##########General Dino Messages, Only 11 Digits
 PediaText.Owner=Owner:
 PediaText.Chest=* Chests
-PediaText.Caution=!!!Dangerous!!!
+PediaText.Caution=!Dangerous!
 PediaText.Rideable=* Rideable
 PediaText.Weak=Almost Dead
 PediaText.Fly=* Able to fly
@@ -197,24 +201,24 @@ PediaText.Embryo.SaberCat=Smilodon
 PediaText.Embryo.Mammoth=Mammoth
 #
 AnuSpeaker.self=Anu:
-AnuSpeaker.Hello=Knees down,Resistance is futile.
-AnuSpeaker.BareHand=Bare hands...Brave
-AnuSpeaker.Draw=DRAW YOUR SWORD,Kid.
-AnuSpeaker.Coward=Bow-using coward!Stop hiding!
-AnuSpeaker.LeartHere=Look what I learnt from here!
-AnuSpeaker.LeartThere=Look what I learnt from there!
-AnuSpeaker.UnknownRanged=So is that your weapon
-AnuSpeaker.UnknownMelee=Ha!Stop Playing!
-AnuSpeaker.summon=Work for me,my servants.
-AnuSpeaker.Trans=Brutes,wake up your wisdom.
+AnuSpeaker.Hello=Kneel before me, resistance is futile.
+AnuSpeaker.BareHand=Bare hands... Stupid, but brave.
+AnuSpeaker.Draw=DRAW YOUR SWORD.
+AnuSpeaker.Coward=Bow using coward! Stop hiding!
+AnuSpeaker.LeartHere=Look what I learned from here!
+AnuSpeaker.LeartThere=Look what I learned from there!
+AnuSpeaker.UnknownRanged=So is that your weapon?
+AnuSpeaker.UnknownMelee=Ha! Stop playing!
+AnuSpeaker.summon=Servants, your Master calls.
+AnuSpeaker.Trans=Brutes, wake up your wisdom.
 AnuSpeaker.Qi=Qi-shock!
-AnuSpeaker.FireRain=Let's rain some fire!
+AnuSpeaker.FireRain=Lets rain some fire!
 #
 FPZSpeaker.self=Pig Zombies:
 FPZSpeaker.SelfKill=We can't live without leader!
 FPZSpeaker.LifeFor.head=My life for 
-FPZSpeaker.LifeFor.tail=!!
-FPZSpeaker.AnuSommon=All Heil Anu!!
+FPZSpeaker.LifeFor.tail=!
+FPZSpeaker.AnuSommon=All hail Anu!!
 ########## Dinoegg.Head Dinoname(automatically) Dinoegg.x
 Dinoegg.Head=An egg of 
 Dinoegg.dry= died because too dry.
@@ -227,6 +231,6 @@ Cultivate.OutBreak=Warning! Cultivating failed!
 ##########Order Drum Messages
 Drum.Trigger=Drum Order:
 Drum.Ordering=Ordering 
-Drum.TRex1=Ordering T-Rexes to come for breakfast.
-Drum.TRex2=Ordering T-Rexes to come for lunch.
-Drum.TRex3=Ordering T-Rexes to come for dinner.
+Drum.TRex1=Ordering T-Rexes to breakfast.
+Drum.TRex2=Ordering T-Rexes to lunch.
+Drum.TRex3=Ordering T-Rexes to dinner.

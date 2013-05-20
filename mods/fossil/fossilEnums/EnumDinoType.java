@@ -7,6 +7,7 @@ import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
@@ -61,7 +62,8 @@ public enum EnumDinoType
     Mosasaurus(EntityMosasaurus.class, 		C.NOTHING),
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
-    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE);
+    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
+    Spinosaurus(EntitySpinosaurus.class, 	C.NOTHING);
 
     private final Class dinoClass;
     /*private final boolean modelable;
@@ -114,6 +116,7 @@ public enum EnumDinoType
         Stegosaurus.setDetails(		Item.stick,			Fossil.rawStegosaurus, 	Fossil.dnaStegosaurus, 	Fossil.eggStegosaurus);
         Dilophosaurus.setDetails(	Item.bone,			Fossil.rawDilophosaurus,Fossil.dnaDilophosaurus,Fossil.eggDilophosaurus);
         Brachiosaurus.setDetails(	Item.stick,			Fossil.rawBrachiosaurus,Fossil.dnaBrachiosaurus,Fossil.eggBrachiosaurus);
+        Spinosaurus.setDetails(		Fossil.skullStick,	Fossil.rawSpinosaurus,	Fossil.dnaSpinosaurus,	Fossil.eggSpinosaurus);
     }
     public boolean isDinoDNA(Item i0)
     {
