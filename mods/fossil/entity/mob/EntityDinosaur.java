@@ -116,7 +116,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public int AttackStrengthIncrease = 1;
     
     //The speed of the dino when hatched
-    public float BaseSpeed = 0.1F;
+    public float BaseSpeed = 0.2F;
     public float SpeedIncrease = 0.015F;
     
     //Breed Tick at the moment, 0=breed, BreedingTime=timer just started

@@ -501,7 +501,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Stegosaurus:var5 = new EntityStegosaurus(this.worldObj);break;
                     case Dilophosaurus:var5 = new EntityDilophosaurus(this.worldObj);break;
                     case Brachiosaurus:var5 = new EntityBrachiosaurus(this.worldObj);break;
-                    case Spinosaurus:var5 = new EntityBrachiosaurus(this.worldObj);break;
+                    case Spinosaurus:var5 = new EntitySpinosaurus(this.worldObj);break;
 
                     default:
                         Fossil.ShowMessage("Bug:Impossible result.", var4);

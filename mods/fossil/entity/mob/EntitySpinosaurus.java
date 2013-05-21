@@ -23,6 +23,7 @@ import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -59,6 +60,8 @@ public class EntitySpinosaurus extends EntityDinosaur
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
 
+    
+
     public EntitySpinosaurus(World var1)
     {
         super(var1);
@@ -80,7 +83,7 @@ public class EntitySpinosaurus extends EntityDinosaur
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        //this.BaseSpeed=;
+        this.BaseSpeed=0.3F;
         this.SpeedIncrease=0.025F;
         this.MaxAge=23;
         //this.BaseHealth=;
@@ -214,8 +217,8 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         super.onUpdate();
         //this.blockBreakingBehavior.execute();
-        if(this.isAdult())
-        	BlockInteractive();
+ //       if(this.isAdult())
+//        	BlockInteractive();
         if (this.health > 0)
         {
             /*this.field_25054_c = this.field_25048_b;
@@ -366,7 +369,7 @@ public class EntitySpinosaurus extends EntityDinosaur
     protected void attackEntity(Entity var1, float var2)
     {
         this.faceEntity(var1, 30.0F, 30.0F);
-
+        
         if (!this.hasPath())
         {
             this.setPathToEntity(this.worldObj.getPathEntityToEntity(this, this.getEntityToAttack(), var2, true, false, true, false));
@@ -443,6 +446,7 @@ public class EntitySpinosaurus extends EntityDinosaur
                     return true;
                 }
              }
+        	/*
         	if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
             {
                 if (var1.username.equalsIgnoreCase(this.getOwnerName()))
@@ -454,6 +458,7 @@ public class EntitySpinosaurus extends EntityDinosaur
 		        }
                 return true;
             }
+            */
         	/*
         	if(var2.itemID == Fossil.chickenEss.itemID)
         		return true;
@@ -553,10 +558,6 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         if(this.isModelized())
         	return super.getTexture();
-        if (this.isWeak())
-            return "/mods/fossil/textures/mob/Spinosaurus_Adult.png";
-        if (this.isAdult() && !this.isTamed()) 
-        	return "/mods/fossil/textures/mob/Spinosaurus_Adult.png";
         return "/mods/fossil/textures/mob/Spinosaurus_Adult.png";
     }
 
