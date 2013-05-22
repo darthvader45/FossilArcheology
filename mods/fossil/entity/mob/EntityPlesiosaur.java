@@ -88,8 +88,8 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.BaseattackStrength=3;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        //this.BaseSpeed=0.2F;
-        //this.SpeedIncrease=0.02F;
+        this.BaseSpeed=0.18F;
+        this.SpeedIncrease=0.02F;
         this.MaxAge=12;
         this.BaseHealth=30;
         this.HealthIncrease=10;

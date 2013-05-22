@@ -92,7 +92,7 @@ public class EntityVelociraptor extends EntityDinosaur
         //this.BaseattackStrength=;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        this.BaseSpeed=0.2F;
+        this.BaseSpeed=0.3F;
         this.SpeedIncrease=0.025F;
         this.MaxAge=9;
         this.BaseHealth=21;

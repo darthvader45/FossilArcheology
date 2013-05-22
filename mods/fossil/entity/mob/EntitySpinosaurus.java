@@ -30,6 +30,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
@@ -54,12 +55,12 @@ public class EntitySpinosaurus extends EntityDinosaur
     private float field_25054_c;
     private boolean field_25052_g;*/
     public boolean Screaming = false;
+    public boolean isAngry = false;
     public int SkillTick = 0;
     //public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
-
     
 
     public EntitySpinosaurus(World var1)
@@ -83,8 +84,8 @@ public class EntitySpinosaurus extends EntityDinosaur
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        this.BaseSpeed=0.3F;
-        this.SpeedIncrease=0.025F;
+        this.BaseSpeed=0.22F;
+        this.SpeedIncrease=0.021F;
         this.MaxAge=23;
         //this.BaseHealth=;
         this.HealthIncrease=5;
@@ -116,6 +117,7 @@ public class EntitySpinosaurus extends EntityDinosaur
         FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
         FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
         
+        this.tasks.addTask(0, new EntityAISwimming(this)); 
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIWander(this));
@@ -125,6 +127,7 @@ public class EntitySpinosaurus extends EntityDinosaur
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+
     }
 
     /**
@@ -216,9 +219,10 @@ public class EntitySpinosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        //this.blockBreakingBehavior.execute();
- //       if(this.isAdult())
-//        	BlockInteractive();
+//        this.blockBreakingBehavior.execute();
+       if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
+        	BlockInteractive();
+         
         if (this.health > 0)
         {
             /*this.field_25054_c = this.field_25048_b;
@@ -352,15 +356,17 @@ public class EntitySpinosaurus extends EntityDinosaur
 
     public boolean isAngry()
     {
-    	return true;
+        return true;
+
     }
+ 
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isAngry() ? super.findPlayerToAttack() : null;
     }
 
     /**
@@ -436,8 +442,6 @@ public class EntitySpinosaurus extends EntityDinosaur
         			if(Fossil.FossilOptions.Heal_Dinos)
         				this.heal(200);
                     this.increaseHunger(500);
-                    this.setTamed(true);
-                    this.setOwner(var1.username);
                     --var2.stackSize;
                     if (var2.stackSize <= 0)
         	        {
@@ -548,6 +552,8 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         if (!this.isWeak())
             this.handleScream();
+        
+        
         super.onLivingUpdate();
     }
 
@@ -577,7 +583,7 @@ public class EntitySpinosaurus extends EntityDinosaur
                 super.jump();
             }
         }
-        else if (!this.onGround)
+        else if (!this.onGround || !this.inWater)
         {
             this.motionY -= 0.1D;
         }

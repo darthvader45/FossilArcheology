@@ -98,8 +98,8 @@ public class EntityDilophosaurus extends EntityDinosaur
         //this.BaseattackStrength=;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        this.BaseSpeed=0.17F;
-        this.SpeedIncrease=0.022F;
+        this.BaseSpeed=0.21F;
+        this.SpeedIncrease=0.026F;
         this.MaxAge=9;
         //this.BaseHealth=;
         //this.HealthIncrease=;

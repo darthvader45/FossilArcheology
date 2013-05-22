@@ -79,7 +79,7 @@ public class EntityTRex extends EntityDinosaur
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        //this.BaseSpeed=;
+        this.BaseSpeed=0.22F;
         this.SpeedIncrease=0.02F;
         this.MaxAge=23;
         //this.BaseHealth=;
@@ -104,6 +104,7 @@ public class EntityTRex extends EntityDinosaur
         FoodMobList.addMob(EnumDinoFoodMob.Pig);
         FoodMobList.addMob(EnumDinoFoodMob.Cow);
         FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        FoodMobList.addMob(EnumDinoFoodMob.Sheep);
         FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
         FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
         FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
@@ -226,7 +227,7 @@ public class EntityTRex extends EntityDinosaur
     {
         super.onUpdate();
         //this.blockBreakingBehavior.execute();
-        if(this.isAdult())
+        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
         	BlockInteractive();
         if (this.health > 0)
         {

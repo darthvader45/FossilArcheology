@@ -77,7 +77,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
         //this.BaseSpeed=;
-        //this.SpeedIncrease=;
+        this.SpeedIncrease=0.012F;
         this.MaxAge=36;
         //this.BaseHealth=;
         this.HealthIncrease=5;
@@ -304,8 +304,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-
-        if (this.isAdult() && ! this.isModelized())//this.getDinoAge() >= 4)
+        if (this.isAdult() && ! this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking)//this.getDinoAge() >= 4)
         {
             this.BlockInteractive();
         }

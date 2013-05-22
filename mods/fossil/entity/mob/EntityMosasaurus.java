@@ -11,6 +11,7 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
+import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIGrowup;
 import mods.fossil.fossilAI.DinoAIStarvation;
 import mods.fossil.fossilAI.WaterDinoAINearestAttackableTarget;
@@ -75,12 +76,12 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         this.WidthInc=0.25F;
         this.Length0=0.5F;
         this.LengthInc=0.45F;
-        this.Height0=0.2F;
+        this.Height0=0.3F;
         this.HeightInc=0.15F;
         this.BaseattackStrength=4;
         this.AttackStrengthIncrease=2;
         //this.BreedingTime=;
-        this.BaseSpeed=0.5F;
+        this.BaseSpeed=0.3F;
         this.SpeedIncrease=0.4F;
         this.MaxAge=20;
         this.BaseHealth=50;
@@ -103,6 +104,8 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(4, new WaterDinoAIWander(this, 0.003F));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
+
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new WaterDinoAINearestAttackableTarget(this, EntityNautilus.class, 16.0F, 0, true));
         this.targetTasks.addTask(3, new WaterDinoAINearestAttackableTarget(this, EntitySquid.class, 16.0F, 0, true));
@@ -353,7 +356,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
             }
             else
             {
-                this.motionY = -0.01874999888241291D;
+                this.motionY = -0.00174999888241291D;
             }
         }
 

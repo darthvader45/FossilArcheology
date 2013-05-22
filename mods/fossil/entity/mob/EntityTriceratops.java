@@ -79,7 +79,7 @@ public class EntityTriceratops extends EntityDinosaur
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
         //this.BaseSpeed=;
-        //this.SpeedIncrease=;
+        this.SpeedIncrease=0.016F;
         this.MaxAge=13;
         this.BaseHealth=21;
         this.HealthIncrease=1;

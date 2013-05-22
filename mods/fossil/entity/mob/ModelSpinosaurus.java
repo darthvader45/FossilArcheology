@@ -294,7 +294,14 @@ public class ModelSpinosaurus extends ModelDinosaurs
 
 	  
 	  
-	  
+        this.leftThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F;
+        this.leftCalf.rotateAngleX = (float) Math.pow(1.3F, 2) * MathHelper.cos(var1 * 0.6662F) * -1.0F * var2 + 0.472F;
+        this.leftFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F;
+        
+        this.rightThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2 - 0.172F;
+        this.rightCalf.rotateAngleX = (float) Math.pow(1.3F, 2) * MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * -1.0F * var2 + 0.472F;
+        this.rightFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2 - 0.172F;
+	/*  
           this.leftThigh.rotateAngleX = MathHelper.clamp_float(MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F, -0.7F, 0.3F);
           this.leftCalf.rotateAngleX = MathHelper.clamp_float(MathHelper.cos(var1 * 0.6662F) * -1.0F * var2 + 0.472F, 0, 1.523598776F);
           this.leftFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F;
@@ -303,7 +310,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
           this.rightFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2 - 0.172F;
           this.upperBody.rotateAngleX = MathHelper.cos(var1 * 0.2662F) * 0.2F * var2 - 0.172F;
           this.neck.rotateAngleX = MathHelper.cos(var1 * 0.2662F + (float)Math.PI) * 0.2F * var2 + 0.172F;
-     
+ */    
   		tail1.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.2F * var1 + initialOffset));
   		currentAngle = tail1.rotateAngleY;
   		tail2.rotateAngleY = ((float) Math.pow(0.25F, 2)) * (MathHelper.cos(-0.2F * var1 + 1F * offset + initialOffset)) - currentAngle;
