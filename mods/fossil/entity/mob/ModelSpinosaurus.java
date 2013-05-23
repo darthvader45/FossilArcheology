@@ -91,8 +91,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
 
     lowerBody = new ModelRenderer(this, "lowerBody");
     lowerBody.setRotationPoint(0F, 1F, -1F);
-    setRotation(lowerBody, 0F, 0F, 0F);
-    lowerBody.mirror = true;
+    lowerBody.mirror = false;
       lowerBody.addBox("lowerBodyPiece", -7F, -4F, -2F, 14, 16, 22);
     upperBody = new ModelRenderer(this, "upperBody");
     upperBody.setRotationPoint(0F, -3F, -2F);
@@ -294,13 +293,18 @@ public class ModelSpinosaurus extends ModelDinosaurs
 
 	  
 	  
-        this.leftThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F;
-        this.leftCalf.rotateAngleX = (float) Math.pow(1.3F, 2) * MathHelper.cos(var1 * 0.6662F) * -1.0F * var2 + 0.472F;
-        this.leftFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F;
+        this.leftThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 / 2.0F) * 0.5F * var2 - 0.172F;
+        this.leftCalf.rotateAngleX = MathHelper.clamp_float((float) Math.pow(1.3F, 2) * MathHelper.cos(var1 / 2.0F) * -1.0F * var2 + 0.472F, 0, 1.523598776F);
+        this.leftFoot.rotateAngleX = MathHelper.cos(var1 / 2.0F) * 1.0F * var2 - 0.172F;
         
-        this.rightThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2 - 0.172F;
-        this.rightCalf.rotateAngleX = (float) Math.pow(1.3F, 2) * MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * -1.0F * var2 + 0.472F;
-        this.rightFoot.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2 - 0.172F;
+        this.rightThigh.rotateAngleX = (float) Math.pow(1.2F, 1) * MathHelper.cos(var1 / 2.0F + (float)Math.PI) * 0.5F * var2 - 0.172F;
+        this.rightCalf.rotateAngleX = MathHelper.clamp_float((float) Math.pow(1.3F, 2) * MathHelper.cos(var1 / 2.0F + (float)Math.PI) * -1.0F * var2 + 0.472F, 0, 1.523598776F);
+        this.rightFoot.rotateAngleX = MathHelper.cos(var1 / 2.0F + (float)Math.PI) * 1.0F * var2 - 0.172F;
+        
+        
+        this.lowerBody.rotationPointY = (MathHelper.cos(var1 / 2.0F) + 2*MathHelper.sin(2));
+        
+        
 	/*  
           this.leftThigh.rotateAngleX = MathHelper.clamp_float(MathHelper.cos(var1 * 0.6662F) * 1.0F * var2 - 0.172F, -0.7F, 0.3F);
           this.leftCalf.rotateAngleX = MathHelper.clamp_float(MathHelper.cos(var1 * 0.6662F) * -1.0F * var2 + 0.472F, 0, 1.523598776F);
