@@ -140,7 +140,7 @@ public class BlockDrum extends BlockContainer
         {
             TileEntityDrum var10 = (TileEntityDrum)var1.getBlockTileEntity(var2, var3, var4);
             var10.TriggerOrder(var5);
-            var1.setBlock(var2, var3, var4, var10.Order.ordinal());
+            var1.setBlockMetadataWithNotify(var2, var3, var4, var10.Order.ordinal(), var6);
         }
         return true;
     }

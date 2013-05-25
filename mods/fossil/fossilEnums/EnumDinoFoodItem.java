@@ -40,6 +40,7 @@ public enum EnumDinoFoodItem
 	Stegosaur(Fossil.rawStegosaurus,50,3),
 	Dilophosaurus(Fossil.rawDilophosaurus,25,2),
 	Brachiosaur(Fossil.rawBrachiosaurus,50,4),
+	Spinosaurus(Fossil.rawSpinosaurus,20,3),
 	DinoMeatCooked(Fossil.cookedDinoMeat,50,5),	
 	;
     public Item item;

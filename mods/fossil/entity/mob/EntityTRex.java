@@ -406,7 +406,6 @@ public class EntityTRex extends EntityDinosaur
                     {
                         this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
                     }
-
                     this.Screaming = true;
                 }
             }
@@ -652,8 +651,12 @@ public class EntityTRex extends EntityDinosaur
     public float getSpeedModifier()
     {
         float var1 = 1.0F;
-
-        if (this.getDinoAge() < 3)
+        
+        if (this.IsHungry())
+        {
+        	var1 *=1.5F;
+        }
+        else if (this.getDinoAge() < 3)
         {
             var1 = super.getSpeedModifier();
 
@@ -671,6 +674,7 @@ public class EntityTRex extends EntityDinosaur
                 var1 = 5.0F;
             }
         }
+
 
         return var1;
     }

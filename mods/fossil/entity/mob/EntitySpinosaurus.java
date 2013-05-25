@@ -74,13 +74,17 @@ public class EntitySpinosaurus extends EntityDinosaur
         //this.moveSpeed = 0.3F;
         this.health = 10;
         this.experienceValue=20;
+       
+        this.HitboxXfactor=1.0F;
+        this.HitboxYfactor=1.5F;
+        this.HitboxZfactor=1.5F;
         
-        this.Width0=0.5F;
-        this.WidthInc=0.3F;
+        this.Width0=0.8F;
+        this.WidthInc=0.7F;
         this.Length0=0.5F;
-        this.LengthInc=0.3F;
+        this.LengthInc=0.7F;
         this.Height0=0.5F;
-        this.HeightInc=0.3F;
+        this.HeightInc=0.7F;
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
@@ -638,8 +642,12 @@ public class EntitySpinosaurus extends EntityDinosaur
     public float getSpeedModifier()
     {
         float var1 = 1.0F;
-
-        if (this.getDinoAge() < 3)
+        
+        if (this.IsHungry())
+        {
+        	var1 *=1.5F;
+        }
+        else if (this.getDinoAge() < 3)
         {
             var1 = super.getSpeedModifier();
 
