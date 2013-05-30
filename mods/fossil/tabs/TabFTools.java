@@ -3,6 +3,7 @@ package mods.fossil.tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class TabFTools extends CreativeTabs 
@@ -21,7 +22,7 @@ public class TabFTools extends CreativeTabs
     
     public String getTranslatedTabLabel()
     {
-     return Fossil.GetLangTextByKey("Tab.Tools.Name");
+     return LocalizationStrings.FTOOLS_NAME;
     }
 	
 }

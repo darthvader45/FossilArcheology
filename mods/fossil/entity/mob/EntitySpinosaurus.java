@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
@@ -179,7 +180,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "TRex_Living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Spino_living : null;
     }
 
     /**
@@ -187,7 +188,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "TRex_hit";
+        return DinoSoundHandler.Spino_hurt;
     }
 
     /**
@@ -195,7 +196,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "TRex_Death";
+        return DinoSoundHandler.Spino_death;
     }
 
     protected void updateEntityActionState() {}
@@ -404,7 +405,7 @@ public class EntitySpinosaurus extends EntityDinosaur
                 {
                     if (this.getDinoAge() >= 3)
                     {
-                        this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
+                        this.worldObj.playSoundAtEntity(this, DinoSoundHandler.Spino_scream, this.getSoundVolume() * 2.0F, 1.0F);
                     }
 
                     this.Screaming = true;

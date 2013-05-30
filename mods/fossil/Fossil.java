@@ -45,6 +45,7 @@ import mods.fossil.client.FossilCfgLoader;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
+import mods.fossil.client.Localizations;
 import mods.fossil.entity.BehaviorJavelinDispense;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityDinoEgg;
@@ -107,6 +108,7 @@ import mods.fossil.tabs.TabFFood;
 import mods.fossil.tabs.TabFItems;
 import mods.fossil.tabs.TabFMaterial;
 import mods.fossil.tabs.TabFTools;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
@@ -608,6 +610,7 @@ public class Fossil implements IPacketHandler
     @cpw.mods.fml.common.Mod.PreInit
 	public void PreInit(FMLPreInitializationEvent event)
 	{
+        Localizations.loadLanguages();
     	MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
     	VillagerRegistry.instance().registerVillageTradeHandler(1, new FossilTradeHandler());
     	
@@ -617,35 +620,34 @@ public class Fossil implements IPacketHandler
 			var2.load();
 		
 		//Blocks
-		blockFossilID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockFossil", 3000).getInt(3000);
-		blockSkullID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockSkull", 3001).getInt(3001);
-		skullLanternID = var2.getBlock(Configuration.CATEGORY_BLOCK, "skullLantern", 3002).getInt(3002);
-		blockanalyzerIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockanalyzerIdle", 3003).getInt(3003);
-		blockanalyzerActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockanalyzerActive", 3004).getInt(3004);
-		blockcultivateIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockcultivateIdle", 3005).getInt(3005);
-		blockcultivateActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockcultivateActive", 3006).getInt(3006);
-		blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockworktableIdle", 3007).getInt(3007);
-		blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockworktableActive", 3008).getInt(3008);
-		blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockTimeMachine", 3009).getInt(3009);
-		fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, "ferns", 3010).getInt(3010);
-		//fernUpperID = var2.getBlock(Configuration.CATEGORY_BLOCK, "fernUpper", 3011).getInt(3011);
-		drumID = var2.getBlock(Configuration.CATEGORY_BLOCK, "drum", 3012).getInt(3012);
-		feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, "feederIdle", 3013).getInt(3013);
-		feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, "feederActive", 3014).getInt(3014);
-		blockPermafrostID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockPermafrost", 3015).getInt(3015);
-		blockIcedStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, "blockIcedStone", 3016).getInt(3016);
-		volcanicAshID = var2.getBlock(Configuration.CATEGORY_BLOCK, "volcanicAsh", 3017).getInt(3017);
-		volcanicRockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "volcanicRock", 3018).getInt(3018);
-		volcanicRockHotID = var2.getBlock(Configuration.CATEGORY_BLOCK, "volcanicRockHot", 3019).getInt(3019);
-		tarID = var2.getBlock(Configuration.CATEGORY_BLOCK, "tar", 3020).getInt(3020);
-		palmLogID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palmLog", 3021).getInt(3021);
-		palmLeavesID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palmLeaves", 3022).getInt(3022);
-		palmSapID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palmSap", 3023).getInt(3023);
-		palaePlanksID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palaePlanks", 3024).getInt(3024);
-		palaeSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palaeSingleSlab", 3024).getInt(3024);
-		palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palaeDoubleSlab", 3025).getInt(3025);
-		palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, "palaeStairs", 3026).getInt(3026);
-		sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3027).getInt(3027);
+		blockFossilID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKFOSSIL_NAME, 3000).getInt(3000);
+		blockSkullID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKSKULL_NAME, 3001).getInt(3001);
+		skullLanternID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SKULLLANTERN_NAME, 3002).getInt(3002);
+        blockanalyzerIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKANALYZERIDLE_NAME, 3003).getInt(3003);
+        blockanalyzerActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKANALYZERACTIVE_NAME, 3004).getInt(3004);
+        blockcultivateIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME, 3005).getInt(3005);
+        blockcultivateActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME, 3006).getInt(3006);
+        blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME, 3007).getInt(3007);
+        blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME, 3008).getInt(3008);
+        blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKTIMEMACHINE_NAME, 3009).getInt(3009);
+        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERNS_NAME, 3010).getInt(3010);
+        drumID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.DRUM_NAME, 3012).getInt(3012);
+        feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERIDLE_NAME, 3013).getInt(3013);
+        feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERACTIVE_NAME, 3014).getInt(3014);
+        blockPermafrostID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKPERMAFROST_NAME, 3015).getInt(3015);
+        blockIcedStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKICEDSTONE_NAME, 3016).getInt(3016);
+        volcanicAshID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICASH_NAME, 3017).getInt(3017);
+        volcanicRockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICROCK_NAME, 3018).getInt(3018);
+        volcanicRockHotID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICROCKHOT_NAME, 3019).getInt(3019);
+        tarID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.TAR_NAME, 3020).getInt(3020);
+        palmLogID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMLOG_NAME, 3021).getInt(3021);
+        palmLeavesID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMLEAVES_NAME, 3022).getInt(3022);
+        palmSapID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMSAP_NAME, 3023).getInt(3023);
+        palaePlanksID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAEPLANKS_NAME, 3024).getInt(3024);
+        palaeSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESINGLESLAB_NAME, 3024).getInt(3024);
+        palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAEDOUBLESLAB_NAME, 3025).getInt(3025);
+        palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESTAIRS_NAME, 3026).getInt(3026);
+        sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3028).getInt(3028);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3029).getInt(3029);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3030).getInt(3030);
@@ -654,37 +656,37 @@ public class Fossil implements IPacketHandler
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3033).getInt(3033);
 	
 		//Items
-		biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, "biofossil", 10000).getInt(10000);
-		relicID = var2.getItem(Configuration.CATEGORY_ITEM, "relic", 10001).getInt(10001);
-		stoneboardID = var2.getItem(Configuration.CATEGORY_ITEM, "stoneboard", 10002).getInt(10002);
-		ancientSwordID = var2.getItem(Configuration.CATEGORY_ITEM, "ancientSword", 10003).getInt(10003);
-		brokenSwordID = var2.getItem(Configuration.CATEGORY_ITEM, "brokenSword", 10004).getInt(10004);
-		fernSeedID = var2.getItem(Configuration.CATEGORY_ITEM, "fernSeed", 10005).getInt(10005);
-		ancienthelmetID = var2.getItem(Configuration.CATEGORY_ITEM, "ancienthelmet", 10006).getInt(10006);
-		brokenhelmetID = var2.getItem(Configuration.CATEGORY_ITEM, "brokenhelmet", 10007).getInt(10007);
-		skullStickID = var2.getItem(Configuration.CATEGORY_ITEM, "skullStick", 10008).getInt(10008);
-		gemID = var2.getItem(Configuration.CATEGORY_ITEM, "gem", 10009).getInt(10009);
-		gemAxeID = var2.getItem(Configuration.CATEGORY_ITEM, "gemAxe", 10010).getInt(10010);
-		gemPickaxeID = var2.getItem(Configuration.CATEGORY_ITEM, "gemPickaxe", 10011).getInt(10011);
-		gemSwordID = var2.getItem(Configuration.CATEGORY_ITEM, "gemSword", 10012).getInt(10012);
-		gemHoeID = var2.getItem(Configuration.CATEGORY_ITEM, "gemHoe", 10013).getInt(10013);
-		gemShovelID = var2.getItem(Configuration.CATEGORY_ITEM, "gemShovel", 10014).getInt(10014);
-		dinoPediaID = var2.getItem(Configuration.CATEGORY_ITEM, "dinoPedia", 10015).getInt(10015);
-		emptyShellID = var2.getItem(Configuration.CATEGORY_ITEM, "emptyShell", 10016).getInt(10016);
-		magicConchID = var2.getItem(Configuration.CATEGORY_ITEM, "magicConch", 10017).getInt(10017);
-		icedMeatID = var2.getItem(Configuration.CATEGORY_ITEM, "icedMeat", 10018).getInt(10018);
-		woodjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "woodjavelin", 10019).getInt(10019);
-		stonejavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "stonejavelin", 10020).getInt(10020);
-		ironjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "ironjavelin", 10021).getInt(10021);
-		goldjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "goldjavelin", 10022).getInt(10022);
-		diamondjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "diamondjavelin", 10023).getInt(10023);
-		ancientJavelinID = var2.getItem(Configuration.CATEGORY_ITEM, "ancientJavelin", 10024).getInt(10024);
-		whipID = var2.getItem(Configuration.CATEGORY_ITEM, "whip", 10025).getInt(10025);
-		legBoneID = var2.getItem(Configuration.CATEGORY_ITEM, "legBone", 10026).getInt(10026);
-		clawID = var2.getItem(Configuration.CATEGORY_ITEM, "claw", 10027).getInt(10027);
-		footID = var2.getItem(Configuration.CATEGORY_ITEM, "foot", 10028).getInt(10028);
-		skullID = var2.getItem(Configuration.CATEGORY_ITEM, "skull", 10029).getInt(10029);
-		brokenSaplingID = var2.getItem(Configuration.CATEGORY_ITEM, "brokenSapling", 10030).getInt(10030);
+        biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
+        relicID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RELIC_NAME, 10001).getInt(10001);
+        stoneboardID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TABLET_NAME, 10002).getInt(10002);
+        ancientSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_SWORD_NAME, 10003).getInt(10003);
+        brokenSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SWORD_NAME, 10004).getInt(10004);
+        fernSeedID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FERNSEED_NAME, 10005).getInt(10005);
+        ancienthelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_HELMET_NAME, 10006).getInt(10006);
+        brokenhelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HELMET_NAME, 10007).getInt(10007);
+        skullStickID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_STICK_NAME, 10008).getInt(10008);
+        gemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.GEM_NAME, 10009).getInt(10009);
+        gemAxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_AXE_NAME, 10010).getInt(10010);
+        gemPickaxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_PICKAXE_NAME, 10011).getInt(10011);
+        gemSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SWORD_NAME, 10012).getInt(10012);
+        gemHoeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_HOE_NAME, 10013).getInt(10013);
+        gemShovelID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SHOVEL_NAME, 10014).getInt(10014);
+        dinoPediaID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOPEDIA_NAME, 10015).getInt(10015);
+        emptyShellID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SHELL_NAME, 10016).getInt(10016);
+        magicConchID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.MAGIC_CONCH_NAME, 10017).getInt(10017);
+        icedMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ICED_MEAT_NAME, 10018).getInt(10018);
+        woodjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WOOD_JAVELIN_NAME, 10019).getInt(10019);
+        stonejavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.STONE_JAVELIN_NAME, 10020).getInt(10020);
+        ironjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.IRON_JAVELIN_NAME, 10021).getInt(10021);
+        goldjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.GOLD_JAVELIN_NAME, 10022).getInt(10022);
+        diamondjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DIAMOND_JAVELIN_NAME, 10023).getInt(10023);
+        ancientJavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_JAVELIN_NAME, 10024).getInt(10024);
+        whipID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_NAME, 10025).getInt(10025);
+        legBoneID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LEGBONE_NAME, 10026).getInt(10026);
+        clawID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CLAW_NAME, 10027).getInt(10027);
+        footID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOOT_NAME, 10028).getInt(10028);
+        skullID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_NAME, 10029).getInt(10029);
+        brokenSaplingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SAPLING_NAME, 10030).getInt(10030);
 		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10031).getInt(10031);
 		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10032).getInt(10032);
 		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10033).getInt(10033);
@@ -703,10 +705,10 @@ public class Fossil implements IPacketHandler
 		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10046).getInt(10046);
 		
 		//Armor
-		skullHelmetID = var2.getItem(Configuration.CATEGORY_ITEM, "skullHelmet", 10047).getInt(10047);
-		ribCageID = var2.getItem(Configuration.CATEGORY_ITEM, "ribCage", 10048).getInt(10048);
-		femursID = var2.getItem(Configuration.CATEGORY_ITEM, "femurs", 10049).getInt(10049);
-		feetID = var2.getItem(Configuration.CATEGORY_ITEM, "feet", 10050).getInt(10050);
+		skullHelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt(10047);
+		ribCageID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt(10048);
+		femursID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEMURS_NAME, 10049).getInt(10049);
+		feetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEET_NAME, 10050).getInt(10050);
 		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10051).getInt(10051);
 		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10052).getInt(10052);
 		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10053).getInt(10053);
@@ -718,17 +720,17 @@ public class Fossil implements IPacketHandler
 	
 		//DNA
 		//dnaID = var2.getItem(Configuration.CATEGORY_ITEM, "dna", 10059).getInt(10059);
-		dnaTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaTriceratops", 10060).getInt(10060);
-		dnaVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaVelociraptor", 10061).getInt(10061);
-		dnaTRexID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaTRex", 10062).getInt(10062);
-		dnaPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaPterosaur", 10063).getInt(10063);
-		dnaNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaNautilus", 10064).getInt(10064);
-		dnaPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaPlesiosaur", 10065).getInt(10065);
-		dnaMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMosasaurus", 10066).getInt(10066);
-		dnaStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaStegosaurus", 10067).getInt(10067);
-		dnaDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaDilophosaurus", 10068).getInt(10068);
-		dnaBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaBrachiosaurus", 10069).getInt(10069);
-		dnaSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "SpinosaurusDNA", 10070).getInt(10070);
+        dnaTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_TRICERATOPS_NAME, 10060).getInt(10060);
+        dnaVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_VELOCIRAPTOR_NAME, 10061).getInt(10061);
+        dnaTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_TREX_NAME, 10062).getInt(10062);
+        dnaPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PTEROSAUR_NAME, 10063).getInt(10063);
+        dnaNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_NAUTILUS_NAME, 10064).getInt(10064);
+        dnaPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PLESIOSAUR_NAME, 10065).getInt(10065);
+        dnaMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MOSASAURUS_NAME, 10066).getInt(10066);
+        dnaStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_STEGOSAURUS_NAME, 10067).getInt(10067);
+        dnaDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DILOPHOSAURUS_NAME, 10068).getInt(10068);
+        dnaBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_BRACHIOSAURUS_NAME, 10069).getInt(10069);
+        dnaSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SPINOSAURUS_NAME, 10070).getInt(10070);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10071).getInt(10071);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10072).getInt(10072);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10073).getInt(10073);
@@ -737,12 +739,12 @@ public class Fossil implements IPacketHandler
 
 		//Animal DNA
 		//animalDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "animalDNA", 10076).getInt(10076);
-		dnaPigID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaPig", 10077).getInt(10077);
-		dnaSheepID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaSheep", 10078).getInt(10078);
-		dnaCowID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaCow", 10079).getInt(10079);
-		dnaChickenID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaChicken", 10080).getInt(10080);
-		dnaSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaSaberCat", 10081).getInt(10081);
-		dnaMammothID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10082).getInt(10082);
+		dnaPigID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PIG_NAME, 10077).getInt(10077);
+		dnaSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SHEEP_NAME, 10078).getInt(10078);
+		dnaCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COW_NAME, 10079).getInt(10079);
+		dnaChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt(10080);
+		dnaSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SABERCAT_NAME, 10081).getInt(10081);
+		dnaMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt(10082);
 		
 		//MobDNA
 		//mobDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt(10083);
@@ -755,17 +757,17 @@ public class Fossil implements IPacketHandler
 
 		//Ancient Egg
 		//ancienteggID = var2.getItem(Configuration.CATEGORY_ITEM, "ancientegg", 10090).getInt(10090);
-		eggTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, "eggTriceratops", 10091).getInt(10091);
-		eggVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, "eggVelociraptor", 10092).getInt(10092);
-		eggTRexID = var2.getItem(Configuration.CATEGORY_ITEM, "eggTRex", 10093).getInt(10093);
-		eggPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "eggPterosaur", 10094).getInt(10094);
-		shellNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, "shellNautilus", 10095).getInt(10095);
-		eggPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "eggPlesiosaur", 10096).getInt(10096);
-		eggMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggMosasaurus", 10097).getInt(10097);
-		eggStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggStegosaurus", 10098).getInt(10098);
-		eggDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggDilophosaurus", 10099).getInt(10099);
-		eggBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggBrachiosaurus", 10100).getInt(10100);
-		eggSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "eggSpinosaurus", 10101).getInt(10101);
+        eggTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_TRICERATOPS_NAME, 10091).getInt(10091);
+        eggVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_VELOCIRAPTOR_NAME, 10092).getInt(10092);
+        eggTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_TREX_NAME, 10093).getInt(10093);
+        eggPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_PTEROSAUR_NAME, 10094).getInt(10094);
+        shellNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SHELL_NAUTILUS_NAME, 10095).getInt(10095);
+        eggPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_PLESIOSAUR_NAME, 10096).getInt(10096);
+        eggMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_MOSASAURUS_NAME, 10097).getInt(10097);
+        eggStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_STEGOSAURUS_NAME, 10098).getInt(10098);
+        eggDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_DILOPHOSAURUS_NAME, 10099).getInt(10099);
+        eggBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_BRACHIOSAURUS_NAME, 10100).getInt(10100);
+        eggSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_SPINOSAURUS_NAME, 10101).getInt(10101);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt(10102);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10103).getInt(10103);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10104).getInt(10104);
@@ -774,12 +776,12 @@ public class Fossil implements IPacketHandler
 	
 		//Embryos
 		//embyoSyringeID = var2.getItem(Configuration.CATEGORY_ITEM, "embyoSyringe", 10107).getInt(10107);
-		embryoPigID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPig", 10108).getInt(10108);
-		embryoSheepID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoSheep", 10109).getInt(10109);
-		embryoCowID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoCow", 10110).getInt(10110);
-		embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoChicken", 10111).getInt(10111);
-		embryoSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoSaberCat", 10112).getInt(10112);
-		embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoMammoth", 10113).getInt(10113);
+        embryoPigID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10108).getInt(10108);
+        embryoSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SHEEP_NAME, 10109).getInt(10109);
+        embryoCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_COW_NAME, 10110).getInt(10110);
+        embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
+        embryoSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SABERCAT_NAME, 10112).getInt(10112);
+        embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
 		//embryoPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
 		//embryoZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
 		//embryoGhastID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt(10116);
@@ -788,23 +790,23 @@ public class Fossil implements IPacketHandler
 		//embryoSpiderID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoSpider", 10119).getInt(10119);
 		
 		//Food
-		cookedChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, "cookedChickenSoup", 10120).getInt(10120);
-		rawChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, "rawChickenSoup", 10121).getInt(10121);
-		chickenEssID = var2.getItem(Configuration.CATEGORY_ITEM, "chickenEss", 10122).getInt(10122);
-		sjlID = var2.getItem(Configuration.CATEGORY_ITEM, "sjl", 10123).getInt(10123);
+		cookedChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.COOKED_CHICKEN_SOUP_NAME, 10120).getInt(10120);
+		rawChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_CHICKEN_SOUP_NAME, 10121).getInt(10121);
+		chickenEssID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EOC_NAME, 10122).getInt(10122);
+		sjlID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SJL_NAME, 10123).getInt(10123);
 		//rawDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, "rawDinoMeat", 10124).getInt(10124);
-		rawTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, "rawTriceratops", 10125).getInt(10125);
-		rawVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, "rawVelociraptor", 10126).getInt(10126);
-		rawTRexID = var2.getItem(Configuration.CATEGORY_ITEM, "rawTRex", 10127).getInt(10127);
-		rawPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "rawPterosaur", 10128).getInt(10128);
-		rawNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawNautilus", 10129).getInt(10129);
-		rawPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, "rawPlesiosaur", 10130).getInt(10130);
-		rawMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawMosasaurus", 10131).getInt(10131);
-		rawStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawStegosaurus", 10132).getInt(10132);
-		rawDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawDilophosaurus", 10133).getInt(10133);
-		rawBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawBrachiosaurus", 10134).getInt(10134);
-		rawSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, "rawSpinosaurus", 10136).getInt(10136);		
-		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, "cookedDinoMeat", 10135).getInt(10135);
+		rawTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_TRICERATOPS_NAME, 10125).getInt(10125);
+		rawVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_VELOCIRAPTOR_NAME, 10126).getInt(10126);
+		rawTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_TREX_NAME, 10127).getInt(10127);
+		rawPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_PTEROSAUR_NAME, 10128).getInt(10128);
+		rawNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_NAUTILUS_NAME, 10129).getInt(10129);
+		rawPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_PLESIOSAUR_NAME, 10130).getInt(10130);
+		rawMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_MOSASAURUS_NAME, 10131).getInt(10131);
+		rawStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_STEGOSAURUS_NAME, 10132).getInt(10132);
+		rawDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_DILOPHOSAURUS_NAME, 10133).getInt(10133);
+		rawBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_BRACHIOSAURUS_NAME, 10134).getInt(10134);
+		rawSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_SPINOSAURUS_NAME, 10136).getInt(10136);		
+		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10135).getInt(10135);
 		
 		/*Option_Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
 		Option_Gen_Academy = var2.get("option", "Academy", true).getBoolean(true);
@@ -816,7 +818,7 @@ public class Fossil implements IPacketHandler
 		FossilOptions.Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
 		FossilOptions.Gen_Academy = var2.get("option", "Academy", true).getBoolean(true);
 		FossilOptions.Gen_Ships = var2.get("option", "Ships", true).getBoolean(true);
-		FossilOptions.Lang_Server = var2.get("option", "Serverlanguage", "en_US").getString();
+//		FossilOptions.Lang_Server = var2.get("option", "Serverlanguage", "en_US").getString();
 		FossilOptions.Heal_Dinos = var2.get("option", "Heal_Dinos", true).getBoolean(true);
 		FossilOptions.Dinos_Starve = var2.get("option", "Dinos_Starve", true).getBoolean(true);
 		FossilOptions.Dino_Block_Breaking = var2.get("option", "Dino_Block_Breaking", true).getBoolean(true);
@@ -832,7 +834,7 @@ public class Fossil implements IPacketHandler
         }
 		if (event.getSide() == Side.CLIENT)
     		proxy.registerSounds();
-    	UpdateLangProp(event.getSide() == Side.CLIENT);
+//    	UpdateLangProp(event.getSide() == Side.CLIENT);
     	/*else
     	{
     		String path="mods/Fossil-Archeology/fossil/Fossillang/";
@@ -845,34 +847,37 @@ public class Fossil implements IPacketHandler
 	public void Init(FMLInitializationEvent event)
 	{
 		//Blocks
-		skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("SkullLantern").setCreativeTab(this.tabFBlocks);
-        blockanalyzerIdle = new BlockAnalyzer(blockanalyzerIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("analyzerIdle").setCreativeTab(this.tabFBlocks);
-        blockanalyzerActive = new BlockAnalyzer(blockanalyzerActiveID, true).setLightValue(0.9375F).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("analyzerActive");
-        blockcultivateIdle = new BlockCultivate(blockcultivateIdleID, false).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("cultivateIdle").setCreativeTab(this.tabFBlocks);
-        blockcultivateActive = new BlockCultivate(blockcultivateActiveID, true).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("cultivateActive");
-        blockworktableIdle = new BlockWorktable(blockworktableIdleID, false).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("worktableIdle").setCreativeTab(this.tabFBlocks);
-        blockworktableActive = new BlockWorktable(blockworktableActiveID, true).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("worktableActive");
-        feederIdle = new BlockFeeder(feederIdleID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Feeder");
-        feederActive = new BlockFeeder(feederActiveID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Feeder").setCreativeTab(this.tabFBlocks);
-        blockTimeMachine = new BlockTimeMachine(blockTimeMachineID, 0, Material.glass).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("BlockTimeMachine").setCreativeTab(this.tabFBlocks);
+		skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.SKULLLANTERN_NAME
+).setCreativeTab(this.tabFBlocks);
+        blockanalyzerIdle = new BlockAnalyzer(blockanalyzerIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCKANALYZERIDLE_NAME
+).setCreativeTab(this.tabFBlocks);
+        blockanalyzerActive = new BlockAnalyzer(blockanalyzerActiveID, true).setLightValue(0.9375F).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCKANALYZERACTIVE_NAME
+);
+        blockcultivateIdle = new BlockCultivate(blockcultivateIdleID, false).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKCULTIVATEIDLE_NAME).setCreativeTab(this.tabFBlocks);
+        blockcultivateActive = new BlockCultivate(blockcultivateActiveID, true).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME);
+        blockworktableIdle = new BlockWorktable(blockworktableIdleID, false).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCKWORKTABLEIDLE_NAME).setCreativeTab(this.tabFBlocks);
+        blockworktableActive = new BlockWorktable(blockworktableActiveID, true).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME);
+        feederIdle = new BlockFeeder(feederIdleID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDERIDLE_NAME);
+        feederActive = new BlockFeeder(feederActiveID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDERACTIVE_NAME).setCreativeTab(this.tabFBlocks);
+        blockTimeMachine = new BlockTimeMachine(blockTimeMachineID, 0, Material.glass).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKTIMEMACHINE_NAME).setCreativeTab(this.tabFBlocks);
         /*, false*/ferns = new BlockFern(fernsID, Material.plants).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setCreativeTab((CreativeTabs)null);
         //fernUpper = new BlockFern(fernUpperID, 0, true).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setCreativeTab((CreativeTabs)null);
-        drum = new BlockDrum(drumID).setHardness(0.8F).setUnlocalizedName("drum").setCreativeTab(this.tabFBlocks);
-        blockPermafrost = new BlockPermafrost(blockPermafrostID).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Permafrost").setCreativeTab(this.tabFBlocks);
-        blockIcedStone = new BlockIcedStone(blockIcedStoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("IcedStone").setCreativeTab(this.tabFBlocks);
-        blockFossil = new BlockFossil(blockFossilID, 1).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("fossil").setCreativeTab(this.tabFBlocks);
-        blockSkull = new BlockFossilSkull(blockSkullID, false).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("Skull").setCreativeTab(this.tabFBlocks);
-        palmLog = new BlockPalmLog(palmLogID).setStepSound(Block.soundWoodFootstep).setHardness(1.4F)/*.setResistance(1.0F)*/.setUnlocalizedName("Palm Log");
-        palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName("Palm Leaves");
-        palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName("Palm Sapling");
-        palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("palaePlanks");
-        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("blackWoodSlab");
-        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("blackWoodSlab").setCreativeTab(this.tabFBlocks);
-        palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName("blackWoodStairs");
-        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("VolcanicAsh").setCreativeTab(this.tabFBlocks);
-        volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("VolcanicRock").setCreativeTab(this.tabFBlocks);
-		sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sarracina").setCreativeTab(this.tabFBlocks);
-        tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName("Tar");
+        drum = new BlockDrum(drumID).setHardness(0.8F).setCreativeTab(this.tabFBlocks);
+        blockPermafrost = new BlockPermafrost(blockPermafrostID).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKPERMAFROST_NAME).setCreativeTab(this.tabFBlocks);
+        blockIcedStone = new BlockIcedStone(blockIcedStoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKICEDSTONE_NAME).setCreativeTab(this.tabFBlocks);
+        blockFossil = new BlockFossil(blockFossilID, 1).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKFOSSIL_NAME).setCreativeTab(this.tabFBlocks);
+        blockSkull = new BlockFossilSkull(blockSkullID, false).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKSKULL_NAME).setCreativeTab(this.tabFBlocks);
+        palmLog = new BlockPalmLog(palmLogID).setStepSound(Block.soundWoodFootstep).setHardness(1.4F)/*.setResistance(1.0F)*/.setUnlocalizedName(LocalizationStrings.PALMLOG_NAME);
+        palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMLEAVES_NAME);
+        palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMSAP_NAME);
+        palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEPLANKS_NAME);
+        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAESINGLESLAB_NAME);
+        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEDOUBLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName(LocalizationStrings.PALAESTAIRS_NAME);
+        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICASH_NAME).setCreativeTab(this.tabFBlocks);
+        volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICROCK_NAME).setCreativeTab(this.tabFBlocks);
+		sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
+        tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
 		Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLog.blockID, 5, 5);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -881,108 +886,108 @@ public class Fossil implements IPacketHandler
 		
         
         //Items
-		biofossil = new ItemBioFossil(biofossilID).setUnlocalizedName("biofossil").setCreativeTab(this.tabFItems);
-		relic = new ForgeItem(relicID,"Relic_Scrap").setUnlocalizedName("relic").setCreativeTab(this.tabFItems);
-		stoneboard = new ItemStoneBoard(stoneboardID).setUnlocalizedName("stoneboard").setCreativeTab(this.tabFItems);
-		ancientSword = new ItemAncientsword(ancientSwordID).setUnlocalizedName("ancientsword").setCreativeTab(this.tabFCombat);
-		brokenSword = new ForgeItem(brokenSwordID,"Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName("Brokensword").setCreativeTab(this.tabFMaterial);
-		fernSeed = new ItemFernSeed(fernSeedID, ferns.blockID).setUnlocalizedName("FernSeed").setCreativeTab(this.tabFItems);
-		ancienthelmet = new ItemAncientHelmet(ancienthelmetID, EnumArmorMaterial.IRON, 3, 0).setUnlocalizedName("ancientHelmet").setCreativeTab(this.tabFArmor);
-		brokenhelmet = new ForgeItem(brokenhelmetID,"Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName("BrokenHelmet").setCreativeTab(this.tabFMaterial);
-		skullStick = new ForgeItem(skullStickID,"Skull_Stick").setUnlocalizedName("SkullStick").setCreativeTab(this.tabFItems);
-		gem = new ForgeItem(gemID,"Scarab_Gem").setUnlocalizedName("Gem").setCreativeTab(this.tabFItems);
-		gemAxe = new ForgeAxe(gemAxeID, EnumToolMaterial.EMERALD,"Gem_Axe").setUnlocalizedName("GemAxe").setCreativeTab(this.tabFTools);
-		gemPickaxe = new ForgePickaxe(gemPickaxeID, EnumToolMaterial.EMERALD,"Gem_Pickaxe").setUnlocalizedName("GemPickaxe").setCreativeTab(this.tabFTools);
-		gemSword = new ForgeSword(gemSwordID, EnumToolMaterial.EMERALD,"Gem_Sword").setUnlocalizedName("GemSword").setCreativeTab(this.tabFCombat);;
-		gemHoe = new ForgeHoe(gemHoeID, EnumToolMaterial.EMERALD,"Gem_Hoe").setUnlocalizedName("GemHoe").setCreativeTab(this.tabFTools);
-		gemShovel = new ForgeShovel(gemShovelID, EnumToolMaterial.EMERALD,"Gem_Shovel").setUnlocalizedName("GemShovel").setCreativeTab(this.tabFTools);
-		dinoPedia = new ForgeItem(dinoPediaID,"Dinopedia").setUnlocalizedName("dinopedia").setCreativeTab(this.tabFItems);
-		emptyShell = new ForgeItem(emptyShellID,"Empty_Shell").setUnlocalizedName("EmptyShell").setCreativeTab(this.tabFItems);
-		magicConch = new ItemMagicConch(magicConchID).setUnlocalizedName("MagicConch").setCreativeTab(this.tabFTools);
-		icedMeat = new ItemIcedMeat(icedMeatID, EnumToolMaterial.EMERALD).setUnlocalizedName("IcedMeat").setCreativeTab(this.tabFItems);
-		woodjavelin = new ItemJavelin(woodjavelinID, EnumToolMaterial.WOOD,"Wooden_Javelin").setUnlocalizedName("WoodJavelin").setCreativeTab(this.tabFCombat);
-		stonejavelin = new ItemJavelin(stonejavelinID, EnumToolMaterial.STONE,"Stone_Javelin").setUnlocalizedName("StoneJavelin").setCreativeTab(this.tabFCombat);
-		ironjavelin = new ItemJavelin(ironjavelinID, EnumToolMaterial.IRON,"Iron_Javelin").setUnlocalizedName("IronJavelin").setCreativeTab(this.tabFCombat);
-		goldjavelin = new ItemJavelin(goldjavelinID, EnumToolMaterial.GOLD,"Gold_Javelin").setUnlocalizedName("GoldJavelin").setCreativeTab(this.tabFCombat);
-		diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD,"Diamond_Javelin").setUnlocalizedName("DiamondJavelin").setCreativeTab(this.tabFCombat);
-		ancientJavelin = new ItemJavelin(ancientJavelinID, EnumToolMaterial.IRON,"Ancient_Javelin").setUnlocalizedName("AncientJavelin").setCreativeTab(this.tabFCombat);
-		whip = new ItemWhip(whipID).setUnlocalizedName("FossilWhip").setCreativeTab(this.tabFTools);
-        legBone = new ForgeItem(legBoneID,"Leg_Bone").setUnlocalizedName("LegBone").setCreativeTab(this.tabFItems);
-		claw = new ForgeItem(clawID,"Claw").setUnlocalizedName("Claw").setCreativeTab(this.tabFItems);
-		foot = new ForgeItem(footID,"Foot").setUnlocalizedName("Foot").setCreativeTab(this.tabFItems);
-		skull = new ForgeItem(skullID,"Skull").setUnlocalizedName("Skull").setCreativeTab(this.tabFItems);
-		brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName("BrokenSapling").setCreativeTab(this.tabFMaterial);
+		biofossil = new ItemBioFossil(biofossilID).setUnlocalizedName(LocalizationStrings.BIO_FOSSIL_NAME).setCreativeTab(this.tabFItems);
+		relic = new ForgeItem(relicID,"Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(this.tabFItems);
+		stoneboard = new ItemStoneBoard(stoneboardID).setUnlocalizedName(LocalizationStrings.TABLET_NAME).setCreativeTab(this.tabFItems);
+		ancientSword = new ItemAncientsword(ancientSwordID).setUnlocalizedName(LocalizationStrings.ANCIENT_SWORD_NAME).setCreativeTab(this.tabFCombat);
+		brokenSword = new ForgeItem(brokenSwordID,"Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_SWORD_NAME).setCreativeTab(this.tabFMaterial);
+		fernSeed = new ItemFernSeed(fernSeedID, ferns.blockID).setUnlocalizedName(LocalizationStrings.FERNSEED_NAME).setCreativeTab(this.tabFItems);
+		ancienthelmet = new ItemAncientHelmet(ancienthelmetID, EnumArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(this.tabFArmor);
+		brokenhelmet = new ForgeItem(brokenhelmetID,"Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(this.tabFMaterial);
+		skullStick = new ForgeItem(skullStickID,"Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(this.tabFItems);
+		gem = new ForgeItem(gemID,"Scarab_Gem").setUnlocalizedName(LocalizationStrings.GEM_NAME).setCreativeTab(this.tabFItems);
+		gemAxe = new ForgeAxe(gemAxeID, EnumToolMaterial.EMERALD,"Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(this.tabFTools);
+		gemPickaxe = new ForgePickaxe(gemPickaxeID, EnumToolMaterial.EMERALD,"Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(this.tabFTools);
+		gemSword = new ForgeSword(gemSwordID, EnumToolMaterial.EMERALD,"Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(this.tabFCombat);;
+		gemHoe = new ForgeHoe(gemHoeID, EnumToolMaterial.EMERALD,"Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(this.tabFTools);
+		gemShovel = new ForgeShovel(gemShovelID, EnumToolMaterial.EMERALD,"Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(this.tabFTools);
+		dinoPedia = new ForgeItem(dinoPediaID,"Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(this.tabFItems);
+		emptyShell = new ForgeItem(emptyShellID,"Empty_Shell").setUnlocalizedName(LocalizationStrings.SHELL_NAME).setCreativeTab(this.tabFItems);
+		magicConch = new ItemMagicConch(magicConchID).setUnlocalizedName(LocalizationStrings.MAGIC_CONCH_NAME).setCreativeTab(this.tabFTools);
+		icedMeat = new ItemIcedMeat(icedMeatID, EnumToolMaterial.EMERALD).setUnlocalizedName(LocalizationStrings.ICED_MEAT_NAME).setCreativeTab(this.tabFItems);
+		woodjavelin = new ItemJavelin(woodjavelinID, EnumToolMaterial.WOOD,"Wooden_Javelin").setUnlocalizedName(LocalizationStrings.WOOD_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		stonejavelin = new ItemJavelin(stonejavelinID, EnumToolMaterial.STONE,"Stone_Javelin").setUnlocalizedName(LocalizationStrings.STONE_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		ironjavelin = new ItemJavelin(ironjavelinID, EnumToolMaterial.IRON,"Iron_Javelin").setUnlocalizedName(LocalizationStrings.IRON_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		goldjavelin = new ItemJavelin(goldjavelinID, EnumToolMaterial.GOLD,"Gold_Javelin").setUnlocalizedName(LocalizationStrings.GOLD_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD,"Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		ancientJavelin = new ItemJavelin(ancientJavelinID, EnumToolMaterial.IRON,"Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+		whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
+        legBone = new ForgeItem(legBoneID,"Leg_Bone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME).setCreativeTab(this.tabFItems);
+		claw = new ForgeItem(clawID,"Claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME).setCreativeTab(this.tabFItems);
+		foot = new ForgeItem(footID,"Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
+		skull = new ForgeItem(skullID,"Skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME).setCreativeTab(this.tabFItems);
+		brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
 		
 		//BoneArmor
-		skullHelmet = new ItemSkullHelmet(skullHelmetID, dinoBone, 3, 0).setUnlocalizedName("SkullHelmet").setCreativeTab(Fossil.tabFArmor);;
-		ribCage = new ItemRibCage(ribCageID, dinoBone, 3, 1).setUnlocalizedName("RibCage").setCreativeTab(Fossil.tabFArmor);;
-		femurs = new ItemFemurs(femursID, dinoBone, 3, 2).setUnlocalizedName("ShinGuard").setCreativeTab(Fossil.tabFArmor);;
-		feet = new ItemFeet(feetID, dinoBone, 3, 3).setUnlocalizedName("Feet").setCreativeTab(this.tabFArmor);
+		skullHelmet = new ItemSkullHelmet(skullHelmetID, dinoBone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
+		ribCage = new ItemRibCage(ribCageID, dinoBone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);;
+		femurs = new ItemFemurs(femursID, dinoBone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);;
+		feet = new ItemFeet(feetID, dinoBone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFArmor);
 		
 		//Ancient Egg
 		//ancientegg = new ItemAncientEgg(ancienteggID);
-		eggTriceratops = new ItemAncientEgg(eggTriceratopsID,0).setUnlocalizedName("eggTriceratops").setCreativeTab(this.tabFMaterial);
-		eggVelociraptor = new ItemAncientEgg(eggVelociraptorID,1).setUnlocalizedName("eggVelociraptor").setCreativeTab(this.tabFMaterial);
-		eggTRex = new ItemAncientEgg(eggTRexID,2).setUnlocalizedName("eggTRex").setCreativeTab(this.tabFMaterial);
-		eggPterosaur = new ItemAncientEgg(eggPterosaurID,3).setUnlocalizedName("eggPterosaur").setCreativeTab(this.tabFMaterial);
-		shellNautilus = new ItemAncientEgg(shellNautilusID,4).setUnlocalizedName("shellNautilus").setCreativeTab(this.tabFMaterial);
-		eggPlesiosaur = new ItemAncientEgg(eggPlesiosaurID,5).setUnlocalizedName("eggPlesiosaur").setCreativeTab(this.tabFMaterial);
-		eggMosasaurus = new ItemAncientEgg(eggMosasaurusID,6).setUnlocalizedName("eggMosasaurus").setCreativeTab(this.tabFMaterial);
-		eggStegosaurus = new ItemAncientEgg(eggStegosaurusID,7).setUnlocalizedName("eggStegosaurus").setCreativeTab(this.tabFMaterial);
-		eggDilophosaurus = new ItemAncientEgg(eggDilophosaurusID,8).setUnlocalizedName("eggDilophosaurus").setCreativeTab(this.tabFMaterial);
-		eggBrachiosaurus = new ItemAncientEgg(eggBrachiosaurusID,9).setUnlocalizedName("eggBrachiosaurus").setCreativeTab(this.tabFMaterial);
-		eggSpinosaurus = new ItemAncientEgg(eggSpinosaurusID,10).setUnlocalizedName("eggSpinosaurus").setCreativeTab(this.tabFMaterial);
+        eggTriceratops = new ItemAncientEgg(eggTriceratopsID,0).setUnlocalizedName(LocalizationStrings.EGG_TRICERATOPS_NAME).setCreativeTab(this.tabFMaterial);
+        eggVelociraptor = new ItemAncientEgg(eggVelociraptorID,1).setUnlocalizedName(LocalizationStrings.EGG_VELOCIRAPTOR_NAME).setCreativeTab(this.tabFMaterial);
+        eggTRex = new ItemAncientEgg(eggTRexID,2).setUnlocalizedName(LocalizationStrings.EGG_TREX_NAME).setCreativeTab(this.tabFMaterial);
+        eggPterosaur = new ItemAncientEgg(eggPterosaurID,3).setUnlocalizedName(LocalizationStrings.EGG_PTEROSAUR_NAME).setCreativeTab(this.tabFMaterial);
+        shellNautilus = new ItemAncientEgg(shellNautilusID,4).setUnlocalizedName(LocalizationStrings.SHELL_NAUTILUS_NAME).setCreativeTab(this.tabFMaterial);
+        eggPlesiosaur = new ItemAncientEgg(eggPlesiosaurID,5).setUnlocalizedName(LocalizationStrings.EGG_PLESIOSAUR_NAME).setCreativeTab(this.tabFMaterial);
+        eggMosasaurus = new ItemAncientEgg(eggMosasaurusID,6).setUnlocalizedName(LocalizationStrings.EGG_MOSASAURUS_NAME).setCreativeTab(this.tabFMaterial);
+        eggStegosaurus = new ItemAncientEgg(eggStegosaurusID,7).setUnlocalizedName(LocalizationStrings.EGG_STEGOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+        eggDilophosaurus = new ItemAncientEgg(eggDilophosaurusID,8).setUnlocalizedName(LocalizationStrings.EGG_DILOPHOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+        eggBrachiosaurus = new ItemAncientEgg(eggBrachiosaurusID,9).setUnlocalizedName(LocalizationStrings.EGG_BRACHIOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+        eggSpinosaurus = new ItemAncientEgg(eggSpinosaurusID,10).setUnlocalizedName(LocalizationStrings.EGG_SPINOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
 
 		//DNA
 		//dna = new ItemDNA(dnaID);
-		dnaTriceratops = new ForgeItem(dnaTriceratopsID,"Triceratops_DNA").setUnlocalizedName("dnaTriceratops").setCreativeTab(this.tabFMaterial);
-		dnaVelociraptor = new ForgeItem(dnaVelociraptorID,"Velociraptor_DNA").setUnlocalizedName("dnaVelociraptor").setCreativeTab(this.tabFMaterial);
-		dnaTRex = new ForgeItem(dnaTRexID,"TRex_DNA").setUnlocalizedName("dnaTRex").setCreativeTab(this.tabFMaterial);
-		dnaPterosaur = new ForgeItem(dnaPterosaurID,"Pterosaur_DNA").setUnlocalizedName("dnaPterosaur").setCreativeTab(this.tabFMaterial);
-		dnaNautilus = new ForgeItem(dnaNautilusID,"Nautilus_DNA").setUnlocalizedName("dnaNautilus").setCreativeTab(this.tabFMaterial);
-		dnaPlesiosaur = new ForgeItem(dnaPlesiosaurID,"Plesiosaur_DNA").setUnlocalizedName("dnaPlesiosaur").setCreativeTab(this.tabFMaterial);
-		dnaMosasaurus = new ForgeItem(dnaMosasaurusID,"Mosasaurus_DNA").setUnlocalizedName("dnaMosasaurus").setCreativeTab(this.tabFMaterial);
-		dnaStegosaurus = new ForgeItem(dnaStegosaurusID,"Stegosaurus_DNA").setUnlocalizedName("dnaStegosaurus").setCreativeTab(this.tabFMaterial);
-		dnaDilophosaurus = new ForgeItem(dnaDilophosaurusID,"Dilophosaurus_DNA").setUnlocalizedName("dnaDilophosaurus").setCreativeTab(this.tabFMaterial);
-		dnaBrachiosaurus = new ForgeItem(dnaBrachiosaurusID,"Brachiosaurus_DNA").setUnlocalizedName("dnaBrachiosaurus").setCreativeTab(this.tabFMaterial);
-		dnaSpinosaurus = new ForgeItem(dnaSpinosaurusID,"Spinosaurus_DNA").setUnlocalizedName("dnaSpinosaurus").setCreativeTab(this.tabFMaterial);
+		dnaTriceratops = new ForgeItem(dnaTriceratopsID,"Triceratops_DNA").setUnlocalizedName(LocalizationStrings.DNA_TRICERATOPS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaVelociraptor = new ForgeItem(dnaVelociraptorID,"Velociraptor_DNA").setUnlocalizedName(LocalizationStrings.DNA_VELOCIRAPTOR_NAME).setCreativeTab(this.tabFMaterial);
+		dnaTRex = new ForgeItem(dnaTRexID,"TRex_DNA").setUnlocalizedName(LocalizationStrings.DNA_TREX_NAME).setCreativeTab(this.tabFMaterial);
+		dnaPterosaur = new ForgeItem(dnaPterosaurID,"Pterosaur_DNA").setUnlocalizedName(LocalizationStrings.DNA_PTEROSAUR_NAME).setCreativeTab(this.tabFMaterial);
+		dnaNautilus = new ForgeItem(dnaNautilusID,"Nautilus_DNA").setUnlocalizedName(LocalizationStrings.DNA_NAUTILUS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaPlesiosaur = new ForgeItem(dnaPlesiosaurID,"Plesiosaur_DNA").setUnlocalizedName(LocalizationStrings.DNA_PLESIOSAUR_NAME).setCreativeTab(this.tabFMaterial);
+		dnaMosasaurus = new ForgeItem(dnaMosasaurusID,"Mosasaurus_DNA").setUnlocalizedName(LocalizationStrings.DNA_MOSASAURUS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaStegosaurus = new ForgeItem(dnaStegosaurusID,"Stegosaurus_DNA").setUnlocalizedName(LocalizationStrings.DNA_STEGOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaDilophosaurus = new ForgeItem(dnaDilophosaurusID,"Dilophosaurus_DNA").setUnlocalizedName(LocalizationStrings.DNA_DILOPHOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaBrachiosaurus = new ForgeItem(dnaBrachiosaurusID,"Brachiosaurus_DNA").setUnlocalizedName(LocalizationStrings.DNA_BRACHIOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
+		dnaSpinosaurus = new ForgeItem(dnaSpinosaurusID,"Spinosaurus_DNA").setUnlocalizedName(LocalizationStrings.DNA_SPINOSAURUS_NAME).setCreativeTab(this.tabFMaterial);
 
 		//animalDNA
 		//animalDNA = new ItemNonDinoDNA(animalDNAID);
-		dnaPig = new ForgeItem(dnaPigID,"Pig_DNA").setUnlocalizedName("dnaPig").setCreativeTab(this.tabFMaterial);
-		dnaSheep = new ForgeItem(dnaSheepID,"Sheep_DNA").setUnlocalizedName("dnaSheep").setCreativeTab(this.tabFMaterial);
-		dnaCow = new ForgeItem(dnaCowID,"Cow_DNA").setUnlocalizedName("dnaCow").setCreativeTab(this.tabFMaterial);
-		dnaChicken = new ForgeItem(dnaChickenID,"Chicken_DNA").setUnlocalizedName("dnaChicken").setCreativeTab(this.tabFMaterial);
-		dnaSaberCat = new ForgeItem(dnaSaberCatID,"Smilodon_DNA").setUnlocalizedName("dnaSaberCat").setCreativeTab(this.tabFMaterial);
-		dnaMammoth = new ForgeItem(dnaMammothID,"Mammoth_DNA").setUnlocalizedName("dnaMammoth").setCreativeTab(this.tabFMaterial);
+		dnaPig = new ForgeItem(dnaPigID,"Pig_DNA").setUnlocalizedName(LocalizationStrings.DNA_PIG_NAME).setCreativeTab(this.tabFMaterial);
+		dnaSheep = new ForgeItem(dnaSheepID,"Sheep_DNA").setUnlocalizedName(LocalizationStrings.DNA_SHEEP_NAME).setCreativeTab(this.tabFMaterial);
+		dnaCow = new ForgeItem(dnaCowID,"Cow_DNA").setUnlocalizedName(LocalizationStrings.DNA_COW_NAME).setCreativeTab(this.tabFMaterial);
+		dnaChicken = new ForgeItem(dnaChickenID,"Chicken_DNA").setUnlocalizedName(LocalizationStrings.DNA_CHICKEN_NAME).setCreativeTab(this.tabFMaterial);
+		dnaSaberCat = new ForgeItem(dnaSaberCatID,"Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SABERCAT_NAME).setCreativeTab(this.tabFMaterial);
+		dnaMammoth = new ForgeItem(dnaMammothID,"Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
 		
 		//Ebryos
 		//embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
-		embryoPig = new ItemEmbryoSyringe(embryoPigID,0).setUnlocalizedName("embryoPig").setCreativeTab(this.tabFItems);
-		embryoSheep = new ItemEmbryoSyringe(embryoSheepID,1).setUnlocalizedName("embryoSheep").setCreativeTab(this.tabFItems);
-		embryoCow = new ItemEmbryoSyringe(embryoCowID,2).setUnlocalizedName("embryoCow").setCreativeTab(this.tabFItems);
-		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName("embryoChicken").setCreativeTab(this.tabFItems);
-		embryoSaberCat = new ItemEmbryoSyringe(embryoSaberCatID,4).setUnlocalizedName("embryoSaberCat").setCreativeTab(this.tabFItems);
-		embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName("embryoMammoth").setCreativeTab(this.tabFItems);
+		embryoPig = new ItemEmbryoSyringe(embryoPigID,0).setUnlocalizedName(LocalizationStrings.EMBRYO_PIG_NAME).setCreativeTab(this.tabFItems);
+		embryoSheep = new ItemEmbryoSyringe(embryoSheepID,1).setUnlocalizedName(LocalizationStrings.EMBRYO_SHEEP_NAME).setCreativeTab(this.tabFItems);
+		embryoCow = new ItemEmbryoSyringe(embryoCowID,2).setUnlocalizedName(LocalizationStrings.EMBRYO_COW_NAME).setCreativeTab(this.tabFItems);
+		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
+		embryoSaberCat = new ItemEmbryoSyringe(embryoSaberCatID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SABERCAT_NAME).setCreativeTab(this.tabFItems);
+		embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
 		
 		//Item Food
 		//rawDinoMeat = new ForgeItemFood(rawDinoMeatID, 3, 0.3F, true).setCreativeTab(this.tabFFood);
-		rawTriceratops = new ForgeFood(rawTriceratopsID, 3, 0.3F, true,"Triceratops_Meat").setUnlocalizedName("Triceratops Meat").setCreativeTab(this.tabFFood);
-		rawVelociraptor = new ForgeFood(rawVelociraptorID, 3, 0.3F, true,"Velociraptor_Meat").setUnlocalizedName("Velociraptor Meat").setCreativeTab(this.tabFFood);
-		rawTRex = new ForgeFood(rawTRexID, 3, 0.3F, true,"TRex_Meat").setUnlocalizedName("TRex Meat").setCreativeTab(this.tabFFood);
-		rawPterosaur = new ForgeFood(rawPterosaurID, 3, 0.3F, true,"Pterosaur_Meat").setUnlocalizedName("Pterosaur Meat").setCreativeTab(this.tabFFood);
-		rawNautilus = new ForgeFood(rawNautilusID, 3, 0.3F, true,"Nautilus_Meat").setUnlocalizedName("Nautilus Meat").setCreativeTab(this.tabFFood);
-		rawPlesiosaur = new ForgeFood(rawPlesiosaurID, 3, 0.3F, true,"Plesiosaur_Meat").setUnlocalizedName("Plesiosaur Meat").setCreativeTab(this.tabFFood);
-		rawMosasaurus = new ForgeFood(rawMosasaurusID, 3, 0.3F, true,"Mosasaurus_Meat").setUnlocalizedName("Mosasaurus Meat").setCreativeTab(this.tabFFood);
-		rawStegosaurus = new ForgeFood(rawStegosaurusID, 3, 0.3F, true,"Stegosaurus_Meat").setUnlocalizedName("Stegosaurus Meat").setCreativeTab(this.tabFFood);
-		rawDilophosaurus = new ForgeFood(rawDilophosaurusID, 3, 0.3F, true,"Dilophosaurus_Meat").setUnlocalizedName("Dilophosaurus Meat").setCreativeTab(this.tabFFood);
-		rawBrachiosaurus = new ForgeFood(rawBrachiosaurusID, 3, 0.3F, true,"Brachiosaurus_Meat").setUnlocalizedName("Brachiosaurus Meat").setCreativeTab(this.tabFFood);
-		rawSpinosaurus = new ForgeFood(rawSpinosaurusID, 3, 0.3F, true,"Spinosaurus_Meat").setUnlocalizedName("Spinosaurus Meat").setCreativeTab(this.tabFFood);
-		cookedDinoMeat = new ForgeFood(cookedDinoMeatID, 8, 0.8F, true,"Dino_Steak").setUnlocalizedName("CookedDinoMeat").setCreativeTab(this.tabFFood);
-		cookedChickenSoup = new ForgeItem(cookedChickenSoupID,"Cooked_Chicken_Soup").setUnlocalizedName("ChickenSoup").setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
-		rawChickenSoup = new ForgeItem(rawChickenSoupID,"Raw_Chicken_Soup").setUnlocalizedName("RawChickenSoup").setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
-		chickenEss = new ItemChickenEss(chickenEssID, 10, 0.0F, false,"Essence_Of_Chicken").setUnlocalizedName("ChickenEss").setContainerItem(Item.glassBottle).setCreativeTab(this.tabFFood);
-		sjl = new ForgeFood(sjlID, 8, 2.0F, false,"Sio_Chiu_Le").setUnlocalizedName("SioChiuLe").setCreativeTab(this.tabFFood);
+        rawTriceratops = new ForgeFood(rawTriceratopsID, 3, 0.3F, true,"Triceratops_Meat").setUnlocalizedName(LocalizationStrings.RAW_TRICERATOPS_NAME).setCreativeTab(this.tabFFood);
+        rawVelociraptor = new ForgeFood(rawVelociraptorID, 3, 0.3F, true,"Velociraptor_Meat").setUnlocalizedName(LocalizationStrings.RAW_VELOCIRAPTOR_NAME).setCreativeTab(this.tabFFood);
+        rawTRex = new ForgeFood(rawTRexID, 3, 0.3F, true,"TRex_Meat").setUnlocalizedName(LocalizationStrings.RAW_TREX_NAME).setCreativeTab(this.tabFFood);
+        rawPterosaur = new ForgeFood(rawPterosaurID, 3, 0.3F, true,"Pterosaur_Meat").setUnlocalizedName(LocalizationStrings.RAW_PTEROSAUR_NAME).setCreativeTab(this.tabFFood);
+        rawNautilus = new ForgeFood(rawNautilusID, 3, 0.3F, true,"Nautilus_Meat").setUnlocalizedName(LocalizationStrings.RAW_NAUTILUS_NAME).setCreativeTab(this.tabFFood);
+        rawPlesiosaur = new ForgeFood(rawPlesiosaurID, 3, 0.3F, true,"Plesiosaur_Meat").setUnlocalizedName(LocalizationStrings.RAW_PLESIOSAUR_NAME).setCreativeTab(this.tabFFood);
+        rawMosasaurus = new ForgeFood(rawMosasaurusID, 3, 0.3F, true,"Mosasaurus_Meat").setUnlocalizedName(LocalizationStrings.RAW_MOSASAURUS_NAME).setCreativeTab(this.tabFFood);
+        rawStegosaurus = new ForgeFood(rawStegosaurusID, 3, 0.3F, true,"Stegosaurus_Meat").setUnlocalizedName(LocalizationStrings.RAW_STEGOSAURUS_NAME).setCreativeTab(this.tabFFood);
+        rawDilophosaurus = new ForgeFood(rawDilophosaurusID, 3, 0.3F, true,"Dilophosaurus_Meat").setUnlocalizedName(LocalizationStrings.RAW_DILOPHOSAURUS_NAME).setCreativeTab(this.tabFFood);
+        rawBrachiosaurus = new ForgeFood(rawBrachiosaurusID, 3, 0.3F, true,"Brachiosaurus_Meat").setUnlocalizedName(LocalizationStrings.RAW_BRACHIOSAURUS_NAME).setCreativeTab(this.tabFFood);
+        rawSpinosaurus = new ForgeFood(rawSpinosaurusID, 3, 0.3F, true,"Spinosaurus_Meat").setUnlocalizedName(LocalizationStrings.RAW_SPINOSAURUS_NAME).setCreativeTab(this.tabFFood);
+		cookedDinoMeat = new ForgeFood(cookedDinoMeatID, 8, 0.8F, true,"Dino_Steak").setUnlocalizedName(LocalizationStrings.DINO_STEAK_NAME).setCreativeTab(this.tabFFood);
+		cookedChickenSoup = new ForgeItem(cookedChickenSoupID,"Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
+		rawChickenSoup = new ForgeItem(rawChickenSoupID,"Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
+		chickenEss = new ItemChickenEss(chickenEssID, 10, 0.0F, false,"Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Item.glassBottle).setCreativeTab(this.tabFFood);
+		sjl = new ForgeFood(sjlID, 8, 2.0F, false,"Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(this.tabFFood);
 		
 		
 		//Initiate some other things...
@@ -1000,37 +1005,57 @@ public class Fossil implements IPacketHandler
 		MinecraftForge.setBlockHarvestLevel(blockIcedStone, 0, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(blockIcedStone, 1, "pickaxe", 1);
 		
-		//Block Registry
-		GameRegistry.registerBlock(blockFossil, "fossil_blockFossil");
-		GameRegistry.registerBlock(blockSkull, "fossil_blockSkull");
-	 	GameRegistry.registerBlock(skullLantern, "fossil_SkullLantern");
-		GameRegistry.registerBlock(blockanalyzerIdle, "fossil_blockanalyzerIdle");
-		GameRegistry.registerBlock(blockanalyzerActive, "fossil_blockanalyzerActive");
-		GameRegistry.registerBlock(blockcultivateIdle, "fossil_blockcultivateIdle");
-		GameRegistry.registerBlock(blockcultivateActive, "fossil_blockcultivateActive");
-		GameRegistry.registerBlock(blockworktableIdle, "fossil_blockworktableIdle");
-		GameRegistry.registerBlock(blockworktableActive, "fossil_blockworktableActive");
-		GameRegistry.registerBlock(ferns, "fossil_Ferns");
-		//GameRegistry.registerBlock(fernUpper, "fossil_FernUpper");
-		GameRegistry.registerBlock(drum, "fossil_Dump");
-		GameRegistry.registerBlock(feederIdle, "fossil_FeederIdle");
-		GameRegistry.registerBlock(feederActive, "fossil_FeederActive");
-		GameRegistry.registerBlock(blockPermafrost, "fossil_blockPermafrost");
-		GameRegistry.registerBlock(blockIcedStone, "fossil_blockIcedStone");
-		GameRegistry.registerBlock(blockTimeMachine, "blockTimeMachine");
-		GameRegistry.registerBlock(palmLog, "palmLog");
-		GameRegistry.registerBlock(palmLeaves, "palmLeaves");
-		GameRegistry.registerBlock(palmSap, "palmSap");
-		GameRegistry.registerBlock(palaeSingleSlab, "palaeSingleSlab");
-		GameRegistry.registerBlock(palaeDoubleSlab, "palaeDoubleSlab");
-		GameRegistry.registerBlock(palaeStairs, "palaeStairs");
-		GameRegistry.registerBlock(palaePlanks, "palaePlanks");
-		GameRegistry.registerBlock(volcanicAsh, "VolcanicAsh");
-		GameRegistry.registerBlock(volcanicRock, "VolcanicRock");
-		GameRegistry.registerBlock(tar, "Tar");
-		GameRegistry.registerBlock(sarracina, "sarracina");
+        //Block Registry
+        GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCKFOSSIL_NAME);
+        GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCKSKULL_NAME);
+        GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULLLANTERN_NAME);
+        GameRegistry.registerBlock(blockanalyzerIdle, LocalizationStrings.BLOCKANALYZERIDLE_NAME);
+        GameRegistry.registerBlock(blockanalyzerActive, LocalizationStrings.BLOCKANALYZERACTIVE_NAME);
+        GameRegistry.registerBlock(blockcultivateIdle, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME);
+        GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME);
+        GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
+        GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME);
+        GameRegistry.registerBlock(ferns, LocalizationStrings.FERNS_NAME);
+        GameRegistry.registerBlock(drum, LocalizationStrings.DRUM_NAME);
+        GameRegistry.registerBlock(feederIdle, LocalizationStrings.FEEDERIDLE_NAME);
+        GameRegistry.registerBlock(feederActive, LocalizationStrings.FEEDERACTIVE_NAME);
+        GameRegistry.registerBlock(blockPermafrost, LocalizationStrings.BLOCKPERMAFROST_NAME);
+        GameRegistry.registerBlock(blockIcedStone, LocalizationStrings.BLOCKICEDSTONE_NAME);
+        GameRegistry.registerBlock(blockTimeMachine, LocalizationStrings.BLOCKTIMEMACHINE_NAME);
+        GameRegistry.registerBlock(palmLog, LocalizationStrings.PALMLOG_NAME);
+        GameRegistry.registerBlock(palmLeaves, LocalizationStrings.PALMLEAVES_NAME);
+        GameRegistry.registerBlock(palmSap, LocalizationStrings.PALMSAP_NAME);
+        GameRegistry.registerBlock(palaeSingleSlab, LocalizationStrings.PALAESINGLESLAB_NAME);
+        GameRegistry.registerBlock(palaeDoubleSlab, LocalizationStrings.PALAEDOUBLESLAB_NAME);
+        GameRegistry.registerBlock(palaeStairs, LocalizationStrings.PALAESTAIRS_NAME);
+        GameRegistry.registerBlock(palaePlanks, LocalizationStrings.PALAEPLANKS_NAME);
+        GameRegistry.registerBlock(volcanicAsh, LocalizationStrings.VOLCANICASH_NAME);
+        GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANICROCK_NAME);
+        GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
+        GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
+        
+        GameRegistry.registerItem(biofossil, LocalizationStrings.BIO_FOSSIL_NAME);
+        GameRegistry.registerItem(relic, LocalizationStrings.RELIC_NAME);
+        GameRegistry.registerItem(stoneboard, LocalizationStrings.TABLET_NAME);
+        GameRegistry.registerItem(brokenSword, LocalizationStrings.BROKEN_SWORD_NAME);
+        GameRegistry.registerItem(ancientSword, LocalizationStrings.ANCIENT_SWORD_NAME);
+        GameRegistry.registerItem(fernSeed, LocalizationStrings.FERNSEED_NAME);
+        GameRegistry.registerItem(brokenhelmet, LocalizationStrings.BROKEN_HELMET_NAME);
+        GameRegistry.registerItem(ancienthelmet, LocalizationStrings.ANCIENT_HELMET_NAME);
+        GameRegistry.registerItem(skullStick, LocalizationStrings.SKULL_STICK_NAME);
+        GameRegistry.registerItem(gem, LocalizationStrings.GEM_NAME);
+        GameRegistry.registerItem(gemAxe, LocalizationStrings.SCARAB_AXE_NAME);
+        GameRegistry.registerItem(gemPickaxe, LocalizationStrings.SCARAB_PICKAXE_NAME);
+        GameRegistry.registerItem(gemSword, LocalizationStrings.SCARAB_SWORD_NAME);
+        GameRegistry.registerItem(gemHoe, LocalizationStrings.SCARAB_HOE_NAME);
+        GameRegistry.registerItem(gemShovel, LocalizationStrings.SCARAB_SHOVEL_NAME);
+        GameRegistry.registerItem(dinoPedia, LocalizationStrings.DINOPEDIA_NAME);
+        GameRegistry.registerItem(emptyShell, LocalizationStrings.SHELL_NAME);
+        GameRegistry.registerItem(magicConch, LocalizationStrings.MAGIC_CONCH_NAME);
+       
 		
 		//Items & Block Names
+        /*
         LanguageRegistry.addName(blockFossil, GetLangTextByKey("Block.Fossil.Name"));//"Block Fossil");
         LanguageRegistry.addName(blockSkull, GetLangTextByKey("Block.Skull.Name"));
         LanguageRegistry.addName(skullLantern, GetLangTextByKey("Block.SkullLantern.Name"));
@@ -1038,7 +1063,9 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.addName(blockcultivateIdle, GetLangTextByKey("Block.CultureVat.Name"));
         LanguageRegistry.addName(blockworktableIdle, GetLangTextByKey("Block.Workbench.Name"));
         LanguageRegistry.addName(feederIdle, GetLangTextByKey("Block.Feeder.Name"));
-        LanguageRegistry.addName(drum, GetLangTextByKey("Block.Drum.Name"));
+        */
+//        LanguageRegistry.addName(drum, LocalizationStrings.DRUM_NAME);
+/*
         LanguageRegistry.addName(blockPermafrost, GetLangTextByKey("Block.Permafrost.Name"));
         LanguageRegistry.addName(blockIcedStone, GetLangTextByKey("Block.IcedStone.Name"));
         LanguageRegistry.addName(blockTimeMachine, GetLangTextByKey("Block.TimeMachine.Name"));
@@ -1054,6 +1081,8 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(volcanicAsh, "Volcanic Ash");
 		LanguageRegistry.addName(volcanicRock, "Volcanic Rock");
 		LanguageRegistry.addName(sarracina, "Sarracina");
+		*/
+        /*
         LanguageRegistry.addName(biofossil, GetLangTextByKey("Item.BioFossil.Name"));
         LanguageRegistry.addName(relic, GetLangTextByKey("Item.Relic.Name"));
         LanguageRegistry.addName(stoneboard, GetLangTextByKey("Item.Tablet.Name"));
@@ -1072,7 +1101,8 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.addName(dinoPedia, GetLangTextByKey("Item.DinoPedia.Name"));
         LanguageRegistry.addName(emptyShell, GetLangTextByKey("Item.Shell.Name"));
         LanguageRegistry.addName(magicConch, GetLangTextByKey("Item.MagicConch.Name"));
-		
+		*/
+        /*
 		LanguageRegistry.addName(legBone, GetLangTextByKey("Item.LegBone.Name"));
 		LanguageRegistry.addName(claw, GetLangTextByKey("Item.Claw.Name"));
 		LanguageRegistry.addName(foot, GetLangTextByKey("Item.Foot.Name"));
@@ -1082,7 +1112,8 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(ribCage, GetLangTextByKey("Item.RibCage.Name"));
 		LanguageRegistry.addName(femurs, GetLangTextByKey("Item.Femurs.Name"));
 		LanguageRegistry.addName(feet, GetLangTextByKey("Item.Feet.Name"));
-		
+		*/
+		/*
         LanguageRegistry.addName(icedMeat, GetLangTextByKey("Item.IcedMeat.Name"));
         LanguageRegistry.addName(woodjavelin, GetLangTextByKey("Item.WoodJavelin.Name"));
         LanguageRegistry.addName(stonejavelin, GetLangTextByKey("Item.StoneJavelin.Name"));
@@ -1091,7 +1122,8 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.addName(goldjavelin, GetLangTextByKey("Item.GoldJavelin.Name"));
         LanguageRegistry.addName(ancientJavelin, GetLangTextByKey("Item.AncientJavelin.Name"));
         LanguageRegistry.addName(whip, GetLangTextByKey("Item.Whip.Name"));
-		
+		**/
+        /*
 		LanguageRegistry.addName(sjl, GetLangTextByKey("Item.SJL.Name"));
 		LanguageRegistry.addName(chickenEss, GetLangTextByKey("Item.EOC.Name"));
 		LanguageRegistry.addName(cookedChickenSoup, GetLangTextByKey("Item.CookedChickenSoup.Name"));
@@ -1154,7 +1186,7 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(embryoChicken, GetLangTextByKey("Item.embryoChicken.Name"));
 		LanguageRegistry.addName(embryoSaberCat, GetLangTextByKey("Item.embryoSaberCat.Name"));
 		LanguageRegistry.addName(embryoMammoth, GetLangTextByKey("Item.embryoMammoth.Name"));
-
+*/
 		GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', blockSkull});
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', skullLantern});
@@ -1345,12 +1377,12 @@ public class Fossil implements IPacketHandler
 		NetworkRegistry.instance().registerChannel(this, "RiderInput");
 		NetworkRegistry.instance().registerChannel(this, "PteroFlight");
 
-		GameRegistry.registerTileEntity(TileEntityCultivate.class, "Cultivate");
-		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, "Analyzer");
-		GameRegistry.registerTileEntity(TileEntityWorktable.class, "Worktable");
-		GameRegistry.registerTileEntity(TileEntityDrum.class, "Drum");
-		GameRegistry.registerTileEntity(TileEntityFeeder.class, "Feeder");
-		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, "TimeMachine");
+		GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCKANALYZERIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
+		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.FEEDERIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCKTIMEMACHINE_NAME);
 		
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.SERVER);

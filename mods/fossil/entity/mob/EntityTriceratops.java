@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -218,7 +219,7 @@ public class EntityTriceratops extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "tri_roar" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.tri_roar : null;
     }
 
     /**
@@ -226,7 +227,7 @@ public class EntityTriceratops extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-    	return "tri_death";
+    	return DinoSoundHandler.tri_death;
     }
 
     /**
@@ -234,7 +235,7 @@ public class EntityTriceratops extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "tri_death";
+        return DinoSoundHandler.tri_death;
     }
 
     /**

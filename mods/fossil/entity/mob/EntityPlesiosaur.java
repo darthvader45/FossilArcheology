@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -171,7 +172,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "Pls_Living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Pls_Living : null;
     }
 
     /**
@@ -179,7 +180,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
      */
     protected String getHurtSound()
     {
-        return "Pls_hurt";
+        return DinoSoundHandler.Pls_hurt;
     }
 
     /**
@@ -187,7 +188,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
      */
     protected String getDeathSound()
     {
-        return "tri_death";
+        return DinoSoundHandler.tri_death;
     }
 
     protected void updateEntityActionState()

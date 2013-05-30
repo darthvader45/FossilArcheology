@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -298,7 +299,7 @@ public class EntityVelociraptor extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.isTamed() ? "raptor_living_friendly" : "raptor_living_wild";
+        return this.isTamed() ? DinoSoundHandler.raptor_living_friendly : DinoSoundHandler.raptor_living_wild;
     }
 
     /**
@@ -306,7 +307,7 @@ public class EntityVelociraptor extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "Raptor_hurt";
+        return DinoSoundHandler.Raptor_hurt;
     }
 
     /**
@@ -314,7 +315,7 @@ public class EntityVelociraptor extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "raptor_death";
+        return DinoSoundHandler.raptor_death;
     }
 
     /**

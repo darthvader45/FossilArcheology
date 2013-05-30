@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
@@ -126,7 +127,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null ? "Brach_living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null ? DinoSoundHandler.Brach_living : null;
     }
 
     /**
@@ -142,7 +143,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "Brach_death";
+        return DinoSoundHandler.Brach_death;
     }
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {

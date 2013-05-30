@@ -8,6 +8,8 @@ import java.util.List;
 //import fossil.entity.mob.EntityRaptor;
 //import fossil.entity.mob.EntityTriceratops;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.fossilEnums.*;
@@ -35,6 +37,8 @@ public class TileEntityDrum extends TileEntity
     public EnumOrderType Order;
     //public byte note;
     //public boolean previousRedstoneState;
+    
+    
 
     public TileEntityDrum()
     {
@@ -100,7 +104,7 @@ public class TileEntityDrum extends TileEntity
     public void TriggerOrder(EntityPlayer var1)
     {
         this.Order = this.Order.Next();
-        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "drum_single", 8.0F, 1.0F);//(float)Math.pow(2.0D, (double)(this.Order.ordinal()/*.ToInt() - 1*/)));
+        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, DinoSoundHandler.drum_single, 8.0F, 1.0F);//(float)Math.pow(2.0D, (double)(this.Order.ordinal()/*.ToInt() - 1*/)));
         //String var2 = Fossil.GetLangTextByKey("Drum.Head");
         //String var3 = this.GetOrderString();
         Fossil.ShowMessage(Fossil.GetLangTextByKey("Drum.Trigger") + " " + Fossil.GetLangTextByKey("Order." + this.Order.toString()), var1);
@@ -114,7 +118,7 @@ public class TileEntityDrum extends TileEntity
         String var5 = Fossil.GetLangTextByKey("Drum.Msg.Head");
         String var6 = Fossil.GetLangTextByKey("Drum.Msg.Middle");
         String var7 = Fossil.GetLangTextByKey("Drum.Msg.Tail");*/
-        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "drum_triple", 8.0F,1.0F);// (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
+        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, DinoSoundHandler.drum_triple, 8.0F,1.0F);// (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
         
         if (var1 != Fossil.skullStick.itemID)//That is treated specially ;)
         {

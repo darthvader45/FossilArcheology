@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -219,7 +220,7 @@ public class EntityPterosaur extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "PTS_living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.PTS_living : null;
     }
 
     /**
@@ -227,7 +228,7 @@ public class EntityPterosaur extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "PTS_hurt";
+        return DinoSoundHandler.PTS_hurt;
     }
 
     /**
@@ -235,7 +236,7 @@ public class EntityPterosaur extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "raptor_death";
+        return DinoSoundHandler.raptor_death;
     }
 
     /**

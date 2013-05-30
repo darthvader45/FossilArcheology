@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilEnums.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -25,6 +26,7 @@ public class BlockDrum extends BlockContainer
     public BlockDrum(int var1)
     {
         super(var1, Material.wood);
+        this.setUnlocalizedName(LocalizationStrings.DRUM_NAME);
     }
 
     /*public String getTextureFile()

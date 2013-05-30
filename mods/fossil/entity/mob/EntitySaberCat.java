@@ -6,6 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.EntityAIBegSC;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.entity.Entity;
@@ -171,7 +172,7 @@ public class EntitySaberCat extends EntityTameable
      */
     protected String getLivingSound()
     {
-        return "SaberCat_Living";
+        return DinoSoundHandler.SaberCat_Living;
     }
 
     /**
@@ -179,7 +180,7 @@ public class EntitySaberCat extends EntityTameable
      */
     protected String getHurtSound()
     {
-        return "SaberCat_Hurt";
+        return DinoSoundHandler.SaberCat_Hurt;
     }
 
     /**
@@ -187,7 +188,7 @@ public class EntitySaberCat extends EntityTameable
      */
     protected String getDeathSound()
     {
-        return "SaberCat_death";
+        return DinoSoundHandler.SaberCat_death;
     }
 
     /**

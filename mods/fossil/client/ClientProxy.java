@@ -63,7 +63,6 @@ import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderPig;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy

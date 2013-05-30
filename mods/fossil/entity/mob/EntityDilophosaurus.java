@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -231,7 +232,7 @@ public class EntityDilophosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? (this.rand.nextInt(3) == 0 ? "DiloCall" : "DiloLiving") : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? (this.rand.nextInt(3) == 0 ? DinoSoundHandler.DiloCall : DinoSoundHandler.DiloLiving) : null;
     }
 
     /**
@@ -239,7 +240,7 @@ public class EntityDilophosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "DiloHurt";
+        return DinoSoundHandler.DiloHurt;
     }
 
     /**
@@ -247,7 +248,7 @@ public class EntityDilophosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "DiloDeath";
+        return DinoSoundHandler.DiloDeath;
     }
 
     /**

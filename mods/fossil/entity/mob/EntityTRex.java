@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
@@ -182,7 +183,7 @@ public class EntityTRex extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "TRex_Living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.TRex_Living : null;
     }
 
     /**
@@ -190,7 +191,7 @@ public class EntityTRex extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "TRex_hit";
+        return DinoSoundHandler.TRex_hit;
     }
 
     /**
@@ -198,7 +199,7 @@ public class EntityTRex extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "TRex_Death";
+        return DinoSoundHandler.TRex_Death;
     }
 
     protected void updateEntityActionState() {}
@@ -425,7 +426,7 @@ public class EntityTRex extends EntityDinosaur
 
         if (this.getDinoAge() >= 3)
         {
-            this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, DinoSoundHandler.TRex_scream, this.getSoundVolume() * 2.0F, 1.0F);
         }
     }
 

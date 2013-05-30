@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -156,7 +157,7 @@ public class EntityStegosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? "Steg_living" : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Steg_living : null;
     }
 
     /**
@@ -164,7 +165,7 @@ public class EntityStegosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return "Steg_Hurt";
+        return DinoSoundHandler.Steg_Hurt;
     }
 
     /**
@@ -172,7 +173,7 @@ public class EntityStegosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "Steg_death";
+        return DinoSoundHandler.Steg_death;
     }
 
     protected void updateEntityActionState()

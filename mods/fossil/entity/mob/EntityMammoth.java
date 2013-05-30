@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -168,7 +169,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
      */
     protected String getLivingSound()
     {
-        return "Mammoth_living";
+        return DinoSoundHandler.Mammoth_living;
     }
 
     /**
@@ -176,7 +177,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
      */
     protected String getHurtSound()
     {
-        return "Mammoth_hurt";
+        return DinoSoundHandler.Mammoth_hurt;
     }
 
     /**
@@ -184,7 +185,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
      */
     protected String getDeathSound()
     {
-        return "Mammoth_death";
+        return DinoSoundHandler.Mammoth_death;
     }
 
     /**

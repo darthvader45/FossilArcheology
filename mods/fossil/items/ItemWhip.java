@@ -2,6 +2,7 @@ package mods.fossil.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.passive.EntityPig;
@@ -57,7 +58,7 @@ public class ItemWhip extends ItemCarrotOnAStick
                 //System.out.println("Damage after:"+String.valueOf(I.getItemDamage()));
                 //I.setItemDamage(I.getItemDamage()+5);
                 //W.playSoundEffect(P.posX, P.posY, P.posZ, "WhipCrack", 0.5F, 1.0F);
-                P.ridingEntity.playSound("WhipCrack", 1.0F, 1.0F);
+                P.ridingEntity.playSound(DinoSoundHandler.WhipCrack, 1.0F, 1.0F);
             }
         }
         return I;
