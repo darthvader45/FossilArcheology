@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -270,7 +272,7 @@ public class EntityDilophosaurus extends EntityDinosaur
             {
                 EnumOrderType var10001 = this.OrderStatus;
 
-                if (this.OrderStatus == EnumOrderType.Follow)
+                if (this.OrderStatus == EnumOrderType.follow)
                 {
                     float var2 = var1.getDistanceToEntity(this);
 
@@ -551,7 +553,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         float var5 = -99999.0F;
         EnumOrderType var10001 = this.OrderStatus;
 
-        if (this.OrderStatus == EnumOrderType.FreeMove || !this.isTamed())
+        if (this.OrderStatus == EnumOrderType.freeMove || !this.isTamed())
         {
             for (int var6 = 0; var6 < 10; ++var6)
             {
@@ -635,7 +637,7 @@ public class EntityDilophosaurus extends EntityDinosaur
     	super.ShowPedia(p0);
     	p0.PrintItemXY(Fossil.dnaDilophosaurus, 120, 7);
     	if(this.LearningChestTick==0)
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Chest"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CHEST), true);
     }
 
     public EntityDilophosaurus spawnBabyAnimal(EntityAgeable var1)

@@ -6,6 +6,8 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
@@ -458,9 +460,9 @@ public class EntityTRex extends EntityDinosaur
         		else
                 {
                     if (!this.isWeak())
-                    	Fossil.ShowMessage(Fossil.GetLangTextByKey("Status.GemErrorHealth"),var1);
+                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
                     if (!this.isAdult())
-                    	Fossil.ShowMessage(Fossil.GetLangTextByKey("Status.GemErrorYoung"),var1);
+                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
                     return true;
                 }
              }
@@ -634,9 +636,9 @@ public class EntityTRex extends EntityDinosaur
     	super.ShowPedia(p0);
     	p0.PrintItemXY(Fossil.dnaTRex, 120, 7);
     	if(this.isWeak())
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Weak"), true, 255, 40, 90);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
     	if (!this.isWeak() && !this.isTamed()  && this.isAdult())
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Caution"), true, 255, 40, 90);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
     		
     }
 

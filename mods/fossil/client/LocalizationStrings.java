@@ -1,7 +1,7 @@
 package mods.fossil.client;
 
 public class LocalizationStrings {
-
+    
     public static final String BLOCKFOSSIL_NAME = "fossil";
     public static final String BLOCKSKULL_NAME = "skullBlock";
     public static final String SKULLLANTERN_NAME = "skullLantern";
@@ -52,7 +52,7 @@ public class LocalizationStrings {
     public static final String RAW_CHICKEN_SOUP_NAME = "rawChickenSoup";
     public static final String COOKED_CHICKEN_SOUP_NAME = "cookedChickenSoup";
     public static final String EOC_NAME = "essenceofChicken";
-    public static final String SHELL_NAME = "emptyShell";
+    public static final String EMPTY_SHELL_NAME = "emptyShell";
     public static final String SJL_NAME = "sJL";
     public static final String ICED_MEAT_NAME = "icedMeat";
     public static final String WOOD_JAVELIN_NAME = "woodJavelin";
@@ -85,7 +85,7 @@ public class LocalizationStrings {
     public static final String RAW_BRACHIOSAURUS_NAME = "rawBrachiosaurus";
     public static final String RAW_SPINOSAURUS_NAME = "rawSpinosaurus";
     public static final String EGG_TRICERATOPS_NAME = "eggTriceratops";
-    public static final String EGG_VELOCIRAPTOR_NAME = "eggBelociraptor";
+    public static final String EGG_VELOCIRAPTOR_NAME = "eggVelociraptor";
     public static final String EGG_TREX_NAME = "eggTRex";
     public static final String EGG_PTEROSAUR_NAME = "eggPterosaur";
     public static final String SHELL_NAUTILUS_NAME = "livingNautilus";
@@ -119,16 +119,86 @@ public class LocalizationStrings {
     public static final String EMBRYO_SABERCAT_NAME = "embryoSabercat";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     
-    public static final String FARMOR_NAME = "FArmor";
-    public static final String FBLOCKS_NAME = "FBlocks";
-    public static final String FCOMBAT_NAME = "FCombat";
-    public static final String FFOOD_NAME = "FFood";
-    public static final String FITEMS_NAME = "FItems";
-    public static final String FMATERIAL_NAME = "FMaterial";
-    public static final String FTOOLS_NAME = "FTools";
+    public static final String FARMOR_NAME = "Ancient Armor";
+    public static final String FBLOCKS_NAME = "Ancient Blocks";
+    public static final String FCOMBAT_NAME = "Ancient Weapons";
+    public static final String FFOOD_NAME = "Ancient Food";
+    public static final String FITEMS_NAME = "Ancient Items";
+    public static final String FMATERIAL_NAME = "Ancient Materials";
+    public static final String FTOOLS_NAME = "Ancient Tools";
+    
+    public static final String PEDIA_EGG_DRY = "pediaEggDry";
+    public static final String PEDIA_EGG_WET = "pediaEggWet";
 
+    public static final String PEDIA_EGG_COLD = "pedia.eggCold";
+    public static final String PEDIA_EGG_WARM = "pedia.eggWarm";
+    public static final String PEDIA_EGG_STATUS = "pedia.eggStatus";
+    public static final String PEDIA_EGG_PROGRESS = "pedia.eggProgress";
+    public static final String PEDIA_EGG_DAY = "pedia.eggDay";
+    public static final String PEDIA_EGG_DAYS = "pedia.eggDays";
+    
+    public static final String DINOEGG_HATCHED = "dinoegg.hatched";
+    public static final String DINOEGG_NOSPACE = "dinoegg.noSpace";
+    
+    public static final String DINOEGG_HEAD = "dinoegg.head";
+    public static final String DINOEGG_DRY = "dinoegg.dry";
+    public static final String DINOEGG_COLD = "dinoegg.cold";
+    
+    public static final String PEDIA_TEXT_OWNER = "pedia.text.owner";
+    public static final String PEDIA_TEXT_CHEST = "pedia.text.chest";
+    public static final String PEDIA_TEXT_CAUTION = "pedia.text.caution";
+    public static final String PEDIA_TEXT_RIDEABLE = "pedia.text.rideable";
+    public static final String PEDIA_TEXT_WEAK = "pedia.text.weak";
+    public static final String PEDIA_TEXT_FLY = "pedia.text.fly";
+    
+    public static final String ORDER_HEAD = "order.head";
+    public static final String ORDER_STAY = "order.stay";
+    public static final String ORDER_FOLLOW = "order.follow";
+    public static final String ORDER_FREEMOVE = "order.freeMove";
+    
+    public static final String ANIMAL_MAMMOTH = "animal.mammoth";
+    public static final String ANIMAL_SABERCAT = "animal.saberCat";
+    public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
+    public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
+    public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
+    
+    public static final String PEDIA_EMBRYO_INSIDE = "pedia.embryo.inside";
+    public static final String PEDIA_EMBRYO_GROWING = "pedia.embryo.growing";
+    public static final String PEDIA_EMBRYO_PIG = "pedia.embryo.pig";
+    public static final String PEDIA_EMBRYO_SHEEP = "pedia.embryo.sheep";
+    public static final String PEDIA_EMBRYO_COW = "pedia.embryo.cow";
+    public static final String PEDIA_EMBRYO_CHICKEN = "pedia.embryo.chicken";
+    public static final String PEDIA_EMBRYO_SABERCAT = "pedia.embryo.saberCat";
+    public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
+    
+    public static final String STATUS_GEM_ERROR_YOUNG = "status.gemErrorYoung";  
+    public static final String STATUS_GEM_ERROR_HEALTH = "status.gemErrrorHealth";   
+    
+    public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";  
+    
+    public static final String DRUM_TRIGGER = "drum.trigger"; 
+    public static final String DRUM_ORDERING = "drum.order"; 
+    public static final String DRUM_TREX = "drum.tRex"; 
+    
+    public static final String DINO_TRICERATOPS = "Dino.Triceratops";
+    public static final String DINO_VELOCIRAPTOR = "Dino.Velociraptor";
+    public static final String DINO_TREX = "Dino.TRex";
+    public static final String DINO_PTEROSAUR = "Dino.Pterosaur";
+    public static final String DINO_NAUTILUS = "Dino.Nautilus";
+    public static final String DINO_PLESIOSAUR = "Dino.Plesiosaur";
+    public static final String DINO_MOSASAURUS = "Dino.Mosasaurus";
+    public static final String DINO_STEGOSAURUS = "Dino.Stegosaurus";
+    public static final String DINO_DILOPHOSAURUS = "Dino.Dilophosaurus";
+    public static final String DINO_BRACHIOSAURUS = "Dino.Brachiosaurus";
+    public static final String DINO_SPINOSAURUS = "Dino.Spinosaurus";
+    
+    public static final String MOB_FPZ = "mob.fpz";
+    public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
+    public static final String BOSS_ANU = "boss.Anu";
+    public static final String MOB_BONES = "mob.bones";
+    
 
-
+   
     
     
 }

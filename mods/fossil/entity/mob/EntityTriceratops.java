@@ -59,7 +59,7 @@ public class EntityTriceratops extends EntityDinosaur
     public EntityTriceratops(World var1)
     {
         super(var1);
-        this.OrderStatus = EnumOrderType.FreeMove;
+        this.OrderStatus = EnumOrderType.freeMove;
         this.SelfType = EnumDinoType.Triceratops;
         this.looksWithInterest = false;
         this.health = 8;

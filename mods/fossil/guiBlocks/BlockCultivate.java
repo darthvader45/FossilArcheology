@@ -7,6 +7,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -245,7 +247,7 @@ public class BlockCultivate extends BlockContainer
     public void onBlockRemovalLost(World var1, int var2, int var3, int var4, boolean var5)
     {
         keepFurnaceInventory = false;
-        String var6 = Fossil.GetLangTextByKey("Cultivate.OutBreak");
+        String var6 = Localizations.getLocalizedString(LocalizationStrings.CULTIVATE_OUTBREAK);
 
         for (int var7 = 0; var7 < var1.playerEntities.size(); ++var7)
         {

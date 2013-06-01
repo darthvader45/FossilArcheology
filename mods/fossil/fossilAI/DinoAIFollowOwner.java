@@ -46,7 +46,7 @@ public class DinoAIFollowOwner extends EntityAIBase
             {
                 return false;
             }
-            else if (this.DinoEntity.getOrderType() != null && this.DinoEntity.getOrderType() != EnumOrderType.Follow)
+            else if (this.DinoEntity.getOrderType() != null && this.DinoEntity.getOrderType() != EnumOrderType.follow)
             {
                 return false;
             }

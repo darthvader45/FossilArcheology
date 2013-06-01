@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -267,10 +269,10 @@ public class EntityMammoth extends EntityTameable implements IShearable
     public void ShowPedia(GuiPedia p0)
     {
     	p0.reset();
-    	p0.PrintStringXY(Fossil.GetLangTextByKey("Animal.Mammoth"), 97, 23,40,90,245);
+    	p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23,40,90,245);
     	if(this.isTamed())
     	{
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Owner"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);

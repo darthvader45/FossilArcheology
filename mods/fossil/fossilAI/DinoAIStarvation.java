@@ -44,9 +44,9 @@ public class DinoAIStarvation extends EntityAIBase
         	if(this.mover.IsDeadlyHungry())
         	{
 
-    			if(this.mover.OrderStatus!=EnumOrderType.FreeMove)
+    			if(this.mover.OrderStatus!=EnumOrderType.freeMove)
     	        {
-    	        	this.mover.OrderStatus=EnumOrderType.FreeMove;
+    	        	this.mover.OrderStatus=EnumOrderType.freeMove;
     	        	this.mover.SendStatusMessage(EnumSituation.StarveEsc);
     	        }
     			else

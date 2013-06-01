@@ -16,6 +16,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -169,7 +171,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
         super(var1);
         //this.getClass();
-        this.OrderStatus = EnumOrderType.FreeMove;
+        this.OrderStatus = EnumOrderType.freeMove;
         this.FoodItemList = new DinoFoodItemList();
         this.FoodBlockList = new DinoFoodBlockList();
         this.FoodMobList = new DinoFoodMobList();
@@ -466,22 +468,22 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void ShowPedia(GuiPedia p0)
     {
     	p0.reset();
-    	p0.PrintStringXY(Fossil.GetLangTextByKey("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
+    	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaClock.png", 97, 34,8,8);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaHeart.png", 97, 46,9,9);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaFood.png", 97, 58,9,9);
     	if(this.getDinoAge()==1)
-    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Fossil.GetLangTextByKey("PediaText.Day"), 109, 35);
+    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WARM), 109, 35);
     	else
-    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Fossil.GetLangTextByKey("PediaText.Days"), 109, 35);
+    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_DAYS), 109, 35);
     	p0.PrintStringXY(String.valueOf(this.getHealthData()) + '/' + this.getMaxHealth(), 109, 47);
     	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 109, 59);
     	
     	if(this.SelfType.isRideable() && this.isAdult())
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Rideable"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
     	if(this.SelfType.isTameable() && this.isTamed())
     	{
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Owner"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);
@@ -553,12 +555,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Tells if the dino is sitting
      */
     public boolean isSitting()
-    {return this.OrderStatus == EnumOrderType.Stay;}
+    {return this.OrderStatus == EnumOrderType.stay;}
     /**
      * Disables a mob's ability to move on its own while true.
      */
     protected boolean isMovementCeased()
-    {return this.OrderStatus == EnumOrderType.Stay;}
+    {return this.OrderStatus == EnumOrderType.stay;}
     
     public boolean attackEntityAsMob(Entity var1)
     {
@@ -878,7 +880,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void SendOrderMessage(EnumOrderType var1)
     {
 
-        String S = Fossil.GetLangTextByKey("Order.Head")+ " " + Fossil.GetLangTextByKey("Order." + var1.toString());
+        String S = Localizations.getLocalizedString(LocalizationStrings.ORDER_HEAD)+ Localizations.getLocalizedString("order." + var1.toString());
         Fossil.ShowMessage(S, (EntityPlayer)this.getOwner());
     }
 
@@ -886,9 +888,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
 		if(this.getOwner()!=null && this.getDistanceToEntity(this.getOwner())<50.0F);
 		{
-			String Status1=Fossil.GetLangTextByKey("Status." + var1.toString()+".Head")+" ";
+			String Status1=Localizations.getLocalizedString("status." + var1.toString()+".head");
 			String Dino=this.SelfType.toString();
-			String Status2=" "+Fossil.GetLangTextByKey("Status." + var1.toString());
+			String Status2=Localizations.getLocalizedString("status." + var1.toString());
 			Fossil.ShowMessage(Status1+Dino+Status2,(EntityPlayer)this.getOwner());
 		}
     }
@@ -1462,7 +1464,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	                    this.setPathToEntity((PathEntity)null);
     	                    this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal()+1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
     	                    this.SendOrderMessage(this.OrderStatus);
-    	                    if(this.OrderStatus==EnumOrderType.Stay)
+    	                    if(this.OrderStatus==EnumOrderType.stay)
     	                    {
     	                    	this.getNavigator().clearPathEntity();
     	                    	this.setPathToEntity(null);

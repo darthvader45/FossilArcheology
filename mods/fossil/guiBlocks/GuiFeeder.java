@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -26,7 +27,7 @@ public class GuiFeeder extends GuiContainer
 
     protected void drawGuiContainerForegroundLayer()
     {
-        this.fontRenderer.drawString(Fossil.GetLangTextByKey("Block.Feeder.Name"), 8, 6, 4210752);
+        this.fontRenderer.drawString(LocalizationStrings.FEEDERIDLE_NAME, 8, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 

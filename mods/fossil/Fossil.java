@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -147,7 +148,9 @@ import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -195,7 +198,7 @@ public class Fossil implements IPacketHandler
 	 * If DebugMode = true
 	 * HatchTime is set to 1
 	 */
-	public static boolean DebugMode = true;
+	public static boolean DebugMode = false;
 	public static final double MESSAGE_DISTANCE = 25.0D;
 	
     //private static int[] blockIDs = new int[] {1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1151, 1152, 1153};
@@ -606,7 +609,6 @@ public class Fossil implements IPacketHandler
 	public static boolean Option_Heal_Dinos;*/
 	
 	static EnumArmorMaterial dinoBone = EnumHelper.addArmorMaterial("DinoBone", 35, new int[]{4,9,7,6}, 15);
-	
     @cpw.mods.fml.common.Mod.PreInit
 	public void PreInit(FMLPreInitializationEvent event)
 	{
@@ -672,7 +674,7 @@ public class Fossil implements IPacketHandler
         gemHoeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_HOE_NAME, 10013).getInt(10013);
         gemShovelID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SHOVEL_NAME, 10014).getInt(10014);
         dinoPediaID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOPEDIA_NAME, 10015).getInt(10015);
-        emptyShellID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SHELL_NAME, 10016).getInt(10016);
+        emptyShellID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMPTY_SHELL_NAME, 10016).getInt(10016);
         magicConchID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.MAGIC_CONCH_NAME, 10017).getInt(10017);
         icedMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ICED_MEAT_NAME, 10018).getInt(10018);
         woodjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WOOD_JAVELIN_NAME, 10019).getInt(10019);
@@ -902,7 +904,7 @@ public class Fossil implements IPacketHandler
 		gemHoe = new ForgeHoe(gemHoeID, EnumToolMaterial.EMERALD,"Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(this.tabFTools);
 		gemShovel = new ForgeShovel(gemShovelID, EnumToolMaterial.EMERALD,"Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(this.tabFTools);
 		dinoPedia = new ForgeItem(dinoPediaID,"Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(this.tabFItems);
-		emptyShell = new ForgeItem(emptyShellID,"Empty_Shell").setUnlocalizedName(LocalizationStrings.SHELL_NAME).setCreativeTab(this.tabFItems);
+		emptyShell = new ForgeItem(emptyShellID,"Empty_Shell").setUnlocalizedName(LocalizationStrings.EMPTY_SHELL_NAME).setCreativeTab(this.tabFItems);
 		magicConch = new ItemMagicConch(magicConchID).setUnlocalizedName(LocalizationStrings.MAGIC_CONCH_NAME).setCreativeTab(this.tabFTools);
 		icedMeat = new ItemIcedMeat(icedMeatID, EnumToolMaterial.EMERALD).setUnlocalizedName(LocalizationStrings.ICED_MEAT_NAME).setCreativeTab(this.tabFItems);
 		woodjavelin = new ItemJavelin(woodjavelinID, EnumToolMaterial.WOOD,"Wooden_Javelin").setUnlocalizedName(LocalizationStrings.WOOD_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
@@ -1034,26 +1036,9 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
         GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
         
-        GameRegistry.registerItem(biofossil, LocalizationStrings.BIO_FOSSIL_NAME);
-        GameRegistry.registerItem(relic, LocalizationStrings.RELIC_NAME);
-        GameRegistry.registerItem(stoneboard, LocalizationStrings.TABLET_NAME);
-        GameRegistry.registerItem(brokenSword, LocalizationStrings.BROKEN_SWORD_NAME);
-        GameRegistry.registerItem(ancientSword, LocalizationStrings.ANCIENT_SWORD_NAME);
-        GameRegistry.registerItem(fernSeed, LocalizationStrings.FERNSEED_NAME);
-        GameRegistry.registerItem(brokenhelmet, LocalizationStrings.BROKEN_HELMET_NAME);
-        GameRegistry.registerItem(ancienthelmet, LocalizationStrings.ANCIENT_HELMET_NAME);
-        GameRegistry.registerItem(skullStick, LocalizationStrings.SKULL_STICK_NAME);
-        GameRegistry.registerItem(gem, LocalizationStrings.GEM_NAME);
-        GameRegistry.registerItem(gemAxe, LocalizationStrings.SCARAB_AXE_NAME);
-        GameRegistry.registerItem(gemPickaxe, LocalizationStrings.SCARAB_PICKAXE_NAME);
-        GameRegistry.registerItem(gemSword, LocalizationStrings.SCARAB_SWORD_NAME);
-        GameRegistry.registerItem(gemHoe, LocalizationStrings.SCARAB_HOE_NAME);
-        GameRegistry.registerItem(gemShovel, LocalizationStrings.SCARAB_SHOVEL_NAME);
-        GameRegistry.registerItem(dinoPedia, LocalizationStrings.DINOPEDIA_NAME);
-        GameRegistry.registerItem(emptyShell, LocalizationStrings.SHELL_NAME);
-        GameRegistry.registerItem(magicConch, LocalizationStrings.MAGIC_CONCH_NAME);
-       
-		
+//        LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palae SingleSlab");
+        
+
 		//Items & Block Names
         /*
         LanguageRegistry.addName(blockFossil, GetLangTextByKey("Block.Fossil.Name"));//"Block Fossil");
@@ -1328,6 +1313,28 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
 		
+
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FAILURESAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", Localizations.getLocalizedString(LocalizationStrings.MOB_BONES));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Nautilus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_NAUTILUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Velociraptor.name", Localizations.getLocalizedString(LocalizationStrings.DINO_VELOCIRAPTOR));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Triceratops.name", Localizations.getLocalizedString(LocalizationStrings.DINO_TRICERATOPS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Tyrannosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_TREX));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.FriendlyPigZombie.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FPZ));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PigBoss.name", Localizations.getLocalizedString(LocalizationStrings.BOSS_ANU));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Pterosaur.name", Localizations.getLocalizedString(LocalizationStrings.DINO_PTEROSAUR));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Plesiosaur.name", Localizations.getLocalizedString(LocalizationStrings.DINO_PLESIOSAUR));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Mosasaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_MOSASAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Stegosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_STEGOSAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Dilophosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_DILOPHOSAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_COW));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_PIG));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.SaberCat.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SABERCAT));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Brachiosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_BRACHIOSAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Spinosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_SPINOSAURUS));
+		
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();
 		/*EnumDinoType.Triceratops.dinoClass=EntityTriceratops.class;
@@ -1444,6 +1451,7 @@ public class Fossil implements IPacketHandler
 		//	var1="--Empty--";
 		return var1;
 	}
+	
 
 	public static void ShowMessage(String var0, EntityPlayer var1)
 	{
@@ -1466,94 +1474,8 @@ public class Fossil implements IPacketHandler
 	{// NOT NEEDED BY ANYONE==>USE .ordinal
 			return var0.ToInt();
 	}*/
+    
 
-	public static void UpdateLangProp(boolean opt)//true=client, false=server
-	{
-		//Thread.currentThread().getContextClassLoader().getResourceAsStream(".");
-			try
-			{
-				String path;
-				if(DebugMode)
-					path="resources/Fossillang/";
-				else
-					path="mods/fossil/Fossillang/";
-				BufferedReader var2;
-				if(opt)//client
-					var2 = new BufferedReader(new FileReader(new File(Minecraft.getMinecraftDir(), path+Minecraft.getMinecraft().gameSettings.language+".lang")));
-				else//server
-					var2 = new BufferedReader(new FileReader(new File(".", path+FossilOptions.Lang_Server+".lang")));
-				for (String var3 = var2.readLine(); var3 != null; var3 = var2.readLine())
-				{
-		    		if (!var3.startsWith("#"))
-		    		{
-		        		String[] var4 = var3.split("=");
-		        		if (var4 != null && var4.length == 2)
-		        			LangProps.setProperty(var4[0].trim(), new String(var4[1].trim().getBytes(),"UTF-8"));
-		    		}
-				}
-				
-				//Complete the key list with the en_US language File
-				if(opt)//client
-					var2 = new BufferedReader(new FileReader(new File(Minecraft.getMinecraftDir(), path+"en_US.lang")));
-				else//server
-					var2 = new BufferedReader(new FileReader(new File(".", path+"en_US.lang")));
-				for (String var3 = var2.readLine(); var3 != null; var3 = var2.readLine())
-				{
-		    		if (!var3.startsWith("#"))
-		    		{
-		        		String[] var4 = var3.split("=");
-		        		if (var4 != null && var4.length == 2 && LangProps.getProperty(var4[0].trim(), "")=="")
-		        			LangProps.setProperty(var4[0].trim(), new String(var4[1].trim().getBytes(),"UTF-8"));
-		    		}
-				}
-			}
-			catch(FileNotFoundException e)
-			{//Try to load the en_US File if the language file doesn't exist
-				System.err.println("Error loading language file: " + e.getMessage()+" Using en_US instead.");//+ file);
-				try
-				{
-					String path;
-					if(DebugMode)
-						path="resources/Fossillang/";
-					else
-						path="mods/fossil/Fossillang/";
-					BufferedReader var2;
-					if(opt)//client
-						var2 = new BufferedReader(new FileReader(new File(Minecraft.getMinecraftDir(), path+"en_US.lang")));
-					else//server
-						var2 = new BufferedReader(new FileReader(new File(".", path+"en_US.lang")));
-					for (String var3 = var2.readLine(); var3 != null; var3 = var2.readLine())
-					{
-			    		if (!var3.startsWith("#"))
-			    		{
-			        		String[] var4 = var3.split("=");
-			        		if (var4 != null && var4.length == 2)
-			        			LangProps.setProperty(var4[0].trim(), new String(var4[1].trim().getBytes(),"UTF-8"));
-			    		}
-					}
-				}
-				catch(FileNotFoundException f)
-				{
-					System.err.println("Error loading en_US file: " + f.getMessage()+" No Language!!!");//+ file);
-				}
-				catch(IOException f)//IOException e)
-				{
-					System.err.println("Error loading language file: " + f.getMessage());//+ file);
-				}
-				catch(NullPointerException f)//IOException e)
-				{
-					System.err.println("Error loading language file: " + f.getMessage());//+ file);
-				}
-			}
-			catch(IOException e)//IOException e)
-			{
-				System.err.println("Error loading language file: " + e.getMessage());//+ file);
-			}
-			catch(NullPointerException e)//IOException e)
-			{
-				System.err.println("Error loading language file: " + e.getMessage());//+ file);
-			}
-	}
 
 	/*private static void UTF8Reader(Properties var0)
 	{

@@ -56,7 +56,7 @@ public class EntitySpinosaurus extends EntityDinosaur
     private float field_25054_c;
     private boolean field_25052_g;*/
     public boolean Screaming = false;
-    public boolean isAngry = false;
+    public boolean isAngry = true;
     public int SkillTick = 0;
     //public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
@@ -77,19 +77,19 @@ public class EntitySpinosaurus extends EntityDinosaur
         this.experienceValue=20;
        
         this.HitboxXfactor=1.0F;
-        this.HitboxYfactor=1.5F;
-        this.HitboxZfactor=1.5F;
+        this.HitboxYfactor=1.0F;
+        this.HitboxZfactor=1.0F;
         
-        this.Width0=0.8F;
-        this.WidthInc=0.7F;
+        this.Width0=0.5F;
+        this.WidthInc=0.3F;
         this.Length0=0.5F;
-        this.LengthInc=0.7F;
+        this.LengthInc=0.3F;
         this.Height0=0.5F;
-        this.HeightInc=0.7F;
+        this.HeightInc=0.3F;
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        this.BaseSpeed=0.22F;
+        this.BaseSpeed=0.24F;
         this.SpeedIncrease=0.021F;
         this.MaxAge=23;
         //this.BaseHealth=;
@@ -590,7 +590,7 @@ public class EntitySpinosaurus extends EntityDinosaur
         }
         else if (!this.onGround || !this.inWater)
         {
-            this.motionY -= 0.1D;
+//            this.motionY -= 0.1D;
         }
     }
 
@@ -646,7 +646,7 @@ public class EntitySpinosaurus extends EntityDinosaur
         
         if (this.IsHungry())
         {
-        	var1 *=1.5F;
+        	var1 *=1.7F;
         }
         else if (this.getDinoAge() < 3)
         {

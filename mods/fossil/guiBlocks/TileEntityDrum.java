@@ -10,6 +10,7 @@ import java.util.List;
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.fossilEnums.*;
@@ -42,7 +43,7 @@ public class TileEntityDrum extends TileEntity
 
     public TileEntityDrum()
     {
-        this.Order = EnumOrderType.Stay;
+        this.Order = EnumOrderType.stay;
         //this.note = 0;
         //this.previousRedstoneState = false;
     }
@@ -107,7 +108,7 @@ public class TileEntityDrum extends TileEntity
         this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, DinoSoundHandler.drum_single, 8.0F, 1.0F);//(float)Math.pow(2.0D, (double)(this.Order.ordinal()/*.ToInt() - 1*/)));
         //String var2 = Fossil.GetLangTextByKey("Drum.Head");
         //String var3 = this.GetOrderString();
-        Fossil.ShowMessage(Fossil.GetLangTextByKey("Drum.Trigger") + " " + Fossil.GetLangTextByKey("Order." + this.Order.toString()), var1);
+        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DRUM_TRIGGER) + Localizations.getLocalizedString("order." + this.Order.toString()), var1);
         this.onInventoryChanged();
     }
 
@@ -125,7 +126,7 @@ public class TileEntityDrum extends TileEntity
 	        for(int i=0;i<EnumDinoType.values().length;++i)
 	        {
 	        	if(EnumDinoType.values()[i].OrderItem!=null && EnumDinoType.values()[i].OrderItem.itemID==var1)
-	        		Fossil.ShowMessage(Fossil.GetLangTextByKey("Drum.Ordering")+ " " + Fossil.GetLangTextByKey("Dino."+EnumDinoType.values()[i].toString()) + ": " + Fossil.GetLangTextByKey("Order." + this.Order.toString()), var2);
+	        		Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DRUM_ORDERING) + Localizations.getLocalizedString("dino."+EnumDinoType.values()[i].toString()) + ": " + Localizations.getLocalizedString("order." + this.Order.toString()), var2);
 	        }		//Output: Ordering Triceratops: Stay
 	        List list = this.worldObj.getEntitiesWithinAABB(EntityDinosaur.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
 	        Iterator it = list.iterator();
@@ -146,7 +147,7 @@ public class TileEntityDrum extends TileEntity
         }
         else
         {
-            Fossil.ShowMessage(Fossil.GetLangTextByKey("Drum.TRex" + String.valueOf(this.Order.ordinal()+1)), var2);
+            Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal()+1)), var2);
         	List list = this.worldObj.getEntitiesWithinAABB(EntityTRex.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
             Iterator it = list.iterator();
 

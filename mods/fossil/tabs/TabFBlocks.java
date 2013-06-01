@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class TabFBlocks extends CreativeTabs 
@@ -22,7 +23,7 @@ public class TabFBlocks extends CreativeTabs
     
     public String getTranslatedTabLabel()
     {
-     return LocalizationStrings.FBLOCKS_NAME;
+        return LocalizationStrings.FBLOCKS_NAME;
     }
 	
 }

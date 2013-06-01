@@ -6,6 +6,8 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -53,10 +55,10 @@ public class ItemMagicConch extends Item
         String var6 = "Head";
         String var7 = "Middle";
         String var8 = "Tail";
-        String var9 = Fossil.GetLangTextByKey("Dino.Plesiosaur");//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
-        String var10 = Fossil.GetLangTextByKey("Drum.Msg.Head");
-        String var11 = Fossil.GetLangTextByKey("Drum.Msg.Middle");
-        String var12 = Fossil.GetLangTextByKey("Drum.Msg.Tail");
+        String var9 = Localizations.getLocalizedString(LocalizationStrings.DINO_PLESIOSAUR);//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
+        String var10 = Localizations.getLocalizedString("Drum.Msg.Head");
+        String var11 = Localizations.getLocalizedString("Drum.Msg.Middle");
+        String var12 = Localizations.getLocalizedString("Drum.Msg.Tail");
         String var13 = "";
         List var14 = var2.getEntitiesWithinAABB(EntityPlesiosaur.class, AxisAlignedBB.getAABBPool().getAABB(var3.posX, var3.posY, var3.posZ, var3.posX + 1.0D, var3.posY + 1.0D, var3.posZ + 1.0D).expand(30.0D, 4.0D, 30.0D));
         Iterator var15 = var14.iterator();
@@ -73,7 +75,7 @@ public class ItemMagicConch extends Item
             }
         }
 
-        var13 = Fossil.GetLangTextByKey("Order." +EnumOrderType.values()[var1.getItemDamage()].toString());
+        var13 = Localizations.getLocalizedString("order." +EnumOrderType.values()[var1.getItemDamage()].toString());
         Fossil.ShowMessage(var10 + var9 + var11 + " " + var13 + var12, var3);
         return var1;
     }

@@ -436,7 +436,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         int var4 = -1;
         float var5 = -99999.0F;
 
-        if (this.OrderStatus == EnumOrderType.FreeMove || !this.isTamed())
+        if (this.OrderStatus == EnumOrderType.freeMove || !this.isTamed())
         {
             for (int var6 = 0; var6 < 10 + this.getDinoAge(); ++var6)
             {

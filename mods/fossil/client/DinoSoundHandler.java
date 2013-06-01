@@ -61,7 +61,6 @@ public class DinoSoundHandler {
         SOUND_RESOURCE_LOCATION + "Steg_living1.wav",
         SOUND_RESOURCE_LOCATION + "Steg_living2.wav",
         SOUND_RESOURCE_LOCATION + "Steg_living3.wav",
-        SOUND_RESOURCE_LOCATION + "test.txt",
         SOUND_RESOURCE_LOCATION + "Trex_Death1.wav",
         SOUND_RESOURCE_LOCATION + "TRex_Death2.wav",
         SOUND_RESOURCE_LOCATION + "TRex_hit.wav",

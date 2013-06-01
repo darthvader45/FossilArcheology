@@ -7,6 +7,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
 import mods.fossil.guiBlocks.GuiPedia;
@@ -163,9 +165,9 @@ public class EntityPregnantSheep extends EntitySheep implements IViviparous, IEn
     {
     	int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
     	p0.reset();
-    	p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Embryo.inside"),false);
-    	p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Embryo."+this.Embryo.toString()),false);
-    	p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Embryo.growing"),false);
+        p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_EMBRYO_INSIDE),false);
+        p0.AddStringLR(Localizations.getLocalizedString("pedia.embryo."+this.Embryo.toString()),false);
+        p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_EMBRYO_GROWING),false);
     	p0.AddStringLR(String.valueOf(quot) + "/100", false);
     	
     	

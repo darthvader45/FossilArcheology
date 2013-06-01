@@ -11,6 +11,8 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -450,9 +452,9 @@ public class EntityPterosaur extends EntityDinosaur
     	super.ShowPedia(p0);
     	p0.PrintItemXY(Fossil.dnaPterosaur, 120, 7);
     	if(this.LearningChestTick==0)
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Chest"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CHEST), true);
     	if(this.isAdult())
-    		p0.AddStringLR(Fossil.GetLangTextByKey("PediaText.Fly"), true);
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_FLY), true);
     }
 
 

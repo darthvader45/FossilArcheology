@@ -2,6 +2,7 @@ package mods.fossil.guiBlocks;
 
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -20,7 +21,7 @@ public class GuiWorktable extends GuiContainer
 
     protected void drawGuiContainerForegroundLayer()
     {
-        this.fontRenderer.drawString(Fossil.GetLangTextByKey("Block.Workbench.Name"), 30, 6, 4210752);
+        this.fontRenderer.drawString(LocalizationStrings.BLOCKWORKTABLEIDLE_NAME, 30, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
