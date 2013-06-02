@@ -140,7 +140,7 @@ public class EntitySaberCat extends EntityTameable
      */
     public String getTexture()
     {
-        return this.isChild() ? "/mods/fossil/textures/SaberCat_Young.png" : "/mods/fossil/textures/SaberCat_Adult.png";
+        return this.isChild() ? "/mods/fossil/textures/mob/SaberCat_Young.png" : "/mods/fossil/textures/mob/SaberCat_Adult.png";
     }
 
     /**

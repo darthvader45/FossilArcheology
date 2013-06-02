@@ -445,7 +445,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
     protected String getModelTexture()
     {
-        return "/mods/fossil/textures/DinoModel" + this.SelfType.toString() + ".png";
+        return "/mods/fossil/textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
     /**

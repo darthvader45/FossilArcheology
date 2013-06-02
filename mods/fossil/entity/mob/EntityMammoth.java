@@ -143,7 +143,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
      */
     public String getTexture()
     {
-        return this.isChild() ? "/mods/fossil/textures/MammothYoung.png" : (!this.getSheared() ? "/mods/fossil/textures/MammothAdult.png" : "/mods/fossil/textures/MammothFurless.png");
+        return this.isChild() ? "/mods/fossil/textures/mob/MammothYoung.png" : (!this.getSheared() ? "/mods/fossil/textures/mob/MammothAdult.png" : "/mods/fossil/textures/mob/MammothFurless.png");
     }
 
     /**

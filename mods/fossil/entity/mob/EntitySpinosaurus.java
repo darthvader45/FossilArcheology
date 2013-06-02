@@ -341,7 +341,14 @@ public class EntitySpinosaurus extends EntityDinosaur
             }
             else
             {
+                if (var3 != attackingPlayer)
+                {
+                    findPlayerToAttack();
+                }
+                else
+                {
                 this.setTarget((EntityLiving)var3);
+                }
                 return super.attackEntityFrom(var1, var2);
             }
         }
@@ -644,7 +651,7 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         float var1 = 1.0F;
         
-        if (this.IsHungry())
+        if (this.IsHungry() || (attackingPlayer != null))
         {
         	var1 *=1.7F;
         }

@@ -318,6 +318,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 	                	case 8:i0=Fossil.dnaStegosaurus;break;
 	                	case 9:i0=Fossil.brokenSapling;break;
 	                	case 10:i0=Fossil.dnaNautilus;break;
+	                    case 11:i0=Fossil.dnaSpinosaurus;break;
                 	}
                     var1 = new ItemStack(i0, 1);
                 }
@@ -367,7 +368,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 var1 = new ItemStack(Fossil.dnaDilophosaurus, 1);
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawSpinosaurus)
-                var1 = new ItemStack(Fossil.rawSpinosaurus, 1);
+                var1 = new ItemStack(Fossil.dnaSpinosaurus, 1);
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.porkRaw)
                 var1 = new ItemStack(Fossil.dnaPig, 2);

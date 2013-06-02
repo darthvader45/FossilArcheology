@@ -340,6 +340,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     	if(var1.itemID==Fossil.dnaBrachiosaurus.itemID)return new ItemStack(Fossil.eggBrachiosaurus, 1);
     	if(var1.itemID==Fossil.dnaPlesiosaur.itemID)return new ItemStack(Fossil.eggPlesiosaur, 1);
     	if(var1.itemID==Fossil.dnaVelociraptor.itemID)return new ItemStack(Fossil.eggVelociraptor, 1);
+        if(var1.itemID==Fossil.dnaSpinosaurus.itemID)return new ItemStack(Fossil.eggSpinosaurus, 1);
     	if(var1.itemID==Fossil.dnaTRex.itemID)return new ItemStack(Fossil.eggTRex, 1);
     	if(var1.itemID==Fossil.dnaDilophosaurus.itemID)return new ItemStack(Fossil.eggDilophosaurus, 1);
     	if(var1.itemID==Fossil.dnaMosasaurus.itemID)return new ItemStack(Fossil.eggMosasaurus, 1);

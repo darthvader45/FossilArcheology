@@ -1,7 +1,5 @@
 package mods.fossil.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityJavelin;
