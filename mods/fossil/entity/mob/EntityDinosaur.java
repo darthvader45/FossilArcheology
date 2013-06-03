@@ -35,6 +35,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -1013,6 +1014,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	    	case Plesiosaur:   return Fossil.rawPlesiosaur.itemID;
 	    	case Brachiosaurus:return Fossil.rawBrachiosaurus.itemID;
 	    	case Dilophosaurus:return Fossil.rawDilophosaurus.itemID;
+	        case Spinosaurus:return Fossil.rawSpinosaurus.itemID;
 	    	default: return Fossil.rawTriceratops.itemID;
     	}
         //return this.isModelized() ? Item.bone.itemID : Fossil.rawDinoMeat.itemID;
@@ -1134,6 +1136,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         }
     }
 
+    
+    
     /**
      * Returns the volume for the sounds this mob makes.
      */
@@ -1256,14 +1260,20 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public EnumOrderType getOrderType()
     {return this.OrderStatus;}
 
-
+    public boolean canBePushed()
+    {
+        return false;
+    }
     /**
      * Called to update the entity's position/logic.
      */
-    /*public void onUpdate()
+    /*
+    public void onUpdate()
     {
         super.onUpdate();
-    }*/
+    }
+    */
+    
     public void onLivingUpdate()
     {
     	if(this.worldObj.isRemote)

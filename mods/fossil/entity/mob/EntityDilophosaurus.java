@@ -92,12 +92,12 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.experienceValue=10;
         
         
-        this.Width0=0.5F;
-        this.WidthInc=0.2F;
-        this.Length0=0.8F;
-        this.LengthInc=0.5F;
-        this.Height0=0.6F;
-        this.HeightInc=0.3F;
+        this.Width0=0.4F;
+        this.WidthInc=0.16F;
+        this.Length0=0.4F;
+        this.LengthInc=0.17F;
+        this.Height0=0.4F;
+        this.HeightInc=0.16F;
         //this.BaseattackStrength=;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;

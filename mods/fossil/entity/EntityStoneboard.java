@@ -170,17 +170,17 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 
     public boolean onValidSurface()
     {
-        if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() > 0)		//test for collisions
+        if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() > 0)     //test for collisions
         {
             return false;
         }
         else
         {
-            int Width = Math.max(1, this.art.sizeX / 16);	//Size of The Tablet
+            int Width = Math.max(1, this.art.sizeX / 16);   //Size of The Tablet
             int Height = Math.max(1, this.art.sizeY / 16);
             
             
-            int xPos = this.xPosition;			//Starting Position of the Tablet
+            int xPos = this.xPosition;          //Starting Position of the Tablet
             int yPos = MathHelper.floor_double(this.posY - (double)((float)this.art.sizeY / 32.0F)); // Center is where you clicked: start at -sizeY/2
             int zPos = this.zPosition;
             
@@ -201,12 +201,12 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
                     if (this.direction != 2 || this.direction != 0)
                     {
                         if(!this.worldObj.getBlockMaterial(this.xPosition, yPos + up, zPos + side).isSolid())
-                        	return false;
+                            return false;
                     }
                     else
                     {
                         if(!this.worldObj.getBlockMaterial(xPos + side, yPos + up, this.zPosition).isSolid())
-                        	return false;
+                            return false;
                     }
                 }
             }
@@ -264,7 +264,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
      */
     public void readEntityFromNBT(NBTTagCompound var1)
     {
-        this.direction = var1.getByte("Dir");
+ //       this.direction = var1.getByte("Dir");
         this.xPosition = var1.getInteger("TileX");
         this.yPosition = var1.getInteger("TileY");
         this.zPosition = var1.getInteger("TileZ");
@@ -293,6 +293,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * Tries to moves the entity by the passed in displacement. Args: x, y, z
      */
+    /*
     public void moveEntity(double var1, double var3, double var5)
     {
         if (!this.worldObj.isRemote && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D)
@@ -301,10 +302,11 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
             this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Fossil.stoneboard)));
         }
     }
-
+*/
     /**
      * Adds to the current velocity of the entity. Args: x, y, z
      */
+    /*
     public void addVelocity(double var1, double var3, double var5)
     {
         if (!this.worldObj.isRemote && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D)
@@ -313,10 +315,12 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
             this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Fossil.stoneboard)));
         }
     }
+    */
 
     public void writeSpawnData(ByteArrayDataOutput var1)
     {
         EnumStoneboard[] var2 = EnumStoneboard.values();
+        var1.writeInt(this.direction);
 
         for (int var3 = 0; var3 < var2.length; ++var3)
         {
@@ -327,11 +331,12 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
             }
         }
 
-        var1.writeInt(0);
+//        var1.writeInt(0);
     }
 
     public void readSpawnData(ByteArrayDataInput var1)
     {
+        this.direction = var1.readInt();
         int var2 = var1.readInt();
         this.art = EnumStoneboard.values()[var2];
     }

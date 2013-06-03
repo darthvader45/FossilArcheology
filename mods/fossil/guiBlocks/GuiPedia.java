@@ -10,7 +10,7 @@ import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
-import mods.fossil.entity.mob.EntitySaberCat;
+import mods.fossil.entity.mob.EntitySmilodon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderEngine;
@@ -172,7 +172,7 @@ public class GuiPedia extends GuiContainer
     	if(Fossil.ToPedia instanceof EntityPregnantPig)((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityPregnantSheep)((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityMammoth)((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntitySaberCat)((EntitySaberCat)Fossil.ToPedia).ShowPedia(this);
+    	if(Fossil.ToPedia instanceof EntitySmilodon)((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
     }
 
     /**

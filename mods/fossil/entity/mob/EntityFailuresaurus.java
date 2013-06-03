@@ -37,4 +37,12 @@ public class EntityFailuresaurus extends EntityZombie
      * Causes this entity to do an upwards motion (jumping).
      */
     protected void jump() {}
+    
+    /**
+     * Returns the texture's file path as a String.
+     */
+    public String getTexture()
+    {
+        return "/mods/fossil/textures/mob/Failuresaurus.png";
+    }
 }

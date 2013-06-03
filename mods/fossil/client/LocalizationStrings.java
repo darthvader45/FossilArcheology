@@ -9,7 +9,7 @@ public class LocalizationStrings {
     public static final String BLOCKANALYZERACTIVE_NAME = "analyzerActive";
     public static final String BLOCKCULTIVATEIDLE_NAME = "cultureVat";
     public static final String BLOCKCULTIVATEACTIVE_NAME = "cultureVatActive";
-    public static final String BLOCKWORKTABLEIDLE_NAME = "workbench";
+    public static final String BLOCKWORKTABLEIDLE_NAME = "fossilworkbench";
     public static final String BLOCKWORKTABLEACTIVE_NAME = "workbenchActive";
     public static final String DRUM_NAME = "drum";
     public static final String FEEDERIDLE_NAME = "feeder";
@@ -28,6 +28,7 @@ public class LocalizationStrings {
     public static final String VOLCANICASH_NAME = "volcanicAsh";
     public static final String VOLCANICROCK_NAME = "volcanicRock";
     public static final String VOLCANICROCKHOT_NAME = "volcanicRockHot";
+    public static final String VOLCANICBRICK_NAME = "volcanicBrick";    
     public static final String SARRACINA_NAME = "sarracina";
     public static final String FERNS_NAME = "fernBlock";
     
@@ -110,13 +111,13 @@ public class LocalizationStrings {
     public static final String DNA_SHEEP_NAME = "dnaSheep";
     public static final String DNA_COW_NAME = "dnaCow";
     public static final String DNA_CHICKEN_NAME = "dnaChicken";
-    public static final String DNA_SABERCAT_NAME = "dnaSabercat";
+    public static final String DNA_SMILODON_NAME = "dnaSabercat";
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
     public static final String EMBRYO_PIG_NAME = "embryoPig";
     public static final String EMBRYO_SHEEP_NAME = "embryoSheep";
     public static final String EMBRYO_COW_NAME = "embryoCow";
     public static final String EMBRYO_CHICKEN_NAME = "embryoChicken";
-    public static final String EMBRYO_SABERCAT_NAME = "embryoSabercat";
+    public static final String EMBRYO_SMILODON_NAME = "embryoSabercat";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     
     public static final String FARMOR_NAME = "Ancient Armor";
@@ -157,7 +158,7 @@ public class LocalizationStrings {
     public static final String ORDER_FREEMOVE = "order.freeMove";
     
     public static final String ANIMAL_MAMMOTH = "animal.mammoth";
-    public static final String ANIMAL_SABERCAT = "animal.saberCat";
+    public static final String ANIMAL_SMILODON = "animal.smilodon";
     public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
     public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
     public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
@@ -168,7 +169,7 @@ public class LocalizationStrings {
     public static final String PEDIA_EMBRYO_SHEEP = "pedia.embryo.sheep";
     public static final String PEDIA_EMBRYO_COW = "pedia.embryo.cow";
     public static final String PEDIA_EMBRYO_CHICKEN = "pedia.embryo.chicken";
-    public static final String PEDIA_EMBRYO_SABERCAT = "pedia.embryo.saberCat";
+    public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
     public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
     
     public static final String STATUS_GEM_ERROR_YOUNG = "status.gemErrorYoung";  

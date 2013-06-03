@@ -562,9 +562,13 @@ public class EntityTriceratops extends EntityDinosaur
         }
     }
 
+    
     public int BlockInteractive()
     {
     	int destroyed=0;
+    	
+    	if (!this.isAdult() && !Fossil.FossilOptions.Dino_Block_Breaking)
+    	{
         for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
         {
             for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
@@ -601,6 +605,7 @@ public class EntityTriceratops extends EntityDinosaur
                 }
             }
         }
+    	}
         return destroyed;
     }
 

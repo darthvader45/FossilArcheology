@@ -17,7 +17,7 @@
 	<entry key="tile.skullLantern.name">Skull Lantern</entry>
 	<entry key="tile.analyzer.name">Analyzer</entry>
 	<entry key="tile.cultureVat.name">Culture Vat</entry>
-	<entry key="tile.workbench.name">Archeology Workbench</entry>
+	<entry key="tile.fossilworkbench.name">Archeology Workbench</entry>
 	<entry key="tile.drum.name">Drum</entry>
 	<entry key="tile.feeder.name">Feeder</entry>
 	<entry key="tile.permafrost.name">Permafrost</entry>
@@ -36,6 +36,7 @@
 	<entry key="tile.volcanicRockHot.name">Hot Volcanic Rock</entry>
 	<entry key="tile.sarracina.name">Sarracina</entry>
 	<entry key="tile.fernBlock.name">Fern Seeds</entry>
+	<entry key="tile.volcanicBrick.name">Volcanic Brick</entry>
 <!-- Items -->
 	<entry key="item.bioFossil.name">Bio-Fossil</entry>
 	<entry key="item.relicScrap.name">Relic Scrap</entry>
@@ -120,14 +121,14 @@
 	<entry key="item.dnaSheep.name">Sheep DNA</entry>
 	<entry key="item.dnaCow.name">Cow DNA</entry>
 	<entry key="item.dnaChicken.name">Chicken DNA</entry>
-	<entry key="item.dnaSabercat.name">Sabercat DNA</entry>
+	<entry key="item.dnaSabercat.name">Smilodon DNA</entry>
 	<entry key="item.dnaMammoth.name">Mammoth DNA</entry>
 <!-- Embryos -->
 	<entry key="item.embryoPig.name">Pig Embryo</entry>
 	<entry key="item.embryoSheep.name">Sheep Embryo</entry>
 	<entry key="item.embryoCow.name">Cow Embryo</entry>
 	<entry key="item.embryoChicken.name">Chicken Embryo</entry>
-	<entry key="item.embryoSabercat.name">Sabercat Embryo</entry>
+	<entry key="item.embryoSabercat.name">Smilodon Embryo</entry>
 	<entry key="item.embryoMammoth.name">Mammoth Embryo</entry>
 <!-- Prefix/Suffix -->
 	<entry key="dnaName.head">DNA of </entry>
@@ -149,24 +150,24 @@
 	<entry key="order.follow">Follow</entry>
 	<entry key="order.freeMove">Free Move</entry>
 <!-- Dinosaur Statuses -->
-	<entry key="status.hungry.head">This </entry>
-	<entry key="status.hungry"> is hungry.</entry>
-	<entry key="status.starve.head">A </entry>
-	<entry key="status.starve"> was starved to death.</entry>
-	<entry key="status.learningChest.head">A </entry>
-	<entry key="status.learningChest"> has learned how to use chests.</entry>
-	<entry key="status.betrayed.head">This </entry>
-	<entry key="status.betrayed"> won't trust mankind anymore.</entry>
-	<entry key="status.noSpace.Head">This </entry>
-	<entry key="status.noSpace"> doesn't have enough space to grow.</entry>
-	<entry key="status.starveEsc"> has escaped because of starvation.</entry>
-	<entry key="status.sJLBite"> bit the Siu-Jiu-Le and ran away.</entry>
-	<entry key="status.chewTime"> needs time to chew.</entry>
-	<entry key="status.full"> is full.</entry>
-	<entry key="status.nervous.Head">You made the little </entry>
-	<entry key="status.nervous"> too nervous to hunt itself.</entry>
-	<entry key="status.gemErrorYoung">This T-Rex is still too young.</entry>
-	<entry key="status.gemErrorHealth">The scarab cannot afford such strong life energy.</entry>
+	<entry key="status.Hungry.head">This </entry>
+	<entry key="status.Hungry"> is hungry.</entry>
+	<entry key="status.Starve.head">A </entry>
+	<entry key="status.Starve"> was starved to death.</entry>
+	<entry key="status.LearningChest.head">A </entry>
+	<entry key="status.LearningChest"> has learned how to use chests.</entry>
+	<entry key="status.Betrayed.head">This </entry>
+	<entry key="status.Betrayed"> won't trust mankind anymore.</entry>
+	<entry key="status.NoSpace.Head">This </entry>
+	<entry key="status.NoSpace"> doesn't have enough space to grow.</entry>
+	<entry key="status.StarveEsc"> has escaped because of starvation.</entry>
+	<entry key="status.SJLBite"> bit the Siu-Jiu-Le and ran away.</entry>
+	<entry key="status.ChewTime"> needs time to chew.</entry>
+	<entry key="status.Full"> is full.</entry>
+	<entry key="status.Nervous.Head">You made the little </entry>
+	<entry key="status.Nervous"> too nervous to hunt itself.</entry>
+	<entry key="status.GemErrorYoung">This T-Rex is still too young.</entry>
+	<entry key="status.GemErrorHealth">The scarab cannot afford such strong life energy.</entry>
 <!-- Dinosaur names. 11 characters MAX -->
 	<entry key="Dino.Triceratops">Triceratops</entry>
 	<entry key="Dino.Velociraptor">Velociraptor</entry>

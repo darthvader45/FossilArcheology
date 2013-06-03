@@ -1,6 +1,6 @@
 package mods.fossil.fossilAI;
 
-import mods.fossil.entity.mob.EntitySaberCat;
+import mods.fossil.entity.mob.EntitySmilodon;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,13 +9,13 @@ import net.minecraft.world.World;
 
 public class EntityAIBegSC extends EntityAIBase
 {
-    private EntitySaberCat field_48350_a;
+    private EntitySmilodon field_48350_a;
     private EntityPlayer field_48348_b;
     private World field_48349_c;
     private float field_48346_d;
     private int field_48347_e;
 
-    public EntityAIBegSC(EntitySaberCat var1, float var2)
+    public EntityAIBegSC(EntitySmilodon var1, float var2)
     {
         this.field_48350_a = var1;
         this.field_48349_c = var1.worldObj;

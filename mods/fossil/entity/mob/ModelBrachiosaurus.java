@@ -212,14 +212,14 @@ public class ModelBrachiosaurus extends ModelDinosaurs
     {
         //if (var7==false)
         {
-            this.Front_Thigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-            this.Front_Calf1.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-            this.Front_Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-            this.Front_Calf2.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-            this.Back_Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-            this.Back_CalfRight.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-            this.Back_Thigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-            this.Back_CalfLeft.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
+            this.Front_Thigh.rotateAngleX = MathHelper.cos((var1 +1)* 0.6662F) * 1.0F * var2/1.5F;
+            this.Front_Calf1.rotateAngleX = MathHelper.cos((var1 +1)* 0.6662F) * 1.0F * var2/1.5F;
+            this.Front_Thigh1.rotateAngleX = MathHelper.cos((var1 +0) * 0.6662F + (float)Math.PI) * 1.0F * var2/1.5F;
+            this.Front_Calf2.rotateAngleX = MathHelper.cos((var1 +0) * 0.6662F + (float)Math.PI) * 1.0F * var2/1.5F;
+            this.Back_Thigh1.rotateAngleX = MathHelper.cos((var1 +3) * 0.6662F + (float)Math.PI) * 1.0F * var2/1.5F;
+            this.Back_CalfRight.rotateAngleX = MathHelper.cos((var1 +3) * 0.6662F + (float)Math.PI) * 1.0F * var2/1.5F;
+            this.Back_Thigh.rotateAngleX = MathHelper.cos((var1 +2) * 0.6662F) * 1.0F * var2/1.5F;
+            this.Back_CalfLeft.rotateAngleX = MathHelper.cos((var1 +2) * 0.6662F) * 1.0F * var2/1.5F;
         }
     }
 }

@@ -32,6 +32,7 @@ import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -67,8 +68,8 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.WidthInc=0.2F;
         this.Length0=2.0F;
         this.LengthInc=0.52F;
-        this.Height0=1.2F;
-        this.HeightInc=0.16F;
+        this.Height0=1.5F;
+        this.HeightInc=0.13F;
         
         /*this.HitboxXfactor=10.0F;
         this.HitboxYfactor=5.0F;
@@ -298,14 +299,13 @@ public class EntityBrachiosaurus extends EntityDinosaur
         //this.InitSize();
         //this.OrderStatus = EnumOrderType.values()[var1.getByte("OrderStatus")];//already done
     }*/
-
     /**
      * Called to update the entity's position/logic.
      */
     public void onUpdate()
     {
         super.onUpdate();
-        if (this.isAdult() && ! this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking)//this.getDinoAge() >= 4)
+        if ((this.isTeen() || this.isAdult())&& !this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking)//this.getDinoAge() >= 4)
         {
             this.BlockInteractive();
         }

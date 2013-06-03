@@ -51,11 +51,11 @@ public class DinoSoundHandler {
         SOUND_RESOURCE_LOCATION + "raptor_living_friendly2.wav",
         SOUND_RESOURCE_LOCATION + "raptor_living_wild1.wav",
         SOUND_RESOURCE_LOCATION + "raptor_living_wild2.wav",
-        SOUND_RESOURCE_LOCATION + "SaberCat_death.wav",
-        SOUND_RESOURCE_LOCATION + "SaberCat_Hurt.wav",
-        SOUND_RESOURCE_LOCATION + "SaberCat_Living1.wav",
-        SOUND_RESOURCE_LOCATION + "SaberCat_Living2.wav",
-        SOUND_RESOURCE_LOCATION + "SaberCat_Living3.wav",
+        SOUND_RESOURCE_LOCATION + "Smilodon_death.wav",
+        SOUND_RESOURCE_LOCATION + "Smilodon_Hurt.wav",
+        SOUND_RESOURCE_LOCATION + "Smilodon_Living1.wav",
+        SOUND_RESOURCE_LOCATION + "Smilodon_Living2.wav",
+        SOUND_RESOURCE_LOCATION + "Smilodon_Living3.wav",
         SOUND_RESOURCE_LOCATION + "Steg_death.wav",
         SOUND_RESOURCE_LOCATION + "Steg_Hurt.wav",
         SOUND_RESOURCE_LOCATION + "Steg_living1.wav",
@@ -105,9 +105,9 @@ public class DinoSoundHandler {
     public static final String Raptor_hurt = SOUND_PREFIX + "Raptor_hurt";
     public static final String raptor_living_friendly = SOUND_PREFIX + "raptor_living_friendly";
     public static final String raptor_living_wild = SOUND_PREFIX + "raptor_living_wild";
-    public static final String SaberCat_death = SOUND_PREFIX + "SaberCat_death";
-    public static final String SaberCat_Hurt = SOUND_PREFIX + "SaberCat_Hurt";
-    public static final String SaberCat_Living = SOUND_PREFIX + "SaberCat_Living";
+    public static final String Smilodon_death = SOUND_PREFIX + "Smilodon_death";
+    public static final String Smilodon_Hurt = SOUND_PREFIX + "Smilodon_Hurt";
+    public static final String Smilodon_Living = SOUND_PREFIX + "Smilodon_Living";
     public static final String Steg_death = SOUND_PREFIX + "Steg_death";
     public static final String Steg_Hurt = SOUND_PREFIX + "Steg_Hurt";
     public static final String Steg_living = SOUND_PREFIX + "Steg_living";

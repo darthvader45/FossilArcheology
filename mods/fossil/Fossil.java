@@ -41,6 +41,7 @@ import mods.fossil.blocks.BlockSarracenia;
 import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicRock;
+import mods.fossil.blocks.BlockVolcanicBrick;
 //import mods.fossil.blocks.FossilSlabs;
 import mods.fossil.client.FossilCfgLoader;
 import mods.fossil.client.FossilGuiHandler;
@@ -68,7 +69,7 @@ import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.entity.mob.EntityPterosaur;
-import mods.fossil.entity.mob.EntitySaberCat;
+import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
@@ -253,7 +254,7 @@ public class Fossil implements IPacketHandler
 	public static BlockHalfSlab palaeDoubleSlab;
 	public static Block palaeStairs;
 	public static Block sarracina;
-	//public static Block newBlock;
+	public static Block volcanicBrick;
 	//public static Block newBlock;
 	//public static Block newBlock;
 	//public static Block newBlock;
@@ -347,7 +348,7 @@ public class Fossil implements IPacketHandler
 	public static Item dnaSheep;
 	public static Item dnaCow;
 	public static Item dnaChicken;
-	public static Item dnaSaberCat;
+	public static Item dnaSmilodon;
 	public static Item dnaMammoth;
 	
 	//Mob DNA
@@ -384,7 +385,7 @@ public class Fossil implements IPacketHandler
 	public static Item embryoSheep;
 	public static Item embryoCow;
 	public static Item embryoChicken;
-	public static Item embryoSaberCat;
+	public static Item embryoSmilodon;
 	public static Item embryoMammoth;
 	//public static Item embryoPigZombie;
 	//public static Item embryoZombie;
@@ -443,7 +444,7 @@ public class Fossil implements IPacketHandler
 	public static int palaeDoubleSlabID;
 	public static int palaeStairsID;
 	public static int sarracinaID;
-	//public static int newBlockID;
+	public static int volcanicBrickID;
 	//public static int newBlockID;
 	//public static int newBlockID;
 	//public static int newBlockID;
@@ -537,7 +538,7 @@ public class Fossil implements IPacketHandler
 	public static int dnaSheepID;
 	public static int dnaCowID;
 	public static int dnaChickenID;
-	public static int dnaSaberCatID;
+	public static int dnaSmilodonID;
 	public static int dnaMammothID;
 	
 	//Mob DNA
@@ -574,7 +575,7 @@ public class Fossil implements IPacketHandler
 	public static int embryoSheepID;
 	public static int embryoCowID;
 	public static int embryoChickenID;
-	public static int embryoSaberCatID;
+	public static int embryoSmilodonID;
 	public static int embryoMammothID;
 	//public static int embryoPigZombieID;
 	//public static int embryoZombieID;
@@ -650,7 +651,7 @@ public class Fossil implements IPacketHandler
         palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAEDOUBLESLAB_NAME, 3025).getInt(3025);
         palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESTAIRS_NAME, 3026).getInt(3026);
         sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3028).getInt(3028);
+		volcanicBrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICBRICK_NAME, 3028).getInt(3028);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3029).getInt(3029);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3030).getInt(3030);
 		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3031).getInt(3031);
@@ -745,7 +746,7 @@ public class Fossil implements IPacketHandler
 		dnaSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SHEEP_NAME, 10078).getInt(10078);
 		dnaCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COW_NAME, 10079).getInt(10079);
 		dnaChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt(10080);
-		dnaSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SABERCAT_NAME, 10081).getInt(10081);
+		dnaSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SMILODON_NAME, 10081).getInt(10081);
 		dnaMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt(10082);
 		
 		//MobDNA
@@ -782,7 +783,7 @@ public class Fossil implements IPacketHandler
         embryoSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SHEEP_NAME, 10109).getInt(10109);
         embryoCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_COW_NAME, 10110).getInt(10110);
         embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
-        embryoSaberCatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SABERCAT_NAME, 10112).getInt(10112);
+        embryoSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt(10112);
         embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
 		//embryoPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
 		//embryoZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
@@ -878,7 +879,8 @@ public class Fossil implements IPacketHandler
         palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName(LocalizationStrings.PALAESTAIRS_NAME);
         volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICASH_NAME).setCreativeTab(this.tabFBlocks);
         volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICROCK_NAME).setCreativeTab(this.tabFBlocks);
-		sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
+        volcanicBrick = new BlockVolcanicBrick(volcanicBrickID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICBRICK_NAME).setCreativeTab(this.tabFBlocks);
+        sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
         tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
 		Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLog.blockID, 5, 5);
@@ -960,7 +962,7 @@ public class Fossil implements IPacketHandler
 		dnaSheep = new ForgeItem(dnaSheepID,"Sheep_DNA").setUnlocalizedName(LocalizationStrings.DNA_SHEEP_NAME).setCreativeTab(this.tabFMaterial);
 		dnaCow = new ForgeItem(dnaCowID,"Cow_DNA").setUnlocalizedName(LocalizationStrings.DNA_COW_NAME).setCreativeTab(this.tabFMaterial);
 		dnaChicken = new ForgeItem(dnaChickenID,"Chicken_DNA").setUnlocalizedName(LocalizationStrings.DNA_CHICKEN_NAME).setCreativeTab(this.tabFMaterial);
-		dnaSaberCat = new ForgeItem(dnaSaberCatID,"Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SABERCAT_NAME).setCreativeTab(this.tabFMaterial);
+		dnaSmilodon = new ForgeItem(dnaSmilodonID,"Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SMILODON_NAME).setCreativeTab(this.tabFMaterial);
 		dnaMammoth = new ForgeItem(dnaMammothID,"Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
 		
 		//Ebryos
@@ -969,7 +971,7 @@ public class Fossil implements IPacketHandler
 		embryoSheep = new ItemEmbryoSyringe(embryoSheepID,1).setUnlocalizedName(LocalizationStrings.EMBRYO_SHEEP_NAME).setCreativeTab(this.tabFItems);
 		embryoCow = new ItemEmbryoSyringe(embryoCowID,2).setUnlocalizedName(LocalizationStrings.EMBRYO_COW_NAME).setCreativeTab(this.tabFItems);
 		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
-		embryoSaberCat = new ItemEmbryoSyringe(embryoSaberCatID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SABERCAT_NAME).setCreativeTab(this.tabFItems);
+		embryoSmilodon = new ItemEmbryoSyringe(embryoSmilodonID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
 		embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
 		
 		//Item Food
@@ -1032,6 +1034,7 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(palaeStairs, LocalizationStrings.PALAESTAIRS_NAME);
         GameRegistry.registerBlock(palaePlanks, LocalizationStrings.PALAEPLANKS_NAME);
         GameRegistry.registerBlock(volcanicAsh, LocalizationStrings.VOLCANICASH_NAME);
+        GameRegistry.registerBlock(volcanicBrick, LocalizationStrings.VOLCANICBRICK_NAME);
         GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANICROCK_NAME);
         GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
         GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
@@ -1161,7 +1164,7 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(dnaSheep, GetLangTextByKey("Item.dnaSheep.Name"));
 		LanguageRegistry.addName(dnaCow, GetLangTextByKey("Item.dnaCow.Name"));
 		LanguageRegistry.addName(dnaChicken, GetLangTextByKey("Item.dnaChicken.Name"));
-		LanguageRegistry.addName(dnaSaberCat, GetLangTextByKey("Item.dnaSaberCat.Name"));
+		LanguageRegistry.addName(dnaSmilodon, GetLangTextByKey("Item.dnaSmilodon.Name"));
 		LanguageRegistry.addName(dnaMammoth, GetLangTextByKey("Item.dnaMammoth.Name"));
 		
 		//Embryo
@@ -1169,7 +1172,7 @@ public class Fossil implements IPacketHandler
 		LanguageRegistry.addName(embryoSheep, GetLangTextByKey("Item.embryoSheep.Name"));
 		LanguageRegistry.addName(embryoCow, GetLangTextByKey("Item.embryoCow.Name"));
 		LanguageRegistry.addName(embryoChicken, GetLangTextByKey("Item.embryoChicken.Name"));
-		LanguageRegistry.addName(embryoSaberCat, GetLangTextByKey("Item.embryoSaberCat.Name"));
+		LanguageRegistry.addName(embryoSmilodon, GetLangTextByKey("Item.embryoSmilodon.Name"));
 		LanguageRegistry.addName(embryoMammoth, GetLangTextByKey("Item.embryoMammoth.Name"));
 */
 		GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
@@ -1192,29 +1195,29 @@ public class Fossil implements IPacketHandler
 		GameRegistry.addRecipe(new ItemStack(skullStick, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Item.stick});
 		GameRegistry.addRecipe(new ItemStack(drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
 		GameRegistry.addRecipe(new ItemStack(feederIdle, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeWood, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeStone, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeIron, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeWood, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeStone, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeWood, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeStone, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeIron, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeWood, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeStone, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeWood, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeStone, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeIron, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeWood, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeStone, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordWood, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordStone, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordIron, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordWood, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordStone, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelWood, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelStone, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelIron, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelWood, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelStone, gem});
+		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelDiamond, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, dnaTriceratops});
@@ -1233,6 +1236,8 @@ public class Fossil implements IPacketHandler
 		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 0), new Object[] {new ItemStack(magicConch, 1, 2)});
 		GameRegistry.addRecipe(new ItemStack(chickenEss, 8), new Object[] {"XXX", "XYX", "XXX", 'X', Item.glassBottle, 'Y', cookedChickenSoup});
 		GameRegistry.addRecipe(new ItemStack(whip, 1), new Object[] {"XXS", "XTS", "TXS", 'T', Item.stick, 'S', Item.silk});
+		
+		GameRegistry.addRecipe(new ItemStack(volcanicBrick, 4), new Object[] {"VV", "VV", 'V', this.volcanicRock});
 		
 		GameRegistry.addRecipe(new ItemStack(palaePlanks, 4), new Object[] {"P", 'P', this.palmLog});
 		GameRegistry.addRecipe(new ItemStack(Block.woodenButton, 1), new Object[] {"P", 'P', this.palaePlanks});
@@ -1308,7 +1313,7 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntitySaberCat.class, 			"SaberCat", 			22, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityBrachiosaurus.class, 	"Brachiosaurus", 		23, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
@@ -1330,7 +1335,7 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_COW));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_PIG));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.SaberCat.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SABERCAT));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SMILODON));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Brachiosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_BRACHIOSAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Spinosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_SPINOSAURUS));

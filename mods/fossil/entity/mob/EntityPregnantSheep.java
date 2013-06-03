@@ -124,7 +124,7 @@ public class EntityPregnantSheep extends EntitySheep implements IViviparous, IEn
                     break;
 
                 case Smilodon:
-                    var2 = new EntitySaberCat(this.worldObj);
+                    var2 = new EntitySmilodon(this.worldObj);
                     break;
 
                 case Mammoth:

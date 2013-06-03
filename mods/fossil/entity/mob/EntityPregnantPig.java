@@ -122,7 +122,7 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
                     break;
 
                 case Smilodon:
-                    var2 = new EntitySaberCat(this.worldObj);
+                    var2 = new EntitySmilodon(this.worldObj);
                     break;
 
                 case Mammoth:
