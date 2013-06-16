@@ -56,42 +56,37 @@ public class EntityBrachiosaurus extends EntityDinosaur
 
     public EntityBrachiosaurus(World var1)
     {
-        super(var1);
+        super(var1,EnumDinoType.Brachiosaurus);
         this.texture = "/mods/fossil/textures/mob/Brachiosaurus.png";
-        this.SelfType = EnumDinoType.Brachiosaurus;
         //this.setSize(1.5F, 1.5F);
-        this.health = 8;
-        this.experienceValue=5;
+        //this.health = 8;
+        //this.experienceValue=5;
         
         
-        this.Width0=1.5F;
+        /*this.Width0=1.5F;
         this.WidthInc=0.2F;
         this.Length0=2.0F;
         this.LengthInc=0.52F;
-        this.Height0=1.5F;
-        this.HeightInc=0.13F;
+        this.Height0=1.2F;
+        this.HeightInc=0.16F;
         
         /*this.HitboxXfactor=10.0F;
         this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;*/
+        this.HitboxZfactor=5.0F;*
         
         //this.BaseattackStrength=;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
         //this.BaseSpeed=;
-        this.SpeedIncrease=0.012F;
+        //this.SpeedIncrease=;
         this.MaxAge=36;
         //this.BaseHealth=;
         this.HealthIncrease=5;
         this.AdultAge=12;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.Sugar);
-        FoodItemList.addItem(EnumDinoFoodItem.Cookie);
-        FoodItemList.addItem(EnumDinoFoodItem.Apple);
         
         //this.setHunger(this.getHungerLimit());
         this.getNavigator().setAvoidsWater(true);
@@ -171,12 +166,12 @@ public class EntityBrachiosaurus extends EntityDinosaur
 	        {
 	            for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
 	            {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r));
                     	return pos;
                     }
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r));
                     	return pos;
@@ -187,12 +182,12 @@ public class EntityBrachiosaurus extends EntityDinosaur
 	        {
 	    		for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
 	            {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
                     	return pos;
                     }
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
                     	return pos;
@@ -242,7 +237,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
                     {
                         TileEntity var14 = this.worldObj.getBlockTileEntity(var15, var16, var17);
 
-                        if (var14 != null && var14 instanceof TileEntityFeeder && ((TileEntityFeeder)var14).CheckIsEmpty(this.SelfType)/*isFilled()*/)
+                        if (var14 != null && var14 instanceof TileEntityFeeder && !((TileEntityFeeder)var14).CheckIsEmpty(this.SelfType)/*isFilled()*/)
                         {
                             var10 = ((double)var15 - this.posX) * ((double)var15 - this.posX) + ((double)var17 - this.posZ) * ((double)var17 - this.posZ);
 
@@ -258,14 +253,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
         return null;
     }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaBrachiosaurus, 120, 7);
-    }
-
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
@@ -436,7 +423,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         int var4 = -1;
         float var5 = -99999.0F;
 
-        if (this.OrderStatus == EnumOrderType.freeMove || !this.isTamed())
+        if (this.OrderStatus == EnumOrderType.FreeMove || !this.isTamed())
         {
             for (int var6 = 0; var6 < 10 + this.getDinoAge(); ++var6)
             {

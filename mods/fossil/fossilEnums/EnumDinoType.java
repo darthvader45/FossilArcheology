@@ -1,6 +1,9 @@
 package mods.fossil.fossilEnums;
 
 import mods.fossil.Fossil;
+import mods.fossil.entity.mob.DinoFoodBlockList;
+import mods.fossil.entity.mob.DinoFoodItemList;
+import mods.fossil.entity.mob.DinoFoodMobList;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityMosasaurus;
@@ -16,15 +19,6 @@ import net.minecraft.item.Item;
 
 interface C
 {
-	/*public static final boolean NO_MODEL =false;
-	public static final boolean MODEL =true;
-	public static final boolean NO_TAME =false;
-	public static final boolean TAME =true;
-	public static final boolean NO_RIDE =false;
-	public static final boolean RIDE =true;
-	public static final boolean NO_CARRY =false;
-	public static final boolean CARRY =true;*/
-	
 	public static final int NOTHING = 0;
 	
 	public static final int NO_FEEDER = 0 << 0;//Bits 0+1:	Dinos Can't use Feeder at all
@@ -40,54 +34,90 @@ interface C
 
 public enum EnumDinoType
 {
-	//Name(Class							Modelable	Tameable	Rideable	Can Carry Items
-    /*Triceratops(EntityTriceratops.class, 	C.MODEL,	C.TAME,		C.RIDE,		C.NO_CARRY),
-    Velociraptor(EntityVelociraptor.class, 	C.NO_MODEL,	C.TAME,		C.NO_RIDE,	C.CARRY),
-    TRex(EntityTRex.class, 					C.NO_MODEL,	C.NO_TAME,	C.RIDE,		C.NO_CARRY),
-    Pterosaur(EntityPterosaur.class, 		C.MODEL,	C.TAME,		C.RIDE,		C.NO_CARRY),
-    Nautilus(EntityNautilus.class, 			C.NO_MODEL,	C.NO_TAME,	C.NO_RIDE,	C.NO_CARRY),//I think not really neccessary...
-    Plesiosaur(EntityPlesiosaur.class, 		C.MODEL,	C.TAME,		C.RIDE,		C.NO_CARRY),
-    Mosasaurus(EntityMosasaurus.class, 		C.NO_MODEL,	C.NO_TAME,	C.NO_RIDE,	C.NO_CARRY),
-    Stegosaurus(EntityStegosaurus.class, 	C.NO_MODEL,	C.TAME,		C.NO_RIDE,	C.NO_CARRY),
-    Dilophosaurus(EntityDilophosaurus.class,C.NO_MODEL,	C.TAME,		C.NO_RIDE,	C.CARRY),
-    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL,	C.TAME,		C.RIDE,		C.NO_CARRY);*/
-
-
-    Triceratops(EntityTriceratops.class, 	C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
-    Velociraptor(EntityVelociraptor.class, 	C.TAME | C.CARRY | C.CARNIVORE),
-    TRex(EntityTRex.class, 					C.RIDE | C.CARNIVORE),
-    Pterosaur(EntityPterosaur.class, 		C.MODEL | C.TAME | C.RIDE | C.CARNIVORE),
+    Triceratops(EntityTriceratops.class, 	C.MODEL | C.TAME  | C.RIDE | C.HERBIVORE),
+    Velociraptor(EntityVelociraptor.class, 	C.TAME  | C.CARRY | C.CARNIVORE),
+    TRex(EntityTRex.class, 					C.RIDE  | C.CARNIVORE),
+    Pterosaur(EntityPterosaur.class, 		C.MODEL | C.TAME  | C.RIDE | C.CARNIVORE),
     Nautilus(EntityNautilus.class, 			C.NOTHING),
-    Plesiosaur(EntityPlesiosaur.class, 		C.MODEL | C.TAME | C.RIDE | C.CARNIVORE),
+    Plesiosaur(EntityPlesiosaur.class, 		C.MODEL | C.TAME  | C.RIDE | C.CARNIVORE),
     Mosasaurus(EntityMosasaurus.class, 		C.NOTHING),
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
-    Spinosaurus(EntitySpinosaurus.class, 	C.NOTHING);
+    Spinosaurus(EntitySpinosaurus.class, 	C.CARRY | C.CARNIVORE);
 
     private final Class dinoClass;
-    /*private final boolean modelable;
-    private final boolean tameable;
-    private final boolean rideable;
-    private final boolean carryitems;*/
+
     public int Flags=0;
     public Item OrderItem;
     public Item DropItem;
     public Item DNAItem;
     public Item EggItem;
-
-    /**
-     * Params: Class, Modelable,Tameable,Rideable,CanCarryItems
-     */
-    /*private EnumDinoType(Class class0, boolean model0,boolean tame0,boolean ride0,boolean carry0/*,Item i0*)
-    {
-        this.dinoClass = class0;
-        this.modelable = model0;
-        this.tameable = tame0;
-        this.rideable = ride0;
-        this.carryitems = carry0;
-        //this.OrderItem = i0;
-    }*/
+    
+    //List of the eatable Items with the FoodValue and HealingValue belonging to
+    public DinoFoodItemList FoodItemList;
+    
+    //List of the eatable Blocks with the FoodValue and HealingValue belonging to
+    public DinoFoodBlockList FoodBlockList;
+    
+    //List of the eatable Mobs with the FoodValue and HealingValue belonging to
+    public DinoFoodMobList FoodMobList;
+    
+    
+    //Starting width and increase of the Dino
+    public float Width0=0.5F;
+    public float WidthInc=0.4F;
+    
+    //Starting length and increase of the Dino
+    public float Length0=0.5F;
+    public float LengthInc=0.2F;
+    
+    //Starting height and increase of the dino
+    public float Height0=0.5F;
+    public float HeightInc=0.2F;
+    
+    
+    
+    //Age Limit of The Dino, standard is 12
+    public int MaxAge = 12;
+    //Age When Dino gets adult, starts Breeding, is Ridable...
+    public int AdultAge = 6;
+    //Age When Dino gets teen..
+    public int TeenAge = 3;
+    
+    
+    
+    //Health of the Dino when hatched
+    public int Health0 = 20;
+    public int HealthInc = 2;
+    
+    //The attacking strength of the Dino when hatched
+    public int Strength0 = 2;
+    public int StrengthInc = 1;
+    
+    //The speed of the dino when hatched
+    public float Speed0 = 0.2F;
+    public float SpeedInc = 0.015F;
+    
+    
+    
+    //The Breeding time of the dinosaur, standard value 3000 ticks
+    public int BreedingTicks = 3000;
+    //Ticks the Dino needs for aging, standard 12000
+    public int AgingTicks = 12000;
+    
+    //Hunger Limit of the Dino, standard is 100
+    public int MaxHunger = 100;
+    //The Level below which the dino starts looking for food. Standard is 0.8 [times MaxHunger]
+    public float HungryLevel = 0.8f;
+    
+    
+    //Base Experience Points of the Dino
+    public float Exp0 = 1.0f;
+    //Experience increase per day for the dino
+    public float ExpInc = 0.2f;
+    
+    
     /**
      * Params: Class, Flags
      */
@@ -95,73 +125,341 @@ public enum EnumDinoType
     {
         this.dinoClass = class0;
         this.Flags=f0;
-        //this.OrderItem = i0;
+        this.FoodItemList = new DinoFoodItemList();
+        this.FoodBlockList = new DinoFoodBlockList();
+        this.FoodMobList = new DinoFoodMobList();
     }
-    private void setDetails(Item order,Item drop,Item dna,Item egg)
+    
+    /**
+     * sets the OrderItem,DropItem,DNAItem and EggItem for the Dino
+     */
+    private void setItems(Item order)//,Item drop,Item dna,Item egg)
     {
-    	this.DropItem = drop;
-        this.DNAItem = dna;
-        this.EggItem = egg;
+    	//this.DropItem = drop;
+        //this.DNAItem = dna;
+        //this.EggItem = egg;
         this.OrderItem = order;
     }
+    
+    /**
+     * sets the TeenAge, AdultAge and MaxAge for the Dino
+     */
+    private void setAges(int Teen, int Adult, int Max)
+    {
+    	if(Teen>0)this.TeenAge=Teen;
+    	if(Adult>0)this.AdultAge=Adult;
+    	if(Max>0)this.MaxAge=Max;
+    }
+    
+    /**
+     * sets the Dimensions for the Dino: starting width,width increase,same for length and height
+     */
+    private void setDimensions(float W0,float WInc,float L0,float LInc,float H0,float HInc)
+    {
+    	if(W0>0)this.Width0=W0;
+    	if(WInc>0)this.WidthInc=WInc;
+    	if(L0>0)this.Length0=L0;
+    	if(LInc>0)this.LengthInc=LInc;
+    	if(H0>0)this.Height0=H0;
+    	if(HInc>0)this.HeightInc=HInc;
+    }
+    
+    /**
+     * sets the starting values and increase for Health,Attack Strength and Speed and the MaxHunger Value
+     */
+    private void setProperties(int H0,int HInc,int Str0,int StrInc,float Sp0,float SpInc, int Hunger)
+    {
+    	if(H0>0)this.Health0=H0;
+    	if(HInc>0)this.HealthInc=HInc;
+    	if(Str0>0)this.Strength0=Str0;
+    	if(StrInc>0)this.StrengthInc=StrInc;
+    	if(Sp0>0)this.Speed0=Sp0;
+    	if(SpInc>0)this.SpeedInc=SpInc;
+    	
+    	if(Hunger>0)this.MaxHunger=Hunger;
+    }
+    
+    /**
+     * sets the breeding time, the aging time and the hungry-level
+     * Hungry level h:below h*MaxHunger, the dinos starts looking for food, below (1-h)*Maxhunger, the dino is starving
+     */
+    private void setAddProperties(int Breed,int Age, float HLevel)
+    {
+    	if(Breed>0)this.BreedingTicks=Breed;
+    	if(Age>0)this.AgingTicks=Age;
+    	
+    	if(HLevel>0)this.HungryLevel=HLevel;
+    }
+    
+    /**
+     * sets the breeding time, the aging time and the hungry-level
+     * Hungry level h:below h*MaxHunger, the dinos starts looking for food, below (1-h)*Maxhunger, the dino is starving
+     */
+    private void setExperience(float E0,float EInc)
+    {
+    	if(E0>0)this.Exp0=E0;
+    	if(EInc>0)this.ExpInc=EInc;
+    }
+    
+    /**
+     * Initializes all individual Dino values
+     */
     public static void init()
     {//								Order Item			Drop Item				DNA Item				Egg Item
-    	Triceratops.setDetails(		Item.stick,			Fossil.rawTriceratops, 	Fossil.dnaTriceratops, 	Fossil.eggTriceratops);
-        Velociraptor.setDetails(	Item.bone,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
-        TRex.setDetails(			Fossil.skullStick,	Fossil.rawTRex, 		Fossil.dnaTRex, 		Fossil.eggTRex);
-        Pterosaur.setDetails(		Item.arrow,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);
-        Nautilus.setDetails(		null,				Fossil.rawNautilus, 	Fossil.dnaNautilus, 	Fossil.shellNautilus);
-        Plesiosaur.setDetails(		Fossil.magicConch,	Fossil.rawPlesiosaur, 	Fossil.dnaPlesiosaur, 	Fossil.eggPlesiosaur);
-        Mosasaurus.setDetails(		null,				Fossil.rawMosasaurus, 	Fossil.dnaMosasaurus, 	Fossil.eggMosasaurus);
-        Stegosaurus.setDetails(		Item.stick,			Fossil.rawStegosaurus, 	Fossil.dnaStegosaurus, 	Fossil.eggStegosaurus);
-        Dilophosaurus.setDetails(	Item.bone,			Fossil.rawDilophosaurus,Fossil.dnaDilophosaurus,Fossil.eggDilophosaurus);
-        Brachiosaurus.setDetails(	Item.stick,			Fossil.rawBrachiosaurus,Fossil.dnaBrachiosaurus,Fossil.eggBrachiosaurus);
-        Spinosaurus.setDetails(		Fossil.skullStick,	Fossil.rawSpinosaurus,	Fossil.dnaSpinosaurus,	Fossil.eggSpinosaurus);
+    	Triceratops.setItems(		Item.stick);//,			Fossil.rawTriceratops, 	Fossil.dnaTriceratops, 	Fossil.eggTriceratops);
+    	Triceratops.setDimensions(1.2F, 0.4F, 1.1F, 0.7F, 1.2F, 0.36F);
+    	Triceratops.setAges(-1, -1, 13);
+    	Triceratops.setProperties(21, 1, 3, -1, -1F, 0.016F, 500);
+    	Triceratops.setExperience(0.5F, 0.2F);
+    	
+    	Triceratops.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
+    	Triceratops.FoodItemList.addItem(EnumDinoFoodItem.Melon);
+    	Triceratops.FoodItemList.addItem(EnumDinoFoodItem.Apple);
+    	Triceratops.FoodItemList.addItem(EnumDinoFoodItem.Bread);
+    	Triceratops.FoodItemList.addItem(EnumDinoFoodItem.Potato);
+        
+    	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
+    	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
+    	
+        Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
+        Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
+        Velociraptor.setAges(-1, -1, 9);
+        Velociraptor.setProperties(21, 1, -1, -1, 0.3F, 0.025F, -1);
+        Velociraptor.setExperience(0.7F, 0.7F);
+        
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+        Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
+        
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Cow);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
+        
+        TRex.setItems(				Fossil.skullStick);//,	Fossil.rawTRex, 		Fossil.dnaTRex, 		Fossil.eggTRex);
+        TRex.setDimensions(0.7F, 0.07F, 0.8F, 0.16F, 0.5F, 0.07F);
+        TRex.setAges(-1, -1, 23);
+        TRex.setProperties(-1, 5, 4, -1, 0.22F, 0.02F, 250);
+        TRex.setExperience(1F, 1F);
+        
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Dilophosaurus);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
+        TRex.FoodItemList.addItem(EnumDinoFoodItem.Velociraptor);
+        
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Cow);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Sheep);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
+        
+        Pterosaur.setItems(			Item.arrow);//,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);
+        Pterosaur.setDimensions(1.2F, 0.3F, 1.0F, 0.4F, 0.8F, 0.2F);
+        Pterosaur.setAges(-1, -1, 9);
+        Pterosaur.setProperties(21, 1, -1, -1, -1F, -1F, -1);
+        Pterosaur.setExperience(0.3F, 0.3F);
+        
+        Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
+        Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
+        Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.Sjl);
+        Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+        
+        Pterosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        
+        Nautilus.setItems(			null);//,				Fossil.rawNautilus, 	Fossil.dnaNautilus, 	Fossil.shellNautilus);
+        Nautilus.setExperience(1.0F, 0F);
+        
+        Plesiosaur.setItems(		Fossil.magicConch);//,	Fossil.rawPlesiosaur, 	Fossil.dnaPlesiosaur, 	Fossil.eggPlesiosaur);
+        Plesiosaur.setDimensions(0.5F, 0.3F, 0.5F, 0.5F, 0.5F, 0.3F);
+        Plesiosaur.setProperties(30, 10, 3, -1, 0.18F, 0.02F, 500);
+        Plesiosaur.setExperience(0.5F, 0.25F);
+        
+        Plesiosaur.FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
+        Plesiosaur.FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
+        Plesiosaur.FoodItemList.addItem(EnumDinoFoodItem.Sjl);
+        Plesiosaur.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+        
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        
+        Mosasaurus.setItems(		null);//,				Fossil.rawMosasaurus, 	Fossil.dnaMosasaurus, 	Fossil.eggMosasaurus);
+        Mosasaurus.setDimensions(0.25F, 0.25F, 0.5F, 0.45F, 0.3F, 0.15F);
+        Mosasaurus.setAges(-1, 8, 20);
+        Mosasaurus.setProperties(50, 10, 4, 2, 0.3F, 0.4F, 500);
+        Mosasaurus.setExperience(1F, 1F);
+        
+        Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Squid);
+        Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
+        
+        Stegosaurus.setItems(		Item.stick);//,			Fossil.rawStegosaurus, 	Fossil.dnaStegosaurus, 	Fossil.eggStegosaurus);
+        Stegosaurus.setDimensions(1.2F, 0.5F, 1.0F, 0.7F, 1.2F, 0.36F);
+        Stegosaurus.setAges(-1, -1, 13);
+        Stegosaurus.setProperties(21, 1, -1, -1, -1F, -1F, 500);
+        Stegosaurus.setExperience(0.5F, 0.2F);
+        
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Melon);
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Carrot);
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Sugar);
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Cookie);
+        Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Bread);
+        
+        Dilophosaurus.setItems(		Item.bone);//,			Fossil.rawDilophosaurus,Fossil.dnaDilophosaurus,Fossil.eggDilophosaurus);
+        Dilophosaurus.setDimensions(0.4F, 0.16F, 0.4F, 0.17F, 0.4F, 0.16F);
+        Dilophosaurus.setAges(-1, -1, 9);
+        Dilophosaurus.setProperties(-1, -1, -1, -1, 0.21F, 0.026F, -1);
+        Dilophosaurus.setExperience(1F, 1F);
+        
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.ChickenCooked);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+        Dilophosaurus.FoodItemList.addItem(EnumDinoFoodItem.Egg);
+        
+        Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
+        Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
+        Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        
+        Brachiosaurus.setItems(		Item.stick);//,			Fossil.rawBrachiosaurus,Fossil.dnaBrachiosaurus,Fossil.eggBrachiosaurus);
+        Brachiosaurus.setDimensions(1.5F, 0.2F, 2.0F, 0.52F, 1.2F, 0.13F);
+        Brachiosaurus.setAges(6, 12, 36);
+        Brachiosaurus.setProperties(-1, 5, -1, -1, -1F, 0.012F, 500);
+        Brachiosaurus.setExperience(0.6F, 0.15F);
+        
+        Brachiosaurus.FoodItemList.addItem(EnumDinoFoodItem.Sugar);
+        Brachiosaurus.FoodItemList.addItem(EnumDinoFoodItem.Cookie);
+        Brachiosaurus.FoodItemList.addItem(EnumDinoFoodItem.Apple);
+		
+		Spinosaurus.setItems(		Fossil.skullStick);//,	Fossil.rawSpinosaurus,	Fossil.dnaSpinosaurus,	Fossil.eggSpinosaurus);
+		Spinosaurus.setDimensions(0.5F,0.3F,0.5F,0.3F,0.5F,0.3F);
+		Spinosaurus.setAges(-1, -1, 23);
+		Spinosaurus.setProperties(-1, 5, 4, -1, 0.24F, 0.021F,550);
+		Spinosaurus.setExperience(0F,0.9F);
+		
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Dilophosaurus);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
+		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Velociraptor);
+        
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
+		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
     }
-    public boolean isDinoDNA(Item i0)
+    
+    /**
+     *      * takes an item and returns if it is a Dino DNA
+     */
+    public static boolean isDinoDNA(Item i0)
     {
-		for(int i=0;i<this.values().length;i++)
+		for(int i=0;i<values().length;i++)
 		{
-		    if(this.values()[i].DNAItem.itemID == i0.itemID)
+		    if(values()[i].DNAItem.itemID == i0.itemID)
 		    	return true;
 		}
 		return false;
     }
-    public boolean isDinoDrop(Item i0)
+    
+    /**
+     * takes an Item and returns if it is a dino drop
+     */
+    public static boolean isDinoDrop(Item i0)
     {
-		for(int i=0;i<this.values().length;i++)
+		for(int i=0;i<values().length;i++)
 		{
-		    if(this.values()[i].DropItem.itemID == i0.itemID)
+		    if(values()[i].DropItem.itemID == i0.itemID)
 		    	return true;
 		}
 		return false;
     }
-    public Item getDNA(Item i0)
+    
+    /**
+     * takes an item, if it is a dinos dropItem or EggItem, it returns the corresponding DNA Item
+     */
+    public static Item getDNA(Item i0)
     {
-		for(int i=0;i<this.values().length;i++)
+		for(int i=0;i<values().length;i++)
 		{
-		    if(this.values()[i].DropItem.itemID == i0.itemID || this.values()[i].EggItem.itemID == i0.itemID)
-		    	return this.values()[i].DNAItem;
+		    if(values()[i].DropItem.itemID == i0.itemID || values()[i].EggItem.itemID == i0.itemID)
+		    	return values()[i].DNAItem;
 		}
 		return null;
     }
-    public Item getDrop(Item i0)
+
+    /**
+     * takes an item, if it is a dinos DNAItem or EggItem, it returns the corresponding Drop Item
+     */
+    public static Item getDrop(Item i0)
     {
-		for(int i=0;i<this.values().length;i++)
+		for(int i=0;i<values().length;i++)
 		{
-		    if(this.values()[i].DNAItem.itemID == i0.itemID || this.values()[i].EggItem.itemID == i0.itemID)
-			return this.values()[i].DropItem;
+		    if(values()[i].DNAItem.itemID == i0.itemID || values()[i].EggItem.itemID == i0.itemID)
+		    	return values()[i].DropItem;
 		}
 		return null;
     }
-    public Item getEgg(Item i0)
+
+    /**
+     * takes an item, if it is a dinos DNAItem or DropItem, it returns the corresponding Egg Item
+     */
+    public static Item getEgg(Item i0)
     {
-		for(int i=0;i<this.values().length;i++)
+		for(int i=0;i<values().length;i++)
 		{
-		    if(this.values()[i].DNAItem.itemID == i0.itemID || this.values()[i].DropItem.itemID == i0.itemID)
-			return this.values()[i].EggItem;
+		    if(values()[i].DNAItem.itemID == i0.itemID || values()[i].DropItem.itemID == i0.itemID)
+		    	return values()[i].EggItem;
 		}
 		return null;
+    }
+    /**
+     * takes an drop-,dna- or eggitem and gives the index, -1 means not found
+     */
+    public static int getIndex(Item i0)
+    {
+		for(int i=0;i<values().length;i++)
+		{
+		    if(values()[i].DNAItem.itemID == i0.itemID || values()[i].DropItem.itemID == i0.itemID || values()[i].EggItem.itemID == i0.itemID)
+		    	return i;
+		}
+		return -1;
     }
     public Class getDinoClass()
     {

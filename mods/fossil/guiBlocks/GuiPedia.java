@@ -106,37 +106,19 @@ public class GuiPedia extends GuiContainer
     {
     	RenderEngine r0= Minecraft.getMinecraft().renderEngine;
     	
-    	//GL11.glBindTexture(GL11.GL_TEXTURE_2D, it0.getIconFromDamage(0).getIconName());
-        //this.mc.renderEngine.bindTexture(it0.getIconFromDamage(0).getIconName());
     	int i=zoom*16;
     	if(i<0)i=4;
     	if(i==0)i=8;
     	if(i>160)i=160;
-    	//double px=((double)(it0.getIconFromDamage(0)%16))/16D;
-    	//double py=((double)(it0.getIconFromDamage(0)/16))/16D;
 
     	RenderItem r= new RenderItem();
     	ItemStack it=new ItemStack(it0,1);
-    	Icon icon = it.getIconIndex();//r0.getMissingIcon(it.getItemSpriteNumber());
+    	Icon icon = it.getIconIndex();
     	r0.bindTexture("/gui/items.png");
-    	//r.renderIcon(x0, y0, it0.getIcon(new ItemStack(it0,1), 1), i, i);
     	GL11.glDisable(GL11.GL_LIGHTING);
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     	r.renderIcon(x0, y0, icon, i, i);
     	GL11.glEnable(GL11.GL_LIGHTING);
-    	
-    	//GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(it0.getTextureFile()));
-        //this.mc.renderEngine.bindTexture(this.mc.renderEngine.getTexture(it0.getTextureFile()));//Does the same as the line above
-        /*GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        Tessellator var9 = Tessellator.instance;
-        var9.startDrawingQuads();
-        var9.addVertexWithUV((double)x0			, (double)(y0 + i)	, 0D, 0D		, 1D);//x,y,z to place at, the relative x,y of the whole texture
-        var9.addVertexWithUV((double)(x0 + i)	, (double)(y0 + i)	, 0D, 1D		, 1D);
-        var9.addVertexWithUV((double)(x0 + i)	, (double)y0		, 0D, 1D		, 0D);
-        var9.addVertexWithUV((double)x0			, (double)y0		, 0D, 0D		, 0D);
-        var9.draw();*/
-    	//int pos0=it0.getIconFromDamage(0);
-        //this.drawTexturedModalRect(x0, y0, pos0 % 16 * 16, pos0 / 16 * 16, 16, 16);//Does this, too
     }
     
     /**

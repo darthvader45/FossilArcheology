@@ -336,7 +336,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         {
             return null;
         }*/
-    	if(var1.itemID==Fossil.dnaTriceratops.itemID)return new ItemStack(Fossil.eggTriceratops, 1);
+    	/*if(var1.itemID==Fossil.dnaTriceratops.itemID)return new ItemStack(Fossil.eggTriceratops, 1);
     	if(var1.itemID==Fossil.dnaBrachiosaurus.itemID)return new ItemStack(Fossil.eggBrachiosaurus, 1);
     	if(var1.itemID==Fossil.dnaPlesiosaur.itemID)return new ItemStack(Fossil.eggPlesiosaur, 1);
     	if(var1.itemID==Fossil.dnaVelociraptor.itemID)return new ItemStack(Fossil.eggVelociraptor, 1);
@@ -346,7 +346,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     	if(var1.itemID==Fossil.dnaMosasaurus.itemID)return new ItemStack(Fossil.eggMosasaurus, 1);
     	if(var1.itemID==Fossil.dnaPterosaur.itemID)return new ItemStack(Fossil.eggPterosaur, 1);
     	if(var1.itemID==Fossil.dnaStegosaurus.itemID)return new ItemStack(Fossil.eggStegosaurus, 1);
-    	if(var1.itemID==Fossil.dnaNautilus.itemID)return new ItemStack(Fossil.shellNautilus, 1);
+    	if(var1.itemID==Fossil.dnaNautilus.itemID)return new ItemStack(Fossil.shellNautilus, 1);*/
+    	
     	if(var1.itemID==Fossil.brokenSapling.itemID)return new ItemStack(Fossil.palmSap, 1);
     	if(var1.itemID==Fossil.dnaSheep.itemID)return new ItemStack(Fossil.embryoSheep, 1);
     	if(var1.itemID==Fossil.dnaCow.itemID)return new ItemStack(Fossil.embryoCow, 1);
@@ -354,6 +355,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     	if(var1.itemID==Fossil.dnaPig.itemID)return new ItemStack(Fossil.embryoPig, 1);
     	if(var1.itemID==Fossil.dnaSmilodon.itemID)return new ItemStack(Fossil.embryoSmilodon, 1);
     	if(var1.itemID==Fossil.dnaMammoth.itemID)return new ItemStack(Fossil.embryoMammoth, 1);
+    	if(EnumDinoType.getEgg(var1.getItem())!=null)return new ItemStack(EnumDinoType.getEgg(var1.getItem()),1);//converts dino dna to dino egg
     	return null;
     }
 

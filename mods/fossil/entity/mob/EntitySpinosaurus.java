@@ -66,17 +66,16 @@ public class EntitySpinosaurus extends EntityDinosaur
 
     public EntitySpinosaurus(World var1)
     {
-        super(var1);
+        super(var1,EnumDinoType.Spinosaurus);
         //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
-        this.SelfType = EnumDinoType.Spinosaurus;
         this.looksWithInterest = false;
         //this.texture = "/fossil/textures/TRex.png";
         //this.setSize(2.5F, 2.5F);
         //this.moveSpeed = 0.3F;
-        this.health = 10;
-        this.experienceValue=20;
+        //this.health = 10;
+        //this.experienceValue=20;
        
-        this.HitboxXfactor=1.0F;
+        /*this.HitboxXfactor=1.0F;
         this.HitboxYfactor=1.0F;
         this.HitboxZfactor=1.0F;
         
@@ -97,30 +96,8 @@ public class EntitySpinosaurus extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         this.MaxHunger=550;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
-        FoodItemList.addItem(EnumDinoFoodItem.Stegosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Dilophosaurus);
-        FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Velociraptor);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Pig);
-        FoodMobList.addMob(EnumDinoFoodMob.Cow);
-        FoodMobList.addMob(EnumDinoFoodMob.Chicken);
-        FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
-        FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
         
         this.tasks.addTask(0, new EntityAISwimming(this)); 
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
@@ -140,7 +117,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     public boolean isAIEnabled()
     {
-        return this.riddenByEntity == null && !this.isWeak();
+        return this.riddenByEntity == null && !this.isWeak() && !this.isModelized();
     }
 
     /**
@@ -253,7 +230,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     public void applyEntityCollision(Entity var1)
     {
-        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
+        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.SelfType.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
         {
             ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
         }
@@ -630,13 +607,6 @@ public class EntitySpinosaurus extends EntityDinosaur
             }
         }
     }*/
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaSpinosaurus, 120, 7);
-
-    		
-    }
 
     public EntitySpinosaurus spawnBabyAnimal(EntityAgeable var1)
     {

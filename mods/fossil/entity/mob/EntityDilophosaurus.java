@@ -82,17 +82,16 @@ public class EntityDilophosaurus extends EntityDinosaur
 
     public EntityDilophosaurus(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Dilophosaurus;
+        super(var1,EnumDinoType.Dilophosaurus);
         this.texture = "/mods/fossil/textures/mob/UtaCalm.png";
         this.looksWithInterest = false;
         //this.CheckSkin();
        // this.setSize(0.3F, 0.3F);
-        this.health = 10;
-        this.experienceValue=10;
+        //this.health = 10;
+        //this.experienceValue=10;
         
         
-        this.Width0=0.4F;
+        /*this.Width0=0.4F;
         this.WidthInc=0.16F;
         this.Length0=0.4F;
         this.LengthInc=0.17F;
@@ -110,22 +109,8 @@ public class EntityDilophosaurus extends EntityDinosaur
         //this.AgingTicks=;
         //this.MaxHunger=;
         //this.Hungrylevel=;
-        //this.moveSpeed = this.getSpeed();//should work
+        //this.moveSpeed = this.getSpeed();//should work*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
-        FoodItemList.addItem(EnumDinoFoodItem.Egg);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
-        FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Pig);
-        FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
         //this.attackStrength = 2 + this.getDinoAge();
         this.getNavigator().setAvoidsWater(true);
@@ -272,7 +257,7 @@ public class EntityDilophosaurus extends EntityDinosaur
             {
                 EnumOrderType var10001 = this.OrderStatus;
 
-                if (this.OrderStatus == EnumOrderType.follow)
+                if (this.OrderStatus == EnumOrderType.Follow)
                 {
                     float var2 = var1.getDistanceToEntity(this);
 
@@ -553,7 +538,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         float var5 = -99999.0F;
         EnumOrderType var10001 = this.OrderStatus;
 
-        if (this.OrderStatus == EnumOrderType.freeMove || !this.isTamed())
+        if (this.OrderStatus == EnumOrderType.FreeMove || !this.isTamed())
         {
             for (int var6 = 0; var6 < 10; ++var6)
             {
@@ -635,7 +620,6 @@ public class EntityDilophosaurus extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
     	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaDilophosaurus, 120, 7);
     	if(this.LearningChestTick==0)
     		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CHEST), true);
     }

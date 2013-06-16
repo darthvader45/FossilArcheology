@@ -594,8 +594,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         	}
         	System.out.println(String.valueOf(Fossil.eggTriceratops.itemID));
         	Item var7=new ItemAncientEgg(id);*/
-        	Item i0;
-        	switch(this.DinoInside)
+        	Item i0 = this.DinoInside.EggItem;
+        	/*switch(this.DinoInside)
         	{
     	    	case Triceratops:  i0=Fossil.eggTriceratops;break;
     	    	case Stegosaurus:  i0= Fossil.eggStegosaurus;break;
@@ -608,7 +608,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     	    	case Dilophosaurus:   i0= Fossil.eggDilophosaurus;break;
     	    	case Spinosaurus:   i0= Fossil.eggSpinosaurus;break;
     	    	default: i0= Fossil.eggTriceratops;System.out.println("FAULTY EGG!!!!:Dinotype " + String.valueOf(var1)+ " does not exist!");break;
-        	}
+        	}*/
         	
         	//System.out.println(String.valueOf(var7.itemID));
             ItemStack var3 = new ItemStack(i0/*this.DinoInside.EggItem/*var7*/, 1, 1);
@@ -637,8 +637,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	Item it0;
-    	switch (this.DinoInside)
+    	Item it0 = this.DinoInside.EggItem;
+    	/*switch (this.DinoInside)
         {
             case Triceratops:it0=Fossil.eggTriceratops;break;
             case Velociraptor:it0=Fossil.eggVelociraptor;break;
@@ -653,7 +653,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
 
             default:it0=Fossil.eggTriceratops;
-        }
+        }*/
     	p0.reset();
     	p0.PrintItemXY(it0, 120, 7);
     	p0.PrintStringLR(/*Fossil.GetLangTextByKey("PediaText.egg.Head")+ " "+*/Localizations.getLocalizedString("Dino."+this.DinoInside.toString()), false, 1,40,90,245);

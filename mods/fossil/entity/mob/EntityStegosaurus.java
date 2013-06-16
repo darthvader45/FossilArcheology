@@ -59,19 +59,18 @@ public class EntityStegosaurus extends EntityDinosaur
 
     public EntityStegosaurus(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Stegosaurus;
+        super(var1,EnumDinoType.Stegosaurus);
         this.looksWithInterest = false;
         //this.SubSpecies = (new Random()).nextInt(3) + 1;
         //this.texture = "/mods/fossil/textures/Stegosaurus_Baby.png";
         //this.CheckSkin();
         //this.setSize(1.0F, 1.0F);
         //this.moveSpeed = 0.3F;
-        this.health = 8;
-        this.experienceValue=3;
+        //this.health = 8;
+        //this.experienceValue=3;
         
         
-        this.Width0=1.2F;
+        /*this.Width0=1.2F;
         this.WidthInc=0.5F;
         this.Length0=1.0F;
         this.LengthInc=0.7F;
@@ -88,16 +87,10 @@ public class EntityStegosaurus extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        this.Hungrylevel=0.9F;
+        this.Hungrylevel=0.9F;*/
         this.updateSize();
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
-        FoodItemList.addItem(EnumDinoFoodItem.Wheat);
-        FoodItemList.addItem(EnumDinoFoodItem.Melon);
-        FoodItemList.addItem(EnumDinoFoodItem.Carrot);
-        FoodItemList.addItem(EnumDinoFoodItem.Sugar);
-        FoodItemList.addItem(EnumDinoFoodItem.Cookie);
-        FoodItemList.addItem(EnumDinoFoodItem.Bread);
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -433,13 +426,6 @@ public class EntityStegosaurus extends EntityDinosaur
         {
             super.applyEntityCollision(var1);
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaStegosaurus, 120, 7);
     }
 
     public EntityStegosaurus spawnBabyAnimal(EntityAgeable var1)

@@ -44,9 +44,9 @@ public class DinoAIStarvation extends EntityAIBase
         	if(this.mover.IsDeadlyHungry())
         	{
 
-    			if(this.mover.OrderStatus!=EnumOrderType.freeMove)
+    			if(this.mover.OrderStatus!=EnumOrderType.FreeMove)
     	        {
-    	        	this.mover.OrderStatus=EnumOrderType.freeMove;
+    	        	this.mover.OrderStatus=EnumOrderType.FreeMove;
     	        	this.mover.SendStatusMessage(EnumSituation.StarveEsc);
     	        }
     			else
@@ -54,11 +54,11 @@ public class DinoAIStarvation extends EntityAIBase
         	}
 	        if(this.mover.ItemInMouth != null)//The Dino has something in its mouth and gets hungry
 	        {
-	        	if(this.mover.FoodItemList.CheckItemById(this.mover.ItemInMouth.itemID))
+	        	if(this.mover.SelfType.FoodItemList.CheckItemById(this.mover.ItemInMouth.itemID))
 	        	{//its food
-	        		if(this.mover.IsHungry() || this.mover.MaxHunger-this.mover.getHunger()>this.mover.FoodItemList.getItemFood(this.mover.ItemInMouth.itemID))
+	        		if(this.mover.IsHungry() || this.mover.SelfType.MaxHunger-this.mover.getHunger()>this.mover.SelfType.FoodItemList.getItemFood(this.mover.ItemInMouth.itemID))
 	            	{//it's hungry or there is enough place in the stomach free
-	            		this.mover.setHunger(this.mover.getHunger()+this.mover.FoodItemList.getItemFood(this.mover.ItemInMouth.itemID));
+	            		this.mover.setHunger(this.mover.getHunger()+this.mover.SelfType.FoodItemList.getItemFood(this.mover.ItemInMouth.itemID));
 	            		this.mover.ItemInMouth = null;
 	            	}
 	        	}

@@ -77,16 +77,15 @@ public class EntityVelociraptor extends EntityDinosaur
 
     public EntityVelociraptor(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Velociraptor;
+        super(var1,EnumDinoType.Velociraptor);
         this.looksWithInterest = false;
         //this.CheckSkin();
         //this.setSize(0.3F, 0.3F);
         //this.moveSpeed = 0.3F;
-        this.health = 10;
-        this.experienceValue=7;
+        //this.health = 10;
+        //this.experienceValue=7;
         
-        this.Width0=0.3F;
+        /*this.Width0=0.3F;
         this.WidthInc=0.12F;
         this.Length0=0.3F;
         this.LengthInc=0.13F;
@@ -103,27 +102,8 @@ public class EntityVelociraptor extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         //this.MaxHunger=;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
-        FoodItemList.addItem(EnumDinoFoodItem.Stegosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Pig);
-        FoodMobList.addMob(EnumDinoFoodMob.Cow);
-        FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
-        FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
         
         //this.setHunger(this.getHungerLimit());
         //this.attackStrength = 2 + this.getDinoAge();
@@ -630,7 +610,7 @@ public class EntityVelociraptor extends EntityDinosaur
         float var5 = -99999.0F;
         EnumOrderType var10001 = this.OrderStatus;
 
-        if (this.OrderStatus == EnumOrderType.freeMove || !this.isTamed())
+        if (this.OrderStatus == EnumOrderType.FreeMove || !this.isTamed())
         {
             for (int var6 = 0; var6 < 10; ++var6)
             {
@@ -706,7 +686,6 @@ public class EntityVelociraptor extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
     	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaVelociraptor, 120, 7);
     	if(this.LearningChestTick==0)
     		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CHEST), true);
     }

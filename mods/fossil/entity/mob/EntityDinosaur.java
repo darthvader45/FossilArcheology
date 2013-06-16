@@ -103,63 +103,63 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public EnumDinoType SelfType = null;
     
     //Starting width and increase of the Dino
-    public float Width0=0.5F;
-    public float WidthInc=0.4F;
+    //    public float Width0=0.5F;
+    //    public float WidthInc=0.4F;
     
     //Starting length and increase of the Dino
-    public float Length0=0.5F;
-    public float LengthInc=0.2F;
+    //   public float Length0=0.5F;
+    //   public float LengthInc=0.2F;
     
     //Starting height and increase of the dino
-    public float Height0=0.5F;
-    public float HeightInc=0.2F;
+    //   public float Height0=0.5F;
+    //   public float HeightInc=0.2F;
     
     //The attacking strength of the Dino when hatched
-    public int BaseattackStrength = 2;
-    public int AttackStrengthIncrease = 1;
+    //    public int BaseattackStrength = 2;
+    //    public int AttackStrengthIncrease = 1;
     
     //The speed of the dino when hatched
-    public float BaseSpeed = 0.2F;
-    public float SpeedIncrease = 0.015F;
+    //   public float BaseSpeed = 0.2F;
+    //   public float SpeedIncrease = 0.015F;
     
     //Breed Tick at the moment, 0=breed, BreedingTime=timer just started
     public int BreedTick;
     
     //The Breeding time of the dinosaur, standard value 3000 ticks
-    public int BreedingTime = 3000;
+    //    public int BreedingTime = 3000;
     
     //Age Limit of The Dino, standard is 12
-    public int MaxAge = 12;
+    //   public int MaxAge = 12;
     
     //Health of the Dino when hatched
-    public int BaseHealth = 20;
+    //   public int BaseHealth = 20;
     
     //The Maximum health increase when aging
-    public int HealthIncrease = 2;
+    //    public int HealthIncrease = 2;
     
     //Age When Dino gets adult, starts Breeding, is Ridable...
-    public int AdultAge = 6;
+    //    public int AdultAge = 6;
     
-  //Age When Dino gets teen..
-    public int TeenAge = 3;
+    //Age When Dino gets teen..
+    //   public int TeenAge = 3;
     
     //Ticks the Dino needs for aging, standard 12000
-    public int AgingTicks = 12000;
+    //    public int AgingTicks = 12000;
     
     //List of the eatable Items with the FoodValue and HealingValue belonging to
-    public DinoFoodItemList FoodItemList;
+    //    public DinoFoodItemList FoodItemList;
     
     //List of the eatable Blocks with the FoodValue and HealingValue belonging to
-    public DinoFoodBlockList FoodBlockList;
+    //    public DinoFoodBlockList FoodBlockList;
     
     //List of the eatable Mobs with the FoodValue and HealingValue belonging to
-    public DinoFoodMobList FoodMobList;
+    //    public DinoFoodMobList FoodMobList;
     
     //Hunger Limit of the Dino, standard is 100
-    public int MaxHunger = 100;
+    //    public int MaxHunger = 100;
     
     //The Level below which the dino starts hunting or looking for food. Standard is 0.8 [times MaxHunger]
-    public float Hungrylevel = 0.8f;
+    //    public float Hungrylevel = 0.8f;
     
     //Variable for the thing the dino can hold in it's mouth
     public ItemStack ItemInMouth = null;
@@ -168,24 +168,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected DinoAIControlledByPlayer ridingHandler;
     public EnumOrderType OrderStatus;
     
-    public EntityDinosaur(World var1)
+    public EntityDinosaur(World var1,EnumDinoType T0)
     {
         super(var1);
-        //this.getClass();
-        this.OrderStatus = EnumOrderType.freeMove;
-        this.FoodItemList = new DinoFoodItemList();
-        this.FoodBlockList = new DinoFoodBlockList();
-        this.FoodMobList = new DinoFoodMobList();
+        this.SelfType=T0;
+        this.OrderStatus = EnumOrderType.FreeMove;
         this.tasks.addTask(0, new DinoAIGrowup(this));
         this.tasks.addTask(0, new DinoAIStarvation(this));
-        this.BreedTick = this.BreedingTime;
-        this.setHunger(this.MaxHunger/2);
+        this.BreedTick = this.SelfType.BreedingTicks;
+        this.setHunger(this.SelfType.MaxHunger/2);
     }
-    /*public abstract void updateSize();
-    public abstract void InitSize();
-    public abstract float getDinoWidth();
-    public abstract float getDinoHeight();
-    public abstract float getDinoLength();*/
     public void setPosition(double par1, double par3, double par5)
     {
         this.posX = par1;
@@ -194,6 +186,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         float w_2 = this.getDinoWidth() / 2.0F * this.HitboxZfactor;
     	float l_2 = this.getDinoLength() / 2.0F*this.HitboxXfactor;
         this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.getDinoHeight()*this.HitboxYfactor, this.posZ + (double)l_2);
+    }
+    protected int getExperiencePoints(EntityPlayer par1EntityPlayer)
+    {
+        return MathHelper.floor_float(this.SelfType.Exp0+(float)this.getDinoAge()*this.SelfType.ExpInc);
     }
     public void updateSize()
     {
@@ -211,7 +207,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	try
     	{
-    		return this.Width0 + this.WidthInc * (float)this.getDinoAge();
+    		return this.SelfType.Width0 + this.SelfType.WidthInc * (float)this.getDinoAge();
     	}
     	catch(NullPointerException e)
     	{
@@ -222,7 +218,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	try
     	{
-    		return this.Height0 + this.HeightInc * (float)this.getDinoAge();
+    		return this.SelfType.Height0 + this.SelfType.HeightInc * (float)this.getDinoAge();
     	}
     	catch(NullPointerException e)
     	{
@@ -233,7 +229,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	try
     	{
-    		return this.Length0 + this.LengthInc * (float)this.getDinoAge();
+    		return this.SelfType.Length0 + this.SelfType.LengthInc * (float)this.getDinoAge();
     	}
     	catch(NullPointerException e)
     	{
@@ -248,25 +244,32 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Tells if the Dino is a Adult
      */
     public boolean isAdult()
-    {return this.getDinoAge() >= this.AdultAge;}
+    {return this.getDinoAge() >= this.SelfType.AdultAge;}
     /**
      * Tells if the Dino is a Teen
      */
     public boolean isTeen()
-    {return this.getDinoAge() >= this.TeenAge;}
+    {return this.getDinoAge() >= this.SelfType.TeenAge;}
     /**
      * Returns the MaxHealth of the Dino depending on the age
      */
     public int getMaxHealth()
     {
-    	return this.BaseHealth+this.getDinoAge()*this.HealthIncrease;
+    	try
+    	{
+    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
+    	}
+    	catch(NullPointerException e)
+    	{
+    		return 10;
+    	}
     }
     /**
      * Returns the MaxHunger of the Dino
      */
     public int getMaxHunger()
     {
-    	return this.MaxHunger;
+    	return this.SelfType.MaxHunger;
     }
     
     /**
@@ -274,7 +277,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public float getSpeed()
     {
-    	return this.BaseSpeed+this.getDinoAge()*this.SpeedIncrease;
+    	return this.SelfType.Speed0+this.getDinoAge()*this.SelfType.SpeedInc;
     }
 
     public DinoAIControlledByPlayer getRidingHandler()
@@ -339,7 +342,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public boolean increaseDinoAge()
     {
-    	if(this.getDinoAge()<this.MaxAge)
+    	if(this.getDinoAge()<this.SelfType.MaxAge)
     	{
     		this.setDinoAge(this.getDinoAge() + 1);
     		return true;
@@ -398,9 +401,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void onKillEntity(EntityLiving var1)
     {
         super.onKillEntity(var1);
-        this.increaseHunger(this.FoodMobList.getMobFood(var1.getClass()));
+        this.increaseHunger(this.SelfType.FoodMobList.getMobFood(var1.getClass()));
         if(Fossil.FossilOptions.Heal_Dinos)
-        	this.heal(this.FoodMobList.getMobHeal(var1.getClass()));
+        	this.heal(this.SelfType.FoodMobList.getMobHeal(var1.getClass()));
     }
     
     public void decreaseHunger()
@@ -410,10 +413,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     }
     
     public boolean IsHungry()
-    {return this.getHunger()<this.getMaxHunger()*this.Hungrylevel;}
+    {return this.getHunger()<this.getMaxHunger()*this.SelfType.HungryLevel;}
     
     public boolean IsDeadlyHungry()
-    {return this.getHunger()<this.getMaxHunger()*(1-this.Hungrylevel);}
+    {return this.getHunger()<this.getMaxHunger()*(1-this.SelfType.HungryLevel);}
 
     
     public int getHungerTick()
@@ -434,7 +437,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Placeholder, returns the attack strength, should be customized for every Dino
      */
     public int getAttackStrength()
-    {return this.BaseattackStrength+this.getDinoAge()*this.AttackStrengthIncrease;}
+    {return this.SelfType.Strength0+this.getDinoAge()*this.SelfType.StrengthInc;}
     
     /**
      * Called when the entity is attacked.
@@ -469,6 +472,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void ShowPedia(GuiPedia p0)
     {
     	p0.reset();
+    	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
     	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaClock.png", 97, 34,8,8);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaHeart.png", 97, 46,9,9);
@@ -490,11 +494,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     			s0=this.getOwnerName().substring(0, 11);
     		p0.AddStringLR(s0, true);
     	}
-    	for(int i=0; i<this.FoodItemList.index;i++)
+    	for(int i=0; i<this.SelfType.FoodItemList.index;i++)
     	{
-    		if(this.FoodItemList.getItem(i)!=null)
-    			p0.AddMiniItem(this.FoodItemList.getItem(i));
+    		if(this.SelfType.FoodItemList.getItem(i)!=null)
+    			p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
     	}
+    	/*for(int i=0; i<this.SelfType.FoodBlockList.index;i++)
+    	{
+    		if(this.SelfType.FoodBlockList.getBlock(i)!=null)
+    		{
+    			p0.AddMiniItem(i0);
+    		}
+    	}*/
+    	//TODO show all blocks the dino can eat
     }
     
     /**
@@ -503,15 +515,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public int Eat(ItemStack item0)
     {
     	int i=item0.stackSize;
-    	if(this.IsHungry() && this.FoodItemList.CheckItemById(item0.itemID))
+    	//TODO it looks like the blocks are missing here...cant be eaten
+    	if(this.IsHungry() && this.SelfType.FoodItemList.CheckItemById(item0.itemID))
     	{	//The Dino is Hungry and it can eat the item
     		//this.showHeartsOrSmokeFX(false);
     		this.worldObj.setEntityState(this, SMOKE_MESSAGE);
     		while(i > 0 && this.getHunger() < this.getMaxHunger())
     		{
-    			this.setHunger(this.getHunger()+ this.FoodItemList.getItemFood(item0.itemID));
+    			this.setHunger(this.getHunger()+ this.SelfType.FoodItemList.getItemFood(item0.itemID));
     			if(Fossil.FossilOptions.Heal_Dinos && !this.worldObj.isRemote)//!this.worldObj.isRemote)
-    				this.heal(this.FoodItemList.getItemHeal(item0.itemID));
+    				this.heal(this.SelfType.FoodItemList.getItemHeal(item0.itemID));
     			i--;
     		}	
     		if(this.getHunger() > this.getMaxHunger())
@@ -536,7 +549,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public int PickUpItem(ItemStack var1)
     {
     	int i=Eat(var1);
-    	if(i>0 && (this.SelfType.canCarryItems() || this.FoodItemList.CheckItemById(var1.getItem().itemID)) && this.ItemInMouth == null)
+    	if(i>0 && (this.SelfType.canCarryItems() || this.SelfType.FoodItemList.CheckItemById(var1.getItem().itemID)) && this.ItemInMouth == null)
     	{//if there are items left after trying to eat and he has nothing atm and the dino is able to carry things or its his food he takes it in the mouth
     		this.HoldItem(var1);
     		i--;
@@ -556,12 +569,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Tells if the dino is sitting
      */
     public boolean isSitting()
-    {return this.OrderStatus == EnumOrderType.stay;}
+    {return this.OrderStatus == EnumOrderType.Stay;}
     /**
      * Disables a mob's ability to move on its own while true.
      */
     protected boolean isMovementCeased()
-    {return this.OrderStatus == EnumOrderType.stay;}
+    {return this.OrderStatus == EnumOrderType.Stay;}
     
     public boolean attackEntityAsMob(Entity var1)
     {
@@ -611,12 +624,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	        {
 	            for (int dy = 4; dy > -5; dy--)
 	            {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r));
                     	return pos;
                     }
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r));
                     	return pos;
@@ -627,12 +640,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	        {
 	            for (int dy = 4; dy > -5; dy--)
 	            {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
                     	return pos;
                     }
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
+                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
                     	return pos;
@@ -689,12 +702,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
                     if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight())
                     {
                     	TileEntity fed = this.worldObj.getBlockTileEntity(MathHelper.floor_double(this.posX+dx), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+dz));
-
-                        if (fed != null && fed instanceof TileEntityFeeder && ((TileEntityFeeder)fed).CheckIsEmpty(this.SelfType)/*isFilled()*/)
-                        {
-                        	//pos = Vec3.createVectorHelper(this.posX+dx,this.posY+dy,this.posY+dz);
-                        	return (TileEntityFeeder)fed;//pos;
-                        }
+                        if (fed != null && fed instanceof TileEntityFeeder && !((TileEntityFeeder)fed).CheckIsEmpty(this.SelfType))
+                        	return (TileEntityFeeder)fed;
                     }
                 }
             }
@@ -862,7 +871,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
                     this.worldObj.setEntityState(this, HEART_MESSAGE);
                 }
 
-                this.BreedTick = this.BreedingTime;
+                this.BreedTick = this.SelfType.BreedingTicks;
             }
         }
     }
@@ -1003,7 +1012,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	if(this.isModelized())
     		return Item.bone.itemID;
-    	switch(this.SelfType)
+    	return this.SelfType.DropItem.itemID;
+    	/*switch(this.SelfType)
     	{
 	    	case Triceratops:  return Fossil.rawTriceratops.itemID;
 	    	case Stegosaurus:  return Fossil.rawStegosaurus.itemID;
@@ -1016,7 +1026,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	    	case Dilophosaurus:return Fossil.rawDilophosaurus.itemID;
 	        case Spinosaurus:return Fossil.rawSpinosaurus.itemID;
 	    	default: return Fossil.rawTriceratops.itemID;
-    	}
+    	}*/
         //return this.isModelized() ? Item.bone.itemID : Fossil.rawDinoMeat.itemID;
     }
     /**
@@ -1143,7 +1153,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected float getSoundVolume()
     {
-    	float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.MaxAge+this.rand.nextFloat()*0.3F;
+    	float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.3F;
         return temp;
     }
     
@@ -1152,7 +1162,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected float getSoundPitch()
     {
-        return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.MaxAge+this.rand.nextFloat()*0.2F;
+        return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.2F;
     }
 
     /**
@@ -1370,7 +1380,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             {
             	if (var2.itemID == Fossil.chickenEss.itemID && !var1.worldObj.isRemote)
             	{// Be grown up by chicken essence
-            		if (this.getDinoAge() < this.AdultAge && this.getHunger() > 0)
+            		if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
             	    {
             			--var2.stackSize;
             	        if (var2.stackSize <= 0)
@@ -1384,7 +1394,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             	     }
             	     return false;
             	}
-            	if (this.FoodItemList.CheckItemById(var2.itemID) || this.FoodBlockList.CheckBlockById(var2.itemID))
+            	if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))
             	{//Item is one of the dinos food items
             		if(!var1.worldObj.isRemote)
             		{
@@ -1392,11 +1402,11 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	                	{	//The Dino is Hungry and it can eat the item
 	                		//this.showHeartsOrSmokeFX(false);
 	            			this.worldObj.setEntityState(this, SMOKE_MESSAGE);
-	                		this.increaseHunger(this.FoodItemList.getItemFood(var2.itemID)+this.FoodBlockList.getBlockFood(var2.itemID));
+	                		this.increaseHunger(this.SelfType.FoodItemList.getItemFood(var2.itemID)+this.SelfType.FoodBlockList.getBlockFood(var2.itemID));
 	                		if(Fossil.FossilOptions.Heal_Dinos)
 	                		{
 	                			//System.out.println("Hbefore:"+String.valueOf(this.health));
-	                			this.heal(this.FoodItemList.getItemHeal(var2.itemID)+this.FoodBlockList.getBlockHeal(var2.itemID));
+	                			this.heal(this.SelfType.FoodItemList.getItemHeal(var2.itemID)+this.SelfType.FoodBlockList.getBlockHeal(var2.itemID));
 	                			//System.out.println("ItemHealValueInDino:"+String.valueOf(this.FoodItemList.getItemHeal(var2.itemID)+this.FoodBlockList.getBlockHeal(var2.itemID)));
 	                			//System.out.println("Hafter:"+String.valueOf(this.health));
 	                		}
@@ -1434,7 +1444,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	            			}
 	            			else
 	            			{
-	            				if(this.FoodItemList.getItemFood(ItemInMouth.itemID)+this.FoodBlockList.getBlockFood(ItemInMouth.itemID)<this.FoodItemList.getItemFood(var2.itemID)+this.FoodBlockList.getBlockFood(var2.itemID))
+	            				if(this.SelfType.FoodItemList.getItemFood(ItemInMouth.itemID)+this.SelfType.FoodBlockList.getBlockFood(ItemInMouth.itemID)<this.SelfType.FoodItemList.getItemFood(var2.itemID)+this.SelfType.FoodBlockList.getBlockFood(var2.itemID))
 	            				{//The item given is better food for the dino
 	            					entityDropItem(new ItemStack(this.ItemInMouth.itemID, 1, 0), 0.5F);//TODO Spit out the old item
 	            					this.HoldItem(var2);
@@ -1474,7 +1484,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	                    this.setPathToEntity((PathEntity)null);
     	                    this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal()+1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
     	                    this.SendOrderMessage(this.OrderStatus);
-    	                    if(this.OrderStatus==EnumOrderType.stay)
+    	                    if(this.OrderStatus==EnumOrderType.Stay)
     	                    {
     	                    	this.getNavigator().clearPathEntity();
     	                    	this.setPathToEntity(null);

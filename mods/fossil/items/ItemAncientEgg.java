@@ -112,7 +112,7 @@ public class ItemAncientEgg extends Item
                         {
                             --var32;
                         }
-                        EnumDinoType i=this.GetTypeFromInt(/*var1.itemID*/var3.inventory.getCurrentItem().itemID);
+                        EnumDinoType i=this.GetTypeFromInt(/*var1.itemID*/var3.inventory.getCurrentItem().getItem());
                         if (!spawnCreature(var2, i, (double)((float)var34 + 0.5F), (double)((float)var32 + 1.0F), (double)((float)var33 + 0.5F)))
                         {
                             return var1;
@@ -153,9 +153,9 @@ public class ItemAncientEgg extends Item
         return var8 != null;
     }
 
-    private EnumDinoType GetTypeFromInt(int var1)
+    private EnumDinoType GetTypeFromInt(Item var1)
     {
-    	if(var1==Fossil.eggTriceratops.itemID)return EnumDinoType.Triceratops;
+    	/*if(var1==Fossil.eggTriceratops.itemID)return EnumDinoType.Triceratops;
     	if(var1==Fossil.eggBrachiosaurus.itemID)return EnumDinoType.Brachiosaurus;
     	if(var1==Fossil.eggPlesiosaur.itemID)return EnumDinoType.Plesiosaur;
     	if(var1==Fossil.eggVelociraptor.itemID)return EnumDinoType.Velociraptor;
@@ -168,6 +168,7 @@ public class ItemAncientEgg extends Item
     	if(var1==Fossil.eggSpinosaurus.itemID)return EnumDinoType.Spinosaurus;
 
     	System.out.println("FAULT!!!!:Dinotype " + String.valueOf(var1)+ " does not exist!");
-    	return EnumDinoType.Triceratops;
+    	return EnumDinoType.Triceratops;*/
+    	return EnumDinoType.values()[EnumDinoType.getIndex(var1)];
     }
 }

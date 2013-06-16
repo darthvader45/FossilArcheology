@@ -69,18 +69,17 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
 
     public EntityPlesiosaur(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Plesiosaur;
+        super(var1,EnumDinoType.Plesiosaur);
         this.looksWithInterest = false;
         //this.SubSpecies = (new Random()).nextInt(3) + 1;
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         this.texture = "/mods/fossil/textures/mob/Plesiosaur_adult.png";
         //this.setSize(1.0F, 1.0F);
         //this.moveSpeed = 0.7F;
-        this.health = 8;
-        this.experienceValue=2;
+        //this.health = 8;
+        //this.experienceValue=2;
         
-        this.Width0=0.5F;
+        /*this.Width0=0.5F;
         this.WidthInc=0.3F;
         this.Length0=0.5F;
         this.LengthInc=0.5F;
@@ -97,16 +96,8 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         //this.AdultAge=;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        //this.Hungrylevel=;
-        this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.Sjl);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
-        FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        //this.Hungrylevel=;*/
+        this.updateSize(); 
         
         this.getNavigator().setCanSwim(true);
         //this.tasks.addTask(0, new DinoAIGrowup(this, 12));
@@ -908,55 +899,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         }
         return destroyed;
     }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaPlesiosaur, 120, 7);
-    }
-    
-    /*public void ShowPedia(EntityPlayer var1)
-    {
-        if (this.isTamed())
-        {
-            Fossil.ShowMessage(OwnerText + this.getOwnerName(), var1);
-            Fossil.ShowMessage(AgeText + this.getDinoAge(), var1);
-            Fossil.ShowMessage(HelthText + this.health + "/" + 20, var1);
-            Fossil.ShowMessage(HungerText + this.getHunger() + "/" + this.MaxHunger, var1);
-        }
-        else
-        {
-            Fossil.ShowMessage(UntamedText, var1);
-        }
-    }*/
-
-    /*public String[] additionalPediaMessage()
-    {
-        String[] var1 = null;
-
-        if (!this.isTamed())
-        {
-            var1 = new String[] {UntamedText};
-        }
-        else
-        {
-            ArrayList var2 = new ArrayList();
-
-            if (this.isTamed() && this.getDinoAge() > 4 && this.riddenByEntity == null)
-            {
-                var2.add(RidiableText);
-            }
-
-            if (!var2.isEmpty())
-            {
-                var1 = new String[1];
-                var1 = (String[])var2.toArray(var1);
-            }
-        }
-
-        return var1;
-    }*/
 
     /**
      * This method gets called when the entity kills another one.

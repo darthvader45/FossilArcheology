@@ -58,14 +58,13 @@ public class EntityTriceratops extends EntityDinosaur
 
     public EntityTriceratops(World var1)
     {
-        super(var1);
-        this.OrderStatus = EnumOrderType.freeMove;
-        this.SelfType = EnumDinoType.Triceratops;
+        super(var1,EnumDinoType.Triceratops);
+        this.OrderStatus = EnumOrderType.FreeMove;
         this.looksWithInterest = false;
-        this.health = 8;
-        this.experienceValue=3;
+        //this.health = 8;
+        //this.experienceValue=3;
         
-        this.Width0=1.2F;
+        /*this.Width0=1.2F;
         this.WidthInc=0.4F;
         this.Length0=1.1F;
         this.LengthInc=0.7F;
@@ -74,7 +73,7 @@ public class EntityTriceratops extends EntityDinosaur
         
         /*this.HitboxXfactor=5.0F;
         this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;*/
+        this.HitboxZfactor=5.0F;*
         
         this.BaseattackStrength=3;
         //this.AttackStrengthIncrease=;
@@ -87,18 +86,8 @@ public class EntityTriceratops extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        //System.out.println("DINO SELF");
-        
-        this.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
-        this.FoodItemList.addItem(EnumDinoFoodItem.Melon);
-        this.FoodItemList.addItem(EnumDinoFoodItem.Apple);
-        this.FoodItemList.addItem(EnumDinoFoodItem.Bread);
-        this.FoodItemList.addItem(EnumDinoFoodItem.Potato);
-        
-        this.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
-        this.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         this.getNavigator().setAvoidsWater(true);
@@ -569,42 +558,42 @@ public class EntityTriceratops extends EntityDinosaur
     	
     	if (!this.isAdult() && !Fossil.FossilOptions.Dino_Block_Breaking)
     	{
-        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
-        {
-            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
-            {
-                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
-                {
-                    if (!this.worldObj.isAirBlock(var1, var2, var3))
-                    {
-                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
+	        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
+	        {
+	            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
+	            {
+	                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
+	                {
+	                    if (!this.worldObj.isAirBlock(var1, var2, var3))
+	                    {
+	                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
 
-                        if (!this.inWater)
-                        {
-                            /*if (this.isTamed() && this.riddenByEntity == null)
-                            {
-                                if (var4 == Block.wood.blockID || var4 == Block.leaves.blockID)
-                                {
-                                    this.worldObj.setBlockWithNotify(var1, var2, var3, 0);
-                                    this.RushTick = 10;
-                                }
-                            }
-                            else*/ if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) <= 1.5D || var4 == Block.wood.blockID || var4 == Block.planks.blockID || var4 == Block.woodDoubleSlab.blockID || var4 == Block.woodSingleSlab.blockID)
-                            {
-                                if ((new Random()).nextInt(10) == 5)
-                                {
-                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
-                                }
+	                        if (!this.inWater)
+	                        {
+	                            /*if (this.isTamed() && this.riddenByEntity == null)
+	                            {
+	                                if (var4 == Block.wood.blockID || var4 == Block.leaves.blockID)
+	                                {
+	                                    this.worldObj.setBlockWithNotify(var1, var2, var3, 0);
+	                                    this.RushTick = 10;
+	                                }
+	                            }
+	                            else*/ if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) <= 1.5D || var4 == Block.wood.blockID || var4 == Block.planks.blockID || var4 == Block.woodDoubleSlab.blockID || var4 == Block.woodSingleSlab.blockID)
+	                            {
+	                                if ((new Random()).nextInt(10) == 5)
+	                                {
+	                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
+	                                }
 
-                                this.worldObj.setBlock(var1, var2, var3, 0);
-                                destroyed++;
-                                //this.RushTick = 10;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+	                                this.worldObj.setBlock(var1, var2, var3, 0);
+	                                destroyed++;
+	                                //this.RushTick = 10;
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	        }
     	}
         return destroyed;
     }
@@ -635,14 +624,6 @@ public class EntityTriceratops extends EntityDinosaur
             Fossil.ShowMessage(UntamedText, var1);
         }
     }*/
-    
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaTriceratops, 120, 7);
-    }
-    
     public EntityTriceratops spawnBabyAnimal(EntityAgeable var1)
     {
         return new EntityTriceratops(this.worldObj);

@@ -23,10 +23,10 @@ public class DinoAIGrowup extends EntityAIBase
      */
     public boolean shouldExecute()
     {  
-        if (/*FossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.MaxAge)
+        if (/*FossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
         {
             this.AITarget.increaseDinoAgeTick();
-            return this.AITarget.getDinoAgeTick() >= this.AITarget.AgingTicks;
+            return this.AITarget.getDinoAgeTick() >= this.AITarget.SelfType.AgingTicks;
         }
         return false;
     }

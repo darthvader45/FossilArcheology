@@ -26,14 +26,14 @@ public class DinoAIWander extends EntityAIBase
     {
         if (this.entity.OrderStatus == null)
         {
-            this.entity.OrderStatus = EnumOrderType.freeMove;
+            this.entity.OrderStatus = EnumOrderType.FreeMove;
         }
 
         if (this.entity.getRNG().nextInt(20) != 0)
         {
             return false;
         }
-        else if (this.entity.getOwnerName() != null && this.entity.worldObj.getPlayerEntityByName(this.entity.getOwnerName()) != null && this.entity.OrderStatus != EnumOrderType.freeMove)
+        else if (this.entity.getOwnerName() != null && this.entity.worldObj.getPlayerEntityByName(this.entity.getOwnerName()) != null && this.entity.OrderStatus != EnumOrderType.FreeMove)
         {
             return false;
         }

@@ -4,6 +4,7 @@ import java.util.Random;
 
 
 import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -244,14 +245,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 int var2 = this.analyzerItemStacks[var1].getItem().itemID;
                 
-                if ((var2 == Fossil.rawDilophosaurus.itemID) || (var2 == Fossil.rawTriceratops.itemID) || (var2 == Fossil.rawTRex.itemID) || (var2 == Fossil.rawSpinosaurus.itemID) || (var2 == Fossil.rawStegosaurus.itemID) || (var2 == Fossil.rawVelociraptor.itemID) || (var2 == Fossil.rawPterosaur.itemID) || (var2 == Fossil.rawPlesiosaur.itemID) || (var2 == Fossil.rawMosasaurus.itemID) || (var2 == Fossil.rawBrachiosaurus.itemID) || (var2 == Fossil.biofossil.itemID ) || (var2 == Fossil.relic.itemID) || /*(var2 == Fossil.rawDinoMeat.itemID) ||*/ (var2 == Item.porkRaw.itemID) || (var2 == Item.beefRaw.itemID) || (var2 == Item.egg.itemID) || (var2 == Item.chickenRaw.itemID) || (var2 == Block.cloth.blockID) || (var2 == Fossil.icedMeat.itemID))
-                {
-                	
+                if (EnumDinoType.isDinoDrop(this.analyzerItemStacks[var1].getItem()) || (var2 == Fossil.biofossil.itemID ) || (var2 == Fossil.relic.itemID) || /*(var2 == Fossil.rawDinoMeat.itemID) ||*/ (var2 == Item.porkRaw.itemID) || (var2 == Item.beefRaw.itemID) || (var2 == Item.egg.itemID) || (var2 == Item.chickenRaw.itemID) || (var2 == Block.cloth.blockID) || (var2 == Fossil.icedMeat.itemID))
+                {	
                     this.RawIndex = var1;
                     break;
-                    
                 }
-                
             }
         }
 
@@ -303,9 +301,13 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
                 if (var2 > 90)
                 {
-                	int i=(new Random()).nextInt(11);
+                	int i=(new Random()).nextInt(EnumDinoType.values().length+1);//+1 for the sapling
                 	Item i0=null;
-                	switch(i)
+                	if(i==0)i0=Fossil.brokenSapling;
+                	else
+                		i0=EnumDinoType.values()[i-1].DNAItem;
+                		
+                	/*switch(i)
                 	{
 	                	case 0:i0=Fossil.dnaTriceratops;break;
 	                	case 1:i0=Fossil.dnaBrachiosaurus;break;
@@ -319,7 +321,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 	                	case 9:i0=Fossil.brokenSapling;break;
 	                	case 10:i0=Fossil.dnaNautilus;break;
 	                    case 11:i0=Fossil.dnaSpinosaurus;break;
-                	}
+                	}*/
                     var1 = new ItemStack(i0, 1);
                 }
             }
@@ -340,36 +342,30 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 var1 = new ItemStack(Fossil.dna, 4, this.analyzerItemStacks[this.RawIndex].getItemDamage());
             }*/
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawBrachiosaurus)
+            if(EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem())!=null)
+            	var1= new ItemStack(EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()),1);
+            
+            /*if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawBrachiosaurus)
                 var1 = new ItemStack(Fossil.dnaBrachiosaurus, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawMosasaurus)
                 var1 = new ItemStack(Fossil.dnaMosasaurus, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawPlesiosaur)
                 var1 = new ItemStack(Fossil.dnaPlesiosaur, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawPterosaur)
                 var1 = new ItemStack(Fossil.dnaPterosaur, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawVelociraptor)
                 var1 = new ItemStack(Fossil.dnaVelociraptor, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawStegosaurus)
                 var1 = new ItemStack(Fossil.dnaStegosaurus, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawTRex)
                 var1 = new ItemStack(Fossil.dnaTRex, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawTriceratops)
                 var1 = new ItemStack(Fossil.dnaTriceratops, 1);
-
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawDilophosaurus)
-                var1 = new ItemStack(Fossil.dnaDilophosaurus, 1);
-            
+                var1 = new ItemStack(Fossil.dnaDilophosaurus, 1);           
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawSpinosaurus)
-                var1 = new ItemStack(Fossil.dnaSpinosaurus, 1);
-
+                var1 = new ItemStack(Fossil.dnaSpinosaurus, 1);*/
+            
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.porkRaw)
                 var1 = new ItemStack(Fossil.dnaPig, 2);
 

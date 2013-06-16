@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class TabFMaterial extends CreativeTabs 
@@ -18,7 +19,7 @@ public class TabFMaterial extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
-       return Fossil.eggBrachiosaurus.itemID;
+       return EnumDinoType.Brachiosaurus.EggItem.itemID;
     }
     
     public String getTranslatedTabLabel()

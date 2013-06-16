@@ -63,17 +63,16 @@ public class EntityTRex extends EntityDinosaur
 
     public EntityTRex(World var1)
     {
-        super(var1);
+        super(var1,EnumDinoType.TRex);
         //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
-        this.SelfType = EnumDinoType.TRex;
         this.looksWithInterest = false;
         //this.texture = "/mods/fossil/textures/TRex.png";
         //this.setSize(2.5F, 2.5F);
         //this.moveSpeed = 0.3F;
-        this.health = 10;
-        this.experienceValue=20;
+        //this.health = 10;
+        //this.experienceValue=20;
         
-        this.Width0=0.7F;
+        /*this.Width0=0.7F;
         this.WidthInc=0.07F;
         this.Length0=0.8F;
         this.LengthInc=0.16F;
@@ -90,31 +89,8 @@ public class EntityTRex extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
-        FoodItemList.addItem(EnumDinoFoodItem.Stegosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Dilophosaurus);
-        FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
-        FoodItemList.addItem(EnumDinoFoodItem.Velociraptor);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Pig);
-        FoodMobList.addMob(EnumDinoFoodMob.Cow);
-        FoodMobList.addMob(EnumDinoFoodMob.Chicken);
-        FoodMobList.addMob(EnumDinoFoodMob.Sheep);
-        FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
-        FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
-        FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
-        FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
         
         //this.attackStrength = 4 + this.getDinoAge();
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8, 23));
@@ -257,7 +233,7 @@ public class EntityTRex extends EntityDinosaur
      */
     public void applyEntityCollision(Entity var1)
     {
-        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
+        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.SelfType.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
         {
             ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
         }
@@ -641,7 +617,6 @@ public class EntityTRex extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
     	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaTRex, 120, 7);
     	if(this.isWeak())
     		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
     	if (!this.isWeak() && !this.isTamed()  && this.isAdult())
@@ -684,7 +659,6 @@ public class EntityTRex extends EntityDinosaur
                 var1 = 5.0F;
             }
         }
-
 
         return var1;
     }

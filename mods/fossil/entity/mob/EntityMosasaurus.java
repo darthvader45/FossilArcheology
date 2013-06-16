@@ -62,17 +62,16 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
 
     public EntityMosasaurus(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Mosasaurus;
+        super(var1,EnumDinoType.Mosasaurus);
         this.looksWithInterest = false;
         this.texture = "/mods/fossil/textures/mob/Mosasaurus.png";
         //this.setSize(0.5F, 0.5F);
         //this.moveSpeed = 0.3F;
-        this.health = 10;
+        //this.health = 10;
         //this.attackStrength = 4 + 2 * this.getDinoAge();
-        this.experienceValue=20;
+        //this.experienceValue=20;
         
-        this.Width0=0.25F;
+        /*this.Width0=0.25F;
         this.WidthInc=0.25F;
         this.Length0=0.5F;
         this.LengthInc=0.45F;
@@ -89,11 +88,8 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         this.AdultAge=8;
         //this.AgingTicks=;
         this.MaxHunger=500;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Squid);
-        FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
         
         this.getNavigator().setCanSwim(true);
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
@@ -701,13 +697,6 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
     {
         this.isJumping = false;
     }
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-    	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaMosasaurus, 120, 7);
-    }
-
     public void HandleBoatSinking()
     {
         EntityBoat var1 = null;

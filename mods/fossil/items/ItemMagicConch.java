@@ -55,7 +55,7 @@ public class ItemMagicConch extends Item
         String var6 = "Head";
         String var7 = "Middle";
         String var8 = "Tail";
-        String var9 = Localizations.getLocalizedString(LocalizationStrings.DINO_PLESIOSAUR);//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
+        String var9 = Localizations.getLocalizedString("Dino.Plesiosaur");//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
         String var10 = Localizations.getLocalizedString("Drum.Msg.Head");
         String var11 = Localizations.getLocalizedString("Drum.Msg.Middle");
         String var12 = Localizations.getLocalizedString("Drum.Msg.Tail");

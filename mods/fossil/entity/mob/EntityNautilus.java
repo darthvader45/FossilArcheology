@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +38,7 @@ public class EntityNautilus extends EntityWaterMob
         this.setSize(0.95F, 0.95F);
         this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
         this.texture = "/mods/fossil/textures/mob/Nautilus.png";
-        this.experienceValue=1;
+        //this.experienceValue=1;
         this.isOwned=false;
     }
 
@@ -99,7 +100,7 @@ public class EntityNautilus extends EntityWaterMob
         if (var3 <= 3)
         {
             this.dropItem(Fossil.emptyShell.itemID, 1);
-            this.dropItem(Fossil.rawNautilus.itemID, 1);
+            this.dropItem(EnumDinoType.Nautilus.DropItem.itemID, 1);
         }
         else
         {
@@ -116,7 +117,7 @@ public class EntityNautilus extends EntityWaterMob
 
         if (var2 == null)
         {
-            ItemStack var3 = new ItemStack(Fossil.shellNautilus/*Fossil.ancientegg*/, 1);
+            ItemStack var3 = new ItemStack(EnumDinoType.Nautilus.EggItem/*Fossil.shellNautilusFossil.ancientegg*/, 1);
 
             if (var1.inventory.addItemStackToInventory(var3))
             {

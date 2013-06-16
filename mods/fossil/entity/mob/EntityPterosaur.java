@@ -81,16 +81,15 @@ public class EntityPterosaur extends EntityDinosaur
 
     public EntityPterosaur(World var1)
     {
-        super(var1);
-        this.SelfType = EnumDinoType.Pterosaur;
+        super(var1,EnumDinoType.Pterosaur);
         this.looksWithInterest = false;
         //this.CheckSkin();
         //this.setSize(0.8F, 0.8F);
         //this.moveSpeed = 2.0F;
-        this.health = 10;
-        this.experienceValue=3;
+        //this.health = 10;
+        //this.experienceValue=3;
         
-        this.Width0=1.2F;
+        /*this.Width0=1.2F;
         this.WidthInc=0.3F;
         this.Length0=1.0F;
         this.LengthInc=0.4F;
@@ -107,15 +106,8 @@ public class EntityPterosaur extends EntityDinosaur
         //this.AdultAge=;
         //this.AgingTicks=;
         //this.MaxHunger=;
-        //this.Hungrylevel=;
+        //this.Hungrylevel=;*/
         this.updateSize();
-        
-        FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
-        FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
-        FoodItemList.addItem(EnumDinoFoodItem.Sjl);
-        FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        
-        FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.texture = "/mods/fossil/textures/mob/Pterosaur.png";
@@ -450,7 +442,6 @@ public class EntityPterosaur extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
     	super.ShowPedia(p0);
-    	p0.PrintItemXY(Fossil.dnaPterosaur, 120, 7);
     	if(this.LearningChestTick==0)
     		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CHEST), true);
     	if(this.isAdult())

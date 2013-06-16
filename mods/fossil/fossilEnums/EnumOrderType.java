@@ -3,9 +3,9 @@ package mods.fossil.fossilEnums;
 import mods.fossil.Fossil;
 public enum EnumOrderType
 {
-    stay,
-    follow,
-    freeMove;
+    Stay,
+    Follow,
+    FreeMove;
 
     public final EnumOrderType Next()
     {

@@ -264,7 +264,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
      */
     public void readEntityFromNBT(NBTTagCompound var1)
     {
- //       this.direction = var1.getByte("Dir");
+        this.direction = var1.getByte("Dir");
         this.xPosition = var1.getInteger("TileX");
         this.yPosition = var1.getInteger("TileY");
         this.zPosition = var1.getInteger("TileZ");
