@@ -116,6 +116,7 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
@@ -1702,7 +1703,6 @@ public class Fossil implements IPacketHandler
 				float Forward = in.readFloat();
 				boolean Jump = in.readBoolean();
 				boolean Sneak = in.readBoolean();
-				
 				Entity E0 =((EntityPlayerMP)player).worldObj.getEntityByID(EntityID);
 				if(E0 instanceof EntityDinosaur)
 				{
@@ -1727,7 +1727,7 @@ public class Fossil implements IPacketHandler
 				float Pitch = in.readFloat();
 				float Wing = in.readFloat();
 				
-				Entity E0 =((EntityPlayerMP)player).worldObj.getEntityByID(EntityID);
+				Entity E0 =((EntityClientPlayerMP)player).worldObj.getEntityByID(EntityID);
 				if(E0 instanceof EntityPterosaur)
 				{
 					((EntityPterosaur)E0).AirAngle=Angle;

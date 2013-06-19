@@ -722,8 +722,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     			Speed += (this.getSpeed()*2.0F - Speed) * 0.4F*this.RiderForward;//Break faster
     			if(Speed<0)Speed=0;
     		}
-    		else
-    			Speed += (this.getSpeed()*2.0F - Speed) * 0.06F*this.RiderForward;
+    		//else//No more Backward movement when ridden!
+    		//	Speed += (this.getSpeed()*2.0F - Speed) * 0.06F*this.RiderForward;
+    	
     	//System.out.println(String.valueOf("Forward:"+this.RiderForward));
     	/*if(this.riddenByEntity instanceof EntityPlayerMP)
     		System.out.println("Is MP "+String.valueOf(this.worldObj.isRemote));

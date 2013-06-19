@@ -278,11 +278,14 @@ public class DinoAIEat extends EntityAIBase
             EntityLiving var4 = (EntityLiving)var2.next();
 
             if (this.Dino.SelfType.FoodMobList.CheckMobByClass(var4.getClass()))
-            {//It's food or the dino can carry things and is not hungry
-                this.targetMob = var4;
-                this.Dino.setAttackTarget(var4);
-                var3 = Vec3.createVectorHelper(var4.posX, var4.posY, var4.posZ);
-                break;
+            {//It's food
+            	if(!(var4 instanceof EntityDinosaur) || (var4 instanceof EntityDinosaur && ((EntityDinosaur) var4).isModelized()==false))
+            	{//No modelized Dinos for Lunch!
+	                this.targetMob = var4;
+	                this.Dino.setAttackTarget(var4);
+	                var3 = Vec3.createVectorHelper(var4.posX, var4.posY, var4.posZ);
+	                break;
+            	}
             }
         }
         return var3;
