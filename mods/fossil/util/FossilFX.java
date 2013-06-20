@@ -37,17 +37,19 @@ public class FossilFX
 			{
 				return null;
 			}
-			else
-			{
-			if (particleName.equals("flies"))//if the name of the particle to be spawned equals test spawn our particle note the name here is the name that you use when you call spawn particle
+			else if (particleName.equals("flies"))//if the name of the particle to be spawned equals test spawn our particle note the name here is the name that you use when you call spawn particle
 			{
 				var21 = new FliesFX(theWorld, par2, par4, par6, (float)par8, (float)par10, (float)par12);
 			}
-
+            else if (particleName.equals("tarBubble"))//if the name of the particle to be spawned equals test spawn our particle note the name here is the name that you use when you call spawn particle
+            {
+                var21 = new TarBubblesFX(theWorld, par2, par4, par6);
+            }
+			
 			mc.effectRenderer.addEffect((EntityFX)var21);
 			return (EntityFX)var21;
 			}
-		}
+			
 		return null;
 	}
 }

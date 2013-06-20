@@ -694,8 +694,8 @@ public class EntityPterosaur extends EntityDinosaur
             			Speed += (this.getSpeed()*2.0F - Speed) * 0.8F*this.RiderForward;//Break faster
             			if(Speed<0)Speed=0;
             		}
-            		else
-            			Speed += (this.getSpeed()*2.0F - Speed) * 0.3F*this.RiderForward;
+            		//else
+            		//	Speed += (this.getSpeed()*2.0F - Speed) * 0.3F*this.RiderForward;
             	this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw - this.RiderStrafe*5.0F);
             	if(this.RiderJump)
                 	this.getJumpHelper().setJumping();

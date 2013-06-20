@@ -3,6 +3,7 @@ package mods.fossil.blocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -30,6 +31,16 @@ public class BlockTar extends Block
         entity.motionY = 0.070000000745058064D;
         entity.fallDistance = 0.0F;
         entity.motionZ = 0.000000000000000004D;
+    }
+    
+    public void randomDisplayTick(World world, int i, int j, int k, Random random)
+    {
+        double var6 = (double)((float)i + random.nextFloat());
+        double var8 = (double)j - 0.05D;
+        double var10 = (double)((float)k + random.nextFloat());
+        FossilFX.spawnParticle("tarBubble", var6, var8+1, var10, 0.0D, 0.0D, 0.0D);
+//        FossilFX.spawnParticle("flies", i+0.5, j+1.0, k+0.5, 0.0D, 1.5D, 0.0D);
+
     }
 
     /**

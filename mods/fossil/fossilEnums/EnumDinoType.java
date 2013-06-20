@@ -44,7 +44,7 @@ public enum EnumDinoType
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
-    Spinosaurus(EntitySpinosaurus.class, 	C.CARRY | C.CARNIVORE);
+    Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE);
 
     private final Class dinoClass;
 
@@ -96,7 +96,7 @@ public enum EnumDinoType
     public int StrengthInc = 1;
     
     //The speed of the dino when hatched
-    public float Speed0 = 0.2F;
+    public float Speed0 = 0.25F;
     public float SpeedInc = 0.015F;
     
     
@@ -305,7 +305,7 @@ public enum EnumDinoType
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
         Mosasaurus.setItems(		null);//,				Fossil.rawMosasaurus, 	Fossil.dnaMosasaurus, 	Fossil.eggMosasaurus);
-        Mosasaurus.setDimensions(0.25F, 0.25F, 0.5F, 0.45F, 0.3F, 0.15F);
+        Mosasaurus.setDimensions(0.25F, 0.4F, 0.5F, 0.45F, 0.4F, 0.25F);
         Mosasaurus.setAges(-1, 8, 20);
         Mosasaurus.setProperties(50, 10, 4, 2, 0.3F, 0.4F, 500);
         Mosasaurus.setExperience(1F, 1F);
@@ -347,9 +347,9 @@ public enum EnumDinoType
         Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
         Brachiosaurus.setItems(		Item.stick);//,			Fossil.rawBrachiosaurus,Fossil.dnaBrachiosaurus,Fossil.eggBrachiosaurus);
-        Brachiosaurus.setDimensions(1.5F, 0.2F, 2.0F, 0.52F, 1.2F, 0.13F);
+        Brachiosaurus.setDimensions(1.0F, 0.5F, 1.0F, 0.5F, 1.0F, 0.5F);
         Brachiosaurus.setAges(6, 12, 36);
-        Brachiosaurus.setProperties(-1, 5, -1, -1, -1F, 0.012F, 500);
+        Brachiosaurus.setProperties(-1, 5, -1, -1, 0.3F, 0.012F, 500);
         Brachiosaurus.setExperience(0.6F, 0.15F);
         
         Brachiosaurus.FoodItemList.addItem(EnumDinoFoodItem.Sugar);

@@ -563,14 +563,7 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         if (!this.isInWater())
         {
-            if (this.riddenByEntity != null)
-            {
-                this.motionY += 0.6299999803304672D;
-            }
-            else
-            {
                 super.jump();
-            }
         }
         else if (!this.onGround || !this.inWater)
         {
