@@ -43,7 +43,7 @@ public enum EnumDinoType
     Mosasaurus(EntityMosasaurus.class, 		C.NOTHING),
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
-    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
+    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
     Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE);
 
     private final Class dinoClass;
@@ -247,7 +247,7 @@ public enum EnumDinoType
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
         
         TRex.setItems(				Fossil.skullStick);//,	Fossil.rawTRex, 		Fossil.dnaTRex, 		Fossil.eggTRex);
-        TRex.setDimensions(0.7F, 0.07F, 0.8F, 0.16F, 0.5F, 0.07F);
+        TRex.setDimensions(0.7F, 0.57F, 0.8F, 0.66F, 0.5F, 0.57F);
         TRex.setAges(-1, -1, 23);
         TRex.setProperties(-1, 5, 4, -1, 0.22F, 0.02F, 250);
         TRex.setExperience(1F, 1F);
@@ -357,7 +357,8 @@ public enum EnumDinoType
         Brachiosaurus.FoodItemList.addItem(EnumDinoFoodItem.Apple);
 		
 		Spinosaurus.setItems(		Fossil.skullStick);//,	Fossil.rawSpinosaurus,	Fossil.dnaSpinosaurus,	Fossil.eggSpinosaurus);
-		Spinosaurus.setDimensions(0.5F,0.3F,0.5F,0.3F,0.5F,0.3F);
+//		Spinosaurus.setDimensions(0.5F,0.3F,0.5F,0.3F,0.5F,0.3F); New model dimensions
+      Spinosaurus.setDimensions(0.8F,0.7F,0.5F,0.7F,0.5F,0.7F); // Dimensions for Dragonith's Spinosaur.
 		Spinosaurus.setAges(-1, -1, 23);
 		Spinosaurus.setProperties(-1, 5, 4, -1, 0.24F, 0.021F,550);
 		Spinosaurus.setExperience(0F,0.9F);
@@ -372,6 +373,8 @@ public enum EnumDinoType
 		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
 		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
 		Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.Velociraptor);
+	      Spinosaurus.FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
+
         
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
@@ -381,7 +384,6 @@ public enum EnumDinoType
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
-		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
     }
     

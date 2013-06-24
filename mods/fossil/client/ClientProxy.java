@@ -63,6 +63,8 @@ import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderPig;
+import net.minecraft.client.renderer.entity.RenderVillager;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
@@ -93,7 +95,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrachiosaurus.class, new RenderBrachiosaurus(0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderMammoth(new ModelMammoth(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));
-
 		//RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
 		
 	}

@@ -88,6 +88,7 @@ import mods.fossil.gens.WorldGenShips;
 import mods.fossil.gens.WorldGenWeaponShop;
 import mods.fossil.gens.WorldGeneratorPalaeoraphe;
 import mods.fossil.gens.WorldGeneratorVolcanicRock;
+import mods.fossil.gens.structure.FossilVillageHandler;
 import mods.fossil.guiBlocks.BlockAnalyzer;
 import mods.fossil.guiBlocks.BlockCultivate;
 import mods.fossil.guiBlocks.BlockDrum;
@@ -174,7 +175,7 @@ import mods.fossil.util.FossilBonemealEvent;
 import mods.fossil.util.FossilTradeHandler;
 import mods.fossil.util.WorldTypeFossil;
 
-@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 0005 Pre2")
+@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 0005 Release")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Fossil implements IPacketHandler
@@ -622,7 +623,12 @@ public class Fossil implements IPacketHandler
 	{
         Localizations.loadLanguages();
     	MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
-    	VillagerRegistry.instance().registerVillageTradeHandler(1, new FossilTradeHandler());
+    	
+    	VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
+        VillagerRegistry.instance().registerVillagerType(10, "/mods/fossil/textures/mob/Archaeologist.png");
+//        FossilVillageHandler villageHandler = new FossilVillageHandler();
+ //       VillagerRegistry.instance().registerVillageCreationHandler(villageHandler);
+        
     	
 		Configuration var2 = new Configuration(event.getSuggestedConfigurationFile());
 		try
@@ -1349,7 +1355,7 @@ public class Fossil implements IPacketHandler
 		//EntityRegistry.registerModEntity(EntityBrachiosaurus.class, 	"Brachiosaurus", 		23, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
 		//EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
-		
+
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(),EnumDinoType.values()[i].name(),200+i, this, 250, 5, true);
 		
@@ -1382,26 +1388,7 @@ public class Fossil implements IPacketHandler
         
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();
-		/*EnumDinoType.Triceratops.dinoClass=EntityTriceratops.class;
-		EnumDinoType.Velociraptor.dinoClass=EntityVelociraptor.class;
-		EnumDinoType.TRex.dinoClass=EntityTRex.class;
-		EnumDinoType.Brachiosaurus.dinoClass=EntityBrachiosaurus.class;
-		EnumDinoType.Plesiosaur.dinoClass=EntityPlesiosaur.class;
-		EnumDinoType.Pterosaur.dinoClass=EntityPterosaur.class;
-		EnumDinoType.Dilophosaurus.dinoClass=EntityDilophosaurus.class;
-		EnumDinoType.Mosasaurus.dinoClass=EntityMosasaurus.class;
-		EnumDinoType.Nautilus.dinoClass=EntityNautilus.class;
-		EnumDinoType.Stegosaurus.dinoClass=EntityStegosaurus.class;*/
 		EnumDinoFoodMob.init();
-		/*EnumDinoFoodMob.Triceratops.setDetails(EntityTriceratops.class);
-		EnumDinoFoodMob.Velociraptor.setDetails(EntityVelociraptor.class);
-		EnumDinoFoodMob.TRex.setDetails(EntityTRex.class);
-		EnumDinoFoodMob.Pterosaur.setDetails(EntityPterosaur.class);
-		EnumDinoFoodMob.Plesiosaur.setDetails(EntityPlesiosaur.class);
-		EnumDinoFoodMob.Mosasaurus.setDetails(EntityMosasaurus.class);
-		EnumDinoFoodMob.Stegosaurus.setDetails(EntityStegosaurus.class);
-		EnumDinoFoodMob.Dilophosaurus.setDetails(EntityDilophosaurus.class);
-		EnumDinoFoodMob.Brachiosaurus.setDetails(EntityBrachiosaurus.class);*/
 
 		
 		GameRegistry.registerWorldGenerator(new FossilGenerator());
@@ -1411,14 +1398,6 @@ public class Fossil implements IPacketHandler
 			GameRegistry.registerWorldGenerator(new WorldGenShips());
 		if(FossilOptions.Gen_Academy)
 			GameRegistry.registerWorldGenerator(new WorldGenAcademy());
-		//GameRegistry.registerWorldGenerator(new WorldGenBigShip());
-		//GameRegistry.registerWorldGenerator(new WorldGenCheheWreck());
-		//GameRegistry.registerWorldGenerator(new WorldGenVikingWreck());
-		//GameRegistry.registerWorldGenerator(new WorldGenShortRangeWreck());
-		//GameRegistry.registerWorldGenerator(new WorldGenShipWreck180());
-		//GameRegistry.registerWorldGenerator(new WorldGenShipWreck270());
-		//GameRegistry.registerWorldGenerator(new WorldGenShipWreck90());
-		//GameRegistry.registerWorldGenerator(new WorldGenGalleonWreck());
 		if(FossilOptions.Gen_Palaeoraphe)
 			GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe());
 		GameRegistry.registerWorldGenerator(new WorldGenWeaponShop());

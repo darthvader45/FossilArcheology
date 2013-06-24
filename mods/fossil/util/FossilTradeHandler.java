@@ -17,6 +17,8 @@ public class FossilTradeHandler implements IVillageTradeHandler
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) 
 	{
 		recipeList.add(new MerchantRecipe(new ItemStack(Item.diamond, 3), new ItemStack(Fossil.relic, 1, 0)));
+	    recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 12), new ItemStack(Fossil.stonejavelin, 2, 0)));
+	    recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 10), new ItemStack(Fossil.chickenEss, 24, 0)));
 	}
 	
 }

@@ -26,7 +26,7 @@ public class WorldGeneratorAcademy extends WorldGenerator
 
 	public boolean LocationIsValidSpawn(World world, int i, int j, int k)
 	{
-		int distanceToAir = 0;
+		int distanceToAir = 1;
 		int checkID = world.getBlockId(i, j, k);
 
 		while (checkID != 0)

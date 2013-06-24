@@ -61,8 +61,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         //this.setSize(1.5F, 1.5F);
         //this.health = 8;
         //this.experienceValue=5;
-        
-        
         /*this.Width0=1.5F;
         this.WidthInc=0.2F;
         this.Length0=2.0F;
@@ -70,9 +68,9 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.Height0=1.2F;
         this.HeightInc=0.16F;
         
-        /*this.HitboxXfactor=10.0F;
+        this.HitboxXfactor=10.0F;
         this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;*
+        this.HitboxZfactor=5.0F;
         
         //this.BaseattackStrength=;
         //this.AttackStrengthIncrease=;
@@ -408,7 +406,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight() * 1.2D, this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight() * 1.5D, this.posZ);
         }
     }
 

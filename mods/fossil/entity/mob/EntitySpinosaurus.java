@@ -6,11 +6,12 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
-import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIGrowup;
 import mods.fossil.fossilAI.DinoAIStarvation;
@@ -24,14 +25,12 @@ import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
@@ -56,60 +55,65 @@ public class EntitySpinosaurus extends EntityDinosaur
     private float field_25054_c;
     private boolean field_25052_g;*/
     public boolean Screaming = false;
-    public boolean isAngry = true;
     public int SkillTick = 0;
     //public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
-    
 
     public EntitySpinosaurus(World var1)
     {
         super(var1,EnumDinoType.Spinosaurus);
         //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
         this.looksWithInterest = false;
-        //this.texture = "/fossil/textures/TRex.png";
+        //this.texture = "/mods/fossil/textures/TRex.png";
         //this.setSize(2.5F, 2.5F);
         //this.moveSpeed = 0.3F;
         //this.health = 10;
         //this.experienceValue=20;
-       
-        /*this.HitboxXfactor=1.0F;
-        this.HitboxYfactor=1.0F;
-        this.HitboxZfactor=1.0F;
         
-        this.Width0=0.5F;
-        this.WidthInc=0.3F;
-        this.Length0=0.5F;
-        this.LengthInc=0.3F;
+        /*this.Width0=0.7F;
+        this.WidthInc=0.07F;
+        this.Length0=0.8F;
+        this.LengthInc=0.16F;
         this.Height0=0.5F;
-        this.HeightInc=0.3F;
+        this.HeightInc=0.07F;
         this.BaseattackStrength=4;
         //this.AttackStrengthIncrease=;
         //this.BreedingTime=;
-        this.BaseSpeed=0.24F;
-        this.SpeedIncrease=0.021F;
+        this.BaseSpeed=0.22F;
+        this.SpeedIncrease=0.02F;
         this.MaxAge=23;
         //this.BaseHealth=;
         this.HealthIncrease=5;
         //this.AdultAge=;
         //this.AgingTicks=;
-        this.MaxHunger=550;
+        this.MaxHunger=500;
         //this.Hungrylevel=;*/
         this.updateSize();
         
-        this.tasks.addTask(0, new EntityAISwimming(this)); 
+        //this.attackStrength = 4 + this.getDinoAge();
+        //this.tasks.addTask(0, new DinoAIGrowup(this, 8, 23));
+        //this.tasks.addTask(0, new DinoAIStarvation(this));
+        //this.tasks.addTask(1, new DinoAIAvoidEntityWhenYoung(this, EntityPlayer.class, 8.0F, 0.3F, 0.35F));
+        //this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+        this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIWander(this));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
+        /*this.tasks.addTask(8, new DinoAIPickItem(this, Item.porkRaw, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Item.beefRaw, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Item.chickenRaw, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Item.porkCooked, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Item.beefCooked, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Item.chickenCooked, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Fossil.rawDinoMeat, this.moveSpeed, 24, this.HuntLimit));
+        this.tasks.addTask(8, new DinoAIPickItem(this, Fossil.cookedDinoMeat, this.moveSpeed, 24, this.HuntLimit));*/
         this.tasks.addTask(6, new DinoAIEat(this, 24));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
-
     }
 
     /**
@@ -117,7 +121,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     public boolean isAIEnabled()
     {
-        return this.riddenByEntity == null && !this.isWeak() && !this.isModelized();
+        return this.riddenByEntity == null && !this.isWeak();
     }
 
     /**
@@ -157,7 +161,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Spino_living : null;
+        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.TRex_Living : null;
     }
 
     /**
@@ -165,7 +169,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-        return DinoSoundHandler.Spino_hurt;
+        return DinoSoundHandler.TRex_hit;
     }
 
     /**
@@ -173,7 +177,7 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return DinoSoundHandler.Spino_death;
+        return DinoSoundHandler.TRex_Death;
     }
 
     protected void updateEntityActionState() {}
@@ -201,10 +205,9 @@ public class EntitySpinosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-//        this.blockBreakingBehavior.execute();
-       if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
+        //this.blockBreakingBehavior.execute();
+        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
         	BlockInteractive();
-         
         if (this.health > 0)
         {
             /*this.field_25054_c = this.field_25048_b;
@@ -345,17 +348,15 @@ public class EntitySpinosaurus extends EntityDinosaur
 
     public boolean isAngry()
     {
-        return true;
-
+    	return true;
     }
- 
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() ? super.findPlayerToAttack() : null;
+        return this.isAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -364,7 +365,7 @@ public class EntitySpinosaurus extends EntityDinosaur
     protected void attackEntity(Entity var1, float var2)
     {
         this.faceEntity(var1, 30.0F, 30.0F);
-        
+
         if (!this.hasPath())
         {
             this.setPathToEntity(this.worldObj.getPathEntityToEntity(this, this.getEntityToAttack(), var2, true, false, true, false));
@@ -389,9 +390,8 @@ public class EntitySpinosaurus extends EntityDinosaur
                 {
                     if (this.getDinoAge() >= 3)
                     {
-                        this.worldObj.playSoundAtEntity(this, DinoSoundHandler.Spino_scream, this.getSoundVolume() * 2.0F, 1.0F);
+                        this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
                     }
-
                     this.Screaming = true;
                 }
             }
@@ -411,7 +411,7 @@ public class EntitySpinosaurus extends EntityDinosaur
 
         if (this.getDinoAge() >= 3)
         {
-            this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, DinoSoundHandler.TRex_scream, this.getSoundVolume() * 2.0F, 1.0F);
         }
     }
 
@@ -431,6 +431,8 @@ public class EntitySpinosaurus extends EntityDinosaur
         			if(Fossil.FossilOptions.Heal_Dinos)
         				this.heal(200);
                     this.increaseHunger(500);
+                    this.setTamed(true);
+                    this.setOwner(var1.username);
                     --var2.stackSize;
                     if (var2.stackSize <= 0)
         	        {
@@ -438,8 +440,15 @@ public class EntitySpinosaurus extends EntityDinosaur
         	        }
                     return true;
                 }
+        		else
+                {
+                    if (!this.isWeak())
+                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
+                    if (!this.isAdult())
+                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
+                    return true;
+                }
              }
-        	/*
         	if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
             {
                 if (var1.username.equalsIgnoreCase(this.getOwnerName()))
@@ -451,11 +460,8 @@ public class EntitySpinosaurus extends EntityDinosaur
 		        }
                 return true;
             }
-            */
-        	/*
         	if(var2.itemID == Fossil.chickenEss.itemID)
         		return true;
-        		*/
          }
         else 
         {
@@ -541,8 +547,6 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         if (!this.isWeak())
             this.handleScream();
-        
-        
         super.onLivingUpdate();
     }
 
@@ -563,18 +567,24 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         if (!this.isInWater())
         {
+            if (this.riddenByEntity != null)
+            {
+                this.motionY += 0.6299999803304672D;
+            }
+            else
+            {
                 super.jump();
+            }
         }
-        else if (!this.onGround || !this.inWater)
+        else if (!this.onGround)
         {
-//            this.motionY -= 0.1D;
+            this.motionY -= 0.1D;
         }
     }
 
     public boolean isWeak()
     {
- //       return this.getHealth() < 8 && this.getDinoAge()>8 && !this.isTamed();
-    	return false;
+        return false;
     }
 
     /*private void HandleWeak()
@@ -600,6 +610,15 @@ public class EntitySpinosaurus extends EntityDinosaur
             }
         }
     }*/
+    public void ShowPedia(GuiPedia p0)
+    {
+    	super.ShowPedia(p0);
+    	if(this.isWeak())
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+    	if (!this.isWeak() && !this.isTamed()  && this.isAdult())
+    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
+    		
+    }
 
     public EntitySpinosaurus spawnBabyAnimal(EntityAgeable var1)
     {
@@ -614,9 +633,9 @@ public class EntitySpinosaurus extends EntityDinosaur
     {
         float var1 = 1.0F;
         
-        if (this.IsHungry() || (attackingPlayer != null))
+        if (this.IsHungry() || (attackingPlayer != null) || this.isAngry())
         {
-        	var1 *=1.7F;
+        	var1 *=1.5F;
         }
         else if (this.getDinoAge() < 3)
         {
