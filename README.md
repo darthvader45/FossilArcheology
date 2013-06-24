@@ -23,10 +23,10 @@ Octo-Docto (Spanish)
 
 Roody (Dutch)
 ###### Special Thanks
-[Flammarilva](https://github.com/fls81245)
+[Flammarilva](https://github.com/fls81245) and the rest of Team July.
 
 ## Fossils Public Servers
-This server is run by 4f6f3b, and where I usually hang out if anyone has any questions.
+This server is run by 4f6f3b, and where he usually is to answer questions.
 
 **fossils.noip.us:25865**
 
@@ -34,9 +34,6 @@ This server is run by 4f6f3b, and where I usually hang out if anyone has any que
 
 Also, please PM him on Minecraft Forums with anything related to the server rather than post it on the thread.
 
-Other public F/A Servers:
-
-173.166.226.57:25565 (Run by Schlein)
 
 ## Wikis
 [User Wiki](http://fossils-archeology.wikia.com/)
@@ -44,17 +41,13 @@ Other public F/A Servers:
 [Developer Wiki](https://github.com/4f6f3b/FossilArcheology/wiki)
 
 ## Known Bugs
-- Tablets move up
-- Mosasaur die when attacking
-
-
-Feel free to post any bugs, ideas, or suggestions here in the forums. We all go through and read the posts. Just be aware these threads can get cluttered and posts can get lost, and any bug reports are much more visible to us if they're posted directly to the project's GitHub.
+For a comprehensive list of reported bugs, refer to the project issues page:
 
 [https://github.com/4f6f3b/FossilArcheology/issues?milestone=1&sort=comments&state=open](https://github.com/4f6f3b/FossilArcheology/issues?milestone=1&sort=comments&state=open)
 
 It's also a good place to check on the progress of future releases. So if you have to ask "when's the next update", we'll probably link you to GitHub.
 
-## Lisence, Copyright, and Modpacks
+## Licence, Copyright, and Modpacks
 Flammarilva's original code is open source and can be found here: [https://github.com/fls81245/FossilArcheology](https://github.com/fls81245/FossilArcheology)
 
 The Fossils and Archeology Revival code is also open source and can be found here: [https://github.com/4f6f3b/FossilArcheology](https://github.com/4f6f3b/FossilArcheology)
@@ -66,19 +59,19 @@ I will also put this here, since this has cropped up several times now. Regardin
 Right now we do not want people adding this mod to public modpacks. We are still working out most of the bugs and we have not tested compatibility with other mods. Our priority is making sure the Fossils mod works 100% before we start worrying about will it work with x mod.
 
 ## How to Build
-IN the Fossil.java:
+In the Fossil.java:
 
 At the very beginning is a boolean DebugMode.
 
 Set to true for work in eclipse, false for compiles.
 
-The Fossillang and Dinosounds Folder must be in the jars/ressources folder for working in eclipse.
+The Fossillang and Dinosounds Folder must be in the jars/resources folder for working in eclipse. This is due to using legacy Modloader methods.
 
-place the whole fossil folder in mcp/src/minecraft.
+Place the whole mods folder in mcp/src/minecraft.
 
-After recompiling/reobfuscating:(Debug MOde false!)
+After recompiling/reobfuscating:(Debug Mode false!)
 
-Copy armor, fossillang,Textures and Dinosounds from the src folder in the reobf/minecraft/fossil folder.
+Copy armor, fossillang, textures and Dinosounds from the src folder in the reobf/minecraft/fossil folder.
 
 Copy the mcmod.info from src in the reobf/minecraft folder.
 

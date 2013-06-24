@@ -1,0 +1,210 @@
+package mods.fossil.client;
+
+public class LocalizationStrings {
+    
+    public static final String BLOCKFOSSIL_NAME = "fossil";
+    public static final String BLOCKSKULL_NAME = "skullBlock";
+    public static final String SKULLLANTERN_NAME = "skullLantern";
+    public static final String BLOCKANALYZERIDLE_NAME = "analyzer";
+    public static final String BLOCKANALYZERACTIVE_NAME = "analyzerActive";
+    public static final String BLOCKCULTIVATEIDLE_NAME = "cultureVat";
+    public static final String BLOCKCULTIVATEACTIVE_NAME = "cultureVatActive";
+    public static final String BLOCKWORKTABLEIDLE_NAME = "fossilworkbench";
+    public static final String BLOCKWORKTABLEACTIVE_NAME = "workbenchActive";
+    public static final String DRUM_NAME = "drum";
+    public static final String FEEDERIDLE_NAME = "feeder";
+    public static final String FEEDERACTIVE_NAME = "feederActive";
+    public static final String BLOCKPERMAFROST_NAME = "permafrost";
+    public static final String BLOCKICEDSTONE_NAME = "icedStone";
+    public static final String BLOCKTIMEMACHINE_NAME = "timeMachine";
+    public static final String TAR_NAME = "tar";
+    public static final String PALMLOG_NAME = "palaeorapheLog";
+    public static final String PALMLEAVES_NAME = "palaeorapheLeaves";
+    public static final String PALMSAP_NAME = "palaeorapheSapling";
+    public static final String PALAEPLANKS_NAME = "palaeoraphePlanks";
+    public static final String PALAESINGLESLAB_NAME = "palaeorapheSlab";
+    public static final String PALAEDOUBLESLAB_NAME = "palaeorapheSlabDouble";
+    public static final String PALAESTAIRS_NAME = "palaeorapheStairs";
+    public static final String VOLCANICASH_NAME = "volcanicAsh";
+    public static final String VOLCANICROCK_NAME = "volcanicRock";
+    public static final String VOLCANICROCKHOT_NAME = "volcanicRockHot";
+    public static final String VOLCANICBRICK_NAME = "volcanicBrick";    
+    public static final String SARRACINA_NAME = "sarracina";
+    public static final String FERNS_NAME = "fernBlock";
+    
+    public static final String BIO_FOSSIL_NAME = "bioFossil";
+    public static final String RELIC_NAME = "relicScrap";
+    public static final String TABLET_NAME = "stoneTablet";
+    public static final String BROKEN_SWORD_NAME = "brokenAncientSword";
+    public static final String ANCIENT_SWORD_NAME = "ancientSword";
+    public static final String FERNSEED_NAME = "fernSeeds";
+    public static final String BROKEN_HELMET_NAME = "brokenAncientHelmet";
+    public static final String ANCIENT_HELMET_NAME = "ancientHelmet";
+    public static final String SKULL_STICK_NAME = "skullStick";
+    public static final String GEM_NAME = "scarabGem";
+    public static final String SCARAB_AXE_NAME = "scarabAxe";
+    public static final String SCARAB_PICKAXE_NAME = "scarabPickAxe";
+    public static final String SCARAB_SWORD_NAME = "scarabSword";
+    public static final String SCARAB_HOE_NAME = "scarabHoe";
+    public static final String SCARAB_SHOVEL_NAME = "scarabShovel";
+    public static final String DINOPEDIA_NAME = "dinoPedia";
+    public static final String TOOTH_NAME = "t-RexTooth";
+    public static final String DAGGER_NAME = "toothDagger";
+    public static final String RAW_CHICKEN_SOUP_NAME = "rawChickenSoup";
+    public static final String COOKED_CHICKEN_SOUP_NAME = "cookedChickenSoup";
+    public static final String EOC_NAME = "essenceofChicken";
+    public static final String EMPTY_SHELL_NAME = "emptyShell";
+    public static final String SJL_NAME = "sJL";
+    public static final String ICED_MEAT_NAME = "icedMeat";
+    public static final String WOOD_JAVELIN_NAME = "woodJavelin";
+    public static final String STONE_JAVELIN_NAME = "stoneJavelin";
+    public static final String IRON_JAVELIN_NAME = "ironJavelin";
+    public static final String GOLD_JAVELIN_NAME = "goldJavelin";
+    public static final String DIAMOND_JAVELIN_NAME = "diamondJavelin";
+    public static final String ANCIENT_JAVELIN_NAME = "ancientJavelin";
+    public static final String WHIP_NAME = "whip";
+    public static final String MAGIC_CONCH_NAME = "magicConch";
+    public static final String LEGBONE_NAME = "legBone";
+    public static final String CLAW_NAME = "claw";
+    public static final String FOOT_NAME = "foot";
+    public static final String SKULL_NAME = "skull";
+    public static final String BROKEN_SAPLING_NAME = "plantFossil";
+    public static final String SKULL_HELMET_NAME = "skullHelmet";
+    public static final String RIBCAGE_NAME = "ribCage";
+    public static final String FEMURS_NAME = "shinGuards";
+    public static final String FEET_NAME = "feet";
+    public static final String DINO_STEAK_NAME = "dinoSteak";
+    
+    /*public static final String RAW_TRICERATOPS_NAME = "rawTriceratops";
+    public static final String RAW_VELOCIRAPTOR_NAME = "rawVelociraptor";
+    public static final String RAW_TREX_NAME = "rawTRex";
+    public static final String RAW_PTEROSAUR_NAME = "rawPterosaur";
+    public static final String RAW_NAUTILUS_NAME = "rawNautilus";
+    public static final String RAW_PLESIOSAUR_NAME = "rawPlesiosaur";
+    public static final String RAW_MOSASAURUS_NAME = "rawMosasaurus";
+    public static final String RAW_STEGOSAURUS_NAME = "rawStegosaurus";
+    public static final String RAW_DILOPHOSAURUS_NAME = "rawDilophosaurus";
+    public static final String RAW_BRACHIOSAURUS_NAME = "rawBrachiosaurus";
+    public static final String RAW_SPINOSAURUS_NAME = "rawSpinosaurus";*/
+    
+    /*public static final String EGG_TRICERATOPS_NAME = "eggTriceratops";
+    public static final String EGG_VELOCIRAPTOR_NAME = "eggVelociraptor";
+    public static final String EGG_TREX_NAME = "eggTRex";
+    public static final String EGG_PTEROSAUR_NAME = "eggPterosaur";
+    public static final String SHELL_NAUTILUS_NAME = "livingNautilus";
+    public static final String EGG_PLESIOSAUR_NAME = "eggPlesiosaur";
+    public static final String EGG_MOSASAURUS_NAME = "eggMosasaurus";
+    public static final String EGG_STEGOSAURUS_NAME = "eggStegosaurus";
+    public static final String EGG_DILOPHOSAURUS_NAME = "eggDilophosaurus";
+    public static final String EGG_BRACHIOSAURUS_NAME = "eggBrachiosaurus";
+    public static final String EGG_SPINOSAURUS_NAME = "eggSpinosaurus";*/
+    
+    /*public static final String DNA_TRICERATOPS_NAME = "dnaTriceratops";
+    public static final String DNA_VELOCIRAPTOR_NAME = "dnaVelociraptor";
+    public static final String DNA_TREX_NAME = "dnaTRex";
+    public static final String DNA_PTEROSAUR_NAME = "dnaPterosaur";
+    public static final String DNA_NAUTILUS_NAME = "dnaNautilus";
+    public static final String DNA_PLESIOSAUR_NAME = "dnaPlesiosaur";
+    public static final String DNA_MOSASAURUS_NAME = "dnaMosasaurus";
+    public static final String DNA_STEGOSAURUS_NAME = "dnaStegosaurus";
+    public static final String DNA_DILOPHOSAURUS_NAME = "dnaDilophosaurus";
+    public static final String DNA_BRACHIOSAURUS_NAME = "dnaBrachiosaurus";
+    public static final String DNA_SPINOSAURUS_NAME = "dnaSpinosaurus";*/
+    
+    public static final String DNA_PIG_NAME = "dnaPig";
+    public static final String DNA_SHEEP_NAME = "dnaSheep";
+    public static final String DNA_COW_NAME = "dnaCow";
+    public static final String DNA_CHICKEN_NAME = "dnaChicken";
+    public static final String DNA_SMILODON_NAME = "dnaSabercat";
+    public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
+    
+    public static final String EMBRYO_PIG_NAME = "embryoPig";
+    public static final String EMBRYO_SHEEP_NAME = "embryoSheep";
+    public static final String EMBRYO_COW_NAME = "embryoCow";
+    public static final String EMBRYO_CHICKEN_NAME = "embryoChicken";
+    public static final String EMBRYO_SMILODON_NAME = "embryoSabercat";
+    public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
+    
+    public static final String FARMOR_NAME = "Ancient Armor";
+    public static final String FBLOCKS_NAME = "Ancient Blocks";
+    public static final String FCOMBAT_NAME = "Ancient Weapons";
+    public static final String FFOOD_NAME = "Ancient Food";
+    public static final String FITEMS_NAME = "Ancient Items";
+    public static final String FMATERIAL_NAME = "Ancient Materials";
+    public static final String FTOOLS_NAME = "Ancient Tools";
+    
+    public static final String PEDIA_EGG_DRY = "pediaEggDry";
+    public static final String PEDIA_EGG_WET = "pediaEggWet";
+
+    public static final String PEDIA_EGG_COLD = "pedia.eggCold";
+    public static final String PEDIA_EGG_WARM = "pedia.eggWarm";
+    public static final String PEDIA_EGG_STATUS = "pedia.eggStatus";
+    public static final String PEDIA_EGG_PROGRESS = "pedia.eggProgress";
+    public static final String PEDIA_EGG_DAY = "pedia.eggDay";
+    public static final String PEDIA_EGG_DAYS = "pedia.eggDays";
+    
+    public static final String DINOEGG_HATCHED = "dinoegg.hatched";
+    public static final String DINOEGG_NOSPACE = "dinoegg.noSpace";
+    
+    public static final String DINOEGG_HEAD = "dinoegg.head";
+    public static final String DINOEGG_DRY = "dinoegg.dry";
+    public static final String DINOEGG_COLD = "dinoegg.cold";
+    
+    public static final String PEDIA_TEXT_OWNER = "pedia.text.owner";
+    public static final String PEDIA_TEXT_CHEST = "pedia.text.chest";
+    public static final String PEDIA_TEXT_CAUTION = "pedia.text.caution";
+    public static final String PEDIA_TEXT_RIDEABLE = "pedia.text.rideable";
+    public static final String PEDIA_TEXT_WEAK = "pedia.text.weak";
+    public static final String PEDIA_TEXT_FLY = "pedia.text.fly";
+    
+    public static final String ORDER_HEAD = "order.head";
+    public static final String ORDER_STAY = "order.stay";
+    public static final String ORDER_FOLLOW = "order.follow";
+    public static final String ORDER_FREEMOVE = "order.freeMove";
+    
+    public static final String ANIMAL_MAMMOTH = "animal.mammoth";
+    public static final String ANIMAL_SMILODON = "animal.smilodon";
+    public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
+    public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
+    public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
+    
+    public static final String PEDIA_EMBRYO_INSIDE = "pedia.embryo.inside";
+    public static final String PEDIA_EMBRYO_GROWING = "pedia.embryo.growing";
+    public static final String PEDIA_EMBRYO_PIG = "pedia.embryo.pig";
+    public static final String PEDIA_EMBRYO_SHEEP = "pedia.embryo.sheep";
+    public static final String PEDIA_EMBRYO_COW = "pedia.embryo.cow";
+    public static final String PEDIA_EMBRYO_CHICKEN = "pedia.embryo.chicken";
+    public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
+    public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
+    
+    public static final String STATUS_GEM_ERROR_YOUNG = "status.gemErrorYoung";  
+    public static final String STATUS_GEM_ERROR_HEALTH = "status.gemErrrorHealth";   
+    
+    public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";  
+    
+    public static final String DRUM_TRIGGER = "drum.trigger"; 
+    public static final String DRUM_ORDERING = "drum.order"; 
+    public static final String DRUM_TREX = "drum.tRex"; 
+    
+    /*public static final String DINO_TRICERATOPS = "Dino.Triceratops";
+    public static final String DINO_VELOCIRAPTOR = "Dino.Velociraptor";
+    public static final String DINO_TREX = "Dino.TRex";
+    public static final String DINO_PTEROSAUR = "Dino.Pterosaur";
+    public static final String DINO_NAUTILUS = "Dino.Nautilus";
+    public static final String DINO_PLESIOSAUR = "Dino.Plesiosaur";
+    public static final String DINO_MOSASAURUS = "Dino.Mosasaurus";
+    public static final String DINO_STEGOSAURUS = "Dino.Stegosaurus";
+    public static final String DINO_DILOPHOSAURUS = "Dino.Dilophosaurus";
+    public static final String DINO_BRACHIOSAURUS = "Dino.Brachiosaurus";
+    public static final String DINO_SPINOSAURUS = "Dino.Spinosaurus";*/
+    
+    public static final String MOB_FPZ = "mob.fpz";
+    public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
+    public static final String BOSS_ANU = "boss.Anu";
+    public static final String MOB_BONES = "mob.bones";
+    
+
+   
+    
+    
+}

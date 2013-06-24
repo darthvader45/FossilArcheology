@@ -1,17 +1,18 @@
 [
 {
-  "modid": "Fossil",
+  "modid": "fossil",
   "name": "Fossil/Archeology",
-  "description": "Adds Dinos and Fossils to Minecraft",
-  "version": "1.47 0005",
-  "mcversion": "1.4.7",
-  "url": "",
+  "description": "Adding dinosaurs, fossils, and more to Minecraft.",
+  "version": "1.52 0005 Release",
+  "url": "http://www.minecraftforum.net/topic/1708636-",
   "updateUrl": "",
-  "authors": [
-    "Microjunk,Shadowbeast007,tyranno66,4f6f3b,Chellre"
+  "authorList": [
+    "Microjunk",
+    "Shadowbeast007",
+    "tyranno66",
+    "4f6f3b"
   ],
-  "credits": "Original Mod By Flammarilva and Team July! Thanks to the community, for all the ideas and testing",
-  "logoFile": "",
+  "credits": "Original mod by Flammarilva and Team July!",
   "screenshots": [
   ],
   "parent":"",
