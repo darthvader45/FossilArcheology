@@ -19,7 +19,7 @@
 	<entry key="tile.cultureVat.name">Culture Vat</entry>
 	<entry key="tile.fossilworkbench.name">Archeology Workbench</entry>
 	<entry key="tile.drum.name">Drum</entry>
-	<entry key="tile.feeder.name">Feeder</entry>
+	<entry key="tile.feederActive.name">Feeder</entry>
 	<entry key="tile.permafrost.name">Permafrost</entry>
 	<entry key="tile.icedStone.name">Iced Stone</entry>
 	<entry key="tile.timeMachine.name">Time Machine</entry>
@@ -37,14 +37,19 @@
 	<entry key="tile.sarracina.name">Sarracina</entry>
 	<entry key="tile.fernBlock.name">Ancient Fern</entry>
 	<entry key="tile.volcanicBrick.name">Volcanic Brick</entry>
-	<entry key="container.feeder">Feeder</entry>
+	<entry key="tile.amberOre.name">Amber Ore</entry>
+	<entry key="tile.ancientStone.name">Ancient Stone</entry>
+	<entry key="tile.ancientStonebrick.name">Ancient Stone Brick</entry>
+	<entry key="tile.ancientWood.name">Ancient Wood</entry>
+	<entry key="tile.ancientWoodPillar.name">Ancient Wood Pillar</entry>
+	<entry key="tile.ancientGlass.name">Ancient Glass</entry>
 <!-- Items -->
 	<entry key="item.bioFossil.name">Bio-Fossil</entry>
 	<entry key="item.relicScrap.name">Relic Scrap</entry>
 	<entry key="item.stoneTablet.name">Stone Tablet</entry>
 	<entry key="item.brokenAncientSword.name">Broken Ancient Sword</entry>
 	<entry key="item.ancientSword.name">Ancient Sword</entry>
-	<entry key="item.fernSeed.name">Fern Seeds</entry>
+	<entry key="item.fernSeeds.name">Fern Seeds</entry>
 	<entry key="item.brokenAncientHelmet.name">Broken Ancient Helmet</entry>
 	<entry key="item.ancientHelmet.name">Ancient Helmet</entry>
 	<entry key="item.skullStick.name">Skull Stick</entry>
@@ -80,6 +85,18 @@
 	<entry key="item.ribCage.name">Rib Cage</entry>
 	<entry key="item.shinGuards.name">Shin Guards</entry>
 	<entry key="item.feet.name">Feet</entry>
+	<entry key="amber">Amber</entry>
+	<entry key="ancientVase">Ancient Vase</entry>
+	<entry key="ancientVaseBroken">Ancient Broken Vase</entry>
+	<entry key="boneArrow">Bone Arrow</entry>
+	<entry key="boneBow">Bone Bow</entry>
+	<entry key="boneGlue">Bone Glue</entry>
+	<entry key="boneRod">Bone Rod</entry>
+	<entry key="boneSword">Bone Sword</entry>
+	<entry key="powderyString">Powdery String</entry>
+	<entry key="ancientWoodPlate">Ancient Wooden Plate</entry>
+	<entry key="animalCoin">Animal Coin</entry>
+	<entry key="dinoCoin">Dinosaur Coin</entry>
 <!-- Dino Meat -->
 	<entry key="item.dinoSteak.name">Dino Steak</entry>
 	<entry key="item.rawTriceratops.name">Triceratops Meat</entry>
@@ -125,14 +142,14 @@
 	<entry key="item.dnaSheep.name">Sheep DNA</entry>
 	<entry key="item.dnaCow.name">Cow DNA</entry>
 	<entry key="item.dnaChicken.name">Chicken DNA</entry>
-	<entry key="item.dnaSabercat.name">Smilodon DNA</entry>
+	<entry key="item.dnaSmilodon.name">Smilodon DNA</entry>
 	<entry key="item.dnaMammoth.name">Mammoth DNA</entry>
 <!-- Embryos -->
 	<entry key="item.embryoPig.name">Pig Embryo</entry>
 	<entry key="item.embryoSheep.name">Sheep Embryo</entry>
 	<entry key="item.embryoCow.name">Cow Embryo</entry>
 	<entry key="item.embryoChicken.name">Chicken Embryo</entry>
-	<entry key="item.embryoSabercat.name">Smilodon Embryo</entry>
+	<entry key="item.embryoSmilodon.name">Smilodon Embryo</entry>
 	<entry key="item.embryoMammoth.name">Mammoth Embryo</entry>
 <!-- Prefix/Suffix -->
 	<entry key="dnaName.head">DNA of </entry>
@@ -187,7 +204,7 @@
 	<entry key="Dino.Compsognathus">Compsognathus</entry>
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mammoth</entry>
-	<entry key="animal.saberCat">Smilodon</entry>
+	<entry key="animal.smilodon">Smilodon</entry>
     <entry key= "animal.pregnant.cow">Pregnant Cow</entry>
     <entry key= "animal.pregnant.pig">Pregnant Pig</entry>   
     <entry key= "animal.pregnant.sheep">Pregnant Sheep</entry>  
@@ -214,7 +231,7 @@
 	<entry key="pedia.embryo.Sheep">Sheep</entry>
 	<entry key="pedia.embryo.Cow">Cow</entry>
 	<entry key="pedia.embryo.Chicken">Chicken</entry>
-	<entry key="pedia.embryo.SaberCat">Smilodon</entry>
+	<entry key="pedia.embryo.Smilodon">Smilodon</entry>
 	<entry key="pedia.embryo.Mammoth">Mammoth</entry>
 <!-- Anu dialogue -->
 	<entry key="anuSpeaker.self">Anu: </entry>

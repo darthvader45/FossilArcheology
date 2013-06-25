@@ -1,5 +1,7 @@
 package mods.fossil.fossilEnums;
 
+import mods.fossil.Fossil;
+
 public enum EnumAnimalType
 {
     Pig(3000),
@@ -13,6 +15,13 @@ public enum EnumAnimalType
     
     private EnumAnimalType(int grow0)
     {
+        if (Fossil.DebugMode)
+        {
+            GrowTime=100;
+        }
+        else
+        {
     	GrowTime=grow0;
+        }
     }
 }

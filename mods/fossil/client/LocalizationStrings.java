@@ -30,7 +30,15 @@ public class LocalizationStrings {
     public static final String VOLCANICROCKHOT_NAME = "volcanicRockHot";
     public static final String VOLCANICBRICK_NAME = "volcanicBrick";    
     public static final String SARRACINA_NAME = "sarracina";
-    public static final String FERNS_NAME = "fernBlock";
+    public static final String FERNBLOCK_NAME = "fernBlock";
+    public static final String TFEEDERIDLE_NAME = "tilefeeder";
+    public static final String AMBERORE_NAME = "amberOre";
+    public static final String ANCIENTSTONE_NAME = "ancientStone";
+    public static final String ANCIENTSTONEBRICK_NAME = "ancientStonebrick";
+    public static final String ANCIENTWOOD_NAME = "ancientWood";
+    public static final String ANCIENTWOODPILLAR_NAME = "ancientWoodPillar";
+    public static final String ANCIENTGLASS_NAME = "ancientGlass";
+    
     
     public static final String BIO_FOSSIL_NAME = "bioFossil";
     public static final String RELIC_NAME = "relicScrap";
@@ -75,6 +83,19 @@ public class LocalizationStrings {
     public static final String FEET_NAME = "feet";
     public static final String DINO_STEAK_NAME = "dinoSteak";
     
+    public static final String AMBER_NAME = "amber";
+    public static final String ANCIENTVASE_NAME = "ancientVase";
+    public static final String ANCIENTVASEBROKEN_NAME = "ancientVaseBroken";
+    public static final String BONEARROW_NAME = "boneArrow";
+    public static final String BONEBOW_NAME = "boneBow";
+    public static final String BONEGLUE_NAME = "boneGlue";
+    public static final String BONEROD_NAME = "boneRod";
+    public static final String BONESWORD_NAME = "boneSword";
+    public static final String POWDERYSTRING_NAME = "powderyString";
+    public static final String ANCIENTWOODPLATE_NAME = "ancientWoodPlate";
+    public static final String ANIMALCOIN_NAME = "animalCoin";
+    public static final String DINOCOIN_NAME = "dinoCoin";
+    
     /*public static final String RAW_TRICERATOPS_NAME = "rawTriceratops";
     public static final String RAW_VELOCIRAPTOR_NAME = "rawVelociraptor";
     public static final String RAW_TREX_NAME = "rawTRex";
@@ -115,14 +136,14 @@ public class LocalizationStrings {
     public static final String DNA_SHEEP_NAME = "dnaSheep";
     public static final String DNA_COW_NAME = "dnaCow";
     public static final String DNA_CHICKEN_NAME = "dnaChicken";
-    public static final String DNA_SMILODON_NAME = "dnaSabercat";
+    public static final String DNA_SMILODON_NAME = "dnaSmilodon";
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
     
     public static final String EMBRYO_PIG_NAME = "embryoPig";
     public static final String EMBRYO_SHEEP_NAME = "embryoSheep";
     public static final String EMBRYO_COW_NAME = "embryoCow";
     public static final String EMBRYO_CHICKEN_NAME = "embryoChicken";
-    public static final String EMBRYO_SMILODON_NAME = "embryoSabercat";
+    public static final String EMBRYO_SMILODON_NAME = "embryoSmilodon";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     
     public static final String FARMOR_NAME = "Ancient Armor";
@@ -202,6 +223,7 @@ public class LocalizationStrings {
     public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
     public static final String BOSS_ANU = "boss.Anu";
     public static final String MOB_BONES = "mob.bones";
+
     
 
    

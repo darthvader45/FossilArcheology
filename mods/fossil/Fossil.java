@@ -1,17 +1,8 @@
 package mods.fossil;
 
-import java.io.BufferedReader;
-
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -26,6 +17,12 @@ import fossil.gens.WorldGenShipWreck90;
 import fossil.gens.WorldGenShortRangeWreck;
 import fossil.gens.WorldGenVikingWreck;*/
 import mods.fossil.util.RenderHUD;
+import mods.fossil.blocks.BlockAmberOre;
+import mods.fossil.blocks.BlockAncientGlass;
+import mods.fossil.blocks.BlockAncientStone;
+import mods.fossil.blocks.BlockAncientStonebrick;
+import mods.fossil.blocks.BlockAncientWood;
+import mods.fossil.blocks.BlockAncientWoodPillar;
 import mods.fossil.blocks.BlockFern;
 import mods.fossil.blocks.BlockFossil;
 import mods.fossil.blocks.BlockFossilSkull;
@@ -42,8 +39,6 @@ import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicRock;
 import mods.fossil.blocks.BlockVolcanicBrick;
-//import mods.fossil.blocks.FossilSlabs;
-import mods.fossil.client.FossilCfgLoader;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
@@ -55,40 +50,26 @@ import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.mob.EntityBones;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
-import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityMammoth;
-import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPigBoss;
-import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.entity.mob.EntityPterosaur;
 import mods.fossil.entity.mob.EntitySmilodon;
-import mods.fossil.entity.mob.EntityStegosaurus;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTriceratops;
-import mods.fossil.entity.mob.EntityVelociraptor;
-import mods.fossil.entity.mob.EntitySpinosaurus;
-import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.gens.FossilGenerator;
 import mods.fossil.gens.TarGenerator;
 import mods.fossil.gens.WorldGenAcademy;
-import mods.fossil.gens.WorldGenPalaeoraphe;
-import mods.fossil.gens.WorldGenShipWreck;
 import mods.fossil.gens.WorldGenShips;
 import mods.fossil.gens.WorldGenWeaponShop;
 import mods.fossil.gens.WorldGeneratorPalaeoraphe;
 import mods.fossil.gens.WorldGeneratorVolcanicRock;
-import mods.fossil.gens.structure.FossilVillageHandler;
 import mods.fossil.guiBlocks.BlockAnalyzer;
 import mods.fossil.guiBlocks.BlockCultivate;
 import mods.fossil.guiBlocks.BlockDrum;
@@ -116,28 +97,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.ModLoader;
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.StringTranslate;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -147,13 +117,9 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.EnumHelper;
-import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -170,10 +136,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.util.FossilBonemealEvent;
 import mods.fossil.util.FossilTradeHandler;
-import mods.fossil.util.WorldTypeFossil;
 
 @Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 0005 Release")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -200,7 +164,7 @@ public class Fossil implements IPacketHandler
 	 * If DebugMode = true
 	 * HatchTime is set to 1
 	 */
-	public static boolean DebugMode = false;
+	public static boolean DebugMode = true;
 	public static final double MESSAGE_DISTANCE = 25.0D;
 	
     //private static int[] blockIDs = new int[] {1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1151, 1152, 1153};
@@ -256,12 +220,12 @@ public class Fossil implements IPacketHandler
 	public static Block palaeStairs;
 	public static Block sarracina;
 	public static Block volcanicBrick;
-	//public static Block newBlock;
-	//public static Block newBlock;
-	//public static Block newBlock;
-	//public static Block newBlock;
-	//public static Block newBlock;
-	//public static Block newBlock;
+    public static Block amberOre;
+    public static Block ancientStone;
+    public static Block ancientStonebrick;
+    public static Block ancientWood;
+    public static Block ancientWoodPillar;
+    public static Block ancientGlass;
 	
     //Items
     public static Item biofossil;
@@ -295,18 +259,18 @@ public class Fossil implements IPacketHandler
 	public static Item foot;
 	public static Item skull;
 	public static Item brokenSapling;
-    //public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-    //public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-	//public static Item newItem;
-    //public static Item newItem;
-	//public static Item newItem;
+    public static Item amber;
+    public static Item ancientVase;
+    public static Item ancientVaseBroken;
+    public static Item boneArrow;
+    public static Item boneBow;
+    public static Item boneGlue;
+    public static Item boneRod;
+    public static Item boneSword;
+    public static Item powderyString;
+    public static Item ancientWoodPlate;
+    public static Item animalCoin;
+    public static Item dinoCoin;
 	//public static Item newItem;
 	//public static Item newItem;
 	
@@ -450,12 +414,12 @@ public class Fossil implements IPacketHandler
 	public static int palaeStairsID;
 	public static int sarracinaID;
 	public static int volcanicBrickID;
-	//public static int newBlockID;
-	//public static int newBlockID;
-	//public static int newBlockID;
-	//public static int newBlockID;
-	//public static int newBlockID;
-	//public static int newBlockID;
+    public static int amberOreID;
+    public static int ancientStoneID;
+    public static int ancientStonebrickID;
+    public static int ancientWoodID;
+    public static int ancientWoodPillarID;
+    public static int ancientGlassID;
 	
     //Items
     public static int biofossilID;
@@ -489,18 +453,18 @@ public class Fossil implements IPacketHandler
 	public static int footID;
 	public static int skullID;
 	public static int brokenSaplingID;
-    //public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-    //public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-	//public static int newItemID;
-    //public static int newItemID;
-	//public static int newItemID;
+    public static int amberID;
+    public static int ancientVaseID;
+    public static int ancientVaseBrokenID;
+    public static int boneArrowID;
+    public static int boneBowID;
+    public static int boneGlueID;
+    public static int boneRodID;
+    public static int boneSwordID;
+    public static int powderyStringID;
+    public static int ancientWoodPlateID;
+    public static int animalCoinID;
+    public static int dinoCoinID;
 	//public static int newItemID;
 	//public static int newItemID;
 	
@@ -646,7 +610,7 @@ public class Fossil implements IPacketHandler
         blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME, 3007).getInt(3007);
         blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME, 3008).getInt(3008);
         blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKTIMEMACHINE_NAME, 3009).getInt(3009);
-        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERNS_NAME, 3010).getInt(3010);
+        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERNBLOCK_NAME, 3010).getInt(3010);
         drumID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.DRUM_NAME, 3012).getInt(3012);
         feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERIDLE_NAME, 3013).getInt(3013);
         feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERACTIVE_NAME, 3014).getInt(3014);
@@ -665,11 +629,12 @@ public class Fossil implements IPacketHandler
         palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESTAIRS_NAME, 3026).getInt(3026);
         sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
 		volcanicBrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICBRICK_NAME, 3028).getInt(3028);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3029).getInt(3029);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3030).getInt(3030);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3031).getInt(3031);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3032).getInt(3032);
-		//newBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, "newBlock", 3033).getInt(3033);
+		amberOreID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.AMBERORE_NAME, 3029).getInt(3029);
+		ancientStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_NAME, 3030).getInt(3030);
+		ancientStonebrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONEBRICK_NAME, 3031).getInt(3031);
+		ancientWoodID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_NAME, 3032).getInt(3032);
+        ancientWoodPillarID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOODPILLAR_NAME, 3033).getInt(3033);
+        ancientGlassID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTGLASS_NAME, 3034).getInt(3034);
 	
 		//Items
         biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
@@ -703,22 +668,22 @@ public class Fossil implements IPacketHandler
         footID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOOT_NAME, 10028).getInt(10028);
         skullID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_NAME, 10029).getInt(10029);
         brokenSaplingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SAPLING_NAME, 10030).getInt(10030);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10031).getInt(10031);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10032).getInt(10032);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10033).getInt(10033);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10034).getInt(10034);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10035).getInt(10035);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10036).getInt(10036);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10037).getInt(10037);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10038).getInt(10038);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10039).getInt(10039);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10040).getInt(10040);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10041).getInt(10041);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10042).getInt(10042);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10043).getInt(10043);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10044).getInt(10044);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10045).getInt(10045);
-		//newItemID = var2.getItem(Configuration.CATEGORY_ITEM, "newItem", 10046).getInt(10046);
+        amberID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.AMBER_NAME, 10031).getInt(10031);
+        ancientVaseID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTVASE_NAME, 10032).getInt(10032);
+        ancientVaseBrokenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTVASEBROKEN_NAME, 10033).getInt(10033);
+        boneArrowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEARROW_NAME, 10034).getInt(10034);
+        boneBowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEBOW_NAME, 10035).getInt(10035);
+        boneGlueID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEGLUE_NAME, 10036).getInt(10036);
+        boneRodID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEROD_NAME, 10037).getInt(10037);
+        boneSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONESWORD_NAME, 10038).getInt(10038);
+        powderyStringID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERYSTRING_NAME, 10039).getInt(10039);
+        ancientWoodPlateID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt(10040);
+        animalCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
+        dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOCOIN_NAME, 10042).getInt(10042);
+        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10043).getInt(10043);
+        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10044).getInt(10044);
+        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10045).getInt(10045);
+        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
 		
 		//Armor
 		skullHelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt(10047);
@@ -865,7 +830,8 @@ public class Fossil implements IPacketHandler
     	}*/		
 	}
 	
-	@cpw.mods.fml.common.Mod.Init
+	@SuppressWarnings("static-access")
+    @cpw.mods.fml.common.Mod.Init
 	public void Init(FMLInitializationEvent event)
 	{
 		//Blocks
@@ -893,19 +859,27 @@ public class Fossil implements IPacketHandler
         palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMLEAVES_NAME);
         palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMSAP_NAME);
         palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEPLANKS_NAME);
-        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAESINGLESLAB_NAME);
-        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEDOUBLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEDOUBLESLAB_NAME);
+        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAESINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName(LocalizationStrings.PALAESTAIRS_NAME);
-        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICASH_NAME).setCreativeTab(this.tabFBlocks);
+        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICASH_NAME).setCreativeTab(this.tabFBlocks);
         volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICROCK_NAME).setCreativeTab(this.tabFBlocks);
         volcanicBrick = new BlockVolcanicBrick(volcanicBrickID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICBRICK_NAME).setCreativeTab(this.tabFBlocks);
         sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
         tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
+        amberOre  = new BlockAmberOre(amberOreID, Material.rock).setHardness(3.0F).setUnlocalizedName(LocalizationStrings.AMBERORE_NAME);
+        ancientStone  = new BlockAncientStone(ancientStoneID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_NAME);
+        ancientStonebrick  = new BlockAncientStonebrick(ancientStonebrickID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENTSTONEBRICK_NAME);
+        ancientWood  = new BlockAncientWood(ancientWoodID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_NAME);
+        ancientWoodPillar = new BlockAncientWoodPillar(ancientWoodPillarID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENTWOODPILLAR_NAME);
+        ancientGlass = new BlockAncientGlass(ancientGlassID, Material.glass, false).setHardness(0.3F).setUnlocalizedName(LocalizationStrings.ANCIENTGLASS_NAME);
 		Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLog.blockID, 5, 5);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palaePlanks.blockID, 5, 20);
 		Block.fire.setBurnProperties(Fossil.tar.blockID, 500, 1);
+	    Block.fire.setBurnProperties(Fossil.ancientWood.blockID, 10, 20);
+	    Block.fire.setBurnProperties(Fossil.ancientWoodPillar.blockID, 5, 10);
 		
         
         //Items
@@ -1044,7 +1018,7 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME);
         GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
         GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME);
-        GameRegistry.registerBlock(ferns, LocalizationStrings.FERNS_NAME);
+        GameRegistry.registerBlock(ferns, LocalizationStrings.FERNBLOCK_NAME);
         GameRegistry.registerBlock(drum, LocalizationStrings.DRUM_NAME);
         GameRegistry.registerBlock(feederIdle, LocalizationStrings.FEEDERIDLE_NAME);
         GameRegistry.registerBlock(feederActive, LocalizationStrings.FEEDERACTIVE_NAME);
@@ -1063,6 +1037,12 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANICROCK_NAME);
         GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
         GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
+        GameRegistry.registerBlock(amberOre, LocalizationStrings.AMBERORE_NAME);
+        GameRegistry.registerBlock(ancientStone, LocalizationStrings.ANCIENTSTONE_NAME);
+        GameRegistry.registerBlock(ancientStonebrick, LocalizationStrings.ANCIENTSTONEBRICK_NAME);
+        GameRegistry.registerBlock(ancientWood, LocalizationStrings.ANCIENTWOOD_NAME);
+        GameRegistry.registerBlock(ancientWoodPillar, LocalizationStrings.ANCIENTWOODPILLAR_NAME);
+        GameRegistry.registerBlock(ancientGlass, LocalizationStrings.ANCIENTGLASS_NAME);
         
 //        LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palae SingleSlab");
         
@@ -1412,7 +1392,7 @@ public class Fossil implements IPacketHandler
 		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCKANALYZERIDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
-		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.FEEDERIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.TFEEDERIDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCKTIMEMACHINE_NAME);
 		
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
