@@ -15,6 +15,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.util.List;
 import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;

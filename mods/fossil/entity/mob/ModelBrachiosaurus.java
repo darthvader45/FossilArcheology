@@ -20,6 +20,7 @@ public class ModelBrachiosaurus extends ModelDinosaurs
     ModelRenderer Lower_Neck;
     ModelRenderer Lower_Neck1;
     ModelRenderer Body;
+    ModelRenderer Body2;
     ModelRenderer Lower_Body;
     ModelRenderer Front_ThighRight;
     ModelRenderer Front_ThighLeft;
@@ -117,10 +118,16 @@ public class ModelBrachiosaurus extends ModelDinosaurs
         this.Lower_Neck1.mirror = true;
         
         this.Body = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 32);
-        this.Body.addBox(-4.0F, 0.0F, 0.0F, 8, 7, 8);
+        this.Body.addBox(-4.0F, 0.0F, 0.0F, 8, 8, 6);
         this.Body.setRotationPoint(0.0F, 9.0F, -3.0F);
         this.setRotation(this.Body, -0.0F, 0.0F, 0.0F);
         this.Body.mirror = true;
+        
+        this.Body2 = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 32);
+        this.Body2.addBox(-4.0F, 0.0F, 0.0F, 8, 8, 2);
+        this.Body2.setRotationPoint(0.0F, 0.0F, 6.0F);
+        this.setRotation(this.Body2, -0.0F, 0.0F, 0.0F);
+        this.Body2.mirror = true;
 
         this.Lower_Body = (new ModelRenderer(this, 28, 0)).setTextureSize(64, 32);
         this.Lower_Body.addBox(-3.5F, 0.0F, 3.0F, 7, 6, 5);
@@ -156,6 +163,7 @@ public class ModelBrachiosaurus extends ModelDinosaurs
         this.Tail3.mirror = true;
         
         Body.addChild(Lower_Body);
+        Body.addChild(Body2);
         Body.addChild(Lower_Neck1);
         Lower_Body.addChild(Tail);
         Tail.addChild(Tail1);

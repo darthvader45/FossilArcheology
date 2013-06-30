@@ -38,6 +38,7 @@ public class LocalizationStrings {
     public static final String ANCIENTWOOD_NAME = "ancientWood";
     public static final String ANCIENTWOODPILLAR_NAME = "ancientWoodPillar";
     public static final String ANCIENTGLASS_NAME = "ancientGlass";
+    public static final String ANCIENTWOODPLATE_NAME = "ancientWoodPlate";
     
     
     public static final String BIO_FOSSIL_NAME = "bioFossil";
@@ -92,7 +93,6 @@ public class LocalizationStrings {
     public static final String BONEROD_NAME = "boneRod";
     public static final String BONESWORD_NAME = "boneSword";
     public static final String POWDERYSTRING_NAME = "powderyString";
-    public static final String ANCIENTWOODPLATE_NAME = "ancientWoodPlate";
     public static final String ANIMALCOIN_NAME = "animalCoin";
     public static final String DINOCOIN_NAME = "dinoCoin";
     
@@ -198,8 +198,9 @@ public class LocalizationStrings {
     public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
     public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
     
-    public static final String STATUS_GEM_ERROR_YOUNG = "status.gemErrorYoung";  
-    public static final String STATUS_GEM_ERROR_HEALTH = "status.gemErrrorHealth";   
+    public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";  
+    public static final String STATUS_GEM_ERROR_HEALTH = "status.GemErrorHealth";
+    public static final String STATUS_GEM_ERROR_TAMED = "status.GemErrorTamed";
     
     public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";  
     

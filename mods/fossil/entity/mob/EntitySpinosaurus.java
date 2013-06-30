@@ -1,6 +1,7 @@
 package mods.fossil.entity.mob;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,11 +18,13 @@ import mods.fossil.fossilAI.DinoAIGrowup;
 import mods.fossil.fossilAI.DinoAIStarvation;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
+import mods.fossil.fossilAI.WaterDinoAISwimming;
 import mods.fossil.fossilEnums.EnumDinoFoodItem;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
+import mods.fossil.fossilInterface.IWaterDino;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -31,6 +34,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
@@ -45,8 +49,9 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
-public class EntitySpinosaurus extends EntityDinosaur
+public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 {
     public final int Areas = 15;
     //public final float HuntLimit = (float)this.getHungerLimit() * 0.8F;
@@ -71,7 +76,9 @@ public class EntitySpinosaurus extends EntityDinosaur
         //this.moveSpeed = 0.3F;
         //this.health = 10;
         //this.experienceValue=20;
-        
+        this.HitboxXfactor=1.4F;
+        this.HitboxYfactor=1.4F;
+        this.HitboxZfactor=1.4F;
         /*this.Width0=0.7F;
         this.WidthInc=0.07F;
         this.Length0=0.8F;
@@ -90,8 +97,11 @@ public class EntitySpinosaurus extends EntityDinosaur
         //this.AgingTicks=;
         this.MaxHunger=500;
         //this.Hungrylevel=;*/
+        
         this.updateSize();
         
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(1, new EntityAISwimming(this));
         //this.attackStrength = 4 + this.getDinoAge();
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8, 23));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
@@ -188,15 +198,6 @@ public class EntitySpinosaurus extends EntityDinosaur
     public boolean getCanSpawnHere()
     {
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
-    }
-
-    /**
-     * Checks if this entity is inside water (if inWater field is true as a result of handleWaterMovement() returning
-     * true)
-     */
-    public boolean isInWater()
-    {
-        return this.onGround ? false : super.isInWater();
     }
 
     /**
@@ -460,8 +461,8 @@ public class EntitySpinosaurus extends EntityDinosaur
 		        }
                 return true;
             }
-        	if(var2.itemID == Fossil.chickenEss.itemID)
-        		return true;
+            if(var2.itemID == Fossil.chickenEss.itemID)
+                return true;
          }
         else 
         {
@@ -483,12 +484,6 @@ public class EntitySpinosaurus extends EntityDinosaur
     public boolean CheckSpace()
     {
         return !this.isEntityInsideOpaqueBlock();
-    }
-
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        	this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getDinoHeight() * 1.5D, this.posZ);
     }
 
     private void Flee(Entity var1, int var2)
@@ -565,21 +560,12 @@ public class EntitySpinosaurus extends EntityDinosaur
      */
     protected void jump()
     {
-        if (!this.isInWater())
-        {
-            if (this.riddenByEntity != null)
-            {
-                this.motionY += 0.6299999803304672D;
-            }
-            else
-            {
-                super.jump();
-            }
-        }
-        else if (!this.onGround)
-        {
-            this.motionY -= 0.1D;
-        }
+ //       if (!this.isInWater())
+            this.isAirBorne = true;
+        
+            this.motionY = 0.5;
+            ForgeHooks.onLivingJump(this);
+
     }
 
     public boolean isWeak()
@@ -712,4 +698,9 @@ public class EntitySpinosaurus extends EntityDinosaur
 	{
 		return null;
 	}
+
+    @Override
+    public boolean isOnSurface() {
+        return this.worldObj.isAirBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY + (double)(this.getEyeHeight() / 2.0F)), (int)Math.floor(this.posZ));
+    }
 }

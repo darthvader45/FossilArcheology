@@ -43,6 +43,7 @@
 	<entry key="tile.ancientWood.name">Ancient Wood</entry>
 	<entry key="tile.ancientWoodPillar.name">Ancient Wood Pillar</entry>
 	<entry key="tile.ancientGlass.name">Ancient Glass</entry>
+	<entry key="tile.ancientWoodPlate.name">Ancient Wooden Plate</entry>
 <!-- Items -->
 	<entry key="item.bioFossil.name">Bio-Fossil</entry>
 	<entry key="item.relicScrap.name">Relic Scrap</entry>
@@ -94,7 +95,6 @@
 	<entry key="boneRod">Bone Rod</entry>
 	<entry key="boneSword">Bone Sword</entry>
 	<entry key="powderyString">Powdery String</entry>
-	<entry key="ancientWoodPlate">Ancient Wooden Plate</entry>
 	<entry key="animalCoin">Animal Coin</entry>
 	<entry key="dinoCoin">Dinosaur Coin</entry>
 <!-- Dino Meat -->
@@ -189,6 +189,7 @@
 	<entry key="status.Nervous"> too nervous to hunt itself.</entry>
 	<entry key="status.GemErrorYoung">This T-Rex is still too young.</entry>
 	<entry key="status.GemErrorHealth">The scarab cannot afford such strong life energy.</entry>
+    <entry key="status.GemErrorHealth">This T-Rex has already been tamed.</entry>
 <!-- Dinosaur names. 11 characters MAX -->
 	<entry key="Dino.Triceratops">Triceratops</entry>
 	<entry key="Dino.Velociraptor">Velociraptor</entry>
