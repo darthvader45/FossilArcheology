@@ -8,9 +8,8 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import net.minecraftforge.common.IArmorTextureProvider;
 
-public class ItemSkullHelmet extends ItemArmor implements IArmorTextureProvider
+public class ItemSkullHelmet extends ItemArmor
 {
 	public ItemSkullHelmet(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) 
 	{		

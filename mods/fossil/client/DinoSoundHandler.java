@@ -17,8 +17,8 @@ import net.minecraftforge.event.ForgeSubscribe;
  */
 public class DinoSoundHandler {
 
-    private static final String SOUND_RESOURCE_LOCATION = "mods/fossil/Sounds/";
-    private static final String SOUND_PREFIX = "mods.fossil.Sounds.";
+    private static final String SOUND_RESOURCE_LOCATION = "sounds/";
+    private static final String SOUND_PREFIX = "sounds.";
 
     public static String[] soundFiles = {
         
@@ -134,7 +134,7 @@ public class DinoSoundHandler {
         for (String soundFile : soundFiles) {
             // Try to add the custom sound file to the pool of sounds
             try {
-                event.manager.soundPoolSounds.addSound(soundFile, this.getClass().getResource("/" + soundFile));
+                event.manager.soundPoolSounds.addSound(soundFile);
             }
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e) {

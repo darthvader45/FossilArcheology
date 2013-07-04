@@ -3,6 +3,7 @@ package mods.fossil.blocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
@@ -17,6 +18,10 @@ public class BlockSarracenia extends BlockFlower
     {
         super(var1, Material.grass);
         this.setTickRandomly(true);
+        this.setUnlocalizedName(LocalizationStrings.SARRACINA_NAME);
+        this.setCreativeTab(Fossil.tabFBlocks);
+        this.setHardness(0.5F);
+        this.setStepSound(Block.soundGrassFootstep);
     }
 
     public void randomDisplayTick(World world, int i, int j, int k, Random random)

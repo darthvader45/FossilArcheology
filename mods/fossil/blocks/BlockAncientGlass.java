@@ -2,9 +2,12 @@ package mods.fossil.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +19,9 @@ public class BlockAncientGlass extends BlockBreakable
     {
         super(par1, "glass", par2Material, par3);
         this.setCreativeTab(Fossil.tabFBlocks);
+        this.setUnlocalizedName(LocalizationStrings.ANCIENTGLASS_NAME);
+        this.setHardness(0.3F);
+        this.setStepSound(Block.soundGlassFootstep);
     }
 
     /**

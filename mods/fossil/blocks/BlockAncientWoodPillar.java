@@ -3,6 +3,7 @@ package mods.fossil.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -20,6 +21,9 @@ public class BlockAncientWoodPillar extends Block
 	    
         super(par1, Material.wood);
         this.setCreativeTab(Fossil.tabFBlocks);
+        this.setUnlocalizedName(LocalizationStrings.ANCIENTWOODPILLAR_NAME);
+        this.setHardness(2.0F);
+        this.setStepSound(Block.soundWoodFootstep);
     }
     
 	@Override

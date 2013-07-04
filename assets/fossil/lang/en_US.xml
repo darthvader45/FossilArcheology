@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English (en_US) Localization File</comment>
+<!-- NOTE THE SPACE BEFORE/AFTER SOME OF THE LINES. -->
+<!-- Tabs -->
+	<entry key="itemgroup.FArmor">Ancient Armor</entry>
+	<entry key="itemgroup.FBlocks">Ancient Blocks</entry>
+	<entry key="itemgroup.FCombat">Ancient Weapons</entry>
+	<entry key="itemgroup.FFood">Ancient Foods</entry>
+	<entry key="itemgroup.FItems">Ancient Items</entry>
+	<entry key="itemgroup.FMaterial">Ancient Materials</entry>
+	<entry key="itemgroup.FTools">Ancient Tools</entry>
+<!-- Blocks -->
+	<entry key="tile.fossil.name">Fossil</entry>
+	<entry key="tile.skullBlock.name">Skull</entry>
+	<entry key="tile.skullLantern.name">Skull Lantern</entry>
+	<entry key="tile.analyzer.name">Analyzer</entry>
+	<entry key="tile.cultureVat.name">Culture Vat</entry>
+	<entry key="tile.fossilworkbench.name">Archeology Workbench</entry>
+	<entry key="tile.drum.name">Drum</entry>
+	<entry key="tile.feederActive.name">Feeder</entry>
+	<entry key="tile.permafrost.name">Permafrost</entry>
+	<entry key="tile.icedStone.name">Iced Stone</entry>
+	<entry key="tile.timeMachine.name">Time Machine</entry>
+	<entry key="tile.tar.name">Tar</entry>
+	<entry key="tile.palaeorapheLog.name">Palaeoraphe Log</entry>
+	<entry key="tile.palaeorapheLeaves.name">Palaeoraphe Leaves</entry>
+	<entry key="tile.palaeorapheSapling.name">Palaeoraphe Sapling</entry>
+	<entry key="tile.palaeoraphePlanks.name">Palaeoraphe Planks</entry>
+	<entry key="tile.palaeorapheSlab.name">Palaeoraphe Slab</entry>
+	<entry key="tile.palaeorapheSlabDouble.name">Palaeoraphe Double Slab</entry>
+	<entry key="tile.palaeorapheStairs.name">Palaeoraphe Stairs</entry>
+	<entry key="tile.volcanicAsh.name">Volcanic Ash</entry>
+	<entry key="tile.volcanicRock.name">Volcanic Rock</entry>
+	<entry key="tile.volcanicRockHot.name">Hot Volcanic Rock</entry>
+	<entry key="tile.sarracina.name">Sarracina</entry>
+	<entry key="tile.fernBlock.name">Ancient Fern</entry>
+	<entry key="tile.volcanicBrick.name">Volcanic Brick</entry>
+	<entry key="tile.amberOre.name">Amber Ore</entry>
+	<entry key="tile.ancientStone.name">Ancient Stone</entry>
+	<entry key="tile.ancientStonebrick.name">Ancient Stone Brick</entry>
+	<entry key="tile.ancientWood.name">Ancient Wood</entry>
+	<entry key="tile.ancientWoodPillar.name">Ancient Wood Pillar</entry>
+	<entry key="tile.ancientGlass.name">Ancient Glass</entry>
+	<entry key="tile.ancientWoodPlate.name">Ancient Wooden Plate</entry>
+<!-- Items -->
+	<entry key="item.bioFossil.name">Bio-Fossil</entry>
+	<entry key="item.relicScrap.name">Relic Scrap</entry>
+	<entry key="item.stoneTablet.name">Stone Tablet</entry>
+	<entry key="item.brokenAncientSword.name">Broken Ancient Sword</entry>
+	<entry key="item.ancientSword.name">Ancient Sword</entry>
+	<entry key="item.fernSeeds.name">Fern Seeds</entry>
+	<entry key="item.brokenAncientHelmet.name">Broken Ancient Helmet</entry>
+	<entry key="item.ancientHelmet.name">Ancient Helmet</entry>
+	<entry key="item.skullStick.name">Skull Stick</entry>
+	<entry key="item.scarabGem.name">Scarab Gem</entry>
+	<entry key="item.scarabAxe.name">Scarab Axe</entry>
+	<entry key="item.scarabPickAxe.name">Scarab PickAxe</entry>
+	<entry key="item.scarabSword.name">Scarab Sword</entry>
+	<entry key="item.scarabHoe.name">Scarab Hoe</entry>
+	<entry key="item.scarabShovel.name">Scarab Shovel</entry>
+	<entry key="item.dinoPedia.name">DinoPedia</entry>
+	<entry key="item.tooth.name">T-Rex Tooth</entry>
+	<entry key="item.dagger.name">Tooth Dagger</entry>
+	<entry key="item.rawChickenSoup.name">Raw Chicken Soup</entry>
+	<entry key="item.cookedChickenSoup.name">Cooked Chicken Soup</entry>
+	<entry key="item.essenceofChicken.name">Essence of Chicken</entry>
+	<entry key="item.emptyShell.name">Empty Shell</entry>
+	<entry key="item.sJL.name">Sio-Chiu-Le</entry>
+	<entry key="item.icedMeat.name">Frozen Meat</entry>
+	<entry key="item.woodJavelin.name">Wooden Javelin</entry>
+	<entry key="item.stoneJavelin.name">Stone Javelin</entry>
+	<entry key="item.ironJavelin.name">Iron Javelin</entry>
+	<entry key="item.goldJavelin.name">Gold Javelin</entry>
+	<entry key="item.diamondJavelin.name">Diamond Javelin</entry>
+	<entry key="item.ancientJavelin.name">Ancient Javelin</entry>
+	<entry key="item.whip.name">Whip</entry>
+	<entry key="item.magicConch.name">Magic Conch</entry>
+	<entry key="item.legBone.name">Leg Bone</entry>
+	<entry key="item.claw.name">Claw</entry>
+	<entry key="item.foot.name">Foot</entry>
+	<entry key="item.skull.name">Skull</entry>
+	<entry key="item.plantFossil.name">Plant Fossil</entry>
+	<entry key="item.skullHelmet.name">Skull Helmet</entry>
+	<entry key="item.ribCage.name">Rib Cage</entry>
+	<entry key="item.shinGuards.name">Shin Guards</entry>
+	<entry key="item.feet.name">Feet</entry>
+	<entry key="amber">Amber</entry>
+	<entry key="ancientVase">Ancient Vase</entry>
+	<entry key="ancientVaseBroken">Ancient Broken Vase</entry>
+	<entry key="boneArrow">Bone Arrow</entry>
+	<entry key="boneBow">Bone Bow</entry>
+	<entry key="boneGlue">Bone Glue</entry>
+	<entry key="boneRod">Bone Rod</entry>
+	<entry key="boneSword">Bone Sword</entry>
+	<entry key="powderyString">Powdery String</entry>
+	<entry key="animalCoin">Animal Coin</entry>
+	<entry key="dinoCoin">Dinosaur Coin</entry>
+<!-- Dino Meat -->
+	<entry key="item.dinoSteak.name">Dino Steak</entry>
+	<entry key="item.rawTriceratops.name">Triceratops Meat</entry>
+	<entry key="item.rawVelociraptor.name">Velociraptor Meat</entry>
+	<entry key="item.rawTRex.name">TRex Meat</entry>
+	<entry key="item.rawPterosaur.name">Pterosaur Meat</entry>
+	<entry key="item.rawNautilus.name">Nautilus Meat</entry>
+	<entry key="item.rawPlesiosaur.name">Plesiosaur Meat</entry>
+	<entry key="item.rawMosasaurus.name">Mosasaurus Meat</entry>
+	<entry key="item.rawStegosaurus.name">Stegosaurus Meat</entry>
+	<entry key="item.rawDilophosaurus.name">Dilophosaurus Meat</entry>
+	<entry key="item.rawBrachiosaurus.name">Brachiosaurus Meat</entry>
+	<entry key="item.rawSpinosaurus.name">Spinosaurus Meat</entry>
+	<entry key="item.rawCompsognathus.name">Compsognathus Meat</entry>
+<!-- Eggs -->
+	<entry key="item.eggTriceratops.name">Triceratops Egg</entry>
+	<entry key="item.eggVelociraptor.name">Velociraptor Egg</entry>
+	<entry key="item.eggTRex.name">TRex Egg</entry>
+	<entry key="item.eggPterosaur.name">Pterosaur Egg</entry>
+	<entry key="item.livingNautilus.name">Living Nautilus</entry>
+	<entry key="item.eggPlesiosaur.name">Plesiosaur Egg</entry>
+	<entry key="item.eggMosasaurus.name">Mosasaurus Egg</entry>
+	<entry key="item.eggStegosaurus.name">Stegosaurus Egg</entry>
+	<entry key="item.eggDilophosaurus.name">Dilophosaurus Egg</entry>
+	<entry key="item.eggBrachiosaurus.name">Brachiosaurus Egg</entry>
+	<entry key="item.eggSpinosaurus.name">Spinosaurus Egg</entry>
+	<entry key="item.eggCompsognathus.name">Compsognathus Egg</entry>
+<!-- DNA -->
+	<entry key="item.dnaTriceratops.name">Triceratops DNA</entry>
+	<entry key="item.dnaVelociraptor.name">Velociraptor DNA</entry>
+	<entry key="item.dnaTRex.name">TRex DNA</entry>
+	<entry key="item.dnaPterosaur.name">Pterosaur DNA</entry>
+	<entry key="item.dnaNautilus.name">Nautilus DNA</entry>
+	<entry key="item.dnaPlesiosaur.name">Plesiosaur DNA</entry>
+	<entry key="item.dnaMosasaurus.name">Mosasaurus DNA</entry>
+	<entry key="item.dnaStegosaurus.name">Stegosaurus DNA</entry>
+	<entry key="item.dnaDilophosaurus.name">Dilophosaurus DNA</entry>
+	<entry key="item.dnaBrachiosaurus.name">Brachiosaurus DNA</entry>
+	<entry key="item.dnaSpinosaurus.name">Spinosaurus DNA</entry>
+	<entry key="item.dnaCompsognathus.name">Compsognathus DNA</entry>
+<!-- DNA -->
+	<entry key="item.dnaPig.name">Pig DNA</entry>
+	<entry key="item.dnaSheep.name">Sheep DNA</entry>
+	<entry key="item.dnaCow.name">Cow DNA</entry>
+	<entry key="item.dnaChicken.name">Chicken DNA</entry>
+	<entry key="item.dnaSmilodon.name">Smilodon DNA</entry>
+	<entry key="item.dnaMammoth.name">Mammoth DNA</entry>
+<!-- Embryos -->
+	<entry key="item.embryoPig.name">Pig Embryo</entry>
+	<entry key="item.embryoSheep.name">Sheep Embryo</entry>
+	<entry key="item.embryoCow.name">Cow Embryo</entry>
+	<entry key="item.embryoChicken.name">Chicken Embryo</entry>
+	<entry key="item.embryoSmilodon.name">Smilodon Embryo</entry>
+	<entry key="item.embryoMammoth.name">Mammoth Embryo</entry>
+<!-- Prefix/Suffix -->
+	<entry key="dnaName.head">DNA of </entry>
+	<entry key="dnaName.tail"></entry>
+	<entry key="embryoName.head">Embryo of </entry>
+	<entry key="embryoName.tail"></entry>
+	<entry key="meatName.head">Meat of </entry>
+	<entry key="meatName.tail"></entry>
+	<entry key="mGCName.head">Magic Conch:</entry>
+	<entry key="mGCName.tail"></entry>
+	<entry key="dEggName.head">Egg of </entry>
+	<entry key="dEggName.tail"></entry>
+<!-- Achievements -->
+	<entry key="achieve.pigBossOnEarth.Name">You broke the rules!</entry>
+	<entry key="achieve.pigBossOnEarth.Desc">Summoned Anu.</entry>
+<!-- Orders -->
+	<entry key="order.head">Order:</entry>
+	<entry key="order.Stay">Stay</entry>
+	<entry key="order.Follow">Follow</entry>
+	<entry key="order.FreeMove">Free Move</entry>
+<!-- Dinosaur Statuses -->
+	<entry key="status.Hungry.head">This </entry>
+	<entry key="status.Hungry"> is hungry.</entry>
+	<entry key="status.Starve.head">A </entry>
+	<entry key="status.Starve"> was starved to death.</entry>
+	<entry key="status.LearningChest.head">A </entry>
+	<entry key="status.LearningChest"> has learned how to use chests.</entry>
+	<entry key="status.Betrayed.head">This </entry>
+	<entry key="status.Betrayed"> won't trust mankind anymore.</entry>
+	<entry key="status.NoSpace.Head">This </entry>
+	<entry key="status.NoSpace"> doesn't have enough space to grow.</entry>
+	<entry key="status.StarveEsc"> has escaped because of starvation.</entry>
+	<entry key="status.SJLBite"> bit the Siu-Jiu-Le and ran away.</entry>
+	<entry key="status.ChewTime"> needs time to chew.</entry>
+	<entry key="status.Full"> is full.</entry>
+	<entry key="status.Nervous.Head">You made the little </entry>
+	<entry key="status.Nervous"> too nervous to hunt itself.</entry>
+	<entry key="status.GemErrorYoung">This T-Rex is still too young.</entry>
+	<entry key="status.GemErrorHealth">The scarab cannot afford such strong life energy.</entry>
+    <entry key="status.GemErrorHealth">This T-Rex has already been tamed.</entry>
+<!-- Dinosaur names. 11 characters MAX -->
+	<entry key="Dino.Triceratops">Triceratops</entry>
+	<entry key="Dino.Velociraptor">Velociraptor</entry>
+	<entry key="Dino.TRex">Tyrannosaurus</entry>
+	<entry key="Dino.Pterosaur">Pterosaur</entry>
+	<entry key="Dino.Plesiosaur">Plesiosaur</entry>
+	<entry key="Dino.Mosasaurus">Mosasaurus</entry>
+	<entry key="Dino.Stegosaurus">Stegosaurus</entry>
+	<entry key="Dino.Dilophosaurus">Dilophosaurus</entry>
+	<entry key="Dino.Brachiosaurus">Brachiosaurus</entry>
+	<entry key="Dino.Nautilus">Nautilus</entry>
+	<entry key="Dino.Spinosaurus">Spinosaurus</entry>
+	<entry key="Dino.Compsognathus">Compsognathus</entry>
+<!-- Animal names. 11 characters MAX -->
+	<entry key="animal.mammoth">Mammoth</entry>
+	<entry key="animal.smilodon">Smilodon</entry>
+    <entry key= "animal.pregnant.cow">Pregnant Cow</entry>
+    <entry key= "animal.pregnant.pig">Pregnant Pig</entry>   
+    <entry key= "animal.pregnant.sheep">Pregnant Sheep</entry>  
+<!-- Pedia text. Dino messages. 11 characters MAX -->
+	<entry key="pedia.text.owner">Owner:</entry>
+	<entry key="pedia.text.chest">* Chests</entry>
+	<entry key="pedia.text.caution">!Dangerous!</entry>
+	<entry key="pedia.text.rideable">* Rideable</entry>
+	<entry key="pedia.text.weak">Almost Dead</entry>
+	<entry key="pedia.text.fly">* Able to fly</entry>
+<!-- Pedia text. 11 characters MAX -->
+	<entry key="pedia.eggWet">Wet</entry>
+	<entry key="pedia.eggDry">Dry</entry>
+	<entry key="pedia.eggCold">Cold</entry>
+	<entry key="pedia.eggWarm">Warm</entry>
+	<entry key="pedia.eggStatus">Status</entry>
+	<entry key="pedia.eggProgress">Progress</entry>
+	<entry key="pedia.eggDay">Day</entry>
+	<entry key="pedia.eggDays">Days</entry>
+<!-- Pedia embryo text. 11 characters MAX -->
+	<entry key="pedia.embryo.inside">Embryo in:</entry>
+	<entry key="pedia.embryo.growing">Progress:</entry>
+	<entry key="pedia.embryo.Pig">Pig</entry>
+	<entry key="pedia.embryo.Sheep">Sheep</entry>
+	<entry key="pedia.embryo.Cow">Cow</entry>
+	<entry key="pedia.embryo.Chicken">Chicken</entry>
+	<entry key="pedia.embryo.Smilodon">Smilodon</entry>
+	<entry key="pedia.embryo.Mammoth">Mammoth</entry>
+<!-- Anu dialogue -->
+	<entry key="anuSpeaker.self">Anu: </entry>
+	<entry key="anuSpeaker.hello">Kneel before me, resistance is futile.</entry>
+	<entry key="anuSpeaker.bareHand">Bare hands... Stupid, but brave.</entry>
+	<entry key="anuSpeaker.draw">DRAW YOUR SWORD.</entry>
+	<entry key="anuSpeaker.coward">Bow using coward! Stop hiding!</entry>
+	<entry key="anuSpeaker.leartHere">Look what I learned from here!</entry>
+	<entry key="anuSpeaker.leartThere">Look what I learned from there!</entry>
+	<entry key="anuSpeaker.unknownRanged">So is that your weapon?</entry>
+	<entry key="anuSpeaker.unknownMelee">Ha! Stop playing!</entry>
+	<entry key="anuSpeaker.summon">Servants, your Master calls.</entry>
+	<entry key="anuSpeaker.trans">Brutes, wake up your wisdom.</entry>
+	<entry key="anuSpeaker.qi">Qi-shock!</entry>
+	<entry key="anuSpeaker.fireRain">Lets rain some fire!</entry>
+<!-- Anu minion dialogue -->
+	<entry key="fpzSpeaker.self">Pig Zombies: </entry>
+	<entry key="fpzSpeaker.selfKill">We can't live without leader!</entry>
+	<entry key="fpzSpeaker.lifeFor.head">My life for </entry>
+	<entry key="fpzSpeaker.lifeFor.tail">!</entry>
+	<entry key="fpzSpeaker.anuSommon">All hail Anu!!</entry>
+<!-- Dinoegg chat strings -->	
+	<entry key="dinoegg.hatched">A dinosaur egg has hatched!</entry>
+	<entry key="dinoegg.noSpace">This egg cannot spawn here.</entry>
+<!-- Hatching text -->		
+	<entry key="dinoegg.head">An egg of </entry>
+	<entry key="dinoegg.dry"> died because it was too dry.</entry>	
+	<entry key="dinoegg.cold"> died because it was too cold.</entry>	
+<!-- Cultivator -->
+	<entry key="cultivate.outBreak">Warning! Cultivating failed!</entry>
+<!-- Drum -->
+	<entry key="drum.trigger">Drum Order: </entry>
+	<entry key="drum.ordering">Ordering </entry>
+	<entry key="drum.tRex1">Ordering T-Rexes to breakfast.</entry>
+	<entry key="drum.tRex2">Ordering T-Rexes to lunch.</entry>
+	<entry key="drum.tRex3">Ordering T-Rexes to dinner.</entry>
+<!-- Nice Names -->
+    <entry key= "mob.bones">Bones</entry>
+    <entry key= "mob.fpz">Friendly Pig Zombies</entry>
+    <entry key= "mob.failuresaurus">Failursaurus</entry>
+    <entry key= "boss.Anu">Anu</entry>
+</properties>

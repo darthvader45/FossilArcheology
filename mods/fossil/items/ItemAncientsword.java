@@ -31,7 +31,7 @@ public class ItemAncientsword extends ItemSword
     /**
      * Returns the damage against a given entity.
      */
-    public int getDamageVsEntity(Entity var1)
+    public float getDamageVsEntity(Entity var1)
     {
         if (var1 != null && var1.worldObj.difficultySetting > 0 && (var1 instanceof EntityPig || var1 instanceof EntityPigZombie))
         {
@@ -49,7 +49,7 @@ public class ItemAncientsword extends ItemSword
         }
         if(var1!=null && (new Random()).nextInt(100)<15)
         	var1.worldObj.addWeatherEffect(new EntityMLighting(var1.worldObj, var1.posX, var1.posY, var1.posZ));
-        return 4 + EnumToolMaterial.IRON.getDamageVsEntity() * 2;
+        return 4.0F + EnumToolMaterial.IRON.getDamageVsEntity() * 2.0F;
     }
 
     private EntityPlayer SearchUser(Entity var1)

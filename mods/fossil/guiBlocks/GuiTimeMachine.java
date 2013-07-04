@@ -2,8 +2,10 @@ package mods.fossil.guiBlocks;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiTimeMachine extends GuiContainer
@@ -44,7 +46,7 @@ public class GuiTimeMachine extends GuiContainer
     {
         boolean var4 = true;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/mods/fossil/textures/gui/Timemachine.png");
+        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Timemachine.png"));
         int var6 = (this.width - this.xSize) / 2;
         int var7 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var6, var7, 0, 0, this.xSize, this.ySize);

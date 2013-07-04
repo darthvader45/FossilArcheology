@@ -8,9 +8,8 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import net.minecraftforge.common.IArmorTextureProvider;
 
-public class ItemFemurs extends ItemArmor implements IArmorTextureProvider
+public class ItemFemurs extends ItemArmor
 {
 	public ItemFemurs(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) 
 	{

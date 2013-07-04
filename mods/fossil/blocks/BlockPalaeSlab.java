@@ -5,8 +5,9 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -24,6 +25,11 @@ public class BlockPalaeSlab extends BlockHalfSlab
 		super(par1, par2, Material.wood);
 		setLightOpacity(0);
 		useNeighborBrightness[this.blockID] = true;
+		this.setHardness(1.4F);
+		this.setResistance(7.5F);
+		this.setStepSound(Block.soundWoodFootstep);
+		this.setUnlocalizedName(LocalizationStrings.PALAESINGLESLAB_NAME);
+		this.setCreativeTab(Fossil.tabFBlocks);
 	}
 	
 	@Override
@@ -63,7 +69,7 @@ public class BlockPalaeSlab extends BlockHalfSlab
 	      par1 = 0;
 	    }
 
-	    return super.getUnlocalizedName2() + "." + woodType[par1];
+	    return super.getUnlocalizedName() + "." + woodType[par1];
 	  }
 
 	  public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)

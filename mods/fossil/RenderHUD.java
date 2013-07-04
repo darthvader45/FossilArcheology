@@ -48,7 +48,7 @@ public class RenderHUD implements ITickHandler
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("%blur%/misc/skullhelmetblur.png"));
+//			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("%blur%/misc/skullhelmetblur.png"));
 			
 			t.startDrawingQuads();
 			t.addVertexWithUV(0.0D, (double)height, 90.0D, 0.0D, 1.0D);
