@@ -3,8 +3,10 @@ package mods.fossil.entity.mob;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -96,7 +98,6 @@ public class RenderMammoth extends RenderLiving
                     if (var18 == 15)
                     {
                         var17 = (float)var1.ticksExisted + var9;
-                        this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var19 = 0.5F;
                         GL11.glColor4f(var19, var19, var19, 1.0F);

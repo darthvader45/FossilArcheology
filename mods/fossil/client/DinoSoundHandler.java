@@ -2,6 +2,7 @@ package mods.fossil.client;
 
 import java.util.logging.Level;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
@@ -17,8 +18,9 @@ import net.minecraftforge.event.ForgeSubscribe;
  */
 public class DinoSoundHandler {
 
-    private static final String SOUND_RESOURCE_LOCATION = "sounds/";
-    private static final String SOUND_PREFIX = "sounds.";
+    private static final String SOUND_RESOURCE_LOCATION = "";
+//    private static final String SOUND_PREFIX = "sounds.";
+    private static final String SOUND_PREFIX = "";
 
     public static String[] soundFiles = {
         
@@ -134,7 +136,7 @@ public class DinoSoundHandler {
         for (String soundFile : soundFiles) {
             // Try to add the custom sound file to the pool of sounds
             try {
-                event.manager.soundPoolSounds.addSound(soundFile);
+            	Minecraft.getMinecraft().sndManager.addSound("fossil:sounds/drum_s.wav");
             }
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e) {

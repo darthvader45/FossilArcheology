@@ -35,6 +35,7 @@ import mods.fossil.guiBlocks.GuiPedia;
 import mods.fossil.items.ItemAncientEgg;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityBoat;
@@ -87,10 +88,10 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Returns the texture's file path as a String.
      */
-    public String getTexture()
+    public ResourceLocation getTexture()
     {
         int var1 = this.DinoInside.ordinal();
-        return var1 < 4 ? "/mods/fossil/textures/mob/eggTexture" + (var1 + 1) + ".png" : "/mods/fossil/textures/mob/eggTexture" + var1 + ".png";
+        return (ResourceLocation) (var1 < 4 ? new ResourceLocation("fossil:textures/mob/eggTexture" + (var1 + 1) + ".png") : new ResourceLocation("fossil:textures/mob/eggTexture" + var1 + ".png"));
     }
 
     public EntityDinoEgg(World var1)
