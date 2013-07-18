@@ -134,7 +134,7 @@ public class ItemBioFossil extends Item
         float var19 = var14 * var16;
         double var20 = 5.0D;
         Vec3 var22 = var13.addVector((double)var18 * var20, (double)var17 * var20, (double)var19 * var20);
-        MovingObjectPosition var23 = var2.rayTraceBlocks_do(var13, var22, true);
+        MovingObjectPosition var23 = this.getMovingObjectPositionFromPlayer(var2, var3, true);
         if(var23==null)
         	return var1;
         else if(var23.typeOfHit == EnumMovingObjectType.TILE && var2.getBlockMaterial(var23.blockX, var23.blockY, var23.blockZ).isSolid())

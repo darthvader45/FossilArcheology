@@ -3,10 +3,13 @@ package mods.fossil.entity.mob;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderPigBoss extends RenderBiped
 {
+    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/PigBoss.png");
     public RenderPigBoss(ModelBiped var1, float var2)
     {
         super(var1, var2);

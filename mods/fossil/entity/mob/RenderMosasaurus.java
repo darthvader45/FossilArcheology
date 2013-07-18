@@ -3,11 +3,14 @@ package mods.fossil.entity.mob;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderMosasaurus extends RenderLiving
 {
+    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/Mosasaurus.png");
     public RenderMosasaurus(float var1)
     {
         super(new ModelMosasaurus(), var1);
@@ -179,4 +182,10 @@ public class RenderMosasaurus extends RenderLiving
         GL11.glPopMatrix();
         this.passSpecialRender(var1, var2, var4, var6);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

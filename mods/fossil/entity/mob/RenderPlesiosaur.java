@@ -2,9 +2,9 @@ package mods.fossil.entity.mob;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -14,6 +14,8 @@ public class RenderPlesiosaur extends RenderLiving
     public final int WaveFreq = 35;
     public final float WaveAngle = 0.17453292F;
     public boolean WaveRight = true;
+    
+    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/Plesiosaur.png");
 
     public RenderPlesiosaur(float var1)
     {
@@ -236,4 +238,10 @@ public class RenderPlesiosaur extends RenderLiving
         GL11.glPopMatrix();
         this.passSpecialRender(var1, var2, var4, var6);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

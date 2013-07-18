@@ -4,10 +4,13 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderNautilus extends RenderLiving
 {
+    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/nautilus.png");
     public RenderNautilus(ModelBase var1, float var2)
     {
         super(var1, var2);
@@ -67,4 +70,10 @@ public class RenderNautilus extends RenderLiving
     {
         this.renderLivingSquid((EntityNautilus)var1, var2, var4, var6, var8, var9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

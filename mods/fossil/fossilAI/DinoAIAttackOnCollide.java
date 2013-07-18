@@ -2,6 +2,7 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.MathHelper;
@@ -11,7 +12,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase
 {
     //World worldObj;
     private final EntityDinosaur attacker;
-    EntityLiving entityTarget;
+    EntityLivingBase entityTarget;
 
     /**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
@@ -44,7 +45,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLiving var1 = this.attacker.getAttackTarget();
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
 
         if (var1 == null)
         {
@@ -67,8 +68,8 @@ public class DinoAIAttackOnCollide extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        EntityLiving var1 = this.attacker.getAttackTarget();
-        return var1 == null ? false : (!this.entityTarget.isEntityAlive() ? false : (!this.field_75437_f ? !this.attacker.getNavigator().noPath() : this.attacker.isWithinHomeDistance(MathHelper.floor_double(this.entityTarget.posX), MathHelper.floor_double(this.entityTarget.posY), MathHelper.floor_double(this.entityTarget.posZ))));
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
+        return var1 == null ? false : (!this.entityTarget.isEntityAlive() ? false : (!this.field_75437_f ? !this.attacker.getNavigator().noPath() : this.attacker.func_110176_b(MathHelper.floor_double(var1.posX), MathHelper.floor_double(this.entityTarget.posY), MathHelper.floor_double(this.entityTarget.posZ))));
     }
 
     /**

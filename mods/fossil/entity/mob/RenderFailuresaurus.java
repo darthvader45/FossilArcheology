@@ -4,9 +4,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderFailuresaurus extends RenderLiving
 {
+    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/failuresaurus.png");
     public RenderFailuresaurus(ModelBase var1, float var2)
     {
         super(var1, var2);
@@ -32,4 +34,10 @@ public class RenderFailuresaurus extends RenderLiving
     {
         this.renderCow((EntityFailuresaurus)var1, var2, var4, var6, var8, var9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

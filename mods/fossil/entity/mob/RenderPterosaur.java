@@ -1,6 +1,5 @@
 package mods.fossil.entity.mob;
 
-import mods.fossil.entity.mob.ModelPterosaurFlying;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;

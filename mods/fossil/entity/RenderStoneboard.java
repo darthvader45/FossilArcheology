@@ -3,12 +3,15 @@ package mods.fossil.entity;
 import java.util.Random;
 
 
+
 import mods.fossil.fossilEnums.EnumStoneboard;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -142,4 +145,10 @@ public class RenderStoneboard extends Render
     {
         this.func_158_a((EntityStoneboard)var1, var2, var4, var6, var8, var9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
