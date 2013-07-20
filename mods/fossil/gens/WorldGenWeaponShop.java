@@ -31,7 +31,7 @@ public class WorldGenWeaponShop implements IWorldGenerator
     	
     	if(biome instanceof BiomeGenDesert)// then add ||BiomeGenXYZ if you want more.
    	 	{
-    		if(random.nextInt(1024) == 0) //adjust the number in nextInt(). Higher values == rarer.
+    		if(random.nextInt(1000) == 0) //adjust the number in nextInt(). Higher values == rarer.
 			{
 				int Xcoord1 = blockX + random.nextInt(16);
 				int Ycoord1 = random.nextInt(5);
