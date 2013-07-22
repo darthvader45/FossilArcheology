@@ -44,6 +44,7 @@
 	<entry key="tile.ancientWoodPillar.name">Ancient Wood Pillar</entry>
 	<entry key="tile.ancientGlass.name">Ancient Glass</entry>
 	<entry key="tile.ancientWoodPlate.name">Ancient Wooden Plate</entry>
+	<entry key="tile.ancientWoodStairs.name">Ancient Wooden Stairs</entry>
 <!-- Items -->
 	<entry key="item.bioFossil.name">Bio-Fossil</entry>
 	<entry key="item.relicScrap.name">Relic Scrap</entry>
@@ -114,9 +115,9 @@
 <!-- Eggs -->
 	<entry key="item.eggTriceratops.name">Triceratops Egg</entry>
 	<entry key="item.eggVelociraptor.name">Velociraptor Egg</entry>
-	<entry key="item.eggTRex.name">TRex Egg</entry>
+	<entry key="item.eggTRex.name">T-Rex Egg</entry>
 	<entry key="item.eggPterosaur.name">Pterosaur Egg</entry>
-	<entry key="item.livingNautilus.name">Living Nautilus</entry>
+	<entry key="item.eggNautilus.name">Living Nautilus</entry>
 	<entry key="item.eggPlesiosaur.name">Plesiosaur Egg</entry>
 	<entry key="item.eggMosasaurus.name">Mosasaurus Egg</entry>
 	<entry key="item.eggStegosaurus.name">Stegosaurus Egg</entry>
@@ -166,7 +167,7 @@
 	<entry key="achieve.pigBossOnEarth.Name">You broke the rules!</entry>
 	<entry key="achieve.pigBossOnEarth.Desc">Summoned Anu.</entry>
 <!-- Orders -->
-	<entry key="order.head">Order:</entry>
+	<entry key="order.head">Order: </entry>
 	<entry key="order.Stay">Stay</entry>
 	<entry key="order.Follow">Follow</entry>
 	<entry key="order.FreeMove">Free Move</entry>
@@ -260,7 +261,7 @@
 <!-- Hatching text -->		
 	<entry key="dinoegg.head">An egg of </entry>
 	<entry key="dinoegg.dry"> died because it was too dry.</entry>	
-	<entry key="dinoegg.cold"> died because it was too cold.</entry>	
+	<entry key="dinoegg.cold"> died because it was too cold.</entry>
 <!-- Cultivator -->
 	<entry key="cultivate.outBreak">Warning! Cultivating failed!</entry>
 <!-- Drum -->

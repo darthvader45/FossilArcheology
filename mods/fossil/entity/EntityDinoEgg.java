@@ -473,12 +473,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 	            }
 	            else
 	            {
-	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_COLD);
+	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_WET);
 	            }
 	
 	            String var1 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_HEAD);
 	            if(FMLCommonHandler.instance().getSide().isServer())
-	            	Fossil.ShowMessage(var1 + Fossil.GetLangTextByKey("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
+	            	Fossil.ShowMessage(var1 + Localizations.getLocalizedString("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
         	}
         	this.setDead();
         }

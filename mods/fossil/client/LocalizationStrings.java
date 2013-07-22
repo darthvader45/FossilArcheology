@@ -24,6 +24,7 @@ public class LocalizationStrings {
     public static final String PALAEPLANKS_NAME = "palaeoraphePlanks";
     public static final String PALAESINGLESLAB_NAME = "palaeorapheSlab";
     public static final String PALAEDOUBLESLAB_NAME = "palaeorapheSlabDouble";
+
     public static final String PALAESTAIRS_NAME = "palaeorapheStairs";
     public static final String VOLCANICASH_NAME = "volcanicAsh";
     public static final String VOLCANICROCK_NAME = "volcanicRock";
@@ -39,7 +40,9 @@ public class LocalizationStrings {
     public static final String ANCIENTWOODPILLAR_NAME = "ancientWoodPillar";
     public static final String ANCIENTGLASS_NAME = "ancientGlass";
     public static final String ANCIENTWOODPLATE_NAME = "ancientWoodPlate";
-    
+    public static final String ANCIENTWOODSTAIRS_NAME = "ancientWoodStairs";    
+    public static final String ANCIENTWOOD_SINGLESLAB_NAME = "ancientWoodSlab";
+    public static final String ANCIENTWOOD_DOUBLESLAB_NAME = "ancientWoodSlabDouble";
     
     public static final String BIO_FOSSIL_NAME = "bioFossil";
     public static final String RELIC_NAME = "relicScrap";
@@ -170,6 +173,8 @@ public class LocalizationStrings {
     public static final String DINOEGG_HEAD = "dinoegg.head";
     public static final String DINOEGG_DRY = "dinoegg.dry";
     public static final String DINOEGG_COLD = "dinoegg.cold";
+    public static final String DINOEGG_WET = "dinoegg.wet";
+    public static final String DINOEGG_WARM = "dinoegg.warm";
     
     public static final String PEDIA_TEXT_OWNER = "pedia.text.owner";
     public static final String PEDIA_TEXT_CHEST = "pedia.text.chest";
