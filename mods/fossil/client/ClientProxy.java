@@ -2,7 +2,6 @@ package mods.fossil.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import mods.fossil.CommonProxy;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityDinoEgg;

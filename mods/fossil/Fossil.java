@@ -145,7 +145,7 @@ import cpw.mods.fml.relauncher.Side;
 import mods.fossil.util.FossilBonemealEvent;
 import mods.fossil.util.FossilTradeHandler;
 
-@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 Build 5.1")
+@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 Build 5.2 DEV")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Fossil implements IPacketHandler

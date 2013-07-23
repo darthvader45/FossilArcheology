@@ -7,17 +7,21 @@ import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 public class ItemWhip extends ItemCarrotOnAStick
 {
     public ItemWhip(int var1)
     {
         super(var1);
-        //this.setIconCoord(1, 4);
+        this.setMaxDamage(100);
+        this.setMaxStackSize(1);
     }
     @SideOnly(Side.CLIENT)
 
@@ -46,21 +50,38 @@ public class ItemWhip extends ItemCarrotOnAStick
     public ItemStack onItemRightClick(ItemStack I, World W, EntityPlayer P)
     {
     	if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
-        {//
+        {
     		EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
 
-            if (D.getRidingHandler().isControlledByPlayer() && I.getMaxDamage() - I.getItemDamage() >= 5)
+//            if (D.getRidingHandler().isControlledByPlayer() && I.getMaxDamage() - I.getItemDamage() >= 5)
+    		 if (D.getRidingHandler().isControlledByPlayer())
             {
+    		     
                 D.getRidingHandler().boostSpeed();
                 //System.out.println("SPEED BOOSTED!");
                 //System.out.println("Damage before:"+String.valueOf(I.getItemDamage()));
-                I.damageItem(5, P);
+                I.damageItem(1, P);
                 //System.out.println("Damage after:"+String.valueOf(I.getItemDamage()));
                 //I.setItemDamage(I.getItemDamage()+5);
                 //W.playSoundEffect(P.posX, P.posY, P.posZ, "WhipCrack", 0.5F, 1.0F);
+                P.swingItem();
                 P.ridingEntity.playSound(DinoSoundHandler.WhipCrack, 1.0F, 1.0F);
             }
         }
+        else
+        {
+            /*
+            if (!W.isRemote)
+            {
+                W.spawnEntityInWorld(new EntityWhipAttachment(W, P));
+            }
+            */
+
+            P.swingItem();
+            W.playSoundAtEntity(P, DinoSoundHandler.WhipCrack,1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        }
+
+        
         return I;
     }
     

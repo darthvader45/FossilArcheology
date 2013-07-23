@@ -100,7 +100,7 @@ public class EntityNautilus extends EntityWaterMob
         if (var3 <= 3)
         {
             this.dropItem(Fossil.emptyShell.itemID, 1);
-            this.dropItem(EnumDinoType.Nautilus.DropItem.itemID, 1);
+//            this.dropItem(EnumDinoType.Nautilus.DropItem.itemID, 1);
         }
         else
         {
