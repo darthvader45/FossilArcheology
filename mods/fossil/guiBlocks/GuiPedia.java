@@ -1,11 +1,11 @@
 package mods.fossil.guiBlocks;
 
 import cpw.mods.fml.relauncher.Side;
-
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -155,6 +156,7 @@ public class GuiPedia extends GuiContainer
     	if(Fossil.ToPedia instanceof EntityPregnantSheep)((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityMammoth)((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntitySmilodon)((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
+        if(Fossil.ToPedia instanceof EntityDodo)((EntityDodo)Fossil.ToPedia).ShowPedia(this);
     }
 
     /**

@@ -355,6 +355,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     	if(var1.itemID==Fossil.dnaPig.itemID)return new ItemStack(Fossil.embryoPig, 1);
     	if(var1.itemID==Fossil.dnaSmilodon.itemID)return new ItemStack(Fossil.embryoSmilodon, 1);
     	if(var1.itemID==Fossil.dnaMammoth.itemID)return new ItemStack(Fossil.embryoMammoth, 1);
+        if(var1.itemID==Fossil.dnaDodo.itemID)return new ItemStack(Fossil.embryoDodo, 1);
     	if(EnumDinoType.getEgg(var1.getItem())!=null)return new ItemStack(EnumDinoType.getEgg(var1.getItem()),1);//converts dino dna to dino egg
     	return null;
     }

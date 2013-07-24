@@ -145,6 +145,7 @@
 	<entry key="item.dnaChicken.name">Chicken DNA</entry>
 	<entry key="item.dnaSmilodon.name">Smilodon DNA</entry>
 	<entry key="item.dnaMammoth.name">Mammoth DNA</entry>
+	<entry key="item.dnaDodo.name">Dodo DNA</entry>
 <!-- Embryos -->
 	<entry key="item.embryoPig.name">Pig Embryo</entry>
 	<entry key="item.embryoSheep.name">Sheep Embryo</entry>
@@ -152,6 +153,7 @@
 	<entry key="item.embryoChicken.name">Chicken Embryo</entry>
 	<entry key="item.embryoSmilodon.name">Smilodon Embryo</entry>
 	<entry key="item.embryoMammoth.name">Mammoth Embryo</entry>
+	<entry key="item.embryoDodo.name">Dodo Embryo</entry>
 <!-- Prefix/Suffix -->
 	<entry key="dnaName.head">DNA of </entry>
 	<entry key="dnaName.tail"></entry>
@@ -207,6 +209,7 @@
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mammoth</entry>
 	<entry key="animal.smilodon">Smilodon</entry>
+	<entry key="animal.dodo">Dodo</entry>
     <entry key= "animal.pregnant.cow">Pregnant Cow</entry>
     <entry key= "animal.pregnant.pig">Pregnant Pig</entry>   
     <entry key= "animal.pregnant.sheep">Pregnant Sheep</entry>  
@@ -235,6 +238,7 @@
 	<entry key="pedia.embryo.Chicken">Chicken</entry>
 	<entry key="pedia.embryo.Smilodon">Smilodon</entry>
 	<entry key="pedia.embryo.Mammoth">Mammoth</entry>
+	<entry key="pedia.embryo.Dodo">Dodo</entry>
 <!-- Anu dialogue -->
 	<entry key="anuSpeaker.self">Anu: </entry>
 	<entry key="anuSpeaker.hello">Kneel before me, resistance is futile.</entry>

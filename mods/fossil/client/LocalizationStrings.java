@@ -141,6 +141,7 @@ public class LocalizationStrings {
     public static final String DNA_CHICKEN_NAME = "dnaChicken";
     public static final String DNA_SMILODON_NAME = "dnaSmilodon";
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
+    public static final String DNA_DODO_NAME = "dnaDodo";
     
     public static final String EMBRYO_PIG_NAME = "embryoPig";
     public static final String EMBRYO_SHEEP_NAME = "embryoSheep";
@@ -148,6 +149,7 @@ public class LocalizationStrings {
     public static final String EMBRYO_CHICKEN_NAME = "embryoChicken";
     public static final String EMBRYO_SMILODON_NAME = "embryoSmilodon";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
+    public static final String EMBRYO_DODO_NAME = "embryoDodo";
     
     public static final String FARMOR_NAME = "Ancient Armor";
     public static final String FBLOCKS_NAME = "Ancient Blocks";
@@ -193,6 +195,7 @@ public class LocalizationStrings {
     public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
     public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
     public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
+    public static final String ANIMAL_DODO = "animal.dodo"; 
     
     public static final String PEDIA_EMBRYO_INSIDE = "pedia.embryo.inside";
     public static final String PEDIA_EMBRYO_GROWING = "pedia.embryo.growing";
@@ -202,6 +205,7 @@ public class LocalizationStrings {
     public static final String PEDIA_EMBRYO_CHICKEN = "pedia.embryo.chicken";
     public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
     public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
+    public static final String PEDIA_EMBRYO_DODO = "pedia.embryo.dodo";
     
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";  
     public static final String STATUS_GEM_ERROR_HEALTH = "status.GemErrorHealth";

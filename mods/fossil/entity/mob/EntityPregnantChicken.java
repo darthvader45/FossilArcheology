@@ -25,7 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityPregnantCow extends EntityCow implements IViviparous, IEntityAdditionalSpawnData
+public class EntityPregnantChicken extends EntityCow implements IViviparous, IEntityAdditionalSpawnData
 {
     public int EmbryoProgress = 0;
     //public final int EmbryoGrowTime = 3000;
@@ -33,7 +33,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
     //public String InsideText = "Embyo inside:";
     //public String GrowingText = "Growing progress:";
 
-    public EntityPregnantCow(World var1)
+    public EntityPregnantChicken(World var1)
     {
         super(var1);
     }
@@ -107,30 +107,6 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
 
             switch (this.Embryo)//EntityPregnantCow$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
             {
-                case Pig:
-                    var2 = new EntityPig(this.worldObj);
-                    break;
-
-                case Sheep:
-                    var2 = new EntitySheep(this.worldObj);
-                    break;
-
-                case Cow:
-                    var2 = new EntityCow(this.worldObj);
-                    break;
-                    
-                case Chicken:
-                    var2 = new EntityChicken(this.worldObj);
-                    break;
-
-                case Smilodon:
-                    var2 = new EntitySmilodon(this.worldObj);
-                    break;
-
-                case Mammoth:
-                    var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
-                    break;
-                    
                 case Dodo:
                     var2 = (new EntityDodo(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
                     break;

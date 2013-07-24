@@ -9,6 +9,7 @@ import java.util.logging.Level;
 
 
 
+
 //import fossil.fossilEnums.EnumAnimalType;
 /*import fossil.gens.WorldGenBigShip;
 import fossil.gens.WorldGenCheheWreck;
@@ -57,6 +58,7 @@ import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityMammoth;
@@ -326,6 +328,7 @@ public class Fossil implements IPacketHandler
 	public static Item dnaChicken;
 	public static Item dnaSmilodon;
 	public static Item dnaMammoth;
+	public static Item dnaDodo;
 	
 	//Mob DNA
 	//public static Item mobDNA;
@@ -364,6 +367,7 @@ public class Fossil implements IPacketHandler
 	public static Item embryoChicken;
 	public static Item embryoSmilodon;
 	public static Item embryoMammoth;
+    public static Item embryoDodo;
 	//public static Item embryoPigZombie;
 	//public static Item embryoZombie;
 	//public static Item embryoGhast;
@@ -522,6 +526,7 @@ public class Fossil implements IPacketHandler
 	public static int dnaChickenID;
 	public static int dnaSmilodonID;
 	public static int dnaMammothID;
+    public static int dnaDodoID;
 	
 	//Mob DNA
 	//public static int mobDNAID;
@@ -560,7 +565,8 @@ public class Fossil implements IPacketHandler
 	public static int embryoChickenID;
 	public static int embryoSmilodonID;
 	public static int embryoMammothID;
-	//public static int embryoPigZombieID;
+    public static int embryoDodoID;
+    //public static int embryoPigZombieID;
 	//public static int embryoZombieID;
 	//public static int embryoGhastID;
 	//public static int embryoWitherID;
@@ -744,6 +750,7 @@ public class Fossil implements IPacketHandler
 		dnaChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt(10080);
 		dnaSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SMILODON_NAME, 10081).getInt(10081);
 		dnaMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt(10082);
+	    dnaDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DODO_NAME, 10082).getInt(10083);
 		
 		//MobDNA
 		//mobDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt(10083);
@@ -783,6 +790,7 @@ public class Fossil implements IPacketHandler
         embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
         embryoSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt(10112);
         embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
+        embryoDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt(10114);
 		//embryoPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
 		//embryoZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
 		//embryoGhastID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt(10116);
@@ -961,7 +969,8 @@ public class Fossil implements IPacketHandler
 		dnaCow = new ForgeItem(dnaCowID,"Cow_DNA").setUnlocalizedName(LocalizationStrings.DNA_COW_NAME).setCreativeTab(this.tabFMaterial);
 		dnaChicken = new ForgeItem(dnaChickenID,"Chicken_DNA").setUnlocalizedName(LocalizationStrings.DNA_CHICKEN_NAME).setCreativeTab(this.tabFMaterial);
 		dnaSmilodon = new ForgeItem(dnaSmilodonID,"Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SMILODON_NAME).setCreativeTab(this.tabFMaterial);
-		dnaMammoth = new ForgeItem(dnaMammothID,"Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
+        dnaMammoth = new ForgeItem(dnaMammothID,"Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
+        dnaDodo = new ForgeItem(dnaDodoID,"Dodo_DNA").setUnlocalizedName(LocalizationStrings.DNA_DODO_NAME).setCreativeTab(this.tabFMaterial);
 		
 		//Ebryos
 		//embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
@@ -970,7 +979,8 @@ public class Fossil implements IPacketHandler
 		embryoCow = new ItemEmbryoSyringe(embryoCowID,2).setUnlocalizedName(LocalizationStrings.EMBRYO_COW_NAME).setCreativeTab(this.tabFItems);
 		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
 		embryoSmilodon = new ItemEmbryoSyringe(embryoSmilodonID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
-		embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
+        embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
+        embryoDodo = new ItemEmbryoSyringe(embryoDodoID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_DODO_NAME).setCreativeTab(this.tabFItems);
 		
 		//Item Food
         //Moved to fossilEnums.EnumDinoType
@@ -1169,6 +1179,7 @@ public class Fossil implements IPacketHandler
 		//EntityRegistry.registerModEntity(EntityBrachiosaurus.class, 	"Brachiosaurus", 		23, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
 		//EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
+	      EntityRegistry.registerModEntity(EntityDodo.class,           "Dodo",              25, this, 250, 5, true);
 
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(),EnumDinoType.values()[i].name(),200+i, this, 250, 5, true);
@@ -1195,6 +1206,7 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SMILODON));
         //LanguageRegistry.instance().addStringLocalization("entity.fossil.Brachiosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_BRACHIOSAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO));
         //LanguageRegistry.instance().addStringLocalization("entity.fossil.Spinosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_SPINOSAURUS));
 
         
