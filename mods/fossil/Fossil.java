@@ -282,7 +282,7 @@ public class Fossil implements IPacketHandler
     public static Item powderyString;
     public static Item animalCoin;
     public static Item dinoCoin;
-	//public static Item newItem;
+	public static Item dodoEgg;
 	//public static Item newItem;
 	
     //Armor
@@ -481,7 +481,7 @@ public class Fossil implements IPacketHandler
     public static int powderyStringID;
     public static int animalCoinID;
     public static int dinoCoinID;
-	//public static int newItemID;
+	public static int dodoEggID;
 	//public static int newItemID;
 	
 	//Armor
@@ -702,7 +702,7 @@ public class Fossil implements IPacketHandler
 //        ancientWoodPlateID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt(10040);
         animalCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
         dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOCOIN_NAME, 10042).getInt(10042);
-        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10043).getInt(10043);
+        dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOEGG_NAME, 10043).getInt(10043);
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10044).getInt(10044);
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10045).getInt(10045);
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
@@ -942,7 +942,8 @@ public class Fossil implements IPacketHandler
 		claw = new ForgeItem(clawID,"Claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME).setCreativeTab(this.tabFItems);
 		foot = new ForgeItem(footID,"Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
 		skull = new ForgeItem(skullID,"Skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME).setCreativeTab(this.tabFItems);
-		brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
+        brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
+        dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODOEGG_NAME);
 		
 		//BoneArmor
 		skullHelmet = new ItemSkullHelmet(skullHelmetID, dinoBone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;

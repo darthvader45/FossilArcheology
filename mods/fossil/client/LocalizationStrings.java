@@ -86,7 +86,6 @@ public class LocalizationStrings {
     public static final String FEMURS_NAME = "shinGuards";
     public static final String FEET_NAME = "feet";
     public static final String DINO_STEAK_NAME = "dinoSteak";
-    
     public static final String AMBER_NAME = "amber";
     public static final String ANCIENTVASE_NAME = "ancientVase";
     public static final String ANCIENTVASEBROKEN_NAME = "ancientVaseBroken";
@@ -98,6 +97,7 @@ public class LocalizationStrings {
     public static final String POWDERYSTRING_NAME = "powderyString";
     public static final String ANIMALCOIN_NAME = "animalCoin";
     public static final String DINOCOIN_NAME = "dinoCoin";
+    public static final String DODOEGG_NAME = "dodoEgg";
     
     /*public static final String RAW_TRICERATOPS_NAME = "rawTriceratops";
     public static final String RAW_VELOCIRAPTOR_NAME = "rawVelociraptor";

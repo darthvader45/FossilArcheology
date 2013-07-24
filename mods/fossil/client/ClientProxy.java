@@ -3,8 +3,10 @@ package mods.fossil.client;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import mods.fossil.CommonProxy;
+import mods.fossil.Fossil;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.RenderDinoEgg;
@@ -65,8 +67,10 @@ import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderPig;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderVillager;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
@@ -98,6 +102,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderMammoth(new ModelMammoth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Fossil.dodoEgg));
 		//RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
 		
 	}

@@ -1,5 +1,11 @@
 package mods.fossil.entity.mob;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.Localizations;
+import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -193,5 +199,13 @@ public class EntityDodo extends EntityAnimal
 
     public Object Imprinting(double posX, double posY, double posZ) {
         return this;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia(GuiPedia p0)
+    {
+        p0.reset();
+        p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO), 97, 23,40,90,245);
+        p0.PrintItemXY(Fossil.embryoDodo, 120, 7);
     }
 }
