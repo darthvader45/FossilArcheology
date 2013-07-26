@@ -87,17 +87,19 @@
 	<entry key="item.ribCage.name">Rib Cage</entry>
 	<entry key="item.shinGuards.name">Shin Guards</entry>
 	<entry key="item.feet.name">Feet</entry>
-	<entry key="amber">Amber</entry>
-	<entry key="ancientVase">Ancient Vase</entry>
-	<entry key="ancientVaseBroken">Ancient Broken Vase</entry>
-	<entry key="boneArrow">Bone Arrow</entry>
-	<entry key="boneBow">Bone Bow</entry>
-	<entry key="boneGlue">Bone Glue</entry>
-	<entry key="boneRod">Bone Rod</entry>
-	<entry key="boneSword">Bone Sword</entry>
-	<entry key="powderyString">Powdery String</entry>
-	<entry key="animalCoin">Animal Coin</entry>
-	<entry key="dinoCoin">Dinosaur Coin</entry>
+	<entry key="item.amber.name">Amber</entry>
+	<entry key="item.ancientVase.name">Ancient Vase</entry>
+	<entry key="item.ancientVaseBroken.name">Ancient Broken Vase</entry>
+	<entry key="item.boneArrow.name">Bone Arrow</entry>
+	<entry key="item.boneBow.name">Bone Bow</entry>
+	<entry key="item.boneGlue.name">Bone Glue</entry>
+	<entry key="item.boneRod.name">Bone Rod</entry>
+	<entry key="item.boneSword.name">Bone Sword</entry>
+	<entry key="item.powderyString.name">Powdery String</entry>
+	<entry key="item.animalCoin.name">Animal Coin</entry>
+	<entry key="item.dinoCoin.name">Dinosaur Coin</entry>
+	<entry key="item.dodoWing.name">Raw Dodo Wing</entry>
+	<entry key="item.dodoWingCooked.name">Cooked Dodo Wing</entry>
 <!-- Dino Meat -->
 	<entry key="item.dinoSteak.name">Dino Steak</entry>
 	<entry key="item.rawTriceratops.name">Triceratops Meat</entry>
@@ -125,6 +127,7 @@
 	<entry key="item.eggBrachiosaurus.name">Brachiosaurus Egg</entry>
 	<entry key="item.eggSpinosaurus.name">Spinosaurus Egg</entry>
 	<entry key="item.eggCompsognathus.name">Compsognathus Egg</entry>
+	<entry key="item.eggDodo.name">Dodo Egg</entry>
 <!-- DNA -->
 	<entry key="item.dnaTriceratops.name">Triceratops DNA</entry>
 	<entry key="item.dnaVelociraptor.name">Velociraptor DNA</entry>
@@ -213,6 +216,7 @@
     <entry key= "animal.pregnant.cow">Pregnant Cow</entry>
     <entry key= "animal.pregnant.pig">Pregnant Pig</entry>   
     <entry key= "animal.pregnant.sheep">Pregnant Sheep</entry>  
+    <entry key= "animal.pregnant.chicken">Pregnant Chicken</entry> 
 <!-- Pedia text. Dino messages. 11 characters MAX -->
 	<entry key="pedia.text.owner">Owner:</entry>
 	<entry key="pedia.text.chest">* Chests</entry>

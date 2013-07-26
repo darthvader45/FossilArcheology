@@ -37,7 +37,7 @@ public class EntityDodo extends EntityAnimal
     public EntityDodo(World par1World)
     {
         super(par1World);
-        this.texture = "/mods/fossil/textures/mob/Dodo_Gray.png";
+
         this.setSize(0.3F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         float f = 0.25F;
@@ -58,12 +58,20 @@ public class EntityDodo extends EntityAnimal
     {
         return true;
     }
+    
+    private void setPedia()
+    {Fossil.ToPedia = (Object)this;}
 
     public int getMaxHealth()
     {
         return 4;
     }
 
+    
+    public String getTexture()
+    {
+        return "/mods/fossil/textures/mob/Dodo_Brown.png";   
+    }
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
@@ -94,7 +102,7 @@ public class EntityDodo extends EntityAnimal
 
         if (!this.onGround && this.motionY < 0.0D)
         {
-            this.motionY *= 0.6D;
+            this.motionY *= 1.1D;
         }
 
         this.field_70886_e += this.field_70889_i * 2.0F;
@@ -102,7 +110,7 @@ public class EntityDodo extends EntityAnimal
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Item.egg.itemID, 1);
+            this.dropItem(Fossil.dodoEgg.itemID, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
     }
@@ -167,11 +175,11 @@ public class EntityDodo extends EntityAnimal
 
         if (this.isBurning())
         {
-            this.dropItem(Item.chickenCooked.itemID, 1);
+            this.dropItem(Fossil.dodoWing.itemID, 1);
         }
         else
         {
-            this.dropItem(Item.chickenRaw.itemID, 1);
+            this.dropItem(Fossil.dodoWingCooked.itemID, 1);
         }
     }
 

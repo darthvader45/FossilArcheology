@@ -97,7 +97,9 @@ public class LocalizationStrings {
     public static final String POWDERYSTRING_NAME = "powderyString";
     public static final String ANIMALCOIN_NAME = "animalCoin";
     public static final String DINOCOIN_NAME = "dinoCoin";
-    public static final String DODOEGG_NAME = "dodoEgg";
+    public static final String DODOEGG_NAME = "eggDodo";
+    public static final String DODOWING_NAME = "dodoWing";
+    public static final String DODOWINGCOOKED_NAME = "dodoWingCooked";
     
     /*public static final String RAW_TRICERATOPS_NAME = "rawTriceratops";
     public static final String RAW_VELOCIRAPTOR_NAME = "rawVelociraptor";
@@ -195,6 +197,7 @@ public class LocalizationStrings {
     public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
     public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
     public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
+    public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken"; 
     public static final String ANIMAL_DODO = "animal.dodo"; 
     
     public static final String PEDIA_EMBRYO_INSIDE = "pedia.embryo.inside";

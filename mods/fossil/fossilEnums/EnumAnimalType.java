@@ -10,7 +10,7 @@ public enum EnumAnimalType
     Chicken(1000),
     Smilodon(4000),
     Mammoth(6000),
-    Dodo(1000);
+    Dodo(1500);
     
     public int GrowTime;
     

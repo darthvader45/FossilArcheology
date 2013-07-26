@@ -1,6 +1,8 @@
 
 package mods.fossil.entity.mob;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -91,16 +93,45 @@ public class ModelDodo extends ModelBase
   {
       super.render(var1, var2, var3, var4, var5, var6, var7);
       this.setRotationAngles(var2, var3, var4, var5, var6, var7);
-    Body.render(var7);
-    Neck.render(var7);
-    Tail_Poof.render(var7);
-    Beak.render(var7);
-    Bottom.render(var7);
-    LeftLeg.render(var7);
-    RightLeg.render(var7);
-    WingLeft.render(var7);
-    WingRight.render(var7);
-    Head.render(var7);
+      
+      if (this.isChild)
+      {
+          float f6 = 2.0F;
+          GL11.glPushMatrix();
+          GL11.glTranslatef(0.0F, 8.0F * var7, 4.0F * var7);
+          this.Head.render(var7);
+          GL11.glPopMatrix();
+          GL11.glPushMatrix();
+          GL11.glScalef(1.0F / 1.5F, 1.0F / 1.5F, 1.0F / 1.5F);
+          GL11.glTranslatef(0.0F, 16.0F * var7, 0.2F);
+          this.Beak.render(var7);
+          GL11.glPopMatrix();
+          GL11.glPushMatrix();
+          GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+          GL11.glTranslatef(0.0F, 24.0F * var7, 0.0F);
+          this.Neck.render(var7);
+          this.Body.render(var7);
+          this.Tail_Poof.render(var7);
+          this.RightLeg.render(var7);
+          this.LeftLeg.render(var7);
+          this.WingRight.render(var7);
+          this.WingLeft.render(var7);
+          this.Bottom.render(var7);
+          GL11.glPopMatrix();
+      }
+      else
+      {
+          this.Body.render(var7);
+          this.Neck.render(var7);
+          this.Tail_Poof.render(var7);
+          this.Beak.render(var7);
+          this.Bottom.render(var7);
+          this.LeftLeg.render(var7);
+          this.RightLeg.render(var7);
+          this.WingLeft.render(var7);
+          this.WingRight.render(var7);
+          this.Head.render(var7);
+      }
   }
   
   private void setRotation(ModelRenderer var1, float var2, float var3, float var4)

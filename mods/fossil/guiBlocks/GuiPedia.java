@@ -7,6 +7,7 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMammoth;
+import mods.fossil.entity.mob.EntityPregnantChicken;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
@@ -154,6 +155,7 @@ public class GuiPedia extends GuiContainer
     	if(Fossil.ToPedia instanceof EntityPregnantCow)((EntityPregnantCow)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityPregnantPig)((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityPregnantSheep)((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
+        if(Fossil.ToPedia instanceof EntityPregnantChicken)((EntityPregnantChicken)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityMammoth)((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntitySmilodon)((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
         if(Fossil.ToPedia instanceof EntityDodo)((EntityDodo)Fossil.ToPedia).ShowPedia(this);

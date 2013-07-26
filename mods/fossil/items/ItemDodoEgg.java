@@ -22,7 +22,7 @@ public class ItemDodoEgg extends Item
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon("fossil:Iced_Meat");
+        itemIcon = iconRegister.registerIcon("fossil:Egg_Dodo");
     }
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer

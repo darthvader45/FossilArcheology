@@ -4,8 +4,8 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
+import mods.fossil.entity.mob.EntityPregnantChicken;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
@@ -83,6 +84,11 @@ public class ItemEmbryoSyringe extends Item
                 var3 = new EntityPregnantSheep(var2.worldObj);
                 ((EntitySheep)var3).setFleeceColor(((EntitySheep)var2).getFleeceColor());
                 ((EntitySheep)var3).setSheared(((EntitySheep)var2).getSheared());
+            }
+            
+            if (var2 instanceof EntityChicken)
+            {
+                var3 = new EntityPregnantChicken(var2.worldObj);
             }
 
             if (var3 != null)

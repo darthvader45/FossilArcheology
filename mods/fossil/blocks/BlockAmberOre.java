@@ -68,7 +68,7 @@ public class BlockAmberOre extends Block
 
             if (this.blockID == Fossil.amberOre.blockID)
             {
-                j1 = MathHelper.getRandomIntegerInRange(par1World.rand, 3, 7);
+                j1 = 1;
             }
 
             this.dropXpOnBlockBreak(par1World, par2, par3, par4, j1);

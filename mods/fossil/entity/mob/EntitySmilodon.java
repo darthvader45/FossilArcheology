@@ -77,6 +77,7 @@ public class EntitySmilodon extends EntityTameable
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 16.0F, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDodo.class, 16.0F, 200, false));
         this.targetTasks.addTask(5, new EntityAITargetNonTamed(this, EntityPig.class, 16.0F, 200, false));
         this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 16.0F, 200, false));
         this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 16.0F, 200, false));

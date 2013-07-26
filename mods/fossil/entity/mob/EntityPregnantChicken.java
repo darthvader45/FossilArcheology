@@ -25,7 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityPregnantChicken extends EntityCow implements IViviparous, IEntityAdditionalSpawnData
+public class EntityPregnantChicken extends EntityChicken implements IViviparous, IEntityAdditionalSpawnData
 {
     public int EmbryoProgress = 0;
     //public final int EmbryoGrowTime = 3000;
@@ -89,7 +89,7 @@ public class EntityPregnantChicken extends EntityCow implements IViviparous, IEn
      */
     public void onLivingUpdate()
     {
-        EntityCow var1 = new EntityCow(this.worldObj);
+        EntityChicken var1 = new EntityChicken(this.worldObj);
 
         if (this.Embryo == null)
         {
@@ -112,7 +112,7 @@ public class EntityPregnantChicken extends EntityCow implements IViviparous, IEn
                     break;
 
                 default:
-                    var2 = new EntityPig(this.worldObj);
+                    var2 = new EntityChicken(this.worldObj);
             }
 
             ((EntityAnimal)var2).setGrowingAge(-24000);
