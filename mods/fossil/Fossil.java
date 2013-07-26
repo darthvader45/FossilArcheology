@@ -374,7 +374,7 @@ public class Fossil implements IPacketHandler
 	public static Item embryoChicken;
 	public static Item embryoSmilodon;
 	public static Item embryoMammoth;
-    public static Item embryoDodo;
+//    public static Item embryoDodo;
 	//public static Item embryoPigZombie;
 	//public static Item embryoZombie;
 	//public static Item embryoGhast;
@@ -573,7 +573,7 @@ public class Fossil implements IPacketHandler
 	public static int embryoChickenID;
 	public static int embryoSmilodonID;
 	public static int embryoMammothID;
-    public static int embryoDodoID;
+ //   public static int embryoDodoID;
     //public static int embryoPigZombieID;
 	//public static int embryoZombieID;
 	//public static int embryoGhastID;
@@ -798,7 +798,7 @@ public class Fossil implements IPacketHandler
         embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
         embryoSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt(10112);
         embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
-        embryoDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt(10114);
+//        embryoDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt(10114);
 		//embryoPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
 		//embryoZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
 		//embryoGhastID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt(10116);
@@ -912,12 +912,10 @@ public class Fossil implements IPacketHandler
         ancientWoodDoubleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME);
         ancientWoodSingleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
-		Block.fire.setBurnProperties(Fossil.palmLog.blockID, 5, 5);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palaePlanks.blockID, 5, 20);
 		Block.fire.setBurnProperties(Fossil.tar.blockID, 500, 1);
 	    Block.fire.setBurnProperties(Fossil.ancientWood.blockID, 10, 20);
-	    Block.fire.setBurnProperties(Fossil.ancientWoodPillar.blockID, 5, 10);
 	    Block.fire.setBurnProperties(Fossil.ancientWoodPlate.blockID, 5, 10);
         Block.fire.setBurnProperties(Fossil.ancientWoodStairs.blockID, 10, 20);		
         
@@ -992,7 +990,7 @@ public class Fossil implements IPacketHandler
 		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
 		embryoSmilodon = new ItemEmbryoSyringe(embryoSmilodonID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
         embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
-        embryoDodo = new ItemEmbryoSyringe(embryoDodoID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_DODO_NAME).setCreativeTab(this.tabFItems);
+//        embryoDodo = new ItemEmbryoSyringe(embryoDodoID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_DODO_NAME).setCreativeTab(this.tabFItems);
 		
 		//Item Food
         //Moved to fossilEnums.EnumDinoType

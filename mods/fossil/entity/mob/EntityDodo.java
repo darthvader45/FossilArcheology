@@ -214,6 +214,6 @@ public class EntityDodo extends EntityAnimal
     {
         p0.reset();
         p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO), 97, 23,40,90,245);
-        p0.PrintItemXY(Fossil.embryoDodo, 120, 7);
+        p0.PrintItemXY(Fossil.dodoEgg, 120, 7);
     }
 }
