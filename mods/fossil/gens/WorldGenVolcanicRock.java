@@ -1,4 +1,4 @@
-package mods.fossil.gens;
+/*package mods.fossil.gens;
 
 import java.util.Random;
 
@@ -35,4 +35,4 @@ public class WorldGenVolcanicRock extends WorldGenerator
 
         return true;
     }
-}
+}*/
