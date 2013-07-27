@@ -5,7 +5,6 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.entity.mob.EntityPregnantChicken;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
@@ -86,10 +85,6 @@ public class ItemEmbryoSyringe extends Item
                 ((EntitySheep)var3).setSheared(((EntitySheep)var2).getSheared());
             }
             
-            if (var2 instanceof EntityChicken)
-            {
-                var3 = new EntityPregnantChicken(var2.worldObj);
-            }
 
             if (var3 != null)
             {

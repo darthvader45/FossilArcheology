@@ -18,6 +18,7 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
@@ -515,6 +516,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         ((EntityCompsognathus)var5).setSubSpecies(1);
                         else
                         ((EntityCompsognathus)var5).setSubSpecies(2);break;
+                    case Ankylosaurus:var5 = new EntityAnkylosaurus(this.worldObj);break;
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", var4);

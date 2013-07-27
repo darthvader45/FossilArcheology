@@ -42,6 +42,7 @@ public enum EnumDinoFoodItem
 	Brachiosaur(EnumDinoType.Brachiosaurus.DropItem,50,4),
 	Spinosaurus(EnumDinoType.Spinosaurus.DropItem,20,3),
 	Compsognathus(EnumDinoType.Compsognathus.DropItem,20,3),
+	Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem,50,3),
 	DinoMeatCooked(Fossil.cookedDinoMeat,50,5),	
 	;
     public Item item;

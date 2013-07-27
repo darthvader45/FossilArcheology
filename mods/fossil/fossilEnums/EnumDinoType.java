@@ -4,6 +4,7 @@ import mods.fossil.Fossil;
 import mods.fossil.entity.mob.DinoFoodBlockList;
 import mods.fossil.entity.mob.DinoFoodItemList;
 import mods.fossil.entity.mob.DinoFoodMobList;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
@@ -46,8 +47,9 @@ public enum EnumDinoType
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
     Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE),
-    Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME);
-
+    Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME),
+    Ankylosaurus(EntityAnkylosaurus.class,  C.TAME  | C.HERBIVORE);
+    
     private final Class dinoClass;
 
     public int Flags=0;
@@ -222,6 +224,21 @@ public enum EnumDinoType
         
     	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
     	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
+    	
+        Ankylosaurus.setItems(       Item.stick);//,         Fossil.rawAnkylosaurus,  Fossil.dnaAnkylosaurus,  Fossil.eggAnkylosaurus);
+        Ankylosaurus.setDimensions(0.5F, 0.25F, 0.5F, 0.25F, 0.5F, 0.25F);
+        Ankylosaurus.setAges(-1, -1, 13);
+        Ankylosaurus.setProperties(21, 1, 4, 3, 0.17F, 0.016F, 500);
+        Ankylosaurus.setExperience(0.5F, 0.2F);
+        
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Melon);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Apple);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Bread);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Potato);
+        
+        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
+        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
     	
         Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
