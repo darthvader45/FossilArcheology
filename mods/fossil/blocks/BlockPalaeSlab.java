@@ -63,7 +63,7 @@ public class BlockPalaeSlab extends BlockHalfSlab
 	      par1 = 0;
 	    }
 
-	    return super.getUnlocalizedName2() + "." + woodType[par1];
+	    return super.getUnlocalizedName() + "." + woodType[par1];
 	  }
 
 	  public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)

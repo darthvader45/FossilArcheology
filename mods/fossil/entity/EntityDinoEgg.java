@@ -19,6 +19,7 @@ import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityMosasaurus;
@@ -49,6 +50,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenDesert;
 import net.minecraft.world.biome.BiomeGenForest;
 import net.minecraft.world.biome.BiomeGenSnow;
 import net.minecraft.world.biome.BiomeGenTaiga;
@@ -508,9 +510,14 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Dilophosaurus:var5 = new EntityDilophosaurus(this.worldObj);break;
                     case Brachiosaurus:var5 = new EntityBrachiosaurus(this.worldObj);break;
                     case Spinosaurus:var5 = new EntitySpinosaurus(this.worldObj);break;
+                    case Compsognathus:var5 = new EntityCompsognathus(this.worldObj);
+                        if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenDesert)
+                        ((EntityCompsognathus)var5).setSubSpecies(1);
+                        else
+                        ((EntityCompsognathus)var5).setSubSpecies(2);break;
 
                     default:
-                        Fossil.ShowMessage("Bug:Impossible result.", var4);
+                        Fossil.ShowMessage("Bug: Impossible result.", var4);
                         //System.err.println("EGGERROR2"+String.valueOf(i));
                         this.setDead();
                         return;

@@ -101,42 +101,6 @@ public class LocalizationStrings {
     public static final String DODOWING_NAME = "dodoWing";
     public static final String DODOWINGCOOKED_NAME = "dodoWingCooked";
     
-    /*public static final String RAW_TRICERATOPS_NAME = "rawTriceratops";
-    public static final String RAW_VELOCIRAPTOR_NAME = "rawVelociraptor";
-    public static final String RAW_TREX_NAME = "rawTRex";
-    public static final String RAW_PTEROSAUR_NAME = "rawPterosaur";
-    public static final String RAW_NAUTILUS_NAME = "rawNautilus";
-    public static final String RAW_PLESIOSAUR_NAME = "rawPlesiosaur";
-    public static final String RAW_MOSASAURUS_NAME = "rawMosasaurus";
-    public static final String RAW_STEGOSAURUS_NAME = "rawStegosaurus";
-    public static final String RAW_DILOPHOSAURUS_NAME = "rawDilophosaurus";
-    public static final String RAW_BRACHIOSAURUS_NAME = "rawBrachiosaurus";
-    public static final String RAW_SPINOSAURUS_NAME = "rawSpinosaurus";*/
-    
-    /*public static final String EGG_TRICERATOPS_NAME = "eggTriceratops";
-    public static final String EGG_VELOCIRAPTOR_NAME = "eggVelociraptor";
-    public static final String EGG_TREX_NAME = "eggTRex";
-    public static final String EGG_PTEROSAUR_NAME = "eggPterosaur";
-    public static final String SHELL_NAUTILUS_NAME = "livingNautilus";
-    public static final String EGG_PLESIOSAUR_NAME = "eggPlesiosaur";
-    public static final String EGG_MOSASAURUS_NAME = "eggMosasaurus";
-    public static final String EGG_STEGOSAURUS_NAME = "eggStegosaurus";
-    public static final String EGG_DILOPHOSAURUS_NAME = "eggDilophosaurus";
-    public static final String EGG_BRACHIOSAURUS_NAME = "eggBrachiosaurus";
-    public static final String EGG_SPINOSAURUS_NAME = "eggSpinosaurus";*/
-    
-    /*public static final String DNA_TRICERATOPS_NAME = "dnaTriceratops";
-    public static final String DNA_VELOCIRAPTOR_NAME = "dnaVelociraptor";
-    public static final String DNA_TREX_NAME = "dnaTRex";
-    public static final String DNA_PTEROSAUR_NAME = "dnaPterosaur";
-    public static final String DNA_NAUTILUS_NAME = "dnaNautilus";
-    public static final String DNA_PLESIOSAUR_NAME = "dnaPlesiosaur";
-    public static final String DNA_MOSASAURUS_NAME = "dnaMosasaurus";
-    public static final String DNA_STEGOSAURUS_NAME = "dnaStegosaurus";
-    public static final String DNA_DILOPHOSAURUS_NAME = "dnaDilophosaurus";
-    public static final String DNA_BRACHIOSAURUS_NAME = "dnaBrachiosaurus";
-    public static final String DNA_SPINOSAURUS_NAME = "dnaSpinosaurus";*/
-    
     public static final String DNA_PIG_NAME = "dnaPig";
     public static final String DNA_SHEEP_NAME = "dnaSheep";
     public static final String DNA_COW_NAME = "dnaCow";
@@ -220,22 +184,12 @@ public class LocalizationStrings {
     public static final String DRUM_ORDERING = "drum.order"; 
     public static final String DRUM_TREX = "drum.tRex"; 
     
-    /*public static final String DINO_TRICERATOPS = "Dino.Triceratops";
-    public static final String DINO_VELOCIRAPTOR = "Dino.Velociraptor";
-    public static final String DINO_TREX = "Dino.TRex";
-    public static final String DINO_PTEROSAUR = "Dino.Pterosaur";
-    public static final String DINO_NAUTILUS = "Dino.Nautilus";
-    public static final String DINO_PLESIOSAUR = "Dino.Plesiosaur";
-    public static final String DINO_MOSASAURUS = "Dino.Mosasaurus";
-    public static final String DINO_STEGOSAURUS = "Dino.Stegosaurus";
-    public static final String DINO_DILOPHOSAURUS = "Dino.Dilophosaurus";
-    public static final String DINO_BRACHIOSAURUS = "Dino.Brachiosaurus";
-    public static final String DINO_SPINOSAURUS = "Dino.Spinosaurus";*/
-    
     public static final String MOB_FPZ = "mob.fpz";
     public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
     public static final String BOSS_ANU = "boss.Anu";
     public static final String MOB_BONES = "mob.bones";
+    
+    //Dinosaur strings are handled through DinoEnum.
 
     
 

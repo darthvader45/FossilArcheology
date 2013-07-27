@@ -5,6 +5,7 @@ import mods.fossil.entity.mob.DinoFoodBlockList;
 import mods.fossil.entity.mob.DinoFoodItemList;
 import mods.fossil.entity.mob.DinoFoodMobList;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
@@ -44,7 +45,8 @@ public enum EnumDinoType
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
-    Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE);
+    Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE),
+    Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME);
 
     private final Class dinoClass;
 
@@ -245,6 +247,26 @@ public enum EnumDinoType
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
+        
+        Compsognathus.setItems(      Item.bone);//,          Fossil.rawCompsognathus, Fossil.dnaCompsognathus, Fossil.eggCompsognathus);
+        Compsognathus.setDimensions(0.5F, 0.05F, 0.5F, 0.05F, 0.5F, 0.05F);
+        Compsognathus.setAges(-1, -1, 9);
+        Compsognathus.setProperties(1, 1, 1, 0, 0.2F, 0.010F, -1);
+        Compsognathus.setExperience(0.2F, 0.2F);
+        
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
+        
+        Compsognathus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        Compsognathus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
         TRex.setItems(				Fossil.skullStick);//,	Fossil.rawTRex, 		Fossil.dnaTRex, 		Fossil.eggTRex);
         TRex.setDimensions(0.7F, 0.57F, 0.8F, 0.66F, 0.5F, 0.57F);

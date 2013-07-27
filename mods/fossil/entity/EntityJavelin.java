@@ -257,7 +257,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
 
                         if (!(movingobjectposition.entityHit instanceof EntityEnderman))
                         {
-                            this.setVelocity(0, 0.3, 0);
+                            this.setDead();
                         }
                     }
                     else

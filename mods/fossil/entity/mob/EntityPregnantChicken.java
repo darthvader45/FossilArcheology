@@ -107,7 +107,10 @@ public class EntityPregnantChicken extends EntityChicken implements IViviparous,
 
             switch (this.Embryo)//EntityPregnantCow$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
             {
-                
+                case Chicken:
+                    var2 = new EntityChicken(this.worldObj);
+                    break;
+                    
                 default:
                     var2 = new EntityChicken(this.worldObj);
             }

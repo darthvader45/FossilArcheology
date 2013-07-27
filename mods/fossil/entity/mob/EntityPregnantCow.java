@@ -130,10 +130,6 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
                 case Mammoth:
                     var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
                     break;
-                    
-                case Dodo:
-                    var2 = (new EntityDodo(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
-                    break;
 
                 default:
                     var2 = new EntityPig(this.worldObj);
