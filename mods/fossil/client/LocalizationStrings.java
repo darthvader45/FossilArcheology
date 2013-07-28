@@ -177,6 +177,7 @@ public class LocalizationStrings {
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";  
     public static final String STATUS_GEM_ERROR_HEALTH = "status.GemErrorHealth";
     public static final String STATUS_GEM_ERROR_TAMED = "status.GemErrorTamed";
+    public static final String STATUS_ESSENCE_FAIL = "status.EssenceFail";
     
     public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";  
     

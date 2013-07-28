@@ -96,7 +96,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+//        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIEatFerns(this));
@@ -511,7 +511,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
     {
     	int destroyed=0;
     	
-    	if (!this.isAdult() && !Fossil.FossilOptions.Dino_Block_Breaking)
+    	if (!this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
     	{
 	        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
 	        {

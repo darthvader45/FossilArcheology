@@ -199,6 +199,7 @@
 	<entry key="status.GemErrorYoung">This T-Rex is still too young.</entry>
 	<entry key="status.GemErrorHealth">The scarab cannot afford such strong life energy.</entry>
     <entry key="status.GemErrorHealth">This T-Rex has already been tamed.</entry>
+    <entry key="status.EssenceFail">Essence of Chicken had no effect.</entry>
 <!-- Dinosaur names. 11 characters MAX -->
 	<entry key="Dino.Triceratops">Triceratops</entry>
 	<entry key="Dino.Velociraptor">Velociraptor</entry>

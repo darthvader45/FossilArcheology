@@ -207,7 +207,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     {
         super.onUpdate();
         //this.blockBreakingBehavior.execute();
-        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
+        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         	BlockInteractive();
         if (this.health > 0)
         {
@@ -462,6 +462,8 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                 return true;
             }
             if(var2.itemID == Fossil.chickenEss.itemID)
+                if (!this.worldObj.isRemote)
+                Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                 return true;
          }
         else 
