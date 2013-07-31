@@ -45,7 +45,7 @@ public class ModelAnkylosaurus extends ModelBase
       setRotation(Head, 0F, 0F, 0F);
       Mouth = new ModelRenderer(this, 0, 15);
       Mouth.addBox(0F, 0F + yoffset, 0F, 4, 6, 4);
-      Mouth.setRotationPoint(-2F, 10.5F, -12.5F);
+      Mouth.setRotationPoint(-2F, 10.5F, -13.5F);
       Mouth.setTextureSize(128, 64);
       Mouth.mirror = true;
       setRotation(Mouth, 0.4363323F, 0F, 0F);
@@ -98,23 +98,29 @@ public class ModelAnkylosaurus extends ModelBase
       Neck.mirror = true;
       setRotation(Neck, 0F, 0F, 0F);
       Tail = new ModelRenderer(this, 104, 46);
-      Tail.addBox(0F, 0F + yoffset, 0F, 6, 6, 6);
-      Tail.setRotationPoint(-3F, 7F, 16F);
+      Tail.addBox(-3F, 0F + yoffset, 0F, 6, 6, 6);
+      Tail.setRotationPoint(0F, 7F, 15F);
       Tail.setTextureSize(128, 64);
       Tail.mirror = true;
       setRotation(Tail, -0.2617994F, 0F, 0F);
+      
       TailClub = new ModelRenderer(this, 80, 46);
-      TailClub.addBox(0F, 0F + yoffset, 0F, 6, 6, 6);
-      TailClub.setRotationPoint(-3F, 9F, 28F);
+      TailClub.addBox(-3F, -3F, 0F, 6, 6, 6);
+      TailClub.setRotationPoint(0F, 2F, 7F);
       TailClub.setTextureSize(128, 64);
       TailClub.mirror = true;
       setRotation(TailClub, 0F, 0F, 0F);
+      
       Tail2 = new ModelRenderer(this, 56, 46);
-      Tail2.addBox(0F, 0F + yoffset, 0F, 4, 4, 8);
-      Tail2.setRotationPoint(-2F, 10F, 20F);
+      Tail2.addBox(-2F, 0F, 0F, 4, 4, 8);
+      Tail2.setRotationPoint(0F, 4F, 5F);
       Tail2.setTextureSize(128, 64);
       Tail2.mirror = true;
       setRotation(Tail2, 0F, 0F, 0F);
+      
+      Tail.addChild(Tail2);
+      Tail2.addChild(TailClub);
+      
       Front_ThighRight = new ModelRenderer(this, 18, 24);
       Front_ThighRight.addBox(0F, 0F + yoffset, 0F, 4, 4, 4);
       Front_ThighRight.setRotationPoint(5F, 14F, 1F);
@@ -180,8 +186,8 @@ public class ModelAnkylosaurus extends ModelBase
     BodySpikes.render(var7);
     Neck.render(var7);
     Tail.render(var7);
-    TailClub.render(var7);
-    Tail2.render(var7);
+//  TailClub.render(var7);
+//    Tail2.render(var7);
     Front_ThighRight.render(var7);
     Front_ThighLeft.render(var7);
     Back_ThighRight.render(var7);
@@ -216,11 +222,11 @@ public class ModelAnkylosaurus extends ModelBase
           this.Leg4.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI +2) * 1.0F * var2;
           this.Leg3.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
 
-          Tail.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.2F * var1 + initialOffset));
+          Tail.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + initialOffset));
         currentAngle = Tail.rotateAngleY;
-        Tail2.rotateAngleY = ((float) Math.pow(0.25F, 2)) * (MathHelper.cos(-0.2F * var1 + 1F * offset + initialOffset)) - currentAngle;
+        Tail2.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + 1F * offset + initialOffset)) - currentAngle;
         currentAngle = Tail.rotateAngleY + Tail2.rotateAngleY;
-        TailClub.rotateAngleY = ((float) Math.pow(0.25F, 3)) * (MathHelper.cos(-0.2F * var1 + 1.1F * 2 * offset + PI / 9 + initialOffset)) - currentAngle;
+        TailClub.rotateAngleY = ((float) Math.pow(0.25F, 3)) * (MathHelper.cos(-0.6F * var1 + 1.1F * 2 * offset + PI / 9 + initialOffset)) - currentAngle;
         currentAngle = Tail.rotateAngleY + Tail2.rotateAngleY + TailClub.rotateAngleY;
   }
 

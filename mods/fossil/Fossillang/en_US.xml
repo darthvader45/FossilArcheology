@@ -180,9 +180,9 @@
 	<entry key="order.Follow">Follow</entry>
 	<entry key="order.FreeMove">Free Move</entry>
 <!-- Dinosaur Statuses -->
-	<entry key="status.Hungry.head">This </entry>
+	<entry key="status.Hungry.head"></entry>
 	<entry key="status.Hungry"> is hungry.</entry>
-	<entry key="status.Starve.head">A </entry>
+	<entry key="status.Starve.head"></entry>
 	<entry key="status.Starve"> was starved to death.</entry>
 	<entry key="status.LearningChest.head">A </entry>
 	<entry key="status.LearningChest"> has learned how to use chests.</entry>

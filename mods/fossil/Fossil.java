@@ -606,7 +606,7 @@ public class Fossil implements IPacketHandler
 	public static String Option_Lang_Server;
 	public static boolean Option_Heal_Dinos;*/
 	
-	static EnumArmorMaterial dinoBone = EnumHelper.addArmorMaterial("DinoBone", 35, new int[]{4,9,7,6}, 15);
+	static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[]{4,9,7,6}, 15);
     @cpw.mods.fml.common.Mod.PreInit
 	public void PreInit(FMLPreInitializationEvent event)
 	{
@@ -954,10 +954,10 @@ public class Fossil implements IPacketHandler
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODOEGG_NAME);
 		
 		//BoneArmor
-		skullHelmet = new ItemSkullHelmet(skullHelmetID, dinoBone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
-		ribCage = new ItemRibCage(ribCageID, dinoBone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);;
-		femurs = new ItemFemurs(femursID, dinoBone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);;
-		feet = new ItemFeet(feetID, dinoBone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFArmor);
+		skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
+		ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);;
+		femurs = new ItemFemurs(femursID, bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);;
+		feet = new ItemFeet(feetID, bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFArmor);
 		
 		//Ancient Egg
 		//Moved to fossilEnums.EnumDinoType
