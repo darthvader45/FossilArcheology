@@ -13,6 +13,8 @@ import java.util.logging.Level;
 
 
 
+
+
 //import fossil.fossilEnums.EnumAnimalType;
 /*import fossil.gens.WorldGenBigShip;
 import fossil.gens.WorldGenCheheWreck;
@@ -27,6 +29,8 @@ import mods.fossil.util.RenderHUD;
 import mods.fossil.blocks.BlockAmberOre;
 import mods.fossil.blocks.BlockAncientGlass;
 import mods.fossil.blocks.BlockAncientStone;
+import mods.fossil.blocks.BlockAncientStoneSlab;
+import mods.fossil.blocks.BlockAncientStoneStairs;
 import mods.fossil.blocks.BlockAncientStonebrick;
 import mods.fossil.blocks.BlockAncientWood;
 import mods.fossil.blocks.BlockAncientWoodPillar;
@@ -243,6 +247,9 @@ public class Fossil implements IPacketHandler
     public static Block ancientWoodStairs;
     public static BlockHalfSlab ancientWoodSingleSlab;
     public static BlockHalfSlab ancientWoodDoubleSlab;
+    public static Block ancientStoneStairs;
+    public static BlockHalfSlab ancientStoneSingleSlab;
+    public static BlockHalfSlab ancientStoneDoubleSlab;
 	
     //Items
     public static Item biofossil;
@@ -443,6 +450,9 @@ public class Fossil implements IPacketHandler
     public static int ancientWoodStairsID;
     public static int ancientWoodSingleSlabID;
     public static int ancientWoodDoubleSlabID;
+    public static int ancientStoneStairsID;
+    public static int ancientStoneSingleSlabID;
+    public static int ancientStoneDoubleSlabID;
 	
     //Items
     public static int biofossilID;
@@ -664,6 +674,9 @@ public class Fossil implements IPacketHandler
         ancientWoodStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOODSTAIRS_NAME, 3036).getInt(3036);
         ancientWoodSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME, 3037).getInt(3037);
         ancientWoodDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME, 3038).getInt(3038);
+        ancientStoneStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONESTAIRS_NAME, 3039).getInt(3039);
+        ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME, 3040).getInt(3040);
+        ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME, 3041).getInt(3041);
         
 		//Items
         biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
@@ -910,6 +923,9 @@ public class Fossil implements IPacketHandler
         ancientWoodStairs = new BlockAncientWoodStairs(ancientWoodStairsID, ancientWood).setUnlocalizedName(LocalizationStrings.ANCIENTWOODSTAIRS_NAME);
         ancientWoodDoubleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME);
         ancientWoodSingleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        ancientStoneStairs = new BlockAncientStoneStairs(ancientStoneStairsID, ancientStonebrick).setUnlocalizedName(LocalizationStrings.ANCIENTSTONESTAIRS_NAME);
+        ancientStoneDoubleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME);
+        ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palaePlanks.blockID, 5, 20);
@@ -1059,9 +1075,13 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(ancientWoodStairs, LocalizationStrings.ANCIENTWOODSTAIRS_NAME);
         GameRegistry.registerBlock(ancientWoodSingleSlab, LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientWoodDoubleSlab, LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENTSTONESTAIRS_NAME);
+        GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME);
         
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0)+".name", "Ancient Wood Slab");
+        LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0)+".name", "Ancient Stone Slab");
         
 //        LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palae SingleSlab");
 		GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
@@ -1150,6 +1170,10 @@ public class Fossil implements IPacketHandler
 	    GameRegistry.addRecipe(new ItemStack(ancientWoodSingleSlab, 6), new Object[] {"PPP", 'P', this.ancientWood});
 	    GameRegistry.addRecipe(new ItemStack(ancientWoodStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', this.ancientWood});
 	    GameRegistry.addRecipe(new ItemStack(ancientWoodStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', this.ancientWood});
+	    
+	       GameRegistry.addRecipe(new ItemStack(ancientStoneSingleSlab, 6), new Object[] {"PPP", 'P', this.ancientStone});
+	        GameRegistry.addRecipe(new ItemStack(ancientStoneStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', this.ancientStone});
+	        GameRegistry.addRecipe(new ItemStack(ancientStoneStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', this.ancientStone});
 		
 		GameRegistry.addRecipe(new ItemStack(feet, 1), new Object[] {"* *","# #", '#', this.foot, '*', this.claw});
 		GameRegistry.addRecipe(new ItemStack(femurs, 1), new Object[] {"###","* *","# #", '#', Item.bone,'*', this.legBone});
@@ -1511,6 +1535,7 @@ public class Fossil implements IPacketHandler
 	{
 		Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
         Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
+        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
 	}
 
 	@Override

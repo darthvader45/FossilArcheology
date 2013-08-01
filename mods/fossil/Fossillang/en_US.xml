@@ -2,6 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>English (en_US) Localization File</comment>
+<!-- Default English translation-->
 <!-- NOTE THE SPACE BEFORE/AFTER SOME OF THE LINES. -->
 <!-- Tabs -->
 	<entry key="itemgroup.FArmor">Ancient Armor</entry>
@@ -45,6 +46,7 @@
 	<entry key="tile.ancientGlass.name">Ancient Glass</entry>
 	<entry key="tile.ancientWoodPlate.name">Ancient Wooden Plate</entry>
 	<entry key="tile.ancientWoodStairs.name">Ancient Wooden Stairs</entry>
+	<entry key="tile.ancientStoneStairs.name">Ancient Stone Stairs</entry>
 <!-- Items -->
 	<entry key="item.bioFossil.name">Bio-Fossil</entry>
 	<entry key="item.relicScrap.name">Relic Scrap</entry>
@@ -217,11 +219,10 @@
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mammoth</entry>
 	<entry key="animal.smilodon">Smilodon</entry>
-	<entry key="animal.dodo">Dodo</entry>
     <entry key= "animal.pregnant.cow">Pregnant Cow</entry>
     <entry key= "animal.pregnant.pig">Pregnant Pig</entry>   
     <entry key= "animal.pregnant.sheep">Pregnant Sheep</entry>  
-    <entry key= "animal.pregnant.chicken">Pregnant Chicken</entry> 
+	<entry key="animal.dodo">Dodo</entry>
 <!-- Pedia text. Dino messages. 11 characters MAX -->
 	<entry key="pedia.text.owner">Owner:</entry>
 	<entry key="pedia.text.chest">* Chests</entry>

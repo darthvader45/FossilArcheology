@@ -43,6 +43,9 @@ public class LocalizationStrings {
     public static final String ANCIENTWOODSTAIRS_NAME = "ancientWoodStairs";    
     public static final String ANCIENTWOOD_SINGLESLAB_NAME = "ancientWoodSlab";
     public static final String ANCIENTWOOD_DOUBLESLAB_NAME = "ancientWoodSlabDouble";
+    public static final String ANCIENTSTONESTAIRS_NAME = "ancientStoneStairs";   
+    public static final String ANCIENTSTONE_SINGLESLAB_NAME = "ancientStoneSlab";
+    public static final String ANCIENTSTONE_DOUBLESLAB_NAME = "ancientStoneSlabDouble";
     
     public static final String BIO_FOSSIL_NAME = "bioFossil";
     public static final String RELIC_NAME = "relicScrap";
