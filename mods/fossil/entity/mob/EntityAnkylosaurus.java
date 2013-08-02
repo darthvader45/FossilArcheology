@@ -163,7 +163,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.tri_roar : null;
+        return DinoSoundHandler.Anky_living;
     }
 
     /**
@@ -171,7 +171,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-    	return DinoSoundHandler.tri_death;
+    	return DinoSoundHandler.Anky_hurt;
     }
 
     /**
@@ -179,7 +179,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return DinoSoundHandler.tri_death;
+        return DinoSoundHandler.Anky_death;
     }
 
     /**
@@ -392,104 +392,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
             this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getDinoHeight() * 0.65D + 0.07D * (double)(12 - this.getDinoAge()), this.posZ);
         }
     }
-
-    /*public boolean HandleEating(int var1)
-    {
-        return this.HandleEating(var1, false);
-    }
-
-    public boolean HandleEating(int var1, boolean var2)
-    {
-        if (this.getHunger() >= this.getHungerLimit())
-        {
-            if (this.isTamed() && !var2)
-            {
-                this.SendStatusMessage(EnumSituation.Full, this.SelfType);
-            }
-
-            return false;
-        }
-        else
-        {
-            this.increaseHunger(var1);
-            this.showHeartsOrSmokeFX(false);
-
-            if (this.getHunger() >= this.getHungerLimit())
-            {
-                this.setHunger(this.getHungerLimit());
-            }
-
-            return true;
-        }
-    }*/
-
-    /*private boolean FindWheats(int var1)
-    {DEAD CODE; replaced by DinoAIPickItem
-        if (this.isSelfSitting())//Sitting->Can't eat
-        {
-            return false;
-        }
-        else
-        {
-            List var2 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.0D, 1.0D));//Sits on Food?
-
-            if (var2 != null)
-            {
-                for (int var3 = 0; var3 < var2.size(); ++var3)
-                {
-                    if (var2.get(var3) instanceof EntityItem)
-                    {
-                        EntityItem var4 = (EntityItem)var2.get(var3);
-
-                        if (this.CheckEatable(var4.func_92014_d().itemID))// == Item.wheat.itemID
-                        {
-                            this.HandleEating(10);
-                            this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, (((new Random()).nextFloat() - (new Random()).nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                            var4.setDead();
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            EntityItem var8 = null;//Looking for food...
-            List var9 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand((double)var1, 4.0D, (double)var1));
-            Iterator var5 = var9.iterator();
-
-            while (var5.hasNext())
-            {
-                Entity var6 = (Entity)var5.next();
-
-                if (var6 instanceof EntityItem)
-                {
-                    EntityItem var7 = (EntityItem)var6;
-
-                    if (this.CheckEatable(var7.func_92014_d().getItem().itemID))// == Item.wheat.itemID		//Is item eatable?
-                    {
-                        if (var8 != null)
-                        {
-                            if (this.GetDistanceWithEntity(var7) < this.GetDistanceWithEntity(var8))
-                            {//go to nearer food
-                                var8 = var7;
-                            }
-                        }
-                        else
-                        {//it found food!
-                            var8 = var7;
-                        }
-                    }
-                }
-            }
-
-            if (var8 != null)
-            {//go to the food
-                this.setPathToEntity(this.worldObj.getPathEntityToEntity(this, var8, (float)var1, true, false, true, false));
-                return true;
-            }
-            return false;//poor dino, no food :(
-        }
-    }*/
-
+    
     /**
      * Applies a velocity to each of the entities pushing them away from each other. Args: entity
      */
@@ -506,79 +409,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
         }
     }
 
-    
-    public int BlockInteractive()
-    {
-    	int destroyed=0;
-    	
-    	if (!this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
-    	{
-	        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
-	        {
-	            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
-	            {
-	                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
-	                {
-	                    if (!this.worldObj.isAirBlock(var1, var2, var3))
-	                    {
-	                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
 
-	                        if (!this.inWater)
-	                        {
-	                            /*if (this.isTamed() && this.riddenByEntity == null)
-	                            {
-	                                if (var4 == Block.wood.blockID || var4 == Block.leaves.blockID)
-	                                {
-	                                    this.worldObj.setBlockWithNotify(var1, var2, var3, 0);
-	                                    this.RushTick = 10;
-	                                }
-	                            }
-	                            else*/ if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) <= 1.5D || var4 == Block.wood.blockID || var4 == Block.planks.blockID || var4 == Block.woodDoubleSlab.blockID || var4 == Block.woodSingleSlab.blockID)
-	                            {
-	                                if ((new Random()).nextInt(10) == 5)
-	                                {
-	                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
-	                                }
-
-	                                this.worldObj.setBlock(var1, var2, var3, 0);
-	                                destroyed++;
-	                                //this.RushTick = 10;
-	                            }
-	                        }
-	                    }
-	                }
-	            }
-	        }
-    	}
-        return destroyed;
-    }
-
-    /*public boolean isWheat(ItemStack var1)
-    {Not needed, use CheckEatable instead
-        return var1 != null && var1.itemID == Item.carrot.itemID;
-    }*/
-
-    /*public void ShowPedia(EntityPlayer var1)
-    {
-        this.PediaTextCorrection(this.SelfType, var1);
-
-        if (this.isTamed())
-        {
-            Fossil.ShowMessage(OwnerText + this.getOwnerName(), var1);
-            Fossil.ShowMessage(AgeText + this.getDinoAge(), var1);
-            Fossil.ShowMessage(HelthText + this.health + "/" + 20, var1);
-            Fossil.ShowMessage(HungerText + this.getHunger() + "/" + this.MaxHunger, var1);
-
-            if (this.isTamed() && this.getDinoAge() > 4 && this.riddenByEntity == null)
-            {
-                Fossil.ShowMessage(RidiableText, var1);
-            }
-        }
-        else
-        {
-            Fossil.ShowMessage(UntamedText, var1);
-        }
-    }*/
     public EntityAnkylosaurus spawnBabyAnimal(EntityAgeable var1)
     {
         return new EntityAnkylosaurus(this.worldObj);

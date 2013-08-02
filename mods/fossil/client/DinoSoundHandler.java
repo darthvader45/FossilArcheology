@@ -22,25 +22,37 @@ public class DinoSoundHandler {
 
     public static String[] soundFiles = {
         
+        //ankylosaurus
+        SOUND_RESOURCE_LOCATION + "ank_l1.wav",
+        SOUND_RESOURCE_LOCATION + "ank_l2.wav",
+        SOUND_RESOURCE_LOCATION + "ank_h1.wav",
+        SOUND_RESOURCE_LOCATION + "ank_h1.wav",
+        SOUND_RESOURCE_LOCATION + "ank_d.wav",
+        //brachiosaurus
         SOUND_RESOURCE_LOCATION + "br_d1.wav",
         SOUND_RESOURCE_LOCATION + "br_d2.wav",
         SOUND_RESOURCE_LOCATION + "br_l1.wav",
         SOUND_RESOURCE_LOCATION + "br_l2.wav",
+        //dilophosaurus
         SOUND_RESOURCE_LOCATION + "Dilod.wav",
         SOUND_RESOURCE_LOCATION + "Diloh.wav",
         SOUND_RESOURCE_LOCATION + "Dilol.wav",
         SOUND_RESOURCE_LOCATION + "di_l1.wav",
         SOUND_RESOURCE_LOCATION + "di_l2.wav",
+        //drum
         SOUND_RESOURCE_LOCATION + "drum_s.wav",
         SOUND_RESOURCE_LOCATION + "drum_t.wav",
+        //mammoth
         SOUND_RESOURCE_LOCATION + "ma_d.wav",
         SOUND_RESOURCE_LOCATION + "ma_h.wav",
         SOUND_RESOURCE_LOCATION + "ma_l.wav",
+        //plesiosaurus
         SOUND_RESOURCE_LOCATION + "Pls_h.wav",
         SOUND_RESOURCE_LOCATION + "Pls_l.wav",
         SOUND_RESOURCE_LOCATION + "PTS_h.wav",
         SOUND_RESOURCE_LOCATION + "PTS_l1.wav",
         SOUND_RESOURCE_LOCATION + "PTS_l2.wav",
+        //velociraptor
         SOUND_RESOURCE_LOCATION + "ra_a1.wav",
         SOUND_RESOURCE_LOCATION + "ra_a2.wav",
         SOUND_RESOURCE_LOCATION + "ra_d.wav",
@@ -51,6 +63,7 @@ public class DinoSoundHandler {
         SOUND_RESOURCE_LOCATION + "ra_l_f2.wav",
         SOUND_RESOURCE_LOCATION + "ra_l_w1.wav",
         SOUND_RESOURCE_LOCATION + "ra_l_w2.wav",
+        //tyrannosaurus
         SOUND_RESOURCE_LOCATION + "re_d1.wav",
         SOUND_RESOURCE_LOCATION + "re_d2.wav",
         SOUND_RESOURCE_LOCATION + "re_hit.wav",
@@ -60,20 +73,36 @@ public class DinoSoundHandler {
         SOUND_RESOURCE_LOCATION + "re_s1.wav",
         SOUND_RESOURCE_LOCATION + "re_s2.wav",
         SOUND_RESOURCE_LOCATION + "re_s3.wav",
+        //smilodon
         SOUND_RESOURCE_LOCATION + "sa_d.wav",
         SOUND_RESOURCE_LOCATION + "sa_h.wav",
         SOUND_RESOURCE_LOCATION + "sa_l1.wav",
         SOUND_RESOURCE_LOCATION + "sa_l2.wav",
         SOUND_RESOURCE_LOCATION + "sa_l3.wav",
+        //stegosaurus
         SOUND_RESOURCE_LOCATION + "st_d.wav",
         SOUND_RESOURCE_LOCATION + "st_h.wav",
         SOUND_RESOURCE_LOCATION + "st_l1.wav",
         SOUND_RESOURCE_LOCATION + "st_l2.wav",
         SOUND_RESOURCE_LOCATION + "st_l3.wav",
+        //triceratops
         SOUND_RESOURCE_LOCATION + "tri_d.wav",
         SOUND_RESOURCE_LOCATION + "tri_r1.wav",
         SOUND_RESOURCE_LOCATION + "tri_r2.wav",
         SOUND_RESOURCE_LOCATION + "tri_r3.wav",
+        
+        //mosasaurus
+        SOUND_RESOURCE_LOCATION + "mo_a1.wav",
+        SOUND_RESOURCE_LOCATION + "mo_d.wav",
+        SOUND_RESOURCE_LOCATION + "mo_h.wav",
+        SOUND_RESOURCE_LOCATION + "mo_l1.wav",
+        SOUND_RESOURCE_LOCATION + "mo_l2.wav",
+            // out of water sounds
+        SOUND_RESOURCE_LOCATION + "mo_o1.wav",
+        SOUND_RESOURCE_LOCATION + "mo_o2.wav",
+        SOUND_RESOURCE_LOCATION + "mo_o3.wav",
+        SOUND_RESOURCE_LOCATION + "mo_o4.wav",
+        
         SOUND_RESOURCE_LOCATION + "whip.wav",
 
 
@@ -121,6 +150,13 @@ public class DinoSoundHandler {
     public static final String Spino_hurt = SOUND_PREFIX + "re_hit";
     public static final String Spino_living = SOUND_PREFIX + "re_l";
     public static final String Spino_scream = SOUND_PREFIX + "re_s";
+    public static final String Anky_living = SOUND_PREFIX + "ank_l";
+    public static final String Anky_death = SOUND_PREFIX + "ank_d";
+    public static final String Anky_hurt = SOUND_PREFIX + "ank_h";
+    public static final String Mosa_living = SOUND_PREFIX + "mo_l";
+    public static final String Mosa_death = SOUND_PREFIX + "mo_d";
+    public static final String Mosa_hurt = SOUND_PREFIX + "mo_h";
+    public static final String Mosa_surface = SOUND_PREFIX + "mo_o";
 
 
 

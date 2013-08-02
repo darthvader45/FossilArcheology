@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFishing;
@@ -158,7 +159,12 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getLivingSound()
     {
-        return "";
+        
+    if (this.isInsideOfMaterial(Material.water) )
+    {
+        return DinoSoundHandler.Mosa_surface;
+    }
+        return DinoSoundHandler.Mosa_living;
     }
 
     /**
@@ -166,7 +172,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getHurtSound()
     {
-        return "";
+        return DinoSoundHandler.Mosa_hurt;
     }
 
     /**
@@ -174,7 +180,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getDeathSound()
     {
-        return "";
+        return DinoSoundHandler.Mosa_death;
     }
 
     protected void updateEntityActionState()

@@ -131,6 +131,7 @@
 	<entry key="item.eggSpinosaurus.name">Spinosaurus Egg</entry>
 	<entry key="item.eggCompsognathus.name">Compsognathus Egg</entry>
 	<entry key="item.eggDodo.name">Dodo Egg</entry>
+	<entry key="item.eggCultivatedDodo.name">Cultivated Dodo Egg</entry>
 	<entry key="item.eggAnkylosaurus.name">Ankylosaurus Egg</entry>
 <!-- DNA -->
 	<entry key="item.dnaTriceratops.name">Triceratops DNA</entry>

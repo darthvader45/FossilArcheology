@@ -15,6 +15,7 @@ import java.util.logging.Level;
 
 
 
+
 //import fossil.fossilEnums.EnumAnimalType;
 /*import fossil.gens.WorldGenBigShip;
 import fossil.gens.WorldGenCheheWreck;
@@ -59,6 +60,7 @@ import mods.fossil.client.FossilOptions;
 import mods.fossil.client.Localizations;
 import mods.fossil.entity.BehaviorJavelinDispense;
 import mods.fossil.entity.EntityAncientJavelin;
+import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
@@ -295,6 +297,7 @@ public class Fossil implements IPacketHandler
     public static Item animalCoin;
     public static Item dinoCoin;
 	public static Item dodoEgg;
+	public static Item cultivatedDodoEgg;
 	public static Item dodoWing;
 	public static Item dodoWingCooked;
 	
@@ -498,6 +501,7 @@ public class Fossil implements IPacketHandler
     public static int animalCoinID;
     public static int dinoCoinID;
 	public static int dodoEggID;
+	public static int cultivatedDodoEggID;
 	public static int dodoWingID;
     public static int dodoWingCookedID;
     
@@ -723,6 +727,7 @@ public class Fossil implements IPacketHandler
         animalCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
         dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOCOIN_NAME, 10042).getInt(10042);
         dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOEGG_NAME, 10043).getInt(10043);
+        cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATEDDODOEGG_NAME, 10044).getInt(10044);
         //10044
         //10045
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
@@ -968,6 +973,7 @@ public class Fossil implements IPacketHandler
 		skull = new ForgeItem(skullID,"Skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME).setCreativeTab(this.tabFItems);
         brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODOEGG_NAME);
+        cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATEDDODOEGG_NAME);
 		
 		//BoneArmor
 		skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
@@ -1196,18 +1202,15 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntityMLighting.class, 		"FriendlyLighting", 	4, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityFailuresaurus.class, 	"Failuresaurus", 		5, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityBones.class, 			"Bones", 				6, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityNautilus.class, 			"Nautilus", 			7, this, 250, 5, true);
+
 		EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityVelociraptor.class, 		"Velociraptor", 		9, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityTriceratops.class, 		"Triceratops", 			10, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityTRex.class, 				"Tyrannosaurus", 		11, this, 250, 5, true);
+		
+		
 		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 	12, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPigBoss.class, 			"PigBoss", 				13, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityPterosaur.class, 		"Pterosaur", 			14, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityPlesiosaur.class, 		"Plesiosaur", 			15, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityMosasaurus.class, 		"Mosasaurus", 			16, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityStegosaurus.class, 		"Stegosaurus", 			17, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityDilophosaurus.class, 	"Dilophosaurus", 		18, this, 250, 5, true);
+		
+		
+		
 		EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
@@ -1217,6 +1220,7 @@ public class Fossil implements IPacketHandler
 		//EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
 	      EntityRegistry.registerModEntity(EntityDodo.class,           "Dodo",              25, this, 250, 5, true);
 	       EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
+           EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class,           "CultivatedDodoEgg",              27, this, 250, 5, true);
           // EntityRegistry.registerModEntity(EntityPregnantChicken.class,           "PregnantChicken",              27, this, 250, 5, true);
 
 		for(int i=0;i<EnumDinoType.values().length;i++)

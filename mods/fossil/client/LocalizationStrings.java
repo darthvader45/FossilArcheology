@@ -101,6 +101,7 @@ public class LocalizationStrings {
     public static final String ANIMALCOIN_NAME = "animalCoin";
     public static final String DINOCOIN_NAME = "dinoCoin";
     public static final String DODOEGG_NAME = "eggDodo";
+    public static final String CULTIVATEDDODOEGG_NAME = "eggCultivatedDodo";
     public static final String DODOWING_NAME = "dodoWing";
     public static final String DODOWINGCOOKED_NAME = "dodoWingCooked";
     
