@@ -57,8 +57,13 @@ public class DinoAIAttackOnCollide extends EntityAIBase
         else
         {
             this.entityTarget = var1;
-            this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(this.entityTarget);
-            return this.entityPathEntity != null;
+        	if( this.entityTarget.isDead == false )
+        	{
+        		 this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(this.entityTarget);
+        		 return this.entityPathEntity != null;
+        	}
+        	return false;
+           
         }
     }
 

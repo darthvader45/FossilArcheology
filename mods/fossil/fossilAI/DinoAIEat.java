@@ -53,9 +53,9 @@ public class DinoAIEat extends EntityAIBase
      */
     public DinoAIEat(EntityDinosaur Dino0, int Range0)
     {
-        this.targetItem = null;
-        this.targetMob = null;
-        this.targetFeeder = null;
+    	this.targetItem = null;
+    	this.targetMob = null;
+    	this.targetFeeder = null;
         this.Dino = Dino0;
         this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
@@ -63,107 +63,168 @@ public class DinoAIEat extends EntityAIBase
         this.TimeAtThisTarget=0;
     }
 
+    public void resetTask()
+    {
+    	destX = destY = destZ = 0;
+        this.Dino.getNavigator().clearPathEntity();
+        this.TimeAtThisTarget=0;
+    }
+    
+    
+    /**
+     * Updates the task.
+     */
+    public void updateTask()
+    {
+    	 if( this.Dino.IsHungry() ) // Let's eat
+         {
+         	// Set our search range.
+         	//System.out.println("TargetTypeShould:"+String.valueOf(this.typeofTarget));
+         	int Range = this.SEARCH_RANGE;//Current Searching range
+         	if(this.Dino.IsDeadlyHungry())
+             	Range *= 2;
+         	
+         	// Find an item to eat.
+         	if(!this.Dino.SelfType.FoodItemList.IsEmpty() || !this.Dino.SelfType.FoodBlockList.IsEmpty())// Can Find Items or ItemBlocks!
+         	{
+ 	            Vec3 possibleItemLocation = this.getNearestItem(Range);
+ 	
+ 	            if (possibleItemLocation != null)//Found Item, go there and eat it
+ 	            {
+ 	                this.destX = possibleItemLocation.xCoord;
+ 	                this.destY = possibleItemLocation.yCoord;
+ 	                this.destZ = possibleItemLocation.zCoord;
+ 	                this.typeofTarget = ITEM;
+ 	                //System.out.println("ITEM FOUND!");
+ 	                return;
+ 	            }
+         	}
+         	
+         	// Eat from the feeder
+         	if(this.Dino.SelfType.useFeeder())
+         	{
+         		this.targetFeeder = this.Dino.GetNearestFeeder(Range/2);
+         		if (this.targetFeeder != null)//Found Item, go there and eat it
+ 	            {
+ 	                this.destX = this.targetFeeder.xCoord;
+                 this.destY = this.targetFeeder.yCoord;
+ 	                this.destZ = this.targetFeeder.zCoord;
+ 	                this.typeofTarget=FEEDER;
+ 	                //System.out.println("FEEDER FOUND!");
+ 	                return;
+ 	            }
+         	}
+         	
+         	
+             if(!this.Dino.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
+             {
+             	Vec3 possibleBlockLocation = this.Dino.getBlockToEat(Range/2);
+         		
+ 	            if (possibleBlockLocation != null)//Found Item, go there and eat it
+ 	            {
+ 	                this.destX = possibleBlockLocation.xCoord;
+ 	                this.destY = possibleBlockLocation.yCoord;
+ 	                this.destZ = possibleBlockLocation.zCoord;
+ 	                this.typeofTarget = BLOCK;
+ 	                //System.out.println("BLOCK FOUND!");
+ 	                return;
+ 	            }
+             }
+             
+             // Has not found anything yet, but their food mob list has stuff!
+             if(!this.Dino.SelfType.FoodMobList.IsEmpty())
+             {
+             	Vec3 possiblePreyLocation = this.getNearestPrey(Range);
+         		
+ 	            if (possiblePreyLocation != null)//Found Item, go there and eat it
+ 	            {
+ 	                this.destX = possiblePreyLocation.xCoord;
+ 	                this.destY = possiblePreyLocation.yCoord;
+ 	                this.destZ = possiblePreyLocation.zCoord;
+ 	                this.typeofTarget = MOB;
+ 	                //System.out.println("MOB FOUND!");
+ 	                return;
+ 	            }
+             }
+         }
+         else
+         {
+        	 
+         	// If this dino can carry items.
+         	if(this.Dino.SelfType.canCarryItems())
+         	{
+         		//System.out.println("F&A: Dino can carry stuff");
+         		
+         		int Range = 3; // Dino just steps over an item
+         		Vec3 var1 = this.getNearestItem(Range);
+
+                 if (var1 != null)
+                 {
+                     this.destX = var1.xCoord;
+                     this.destY = var1.yCoord;
+                     this.destZ = var1.zCoord;
+                     this.typeofTarget=ITEM;
+                     return;
+                 }
+                 
+         		if( (new Random()).nextInt( (new Random() ).nextInt( 4000 ) +4000 ) == 1 )
+         		{
+         			// The Dino is willing to (once every 4000-8000 ticks), but looks only in a small radius
+ 	        		Range=10;
+ 	        		var1 = this.getNearestItem(Range);
+ 	
+ 	                if (var1 != null)
+ 	                {
+ 	                    this.destX = var1.xCoord;
+ 	                    this.destY = var1.yCoord;
+ 	                    this.destZ = var1.zCoord;
+ 	                    this.typeofTarget=ITEM;
+ 	                    return;
+ 	                }
+         		}
+         	}
+         	else
+         	{
+         		//System.out.println("F&A: Dino cannot carry anything!");
+         	} 	  
+       	         	
+         }
+    }
+    
     /**
      * Returns whether the EntityAIBase should begin execution.
+     * Called per frame.
      */
-    public boolean shouldExecute()
+public boolean shouldExecute()
     {
-        if (this.Dino.IsHungry() && this.typeofTarget==NO_TARGET && (!this.Dino.SelfType.FoodItemList.IsEmpty() || !this.Dino.SelfType.FoodBlockList.IsEmpty() || !this.Dino.SelfType.FoodMobList.IsEmpty() || this.Dino.SelfType.useFeeder()))
-        {
-            //System.out.println("TargetTypeShould:"+String.valueOf(this.typeofTarget));
-            int Range=this.SEARCH_RANGE;//Current Searching range
-            if(this.Dino.IsDeadlyHungry())
-                Range*=2;
-            
-            if(!this.Dino.SelfType.FoodItemList.IsEmpty() || !this.Dino.SelfType.FoodBlockList.IsEmpty())// Can Find Items or ItemBlocks!
-            {
-                Vec3 var1 = this.getNearestItem(Range);
-    
-                if (var1 != null)//Found Item, go there and eat it
-                {
-                    this.destX = var1.xCoord;
-                    this.destY = var1.yCoord;
-                    this.destZ = var1.zCoord;
-                    this.typeofTarget=ITEM;
-                    //System.out.println("ITEM FOUND!");
-                    return true;
-                }
-            }
-            if(this.Dino.SelfType.useFeeder())
-            {
-                this.targetFeeder = this.Dino.GetNearestFeeder(Range/2);
-                if (this.targetFeeder != null)//Found Item, go there and eat it
-                {
-                    this.destX = this.targetFeeder.xCoord;
-                    this.destY = this.targetFeeder.yCoord;
-                    this.destZ = this.targetFeeder.zCoord;
-                    this.typeofTarget=FEEDER;
-                    //System.out.println("FEEDER FOUND!");
-                    return true;
-                }
-            }
-            if(!this.Dino.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
-            {
-                Vec3 var1 = this.Dino.getBlockToEat(Range/2);
-                
-                if (var1 != null)//Found Item, go there and eat it
-                {
-                    this.destX = var1.xCoord;
-                    this.destY = var1.yCoord;
-                    this.destZ = var1.zCoord;
-                    this.typeofTarget=BLOCK;
-                    //System.out.println("BLOCK FOUND!");
-                    return true;
-                }
-            }
-            if(!this.Dino.SelfType.FoodMobList.IsEmpty())//Hasn't found anything and has blocks it can look for
-            {
-                Vec3 var1 = this.getNearestPrey(Range);
-                
-                if (var1 != null)//Found Item, go there and eat it
-                {
-                    this.destX = var1.xCoord;
-                    this.destY = var1.yCoord;
-                    this.destZ = var1.zCoord;
-                    this.typeofTarget=MOB;
-                    //System.out.println("MOB FOUND!");
-                    return true;
-                }
-            }
-        }
-        else
-        {
-            if(this.Dino.SelfType.canCarryItems())
-            {//It can carry items
-                int Range=3;//Dino just steps over an item
-                Vec3 var1 = this.getNearestItem(Range);
 
-                if (var1 != null)
-                {
-                    this.destX = var1.xCoord;
-                    this.destY = var1.yCoord;
-                    this.destZ = var1.zCoord;
-                    this.typeofTarget=ITEM;
-                    return true;
-                }
-                if((new Random()).nextInt((new Random()).nextInt(4000)+4000)==1)
-                {// The Dino is willing to (once every 4000-8000 ticks), but looks only in a small radius
-                    Range=10;
-                    var1 = this.getNearestItem(Range);
-    
-                    if (var1 != null)
-                    {
-                        this.destX = var1.xCoord;
-                        this.destY = var1.yCoord;
-                        this.destZ = var1.zCoord;
-                        this.typeofTarget=ITEM;
-                        return true;
-                    }
-                }
-            }
-            if(this.typeofTarget!=NO_TARGET)
-                return true;
-        }
+    	// Check to see if the dino is hungry
+    	// and if one of these are true:
+    	// 		1.) it has food in its food list
+    	//		2.) it has food blocks in its food block list
+    	//		3.) it has food in its mob list
+    	//		4.) it can use a feeder
+		if( this.Dino.IsHungry() == true )
+    	{
+    		//System.out.println("F&A: Dino is Hungry!");    		
+    		return true;
+    	}
+
+		if( this.typeofTarget == MOB && this.targetMob == null )
+    	{
+    		this.typeofTarget = NO_TARGET;
+    		return false;
+    	}
+    	
+    	if( this.typeofTarget == NO_TARGET )
+		{
+			this.targetItem = null;			
+		}
+    	
+        // Make wander or some other behavior.
+		//System.out.println("F&A: Should not execute!");
+
+        this.Dino.getNavigator().clearPathEntity();
         return false;
     }
 
@@ -172,8 +233,55 @@ public class DinoAIEat extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        //System.out.println("Continue:"+String.valueOf(!this.Dino.getNavigator().noPath() && ((this.typeofTarget==ITEM && this.targetItem.isEntityAlive()) || (this.typeofTarget==MOB && this.targetMob.isEntityAlive()) || (this.typeofTarget==FEEDER && !this.targetFeeder.isInvalid()) || (this.typeofTarget==BLOCK && this.Dino.FoodBlockList.CheckBlockById(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ))))));
-        return !this.Dino.getNavigator().noPath() && ((this.typeofTarget==ITEM && this.targetItem.isEntityAlive()) || (this.typeofTarget==MOB && this.targetMob.isEntityAlive()) || (this.typeofTarget==FEEDER && !this.targetFeeder.isInvalid()) || (this.typeofTarget==BLOCK && this.Dino.SelfType.FoodBlockList.CheckBlockById(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ))));
+    	//System.out.println("Continue:"+String.valueOf(!this.Dino.getNavigator().noPath() && ((this.typeofTarget==ITEM && this.targetItem.isEntityAlive()) || (this.typeofTarget==MOB && this.targetMob.isEntityAlive()) || (this.typeofTarget==FEEDER && !this.targetFeeder.isInvalid()) || (this.typeofTarget==BLOCK && this.Dino.FoodBlockList.CheckBlockById(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ))))));
+        
+
+    	//System.out.println("F&A:DinoAIEat::continueExecuting()");
+    	
+    	
+    	// Check to see if we have a path
+    	if( this.Dino.getNavigator().noPath() == false )
+    	{
+    		// If this is an item which is alive.
+    		if( this.typeofTarget == ITEM && this.targetItem.isEntityAlive() )
+    		{
+    			//System.out.println("F&A:DinoAIEat::continueExecuting(): Yes");
+    			return true;
+    		}
+    		
+    		// If this is a mob and its still alive.
+    		if( this.typeofTarget == MOB && this.targetMob.isEntityAlive() )
+    		{
+    			//System.out.println("F&A:DinoAIEat::continueExecuting(): Yes");
+    			return true;
+    		}
+    		
+    		// If this is a valid feeder
+    		if( this.typeofTarget == FEEDER && this.targetFeeder.isInvalid() == false )
+    		{
+    			//System.out.println("F&A:DinoAIEat::continueExecuting(): Yes");
+    			return true;
+    		}
+    		
+    		// If this is a block and its in our food block list.
+    		if( this.typeofTarget == BLOCK && this.Dino.SelfType.FoodBlockList.CheckBlockById( this.Dino.worldObj.getBlockId( (int)destX, (int)destY, (int)destZ) ) )
+    		{    			
+    			return true;
+    		}
+       	}
+    	
+    	//System.out.println("F&A:DinoAIEat::continueExecuting(): No");
+    	
+    	// Failed our checks because it has no path or its target is not found/food.
+    	this.Dino.getNavigator().clearPathEntity();
+    	return false;
+    	
+    	// HOLY MOTHER OF GOD DONT EVER DO THIS AGAIN!!!!
+    	// v										v
+    	//
+    	// return !this.Dino.getNavigator().noPath() && ((this.typeofTarget==ITEM && this.targetItem.isEntityAlive()) || (this.typeofTarget==MOB && this.targetMob.isEntityAlive()) || (this.typeofTarget==FEEDER && !this.targetFeeder.isInvalid()) || (this.typeofTarget==BLOCK && this.Dino.SelfType.FoodBlockList.CheckBlockById(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ))));
+    	//
+    	// ^										^
     }
 
     /**
@@ -181,69 +289,96 @@ public class DinoAIEat extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.TimeAtThisTarget++;
-        if(this.TimeAtThisTarget==500)
-        {
-            this.TimeAtThisTarget=0;
-            this.typeofTarget=NO_TARGET;
-            return;
-        }
-        //System.out.println("TargetType:"+String.valueOf(this.typeofTarget));
-        if(this.typeofTarget==MOB)
-        {
-            if(!this.targetMob.isDead)
-            {
-                this.destX=this.targetMob.posX;
-                this.destY=this.targetMob.posY;
-                this.destZ=this.targetMob.posZ;
-                this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getSpeed());
-            }
-            else
-            {
-                this.Dino.getNavigator().clearPathEntity();
-                this.TimeAtThisTarget=0;
-                this.typeofTarget=NO_TARGET;
-            }
-            return;
-        }
+
+    	//System.out.println("F&A: StartExecuting");
+    	
+    	this.TimeAtThisTarget++;
+    	
+    	
+    	// If we've spent too much time at this target.
+    	if( this.TimeAtThisTarget >= 500 )
+    	{
+    		this.TimeAtThisTarget = 0;
+    		this.typeofTarget = NO_TARGET;
+    		return;
+    	}
+    	
+    	// Handle eating nothing
+    	if( this.typeofTarget == NO_TARGET )
+    	{
+    		// No target.
+        	//System.out.println("F&A: No target to eat.");
+    		return;
+    	}
+    	
+    	// Handle eating mobs
+    	//System.out.println("TargetType:"+String.valueOf(this.typeofTarget));
+    	if( this.typeofTarget == MOB )
+    	{
+    		// If this mob is not dead
+    		if( this.targetMob.isDead == false )
+    		{
+
+    	    	//System.out.println("TargetType: Mob is not dead");
+    			
+    			this.destX=this.targetMob.posX;
+    			this.destY=this.targetMob.posY;
+    			this.destZ=this.targetMob.posZ;
+    			this.Dino.getNavigator().tryMoveToXYZ( this.destX, this.destY, this.destZ, this.Dino.getSpeed() );
+    		}
+    		else // if the mob is dead.
+    		{
+
+    	    	//System.out.println("TargetType: Mob is dead");
+    			this.Dino.getNavigator().clearPathEntity();
+    			this.TimeAtThisTarget = 0;
+                this.typeofTarget = NO_TARGET;
+                this.targetMob = null;
+    		}
+    		return;
+    	}
+    	
+    	// Handle eating everything else
         double Distance = Math.pow(this.Dino.posX - this.destX, 2.0D) + Math.pow(this.Dino.posZ - this.destZ, 2.0D);
 
         if (Distance < Math.pow(this.USE_RANGE, 2.0D))
         {
-            switch(this.typeofTarget)
+        	switch(this.typeofTarget)
             {
-                case ITEM:
-                    if(this.targetItem!=null && !this.targetItem.isDead)
-                    {
-                        int i=this.Dino.PickUpItem(this.targetItem.getEntityItem());
-                        if(i>0)
-                            this.targetItem.getEntityItem().stackSize=i;
-                        else
-                            this.targetItem.setDead();
-                    }
-                break;
-                case FEEDER:
-                    if(!this.targetFeeder.isInvalid())
-                    {
-                        int healval=MathHelper.floor_double(this.targetFeeder.Feed(this.Dino, this.Dino.SelfType)/15D);
-                        if(Fossil.FossilOptions.Heal_Dinos)
-                            this.Dino.heal(healval);
-                    }
-                break;
-                case BLOCK:
-                    if(Fossil.FossilOptions.Heal_Dinos)
-                        this.Dino.heal(this.Dino.SelfType.FoodBlockList.getBlockHeal(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
-                    this.Dino.increaseHunger(this.Dino.SelfType.FoodBlockList.getBlockFood(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
-                    this.Dino.worldObj.setBlock((int)destX, (int)destY, (int)destZ,0);
-                break;
+            	case ITEM:
+	            	if(this.targetItem!=null && !this.targetItem.isDead)
+	            	{
+	    	            int i=this.Dino.PickUpItem(this.targetItem.getEntityItem());
+	    	            if(i>0)
+	    	            	this.targetItem.getEntityItem().stackSize=i;
+	    	            else
+	    	            	this.targetItem.setDead();
+	            	}
+            	break;
+            	
+            	case FEEDER:
+	            	if(!this.targetFeeder.isInvalid())
+	            	{
+	            		int healval=MathHelper.floor_double(this.targetFeeder.Feed(this.Dino, this.Dino.SelfType)/15D);
+	            		if(Fossil.FossilOptions.Heal_Dinos)
+	            			this.Dino.heal(healval);
+	            	}
+            	break;
+            	
+            	case BLOCK:
+	            	if(Fossil.FossilOptions.Heal_Dinos)
+	            		this.Dino.heal(this.Dino.SelfType.FoodBlockList.getBlockHeal(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
+	            	this.Dino.increaseHunger(this.Dino.SelfType.FoodBlockList.getBlockFood(this.Dino.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
+	            	this.Dino.worldObj.setBlock((int)destX, (int)destY, (int)destZ,0);
+            	break;
             }
-            
+        	
             this.Dino.getNavigator().clearPathEntity();
             this.TimeAtThisTarget=0;
             this.typeofTarget=NO_TARGET;
         }
-        else
-            this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getSpeed());
+        //else
+          //  this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getSpeed());
     }
 
     private Vec3 getNearestItem(int SEARCH_RANGE)
@@ -279,13 +414,13 @@ public class DinoAIEat extends EntityAIBase
 
             if (this.Dino.SelfType.FoodMobList.CheckMobByClass(var4.getClass()))
             {//It's food
-                if(!(var4 instanceof EntityDinosaur) || (var4 instanceof EntityDinosaur && ((EntityDinosaur) var4).isModelized()==false))
-                {//No modelized Dinos for Lunch!
-                    this.targetMob = var4;
-                    this.Dino.setAttackTarget(var4);
-                    var3 = Vec3.createVectorHelper(var4.posX, var4.posY, var4.posZ);
-                    break;
-                }
+            	if(!(var4 instanceof EntityDinosaur) || (var4 instanceof EntityDinosaur && ((EntityDinosaur) var4).isModelized()==false))
+            	{//No modelized Dinos for Lunch!
+	                this.targetMob = var4;
+	                this.Dino.setAttackTarget(var4);
+	                var3 = Vec3.createVectorHelper(var4.posX, var4.posY, var4.posZ);
+	                break;
+            	}
             }
         }
         return var3;
