@@ -44,7 +44,7 @@ public class EntityDodo extends EntityAnimal
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMate(this, f));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.seeds.itemID, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.melonSeeds.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, f));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -175,11 +175,11 @@ public class EntityDodo extends EntityAnimal
 
         if (this.isBurning())
         {
-            this.dropItem(Fossil.dodoWing.itemID, 1);
+            this.dropItem(Fossil.dodoWingCooked.itemID, 1);
         }
         else
         {
-            this.dropItem(Fossil.dodoWingCooked.itemID, 1);
+            this.dropItem(Fossil.dodoWing.itemID, 1);
         }
     }
 
@@ -197,7 +197,7 @@ public class EntityDodo extends EntityAnimal
      */
     public boolean isBreedingItem(ItemStack par1ItemStack)
     {
-        return par1ItemStack != null && par1ItemStack.getItem() instanceof ItemSeeds;
+        return par1ItemStack != null && par1ItemStack.getItem() == Item.melonSeeds;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)

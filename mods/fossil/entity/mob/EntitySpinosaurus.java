@@ -444,10 +444,20 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         		else
                 {
                     if (!this.isWeak())
-                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
-                    if (!this.isAdult())
-                    	Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
-                    return true;
+                    {
+                        if (!this.worldObj.isRemote)
+                        {
+                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
+                        }
+                        }
+                        if (!this.isAdult())
+                        {
+                            if (!this.worldObj.isRemote)
+                            {
+                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
+                            }
+                        }
+                        return true;
                 }
              }
         	if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
@@ -462,9 +472,13 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                 return true;
             }
             if(var2.itemID == Fossil.chickenEss.itemID)
+            {
                 if (!this.worldObj.isRemote)
+                {
                 Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                 return true;
+                }
+            }
          }
         else 
         {

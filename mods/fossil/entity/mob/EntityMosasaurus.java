@@ -494,6 +494,18 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         	this.heal(5);
     }
 
+    //TODO: Fix this water dino AI so they can hunt properly and not need this.
+    @Override
+    public void decreaseHunger()
+    {
+        if (this.getHunger() > 260)
+        {
+            if (this.getHunger() > 0)
+            {
+                this.setHunger(this.getHunger() - 1);
+            }
+        }
+    }
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */

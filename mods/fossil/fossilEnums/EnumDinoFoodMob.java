@@ -5,6 +5,7 @@ import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
@@ -45,6 +46,7 @@ public enum EnumDinoFoodMob
 	Spinosaurus(null,70,5),
 	Compsognathus(null,20,3),
 	Ankylosaurus(null,50,3),
+	Dodo(EntityDodo.class,20,2),
 	;
     public Class preyClass;
     public int FoodValue;

@@ -290,7 +290,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        if ((this.isTeen() || this.isAdult())&& !this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking == true)//this.getDinoAge() >= 4)
+        if ((this.isTeen() || this.isAdult())&& !this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking == true && this.riddenByEntity == null )//this.getDinoAge() >= 4)
         {
             this.BlockInteractive();
         }

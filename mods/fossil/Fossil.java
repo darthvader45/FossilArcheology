@@ -158,7 +158,7 @@ import cpw.mods.fml.relauncher.Side;
 import mods.fossil.util.FossilBonemealEvent;
 import mods.fossil.util.FossilTradeHandler;
 
-@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 Build 5.2 DEV")
+@Mod(modid = "fossil", name = "Fossil/Archeology", version = "1.5.2 Build 5.2")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Fossil implements IPacketHandler
@@ -183,7 +183,7 @@ public class Fossil implements IPacketHandler
 	 * If DebugMode = true
 	 * Dinosaur/Syringe times are accelerated.
 	 */
-	public static boolean DebugMode = true;
+	public static boolean DebugMode = false;
 	public static final double MESSAGE_DISTANCE = 25.0D;
 	
     //private static int[] blockIDs = new int[] {1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1151, 1152, 1153};
@@ -1249,7 +1249,7 @@ public class Fossil implements IPacketHandler
         //LanguageRegistry.instance().addStringLocalization("entity.fossil.Brachiosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_BRACHIOSAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantChicken.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_CHICKEN));
+//        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantChicken.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_CHICKEN));
         //LanguageRegistry.instance().addStringLocalization("entity.fossil.Spinosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_SPINOSAURUS));
 
         
