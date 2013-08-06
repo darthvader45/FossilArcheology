@@ -59,7 +59,7 @@ public class BlockFeeder extends BlockContainer
      */
     public int idDropped(int var1, Random var2, int var3)
     {
-        return Fossil.feederIdle.blockID;
+        return Fossil.feederActive.blockID;
     }
     public int getRenderType()
     {

@@ -2,18 +2,23 @@ package mods.fossil.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import mods.fossil.CommonProxy;
+import mods.fossil.Fossil;
 import mods.fossil.entity.EntityAncientJavelin;
+import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.RenderDinoEgg;
 import mods.fossil.entity.RenderJavelin;
 import mods.fossil.entity.RenderStoneboard;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityMammoth;
@@ -29,6 +34,7 @@ import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
+import mods.fossil.entity.mob.ModelCompsognathus;
 import mods.fossil.entity.mob.ModelDilophosaurus;
 import mods.fossil.entity.mob.ModelFailuresaurus;
 import mods.fossil.entity.mob.ModelMammoth;
@@ -41,8 +47,12 @@ import mods.fossil.entity.mob.ModelStegosaurus;
 import mods.fossil.entity.mob.ModelTRex;
 import mods.fossil.entity.mob.ModelTriceratops;
 import mods.fossil.entity.mob.ModelVelociraptor;
+import mods.fossil.entity.mob.RenderAnkylosaurus;
 import mods.fossil.entity.mob.RenderBrachiosaurus;
+import mods.fossil.entity.mob.RenderCompsognathus;
 import mods.fossil.entity.mob.RenderDilophosaurus;
+import mods.fossil.entity.mob.ModelDodo;
+import mods.fossil.entity.mob.RenderDodo;
 import mods.fossil.entity.mob.RenderFailuresaurus;
 import mods.fossil.entity.mob.RenderMammoth;
 import mods.fossil.entity.mob.RenderMosasaurus;
@@ -59,12 +69,16 @@ import mods.fossil.entity.mob.RenderVelociraptor;
 import mods.fossil.guiBlocks.RenderTNClock;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.client.renderer.entity.RenderPig;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderVillager;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
@@ -94,7 +108,12 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBiped(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrachiosaurus.class, new RenderBrachiosaurus(0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderMammoth(new ModelMammoth(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCompsognathus.class, new RenderCompsognathus(new ModelCompsognathus(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Fossil.dodoEgg));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCultivatedDodoEgg.class, new RenderSnowball(Fossil.cultivatedDodoEgg));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnkylosaurus.class, new RenderAnkylosaurus(0.5F));
 		//RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
 		
 	}

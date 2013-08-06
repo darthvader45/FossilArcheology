@@ -1,5 +1,6 @@
 package mods.fossil.guiBlocks;
 
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiCultivate extends GuiContainer
 {
+	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Cultivate.png");
     private TileEntityCultivate furnaceInventory;
 
     public GuiCultivate(InventoryPlayer var1, TileEntity var2)
@@ -32,7 +34,7 @@ public class GuiCultivate extends GuiContainer
     {
         //int var4 = this.mc.renderEngine.getTexture("/fossil/textures/UICultivate.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Cultivate.png"));
+        mc.func_110434_K().func_110577_a(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

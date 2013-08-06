@@ -57,6 +57,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public EntityBrachiosaurus(World var1)
     {
         super(var1,EnumDinoType.Brachiosaurus);
+        this.texture = "/mods/fossil/textures/mob/Brachiosaurus.png";
         //this.setSize(1.5F, 1.5F);
         //this.health = 8;
         //this.experienceValue=5;
@@ -289,7 +290,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        if ((this.isTeen() || this.isAdult())&& !this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking)//this.getDinoAge() >= 4)
+        if ((this.isTeen() || this.isAdult())&& !this.isModelized() && Fossil.FossilOptions.Dino_Block_Breaking == true && this.riddenByEntity == null )//this.getDinoAge() >= 4)
         {
             this.BlockInteractive();
         }

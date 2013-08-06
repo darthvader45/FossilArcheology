@@ -3,7 +3,6 @@ package mods.fossil.blocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,9 +15,6 @@ public class BlockAncientStonebrick extends Block
     {
         super(var1, Material.rock);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.ANCIENTSTONEBRICK_NAME);
-        this.setStepSound(Block.soundStoneFootstep);
-        this.setHardness(1.5F);
     }
 
     /**

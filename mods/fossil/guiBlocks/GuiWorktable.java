@@ -1,6 +1,7 @@
 package mods.fossil.guiBlocks;
 
 
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiWorktable extends GuiContainer
 {
+	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
     private TileEntityWorktable furnaceInventory;
 
     public GuiWorktable(InventoryPlayer var1, TileEntity var2)
@@ -32,7 +34,7 @@ public class GuiWorktable extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Workbench.png"));
+        mc.func_110434_K().func_110577_a(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

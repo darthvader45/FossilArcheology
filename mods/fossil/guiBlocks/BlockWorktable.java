@@ -204,6 +204,8 @@ public class BlockWorktable extends BlockContainer
         {
             TileEntityWorktable var7 = (TileEntityWorktable)var1.getBlockTileEntity(var2, var3, var4);
 
+            if (var7 != null)
+            {
             for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
             {
                 ItemStack var9 = var7.getStackInSlot(var8);
@@ -234,7 +236,7 @@ public class BlockWorktable extends BlockContainer
                 }
             }
         }
-
+        }
         super.breakBlock(var1, var2, var3, var4, var5, var6);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFishing;
@@ -158,7 +159,12 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getLivingSound()
     {
-        return "";
+        
+    if (this.isInsideOfMaterial(Material.water) )
+    {
+        return DinoSoundHandler.Mosa_surface;
+    }
+        return DinoSoundHandler.Mosa_living;
     }
 
     /**
@@ -166,7 +172,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getHurtSound()
     {
-        return "";
+        return DinoSoundHandler.Mosa_hurt;
     }
 
     /**
@@ -174,7 +180,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
      */
     protected String getDeathSound()
     {
-        return "";
+        return DinoSoundHandler.Mosa_death;
     }
 
     protected void updateEntityActionState()
@@ -488,6 +494,18 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         	this.heal(5);
     }
 
+    //TODO: Fix this water dino AI so they can hunt properly and not need this.
+    @Override
+    public void decreaseHunger()
+    {
+        if (this.getHunger() > 260)
+        {
+            if (this.getHunger() > 0)
+            {
+                this.setHunger(this.getHunger() - 1);
+            }
+        }
+    }
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */

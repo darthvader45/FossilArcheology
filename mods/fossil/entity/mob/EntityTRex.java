@@ -210,7 +210,7 @@ public class EntityTRex extends EntityDinosaur
     {
         super.onUpdate();
         //this.blockBreakingBehavior.execute();
-        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking)
+        if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
             BlockInteractive();
         if (this.health > 0)
         {
@@ -447,10 +447,20 @@ public class EntityTRex extends EntityDinosaur
                 else
                 {
                     if (!this.isWeak())
+                    {
+                        if (!this.worldObj.isRemote)
+                        {
                         Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
-                    if (!this.isAdult())
+                        }
+                        }
+                        if (!this.isAdult())
+                        {
+                            if (!this.worldObj.isRemote)
+                            {
                         Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
-                    return true;
+                            }
+                        }
+                        return true;
                 }
              }
             if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
@@ -465,7 +475,13 @@ public class EntityTRex extends EntityDinosaur
                 return true;
             }
             if(var2.itemID == Fossil.chickenEss.itemID)
+            {
+                if (!this.worldObj.isRemote)
+                {
+                Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                 return true;
+                }
+            }
          }
         else 
         {

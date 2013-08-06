@@ -7,8 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,6 +20,9 @@ import mods.fossil.Fossil;
 
 public class RenderHUD implements ITickHandler
 {
+	
+	public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
+	private static TextureManager textureManager = Minecraft.getMinecraft().func_110434_K(); //get the TextureManager instance
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData)
 	{
@@ -50,7 +55,6 @@ public class RenderHUD implements ITickHandler
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 //			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("%blur%/misc/skullhelmetblur.png"));
-//			mc.renderEngine.func_110581_b("%blur%/misc/skullhelmetblur.png").func_110552_b();
 			
 			t.startDrawingQuads();
 			t.addVertexWithUV(0.0D, (double)height, 90.0D, 0.0D, 1.0D);

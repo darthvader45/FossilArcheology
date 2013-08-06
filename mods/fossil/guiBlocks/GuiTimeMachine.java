@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiTimeMachine extends GuiContainer
 {
+	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Timemachine.png");
     private TileEntityTimeMachine timeMachineInstance;
     final int SQR_WIDTH = 34;
     final int SQR_HEIGHT = 13;
@@ -46,7 +47,7 @@ public class GuiTimeMachine extends GuiContainer
     {
         boolean var4 = true;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Timemachine.png"));
+        mc.func_110434_K().func_110577_a(loc);
         int var6 = (this.width - this.xSize) / 2;
         int var7 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var6, var7, 0, 0, this.xSize, this.ySize);

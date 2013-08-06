@@ -74,12 +74,14 @@ public class DinoAIControlledByPlayer extends EntityAIBase
 	    	{
 	    		this.lastTimeSeenWhip=0;
 	    		EntityPlayer P = (EntityPlayer)this.motionTarget.riddenByEntity;
+	    		/* Handle whip damage in whip class so it doesn't constantly drain while riding.
 	            if (!P.capabilities.isCreativeMode)
 	            {//decrease the whips uses left
 	                ItemStack I = P.getHeldItem();
 	                if (I != null && I.itemID == Fossil.whip.itemID)
 	                	I.setItemDamage(I.getItemDamage()+1);
 	            }
+	            */
 	    	}
 	    	if(!this.motionTarget.canBeSteered() && this.lastTimeSeenWhip<FollowTimeWithoutWhip && this.lastTimeSeenWhip!=-1)
 	    		this.lastTimeSeenWhip++;

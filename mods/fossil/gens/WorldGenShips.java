@@ -31,7 +31,7 @@ public class WorldGenShips implements IWorldGenerator
     	if(biome instanceof BiomeGenOcean)
    	 	{
     		
-    		if (random.nextInt(50)==0)
+    		if (random.nextInt(50)==0) //adjust the number in nextInt(). Higher values == rarer. Default 50
     		{
     			int var6 = blockX + random.nextInt(128);
     			int var7 = blockZ + random.nextInt(128);
@@ -48,7 +48,7 @@ public class WorldGenShips implements IWorldGenerator
     	WorldGeneratorCheheWreck chehewreck = new WorldGeneratorCheheWreck();
     	if(biome instanceof BiomeGenRiver)
    	 	{
-    		if(random.nextInt(20) == 0) //adjust the number in nextInt(). Higher values == rarer.
+    		if(random.nextInt(20) == 0) //adjust the number in nextInt(). Higher values == rarer. Default 20
 			{
 				int var6 = blockX + random.nextInt(16);
     			int var7 = blockZ + random.nextInt(16);
@@ -65,7 +65,8 @@ public class WorldGenShips implements IWorldGenerator
     	if(biome instanceof BiomeGenSwamp)
    	 	{
     	
-    		for (int x = 0;x<2;x++)
+ //   		for (int x = 0;x<2;x++)
+    	    if(random.nextInt(20) == 0) 
     		{
     			int var6 = blockX + random.nextInt(512);
     			int var7 = blockZ + random.nextInt(512);

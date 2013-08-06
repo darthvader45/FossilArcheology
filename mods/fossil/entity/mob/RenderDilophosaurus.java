@@ -1,26 +1,22 @@
 package mods.fossil.entity.mob;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderDilophosaurus extends RenderLiving
 {
-    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/Brachiosaurus.png");
-    
     public RenderDilophosaurus(ModelBase var1, float var2)
     {
         super(var1, var2);
-    }
-    
-    protected ResourceLocation textureloc (EntityDilophosaurus par1Entity)
-    {
-        return texture;
     }
 
     public void RenderDino(EntityDilophosaurus var1, double var2, double var4, double var6, float var8, float var9)
@@ -62,7 +58,7 @@ public class RenderDilophosaurus extends RenderLiving
                 var15 = 1.0F;
             }
 
-//            this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
+            this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             this.mainModel.setLivingAnimations(var1, var16, var15, var9);
 
@@ -208,11 +204,5 @@ public class RenderDilophosaurus extends RenderLiving
     public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
     {
         this.RenderDino((EntityDilophosaurus)var1, var2, var4, var6, var8, var9);
-    }
-
-	@Override
-    protected ResourceLocation func_110775_a(Entity par1Entity)
-    {
-        return this.textureloc((EntityDilophosaurus)par1Entity);
     }
 }

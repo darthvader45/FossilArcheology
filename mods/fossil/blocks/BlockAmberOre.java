@@ -3,7 +3,6 @@ package mods.fossil.blocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,8 +15,6 @@ public class BlockAmberOre extends Block
     {
         super(par1, Material.rock);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.AMBERORE_NAME);
-        this.setHardness(3.0F);
     }
 
     /**
@@ -71,7 +68,7 @@ public class BlockAmberOre extends Block
 
             if (this.blockID == Fossil.amberOre.blockID)
             {
-                j1 = MathHelper.getRandomIntegerInRange(par1World.rand, 3, 7);
+                j1 = 1;
             }
 
             this.dropXpOnBlockBreak(par1World, par2, par3, par4, j1);

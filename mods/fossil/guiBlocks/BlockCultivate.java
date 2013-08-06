@@ -65,25 +65,37 @@ public class BlockCultivate extends BlockContainer
         this.setDefaultDirection(var1, var2, var3, var4);
     }
 
-    private void setDefaultDirection(World var1, int var2, int var3, int var4)
+    private void setDefaultDirection(World par1World, int par2, int par3, int par4)
     {
-        if (!var1.isRemote)
+        if (!par1World.isRemote)
         {
-            int var5 = var1.getBlockId(var2, var3, var4 - 1);
-            int var6 = var1.getBlockId(var2, var3, var4 + 1);
-            int var7 = var1.getBlockId(var2 - 1, var3, var4);
-            int var8 = var1.getBlockId(var2 + 1, var3, var4);
-            byte var9 = 3;
+            int l = par1World.getBlockId(par2, par3, par4 - 1);
+            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
+            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
+            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            byte b0 = 3;
 
-            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])var9 = 3;
+            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            {
+                b0 = 3;
+            }
 
-            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])var9 = 2;
+            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            {
+                b0 = 2;
+            }
 
-            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])var9 = 5;
+            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            {
+                b0 = 5;
+            }
 
-            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])var9 = 4;
+            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            {
+                b0 = 4;
+            }
 
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var9,0);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
         }
     }
     @SideOnly(Side.CLIENT)
@@ -94,9 +106,9 @@ public class BlockCultivate extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
+        this.blockIcon = par1IconRegister.registerIcon(this.isActive? "fossil:Culture_Sides_Active" : "fossil:Culture_Sides_Idle");
         this.Bottom = par1IconRegister.registerIcon("fossil:Culture_Bottom");
         this.Top = par1IconRegister.registerIcon("fossil:Culture_Top");
-        this.blockIcon = this.isActive? par1IconRegister.registerIcon("fossil:Culture_Sides_Active") : par1IconRegister.registerIcon("fossil:Culture_Sides_Idle");
     }
 
     /**
@@ -106,42 +118,7 @@ public class BlockCultivate extends BlockContainer
     {
         return par1 == 1 ? this.Top : (par1 != 0 ? this.blockIcon : this.Bottom);
     }
-    /**
-     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
-     */
-    /*public int getBlockTexture(IBlockAccess var1, int var2, int var3, int var4, int var5)
-    {
-        if (var5 == 1)
-        {
-            return 36;
-        }
-        else if (var5 == 0)
-        {
-            return 36;
-        }
-        else
-        {
-            int var6 = var1.getBlockMetadata(var2, var3, var4);
-            return var5 != var6 ? (this.isActive ? 21 : 20) : (this.isActive ? 21 : 20);
-        }
-    }*/
-    /*
-     * If this returns true, then comparators facing away from this block will use the value from
-     * getComparatorInputOverride instead of the actual redstone signal strength.
-     *
-    public boolean hasComparatorInputOverride()
-    {//TODO
-        return true;
-    }
 
-    /*
-     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
-     * strength when this block inputs to a comparator.
-     *
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
-    {//TODO
-        return Container.func_94526_b((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
-    }*/
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display

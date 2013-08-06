@@ -6,13 +6,13 @@ import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityCultivate extends TileEntity implements IInventory, ISidedInventory
 {
@@ -355,6 +355,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     	if(var1.itemID==Fossil.dnaPig.itemID)return new ItemStack(Fossil.embryoPig, 1);
     	if(var1.itemID==Fossil.dnaSmilodon.itemID)return new ItemStack(Fossil.embryoSmilodon, 1);
     	if(var1.itemID==Fossil.dnaMammoth.itemID)return new ItemStack(Fossil.embryoMammoth, 1);
+        if(var1.itemID==Fossil.dnaDodo.itemID)return new ItemStack(Fossil.dodoEgg, 1);
     	if(EnumDinoType.getEgg(var1.getItem())!=null)return new ItemStack(EnumDinoType.getEgg(var1.getItem()),1);//converts dino dna to dino egg
     	return null;
     }
@@ -388,6 +389,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 	}
 
 	@Override
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
+		return false;
+	}
+
+	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
 		// TODO Auto-generated method stub
 		return null;
@@ -401,12 +407,6 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return false;
 	}

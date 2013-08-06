@@ -4,7 +4,6 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
@@ -15,6 +14,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
@@ -84,6 +84,7 @@ public class ItemEmbryoSyringe extends Item
                 ((EntitySheep)var3).setFleeceColor(((EntitySheep)var2).getFleeceColor());
                 ((EntitySheep)var3).setSheared(((EntitySheep)var2).getSheared());
             }
+            
 
             if (var3 != null)
             {
@@ -94,6 +95,7 @@ public class ItemEmbryoSyringe extends Item
             	if(var1.itemID==Fossil.embryoPig.itemID)e0=EnumAnimalType.Pig;
             	if(var1.itemID==Fossil.embryoSmilodon.itemID)e0=EnumAnimalType.Smilodon;
             	if(var1.itemID==Fossil.embryoSheep.itemID)e0=EnumAnimalType.Sheep;
+//                if(var1.itemID==Fossil.embryoDodo.itemID)e0=EnumAnimalType.Dodo;
                 ((IViviparous)var3).SetEmbryo(e0);
                 ((EntityAnimal)var3).setLocationAndAngles(var2.posX, var2.posY, var2.posZ, var2.rotationYaw, var2.rotationPitch);
                 var2.setDead();

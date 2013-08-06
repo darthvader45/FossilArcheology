@@ -2,18 +2,24 @@ package mods.fossil.guiBlocks;
 
 import java.util.Random;
 
+
+
+
+
+
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.ForgeDummyContainer;
+import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory
 {
@@ -23,6 +29,10 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     public int analyzerCookTime = 0;
     private int RawIndex = -1;
     private int SpaceIndex = -1;
+    
+    private static final int[] field_102010_d = new int[] {0};
+    private static final int[] field_102011_e = new int[] {2, 1};
+    private static final int[] field_102009_f = new int[] {1};
 
     public TileEntityAnalyzer ()
     {
@@ -385,11 +395,19 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 if (var2 >= 10 && var2 < 20)
                     var1 = new ItemStack(Fossil.dnaMammoth, 1);
                 
-                if (var2 >= 20 && var2 < 40)
+                if (var2 >= 20 && var2 < 30)
+                    var1 = new ItemStack(Fossil.dnaDodo, 1);
+                
+                if (var2 >= 30 && var2 < 40)
+                    var1 = new ItemStack(Item.chickenRaw, 1);
+                 
+                if (var2 >= 40 && var2 < 50)
                     var1 = new ItemStack(Item.chickenRaw, 1);
                 
-                if (var2 >= 40 && var2 < 60)
+                if (var2 >= 50 && var2 < 60)
                     var1 = new ItemStack(Item.porkRaw, 1);
+                
+                
 
                 if (var1 == null)
                     var1 = new ItemStack(Item.beefRaw);
@@ -446,9 +464,19 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
         }
     }
 
-    private int getItemBurnTime(ItemStack var1)
+
+    
+    private static int getItemBurnTime(ItemStack var1)
     {
         return 100;
+    }
+    
+    /**
+     * Return true if item is a fuel source (getItemBurnTime() > 0).
+     */
+    public static boolean isItemFuel(ItemStack par0ItemStack)
+    {
+        return getItemBurnTime(par0ItemStack) > 0;
     }
 
     /**
@@ -463,49 +491,58 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
     public void closeChest() {}
 
-    public int getSizeInventorySide(ForgeDirection var1)
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return 1;
+        return par1 > 8 ? false : (par1 < 8 ? isItemFuel(par2ItemStack) : true);
     }
 
-    public int getStartInventorySide(ForgeDirection var1)
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
+    public int[] getAccessibleSlotsFromSide(int par1)
     {
-        byte var2 = 0;
-        byte var3 = 8;
-        boolean var4 = true;
-
-        if (var1 == ForgeDirection.DOWN)
-        {
-            var2 = 0;
-            var3 = 8;
-            var4 = true;
-        }
-
-        if (var1 == ForgeDirection.UP)
-        {
-            var2 = 9;
-            var3 = 12;
-            var4 = false;
-        }
-
-        for (int var5 = var2; var5 <= var3; ++var5)
-        {
-            if (var4)
-            {
-                if (this.analyzerItemStacks[var5] == null)
-                {
-                    return var5;
-                }
-            }
-            else if (this.analyzerItemStacks[var5] != null)
-            {
-                return var5;
-            }
-        }
-
-        return var2;
+        return par1 == 0 ? field_102011_e : (par1 == 1 ? field_102010_d : field_102009_f);
     }
 
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return this.isStackValidForSlot(par1, par2ItemStack);
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return false;
+    }
+    @Override
+    /* DEPRECATED
+    public int getSizeInventorySide(ForgeDirection side)
+    {
+        if (ForgeDummyContainer.legacyFurnaceSides)
+        {
+            if (side == ForgeDirection.DOWN) return 1;
+            if (side == ForgeDirection.UP) return 0;
+            return 2;
+        }
+        else
+        {
+            if (side == ForgeDirection.DOWN) return 2;
+            if (side == ForgeDirection.UP) return 0;
+            return 1;
+        }
+    }
+*/
     /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
@@ -519,24 +556,9 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 		return false;
 	}
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }

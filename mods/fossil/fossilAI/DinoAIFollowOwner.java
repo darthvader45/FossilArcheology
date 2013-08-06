@@ -2,9 +2,7 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumOrderType;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
@@ -13,7 +11,7 @@ import net.minecraft.world.World;
 public class DinoAIFollowOwner extends EntityAIBase
 {
     private EntityDinosaur DinoEntity;
-    private Entity FollowTarget;
+    private EntityLiving FollowTarget;
     World WorldObj;
     private PathNavigate selfNavigator;
     private int actionCount;
@@ -42,7 +40,7 @@ public class DinoAIFollowOwner extends EntityAIBase
         }
         else
         {
-            Entity var1 = this.DinoEntity.getOwner();
+            EntityLiving var1 = this.DinoEntity.getOwner();
 
             if (var1 == null)
             {

@@ -5,14 +5,11 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderMammoth extends RenderLiving
 {
-    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/MammothAdult.png");
     public RenderMammoth(ModelBase var1, float var2)
     {
         super(var1, var2);
@@ -99,6 +96,7 @@ public class RenderMammoth extends RenderLiving
                     if (var18 == 15)
                     {
                         var17 = (float)var1.ticksExisted + var9;
+                        this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var19 = 0.5F;
                         GL11.glColor4f(var19, var19, var19, 1.0F);
@@ -239,10 +237,4 @@ public class RenderMammoth extends RenderLiving
 
         return var1 + var3 * var4;
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

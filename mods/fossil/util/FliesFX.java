@@ -6,12 +6,16 @@ import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.ResourceLocation;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class FliesFX extends EntityFX 
 {
-
+	//declare your variables
+	public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
+	private static TextureManager textureManager = Minecraft.getMinecraft().func_110434_K(); //get the TextureManager instance
+	
 	float particleScaleOverTime;
 
     public FliesFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
@@ -53,7 +57,7 @@ public class FliesFX extends EntityFX
         }
         this.particleScale = this.particleScaleOverTime * f6;
         Minecraft mc = FMLClientHandler.instance().getClient();
-        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, mc.renderEngine.func_110581_b(new ResourceLocation("fossil:textures/Flies.png")).func_110552_b());//mc.renderEngine.getTexture("/mods/fossil/textures/Flies.png"));
+        textureManager.func_110577_a(resourceloc);
         float f0 = (float) this.particleTextureIndexX / 16F;
         float f7 = f0 + 0.0624375F;
         float f8 = (float) this.particleTextureIndexX / 16F;
@@ -70,8 +74,7 @@ public class FliesFX extends EntityFX
         tessellator1.addVertexWithUV((f11 + f1 * f10) - f4 * f10, f12 - f2 * f10, (f13 + f3 * f10) - f5 * f10, f0, f9);
         
         tessellator1.draw();
-        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, mc.renderEngine.func_110581_b(new ResourceLocation("/particles.png")).func_110552_b());
-        //        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, mc.renderEngine.getTexture("/particles.png"));
+//        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, mc.renderEngine.getTexture("/particles.png"));
     }
 
     /**

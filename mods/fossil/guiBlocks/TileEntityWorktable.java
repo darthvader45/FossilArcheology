@@ -3,12 +3,13 @@ package mods.fossil.guiBlocks;
 import mods.fossil.Fossil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityWorktable extends TileEntity implements IInventory, ISidedInventory
 {
@@ -391,7 +392,6 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
 	{
 		return false;
 	}
-
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {

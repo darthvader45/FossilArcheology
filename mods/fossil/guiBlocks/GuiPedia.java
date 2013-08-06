@@ -1,29 +1,36 @@
 package mods.fossil.guiBlocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.entity.mob.EntitySmilodon;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer
-{
+{	
+	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
 	int left;//counter for text added on the left side
 	int right;//same for the right side
 	int items;//counter for the minipics down
@@ -100,7 +107,7 @@ public class GuiPedia extends GuiContainer
     }
     public void PrintItemXY(Item it0,int x0,int y0, int zoom)
     {
-//    	RenderEngine r0= Minecraft.getMinecraft().renderEngine;
+    	TextureManager r0= Minecraft.getMinecraft().renderEngine;
     	
     	int i=zoom*16;
     	if(i<0)i=4;
@@ -110,8 +117,7 @@ public class GuiPedia extends GuiContainer
     	RenderItem r= new RenderItem();
     	ItemStack it=new ItemStack(it0,1);
     	Icon icon = it.getIconIndex();
-//    	r0.bindTexture("/gui/items.png");
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("textures/gui/items.png"));
+///    	r0.bindTexture("/gui/items.png");
     	GL11.glDisable(GL11.GL_LIGHTING);
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     	r.renderIcon(x0, y0, icon, i, i);
@@ -131,7 +137,7 @@ public class GuiPedia extends GuiContainer
     {
         //GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(str0));
 //    	this.mc.renderEngine.bindTexture(str0);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation(str0));
+        mc.func_110434_K().func_110578_a(str0, null);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
         Tessellator var9 = Tessellator.instance;
         var9.startDrawingQuads();
@@ -153,6 +159,7 @@ public class GuiPedia extends GuiContainer
     	if(Fossil.ToPedia instanceof EntityPregnantSheep)((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntityMammoth)((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
     	if(Fossil.ToPedia instanceof EntitySmilodon)((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
+        if(Fossil.ToPedia instanceof EntityDodo)((EntityDodo)Fossil.ToPedia).ShowPedia(this);
     }
 
     /**
@@ -169,7 +176,7 @@ public class GuiPedia extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Dinopedia.png"));
+        mc.func_110434_K().func_110577_a(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

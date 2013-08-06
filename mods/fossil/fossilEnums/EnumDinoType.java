@@ -4,7 +4,9 @@ import mods.fossil.Fossil;
 import mods.fossil.entity.mob.DinoFoodBlockList;
 import mods.fossil.entity.mob.DinoFoodItemList;
 import mods.fossil.entity.mob.DinoFoodMobList;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
@@ -44,8 +46,10 @@ public enum EnumDinoType
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
-    Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE);
-
+    Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE),
+    Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME),
+    Ankylosaurus(EntityAnkylosaurus.class,  C.TAME  | C.HERBIVORE);
+    
     private final Class dinoClass;
 
     public int Flags=0;
@@ -221,6 +225,21 @@ public enum EnumDinoType
     	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
     	Triceratops.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
     	
+        Ankylosaurus.setItems(       Item.stick);//,         Fossil.rawAnkylosaurus,  Fossil.dnaAnkylosaurus,  Fossil.eggAnkylosaurus);
+        Ankylosaurus.setDimensions(0.5F, 0.25F, 0.5F, 0.25F, 0.5F, 0.25F);
+        Ankylosaurus.setAges(-1, -1, 13);
+        Ankylosaurus.setProperties(21, 1, 4, 3, 0.17F, 0.016F, 500);
+        Ankylosaurus.setExperience(0.5F, 0.2F);
+        
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Melon);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Apple);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Bread);
+        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Potato);
+        
+        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
+        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
+    	
         Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
         Velociraptor.setAges(-1, -1, 9);
@@ -245,6 +264,28 @@ public enum EnumDinoType
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
+        Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
+        
+        Compsognathus.setItems(      Item.bone);//,          Fossil.rawCompsognathus, Fossil.dnaCompsognathus, Fossil.eggCompsognathus);
+        Compsognathus.setDimensions(0.5F, 0.05F, 0.5F, 0.05F, 0.5F, 0.05F);
+        Compsognathus.setAges(-1, -1, 9);
+        Compsognathus.setProperties(1, 1, 1, 0, 0.2F, 0.010F, -1);
+        Compsognathus.setExperience(0.2F, 0.2F);
+        
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Pterosaur);
+        Compsognathus.FoodItemList.addItem(EnumDinoFoodItem.Brachiosaur);
+        
+        Compsognathus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        Compsognathus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Compsognathus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         TRex.setItems(				Fossil.skullStick);//,	Fossil.rawTRex, 		Fossil.dnaTRex, 		Fossil.eggTRex);
         TRex.setDimensions(0.7F, 0.57F, 0.8F, 0.66F, 0.5F, 0.57F);
@@ -274,6 +315,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Brachiosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Pterosaur.setItems(			Item.arrow);//,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);
         Pterosaur.setDimensions(1.2F, 0.3F, 1.0F, 0.4F, 0.8F, 0.2F);
@@ -303,6 +345,7 @@ public enum EnumDinoType
         
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Mosasaurus.setItems(		null);//,				Fossil.rawMosasaurus, 	Fossil.dnaMosasaurus, 	Fossil.eggMosasaurus);
         Mosasaurus.setDimensions(0.25F, 0.4F, 0.5F, 0.45F, 0.4F, 0.25F);
@@ -326,6 +369,9 @@ public enum EnumDinoType
         Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Cookie);
         Stegosaurus.FoodItemList.addItem(EnumDinoFoodItem.Bread);
         
+        Stegosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
+        Stegosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
+        
         Dilophosaurus.setItems(		Item.bone);//,			Fossil.rawDilophosaurus,Fossil.dnaDilophosaurus,Fossil.eggDilophosaurus);
         Dilophosaurus.setDimensions(0.4F, 0.16F, 0.4F, 0.17F, 0.4F, 0.16F);
         Dilophosaurus.setAges(-1, -1, 9);
@@ -345,6 +391,7 @@ public enum EnumDinoType
         Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
         Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
         Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Dilophosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Brachiosaurus.setItems(		Item.stick);//,			Fossil.rawBrachiosaurus,Fossil.dnaBrachiosaurus,Fossil.eggBrachiosaurus);
         Brachiosaurus.setDimensions(1.0F, 0.5F, 1.0F, 0.5F, 1.0F, 0.5F);
@@ -385,6 +432,7 @@ public enum EnumDinoType
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pterosaur);
 		Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Velociraptor);
+	    Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
     }
     
     /**

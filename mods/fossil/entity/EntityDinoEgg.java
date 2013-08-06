@@ -18,7 +18,9 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityMosasaurus;
@@ -46,10 +48,10 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenDesert;
 import net.minecraft.world.biome.BiomeGenForest;
 import net.minecraft.world.biome.BiomeGenSnow;
 import net.minecraft.world.biome.BiomeGenTaiga;
@@ -88,10 +90,10 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Returns the texture's file path as a String.
      */
-    public ResourceLocation getTexture()
+    public String getTexture()
     {
         int var1 = this.DinoInside.ordinal();
-        return (ResourceLocation) (var1 < 4 ? new ResourceLocation("fossil:textures/mob/eggTexture" + (var1 + 1) + ".png") : new ResourceLocation("fossil:textures/mob/eggTexture" + var1 + ".png"));
+        return var1 < 4 ? "/mods/fossil/textures/mob/eggTexture" + (var1 + 1) + ".png" : "/mods/fossil/textures/mob/eggTexture" + var1 + ".png";
     }
 
     public EntityDinoEgg(World var1)
@@ -474,12 +476,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 	            }
 	            else
 	            {
-	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_COLD);
+	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_WET);
 	            }
 	
 	            String var1 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_HEAD);
 	            if(FMLCommonHandler.instance().getSide().isServer())
-	            	Fossil.ShowMessage(var1 + Fossil.GetLangTextByKey("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
+	            	Fossil.ShowMessage(var1 + Localizations.getLocalizedString("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
         	}
         	this.setDead();
         }
@@ -509,9 +511,15 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Dilophosaurus:var5 = new EntityDilophosaurus(this.worldObj);break;
                     case Brachiosaurus:var5 = new EntityBrachiosaurus(this.worldObj);break;
                     case Spinosaurus:var5 = new EntitySpinosaurus(this.worldObj);break;
+                    case Compsognathus:var5 = new EntityCompsognathus(this.worldObj);
+                        if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenDesert)
+                        ((EntityCompsognathus)var5).setSubSpecies(1);
+                        else
+                        ((EntityCompsognathus)var5).setSubSpecies(2);break;
+                    case Ankylosaurus:var5 = new EntityAnkylosaurus(this.worldObj);break;
 
                     default:
-                        Fossil.ShowMessage("Bug:Impossible result.", var4);
+                        Fossil.ShowMessage("Bug: Impossible result.", var4);
                         //System.err.println("EGGERROR2"+String.valueOf(i));
                         this.setDead();
                         return;

@@ -557,7 +557,7 @@ public class EntityTriceratops extends EntityDinosaur
     {
     	int destroyed=0;
     	
-    	if (!this.isAdult() && !Fossil.FossilOptions.Dino_Block_Breaking)
+    	if (!this.isAdult() && (Fossil.FossilOptions.Dino_Block_Breaking == true) && this.riddenByEntity == null )
     	{
 	        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
 	        {

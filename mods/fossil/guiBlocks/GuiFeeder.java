@@ -1,5 +1,8 @@
 package mods.fossil.guiBlocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -12,12 +15,10 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
 public class GuiFeeder extends GuiContainer
 {
+	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
     private TileEntityFeeder FeederInventory;
 
     public GuiFeeder(InventoryPlayer var1, TileEntity var2)
@@ -85,7 +86,7 @@ public class GuiFeeder extends GuiContainer
     {
         //int var4 = this.mc.renderEngine.getTexture("/fossil/textures/UIFeeder.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/gui/Feeder.png"));
+        mc.func_110434_K().func_110577_a(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

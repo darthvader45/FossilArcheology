@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 
 public class CfgLoader
 {
-    private static final File cfgdir = new File(Minecraft.getMinecraft().mcDataDir, "config");
+    private static final File cfgdir = new File(Minecraft.getMinecraft().mcDataDir, "/config/");
     private static final File cfgfile = new File(cfgdir, "ModFossil.cfg");
     public static final Properties props = new Properties();
 

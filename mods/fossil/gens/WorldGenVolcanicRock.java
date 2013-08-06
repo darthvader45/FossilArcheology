@@ -1,4 +1,4 @@
-package mods.fossil.gens;
+/*package mods.fossil.gens;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenVolcanicRock extends WorldGenerator
 {
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         for (int l = 0; l < 2; l++)
         {
@@ -21,7 +21,7 @@ public class WorldGenVolcanicRock extends WorldGenerator
 
             if (par1World.isAirBlock(i1, par4, k1) && (par1World.getBlockMaterial(i1 - 1, par4 - 1, k1) == Material.lava || par1World.getBlockMaterial(i1 + 1, par4 - 1, k1) == Material.lava || par1World.getBlockMaterial(i1, par4 - 1, k1 - 1) == Material.lava || par1World.getBlockMaterial(i1, par4 - 1, k1 + 1) == Material.lava))
             {
-            	for (int x = 0;x<2;x++)
+                for (int x = 0;x<2;x++)
                 {
                     if (par1World.getBlockId(i1, j1 - 1, k1) == Block.dirt.blockID || par1World.getBlockId(i1, j1 - 1, k1) == Block.stone.blockID || par1World.getBlockId(i1, j1 - 1, k1) == Block.sand.blockID)
                     {
@@ -35,4 +35,4 @@ public class WorldGenVolcanicRock extends WorldGenerator
 
         return true;
     }
-}
+}*/

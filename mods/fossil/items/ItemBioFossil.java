@@ -6,7 +6,6 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityDinosaur;

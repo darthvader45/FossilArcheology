@@ -58,9 +58,9 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
         this.SelfMaterial = EnumToolMaterial.WOOD;
     }
 
-    public EntityJavelin(World var1, EntityLiving var2, float var3, EnumToolMaterial var4, int damagevalue)
+    public EntityJavelin(World var1, EntityPlayer var32, float var3, EnumToolMaterial var4, int damagevalue)
     {
-        super(var1, var2, var3);
+        super(var1, var32, var3);
         //this.SelfMaterial = EnumToolMaterial.WOOD;
         this.SelfMaterial = var4;
         this.damaged= damagevalue;
@@ -257,7 +257,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
 
                         if (!(movingobjectposition.entityHit instanceof EntityEnderman))
                         {
-                            this.setVelocity(0, 0.3, 0);
+                            this.setDead();
                         }
                     }
                     else

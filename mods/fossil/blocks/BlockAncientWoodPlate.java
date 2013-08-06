@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -27,9 +26,6 @@ public class BlockAncientWoodPlate extends Block
         super(par1, Material.wood);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.ANCIENTWOODPLATE_NAME);
-        this.setHardness(0.6F);
-        this.setStepSound(Block.soundWoodFootstep);
     }
 
     @SideOnly(Side.CLIENT)

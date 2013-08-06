@@ -1,7 +1,6 @@
 package mods.fossil.blocks;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -13,9 +12,6 @@ public class BlockAncientWood extends Block
     {
         super(par1, Material.wood);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_NAME);
-        this.setStepSound(Block.soundWoodFootstep);
-        this.setHardness(2.0F);
     }
     
 	@Override

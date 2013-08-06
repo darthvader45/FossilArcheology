@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 
 public class TimeMachineCfgLoader
 {
-    private static final File cfgdir = new File(Minecraft.getMinecraft().mcDataDir, "config");
+    private static final File cfgdir = new  File(Minecraft.getMinecraft().mcDataDir, "/config/");
     private static final File cfgfile = new File(cfgdir, "AddonTimeMachine.cfg");
     public static final Properties props = new Properties();
 

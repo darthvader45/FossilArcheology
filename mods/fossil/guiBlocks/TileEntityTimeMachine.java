@@ -6,11 +6,11 @@ import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityTimeMachine extends TileEntity implements IInventory, ISidedInventory
 {
@@ -403,7 +403,6 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory, ISi
 	public boolean isInvNameLocalized() {
 		return false;
 	}
-
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {

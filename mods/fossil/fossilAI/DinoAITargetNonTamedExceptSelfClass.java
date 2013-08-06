@@ -8,7 +8,7 @@ public class DinoAITargetNonTamedExceptSelfClass extends EntityAITargetNonTamed
 {
     public DinoAITargetNonTamedExceptSelfClass(EntityTameable var1, Class var2, float var3, int var4, boolean var5)
     {
-        super(var1, var2, var4, var5);
+        super(var1, var2, var3, var4, var5);
     }
 
     /**

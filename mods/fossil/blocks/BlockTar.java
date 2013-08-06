@@ -3,7 +3,6 @@ package mods.fossil.blocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,11 +16,8 @@ public class BlockTar extends Block
 {
     public BlockTar(int i, Material par2Material)
     {
-
         super(i, Material.sand);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.TAR_NAME);
-    	this.setHardness(100.0F);
     }
     
     

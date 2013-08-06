@@ -38,7 +38,7 @@ public class WorldGenAcademy implements IWorldGenerator
     	
     	if((biome instanceof BiomeGenDesert) || (biome instanceof BiomeGenJungle) || (biome instanceof BiomeGenTaiga) || (biome instanceof BiomeGenPlains))// then add ||BiomeGenXYZ if you want more.
    	 	{
-    		if(random.nextInt(20) == 0) //adjust the number in nextInt(). Higher values == rarer.
+    		if(random.nextInt(20) == 0) //adjust the number in nextInt(). Higher values == rarer. Default = 20
 			{
 				int Xcoord1 = blockX + random.nextInt(16);
 				int Ycoord1 = random.nextInt(100);

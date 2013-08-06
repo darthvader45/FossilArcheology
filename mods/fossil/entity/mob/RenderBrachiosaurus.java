@@ -4,23 +4,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderBrachiosaurus extends RenderLiving
 {
-    private static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/Brachiosaurus.png");
-	
     public RenderBrachiosaurus(float var1)
     {
         super(new ModelBrachiosaurus(), var1);
-    }
-    
-    protected ResourceLocation textureloc (EntityBrachiosaurus par1Entity)
-    {
-        return texture;
     }
 
     /**
@@ -110,7 +101,7 @@ public class RenderBrachiosaurus extends RenderLiving
                     if (var18 == 15)
                     {
                         var17 = (float)var1.ticksExisted + var9;
-//                        this.loadTexture("%blur%/misc/glint.png");
+                        this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var19 = 0.5F;
                         GL11.glColor4f(var19, var19, var19, 1.0F);
@@ -233,11 +224,5 @@ public class RenderBrachiosaurus extends RenderLiving
     public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
     {
         this.renderNew((EntityBrachiosaurus)var1, var2, var4, var6, var8, var9);
-    }
-
-	@Override
-    protected ResourceLocation func_110775_a(Entity par1Entity)
-    {
-        return this.textureloc((EntityBrachiosaurus)par1Entity);
     }
 }

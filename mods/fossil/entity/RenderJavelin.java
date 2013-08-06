@@ -14,32 +14,32 @@ public class RenderJavelin extends Render
 {
     public void renderJavelin(EntityJavelin var1, double var2, double var4, double var6, float var8, float var9)
     {
-        switch (var1.SelfMaterial.ordinal())//RenderJavelin$1.$SwitchMap$net$minecraft$item$EnumToolMaterial[var1.SelfMaterial.ordinal()])
+        switch (var1.SelfMaterial.ordinal())
         {
             case 1:
-                this.loadTexture("/mods/fossil/textures/StoneJavelin.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/StoneJavelin.png"));
                 break;
 
             case 2:
-                this.loadTexture("/mods/fossil/textures/IronJavelin.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/IronJavelin.png"));
                 break;
 
             case 4:
-                this.loadTexture("/mods/fossil/textures/GoldJavelin.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/GoldJavelin.png"));
                 break;
 
             case 3:
-                this.loadTexture("/mods/fossil/textures/DiamondJavelin.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
                 break;
 
             case 0:
             default:
-                this.loadTexture("/mods/fossil/textures/WoodenJavelin.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
         }
 
         if (var1 instanceof EntityAncientJavelin)
         {
-            this.loadTexture("/mods/fossil/textures/AncientJavelin.png");
+            this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/AncientJavelin.png"));
         }
 
         GL11.glPushMatrix();

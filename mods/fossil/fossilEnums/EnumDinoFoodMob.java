@@ -1,8 +1,11 @@
 package mods.fossil.fossilEnums;
 
 import mods.fossil.Fossil;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
@@ -41,6 +44,9 @@ public enum EnumDinoFoodMob
 	Dilophosaurus(null,25,2),
 	Brachiosaurus(null,80,5),
 	Spinosaurus(null,70,5),
+	Compsognathus(null,20,3),
+	Ankylosaurus(null,50,3),
+	Dodo(EntityDodo.class,20,2),
 	;
     public Class preyClass;
     public int FoodValue;
@@ -74,6 +80,7 @@ public enum EnumDinoFoodMob
     	Dilophosaurus.setDetails(EntityDilophosaurus.class);
     	Brachiosaurus.setDetails(EntityBrachiosaurus.class);
     	Spinosaurus.setDetails(EntitySpinosaurus.class);
-    	
+        Compsognathus.setDetails(EntityCompsognathus.class);
+        Ankylosaurus.setDetails(EntityAnkylosaurus.class);
     }
 }

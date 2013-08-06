@@ -97,9 +97,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public boolean RiderSneak=false;
     
     //Factors enlarging the Hitbox to a senseful value
-    public float HitboxXfactor=1.0F;
-    public float HitboxYfactor=1.0F;
-    public float HitboxZfactor=1.0F;
+    public float HitboxXfactor=1.1F;
+    public float HitboxYfactor=1.1F;
+    public float HitboxZfactor=1.1F;
     
     public EnumDinoType SelfType = null;
     
@@ -1394,6 +1394,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             	        this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
             	        return true;
             	     }
+                    if (!this.worldObj.isRemote)
+                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
             	     return false;
             	}
             	if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))

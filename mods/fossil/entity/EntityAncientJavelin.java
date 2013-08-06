@@ -25,9 +25,9 @@ public class EntityAncientJavelin extends EntityJavelin
         super(var1, var2, var4, var6);
     }
 
-    public EntityAncientJavelin(World var1, EntityLiving var2, float var3, EnumToolMaterial var4, int damagevalue)
+    public EntityAncientJavelin(World var1, EntityPlayer var32, float var3, EnumToolMaterial var4, int damagevalue)
     {
-        super(var1, var2, var3);
+        super(var1, var32, var3, var4, damagevalue);
         this.SelfMaterial = var4;
         this.damaged=damagevalue;
     }

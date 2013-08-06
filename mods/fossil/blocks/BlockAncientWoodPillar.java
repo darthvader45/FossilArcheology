@@ -1,12 +1,14 @@
 package mods.fossil.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
@@ -20,10 +22,8 @@ public class BlockAncientWoodPillar extends Block
 	    
 	    
         super(par1, Material.wood);
+        setBurnProperties(this.blockID, 5, 10);
         this.setCreativeTab(Fossil.tabFBlocks);
-        this.setUnlocalizedName(LocalizationStrings.ANCIENTWOODPILLAR_NAME);
-        this.setHardness(2.0F);
-        this.setStepSound(Block.soundWoodFootstep);
     }
     
 	@Override
@@ -33,6 +33,18 @@ public class BlockAncientWoodPillar extends Block
         this.Top = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar_Top");
     }
 	
+    // this sets the amount droped when broken.
+    public int quantityDropped(Random par1Random)
+    {
+        return 1;
+    }
+    
+    // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
+    // making stone drop cobblestone. 
+    public int idDropped(int par1, Random par2Random, int par3)
+    {
+        return Fossil.palmLog.blockID;
+    }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -69,5 +81,33 @@ public class BlockAncientWoodPillar extends Block
 
         return var10 | var11;
     }
+
+    public int damageDropped(int var1)
+    {
+        return var1 & 3;
+    }
+
+    public static int limitToValidMetadata(int var0)
+    {
+        return var0 & 3;
+    }
     
+    /**
+     * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
+     * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
+     */
+    protected ItemStack createStackedBlock(int var1)
+    {
+        return new ItemStack(this.blockID, 1, limitToValidMetadata(var1));
+    }
+
+    public boolean canSustainLeaves(World var1, int var2, int var3, int var4)
+    {
+        return true;
+    }
+
+    public boolean isWood(World var1, int var2, int var3, int var4)
+    {
+        return true;
+    }
 }
