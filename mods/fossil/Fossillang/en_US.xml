@@ -20,6 +20,7 @@
 	<entry key="tile.cultureVat.name">Culture Vat</entry>
 	<entry key="tile.fossilworkbench.name">Archeology Workbench</entry>
 	<entry key="tile.drum.name">Drum</entry>
+	<entry key="tile.feederIdle.name">Feeder</entry>
 	<entry key="tile.feederActive.name">Feeder</entry>
 	<entry key="tile.permafrost.name">Permafrost</entry>
 	<entry key="tile.icedStone.name">Iced Stone</entry>
