@@ -1,6 +1,8 @@
 package mods.fossil.gens;
 
 import java.util.Random;
+
+import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -5756,7 +5758,7 @@ public class WorldGeneratorAcademy extends WorldGenerator
 		world.setBlock(i + 8, j + 4, k + 16, 0);
 		world.setBlock(i + 8, j + 4, k + 17, 0);
 		world.setBlock(i + 8, j + 4, k + 18, 0);
-		world.setBlock(i + 8, j + 4, k + 19, Block.blockDiamond.blockID);
+		world.setBlock(i + 8, j + 4, k + 19, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 8, j + 4, k + 20, 0);
 		world.setBlock(i + 8, j + 4, k + 21, 0);
 		world.setBlock(i + 8, j + 4, k + 22, 0);
@@ -7161,11 +7163,11 @@ public class WorldGeneratorAcademy extends WorldGenerator
 		world.setBlock(i + 10, j + 4, k + 14, 0);
 		world.setBlock(i + 10, j + 4, k + 15, 0);
 		world.setBlock(i + 10, j + 4, k + 16, 0);
-		world.setBlock(i + 10, j + 4, k + 17, Block.blockDiamond.blockID);
+		world.setBlock(i + 10, j + 4, k + 17, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 10, j + 4, k + 18, 0);
 		world.setBlock(i + 10, j + 4, k + 19, 0);
 		world.setBlock(i + 10, j + 4, k + 20, 0);
-		world.setBlock(i + 10, j + 4, k + 21, Block.blockDiamond.blockID);
+		world.setBlock(i + 10, j + 4, k + 21, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 10, j + 4, k + 22, 0);
 		world.setBlock(i + 10, j + 4, k + 23, 0);
 		world.setBlock(i + 10, j + 4, k + 24, Block.stoneBrick.blockID);
@@ -9253,11 +9255,11 @@ public class WorldGeneratorAcademy extends WorldGenerator
 		world.setBlock(i + 13, j + 4, k + 14, 0);
 		world.setBlock(i + 13, j + 4, k + 15, 0);
 		world.setBlock(i + 13, j + 4, k + 16, 0);
-		world.setBlock(i + 13, j + 4, k + 17, Block.blockDiamond.blockID);
+		world.setBlock(i + 13, j + 4, k + 17, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 13, j + 4, k + 18, 0);
 		world.setBlock(i + 13, j + 4, k + 19, 0);
 		world.setBlock(i + 13, j + 4, k + 20, 0);
-		world.setBlock(i + 13, j + 4, k + 21, Block.blockDiamond.blockID);
+		world.setBlock(i + 13, j + 4, k + 21, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 13, j + 4, k + 22, 0);
 		world.setBlock(i + 13, j + 4, k + 23, 0);
 		world.setBlock(i + 13, j + 4, k + 24, Block.stoneBrick.blockID);
@@ -10648,7 +10650,7 @@ public class WorldGeneratorAcademy extends WorldGenerator
 		world.setBlock(i + 15, j + 4, k + 16, 0);
 		world.setBlock(i + 15, j + 4, k + 17, 0);
 		world.setBlock(i + 15, j + 4, k + 18, 0);
-		world.setBlock(i + 15, j + 4, k + 19, Block.blockDiamond.blockID);
+		world.setBlock(i + 15, j + 4, k + 19, Fossil.blockcultivateIdle.blockID);
 		world.setBlock(i + 15, j + 4, k + 20, 0);
 		world.setBlock(i + 15, j + 4, k + 21, 0);
 		world.setBlock(i + 15, j + 4, k + 22, 0);
