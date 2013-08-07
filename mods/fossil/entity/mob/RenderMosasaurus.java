@@ -3,11 +3,25 @@ package mods.fossil.entity.mob;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderMosasaurus extends RenderLiving
 {
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Mosasaurus.png");
+    
+    protected ResourceLocation func_110919_a(EntityMosasaurus par1Entity)
+    {
+        return loc;
+    }
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityMosasaurus)par1Entity);
+    }
+    
     public RenderMosasaurus(float var1)
     {
         super(new ModelMosasaurus(), var1);
@@ -31,7 +45,7 @@ public class RenderMosasaurus extends RenderLiving
         }
         else
         {
-            this.loadTexture(var1.getTexture());
+     //       this.loadTexture(var1.getTexture());
             float var4 = 300.0F;
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -101,7 +115,7 @@ public class RenderMosasaurus extends RenderLiving
                 var15 = 1.0F;
             }
 
-            this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
+  //          this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             this.mainModel.setLivingAnimations(var1, var16, var15, var9);
             ((ModelMosasaurus)this.mainModel).render(var1, var16, var15, var13, var11 - var10, var12, var14);

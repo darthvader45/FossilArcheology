@@ -13,11 +13,13 @@ import mods.fossil.fossilInterface.IViviparous;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -62,64 +64,53 @@ public class ItemEmbryoSyringe extends Item
     /**
      * dye sheep, place saddles, etc ...
      */
-    public boolean itemInteractionForEntity(ItemStack var1, EntityLiving var2)
+    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
-        if (var2 instanceof EntityAnimal && ((EntityAnimal)var2).getGrowingAge() == 0)
+        if (par3EntityLivingBase instanceof EntityAnimal && ((EntityAnimal)par3EntityLivingBase).getGrowingAge() == 0)
         {
             Object var3 = null;
 
-            if (var2 instanceof EntityPig)
+            if (par3EntityLivingBase instanceof EntityPig)
             {
-                var3 = new EntityPregnantPig(var2.worldObj);
+                var3 = new EntityPregnantPig(par3EntityLivingBase.worldObj);
             }
 
-            if (var2 instanceof EntityCow)
+            if (par3EntityLivingBase instanceof EntityCow)
             {
-                var3 = new EntityPregnantCow(var2.worldObj);
+                var3 = new EntityPregnantCow(par3EntityLivingBase.worldObj);
             }
 
-            if (var2 instanceof EntitySheep)
+            if (par3EntityLivingBase instanceof EntitySheep)
             {
-                var3 = new EntityPregnantSheep(var2.worldObj);
-                ((EntitySheep)var3).setFleeceColor(((EntitySheep)var2).getFleeceColor());
-                ((EntitySheep)var3).setSheared(((EntitySheep)var2).getSheared());
+                var3 = new EntityPregnantSheep(par3EntityLivingBase.worldObj);
+                ((EntitySheep)var3).setFleeceColor(((EntitySheep)par3EntityLivingBase).getFleeceColor());
+                ((EntitySheep)var3).setSheared(((EntitySheep)par3EntityLivingBase).getSheared());
             }
             
 
             if (var3 != null)
             {
             	EnumAnimalType e0=EnumAnimalType.Chicken;
-            	if(var1.itemID==Fossil.embryoChicken.itemID)e0=EnumAnimalType.Chicken;
-            	if(var1.itemID==Fossil.embryoCow.itemID)e0=EnumAnimalType.Cow;
-            	if(var1.itemID==Fossil.embryoMammoth.itemID)e0=EnumAnimalType.Mammoth;
-            	if(var1.itemID==Fossil.embryoPig.itemID)e0=EnumAnimalType.Pig;
-            	if(var1.itemID==Fossil.embryoSmilodon.itemID)e0=EnumAnimalType.Smilodon;
-            	if(var1.itemID==Fossil.embryoSheep.itemID)e0=EnumAnimalType.Sheep;
+            	if(par1ItemStack.itemID==Fossil.embryoChicken.itemID)e0=EnumAnimalType.Chicken;
+            	if(par1ItemStack.itemID==Fossil.embryoCow.itemID)e0=EnumAnimalType.Cow;
+            	if(par1ItemStack.itemID==Fossil.embryoMammoth.itemID)e0=EnumAnimalType.Mammoth;
+            	if(par1ItemStack.itemID==Fossil.embryoPig.itemID)e0=EnumAnimalType.Pig;
+            	if(par1ItemStack.itemID==Fossil.embryoSmilodon.itemID)e0=EnumAnimalType.Smilodon;
+            	if(par1ItemStack.itemID==Fossil.embryoSheep.itemID)e0=EnumAnimalType.Sheep;
 //                if(var1.itemID==Fossil.embryoDodo.itemID)e0=EnumAnimalType.Dodo;
                 ((IViviparous)var3).SetEmbryo(e0);
-                ((EntityAnimal)var3).setLocationAndAngles(var2.posX, var2.posY, var2.posZ, var2.rotationYaw, var2.rotationPitch);
-                var2.setDead();
+                ((EntityAnimal)var3).setLocationAndAngles(par3EntityLivingBase.posX, par3EntityLivingBase.posY, par3EntityLivingBase.posZ, par3EntityLivingBase.rotationYaw, par3EntityLivingBase.rotationPitch);
+                par3EntityLivingBase.setDead();
 
-                if (!var2.worldObj.isRemote)
+                if (!par3EntityLivingBase.worldObj.isRemote)
                 {
-                    var2.worldObj.spawnEntityInWorld((EntityAnimal)var3);
+                	par3EntityLivingBase.worldObj.spawnEntityInWorld((EntityAnimal)var3);
                 }
 
-                --var1.stackSize;
+                --par1ItemStack.stackSize;
             }
             return true;
         }
         return false;
     }
-
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    //public void getSubItems(int var1, CreativeTabs var2, List var3)
-    //{
-    //    for (int var4 = 0; var4 < EnumEmbyos.values().length; ++var4)
-    //    {
-    //        var3.add(new ItemStack(var1, 1, var4));
-    //    }
-    //}
 }

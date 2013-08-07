@@ -1,13 +1,14 @@
 package mods.fossil.fossilAI;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 public class WaterDinoAINearestAttackableTarget extends EntityAINearestAttackableTarget
 {
-    public WaterDinoAINearestAttackableTarget(EntityLiving var1, Class var2, float var3, int var4, boolean var5)
+    public WaterDinoAINearestAttackableTarget(EntityCreature var1, Class par2Class, int par3, boolean par4, boolean par5)
     {
-        super(var1, var2, var3, var4, var5);
+        super(var1, par2Class, par3, par4, par5);
     }
 
     /**

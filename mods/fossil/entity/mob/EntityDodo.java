@@ -1,5 +1,6 @@
 package mods.fossil.entity.mob;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
@@ -7,6 +8,7 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
 import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -57,6 +59,13 @@ public class EntityDodo extends EntityAnimal
     public boolean isAIEnabled()
     {
         return true;
+    }
+    
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(4.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
     }
     
     private void setPedia()
@@ -183,6 +192,20 @@ public class EntityDodo extends EntityAnimal
         }
     }
 
+    /**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
+    public boolean interact(EntityPlayer var1)
+    {
+        ItemStack var2 = var1.inventory.getCurrentItem();
+        if (var2!=null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+        {
+        	this.setPedia();
+            var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+            return true;
+        }
+        return super.interact(var1);
+    }
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */

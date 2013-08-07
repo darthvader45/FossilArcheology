@@ -2,16 +2,18 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class FPZAIOwnerHurtTarget extends EntityAITarget
 {
     EntityFriendlyPigZombie fpz;
-    EntityLiving field_48391_b;
+    EntityLivingBase theTarget;
+    private int field_142050_e;
 
     public FPZAIOwnerHurtTarget(EntityFriendlyPigZombie var1)
     {
-        super(var1, 32.0F, false);
+        super(var1, false);
         this.fpz = var1;
         this.setMutexBits(1);
     }
@@ -27,7 +29,7 @@ public class FPZAIOwnerHurtTarget extends EntityAITarget
         }
         else
         {
-            EntityLiving var1 = this.fpz.getOwner();
+            EntityLivingBase var1 = this.fpz.getOwner();
 
             if (var1 == null)
             {
@@ -35,9 +37,10 @@ public class FPZAIOwnerHurtTarget extends EntityAITarget
             }
             else
             {
-                this.field_48391_b = var1.getLastAttackingEntity();
-                return this.isSuitableTarget(this.field_48391_b, false);
-            }
+                this.theTarget = var1.func_110144_aD();
+                int i = var1.func_142013_aG();
+                return i != this.field_142050_e && this.isSuitableTarget(this.theTarget, false) && this.fpz.func_142018_a(this.theTarget, var1);
+           }
         }
     }
 
@@ -46,7 +49,7 @@ public class FPZAIOwnerHurtTarget extends EntityAITarget
      */
     public void startExecuting()
     {
-        this.taskOwner.setAttackTarget(this.field_48391_b);
+        this.taskOwner.setAttackTarget(this.theTarget);
         super.startExecuting();
     }
 }

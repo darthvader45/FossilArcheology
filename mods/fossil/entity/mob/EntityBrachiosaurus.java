@@ -57,7 +57,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public EntityBrachiosaurus(World var1)
     {
         super(var1,EnumDinoType.Brachiosaurus);
-        this.texture = "/mods/fossil/textures/mob/Brachiosaurus.png";
         //this.setSize(1.5F, 1.5F);
         //this.health = 8;
         //this.experienceValue=5;
@@ -93,8 +92,8 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIEatLeavesWithHeight(this, 24));//, this.HuntLimit));
         //this.tasks.addTask(6, new DinoAIUseFeederWithHeight(this, 24));//, this.HuntLimit));
         this.tasks.addTask(7, new DinoAIWander(this));

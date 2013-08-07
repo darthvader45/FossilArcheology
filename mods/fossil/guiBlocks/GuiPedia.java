@@ -133,11 +133,11 @@ public class GuiPedia extends GuiContainer
     /**
      * Print a Picture at X,Y
      */
-    public void PrintPictXY(String str0,int x0,int y0,int width,int height)
+    public void PrintPictXY(ResourceLocation str0,int x0,int y0,int width,int height)
     {
         //GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(str0));
 //    	this.mc.renderEngine.bindTexture(str0);
-        mc.func_110434_K().func_110578_a(str0, null);
+        mc.func_110434_K().func_110577_a(str0);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
         Tessellator var9 = Tessellator.instance;
         var9.startDrawingQuads();

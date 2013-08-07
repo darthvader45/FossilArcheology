@@ -11,7 +11,6 @@ public class EntityFailuresaurus extends EntityZombie
     public EntityFailuresaurus(World var1)
     {
         super(var1);
-        this.texture = "/mods/fossil/textures/Failuresaurus.png";
         this.experienceValue=4;
     }
 

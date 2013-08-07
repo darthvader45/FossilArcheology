@@ -9,11 +9,25 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderVelociraptor extends RenderLiving
 {
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Velociraptor.png");
+    
+    protected ResourceLocation func_110919_a(EntityVelociraptor par1Entity)
+    {
+        return loc;
+    }
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityVelociraptor)par1Entity);
+    }
+    
     final float SwingConst = 0.261799F;
     final int SwingStep = 15;
     public static final float SwingBackSignal = -1000.0F;
@@ -111,7 +125,6 @@ public class RenderVelociraptor extends RenderLiving
                     if (var18 == 15)
                     {
                         var17 = (float)var1.ticksExisted + var9;
-                        this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var19 = 0.5F;
                         GL11.glColor4f(var19, var19, var19, 1.0F);

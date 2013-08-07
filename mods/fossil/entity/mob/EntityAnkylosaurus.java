@@ -62,45 +62,15 @@ public class EntityAnkylosaurus extends EntityDinosaur
         super(var1,EnumDinoType.Ankylosaurus);
         this.OrderStatus = EnumOrderType.FreeMove;
         this.looksWithInterest = false;
-        //this.health = 8;
-        //this.experienceValue=3;
-        
-        /*this.Width0=1.2F;
-        this.WidthInc=0.4F;
-        this.Length0=1.1F;
-        this.LengthInc=0.7F;
-        this.Height0=1.2F;
-        this.HeightInc=0.36F;
-        
-        /*this.HitboxXfactor=5.0F;
-        this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;*
-        
-        this.BaseattackStrength=3;
-        //this.AttackStrengthIncrease=;
-        //this.BreedingTime=;
-        //this.BaseSpeed=;
-        this.SpeedIncrease=0.016F;
-        this.MaxAge=13;
-        this.BaseHealth=21;
-        this.HealthIncrease=1;
-        //this.AdultAge=;
-        //this.AgingTicks=;
-        this.MaxHunger=500;
-        //this.Hungrylevel=;*/
+
         this.updateSize();
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         this.getNavigator().setAvoidsWater(true);
-        //this.tasks.addTask(0, new DinoAIGrowup(this));
-        //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
-//        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
-        //this.tasks.addTask(6, new DinoAIEatFerns(this));
-        //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24, EnumDinoEating.Herbivorous));
+        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIWander(this));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -113,18 +83,6 @@ public class EntityAnkylosaurus extends EntityDinosaur
     public boolean isAIEnabled()
     {
         return !this.isModelized();
-    }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
-    {
-        if (this.isModelized())
-            return super.getTexture();
-
-            return "/mods/fossil/textures/mob/Ankylosaurus.png";
-
     }
 
     /**
@@ -328,12 +286,12 @@ public class EntityAnkylosaurus extends EntityDinosaur
         if (var1)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-            this.moveSpeed = 2.0F;
+//            this.moveSpeed = 2.0F;
         }
         else
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-            this.moveSpeed = 0.5F;
+//            this.moveSpeed = 0.5F;
         }
     }
 

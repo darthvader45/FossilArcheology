@@ -11,9 +11,12 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
 import mods.fossil.fossilAI.EntityAIBegSC;
 import mods.fossil.guiBlocks.GuiPedia;
+import net.minecraft.block.BlockColored;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -48,47 +51,63 @@ import net.minecraft.world.World;
 
 public class EntitySmilodon extends EntityTameable
 {
-    private boolean looksWithInterest = false;
-    private float field_25048_b;
-    private float field_25054_c;
+    private float field_70926_e;
+    private float field_70924_f;
+
+    /** true is the wolf is wet else false */
     private boolean isShaking;
-    private boolean field_25052_g;
+    private boolean field_70928_h;
+
+    /**
+     * This time increases while wolf is shaking and emitting water particles.
+     */
     private float timeWolfIsShaking;
     private float prevTimeWolfIsShaking;
 
     public EntitySmilodon(World var1)
     {
         super(var1);
-        this.texture = "/mods/fossil/textures/mob/Smilodon_Adult.png";
         this.setSize(0.8F, 0.8F);
-        this.moveSpeed = 0.3F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
-        this.tasks.addTask(6, new EntityAIMate(this, this.moveSpeed));
-        this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this,  1.0D, true));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this,  1.0D, 10.0F, 2.0F));
+        this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWander(this,  1.0D));
         this.tasks.addTask(8, new EntityAIBegSC(this, 8.0F));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 16.0F, 200, false));
-        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDodo.class, 16.0F, 200, false));
-        this.targetTasks.addTask(5, new EntityAITargetNonTamed(this, EntityPig.class, 16.0F, 200, false));
-        this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 16.0F, 200, false));
-        this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 16.0F, 200, false));
-        this.targetTasks.addTask(8, new EntityAITargetNonTamed(this, EntityVillager.class, 16.0F, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDodo.class, 200, false));
+        this.targetTasks.addTask(5, new EntityAITargetNonTamed(this, EntityPig.class, 200, false));
+        this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 200, false));
+        this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 200, false));
+        this.targetTasks.addTask(8, new EntityAITargetNonTamed(this, EntityVillager.class, 200, false));
         this.experienceValue=5;
+        this.setTamed(false);
+    }
+    
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+
+        if (this.isTamed())
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+        }
+        else
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+        }
     }
 
-    public int getMaxHealth()
-    {
-        return !this.isTamed() ? 8 : 20;
-    }
+
 
     /**
      * Returns true if the newer Entity AI code should be run
@@ -103,11 +122,15 @@ public class EntitySmilodon extends EntityTameable
     /**
      * Sets the active target the Task system uses for tracking
      */
-    public void setAttackTarget(EntityLiving var1)
+    public void setAttackTarget(EntityLivingBase par1EntityLivingBase)
     {
-        super.setAttackTarget(var1);
+        super.setAttackTarget(par1EntityLivingBase);
 
-        if (var1 instanceof EntityPlayer)
+        if (par1EntityLivingBase == null)
+        {
+            this.setAngry(false);
+        }
+        else if (!this.isTamed())
         {
             this.setAngry(true);
         }
@@ -118,30 +141,24 @@ public class EntitySmilodon extends EntityTameable
      */
     protected void updateAITick()
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
+        this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Integer(this.getHealth()));
+        this.dataWatcher.addObject(18, Float.valueOf(this.func_110143_aJ()));
+        this.dataWatcher.addObject(19, new Byte((byte)0));
+        this.dataWatcher.addObject(20, new Byte((byte)BlockColored.getBlockFromDye(1)));
     }
 
+    
     /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
+     * Plays step sound at given x, y, z for the entity
      */
-    protected boolean canTriggerWalking()
+    protected void playStepSound(int par1, int par2, int par3, int par4)
     {
-        return false;
-    }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
-    {
-        return this.isChild() ? "/mods/fossil/textures/mob/Smilodon_Young.png" : "/mods/fossil/textures/mob/Smilodon_Adult.png";
+        this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }
 
     /**
@@ -151,6 +168,7 @@ public class EntitySmilodon extends EntityTameable
     {
         super.writeEntityToNBT(var1);
         var1.setBoolean("Angry", this.isAngry());
+        var1.setByte("CollarColor", (byte)this.getCollarColor());
     }
 
     /**
@@ -210,63 +228,6 @@ public class EntitySmilodon extends EntityTameable
         return -1;
     }
 
-    protected void updateEntityActionState()
-    {
-        super.updateEntityActionState();
-
-        if (!this.hasAttacked && !this.hasPath() && this.isTamed() && this.ridingEntity == null)
-        {
-            EntityPlayer var4 = this.worldObj.getPlayerEntityByName(this.getOwnerName());
-
-            if (var4 != null)
-            {
-                float var5 = var4.getDistanceToEntity(this);
-
-                if (var5 > 5.0F)
-                {
-                    this.getPathOrWalkableBlock(var4, var5);
-                }
-            }
-            else if (!this.isInWater())
-            {
-                this.setIsSitting(true);
-            }
-        }
-        else if (this.entityToAttack == null && !this.hasPath() && !this.isTamed() && !this.isChild() && this.worldObj.rand.nextInt(100) == 0)
-        {
-            List var3 = this.worldObj.getEntitiesWithinAABB(EntityAnimal.class, AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
-
-            if (!var3.isEmpty())
-            {
-                EntityAnimal var2 = (EntityAnimal)var3.get(this.worldObj.rand.nextInt(var3.size()));
-
-                if (!(var2 instanceof EntitySmilodon))
-                {
-                    this.setAttackTarget(var2);
-                }
-            }
-        }
-        else if (this.isChild() && !this.isTamed())
-        {
-            Entity var1 = this.getEntityToAttack();
-
-            if (!(var1 instanceof EntityPlayer))
-            {
-                this.setAttackTarget((EntityLiving)null);
-            }
-        }
-
-        if (this.isInWater())
-        {
-            this.setIsSitting(false);
-        }
-
-        if (!this.worldObj.isRemote)
-        {
-            this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
-        }
-    }
-
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
@@ -275,9 +236,9 @@ public class EntitySmilodon extends EntityTameable
     {
         super.onLivingUpdate();
 
-        if (!this.worldObj.isRemote && this.isShaking && !this.field_25052_g && !this.hasPath() && this.onGround)
+        if (!this.worldObj.isRemote && this.isShaking && !this.field_70928_h && !this.hasPath() && this.onGround)
         {
-            this.field_25052_g = true;
+            this.field_70928_h = true;
             this.timeWolfIsShaking = 0.0F;
             this.prevTimeWolfIsShaking = 0.0F;
             this.worldObj.setEntityState(this, (byte)8);
@@ -300,18 +261,18 @@ public class EntitySmilodon extends EntityTameable
     public void onUpdate()
     {
         super.onUpdate();
-        this.field_25054_c = this.field_25048_b;
+        this.field_70924_f = this.field_70926_e;
 
-        if (this.looksWithInterest)
+        if (this.lookswithinterest())
         {
-            this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
+            this.field_70926_e += (1.0F - this.field_70926_e) * 0.4F;
         }
         else
         {
-            this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
+            this.field_70926_e += (0.0F - this.field_70926_e) * 0.4F;
         }
 
-        if (this.looksWithInterest)
+        if (this.lookswithinterest())
         {
             this.numTicksToChaseTarget = 10;
         }
@@ -319,11 +280,11 @@ public class EntitySmilodon extends EntityTameable
         if (this.isWet())
         {
             this.isShaking = true;
-            this.field_25052_g = false;
+            this.field_70928_h = false;
             this.timeWolfIsShaking = 0.0F;
             this.prevTimeWolfIsShaking = 0.0F;
         }
-        else if ((this.isShaking || this.field_25052_g) && this.field_25052_g)
+        else if ((this.isShaking || this.field_70928_h) && this.field_70928_h)
         {
             if (this.timeWolfIsShaking == 0.0F)
             {
@@ -336,7 +297,7 @@ public class EntitySmilodon extends EntityTameable
             if (this.prevTimeWolfIsShaking >= 2.0F)
             {
                 this.isShaking = false;
-                this.field_25052_g = false;
+                this.field_70928_h = false;
                 this.prevTimeWolfIsShaking = 0.0F;
                 this.timeWolfIsShaking = 0.0F;
             }
@@ -384,7 +345,7 @@ public class EntitySmilodon extends EntityTameable
 
     public float getInterestedAngle(float var1)
     {
-        return (this.field_25054_c + (this.field_25048_b - this.field_25054_c) * var1) * 0.15F * (float)Math.PI;
+        return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * var1) * 0.15F * (float)Math.PI;
     }
 
     public float getEyeHeight()
@@ -434,7 +395,7 @@ public class EntitySmilodon extends EntityTameable
      */
     protected boolean isMovementCeased()
     {
-        return this.isSitting() || this.field_25052_g;
+        return this.isSitting() || this.field_70928_h;
     }
 
     /**
@@ -582,7 +543,7 @@ public class EntitySmilodon extends EntityTameable
             {
                 ItemFood var3 = (ItemFood)Item.itemsList[var2.itemID];
 
-                if (this.TamedInterest(var2.itemID) && this.dataWatcher.getWatchableObjectInt(18) < 20)
+                if (this.TamedInterest(var2.itemID) && this.dataWatcher.func_111145_d(18) < 20.0F)
                 {
                     --var2.stackSize;
                     this.heal(var3.getHealAmount());
@@ -642,7 +603,7 @@ public class EntitySmilodon extends EntityTameable
     {
         if (var1 == 8)
         {
-            this.field_25052_g = true;
+            this.field_70928_h = true;
             this.timeWolfIsShaking = 0.0F;
             this.prevTimeWolfIsShaking = 0.0F;
         }
@@ -652,9 +613,10 @@ public class EntitySmilodon extends EntityTameable
         }
     }
 
-    public float setTailRotation()
+    @SideOnly(Side.CLIENT)
+    public float getTailRotation()
     {
-        return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (float)(20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+        return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20.0F - this.dataWatcher.func_111145_d(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
     }
 
     /**
@@ -668,20 +630,6 @@ public class EntitySmilodon extends EntityTameable
     public boolean isWheat(ItemStack var1)
     {
         return var1 == null ? false : (!(Item.itemsList[var1.itemID] instanceof ItemFood) ? false : ((ItemFood)Item.itemsList[var1.itemID]).isWolfsFavoriteMeat());
-    }
-
-    public void setIsSitting(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-        if (var1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
-        }
     }
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
@@ -717,6 +665,22 @@ public class EntitySmilodon extends EntityTameable
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
         }
     }
+    
+    /**
+     * Return this wolf's collar color.
+     */
+    public int getCollarColor()
+    {
+        return this.dataWatcher.getWatchableObjectByte(20) & 15;
+    }
+
+    /**
+     * Set this wolf's collar color.
+     */
+    public void setCollarColor(int par1)
+    {
+        this.dataWatcher.updateObject(20, Byte.valueOf((byte)(par1 & 15)));
+    }
 
     public boolean isTamed()
     {
@@ -725,29 +689,47 @@ public class EntitySmilodon extends EntityTameable
 
     public void setIsTamed(boolean var1)
     {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+//        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
         if (var1)
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 4)));
+            this.dataWatcher.updateObject(19, Byte.valueOf((byte)1));
         }
         else
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -5)));
+            this.dataWatcher.updateObject(19, Byte.valueOf((byte)0));
         }
     }
 
-    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
+    public EntitySmilodon spawnBabyAnimal(EntityAgeable par1EntityAgeable)
     {
-        EntitySmilodon var2 = new EntitySmilodon(this.worldObj);
-        var2.setOwner(this.getOwnerName());
-        var2.setTamed(true);
-        return var2;
-    }
+    	EntitySmilodon entitysmilodon = new EntitySmilodon(this.worldObj);
+        String s = this.getOwnerName();
 
-    public void func_48150_h(boolean var1)
+        if (s != null && s.trim().length() > 0)
+        {
+        	entitysmilodon.setOwner(s);
+        	entitysmilodon.setTamed(true);
+        }
+
+        return entitysmilodon;
+    }
+    
+    public void func_70918_i(boolean par1)
     {
-        this.looksWithInterest = var1;
+        if (par1)
+        {
+            this.dataWatcher.updateObject(19, Byte.valueOf((byte)1));
+        }
+        else
+        {
+            this.dataWatcher.updateObject(19, Byte.valueOf((byte)0));
+        }
+    }
+    
+    public boolean lookswithinterest()
+    {
+        return this.dataWatcher.getWatchableObjectByte(19) == 1;
     }
 
     public boolean func_48135_b(EntityAnimal var1)

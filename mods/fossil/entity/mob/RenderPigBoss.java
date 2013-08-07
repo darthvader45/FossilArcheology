@@ -2,11 +2,28 @@ package mods.fossil.entity.mob;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderPigBoss extends RenderBiped
 {
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/PigBoss.png");
+    private static final ResourceLocation loc2 = new ResourceLocation("fossil:textures/mob/PigBoss_r.png");
+    private static final ResourceLocation loc3 = new ResourceLocation("fossil:textures/mob/PigBossCharged_r.png");
+    
+    protected ResourceLocation func_110919_a(EntityPigBoss par1Entity)
+    {
+        return loc;
+    }
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityPigBoss)par1Entity);
+    }
+    
     public RenderPigBoss(ModelBiped var1, float var2)
     {
         super(var1, var2);
@@ -37,11 +54,11 @@ public class RenderPigBoss extends RenderBiped
         {
             if (var1.FireballCount >= 50)
             {
-                this.loadTexture("/mods/fossil/textures/PigBossCharged_r.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/PigBossCharged_r.png"));
             }
             else
             {
-                this.loadTexture("/mods/fossil/textures/PigBoss_r.png");
+                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/PigBoss_r.png"));
             }
 
             float var4 = (1.0F - var1.getBrightness(1.0F)) * 0.5F;

@@ -87,8 +87,8 @@ public class EntityCompsognathus extends EntityDinosaur
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));
         this.tasks.addTask(7, new DinoAIWander(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -128,8 +128,8 @@ public class EntityCompsognathus extends EntityDinosaur
      */
     public String getTexture()
     {
-        if (this.isModelized())
-            return super.getTexture();
+//        if (this.isModelized())
+ //           return super.getTexture();
             switch (this.getSubSpecies())
             {
                 case 1:

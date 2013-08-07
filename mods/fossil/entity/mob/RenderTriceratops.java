@@ -5,11 +5,25 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderTriceratops extends RenderLiving
 {
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Triceratops.png");
+    
+    protected ResourceLocation func_110919_a(EntityTriceratops par1Entity)
+    {
+        return loc;
+    }
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityTriceratops)par1Entity);
+    }
+    
     public RenderTriceratops(ModelBase var1, float var2)
     {
         super(var1, var2);
@@ -109,7 +123,6 @@ public class RenderTriceratops extends RenderLiving
                     if (var18 == 15)
                     {
                         var17 = (float)var1.ticksExisted + var9;
-                        this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var19 = 0.5F;
                         GL11.glColor4f(var19, var19, var19, 1.0F);
@@ -241,9 +254,9 @@ public class RenderTriceratops extends RenderLiving
     {
         EntityDinosaur var4 = (EntityDinosaur)var1;
 
-        if (var4.getHealth() < 8 + var4.getDinoAge() && var4.getHealth() > 20)
+        if (var4.func_110143_aJ() < 8 + var4.getDinoAge() && var4.func_110143_aJ() > 20)
         {
-            this.loadTexture("/mods/fossil/textures/mob/Tri_Hurt.png");
+            this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/mob/Tri_Hurt.png"));
             return 1;
         }
         else

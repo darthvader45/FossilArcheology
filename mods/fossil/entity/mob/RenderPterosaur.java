@@ -6,12 +6,26 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderPterosaur extends RenderLiving
 {
+
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Pterosaur.png");
+    
+    protected ResourceLocation func_110919_a(EntityPterosaur par1Entity)
+    {
+        return loc;
+    }
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityPterosaur)par1Entity);
+    }
+    
     public boolean FlyingModel = false;
     public boolean LandingModel = false;
     public float RollAngle = 0.0F;
@@ -85,7 +99,7 @@ public class RenderPterosaur extends RenderLiving
                 var15 = 1.0F;
             }
 
-            this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
+   //         this.loadDownloadableImageTexture(var1.skinUrl, var1.getTexture());
             GL11.glEnable(GL11.GL_ALPHA_TEST);
 
             if (this.LandingModel)

@@ -110,15 +110,14 @@ public class EntityPterosaur extends EntityDinosaur
         this.updateSize();
         
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.texture = "/mods/fossil/textures/mob/Pterosaur.png";
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         //this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
         //this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24/*, this.HuntLimit*/, EnumDinoEating.Carnivorous));
         /*this.tasks.addTask(6, new DinoAIPickItem(this, Item.fishRaw, this.moveSpeed, 24, this.HuntLimit));
         this.tasks.addTask(6, new DinoAIPickItem(this, Item.fishCooked, this.moveSpeed, 24, this.HuntLimit));
@@ -807,7 +806,7 @@ public class EntityPterosaur extends EntityDinosaur
                 }
                 else
                 {
-                    var5 = this.landMovementFactor;
+                    var5 = this.getAIMoveSpeed();
                 }
 
                 var5 *= var8;

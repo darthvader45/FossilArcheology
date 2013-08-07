@@ -3,6 +3,7 @@ package mods.fossil.fossilAI;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
@@ -11,21 +12,23 @@ import net.minecraft.world.World;
 public class DinoAIFollowOwner extends EntityAIBase
 {
     private EntityDinosaur DinoEntity;
-    private EntityLiving FollowTarget;
-    World WorldObj;
-    private PathNavigate selfNavigator;
-    private int actionCount;
-    float closeRange;
-    float stayRange;
-    private boolean field_48311_i;
+    private EntityLivingBase theOwner;
+    World theWorld;
+    private double field_75336_f;
+    private PathNavigate petPathfinder;
+    private int field_75343_h;
+    float maxDist;
+    float minDist;
+    private boolean field_75344_i;
 
-    public DinoAIFollowOwner(EntityDinosaur var1, float var3, float var4)
+    public DinoAIFollowOwner(EntityDinosaur par1EntityTameable, double par2, float par4, float par5)
     {
-        this.DinoEntity = var1;
-        this.WorldObj = var1.worldObj;
-        this.selfNavigator = var1.getNavigator();
-        this.stayRange = var3;
-        this.closeRange = var4;
+        this.DinoEntity = par1EntityTameable;
+        this.theWorld = par1EntityTameable.worldObj;
+        this.field_75336_f = par2;
+        this.petPathfinder = par1EntityTameable.getNavigator();
+        this.minDist = par4;
+        this.maxDist = par5;
         this.setMutexBits(3);
     }
 
@@ -40,9 +43,9 @@ public class DinoAIFollowOwner extends EntityAIBase
         }
         else
         {
-            EntityLiving var1 = this.DinoEntity.getOwner();
+            EntityLivingBase entitylivingbase = this.DinoEntity.func_130012_q();
 
-            if (var1 == null)
+            if (entitylivingbase == null)
             {
                 return false;
             }
@@ -50,13 +53,17 @@ public class DinoAIFollowOwner extends EntityAIBase
             {
                 return false;
             }
-            else if (this.DinoEntity.getDistanceSqToEntity(var1) < (double)(this.stayRange * this.stayRange))
+            else if (this.DinoEntity.isSitting())
+            {
+                return false;
+            }
+            else if (this.DinoEntity.getDistanceSqToEntity(entitylivingbase) < (double)(this.minDist * this.minDist))
             {
                 return false;
             }
             else
             {
-                this.FollowTarget = var1;
+                this.theOwner = entitylivingbase;
                 return true;
             }
         }
@@ -67,7 +74,7 @@ public class DinoAIFollowOwner extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        return !this.selfNavigator.noPath() && this.DinoEntity.getDistanceSqToEntity(this.FollowTarget) > (double)(this.closeRange * this.closeRange) && !this.DinoEntity.isSitting();
+        return !this.petPathfinder.noPath() && this.DinoEntity.getDistanceSqToEntity(this.theOwner) > (double)(this.maxDist * this.maxDist) && !this.DinoEntity.isSitting();
     }
 
     /**
@@ -75,8 +82,8 @@ public class DinoAIFollowOwner extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.actionCount = 0;
-        this.field_48311_i = this.DinoEntity.getNavigator().getAvoidsWater();
+        this.field_75343_h = 0;
+        this.field_75344_i = this.DinoEntity.getNavigator().getAvoidsWater();
         this.DinoEntity.getNavigator().setAvoidsWater(false);
     }
 
@@ -85,9 +92,9 @@ public class DinoAIFollowOwner extends EntityAIBase
      */
     public void resetTask()
     {
-        this.FollowTarget = null;
-        this.selfNavigator.clearPathEntity();
-        this.DinoEntity.getNavigator().setAvoidsWater(this.field_48311_i);
+        this.theOwner = null;
+        this.petPathfinder.clearPathEntity();
+        this.DinoEntity.getNavigator().setAvoidsWater(this.field_75344_i);
     }
 
     /**
@@ -95,27 +102,36 @@ public class DinoAIFollowOwner extends EntityAIBase
      */
     public void updateTask()
     {
-        this.DinoEntity.getLookHelper().setLookPositionWithEntity(this.FollowTarget, 10.0F, (float)this.DinoEntity.getVerticalFaceSpeed());
+        this.DinoEntity.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float)this.DinoEntity.getVerticalFaceSpeed());
 
-        if (!this.DinoEntity.isSitting() && --this.actionCount <= 0)
+        if (!this.DinoEntity.isSitting())
         {
-            this.actionCount = 10;
-
-            if (!this.selfNavigator.tryMoveToEntityLiving(this.FollowTarget, this.DinoEntity.getSpeed()) && this.DinoEntity.getDistanceSqToEntity(this.FollowTarget) >= 144.0D)
+            if (--this.field_75343_h <= 0)
             {
-                int var1 = MathHelper.floor_double(this.FollowTarget.posX) - 2;
-                int var2 = MathHelper.floor_double(this.FollowTarget.posZ) - 2;
-                int var3 = MathHelper.floor_double(this.FollowTarget.boundingBox.minY);
+                this.field_75343_h = 10;
 
-                for (int var4 = 0; var4 <= 4; ++var4)
+                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f))
                 {
-                    for (int var5 = 0; var5 <= 4; ++var5)
+                    if (!this.DinoEntity.func_110167_bD())
                     {
-                        if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && this.WorldObj.isBlockNormalCube(var1 + var4, var3 - 1, var2 + var5) && !this.WorldObj.isBlockNormalCube(var1 + var4, var3, var2 + var5) && !this.WorldObj.isBlockNormalCube(var1 + var4, var3 + 1, var2 + var5))
+                        if (this.DinoEntity.getDistanceSqToEntity(this.theOwner) >= 144.0D)
                         {
-                            this.DinoEntity.setLocationAndAngles((double)((float)(var1 + var4) + 0.5F), (double)var3, (double)((float)(var2 + var5) + 0.5F), this.DinoEntity.rotationYaw, this.DinoEntity.rotationPitch);
-                            this.selfNavigator.clearPathEntity();
-                            return;
+                            int i = MathHelper.floor_double(this.theOwner.posX) - 2;
+                            int j = MathHelper.floor_double(this.theOwner.posZ) - 2;
+                            int k = MathHelper.floor_double(this.theOwner.boundingBox.minY);
+
+                            for (int l = 0; l <= 4; ++l)
+                            {
+                                for (int i1 = 0; i1 <= 4; ++i1)
+                                {
+                                    if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.theWorld.doesBlockHaveSolidTopSurface(i + l, k - 1, j + i1) && !this.theWorld.isBlockNormalCube(i + l, k, j + i1) && !this.theWorld.isBlockNormalCube(i + l, k + 1, j + i1))
+                                    {
+                                        this.DinoEntity.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), this.DinoEntity.rotationYaw, this.DinoEntity.rotationPitch);
+                                        this.petPathfinder.clearPathEntity();
+                                        return;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -123,3 +139,4 @@ public class DinoAIFollowOwner extends EntityAIBase
         }
     }
 }
+

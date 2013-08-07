@@ -202,7 +202,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
 
                 if (!this.worldObj.isRemote)
                 {
-                    this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
+                    this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
                 }
             }
         }

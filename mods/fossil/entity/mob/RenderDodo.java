@@ -8,10 +8,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderDodo extends RenderLiving
 {
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Dodo_Brown.png");
+    
     public RenderDodo(ModelBase par1ModelBase, float par2)
     {
         super(par1ModelBase, par2);
@@ -20,6 +23,11 @@ public class RenderDodo extends RenderLiving
     public void renderDodo(EntityDodo par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         super.doRenderLiving(par1Entity, par2, par4, par6, par8, par9);
+    }
+    
+    protected ResourceLocation func_110919_a(EntityDodo par1Entity)
+    {
+        return loc;
     }
 
     protected float getWingRotation(EntityDodo par1EntityLiving, float par2)
@@ -42,6 +50,12 @@ public class RenderDodo extends RenderLiving
         this.renderDodo((EntityDodo)par1EntityLiving, par2, par4, par6, par8, par9);
     }
 
+    
+    protected ResourceLocation func_110775_a(Entity par1Entity)
+    {
+        return this.func_110919_a((EntityDodo)par1Entity);
+    }
+    
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
      * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic

@@ -2,16 +2,17 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class FPZAIOwnerHurtByTarget extends EntityAITarget
 {
     EntityFriendlyPigZombie fpz;
-    EntityLiving field_48393_b;
+    EntityLivingBase field_48393_b;
 
     public FPZAIOwnerHurtByTarget(EntityFriendlyPigZombie var1)
     {
-        super(var1, 32.0F, false);
+        super(var1, false);
         this.fpz = var1;
         this.setMutexBits(1);
     }

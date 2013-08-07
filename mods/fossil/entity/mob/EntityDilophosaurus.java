@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
+
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -30,6 +31,7 @@ import net.minecraft.block.StepSound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -83,7 +85,6 @@ public class EntityDilophosaurus extends EntityDinosaur
     public EntityDilophosaurus(World var1)
     {
         super(var1,EnumDinoType.Dilophosaurus);
-        this.texture = "/mods/fossil/textures/mob/UtaCalm.png";
         this.looksWithInterest = false;
         //this.CheckSkin();
        // this.setSize(0.3F, 0.3F);
@@ -119,9 +120,9 @@ public class EntityDilophosaurus extends EntityDinosaur
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24, /*this.HuntLimit,*/ EnumDinoEating.Carnivorous));
         this.tasks.addTask(7, new DinoAIWander(this));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
@@ -159,13 +160,6 @@ public class EntityDilophosaurus extends EntityDinosaur
         return false;
     }
 
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
-    {
-        return super.getTexture();
-    }
 
     /**
      * Causes this entity to do an upwards motion (jumping).
@@ -270,11 +264,13 @@ public class EntityDilophosaurus extends EntityDinosaur
                     {
                         if (var2 < 5.0F)
                         {
-                            this.moveSpeed = 2.0F;
+                            //this.moveSpeed = 2.0F;
+                	        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(2.0D);
                         }
                         else
                         {
-                            this.moveSpeed = 1.0F;
+//                	        // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
+                	        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(1.0D);
                         }
                     }
                 }
@@ -291,7 +287,7 @@ public class EntityDilophosaurus extends EntityDinosaur
 
         if (!this.worldObj.isRemote)
         {
-            this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
+            this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
         }
     }
 

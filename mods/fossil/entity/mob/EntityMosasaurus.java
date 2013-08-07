@@ -65,7 +65,6 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
     {
         super(var1,EnumDinoType.Mosasaurus);
         this.looksWithInterest = false;
-        this.texture = "/mods/fossil/textures/mob/Mosasaurus.png";
         //this.setSize(0.5F, 0.5F);
         //this.moveSpeed = 0.3F;
         //this.health = 10;
@@ -96,7 +95,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, (new WaterDinoAISwimming(this, true, 0.09374999F, 0.018749999F)).setDiveAtNight());
-        this.tasks.addTask(2, new DinoAIAttackOnCollide(this, true));
+        this.tasks.addTask(2, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(3,new DinoAIEat(this,24));
         this.tasks.addTask(4, new WaterDinoAIWander(this, 0.003F));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

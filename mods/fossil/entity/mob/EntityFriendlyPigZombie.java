@@ -1,12 +1,13 @@
 package mods.fossil.entity.mob;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.FPZAIFollowOwner;
 import mods.fossil.fossilAI.FPZAIOwnerHurtByTarget;
 import mods.fossil.fossilAI.FPZAIOwnerHurtTarget;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -34,14 +35,12 @@ public class EntityFriendlyPigZombie extends EntityMob
     public EntityFriendlyPigZombie(World var1)
     {
         super(var1);
-        this.texture = "/mob/pigzombie.png";
-        this.moveSpeed = 0.23F;
         this.isImmuneToFire = true;
         this.LeaderName = "Notch";
         this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLiving.class, this.moveSpeed * 2.0F, false));
-        this.tasks.addTask(5, new FPZAIFollowOwner(this, this.moveSpeed * 1.5F, 10.0F, 2.0F));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLiving.class, 10.0F * 2.0F, false));
+        this.tasks.addTask(5, new FPZAIFollowOwner(this, 10.0F, 10.0F, 2.0F));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new FPZAIOwnerHurtByTarget(this));
@@ -49,6 +48,20 @@ public class EntityFriendlyPigZombie extends EntityMob
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+
+        if (this.isTamed())
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+        }
+        else
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+        }
+    }
     /**
      * Returns true if the newer Entity AI code should be run
      */
@@ -62,7 +75,8 @@ public class EntityFriendlyPigZombie extends EntityMob
      */
     public void onUpdate()
     {
-        this.moveSpeed = this.entityToAttack == null ? 0.5F : 0.95F;
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(2.0D);
+ //       this.moveSpeed = this.entityToAttack == null ? 0.5F : 0.95F;
 
         if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0)
         {
@@ -204,8 +218,19 @@ public class EntityFriendlyPigZombie extends EntityMob
         }
     }
 
-    public EntityLiving getOwner()
+    public EntityPlayer getOwner()
     {
         return this.Leader;
     }
+
+	public EntityLivingBase func_130012_q() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean func_142018_a(EntityLivingBase theTarget,
+			EntityLivingBase var1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

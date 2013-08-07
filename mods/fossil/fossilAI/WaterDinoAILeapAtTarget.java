@@ -1,6 +1,7 @@
 package mods.fossil.fossilAI;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.util.MathHelper;
 
@@ -10,7 +11,7 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget
     EntityLiving leaper;
 
     /** The entity that the leaper is leaping towards. */
-    EntityLiving leapTarget;
+    EntityLivingBase leapTarget;
 
     /** The entity's motionY after leaping. */
     float leapMotionY;
@@ -33,8 +34,8 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget
         }
         else
         {
-            double var1 = this.leaper.getDistanceSqToEntity(this.leapTarget);
-            return var1 >= 1.0D && var1 <= 32.0D ? this.leaper.getRNG().nextInt(5) == 0 : false;
+            double d0 = this.leaper.getDistanceSqToEntity(this.leapTarget);
+            return d0 >= 4.0D && d0 <= 16.0D ? (!this.leaper.onGround ? false : this.leaper.getRNG().nextInt(5) == 0) : false;
         }
     }
 
