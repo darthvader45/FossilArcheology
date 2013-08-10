@@ -24,6 +24,7 @@ import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import mods.fossil.entity.mob.EntityPigBoss;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPregnantPig;
@@ -39,6 +40,7 @@ import mods.fossil.entity.mob.ModelDilophosaurus;
 import mods.fossil.entity.mob.ModelFailuresaurus;
 import mods.fossil.entity.mob.ModelMammoth;
 import mods.fossil.entity.mob.ModelNautilus;
+import mods.fossil.entity.mob.ModelPachycephalosaurus;
 import mods.fossil.entity.mob.ModelPigBoss;
 import mods.fossil.entity.mob.ModelPterosaurGround;
 import mods.fossil.entity.mob.ModelSmilodon;
@@ -57,6 +59,7 @@ import mods.fossil.entity.mob.RenderFailuresaurus;
 import mods.fossil.entity.mob.RenderMammoth;
 import mods.fossil.entity.mob.RenderMosasaurus;
 import mods.fossil.entity.mob.RenderNautilus;
+import mods.fossil.entity.mob.RenderPachycephalosaurus;
 import mods.fossil.entity.mob.RenderPigBoss;
 import mods.fossil.entity.mob.RenderPlesiosaur;
 import mods.fossil.entity.mob.RenderPterosaur;
@@ -114,6 +117,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Fossil.dodoEgg));
         RenderingRegistry.registerEntityRenderingHandler(EntityCultivatedDodoEgg.class, new RenderSnowball(Fossil.cultivatedDodoEgg));
         RenderingRegistry.registerEntityRenderingHandler(EntityAnkylosaurus.class, new RenderAnkylosaurus(0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPachycephalosaurus.class, new RenderPachycephalosaurus(new ModelPachycephalosaurus(), 0.5F));
 		//RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
 		
 	}

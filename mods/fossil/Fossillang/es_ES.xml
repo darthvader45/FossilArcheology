@@ -216,6 +216,7 @@
 	<entry key="Dino.Spinosaurus">Espinosaurio</entry>
 	<entry key="Dino.Compsognathus">Compsognathus</entry>
 	<entry key="Dino.Ankylosaurus">Ankylosaurus</entry>
+	<entry key="Dino.Pachycephalosaurus">Pachycephalosaurus</entry>
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mamút</entry>
 	<entry key="animal.saberCat">Tigre dientes de sable</entry>

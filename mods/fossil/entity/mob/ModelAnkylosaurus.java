@@ -222,11 +222,11 @@ public class ModelAnkylosaurus extends ModelBase
           this.Leg4.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI +2) * 1.0F * var2;
           this.Leg3.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
 
-          Tail.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + initialOffset));
+          this.Tail.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + initialOffset));
         currentAngle = Tail.rotateAngleY;
-        Tail2.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + 1F * offset + initialOffset)) - currentAngle;
+        this.Tail2.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + 1F * offset + initialOffset)) - currentAngle;
         currentAngle = Tail.rotateAngleY + Tail2.rotateAngleY;
-        TailClub.rotateAngleY = ((float) Math.pow(0.25F, 3)) * (MathHelper.cos(-0.6F * var1 + 1.1F * 2 * offset + PI / 9 + initialOffset)) - currentAngle;
+        this.TailClub.rotateAngleY = ((float) Math.pow(0.25F, 3)) * (MathHelper.cos(-0.6F * var1 + 1.1F * 2 * offset + PI / 9 + initialOffset)) - currentAngle;
         currentAngle = Tail.rotateAngleY + Tail2.rotateAngleY + TailClub.rotateAngleY;
   }
 

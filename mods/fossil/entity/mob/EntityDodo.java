@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
@@ -34,9 +36,11 @@ public class EntityDodo extends EntityAnimal
     /** The time until the next egg is spawned. */
     public int timeUntilNextEgg;
 
+
     public EntityDodo(World par1World)
     {
         super(par1World);
+        
 
         this.setSize(0.3F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
@@ -70,7 +74,7 @@ public class EntityDodo extends EntityAnimal
     
     public String getTexture()
     {
-        return "/mods/fossil/textures/mob/Dodo_Brown.png";   
+        return "/mods/fossil/textures/mob/Dodo_Gray.png";   
     }
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
