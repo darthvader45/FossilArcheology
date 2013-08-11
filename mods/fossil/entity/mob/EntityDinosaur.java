@@ -178,6 +178,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger/2);
+        this.setEntityHealth( this.SelfType.Health0 );
     }
     public void setPosition(double par1, double par3, double par5)
     {
@@ -256,14 +257,23 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public int getMaxHealth()
     {
-    	try
+    	if( this.SelfType != null )
     	{
-    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
+    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
     	}
-    	catch(NullPointerException e)
+    	else
     	{
-    		return 10;
+    		return 1;
     	}
+    	
+//    	try
+//    	{
+//    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
+//    	}
+//    	catch(NullPointerException e)
+//    	{
+//    		return 10;
+//    	}
     }
     /**
      * Returns the MaxHunger of the Dino
