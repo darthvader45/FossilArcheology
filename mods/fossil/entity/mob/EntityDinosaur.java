@@ -483,7 +483,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void ShowPedia(GuiPedia p0)
     {
     	String fullName = Localizations.getLocalizedString("Dino."+this.SelfType.toString());
-    	String truncatedName = fullName.substring(0, Math.min(fullName.length(), 11));
+    	String truncatedName = fullName.substring(0, 12);
     			
     	p0.reset();
     	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
