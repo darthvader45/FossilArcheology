@@ -1,12 +1,16 @@
 package mods.fossil.entity;
 
 import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityVelociraptor;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenSnow;
+import net.minecraft.world.biome.BiomeGenTaiga;
 
 public class EntityDodoEgg extends EntityThrowable
 {
@@ -27,7 +31,6 @@ public class EntityDodoEgg extends EntityThrowable
     
     public String getTexture()
     {
-
         return "/mods/fossil/textures/items/Egg_Dodo.png";
     }
 

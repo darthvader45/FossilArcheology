@@ -472,9 +472,13 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
+    	String fullName = Localizations.getLocalizedString("Dino."+this.SelfType.toString());
+    	String truncatedName = fullName.substring(0, Math.min(fullName.length(), 11));
+    			
     	p0.reset();
     	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
-    	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
+    	p0.PrintStringXY(truncatedName, 97, 23,40,90,245);
+//    	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaClock.png", 97, 34,8,8);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaHeart.png", 97, 46,9,9);
     	p0.PrintPictXY("/mods/fossil/textures/gui/PediaFood.png", 97, 58,9,9);

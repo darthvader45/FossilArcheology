@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -19,9 +20,11 @@ public class RenderPachycephalosaurus extends RenderLiving
     {
         super(var1, var3);
         this.setRenderPassModel(var2);
+        
+        
     }
 
-    public void renderCow(EntityPachycephalosaurus var1, double var2, double var4, double var6, float var8, float var9)
+    public void renderPachycephalosaurus(EntityPachycephalosaurus var1, double var2, double var4, double var6, float var8, float var9)
     {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
@@ -82,6 +85,7 @@ public class RenderPachycephalosaurus extends RenderLiving
                     GL11.glEnable(GL11.GL_ALPHA_TEST);
                 }
             }
+           
 
             this.renderEquippedItems(var1, var9);
             float var25 = var1.getBrightness(var9);
@@ -165,7 +169,7 @@ public class RenderPachycephalosaurus extends RenderLiving
 
     public void doRenderLiving(EntityLiving var1, double var2, double var4, double var6, float var8, float var9)
     {
-        this.renderCow((EntityPachycephalosaurus)var1, var2, var4, var6, var8, var9);
+        this.renderPachycephalosaurus((EntityPachycephalosaurus)var1, var2, var4, var6, var8, var9);
     }
 
     /**
@@ -176,7 +180,7 @@ public class RenderPachycephalosaurus extends RenderLiving
      */
     public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
     {
-        this.renderCow((EntityPachycephalosaurus)var1, var2, var4, var6, var8, var9);
+        this.renderPachycephalosaurus((EntityPachycephalosaurus)var1, var2, var4, var6, var8, var9);
     }
 
     /**

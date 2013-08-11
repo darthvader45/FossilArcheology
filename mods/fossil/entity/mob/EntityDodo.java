@@ -74,7 +74,7 @@ public class EntityDodo extends EntityAnimal
     
     public String getTexture()
     {
-        return "/mods/fossil/textures/mob/Dodo_Gray.png";   
+        return "/mods/fossil/textures/mob/Dodo_Brown.png";   
     }
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons

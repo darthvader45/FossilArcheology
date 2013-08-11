@@ -9,6 +9,9 @@ import net.minecraft.util.MathHelper;
 
 public class ModelPachycephalosaurus extends ModelDinosaurs
 {
+	
+    public boolean isAttacking = false;
+    
   //fields
     ModelRenderer Body;
     ModelRenderer UpperBody;
@@ -169,8 +172,11 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
       var1.rotateAngleZ = var4;
   }
   
+ 
   protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
   {
+
+      
       float PI = (float) Math.PI;
       float initialOffset = PI / 2;
       float offset = PI * 2 / 11;
@@ -192,20 +198,23 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
   
   public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4)
   {
-
-      EntityPachycephalosaurus entitypachy = (EntityPachycephalosaurus)par1EntityLiving;
-	  /*
-      int i = entitypachy.getAttackTimer();
-
-      if (i > 0)*/
-	  if (entitypachy.isAttacking)
+      EntityPachycephalosaurus entity = (EntityPachycephalosaurus)par1EntityLiving;
+      
+      int i = entity.getAttackTimer();
+      
+      if (i > 0)
       {
-//          this.UpperBody.rotateAngleX = -0.614F + 0.2F * this.func_78172_a((float)i - par4, 10.0F);
- //         this.Head.rotateAngleX = -0.614F + 0F * this.func_78172_a((float)i - par4, 10.0F);
-    	  this.Head.rotateAngleX = 0.0F;
+//          this.UpperBody.rotateAngleX = -0.614F + 1.4F * this.func_78172_a((float)i - par4, 10.0F);
+//         this.Head.rotateAngleX = -0.614F + 1.4F * this.func_78172_a((float)i - par4, 10.0F);
     	  this.UpperBody.rotateAngleX = 0.0F;
+    	  this.Head.rotateAngleX = 0.0F;
       }
-  }
+      else
+      {
+    	  this.UpperBody.rotateAngleX = -0.314F;
+    	  this.Head.rotateAngleX = -0.614F;
+      }
+   }
   
   private float func_78172_a(float par1, float par2)
   {

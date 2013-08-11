@@ -63,7 +63,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     //public int BreedTick = 3000;
     public boolean Running = false;
     private int attackTimer;
-    public boolean isAttacking = false;
 
     public EntityPachycephalosaurus(World var1)
     {
@@ -89,7 +88,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     @Override
     public boolean attackEntityAsMob(Entity var1)
     {
-    	this.isAttacking = true;
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
         if (this.rand.nextInt(16) < 9 && var1 instanceof EntityLiving)
@@ -223,14 +221,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-
         if (this.attackTimer > 0)
         {
             --this.attackTimer;
-        }
-        else
-        {
-        	this.isAttacking = false;
         }
         
         if (this.looksWithInterest)
@@ -334,6 +327,10 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     }
     public void handleHealthUpdate(byte var1)
     {
+        if (var1 == 4)
+        {
+            this.attackTimer = 10;
+        }
         if (var1 == 7)
         {
             this.showHeartsOrSmokeFX(true);
@@ -468,6 +465,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     {
         return this.attackTimer;
     }
+    
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable var1) 
