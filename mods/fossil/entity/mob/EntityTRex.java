@@ -474,6 +474,8 @@ public class EntityTRex extends EntityDinosaur
                 }
                 return true;
             }
+            if (!Fossil.DebugMode)
+            {
             if(var2.itemID == Fossil.chickenEss.itemID)
             {
                 if (!this.worldObj.isRemote)
@@ -481,6 +483,7 @@ public class EntityTRex extends EntityDinosaur
                 Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                 return true;
                 }
+            }
             }
          }
         else 
@@ -608,7 +611,8 @@ public class EntityTRex extends EntityDinosaur
 
     public boolean isWeak()
     {
-        return this.getHealth() < 8 && this.getDinoAge()>8 && !this.isTamed();
+//        return this.getHealth() < 8 && this.getDinoAge()>8 && !this.isTamed(); 
+    	return this.getHealthData() < 20 && this.getDinoAge()>5 && !this.isTamed();
     }
 
     /*private void HandleWeak()

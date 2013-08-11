@@ -827,7 +827,7 @@ public class EntityPterosaur extends EntityDinosaur
 
                 if (var6 > 0)
                 {
-                    var3 = Block.blocksList[var6].slipperiness * 0.91F;
+                    var3 = Block.blocksList[var6].slipperiness * 0.71F;
                 }
             }
 
