@@ -20,6 +20,7 @@
 	<entry key="tile.cultureVat.name">Incubadora</entry>
 	<entry key="tile.fossilworkbench.name">Mesa de Arqueólogo</entry>
 	<entry key="tile.drum.name">Tambor de Órdenes</entry>
+	<entry key="tile.feederIdle.name">Comedero</entry>
 	<entry key="tile.feederActive.name">Comedero</entry>
 	<entry key="tile.permafrost.name">Permagel</entry>
 	<entry key="tile.icedStone.name">Piedra Congelada</entry>
@@ -131,7 +132,9 @@
 	<entry key="item.eggSpinosaurus.name">Huevo de Espinosaurio</entry>
 	<entry key="item.eggCompsognathus.name">Huevo de Compsognathus</entry>
 	<entry key="item.eggDodo.name">Dodo Egg</entry>
+	<entry key="item.eggCultivatedDodo.name">Cultivated Dodo Egg</entry>
 	<entry key="item.eggAnkylosaurus.name">Huevo de Ankylosaurus</entry>
+	<entry key="item.eggPachycephalosaurus.name">Huevo de Pachycephalosaurus</entry>
 <!-- DNA -->
 	<entry key="item.dnaTriceratops.name">ADN de Triceratops</entry>
 	<entry key="item.dnaVelociraptor.name">ADN de Velocirraptor</entry>
@@ -146,6 +149,7 @@
 	<entry key="item.dnaSpinosaurus.name">ADN de Espinosaurio</entry>
 	<entry key="item.dnaCompsognathus.name">ADN de Compsognathus</entry>
 	<entry key="item.dnaAnkylosaurus.name">ADN de Ankylosaurus</entry>
+	<entry key="item.dnaPachycephalosaurus.name">ADN de Pachycephalosaurus</entry>
 <!-- DNA -->
 	<entry key="item.dnaPig.name">ADN de Cerdo</entry>
 	<entry key="item.dnaSheep.name">ADN de Oveja</entry>
@@ -216,6 +220,7 @@
 	<entry key="Dino.Spinosaurus">Espinosaurio</entry>
 	<entry key="Dino.Compsognathus">Compsognathus</entry>
 	<entry key="Dino.Ankylosaurus">Ankylosaurus</entry>
+	<entry key="Dino.Pachycephalosaurus">Pachycephalosaurus</entry>
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mamút</entry>
 	<entry key="animal.saberCat">Tigre dientes de sable</entry>

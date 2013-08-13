@@ -49,7 +49,7 @@ public enum EnumDinoType
     Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
     Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE),
     Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME),
-    Ankylosaurus(EntityAnkylosaurus.class,  C.TAME  | C.HERBIVORE);
+    Ankylosaurus(EntityAnkylosaurus.class,  C.TAME  | C.HERBIVORE),
     Pachycephalosaurus(EntityPachycephalosaurus.class, C.TAME  | C.HERBIVORE);
     
     private final Class dinoClass;

@@ -45,7 +45,7 @@ public class EntityAIBegSC extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.field_48350_a.func_48150_h(true);
+        this.field_48350_a.func_70918_i(true);
         this.field_48347_e = 40 + this.field_48350_a.getRNG().nextInt(40);
     }
 
@@ -54,7 +54,7 @@ public class EntityAIBegSC extends EntityAIBase
      */
     public void resetTask()
     {
-        this.field_48350_a.func_48150_h(false);
+        this.field_48350_a.func_70918_i(false);
         this.field_48348_b = null;
     }
 

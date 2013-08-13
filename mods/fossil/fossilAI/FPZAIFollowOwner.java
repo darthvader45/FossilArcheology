@@ -2,6 +2,7 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
@@ -10,7 +11,7 @@ import net.minecraft.world.World;
 public class FPZAIFollowOwner extends EntityAIBase
 {
     private EntityFriendlyPigZombie thePet;
-    private EntityLiving theOwner;
+    private EntityLivingBase theOwner;
     World theWorld;
     private float field_48303_f;
     private PathNavigate petPathfinder;
@@ -35,7 +36,7 @@ public class FPZAIFollowOwner extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLiving var1 = this.thePet.getOwner();
+        EntityLivingBase var1 = this.thePet.func_130012_q();
 
         if (var1 == null)
         {

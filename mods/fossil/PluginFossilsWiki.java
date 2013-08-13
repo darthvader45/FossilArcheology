@@ -1,6 +1,6 @@
 package mods.fossil;
 
-import wikilink.api.Plugin;
+//import wikilink.api.Plugin;
 
 public class PluginFossilsWiki implements Plugin
 {

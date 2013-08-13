@@ -76,9 +76,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(7, new DinoAIWander(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -363,12 +363,12 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         if (var1)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-            this.moveSpeed = 2.0F;
+//            this.moveSpeed = 2.0F;
         }
         else
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-            this.moveSpeed = 0.5F;
+//            this.moveSpeed = 0.5F;
         }
     }
 

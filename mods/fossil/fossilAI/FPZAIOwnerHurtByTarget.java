@@ -28,7 +28,7 @@ public class FPZAIOwnerHurtByTarget extends EntityAITarget
         }
         else
         {
-            EntityLiving var1 = this.fpz.getOwner();
+            EntityLivingBase var1 = this.fpz.func_130012_q();
 
             if (var1 == null)
             {

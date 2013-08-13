@@ -512,8 +512,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Dilophosaurus:var5 = new EntityDilophosaurus(this.worldObj);break;
                     case Brachiosaurus:var5 = new EntityBrachiosaurus(this.worldObj);break;
                     case Spinosaurus:var5 = new EntitySpinosaurus(this.worldObj);break;
-<<<<<<< HEAD
-=======
                     case Pachycephalosaurus:var5 = new EntityPachycephalosaurus(this.worldObj);
                     if (var3 instanceof BiomeGenForest)
                         ((EntityPachycephalosaurus)var5).setSubSpecies(1);
@@ -521,8 +519,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         ((EntityPachycephalosaurus)var5).setSubSpecies(2);
                     else
                         ((EntityPachycephalosaurus)var5).setSubSpecies(3);break;
-                        
->>>>>>> master
                     case Compsognathus:var5 = new EntityCompsognathus(this.worldObj);
                         if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenDesert)
                         ((EntityCompsognathus)var5).setSubSpecies(1);
