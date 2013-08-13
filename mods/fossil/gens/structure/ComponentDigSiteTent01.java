@@ -36,10 +36,12 @@ public class ComponentDigSiteTent01 extends ComponentVillage {
     }
 
          this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 7, 5, 4, 0, 0, false);
+
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 8, 0, 5, Block.glowStone.blockID, Block.cobblestone.blockID, false);
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 8, 5, 5, Block.glowStone.blockID, Block.cobblestone.blockID, false);
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 1, 8, 6, 4, Block.glowStone.blockID, Block.cobblestone.blockID, false);
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 7, 2, 8, 7, 3, Block.glowStone.blockID, Block.cobblestone.blockID, false);
+          /*
           int i = this.getMetadataWithOffset(Block.stairsWoodOak.blockID, 3);
           int j = this.getMetadataWithOffset(Block.stairsWoodOak.blockID, 2);
           int k;
@@ -54,6 +56,7 @@ public class ComponentDigSiteTent01 extends ComponentVillage {
               }
           }
 
+  		
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 0, 0, 1, 5, Block.glowStone.blockID, Block.cobblestone.blockID, false);
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 5, 8, 1, 5, Block.glowStone.blockID, Block.cobblestone.blockID, false);
           this.fillWithBlocks(par1World, par3StructureBoundingBox, 8, 1, 0, 8, 1, 4, Block.glowStone.blockID, Block.cobblestone.blockID, false);
@@ -103,6 +106,10 @@ public class ComponentDigSiteTent01 extends ComponentVillage {
           this.placeBlockAtCurrentPosition(par1World, 0, 0, 1, 2, 0, par3StructureBoundingBox);
           this.placeDoorAtCurrentPosition(par1World, par3StructureBoundingBox, par2Random, 1, 1, 0, this.getMetadataWithOffset(Block.doorWood.blockID, 1));
 
+
+
+
+          
           if (this.getBlockIdAtCurrentPosition(par1World, 1, 0, -1, par3StructureBoundingBox) == 0 && this.getBlockIdAtCurrentPosition(par1World, 1, -1, -1, par3StructureBoundingBox) != 0)
           {
               this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 3), 1, 0, -1, par3StructureBoundingBox);
@@ -116,7 +123,7 @@ public class ComponentDigSiteTent01 extends ComponentVillage {
                   this.fillCurrentPositionBlocksDownwards(par1World, Block.cobblestone.blockID, 0, i1, -1, l, par3StructureBoundingBox);
               }
           }
-
+*/
           this.spawnVillagers(par1World, par3StructureBoundingBox, 2, 1, 2, 1);
           return true;
    }

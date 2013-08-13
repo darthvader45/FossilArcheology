@@ -111,6 +111,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger/2);
+        this.setEntityHealth( this.SelfType.Health0 );
     }
     public void setPosition(double par1, double par3, double par5)
     {
@@ -191,14 +192,23 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public int getMaxHealth()
     {
-    	try
+    	if( this.SelfType != null )
     	{
-    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
+    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
     	}
-    	catch(NullPointerException e)
+    	else
     	{
-    		return 10;
+    		return 1;
     	}
+    	
+//    	try
+//    	{
+//    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
+//    	}
+//    	catch(NullPointerException e)
+//    	{
+//    		return 10;
+//    	}
     }
     /**
      * Returns the MaxHunger of the Dino
@@ -404,8 +414,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
+//    	String fullName = Localizations.getLocalizedString("Dino."+this.SelfType.toString());
+//    	String truncatedName = fullName.substring(0, 12);
+    			
     	p0.reset();
     	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
+//    	p0.PrintStringXY(truncatedName, 97, 23,40,90,245);
     	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
     	p0.PrintPictXY(new ResourceLocation("fossil:textures/gui/PediaClock.png"), 97, 34,8,8);
     	p0.PrintPictXY(new ResourceLocation("fossil:textures/gui/PediaHeart.png"), 97, 46,9,9);

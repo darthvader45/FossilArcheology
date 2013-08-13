@@ -479,7 +479,7 @@ public class EntityPterosaur extends EntityDinosaur
             	if(this.AirSpeed==-1.0F)
             	{
             		this.AirPitch=-10.0F;
-            		this.AirSpeed=Speed*1.5F;
+            		this.AirSpeed=Speed*0.12F;
             	}
             	this.Landing=this.RiderSneak;
             	/*if (!this.isCollidedVertically)
@@ -826,7 +826,7 @@ public class EntityPterosaur extends EntityDinosaur
 
                 if (var6 > 0)
                 {
-                    var3 = Block.blocksList[var6].slipperiness * 0.91F;
+                    var3 = Block.blocksList[var6].slipperiness * 0.71F;
                 }
             }
 

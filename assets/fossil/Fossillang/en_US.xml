@@ -118,6 +118,7 @@
 	<entry key="item.rawSpinosaurus.name">Spinosaurus Meat</entry>
 	<entry key="item.rawCompsognathus.name">Compsognathus Meat</entry>
 	<entry key="item.rawAnkylosaurus.name">Ankylosaurus Meat</entry>
+	<entry key="item.rawPachycephalosaurus.name">Pachycephalosaurus Meat</entry>
 <!-- Eggs -->
 	<entry key="item.eggTriceratops.name">Triceratops Egg</entry>
 	<entry key="item.eggVelociraptor.name">Velociraptor Egg</entry>
@@ -134,6 +135,7 @@
 	<entry key="item.eggDodo.name">Dodo Egg</entry>
 	<entry key="item.eggCultivatedDodo.name">Cultivated Dodo Egg</entry>
 	<entry key="item.eggAnkylosaurus.name">Ankylosaurus Egg</entry>
+	<entry key="item.eggPachycephalosaurus.name">Pachycephalosaurus Egg</entry>
 <!-- DNA -->
 	<entry key="item.dnaTriceratops.name">Triceratops DNA</entry>
 	<entry key="item.dnaVelociraptor.name">Velociraptor DNA</entry>
@@ -148,6 +150,7 @@
 	<entry key="item.dnaSpinosaurus.name">Spinosaurus DNA</entry>
 	<entry key="item.dnaCompsognathus.name">Compsognathus DNA</entry>
 	<entry key="item.dnaAnkylosaurus.name">Ankylosaurus DNA</entry>
+	<entry key="item.dnaPachycephalosaurus.name">Pachycephalosaurus DNA</entry>
 <!-- DNA -->
 	<entry key="item.dnaPig.name">Pig DNA</entry>
 	<entry key="item.dnaSheep.name">Sheep DNA</entry>
@@ -218,6 +221,7 @@
 	<entry key="Dino.Spinosaurus">Spinosaurus</entry>
 	<entry key="Dino.Compsognathus">Compsognathus</entry>
 	<entry key="Dino.Ankylosaurus">Ankylosaurus</entry>
+	<entry key="Dino.Pachycephalosaurus">Pachycephalosaurus</entry>
 <!-- Animal names. 11 characters MAX -->
 	<entry key="animal.mammoth">Mammoth</entry>
 	<entry key="animal.smilodon">Smilodon</entry>
