@@ -4,7 +4,7 @@
 	<comment>Simplified Chinese (zh_CN) Localization File</comment>
 <!-- Simplified Chinese translation-->
 <!-- NOTE THE SPACE BEFORE/AFTER SOME OF THE LINES. -->
-<!-- Tabs -->
+<!-- 创造模式标签 -->
 	<entry key="itemgroup.FArmor">古代装备</entry>
 	<entry key="itemgroup.FBlocks">古代方块</entry>
 	<entry key="itemgroup.FCombat">古代武器</entry>
@@ -12,7 +12,7 @@
 	<entry key="itemgroup.FItems">古代物品</entry>
 	<entry key="itemgroup.FMaterial">古代材料</entry>
 	<entry key="itemgroup.FTools">古代工具</entry>
-<!-- Blocks -->
+<!-- 方块 -->
 	<entry key="tile.fossil.name">化石</entry>
 	<entry key="tile.skullBlock.name">头骨</entry>
 	<entry key="tile.skullLantern.name">头骨灯笼</entry>
@@ -48,7 +48,7 @@
 	<entry key="tile.ancientWoodPlate.name">古代木板</entry>
 	<entry key="tile.ancientWoodStairs.name">古代木头楼梯</entry>
 	<entry key="tile.ancientStoneStairs.name">古代石头楼梯</entry>
-<!-- Items -->
+<!-- 物品 -->
 	<entry key="item.bioFossil.name">活体化石</entry>
 	<entry key="item.relicScrap.name">遗跡碎片</entry>
 	<entry key="item.stoneTablet.name">石版画</entry>
@@ -103,7 +103,7 @@
 	<entry key="item.dinoCoin.name">恐龙硬币</entry>
 	<entry key="item.dodoWing.name">生渡渡鸟翅膀</entry>
 	<entry key="item.dodoWingCooked.name">烤渡渡鸟翅膀</entry>
-<!-- Dino Meat -->
+<!-- 恐龙肉 -->
 	<entry key="item.dinoSteak.name">恐龙肉排</entry>
 	<entry key="item.rawTriceratops.name">三角龙肉</entry>
 	<entry key="item.rawVelociraptor.name">迅猛龙肉</entry>
@@ -119,7 +119,7 @@
 	<entry key="item.rawCompsognathus.name">美颌龙肉</entry>
 	<entry key="item.rawAnkylosaurus.name">背甲龙肉</entry>
 	<entry key="item.rawPachycephalosaurus.name">肿头龙肉</entry>
-<!--蛋s -->
+<!--蛋 -->
 	<entry key="item.eggTriceratops.name">三角龙蛋</entry>
 	<entry key="item.eggVelociraptor.name">迅猛龙蛋</entry>
 	<entry key="item.eggTRex.name">霸王龙蛋</entry>
@@ -159,7 +159,7 @@
 	<entry key="item.dnaSmilodon.name">剑齿虎DNA</entry>
 	<entry key="item.dnaMammoth.name">猛犸象DNA</entry>
 	<entry key="item.dnaDodo.name">渡渡鸟DNA</entry>
-<!--胚胎s -->
+<!--胚胎 -->
 	<entry key="item.embryoPig.name">猪胚胎</entry>
 	<entry key="item.embryoSheep.name">羊胚胎</entry>
 	<entry key="item.embryoCow.name">牛胚胎</entry>
@@ -167,7 +167,7 @@
 	<entry key="item.embryoSmilodon.name">剑齿虎胚胎</entry>
 	<entry key="item.embryoMammoth.name">猛犸象胚胎</entry>
 	<entry key="item.embryoDodo.name">渡渡鸟胚胎</entry>
-<!-- Prefix/Suffix -->
+<!-- 前缀/后缀 -->
 	<entry key="dnaName.head"></entry>
 	<entry key="dnaName.tail">DNA</entry>
 	<entry key="embryoName.head"></entry>
@@ -178,15 +178,15 @@
 	<entry key="mGCName.tail">模式</entry>
 	<entry key="dEggName.head"></entry>
 	<entry key="dEggName.tail">蛋</entry>
-<!-- Achievements -->
+<!-- 成就 -->
 	<entry key="achieve.pigBossOnEarth.Name">你犯规我要告诉马麻!!</entry>
 	<entry key="achieve.pigBossOnEarth.Desc">把阿努召唤到地面世界</entry>
-<!-- Orders -->
+<!-- 命令 -->
 	<entry key="order.head">命令: </entry>
 	<entry key="order.Stay">留在原地</entry>
 	<entry key="order.Follow">跟随</entry>
 	<entry key="order.FreeMove">自由移动</entry>
-<!-- Dinosaur Statuses -->
+<!-- 恐龙状态 -->
 	<entry key="status.Hungry.head"></entry>
 	<entry key="status.Hungry">饿了</entry>
 	<entry key="status.Starve.head"></entry>
@@ -207,7 +207,7 @@
 	<entry key="status.GemErrorHealth">圣甲虫宝石无法负荷如此强的生命能量</entry>
     <entry key="status.GemErrorHealth">这头霸王龙已被驯服</entry>
     <entry key="status.EssenceFail">鸡精没有起效</entry>
-<!-- Dinosaur names. 11 characters MAX -->
+<!-- 恐龙名称.最多允许11个字符 -->
 	<entry key="Dino.Triceratops">三角龙</entry>
 	<entry key="Dino.Velociraptor">迅猛龙</entry>
 	<entry key="Dino.TRex">霸王龙</entry>
@@ -222,21 +222,21 @@
 	<entry key="Dino.Compsognathus">美颌龙</entry>
 	<entry key="Dino.Ankylosaurus">背甲龙</entry>
 	<entry key="Dino.Pachycephalosaurus">肿头龙</entry>
-<!-- Animal names. 11 characters MAX -->
+<!-- 动物名称.最多允许11个字符 -->
 	<entry key="animal.mammoth">猛犸象</entry>
 	<entry key="animal.smilodon">剑齿虎</entry>
     <entry key= "animal.pregnant.cow">受孕牛</entry>
     <entry key= "animal.pregnant.pig">受孕猪</entry>   
     <entry key= "animal.pregnant.sheep">受孕羊</entry>  
 	<entry key="animal.dodo">渡渡鸟</entry>
-<!-- Pedia text. Dino messages. 11 characters MAX -->
+<!-- 百科文本.恐龙信息.最多允许11个字符 -->
 	<entry key="pedia.text.owner">主人:</entry>
 	<entry key="pedia.text.chest">* 箱子</entry>
 	<entry key="pedia.text.caution">---警告:危险---</entry>
 	<entry key="pedia.text.rideable">* 可乘骑</entry>
 	<entry key="pedia.text.weak">虚弱垂死</entry>
 	<entry key="pedia.text.fly"> * 可飞行</entry>
-<!-- Pedia text. 11 characters MAX -->
+<!-- 百科文本.最多允许11个字符 -->
 	<entry key="pedia.eggWet">潮湿</entry>
 	<entry key="pedia.eggDry">干燥</entry>
 	<entry key="pedia.eggCold">寒冷</entry>
@@ -245,7 +245,7 @@
 	<entry key="pedia.eggProgress">孵化进度</entry>
 	<entry key="pedia.eggDay">天</entry>
 	<entry key="pedia.eggDays">天</entry>
-<!-- Pedia胚胎 text. 11 characters MAX -->
+<!-- 百科胚胎文本.最多允许11个字符 -->
 	<entry key="pedia.embryo.inside">怀有胎儿:</entry>
 	<entry key="pedia.embryo.growing">成长进度:</entry>
 	<entry key="pedia.embryo.Pig">猪</entry>
@@ -255,7 +255,7 @@
 	<entry key="pedia.embryo.Smilodon">剑齿虎</entry>
 	<entry key="pedia.embryo.Mammoth">猛犸象</entry>
 	<entry key="pedia.embryo.Dodo">渡渡鸟</entry>
-<!-- Anu dialogue -->
+<!-- 阿努对白 -->
 	<entry key="anuSpeaker.self">阿努: </entry>
 	<entry key="anuSpeaker.hello">跪下吧,反抗无用.</entry>
 	<entry key="anuSpeaker.bareHand">空手吗... 愚蠢至极,但勇气可嘉.</entry>
@@ -269,29 +269,29 @@
 	<entry key="anuSpeaker.trans">地上的兽啊,显露你的智慧吧.</entry>
 	<entry key="anuSpeaker.qi">剑气!</entry>
 	<entry key="anuSpeaker.fireRain">来下点火雨吧!</entry>
-<!-- Anu minion dialogue -->
+<!-- 阿努杂兵对白 -->
 	<entry key="fpzSpeaker.self">僵尸猪人: </entry>
 	<entry key="fpzSpeaker.selfKill">离开了我皇的领导俺们活不了!</entry>
 	<entry key="fpzSpeaker.lifeFor.head">为</entry>
 	<entry key="fpzSpeaker.lifeFor.tail">而生!</entry>
 	<entry key="fpzSpeaker.anuSommon">我皇阿努万岁!!</entry>
-<!-- Dinoegg chat strings -->	
+<!-- 恐龙蛋信息 -->	
 	<entry key="dinoegg.hatched">有颗恐龙蛋孵化了!</entry>
 	<entry key="dinoegg.noSpace">这颗蛋无法放在这里.</entry>
-<!-- Hatching text -->		
+<!-- 孵化信息 -->		
 	<entry key="dinoegg.head">某颗</entry>
 	<entry key="dinoegg.dry">蛋因为太干燥死亡了</entry>	
 	<entry key="dinoegg.cold">蛋因为太寒冷死亡了</entry>
-<!-- Cultivator -->
+<!-- 培养槽 -->
 	<entry key="cultivate.outBreak">警告!培养槽失控!</entry>
-<!-- Drum -->
+<!-- 命令鼓 -->
 	<entry key="drum.trigger">命令鼓模式: </entry>
 	<entry key="drum.ordering">正在命令半径30格内的</entry>
 	<entry key="drum.tRex1">正在命令半径50格内的暴龙来吃早餐</entry>
 	<entry key="drum.tRex2">正在命令半径50格内的暴龙来吃午餐</entry>
 	<entry key="drum.tRex3">正在命令半径50格内的暴龙来吃晚餐</entry>
-<!-- Nice Names -->
-    <entry key= "mob.bones">骨架兄</entry>
+<!-- 昵称 -->
+    <entry key= "mob.bones">骨架</entry>
     <entry key= "mob.fpz">僵尸猪人伙伴</entry>
     <entry key= "mob.failuresaurus">畸龙</entry>
     <entry key= "boss.Anu">阿努</entry>
