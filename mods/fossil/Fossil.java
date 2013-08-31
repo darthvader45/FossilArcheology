@@ -319,19 +319,7 @@ public class Fossil implements IPacketHandler
 	//public static Item newArmor;
 	//public static Item newArmor;
 	
-	//DNA
-	//public static Item dna;
-	/*public static Item dnaTriceratops;
-	public static Item dnaVelociraptor;
-	public static Item dnaTRex;
-	public static Item dnaPterosaur;
-	public static Item dnaNautilus;
-	public static Item dnaPlesiosaur;
-	public static Item dnaMosasaurus;
-	public static Item dnaStegosaurus;
-	public static Item dnaDilophosaurus;
-	public static Item dnaBrachiosaurus;
-	public static Item dnaSpinosaurus;*/
+	//DNA - See DinoEnum
 	//public static Item[] DNAItems= new Item[EnumDinoType.values().length];
 	
 	//public static Item newDinoDNA;
@@ -359,25 +347,8 @@ public class Fossil implements IPacketHandler
 	//public static Item dnaSpider;
 	//public static Item dnaSkeleton;
 	
-	//Ancient Egg
-	//public static Item ancientegg;
-	/*public static Item eggTriceratops;
-	public static Item eggVelociraptor;
-	public static Item eggTRex;
-	public static Item eggPterosaur;
-	public static Item shellNautilus;
-	public static Item eggPlesiosaur;
-	public static Item eggMosasaurus;
-	public static Item eggStegosaurus;
-	public static Item eggDilophosaurus;
-	public static Item eggBrachiosaurus;
-	public static Item eggSpinosaurus;*/
+	//Ancient Egg - See DinoEnum
 	//public static Item[] EGGItems= new Item[EnumDinoType.values().length];
-	//public static Item eggNew;
-	//public static Item eggNew;
-	//public static Item eggNew;
-	//public static Item eggNew;
-	//public static Item eggNew;
 	
 	//Embryos
 	//public static Item embyoSyringe;
@@ -388,32 +359,18 @@ public class Fossil implements IPacketHandler
 	public static Item embryoSmilodon;
 	public static Item embryoMammoth;
 //    public static Item embryoDodo;
-	//public static Item embryoPigZombie;
-	//public static Item embryoZombie;
-	//public static Item embryoGhast;
-	//public static Item embryoWither;
-	//public static Item embryoSkeleton;
-	//public static Item embryoSpider;
 	
 	//Item Food
 	public static Item cookedChickenSoup;
 	public static Item rawChickenSoup;
     public static Item chickenEss;
 	public static Item sjl;
-	//public static Item rawDinoMeat;
-	/*public static Item rawTriceratops;
-	public static Item rawVelociraptor;
-	public static Item rawTRex;
-	public static Item rawPterosaur;
-	public static Item rawNautilus;
-	public static Item rawPlesiosaur;
-	public static Item rawMosasaurus;
-	public static Item rawStegosaurus;
-	public static Item rawDilophosaurus;
-	public static Item rawBrachiosaurus;
-	public static Item rawSpinosaurus;*/
 	//public static Item[] RAWItems= new Item[EnumDinoType.values().length];
 	public static Item cookedDinoMeat;
+	
+	//Music Discs
+	public static Item fossilRecord;
+	public static Item fossilRecord2;
 	
 	//Config ID INTs
 	//Blocks
@@ -618,6 +575,8 @@ public class Fossil implements IPacketHandler
 	public static int[] RAWIds= new int[EnumDinoType.values().length];
 	public static int cookedDinoMeatID;
 	
+	public static int fossilRecordID;
+	public static int fossilRecord2ID;
 	/*public static boolean Option_Gen_Palaeoraphe;
 	public static boolean Option_Gen_Academy;
 	public static boolean Option_Gen_Ships;
@@ -733,7 +692,8 @@ public class Fossil implements IPacketHandler
         dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOCOIN_NAME, 10042).getInt(10042);
         dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOEGG_NAME, 10043).getInt(10043);
         cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATEDDODOEGG_NAME, 10044).getInt(10044);
-        //10044
+        fossilRecordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt(10045);
+//        fossilRecord2ID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD2_NAME, 10046).getInt(10046);
         //10045
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
 		
@@ -1028,7 +988,9 @@ public class Fossil implements IPacketHandler
         dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODOWING_NAME).setCreativeTab(this.tabFFood);
         dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODOWINGCOOKED_NAME).setCreativeTab(this.tabFFood);
 		
-		
+        // Music Discs
+        fossilRecord = new ItemFossilRecord(fossilRecordID, modid+":record_bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
+        fossilRecord2 = new ItemFossilRecord(fossilRecord2ID, modid+":record_jp_theme").setUnlocalizedName(LocalizationStrings.FOSSILRECORD2_NAME);		
 		//Initiate some other things...
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(),-1));
 		
@@ -1136,9 +1098,9 @@ public class Fossil implements IPacketHandler
 		
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(rawChickenSoup, 1, 0), new Object[] {Item.bucketEmpty, Item.chickenRaw});
-		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 1), new Object[] {new ItemStack(magicConch, 1, 0)});
-		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 2), new Object[] {new ItemStack(magicConch, 1, 1)});
-		//GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 0), new Object[] {new ItemStack(magicConch, 1, 2)});
+		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 1), new Object[] {new ItemStack(magicConch, 1, 0)});
+		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 2), new Object[] {new ItemStack(magicConch, 1, 1)});
+		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 0), new Object[] {new ItemStack(magicConch, 1, 2)});
 		GameRegistry.addRecipe(new ItemStack(chickenEss, 8), new Object[] {"XXX", "XYX", "XXX", 'X', Item.glassBottle, 'Y', cookedChickenSoup});
 		GameRegistry.addRecipe(new ItemStack(whip, 1), new Object[] {"XXS", "XTS", "TXS", 'T', Item.stick, 'S', Item.silk});
 		

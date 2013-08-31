@@ -31,6 +31,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -108,9 +109,8 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         //this.tasks.addTask(1, new DinoAIAvoidEntityWhenYoung(this, EntityPlayer.class, 8.0F, 0.3F, 0.35F));
         //this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F));
-        this.tasks.addTask(6, new DinoAIWander(this));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 2.0D, true));
+        this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         /*this.tasks.addTask(8, new DinoAIPickItem(this, Item.porkRaw, this.moveSpeed, 24, this.HuntLimit));
         this.tasks.addTask(8, new DinoAIPickItem(this, Item.beefRaw, this.moveSpeed, 24, this.HuntLimit));
@@ -166,30 +166,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         //this.WeakToDeath = var1.getInteger("WeakToDeath");
     }*/
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.TRex_Living : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.TRex_hit;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.TRex_Death;
-    }
-
     protected void updateEntityActionState() {}
 
     /**
@@ -209,7 +185,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         //this.blockBreakingBehavior.execute();
         if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         	BlockInteractive();
-        if (this.health > 0)
+        if (this.func_110143_aJ() > 0)
         {
             /*this.field_25054_c = this.field_25048_b;
 
@@ -266,7 +242,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
     private void handleScream()
     {
-        EntityLiving var1 = this.getAttackTarget();
+        EntityLivingBase var1 = this.getAttackTarget();
 
         if (var1 == null)
         {
@@ -339,12 +315,12 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      * Deals damage to the entity. If its a EntityPlayer then will take damage from the armor first and then health
      * second with the reduced value. Args: damageAmount
      */
-    protected void damageEntity(DamageSource var1, int var2)
+    protected void damageEntity(DamageSource var1, float var2)
     {
         var2 = this.applyArmorCalculations(var1, var2);
         var2 = this.applyPotionDamageCalculations(var1, var2);
-        this.prevHealth=this.health;
-        this.health -= var2;
+ //       this.prevHealth=this.health;
+ //       this.health -= var2;
     }
 
     public boolean isAngry()
@@ -412,7 +388,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         if (this.getDinoAge() >= 3)
         {
-            this.worldObj.playSoundAtEntity(this, DinoSoundHandler.TRex_scream, this.getSoundVolume() * 2.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, Fossil.modid+"tyrannosaurus_scream", this.getSoundVolume() * 2.0F, 1.0F);
         }
     }
 
@@ -566,8 +542,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      */
     public String getTexture()
     {
-        if(this.isModelized())
-        	return super.getTexture();
+
         return "/mods/fossil/textures/mob/Spinosaurus_Adult.png";
     }
 
@@ -641,7 +616,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         }
         else if (this.getDinoAge() < 3)
         {
-            var1 = super.getSpeedModifier();
+            var1 = 1.0F;// super.getSpeedModifier();
 
             if (this.fleeingTick > 0)
             {

@@ -90,7 +90,7 @@ public class EntityCompsognathus extends EntityDinosaur
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));
-        this.tasks.addTask(7, new DinoAIWander(this));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
@@ -218,29 +218,6 @@ public class EntityCompsognathus extends EntityDinosaur
        // this.InitSize();
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.isTamed() ? DinoSoundHandler.raptor_living_friendly : DinoSoundHandler.raptor_living_wild;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Raptor_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.raptor_death;
-    }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.

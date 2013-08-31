@@ -6,6 +6,7 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,14 @@ public class EntityNautilus extends EntityWaterMob
         //this.experienceValue=1;
         this.isOwned=false;
     }
+    
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(15.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
+    }
+
 
     /**
      * Called to update the entity's position/logic.
@@ -306,8 +315,4 @@ public class EntityNautilus extends EntityWaterMob
     	return true;
     }
 
-    public int getMaxHealth()
-    {
-        return 20;
-    }
 }

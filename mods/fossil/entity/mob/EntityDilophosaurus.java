@@ -124,7 +124,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24, /*this.HuntLimit,*/ EnumDinoEating.Carnivorous));
-        this.tasks.addTask(7, new DinoAIWander(this));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -208,29 +208,6 @@ public class EntityDilophosaurus extends EntityDinosaur
         }*/
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? (this.rand.nextInt(3) == 0 ? DinoSoundHandler.DiloCall : DinoSoundHandler.DiloLiving) : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.DiloHurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.DiloDeath;
-    }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.

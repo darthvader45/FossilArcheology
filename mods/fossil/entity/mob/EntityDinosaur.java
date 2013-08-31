@@ -79,6 +79,20 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public static final byte SMOKE_MESSAGE = 36;
     public static final byte AGING_MESSAGE = 37;
     
+    //public static final int RIDER_STRAFE_INDEX = 25;
+    //public static final int RIDER_FORWARD_INDEX = 26;
+    //public static final int RIDER_JUMP_INDEX = 27;
+    /*public static String SelfName = "";
+    public static String OwnerText = "Owner:";
+    public static String UntamedText = "Untamed";
+    public static String EnableChestText = " * Chests";
+    public static String AgeText = "Age:";
+    public static String HelthText = "Health:";
+    public static String HungerText = "Hunger:";
+    public static String CautionText = "Dangerous";
+    public static String RidiableText = " * Rideable";
+    public static String WeakText = "Dying";
+    public static String FlyText = " * Can Fly";*/
     public float RiderStrafe= 0.0F;
     public float RiderForward=0.0F;
     public boolean RiderJump=false;
@@ -91,9 +105,64 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     
     public EnumDinoType SelfType = null;
     
-
+    //Starting width and increase of the Dino
+    //    public float Width0=0.5F;
+    //    public float WidthInc=0.4F;
+    
+    //Starting length and increase of the Dino
+    //   public float Length0=0.5F;
+    //   public float LengthInc=0.2F;
+    
+    //Starting height and increase of the dino
+    //   public float Height0=0.5F;
+    //   public float HeightInc=0.2F;
+    
+    //The attacking strength of the Dino when hatched
+    //    public int BaseattackStrength = 2;
+    //    public int AttackStrengthIncrease = 1;
+    
+    //The speed of the dino when hatched
+    //   public float BaseSpeed = 0.2F;
+    //   public float SpeedIncrease = 0.015F;
+    
     //Breed Tick at the moment, 0=breed, BreedingTime=timer just started
     public int BreedTick;
+    
+    //The Breeding time of the dinosaur, standard value 3000 ticks
+    //    public int BreedingTime = 3000;
+    
+    //Age Limit of The Dino, standard is 12
+    //   public int MaxAge = 12;
+    
+    //Health of the Dino when hatched
+    //   public int BaseHealth = 20;
+    
+    //The Maximum health increase when aging
+    //    public int HealthIncrease = 2;
+    
+    //Age When Dino gets adult, starts Breeding, is Ridable...
+    //    public int AdultAge = 6;
+    
+    //Age When Dino gets teen..
+    //   public int TeenAge = 3;
+    
+    //Ticks the Dino needs for aging, standard 12000
+    //    public int AgingTicks = 12000;
+    
+    //List of the eatable Items with the FoodValue and HealingValue belonging to
+    //    public DinoFoodItemList FoodItemList;
+    
+    //List of the eatable Blocks with the FoodValue and HealingValue belonging to
+    //    public DinoFoodBlockList FoodBlockList;
+    
+    //List of the eatable Mobs with the FoodValue and HealingValue belonging to
+    //    public DinoFoodMobList FoodMobList;
+    
+    //Hunger Limit of the Dino, standard is 100
+    //    public int MaxHunger = 100;
+    
+    //The Level below which the dino starts hunting or looking for food. Standard is 0.8 [times MaxHunger]
+    //    public float Hungrylevel = 0.8f;
     
     //Variable for the thing the dino can hold in it's mouth
     public ItemStack ItemInMouth = null;
@@ -134,14 +203,22 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	//float l_2 = this.getDinoLength();// / 2.0F;
         //float var8 = this.getD;
         //this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.getDinoHeight()*2.0D, this.posZ + (double)l_2);
-
-    	//    	this.moveSpeed=this.getSpeed();
-        this.setAIMoveSpeed((float)this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111126_e());
+//    	this.moveSpeed=this.getSpeed();
+    	this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(this.SelfType.Speed0+this.getDinoAge()*this.SelfType.SpeedInc+2.0D);
     }
     public void InitSize()//Necessary to overload existing
     {this.updateSize();}
     public float getDinoWidth()
     {
+    	if( this.SelfType != null )
+    	{
+    		return this.SelfType.Width0 + + this.SelfType.WidthInc * (float)this.getDinoAge();
+    	}
+    	else
+    	{
+    		return 1.0F;
+    	}
+    	/*
     	try
     	{
     		return this.SelfType.Width0 + this.SelfType.WidthInc * (float)this.getDinoAge();
@@ -149,10 +226,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	catch(NullPointerException e)
     	{
     		return 1.0F;
-    	}
+    	}*/
     }
     public float getDinoHeight()
     {
+    	if( this.SelfType != null )
+    	{
+    		return this.SelfType.Height0 + + this.SelfType.HeightInc * (float)this.getDinoAge();
+    	}
+    	else
+    	{
+    		return 1.0F;
+    	}
+    	/*
     	try
     	{
     		return this.SelfType.Height0 + this.SelfType.HeightInc * (float)this.getDinoAge();
@@ -161,9 +247,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	{
     		return 1.0F;
     	}
+    	*/
     }
     public float getDinoLength()
     {
+    	if( this.SelfType != null )
+    	{
+    		return this.SelfType.Length0 + + this.SelfType.LengthInc * (float)this.getDinoAge();
+    	}
+    	else
+    	{
+    		return 1.0F;
+    	}
+    	/*
     	try
     	{
     		return this.SelfType.Length0 + this.SelfType.LengthInc * (float)this.getDinoAge();
@@ -172,6 +268,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	{
     		return 1.0F;
     	}
+    	*/
     }
     
     private void setPedia()
@@ -190,16 +287,33 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Returns the MaxHealth of the Dino depending on the age
      */
-    public int getMaxHealth()
+    
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        
+    	if( this.SelfType != null )
+    	{
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc);
+    	}
+    	else
+    	{
+    		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(7.0F);
+    	}
+    	
+    	}
+    /* Replaced by func_110147_ax()
+    public double getMaxHealth()
     {
     	if( this.SelfType != null )
     	{
-    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
+//    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
     	}
     	else
     	{
     		return 1;
     	}
+
     	
 //    	try
 //    	{
@@ -210,6 +324,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 //    		return 10;
 //    	}
     }
+        	*/
     /**
      * Returns the MaxHunger of the Dino
      */
@@ -241,6 +356,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         if (this.SelfType.isModelable())
         {
             this.dataWatcher.updateObject(MODELIZED_INDEX, Byte.valueOf((byte)(var1 ? 0 : -1)));
+
+//            if (var1)
+//                this.texture = this.getModelTexture();
         }
     }
 
@@ -268,11 +386,14 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /*@SideOnly(Side.CLIENT)
     public void getHealthData()
     {this.setEntityHealth(this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX));}*/
+    
+    /*
     public int getHealthData()
     {return this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX);}
 
- //   public void setHealthData()
-//    {this.dataWatcher.updateObject(HEALTH_INDEX, Integer.valueOf(this.health));}
+    public void setHealthData()
+    {this.dataWatcher.updateObject(HEALTH_INDEX, Integer.valueOf(this.health));}
+   */
     
     public int getDinoAge()
     {return this.dataWatcher.getWatchableObjectInt(AGE_DATA_INDEX);}
@@ -398,10 +519,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Returns the texture's file path as a String.
      */
- //   public String getTexture()
-  //  {
- //       return this.isModelized() ? this.getModelTexture() : this.texture;
-  //  }
+    /*
+    public String getTexture()
+    {
+        return this.isModelized() ? this.getModelTexture() : this.texture;
+    }
+    */
 
     /**
      * Get number of ticks, at least during which the living entity will be silent.
@@ -428,7 +551,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WARM), 109, 35);
     	else
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_DAYS), 109, 35);
-    	p0.PrintStringXY(String.valueOf(this.getHealthData()) + '/' + this.getMaxHealth(), 109, 47);
+    	p0.PrintStringXY(String.valueOf(this.func_110143_aJ()) + '/' + this.func_110138_aP(), 109, 47); //display the health
     	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 109, 59);
     	
     	if(this.SelfType.isRideable() && this.isAdult())
@@ -1296,9 +1419,15 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	}
         else
         {
+        	/*
+        	if(this.health!=this.prevHealth)
+        	{
+        		this.setHealthData();
+        		this.prevHealth=this.health;
+        	}*/
         	if(this.prevHealth!=this.prevHealth)
         	{
-        		this.getHealthData();
+        		this.func_110143_aJ();
         		this.prevHealth=this.prevHealth;
         	}
         	//if(this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX)!=this.health)

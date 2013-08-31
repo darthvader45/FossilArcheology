@@ -96,12 +96,36 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIEatLeavesWithHeight(this, 24));//, this.HuntLimit));
         //this.tasks.addTask(6, new DinoAIUseFeederWithHeight(this, 24));//, this.HuntLimit));
-        this.tasks.addTask(7, new DinoAIWander(this));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
 
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return "fossil:brachiosaurus_living";
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound()
+    {
+    	return "fossil:brachiosaurus_hurt";
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return "fossil:brachiosaurus_death";
+    } 
     /*public int getHungerLimit()
     {
         return 500;
@@ -115,29 +139,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         return !this.isModelized();
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null ? DinoSoundHandler.Brach_living : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return "mob.cowhurt";
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Brach_death;
-    }
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {
     	Vec3 pos = null;

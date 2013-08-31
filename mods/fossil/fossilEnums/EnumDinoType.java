@@ -94,8 +94,8 @@ public enum EnumDinoType
     
     
     //Health of the Dino when hatched
-    public int Health0 = 20;
-    public int HealthInc = 2;
+    public float Health0 = 20;
+    public float HealthInc = 2;
     
     //The attacking strength of the Dino when hatched
     public int Strength0 = 2;
@@ -173,7 +173,7 @@ public enum EnumDinoType
     /**
      * sets the starting values and increase for Health,Attack Strength and Speed and the MaxHunger Value
      */
-    private void setProperties(int H0,int HInc,int Str0,int StrInc,float Sp0,float SpInc, int Hunger)
+    private void setProperties(float H0,float HInc,int Str0,int StrInc,float Sp0,float SpInc, int Hunger)
     {
     	if(H0>0)this.Health0=H0;
     	if(HInc>0)this.HealthInc=HInc;

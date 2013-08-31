@@ -1,7 +1,6 @@
 package mods.fossil.entity.mob;
 
 import java.util.List;
-
 import java.util.Random;
 
 import mods.fossil.Fossil;
@@ -11,6 +10,8 @@ import mods.fossil.fossilEnums.EnumPigmenSpeaks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -43,15 +44,16 @@ public class EntityPigBoss extends EntityZombie
     public EntityPigBoss(World var1)
     {
         super(var1);
-        this.texture = "/mods/fossil/textures/mob/PigBoss.png";
-        this.moveSpeed = 0.5F;
-        this.health = 100;
+//        this.texture = "/mods/fossil/textures/mob/PigBoss.png";
+ //       this.moveSpeed = 0.5F;
+ //       this.health = 100;
         this.isImmuneToFire = true;
     }
 
     /**
      * Heal living entity (param: amount of half-hearts)
      */
+    /*
     public void heal(int var1)
     {
         if (this.health > 0)
@@ -71,7 +73,15 @@ public class EntityPigBoss extends EntityZombie
             }
         }
     }
-
+    */
+    @Override
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(4.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(1.0D);
+    }
+    
     /**
      * Called to update the entity's position/logic.
      */
@@ -145,7 +155,7 @@ public class EntityPigBoss extends EntityZombie
     {
         Entity var1 = super.findPlayerToAttack();
 
-        if (var1 instanceof EntityPlayer && ((EntityPlayer)var1).getHealth() > 0)
+        if (var1 instanceof EntityPlayer && ((EntityPlayer)var1).func_110143_aJ() > 0)
         {
             this.Mouth.SendSpeech(EnumPigBossSpeaks.Hello);
 
@@ -168,9 +178,9 @@ public class EntityPigBoss extends EntityZombie
 
         if (this.FireballCount < 50)
         {
-            if (this.texture != "/mods/fossil/textures/PigBoss.png")
+ //           if (this.texture != "/mods/fossil/textures/PigBoss.png")
             {
-                this.texture = "/mods/fossil/textures/PigBoss.png";
+  //              this.texture = "/mods/fossil/textures/PigBoss.png";
             }
 
             ++this.FireballCount;
@@ -178,9 +188,9 @@ public class EntityPigBoss extends EntityZombie
 
         if (this.FireballCount > 50 && this.getAttackMode() == 1 && this.getAITarget() != null)
         {
-            if (this.texture != "/mods/fossil/textures/PigBoss_Charging.png")
+    //        if (this.texture != "/mods/fossil/textures/PigBoss_Charging.png")
             {
-                this.texture = "/mods/fossil/textures/PigBoss_Charging.png";
+   //             this.texture = "/mods/fossil/textures/PigBoss_Charging.png";
             }
 
             this.setPathToEntity((PathEntity)null);
@@ -402,12 +412,12 @@ public class EntityPigBoss extends EntityZombie
 
             if (var1 == 0)
             {
-                this.moveSpeed = 0.9F;
+ //               this.moveSpeed = 0.9F;
             }
 
             if (var1 == 1)
             {
-                this.moveSpeed = 0.5F;
+//                this.moveSpeed = 0.5F;
             }
         }
     }
@@ -518,7 +528,7 @@ public class EntityPigBoss extends EntityZombie
 
             for (int var2 = 0; var2 < var1.size(); ++var2)
             {
-                EntityLiving var3 = (EntityLiving)var1.get(var2);
+                EntityLivingBase var3 = (EntityLiving)var1.get(var2);
                 double var4 = this.posX - var3.posX;
                 double var6;
 

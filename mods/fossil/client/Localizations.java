@@ -14,7 +14,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 public class Localizations {
 
-    private static final String LANG_RESOURCE_LOCATION = "/mods/fossil/Fossillang/";
+    private static final String LANG_RESOURCE_LOCATION = "fossil:fossillang/";
 
     public static String[] localeFiles = { 
         LANG_RESOURCE_LOCATION + "en_US.xml", 

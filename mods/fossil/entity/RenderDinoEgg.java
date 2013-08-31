@@ -2,16 +2,12 @@ package mods.fossil.entity;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderDinoEgg extends Render
 {
-    private static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/entity/enderdragon/dragon.png");
-	
     protected ModelDinoEgg MainModel;
 
     public RenderDinoEgg(float var1)
@@ -33,26 +29,15 @@ public class RenderDinoEgg extends Render
             var11 = 0.0F;
         }
 
-//        this.loadTexture("/terrain.png");
         float var12 = 0.75F;
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
-//        this.loadTexture(var1.getTexture());
+        this.renderManager.renderEngine.func_110577_a(new ResourceLocation(var1.getTexture()));
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         this.MainModel.render(var1, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
-    
-    protected ResourceLocation func_110841_a(EntityDinoEgg par1EntityDinoEgg)
-    {
-        return resourceloc;
-    }
 
-    protected ResourceLocation func_110775_a(Entity par1Entity)
-    {
-        return this.func_110841_a((EntityDinoEgg)par1Entity);
-    }
-    
     public void doRenderLiving(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9)
     {
         this.renderDinoEgg(var1, var2, var4, var6, var8, var9);
@@ -68,4 +53,10 @@ public class RenderDinoEgg extends Render
     {
         this.renderDinoEgg((EntityDinoEgg)var1, var2, var4, var6, var8, var9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

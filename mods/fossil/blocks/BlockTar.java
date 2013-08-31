@@ -40,6 +40,8 @@ public class BlockTar extends Block
         double var10 = (double)((float)k + random.nextFloat());
         FossilFX.spawnParticle("tarBubble", var6, var8+1, var10, 0.0D, 0.0D, 0.0D);
 //        FossilFX.spawnParticle("flies", i+0.5, j+1.0, k+0.5, 0.0D, 1.5D, 0.0D);
+        
+        world.playSound((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "fossil:tar", random.nextFloat() * 0.3F + 0.1F, random.nextFloat() * 1.0F + 0.0F, false);
 
     }
 

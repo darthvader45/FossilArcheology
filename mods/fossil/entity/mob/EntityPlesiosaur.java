@@ -73,7 +73,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.looksWithInterest = false;
         //this.SubSpecies = (new Random()).nextInt(3) + 1;
         this.setSubSpecies((new Random()).nextInt(3) + 1);
-        this.texture = "/mods/fossil/textures/mob/Plesiosaur_adult.png";
         //this.setSize(1.0F, 1.0F);
         //this.moveSpeed = 0.7F;
         //this.health = 8;
@@ -104,15 +103,15 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         //this.tasks.addTask(1, new WaterDinoAISwimming(this, true, 0.09374999F, 0.018749999F));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24,/* this.HuntLimit,*/ EnumDinoEating.Carnivorous));
         /*this.tasks.addTask(7, new DinoAIPickItem(this, Item.fishRaw, this.moveSpeed * 2.0F, 24, this.HuntLimit));
         this.tasks.addTask(7, new DinoAIPickItem(this, Item.fishCooked, this.moveSpeed * 2.0F, 24, this.HuntLimit));
         this.tasks.addTask(7, new DinoAIPickItem(this, Fossil.sjl, this.moveSpeed * 2.0F, 24, this.HuntLimit));*/
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-        this.tasks.addTask(9, new DinoAIWander(this));
+        this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
     }
@@ -158,29 +157,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         //this.InitSize();
     }*/
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Pls_Living : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Pls_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.tri_death;
-    }
 
     protected void updateEntityActionState()
     {
@@ -1016,7 +992,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
                 }
                 else
                 {
-                    var5 = this.landMovementFactor;
+                    var5 = 1.0F;//this.landMovementFactor;
                 }
 
                 var5 *= var8;

@@ -70,12 +70,6 @@ public class EntityDodo extends EntityAnimal
     
     private void setPedia()
     {Fossil.ToPedia = (Object)this;}
-
-    public int getMaxHealth()
-    {
-        return 4;
-    }
-
     
     public String getTexture()
     {
@@ -134,7 +128,7 @@ public class EntityDodo extends EntityAnimal
      */
     protected String getLivingSound()
     {
-        return "mob.chicken.say";
+        return "fossil:dodo_living";
     }
 
     /**
@@ -142,7 +136,7 @@ public class EntityDodo extends EntityAnimal
      */
     protected String getHurtSound()
     {
-        return "mob.chicken.hurt";
+        return "fossil:dodo_hurt";
     }
 
     /**
@@ -150,9 +144,18 @@ public class EntityDodo extends EntityAnimal
      */
     protected String getDeathSound()
     {
-        return "mob.chicken.hurt";
+        return "fossil:dodo_death";
     }
 
+    
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    protected float getSoundVolume()
+    {
+        return 0.2F;
+    }
+    
     /**
      * Plays step sound at given x, y, z for the entity
      */

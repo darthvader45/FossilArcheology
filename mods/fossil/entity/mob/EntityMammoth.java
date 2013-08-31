@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.LocalizationStrings;
@@ -14,6 +13,7 @@ import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -87,6 +87,15 @@ public class EntityMammoth extends EntityTameable implements IShearable
     {
         return true;
     }
+    
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(24.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
+    }
+
+    
     private void setPedia()
     {Fossil.ToPedia = (Object)this;}
     public boolean attackEntityAsMob(Entity var1)
@@ -102,11 +111,6 @@ public class EntityMammoth extends EntityTameable implements IShearable
 
         this.worldObj.playSoundAtEntity(this, "mob.irongolem.throw", 1.0F, 1.0F);
         return var2;
-    }
-
-    public int getMaxHealth()
-    {
-        return 24;
     }
 
     /**
@@ -163,30 +167,6 @@ public class EntityMammoth extends EntityTameable implements IShearable
         super.readEntityFromNBT(var1);
         this.setSheared(var1.getBoolean("Sheared"));
         this.setFleeceColor(var1.getByte("Color"));
-    }
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSoundHandler.Mammoth_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Mammoth_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Mammoth_death;
     }
 
     /**

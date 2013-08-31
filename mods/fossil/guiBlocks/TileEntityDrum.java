@@ -105,7 +105,7 @@ public class TileEntityDrum extends TileEntity
     public void TriggerOrder(EntityPlayer var1)
     {
         this.Order = this.Order.Next();
-        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, DinoSoundHandler.drum_single, 8.0F, 1.0F);//(float)Math.pow(2.0D, (double)(this.Order.ordinal()/*.ToInt() - 1*/)));
+        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "fossil:drum_single", 8.0F, 1.0F);//(float)Math.pow(2.0D, (double)(this.Order.ordinal()/*.ToInt() - 1*/)));
         //String var2 = Fossil.GetLangTextByKey("Drum.Head");
         //String var3 = this.GetOrderString();
         Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DRUM_TRIGGER) + Localizations.getLocalizedString("order." + this.Order.toString()), var1);
@@ -119,7 +119,7 @@ public class TileEntityDrum extends TileEntity
         String var5 = Fossil.GetLangTextByKey("Drum.Msg.Head");
         String var6 = Fossil.GetLangTextByKey("Drum.Msg.Middle");
         String var7 = Fossil.GetLangTextByKey("Drum.Msg.Tail");*/
-        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, DinoSoundHandler.drum_triple, 8.0F,1.0F);// (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
+        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "fossil:drum_triple", 8.0F,1.0F);// (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
         
         if (var1 != Fossil.skullStick.itemID)//That is treated specially ;)
         {

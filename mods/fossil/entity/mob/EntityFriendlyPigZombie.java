@@ -55,11 +55,11 @@ public class EntityFriendlyPigZombie extends EntityMob
 
         if (this.isTamed())
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(25.0D);
         }
         else
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
         }
     }
     /**
@@ -192,11 +192,6 @@ public class EntityFriendlyPigZombie extends EntityMob
      * Called when a lightning bolt hits the entity.
      */
     public void onStruckByLightning(EntityLightningBolt var1) {}
-
-    public int getMaxHealth()
-    {
-        return 20;
-    }
 
     public boolean isTamed()
     {

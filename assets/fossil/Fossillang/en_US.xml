@@ -103,6 +103,9 @@
 	<entry key="item.dinoCoin.name">Dinosaur Coin</entry>
 	<entry key="item.dodoWing.name">Raw Dodo Wing</entry>
 	<entry key="item.dodoWingCooked.name">Cooked Dodo Wing</entry>
+<!-- Music Records -->
+    <entry key="item.record_bones.name">Josh Whiteman - Bones</entry>
+    <entry key="item.record_jp_theme.name">JP Theme</entry>
 <!-- Dino Meat -->
 	<entry key="item.dinoSteak.name">Dino Steak</entry>
 	<entry key="item.rawTriceratops.name">Triceratops Meat</entry>

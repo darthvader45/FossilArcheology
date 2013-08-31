@@ -123,7 +123,7 @@ public class EntityPterosaur extends EntityDinosaur
         this.tasks.addTask(6, new DinoAIPickItem(this, Item.fishCooked, this.moveSpeed, 24, this.HuntLimit));
         this.tasks.addTask(6, new DinoAIPickItem(this, Fossil.sjl, this.moveSpeed * 2.0F, 24, this.HuntLimit));*/
         this.tasks.addTask(7, new DinoAIEat(this, 24));
-        this.tasks.addTask(7, new DinoAIWander(this));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -208,29 +208,7 @@ public class EntityPterosaur extends EntityDinosaur
     public void setWingState(float var1)
     {this.dataWatcher.updateObject(WING_STATE_INDEX, Integer.valueOf((int)(var1*10000F)));}*/
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.PTS_living : null;
-    }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.PTS_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.raptor_death;
-    }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.

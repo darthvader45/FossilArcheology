@@ -80,7 +80,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
-        this.tasks.addTask(7, new DinoAIWander(this));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
@@ -182,30 +182,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         //this.setSelfSitting(var1.getBoolean("Sitting"));
         //this.InitSize();
     }*/
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.Steg_living : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Steg_Hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Steg_death;
-    }
 
     protected void updateEntityActionState()
     {

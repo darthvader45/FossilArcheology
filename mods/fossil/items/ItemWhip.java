@@ -65,7 +65,7 @@ public class ItemWhip extends ItemCarrotOnAStick
                 //I.setItemDamage(I.getItemDamage()+5);
                 //W.playSoundEffect(P.posX, P.posY, P.posZ, "WhipCrack", 0.5F, 1.0F);
                 P.swingItem();
-                P.ridingEntity.playSound(DinoSoundHandler.WhipCrack, 1.0F, 1.0F);
+                P.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
             }
         }
         else
@@ -78,7 +78,7 @@ public class ItemWhip extends ItemCarrotOnAStick
             */
 
             P.swingItem();
-            W.playSoundAtEntity(P, DinoSoundHandler.WhipCrack,1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            W.playSoundAtEntity(P, "fossil:whip",1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
         }
 
         

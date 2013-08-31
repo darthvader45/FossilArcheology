@@ -97,12 +97,12 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F));
+        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         //this.tasks.addTask(6, new DinoAIEatFerns(this));
         //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24, EnumDinoEating.Herbivorous));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
-        this.tasks.addTask(8, new DinoAIWander(this));
+        this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(10, new EntityAILookIdle(this));
     }
@@ -121,7 +121,7 @@ public class EntityTriceratops extends EntityDinosaur
     public String getTexture()
     {
         if (this.isModelized())
-            return super.getTexture();
+            return super.getModelTexture();
         if(this.isAdult())
         {
         	switch (this.getSubSpecies())
@@ -204,29 +204,6 @@ public class EntityTriceratops extends EntityDinosaur
         ForgeHooks.onLivingJump(this);
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null ? DinoSoundHandler.tri_roar : null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-    	return DinoSoundHandler.tri_death;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.tri_death;
-    }
 
     /**
      * Called to update the entity's position/logic.
@@ -374,12 +351,12 @@ public class EntityTriceratops extends EntityDinosaur
         if (var1)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-            this.moveSpeed = 2.0F;
+    //        this.moveSpeed = 2.0F;
         }
         else
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-            this.moveSpeed = 0.5F;
+   //         this.moveSpeed = 0.5F;
         }
     }
 

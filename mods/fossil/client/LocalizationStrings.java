@@ -194,6 +194,9 @@ public class LocalizationStrings {
     public static final String BOSS_ANU = "boss.Anu";
     public static final String MOB_BONES = "mob.bones";
     
+    public static final String FOSSILRECORD_NAME = "record_bones";
+    public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+    
     //Dinosaur strings are handled through DinoEnum.
 
     

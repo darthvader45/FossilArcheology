@@ -28,6 +28,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -101,11 +102,11 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new WaterDinoAINearestAttackableTarget(this, EntityNautilus.class, 16.0F, 0, true));
-        this.targetTasks.addTask(3, new WaterDinoAINearestAttackableTarget(this, EntitySquid.class, 16.0F, 0, true));
-        this.targetTasks.addTask(4, new WaterDinoAINearestAttackableTarget(this, EntityAnimal.class, 16.0F, 0, true));
-        this.targetTasks.addTask(5, new WaterDinoAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, false));
+//        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+//        this.targetTasks.addTask(2, new WaterDinoAINearestAttackableTarget(this, EntityNautilus.class, 16.0F, 0, true));
+//        this.targetTasks.addTask(3, new WaterDinoAINearestAttackableTarget(this, EntitySquid.class, 16.0F, 0, true));
+//        this.targetTasks.addTask(4, new WaterDinoAINearestAttackableTarget(this, EntityAnimal.class, 16.0F, 0, true));
+//        this.targetTasks.addTask(5, new WaterDinoAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, false));
     }
 
     /**
@@ -155,35 +156,15 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound()
     {
         
     if (this.isInsideOfMaterial(Material.water) )
     {
-        return DinoSoundHandler.Mosa_surface;
+        return "fossil:mosasaurus_surface";
     }
-        return DinoSoundHandler.Mosa_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Mosa_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Mosa_death;
-    }
-
-    protected void updateEntityActionState()
-    {
-    	super.updateEntityActionState();
+        return "fossil:mosasaurus_living";
     }
 
     /**
@@ -259,7 +240,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
             }
 
             float var9 = 0.1627714F / (var8 * var8 * var8);
-            float var5 = this.onGround ? this.landMovementFactor * var9 : this.jumpMovementFactor;
+            float var5 = this.onGround ? this.getAIMoveSpeed() * var9 : this.jumpMovementFactor;
             this.moveFlying(var1, var2, var5);
             var8 = 0.91F;
 
@@ -532,7 +513,7 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
             if (var1)
             {
                 this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-                this.moveSpeed = 2.0F;
+//TODO                this.moveSpeed = 2.0F;
             }
             else
             {
@@ -677,15 +658,15 @@ public class EntityMosasaurus extends EntityDinosaur implements IWaterDino
         }
         else
         {
-            EntityLiving var2 = null;
-            EntityLiving var3 = null;
+            EntityLivingBase var2 = null;
+            EntityLivingBase var3 = null;
             float var4 = (float)var1 * 2.0F;
             List var5 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand((double)var1, (double)(var1 * 2), (double)var1));
             Iterator var6 = var5.iterator();
 
             while (var6.hasNext())
             {
-                var3 = (EntityLiving)var6.next();
+                var3 = (EntityLivingBase)var6.next();
 
                 if (!(var3 instanceof EntityPlayer) && (var3 instanceof EntitySquid || var3 instanceof EntityNautilus) && this.GetDistanceWithEntity(var3) < var4)
                 {

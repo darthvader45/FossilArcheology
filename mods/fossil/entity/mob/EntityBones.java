@@ -4,6 +4,7 @@ import mods.fossil.Fossil;
 import mods.fossil.fossilAI.EntityAIDeadBones;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,10 +25,8 @@ public class EntityBones extends EntityMob
         this.experienceValue=7;
     }
 
-    public int getMaxHealth()
-    {
-        return 20;
-    }
+
+
 
     /**
      * Returns true if the newer Entity AI code should be run
@@ -37,6 +36,13 @@ public class EntityBones extends EntityMob
         return true;
     }
 
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
+    }
+    
     /**
      * Returns the sound this mob makes when it is hurt.
      */

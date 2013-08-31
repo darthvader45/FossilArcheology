@@ -189,30 +189,6 @@ public class EntitySmilodon extends EntityTameable
     }
 
     /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSoundHandler.Smilodon_Living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSoundHandler.Smilodon_Hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Smilodon_death;
-    }
-
-    /**
      * Returns the volume for the sounds this mob makes.
      */
     protected float getSoundVolume()

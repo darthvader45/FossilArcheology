@@ -28,9 +28,15 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,17 +72,19 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.updateSize();
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
+        this.tasks.addTask(8, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
-        this.tasks.addTask(8, new DinoAIWander(this));
+        this.tasks.addTask(5, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(10, new EntityAILookIdle(this));
+        
     }
-
+    
     /**
      * Returns true if the newer Entity AI code should be run
      */
@@ -109,42 +117,23 @@ public class EntityAnkylosaurus extends EntityDinosaur
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
+    /*
     protected void jump()
     {
         this.motionY = 0.5;
         this.isAirBorne = true;
         ForgeHooks.onLivingJump(this);
     }
+    */
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSoundHandler.Anky_living;
-    }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-    	return DinoSoundHandler.Anky_hurt;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSoundHandler.Anky_death;
-    }
 
     /**
      * Called to update the entity's position/logic.
      */
     public void onUpdate()
     {
+//        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(this.SelfType.Speed0); //Movespeed
         super.onUpdate();
         /*this.field_25054_c = this.field_25048_b;
 
