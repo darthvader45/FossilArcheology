@@ -1,9 +1,10 @@
 package mods.fossil;
 
-public class CommonProxy
+public class ClientProxy extends CommonProxy
 {
+ @Override
     public void registerRenderThings()
     {
-        
+     
     }
 }

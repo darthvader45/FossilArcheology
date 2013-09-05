@@ -10,22 +10,20 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
-public class ItemFeet extends ItemArmor
+public class ItemShinGuards extends ItemArmor
 {
-	public ItemFeet(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) 
+	public ItemShinGuards(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) 
 	{
-		
-         super(par1, par2EnumArmorMaterial, par3, par4);
-         this.setCreativeTab(Fossil.tabFArmor);
+        super(par1, par2EnumArmorMaterial, par3, par4);
     }
  
 	@Override
 	public void registerIcons(IconRegister iconRegister)
 	{
-		itemIcon = iconRegister.registerIcon("fossil:Bone_Boots");
+		itemIcon = iconRegister.registerIcon("fossil:Bone_Legs");
     }
-	
-	public String getArmorTextureFile(ItemStack par1)
+
+    public String getArmorTextureFile(ItemStack par1)
     {
         if ( par1.itemID == FossilArmorItem.skullHelmet.itemID|| par1.itemID == FossilArmorItem.ribCage.itemID|| par1.itemID == FossilArmorItem.feet.itemID)
         {
@@ -36,5 +34,5 @@ public class ItemFeet extends ItemArmor
               return "/mods/fossil/textures/armor/bone_2.png";
         }
 			  return "/mods/fossil/textures/armor/bone_2.png";
-    }	
+    }
 }
