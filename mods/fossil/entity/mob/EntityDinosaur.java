@@ -61,6 +61,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -180,7 +181,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger/2);
-        this.setEntityHealth( this.SelfType.Health0 );
+        this.setHealth( this.SelfType.Health0 );
     }
     public void setPosition(double par1, double par3, double par5)
     {
@@ -204,7 +205,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         //float var8 = this.getD;
         //this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.getDinoHeight()*2.0D, this.posZ + (double)l_2);
 //    	this.moveSpeed=this.getSpeed();
-    	this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(this.SelfType.Speed0+this.getDinoAge()*this.SelfType.SpeedInc+2.0D);
+    	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(getSpeed());
     }
     public void InitSize()//Necessary to overload existing
     {this.updateSize();}
@@ -212,7 +213,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	if( this.SelfType != null )
     	{
-    		return this.SelfType.Width0 + + this.SelfType.WidthInc * (float)this.getDinoAge();
+    		return this.SelfType.Width0 + this.SelfType.WidthInc * (float)this.getDinoAge();
     	}
     	else
     	{
@@ -232,7 +233,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	if( this.SelfType != null )
     	{
-    		return this.SelfType.Height0 + + this.SelfType.HeightInc * (float)this.getDinoAge();
+    		return this.SelfType.Height0 + this.SelfType.HeightInc * (float)this.getDinoAge();
     	}
     	else
     	{
@@ -253,7 +254,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	if( this.SelfType != null )
     	{
-    		return this.SelfType.Length0 + + this.SelfType.LengthInc * (float)this.getDinoAge();
+    		return this.SelfType.Length0 + this.SelfType.LengthInc * (float)this.getDinoAge();
     	}
     	else
     	{
@@ -288,33 +289,17 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Returns the MaxHealth of the Dino depending on the age
      */
     
-    protected void func_110147_ax()
-    {
-        super.func_110147_ax();
-        
-    	if( this.SelfType != null )
-    	{
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc);
-    	}
-    	else
-    	{
-    		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(7.0F);
-    	}
-    	
-    	}
-    /* Replaced by func_110147_ax()
-    public double getMaxHealth()
-    {
-    	if( this.SelfType != null )
-    	{
-//    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
-    	}
-    	else
-    	{
-    		return 1;
-    	}
 
-    	
+    public float getDinoMaxHealth()
+    {
+    	if( this.SelfType != null )
+    	{
+    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
+    	}
+    	else
+    	{
+    		return 11;
+    	}
 //    	try
 //    	{
 //    		return this.SelfType.Health0+this.getDinoAge()*this.SelfType.HealthInc;
@@ -324,7 +309,18 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 //    		return 10;
 //    	}
     }
-        	*/
+    	
+//    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getDinoMaxHealth());
+    }
+
+
+    	
+
+        	
     /**
      * Returns the MaxHunger of the Dino
      */
@@ -372,7 +368,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.dataWatcher.addObject(SUBSPECIES_INDEX, new Integer(1));
         this.dataWatcher.addObject(MODELIZED_INDEX, new Byte((byte) - 1));
         this.dataWatcher.addObject(HEALTH_INDEX, new Integer(10));
-        //this.dataWatcher.addObject(RIDER_STRAFE_INDEX, new Integer(300));
+   //this.dataWatcher.addObject(RIDER_STRAFE_INDEX, new Integer(300));
         //this.dataWatcher.addObject(RIDER_FORWARD_INDEX, new Integer(1));
         //this.dataWatcher.addObject(RIDER_JUMP_INDEX, new Integer(0));
     }
@@ -551,7 +547,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WARM), 109, 35);
     	else
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_DAYS), 109, 35);
-    	p0.PrintStringXY(String.valueOf(this.func_110143_aJ()) + '/' + this.func_110138_aP(), 109, 47); //display the health
+    	p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 109, 47); //display the health
     	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 109, 59);
     	
     	if(this.SelfType.isRideable() && this.isAdult())
@@ -1425,10 +1421,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         		this.setHealthData();
         		this.prevHealth=this.health;
         	}*/
-        	if(this.prevHealth!=this.prevHealth)
+        	if(this.getHealth()!=this.prevHealth)
         	{
-        		this.func_110143_aJ();
-        		this.prevHealth=this.prevHealth;
+        		this.getHealth();
+        		this.prevHealth=getHealth();
         	}
         	//if(this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX)!=this.health)
         	//	this.setHealthData();

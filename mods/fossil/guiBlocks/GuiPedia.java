@@ -135,9 +135,7 @@ public class GuiPedia extends GuiContainer
      */
     public void PrintPictXY(ResourceLocation str0,int x0,int y0,int width,int height)
     {
-        //GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(str0));
-//    	this.mc.renderEngine.bindTexture(str0);
-        mc.func_110434_K().func_110577_a(str0);
+    	mc.getTextureManager().bindTexture(str0);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
         Tessellator var9 = Tessellator.instance;
         var9.startDrawingQuads();
@@ -176,7 +174,7 @@ public class GuiPedia extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.func_110434_K().func_110577_a(loc);
+        mc.getTextureManager().bindTexture(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
