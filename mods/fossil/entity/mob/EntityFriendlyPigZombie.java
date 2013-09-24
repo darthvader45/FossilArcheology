@@ -48,18 +48,18 @@ public class EntityFriendlyPigZombie extends EntityMob
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
-    protected void func_110147_ax()
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
 
         if (this.isTamed())
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(25.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
         }
         else
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
         }
     }
     /**
@@ -75,7 +75,6 @@ public class EntityFriendlyPigZombie extends EntityMob
      */
     public void onUpdate()
     {
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(2.0D);
  //       this.moveSpeed = this.entityToAttack == null ? 0.5F : 0.95F;
 
         if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0)

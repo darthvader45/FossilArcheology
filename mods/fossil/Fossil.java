@@ -6,27 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 
-
-
-
-
-
-
-
-
-
-
-
-//import fossil.fossilEnums.EnumAnimalType;
-/*import fossil.gens.WorldGenBigShip;
-import fossil.gens.WorldGenCheheWreck;
-import fossil.gens.WorldGenDukeWreck;
-import fossil.gens.WorldGenGalleonWreck;*/
-/*import fossil.gens.WorldGenShipWreck180;
-import fossil.gens.WorldGenShipWreck270;
-import fossil.gens.WorldGenShipWreck90;
-import fossil.gens.WorldGenShortRangeWreck;
-import fossil.gens.WorldGenVikingWreck;*/
 import mods.fossil.util.RenderHUD;
 import mods.fossil.blocks.BlockAmberOre;
 import mods.fossil.blocks.BlockAncientGlass;
@@ -40,9 +19,11 @@ import mods.fossil.blocks.BlockAncientWoodPlate;
 import mods.fossil.blocks.BlockAncientWoodSlab;
 import mods.fossil.blocks.BlockAncientWoodStairs;
 import mods.fossil.blocks.BlockFern;
+import mods.fossil.blocks.BlockFigurine;
 import mods.fossil.blocks.BlockFossil;
 import mods.fossil.blocks.BlockFossilSkull;
 import mods.fossil.blocks.BlockIcedStone;
+import mods.fossil.blocks.BlockMarble;
 import mods.fossil.blocks.BlockPalaePlanks;
 import mods.fossil.blocks.BlockPalaeSlab;
 import mods.fossil.blocks.BlockPalaeStairs;
@@ -67,7 +48,9 @@ import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBones;
+import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
@@ -131,6 +114,8 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -172,32 +157,21 @@ public class Fossil implements IPacketHandler
 	
 	@Instance("fossil")
 	public static Fossil instance;
-	
+	 
 	public static FossilGuiHandler GH = new FossilGuiHandler();
 	public static FossilOptions FossilOptions;
 	public static Properties LangProps = new Properties();
 	public static Object ToPedia;
 	
-	//private static final File Langdir = new File("/lang");
-    //public static String LastLangSetting = "en_US";
-	//private static File Langfile = new File(Langdir, LastLangSetting + ".lang");
 	public static IChatListener messagerHandler = new FossilMessageHandler();
 	
 	/*
 	 * If DebugMode = true
-	 * Dinosaur/Syringe times are accelerated.
+	 * Dinosaur/Syringe times are accelerated but not disabled to allow for error checking.
 	 */
 	public static boolean DebugMode = true;
 	public static final double MESSAGE_DISTANCE = 25.0D;
 	
-    //private static int[] blockIDs = new int[] {1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1151, 1152, 1153};
-    //private static String[] BlockName = new String[] {"block Fossil", "block Skull", "block SkullLantern", "block analyzerIdle", "block analyzerActive", "block cultivateIdle", "block cultivateActive", "block worktableIdle", "block worktableActive", "block fern", "block fernUpper", "block Drum", "block FeederIdle", "block FeederActive", "Block Permafrost", "Block IcedStone"};
-    //private static int[] ItemIDs = new int[] {600, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636};
-    //private static String[] ItemName = new String[] {"Item biofossil", "Item relic", "Item stoneboard", "Item DNA", "Item Ancientegg", "Item AncientSword", "Item BrokenSword", "Item FernSeed", "Item AncientHelmet", "Item BrokenHelmet", "Item SkullStick", "Item Gen", "Item GenAxe", "Item GenPickaxe", "Item GenSword", "Item GenHoe", "Item GenShovel", "Item DinoPedia", "Item TRexTooth", "Item ToothDagger", "Item RawChickenSoup", "Item ChickenEss", "Item EmptyShell", "Item Magic conch", "Item SJL", "Item RawDinoMeat", "Item CookedDinoMeat", "Item EmbyoSyringe", "Item AnimalDNA", "Item IcedMeat", "Item WoodJavelin", "Item StonrJavelin", "Item IronJavelin", "Item GoldJavelin", "Item DiamondJavelin", "Item AncientJavelin", "Item Whip"};
-    //public static int[] fernPics = new int[] {38, 39, 40, 41, 42, 43, 26, 27, 71, 72, 73, 74, 58};
-    //public static final int MultiCount = EnumDinoType.values().length * 3 + EnumAnimalType.values().length * 2 - 1 + 2;
-    //public static ItemStack[] SingleTotalList;
-    //public static ItemStack[] MultiTotalList = new ItemStack[MultiCount];
     
     public static CreativeTabs tabFBlocks = new TabFBlocks(CreativeTabs.getNextID(), "Fossil Blocks");
 	public static CreativeTabs tabFItems = new TabFItems(CreativeTabs.getNextID(), "Fossil Items");
@@ -256,6 +230,8 @@ public class Fossil implements IPacketHandler
     public static Block ancientStoneStairs;
     public static BlockHalfSlab ancientStoneSingleSlab;
     public static BlockHalfSlab ancientStoneDoubleSlab;
+    public static Block marble;
+    public static Block figurine;
 	
     //Items
     public static Item biofossil;
@@ -274,6 +250,7 @@ public class Fossil implements IPacketHandler
     public static Item gemHoe;
     public static Item gemShovel;
     public static Item dinoPedia;
+    public static Item archNotebook;
     public static Item emptyShell;
     public static Item magicConch;
     public static Item icedMeat;
@@ -304,6 +281,7 @@ public class Fossil implements IPacketHandler
 	public static Item cultivatedDodoEgg;
 	public static Item dodoWing;
 	public static Item dodoWingCooked;
+
 	
     //Armor
     public static Item skullHelmet;
@@ -369,8 +347,7 @@ public class Fossil implements IPacketHandler
 	public static Item cookedDinoMeat;
 	
 	//Music Discs
-	public static Item fossilRecord;
-	public static Item fossilRecord2;
+	public static Item fossilrecordBones;
 	
 	//Config ID INTs
 	//Blocks
@@ -417,6 +394,8 @@ public class Fossil implements IPacketHandler
     public static int ancientStoneStairsID;
     public static int ancientStoneSingleSlabID;
     public static int ancientStoneDoubleSlabID;
+    public static int marbleID;
+    public static int figurineID;
 	
     //Items
     public static int biofossilID;
@@ -435,6 +414,7 @@ public class Fossil implements IPacketHandler
     public static int gemHoeID;
     public static int gemShovelID;
     public static int dinoPediaID;
+    public static int archNotebookID;
     public static int emptyShellID;
     public static int magicConchID;
     public static int icedMeatID;
@@ -465,6 +445,7 @@ public class Fossil implements IPacketHandler
 	public static int cultivatedDodoEggID;
 	public static int dodoWingID;
     public static int dodoWingCookedID;
+
     
 	//Armor
 	public static int skullHelmetID;
@@ -482,17 +463,6 @@ public class Fossil implements IPacketHandler
 	
 	//DNA
 	//public static int dnaID;
-	/*public static int dnaTriceratopsID;
-	public static int dnaVelociraptorID;
-	public static int dnaTRexID;
-	public static int dnaPterosaurID;
-	public static int dnaNautilusID;
-	public static int dnaPlesiosaurID;
-	public static int dnaMosasaurusID;
-	public static int dnaStegosaurusID;
-	public static int dnaDilophosaurusID;
-	public static int dnaBrachiosaurusID;
-	public static int dnaSpinosaurusID;*/
 	public static int[] DNAIds= new int[EnumDinoType.values().length];
 	//public static int newDinoDNAID;
 	//public static int newDinoDNAID;
@@ -521,17 +491,6 @@ public class Fossil implements IPacketHandler
 	
 	//Ancient Egg
 	//public static int ancienteggID;
-	/*public static int eggTriceratopsID;
-	public static int eggVelociraptorID;
-	public static int eggTRexID;
-	public static int eggPterosaurID;
-	public static int shellNautilusID;
-	public static int eggPlesiosaurID;
-	public static int eggMosasaurusID;
-	public static int eggStegosaurusID;
-	public static int eggDilophosaurusID;
-	public static int eggBrachiosaurusID;
-	public static int eggSpinosaurusID;*/
 	public static int[] EGGIds= new int[EnumDinoType.values().length];
 	//public static int eggNewID;
 	//public static int eggNewID;
@@ -560,34 +519,17 @@ public class Fossil implements IPacketHandler
 	public static int rawChickenSoupID;
     public static int chickenEssID;
 	public static int sjlID;
-	//public static int rawDinoMeatID;
-	/*public static int rawTriceratopsID;
-	public static int rawVelociraptorID;
-	public static int rawTRexID;
-	public static int rawPterosaurID;
-	public static int rawNautilusID;
-	public static int rawPlesiosaurID;
-	public static int rawMosasaurusID;
-	public static int rawStegosaurusID;
-	public static int rawDilophosaurusID;
-	public static int rawBrachiosaurusID;
-	public static int rawSpinosaurusID;*/
+
 	public static int[] RAWIds= new int[EnumDinoType.values().length];
 	public static int cookedDinoMeatID;
 	
 	public static int fossilRecordID;
-	public static int fossilRecord2ID;
-	/*public static boolean Option_Gen_Palaeoraphe;
-	public static boolean Option_Gen_Academy;
-	public static boolean Option_Gen_Ships;
-	public static String Option_Lang_Server;
-	public static boolean Option_Heal_Dinos;*/
 	
 	static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[]{4,9,7,6}, 15);
 	@Mod.EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
 	{
-        Localizations.loadLanguages();
+ //       Localizations.loadLanguages();
     	MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
     	
     	
@@ -603,48 +545,51 @@ public class Fossil implements IPacketHandler
 			var2.load();
 		
 		//Blocks
-		blockFossilID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKFOSSIL_NAME, 3000).getInt(3000);
-		blockSkullID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKSKULL_NAME, 3001).getInt(3001);
-		skullLanternID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SKULLLANTERN_NAME, 3002).getInt(3002);
-        blockanalyzerIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKANALYZERIDLE_NAME, 3003).getInt(3003);
-        blockanalyzerActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKANALYZERACTIVE_NAME, 3004).getInt(3004);
-        blockcultivateIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME, 3005).getInt(3005);
-        blockcultivateActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME, 3006).getInt(3006);
-        blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME, 3007).getInt(3007);
-        blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME, 3008).getInt(3008);
-        blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKTIMEMACHINE_NAME, 3009).getInt(3009);
-        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERNBLOCK_NAME, 3010).getInt(3010);
+		blockFossilID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt(3000);
+		blockSkullID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SKULL_NAME, 3001).getInt(3001);
+		skullLanternID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SKULL_LANTERN_NAME, 3002).getInt(3002);
+        blockanalyzerIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME, 3003).getInt(3003);
+        blockanalyzerActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME, 3004).getInt(3004);
+        blockcultivateIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME, 3005).getInt(3005);
+        blockcultivateActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME, 3006).getInt(3006);
+        blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 3007).getInt(3007);
+        blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME, 3008).getInt(3008);
+        blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_TIMEMACHINE_NAME, 3009).getInt(3009);
+        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERN_BLOCK_NAME, 3010).getInt(3010);
         drumID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.DRUM_NAME, 3012).getInt(3012);
-        feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERIDLE_NAME, 3013).getInt(3013);
-        feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDERACTIVE_NAME, 3014).getInt(3014);
-        blockPermafrostID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKPERMAFROST_NAME, 3015).getInt(3015);
-        blockIcedStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCKICEDSTONE_NAME, 3016).getInt(3016);
-        volcanicAshID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICASH_NAME, 3017).getInt(3017);
-        volcanicRockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICROCK_NAME, 3018).getInt(3018);
-        volcanicRockHotID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICROCKHOT_NAME, 3019).getInt(3019);
+        feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_IDLE_NAME, 3013).getInt(3013);
+        feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_ACTIVE_NAME, 3014).getInt(3014);
+        blockPermafrostID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_PERMAFROST_NAME, 3015).getInt(3015);
+        blockIcedStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ICEDSTONE_NAME, 3016).getInt(3016);
+        volcanicAshID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ASH_NAME, 3017).getInt(3017);
+        volcanicRockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_NAME, 3018).getInt(3018);
+        volcanicRockHotID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_HOT_NAME, 3019).getInt(3019);
         tarID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.TAR_NAME, 3020).getInt(3020);
-        palmLogID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMLOG_NAME, 3021).getInt(3021);
-        palmLeavesID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMLEAVES_NAME, 3022).getInt(3022);
-        palmSapID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALMSAP_NAME, 3023).getInt(3023);
-        palaePlanksID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAEPLANKS_NAME, 3024).getInt(3024);
-        palaeSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESINGLESLAB_NAME, 3024).getInt(3024);
-        palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAEDOUBLESLAB_NAME, 3025).getInt(3025);
-        palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAESTAIRS_NAME, 3026).getInt(3026);
+        palmLogID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LOG_NAME, 3021).getInt(3021);
+        palmLeavesID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LEAVES_NAME, 3022).getInt(3022);
+        palmSapID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SAP_NAME, 3023).getInt(3023);
+        palaePlanksID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_PLANKS_NAME, 3024).getInt(3024);
+        palaeSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SINGLESLAB_NAME, 3024).getInt(3024);
+        palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_DOUBLESLAB_NAME, 3025).getInt(3025);
+        palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_STAIRS_NAME, 3026).getInt(3026);
         sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
-		volcanicBrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANICBRICK_NAME, 3028).getInt(3028);
-		amberOreID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.AMBERORE_NAME, 3029).getInt(3029);
-		ancientStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_NAME, 3030).getInt(3030);
-		ancientStonebrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONEBRICK_NAME, 3031).getInt(3031);
-		ancientWoodID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_NAME, 3032).getInt(3032);
-        ancientWoodPillarID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOODPILLAR_NAME, 3033).getInt(3033);
-        ancientGlassID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTGLASS_NAME, 3034).getInt(3034);
-        ancientWoodPlateID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOODPLATE_NAME, 3035).getInt(3035);
-        ancientWoodStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOODSTAIRS_NAME, 3036).getInt(3036);
-        ancientWoodSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME, 3037).getInt(3037);
-        ancientWoodDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME, 3038).getInt(3038);
-        ancientStoneStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONESTAIRS_NAME, 3039).getInt(3039);
-        ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME, 3040).getInt(3040);
-        ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME, 3041).getInt(3041);
+		volcanicBrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_BRICK_NAME, 3028).getInt(3028);
+		amberOreID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.AMBER_ORE_NAME, 3029).getInt(3029);
+		ancientStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_NAME, 3030).getInt(3030);
+		ancientStonebrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_BRICK_NAME, 3031).getInt(3031);
+		ancientWoodID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_NAME, 3032).getInt(3032);
+        ancientWoodPillarID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME, 3033).getInt(3033);
+        ancientGlassID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_GLASS_NAME, 3034).getInt(3034);
+        ancientWoodPlateID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PLATE_NAME, 3035).getInt(3035);
+        ancientWoodStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME, 3036).getInt(3036);
+        ancientWoodSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME, 3037).getInt(3037);
+        ancientWoodDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME, 3038).getInt(3038);
+        ancientStoneStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME, 3039).getInt(3039);
+        ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME, 3040).getInt(3040);
+        ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt(3041);
+        marbleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt(3042);
+        figurineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
+
         
 		//Items
         biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
@@ -656,7 +601,7 @@ public class Fossil implements IPacketHandler
         ancienthelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_HELMET_NAME, 10006).getInt(10006);
         brokenhelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HELMET_NAME, 10007).getInt(10007);
         skullStickID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_STICK_NAME, 10008).getInt(10008);
-        gemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.GEM_NAME, 10009).getInt(10009);
+        gemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_GEM_NAME, 10009).getInt(10009);
         gemAxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_AXE_NAME, 10010).getInt(10010);
         gemPickaxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_PICKAXE_NAME, 10011).getInt(10011);
         gemSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SWORD_NAME, 10012).getInt(10012);
@@ -679,21 +624,22 @@ public class Fossil implements IPacketHandler
         skullID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_NAME, 10029).getInt(10029);
         brokenSaplingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SAPLING_NAME, 10030).getInt(10030);
         amberID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.AMBER_NAME, 10031).getInt(10031);
-        ancientVaseID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTVASE_NAME, 10032).getInt(10032);
-        ancientVaseBrokenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTVASEBROKEN_NAME, 10033).getInt(10033);
-        boneArrowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEARROW_NAME, 10034).getInt(10034);
-        boneBowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEBOW_NAME, 10035).getInt(10035);
-        boneGlueID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEGLUE_NAME, 10036).getInt(10036);
-        boneRodID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONEROD_NAME, 10037).getInt(10037);
-        boneSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONESWORD_NAME, 10038).getInt(10038);
-        powderyStringID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERYSTRING_NAME, 10039).getInt(10039);
+        ancientVaseID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_NAME, 10032).getInt(10032);
+        ancientVaseBrokenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_BROKEN_NAME, 10033).getInt(10033);
+        boneArrowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ARROW_NAME, 10034).getInt(10034);
+        boneBowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_BOW_NAME, 10035).getInt(10035);
+        boneGlueID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_GLUE_NAME, 10036).getInt(10036);
+        boneRodID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ROD_NAME, 10037).getInt(10037);
+        boneSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_SWORD_NAME, 10038).getInt(10038);
+        powderyStringID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERY_STRING_NAME, 10039).getInt(10039);
 //        ancientWoodPlateID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt(10040);
         animalCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
-        dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOCOIN_NAME, 10042).getInt(10042);
-        dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOEGG_NAME, 10043).getInt(10043);
-        cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATEDDODOEGG_NAME, 10044).getInt(10044);
+        dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_COIN_NAME, 10042).getInt(10042);
+        dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_EGG_NAME, 10043).getInt(10043);
+        cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt(10044);
         fossilRecordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt(10045);
-//        fossilRecord2ID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD2_NAME, 10046).getInt(10046);
+        archNotebookID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt(10046);
+
         //10045
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
 		
@@ -713,17 +659,6 @@ public class Fossil implements IPacketHandler
 	
 		//DNA
 		//dnaID = var2.getItem(Configuration.CATEGORY_ITEM, "dna", 10059).getInt(10059);
-        /*dnaTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_TRICERATOPS_NAME, 10060).getInt(10060);
-        dnaVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_VELOCIRAPTOR_NAME, 10061).getInt(10061);
-        dnaTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_TREX_NAME, 10062).getInt(10062);
-        dnaPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PTEROSAUR_NAME, 10063).getInt(10063);
-        dnaNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_NAUTILUS_NAME, 10064).getInt(10064);
-        dnaPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PLESIOSAUR_NAME, 10065).getInt(10065);
-        dnaMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MOSASAURUS_NAME, 10066).getInt(10066);
-        dnaStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_STEGOSAURUS_NAME, 10067).getInt(10067);
-        dnaDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DILOPHOSAURUS_NAME, 10068).getInt(10068);
-        dnaBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_BRACHIOSAURUS_NAME, 10069).getInt(10069);
-        dnaSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SPINOSAURUS_NAME, 10070).getInt(10070);*/
         for(int i=0;i<EnumDinoType.values().length;i++)
         	DNAIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "dna"+EnumDinoType.values()[i].name(), 10060+i).getInt(10060+i);
 		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10071).getInt(10071);
@@ -753,17 +688,6 @@ public class Fossil implements IPacketHandler
 
 		//Ancient Egg
 		//ancienteggID = var2.getItem(Configuration.CATEGORY_ITEM, "ancientegg", 10090).getInt(10090);
-        /*eggTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_TRICERATOPS_NAME, 10091).getInt(10091);
-        eggVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_VELOCIRAPTOR_NAME, 10092).getInt(10092);
-        eggTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_TREX_NAME, 10093).getInt(10093);
-        eggPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_PTEROSAUR_NAME, 10094).getInt(10094);
-        shellNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SHELL_NAUTILUS_NAME, 10095).getInt(10095);
-        eggPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_PLESIOSAUR_NAME, 10096).getInt(10096);
-        eggMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_MOSASAURUS_NAME, 10097).getInt(10097);
-        eggStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_STEGOSAURUS_NAME, 10098).getInt(10098);
-        eggDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_DILOPHOSAURUS_NAME, 10099).getInt(10099);
-        eggBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_BRACHIOSAURUS_NAME, 10100).getInt(10100);
-        eggSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EGG_SPINOSAURUS_NAME, 10101).getInt(10101);*/
         for(int i=0;i<EnumDinoType.values().length;i++)
         	EGGIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "egg"+EnumDinoType.values()[i].name(), 10091+i).getInt(10091+i);
 		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt(10102);
@@ -793,35 +717,19 @@ public class Fossil implements IPacketHandler
 		rawChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_CHICKEN_SOUP_NAME, 10121).getInt(10121);
 		chickenEssID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EOC_NAME, 10122).getInt(10122);
 		sjlID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SJL_NAME, 10123).getInt(10123);
-        dodoWingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOWING_NAME, 10200).getInt(10200);
-        dodoWingCookedID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODOWINGCOOKED_NAME, 10201).getInt(10201);
-		//rawDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, "rawDinoMeat", 10124).getInt(10124);
-		/*rawTriceratopsID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_TRICERATOPS_NAME, 10125).getInt(10125);
-		rawVelociraptorID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_VELOCIRAPTOR_NAME, 10126).getInt(10126);
-		rawTRexID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_TREX_NAME, 10127).getInt(10127);
-		rawPterosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_PTEROSAUR_NAME, 10128).getInt(10128);
-		rawNautilusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_NAUTILUS_NAME, 10129).getInt(10129);
-		rawPlesiosaurID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_PLESIOSAUR_NAME, 10130).getInt(10130);
-		rawMosasaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_MOSASAURUS_NAME, 10131).getInt(10131);
-		rawStegosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_STEGOSAURUS_NAME, 10132).getInt(10132);
-		rawDilophosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_DILOPHOSAURUS_NAME, 10133).getInt(10133);
-		rawBrachiosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_BRACHIOSAURUS_NAME, 10134).getInt(10134);
-		rawSpinosaurusID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_SPINOSAURUS_NAME, 10136).getInt(10136);*/	
+        dodoWingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_NAME, 10200).getInt(10200);
+        dodoWingCookedID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_COOKED_NAME, 10201).getInt(10201);
+        
+        //DINOSAUR IDS START AT 10125, GIVE PLENTY OF BUFFER ROOM
 		for(int i=0;i<EnumDinoType.values().length;i++)
         	RAWIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "raw"+EnumDinoType.values()[i].name(), 10125+i).getInt(10125+i);
 		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10135).getInt(10135);
 		
-		/*Option_Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
-		Option_Gen_Academy = var2.get("option", "Academy", true).getBoolean(true);
-		Option_Gen_Ships = var2.get("option", "Ships", true).getBoolean(true);
-		Option_Lang_Server = var2.get("option", "Serverlanguage", "en_US").value;
-		Option_Heal_Dinos = var2.get("option", "Heal_Dinos", true).getBoolean(true);*/
 		
-		//FossilOptions.Load(var2);
+		//Config options
 		FossilOptions.Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
 		FossilOptions.Gen_Academy = var2.get("option", "Academy", true).getBoolean(true);
 		FossilOptions.Gen_Ships = var2.get("option", "Ships", true).getBoolean(true);
-//		FossilOptions.Lang_Server = var2.get("option", "Serverlanguage", "en_US").getString();
 		FossilOptions.Heal_Dinos = var2.get("option", "Heal_Dinos", true).getBoolean(true);
 		FossilOptions.Dinos_Starve = var2.get("option", "Dinos_Starve", true).getBoolean(true);
 		FossilOptions.Dino_Block_Breaking = var2.get("option", "Dino_Block_Breaking", true).getBoolean(true);
@@ -836,63 +744,61 @@ public class Fossil implements IPacketHandler
             var2.save();
         }
 		if (event.getSide() == Side.CLIENT)
-    		proxy.registerSounds();
-//    	UpdateLangProp(event.getSide() == Side.CLIENT);
-    	/*else
-    	{
-    		String path="mods/Fossil-Archeology/fossil/Fossillang/";
-    		System.out.println(Minecraft.getMinecraft().mcDataDir.getAbsolutePath());
-    		System.out.println(path+Minecraft.getMinecraft().gameSettings.language+".lang");
-    	}*/		
+    		proxy.registerSounds();	
 	}
 	
 	@SuppressWarnings("static-access")
 	@Mod.EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
+		LanguageRegistry.instance().addStringLocalization("itemGroup." + this.modid, "en_US", this.modid);
+		
+		
 		//Blocks
-		skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.SKULLLANTERN_NAME).setCreativeTab(this.tabFBlocks);
-        blockanalyzerIdle = new BlockAnalyzer(blockanalyzerIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCKANALYZERIDLE_NAME).setCreativeTab(this.tabFBlocks);
-        blockanalyzerActive = new BlockAnalyzer(blockanalyzerActiveID, true).setLightValue(0.9375F).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCKANALYZERACTIVE_NAME);
-        blockcultivateIdle = new BlockCultivate(blockcultivateIdleID, false).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKCULTIVATEIDLE_NAME).setCreativeTab(this.tabFBlocks);
-        blockcultivateActive = new BlockCultivate(blockcultivateActiveID, true).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME);
-        blockworktableIdle = new BlockWorktable(blockworktableIdleID, false).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCKWORKTABLEIDLE_NAME).setCreativeTab(this.tabFBlocks);
-        blockworktableActive = new BlockWorktable(blockworktableActiveID, true).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME);
-        feederIdle = new BlockFeeder(feederIdleID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDERIDLE_NAME);
-        feederActive = new BlockFeeder(feederActiveID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDERACTIVE_NAME).setCreativeTab(this.tabFBlocks);
-        blockTimeMachine = new BlockTimeMachine(blockTimeMachineID, 0, Material.glass).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKTIMEMACHINE_NAME).setCreativeTab(this.tabFBlocks);
-        /*, false*/ferns = new BlockFern(fernsID, Material.plants).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setCreativeTab((CreativeTabs)null);
-        //fernUpper = new BlockFern(fernUpperID, 0, true).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setCreativeTab((CreativeTabs)null);
+		skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.SKULL_LANTERN_NAME).setCreativeTab(this.tabFBlocks);
+        blockanalyzerIdle = new BlockAnalyzer(blockanalyzerIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME).setCreativeTab(this.tabFBlocks);
+        blockanalyzerActive = new BlockAnalyzer(blockanalyzerActiveID, true).setLightValue(0.9375F).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
+        blockcultivateIdle = new BlockCultivate(blockcultivateIdleID, false).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME).setCreativeTab(this.tabFBlocks);
+        blockcultivateActive = new BlockCultivate(blockcultivateActiveID, true).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+        blockworktableIdle = new BlockWorktable(blockworktableIdleID, false).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME).setCreativeTab(this.tabFBlocks);
+        blockworktableActive = new BlockWorktable(blockworktableActiveID, true).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
+        feederIdle = new BlockFeeder(feederIdleID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDER_IDLE_NAME);
+        feederActive = new BlockFeeder(feederActiveID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.FEEDER_ACTIVE_NAME).setCreativeTab(this.tabFBlocks);
+        blockTimeMachine = new BlockTimeMachine(blockTimeMachineID, 0, Material.glass).setLightValue(0.9375F).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_TIMEMACHINE_NAME).setCreativeTab(this.tabFBlocks);
+        ferns = new BlockFern(fernsID, Material.plants).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setCreativeTab((CreativeTabs)null);
         drum = new BlockDrum(drumID).setHardness(0.8F).setCreativeTab(this.tabFBlocks);
-        blockPermafrost = new BlockPermafrost(blockPermafrostID).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.BLOCKPERMAFROST_NAME).setCreativeTab(this.tabFBlocks);
-        blockIcedStone = new BlockIcedStone(blockIcedStoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKICEDSTONE_NAME).setCreativeTab(this.tabFBlocks);
-        blockFossil = new BlockFossil(blockFossilID, 1).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKFOSSIL_NAME).setCreativeTab(this.tabFBlocks);
-        blockSkull = new BlockFossilSkull(blockSkullID, false).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCKSKULL_NAME).setCreativeTab(this.tabFBlocks);
-        palmLog = new BlockPalmLog(palmLogID).setStepSound(Block.soundWoodFootstep).setHardness(1.4F)/*.setResistance(1.0F)*/.setUnlocalizedName(LocalizationStrings.PALMLOG_NAME);
-        palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMLEAVES_NAME);
-        palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALMSAP_NAME);
-        palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEPLANKS_NAME);
-        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAEDOUBLESLAB_NAME);
-        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAESINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
-        palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName(LocalizationStrings.PALAESTAIRS_NAME);
-        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICASH_NAME).setCreativeTab(this.tabFBlocks);
-        volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICROCK_NAME).setCreativeTab(this.tabFBlocks);
-        volcanicBrick = new BlockVolcanicBrick(volcanicBrickID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANICBRICK_NAME).setCreativeTab(this.tabFBlocks);
+        blockPermafrost = new BlockPermafrost(blockPermafrostID).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_PERMAFROST_NAME).setCreativeTab(this.tabFBlocks);
+        blockIcedStone = new BlockIcedStone(blockIcedStoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_ICEDSTONE_NAME).setCreativeTab(this.tabFBlocks);
+        blockFossil = new BlockFossil(blockFossilID, 1).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_FOSSIL_NAME).setCreativeTab(this.tabFBlocks);
+        blockSkull = new BlockFossilSkull(blockSkullID, false).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SKULL_NAME).setCreativeTab(this.tabFBlocks);
+        palmLog = new BlockPalmLog(palmLogID).setStepSound(Block.soundWoodFootstep).setHardness(1.4F)/*.setResistance(1.0F)*/.setUnlocalizedName(LocalizationStrings.PALAE_LOG_NAME);
+        palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALAE_LEAVES_NAME);
+        palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALAE_SAP_NAME);
+        palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAE_PLANKS_NAME);
+        palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAE_DOUBLESLAB_NAME);
+        palaeSingleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        palaeStairs = new BlockPalaeStairs(palaeStairsID, palaePlanks).setUnlocalizedName(LocalizationStrings.PALAE_STAIRS_NAME);
+        volcanicAsh = new BlockVolcanicAsh(volcanicAshID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_ASH_NAME).setCreativeTab(this.tabFBlocks);
+        volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_ROCK_NAME).setCreativeTab(this.tabFBlocks);
+        volcanicBrick = new BlockVolcanicBrick(volcanicBrickID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_BRICK_NAME).setCreativeTab(this.tabFBlocks);
         sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
         tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
-        amberOre  = new BlockAmberOre(amberOreID, Material.rock).setHardness(3.0F).setUnlocalizedName(LocalizationStrings.AMBERORE_NAME);
-        ancientStone  = new BlockAncientStone(ancientStoneID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_NAME);
-        ancientStonebrick  = new BlockAncientStonebrick(ancientStonebrickID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENTSTONEBRICK_NAME);
-        ancientWood  = new BlockAncientWood(ancientWoodID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_NAME);
-        ancientWoodPillar = new BlockAncientWoodPillar(ancientWoodPillarID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENTWOODPILLAR_NAME);
-        ancientGlass = new BlockAncientGlass(ancientGlassID, Material.glass, false).setHardness(0.3F).setUnlocalizedName(LocalizationStrings.ANCIENTGLASS_NAME);
-        ancientWoodPlate = new BlockAncientWoodPlate(ancientWoodPlateID, Material.wood).setHardness(0.6F).setUnlocalizedName(LocalizationStrings.ANCIENTWOODPLATE_NAME);
-        ancientWoodStairs = new BlockAncientWoodStairs(ancientWoodStairsID, ancientWood).setUnlocalizedName(LocalizationStrings.ANCIENTWOODSTAIRS_NAME);
-        ancientWoodDoubleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME);
-        ancientWoodSingleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
-        ancientStoneStairs = new BlockAncientStoneStairs(ancientStoneStairsID, ancientStonebrick).setUnlocalizedName(LocalizationStrings.ANCIENTSTONESTAIRS_NAME);
-        ancientStoneDoubleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME);
-        ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        amberOre  = new BlockAmberOre(amberOreID, Material.rock).setHardness(3.0F).setUnlocalizedName(LocalizationStrings.AMBER_ORE_NAME);
+        ancientStone  = new BlockAncientStone(ancientStoneID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_NAME);
+        ancientStonebrick  = new BlockAncientStonebrick(ancientStonebrickID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_BRICK_NAME);
+        ancientWood  = new BlockAncientWood(ancientWoodID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_NAME);
+        ancientWoodPillar = new BlockAncientWoodPillar(ancientWoodPillarID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
+        ancientGlass = new BlockAncientGlass(ancientGlassID, Material.glass, false).setHardness(0.3F).setUnlocalizedName(LocalizationStrings.ANCIENT_GLASS_NAME);
+        ancientWoodPlate = new BlockAncientWoodPlate(ancientWoodPlateID, Material.wood).setHardness(0.6F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
+        ancientWoodStairs = new BlockAncientWoodStairs(ancientWoodStairsID, ancientWood).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
+        ancientWoodDoubleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
+        ancientWoodSingleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        ancientStoneStairs = new BlockAncientStoneStairs(ancientStoneStairsID, ancientStonebrick).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
+        ancientStoneDoubleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
+        ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        marble  = new BlockMarble(marbleID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.MARBLE_NAME);
+        figurine  = new BlockFigurine(figurineID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
+        
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palaePlanks.blockID, 5, 20);
@@ -911,7 +817,7 @@ public class Fossil implements IPacketHandler
 		ancienthelmet = new ItemAncientHelmet(ancienthelmetID, EnumArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(this.tabFArmor);
 		brokenhelmet = new ForgeItem(brokenhelmetID,"Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(this.tabFMaterial);
 		skullStick = new ForgeItem(skullStickID,"Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(this.tabFItems);
-		gem = new ForgeItem(gemID,"Scarab_Gem").setUnlocalizedName(LocalizationStrings.GEM_NAME).setCreativeTab(this.tabFItems);
+		gem = new ForgeItem(gemID,"Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(this.tabFItems);
 		gemAxe = new ForgeAxe(gemAxeID, EnumToolMaterial.EMERALD,"Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(this.tabFTools);
 		gemPickaxe = new ForgePickaxe(gemPickaxeID, EnumToolMaterial.EMERALD,"Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(this.tabFTools);
 		gemSword = new ForgeSword(gemSwordID, EnumToolMaterial.EMERALD,"Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(this.tabFCombat);;
@@ -934,8 +840,10 @@ public class Fossil implements IPacketHandler
 		foot = new ForgeItem(footID,"Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
 		skull = new ForgeItem(skullID,"Skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME).setCreativeTab(this.tabFItems);
         brokenSapling = new ForgeItem(brokenSaplingID,"Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
-        dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODOEGG_NAME);
-        cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATEDDODOEGG_NAME);
+        dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
+        cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
+		archNotebook = new ForgeItem(archNotebookID,"Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
+
 		
 		//BoneArmor
 		skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
@@ -973,7 +881,6 @@ public class Fossil implements IPacketHandler
 		embryoChicken = new ItemEmbryoSyringe(embryoChickenID,3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
 		embryoSmilodon = new ItemEmbryoSyringe(embryoSmilodonID,4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
         embryoMammoth = new ItemEmbryoSyringe(embryoMammothID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
-//        embryoDodo = new ItemEmbryoSyringe(embryoDodoID,5).setUnlocalizedName(LocalizationStrings.EMBRYO_DODO_NAME).setCreativeTab(this.tabFItems);
 		
 		//Item Food
         //Moved to fossilEnums.EnumDinoType
@@ -985,15 +892,14 @@ public class Fossil implements IPacketHandler
 		rawChickenSoup = new ForgeItem(rawChickenSoupID,"Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
 		chickenEss = new ItemChickenEss(chickenEssID, 10, 0.0F, false,"Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Item.glassBottle).setCreativeTab(this.tabFFood);
 		sjl = new ForgeFood(sjlID, 8, 2.0F, false,"Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(this.tabFFood);
-        dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODOWING_NAME).setCreativeTab(this.tabFFood);
-        dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODOWINGCOOKED_NAME).setCreativeTab(this.tabFFood);
+        dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
+        dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
 		
         // Music Discs
-        fossilRecord = new ItemFossilRecord(fossilRecordID, modid+":record_bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
-        fossilRecord2 = new ItemFossilRecord(fossilRecord2ID, modid+":record_jp_theme").setUnlocalizedName(LocalizationStrings.FOSSILRECORD2_NAME);		
-		//Initiate some other things...
+        fossilrecordBones = new ItemFossilRecord(fossilRecordID, "Bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
+
+        //Initiate some other things...
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(),-1));
-		
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.woodjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(),0));
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.stonejavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(),1));
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.ironjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(),2));
@@ -1007,54 +913,55 @@ public class Fossil implements IPacketHandler
 		MinecraftForge.setBlockHarvestLevel(blockIcedStone, 1, "pickaxe", 1);
 		
         //Block Registry
-        GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCKFOSSIL_NAME);
-        GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCKSKULL_NAME);
-        GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULLLANTERN_NAME);
-        GameRegistry.registerBlock(blockanalyzerIdle, LocalizationStrings.BLOCKANALYZERIDLE_NAME);
-        GameRegistry.registerBlock(blockanalyzerActive, LocalizationStrings.BLOCKANALYZERACTIVE_NAME);
-        GameRegistry.registerBlock(blockcultivateIdle, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME);
-        GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCKCULTIVATEACTIVE_NAME);
-        GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
-        GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCKWORKTABLEACTIVE_NAME);
-        GameRegistry.registerBlock(ferns, LocalizationStrings.FERNBLOCK_NAME);
+        GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCK_FOSSIL_NAME);
+        GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCK_SKULL_NAME);
+        GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULL_LANTERN_NAME);
+        GameRegistry.registerBlock(blockanalyzerIdle, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
+        GameRegistry.registerBlock(blockanalyzerActive, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
+        GameRegistry.registerBlock(blockcultivateIdle, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
+        GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+        GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
+        GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
+        GameRegistry.registerBlock(ferns, LocalizationStrings.FERN_BLOCK_NAME);
         GameRegistry.registerBlock(drum, LocalizationStrings.DRUM_NAME);
-        GameRegistry.registerBlock(feederIdle, LocalizationStrings.FEEDERIDLE_NAME);
-        GameRegistry.registerBlock(feederActive, LocalizationStrings.FEEDERACTIVE_NAME);
-        GameRegistry.registerBlock(blockPermafrost, LocalizationStrings.BLOCKPERMAFROST_NAME);
-        GameRegistry.registerBlock(blockIcedStone, LocalizationStrings.BLOCKICEDSTONE_NAME);
-        GameRegistry.registerBlock(blockTimeMachine, LocalizationStrings.BLOCKTIMEMACHINE_NAME);
-        GameRegistry.registerBlock(palmLog, LocalizationStrings.PALMLOG_NAME);
-        GameRegistry.registerBlock(palmLeaves, LocalizationStrings.PALMLEAVES_NAME);
-        GameRegistry.registerBlock(palmSap, LocalizationStrings.PALMSAP_NAME);
-        GameRegistry.registerBlock(palaeSingleSlab, LocalizationStrings.PALAESINGLESLAB_NAME);
-        GameRegistry.registerBlock(palaeDoubleSlab, LocalizationStrings.PALAEDOUBLESLAB_NAME);
-        GameRegistry.registerBlock(palaeStairs, LocalizationStrings.PALAESTAIRS_NAME);
-        GameRegistry.registerBlock(palaePlanks, LocalizationStrings.PALAEPLANKS_NAME);
-        GameRegistry.registerBlock(volcanicAsh, LocalizationStrings.VOLCANICASH_NAME);
-        GameRegistry.registerBlock(volcanicBrick, LocalizationStrings.VOLCANICBRICK_NAME);
-        GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANICROCK_NAME);
+        GameRegistry.registerBlock(feederIdle, LocalizationStrings.FEEDER_IDLE_NAME);
+        GameRegistry.registerBlock(feederActive, LocalizationStrings.FEEDER_ACTIVE_NAME);
+        GameRegistry.registerBlock(blockPermafrost, LocalizationStrings.BLOCK_PERMAFROST_NAME);
+        GameRegistry.registerBlock(blockIcedStone, LocalizationStrings.BLOCK_ICEDSTONE_NAME);
+        GameRegistry.registerBlock(blockTimeMachine, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
+        GameRegistry.registerBlock(palmLog, LocalizationStrings.PALAE_LOG_NAME);
+        GameRegistry.registerBlock(palmLeaves, LocalizationStrings.PALAE_LEAVES_NAME);
+        GameRegistry.registerBlock(palmSap, LocalizationStrings.PALAE_SAP_NAME);
+        GameRegistry.registerBlock(palaeSingleSlab, LocalizationStrings.PALAE_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(palaeDoubleSlab, LocalizationStrings.PALAE_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(palaeStairs, LocalizationStrings.PALAE_STAIRS_NAME);
+        GameRegistry.registerBlock(palaePlanks, LocalizationStrings.PALAE_PLANKS_NAME);
+        GameRegistry.registerBlock(volcanicAsh, LocalizationStrings.VOLCANIC_ASH_NAME);
+        GameRegistry.registerBlock(volcanicBrick, LocalizationStrings.VOLCANIC_BRICK_NAME);
+        GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANIC_ROCK_NAME);
         GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
         GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
-        GameRegistry.registerBlock(amberOre, LocalizationStrings.AMBERORE_NAME);
-        GameRegistry.registerBlock(ancientStone, LocalizationStrings.ANCIENTSTONE_NAME);
-        GameRegistry.registerBlock(ancientStonebrick, LocalizationStrings.ANCIENTSTONEBRICK_NAME);
-        GameRegistry.registerBlock(ancientWood, LocalizationStrings.ANCIENTWOOD_NAME);
-        GameRegistry.registerBlock(ancientWoodPillar, LocalizationStrings.ANCIENTWOODPILLAR_NAME);
-        GameRegistry.registerBlock(ancientGlass, LocalizationStrings.ANCIENTGLASS_NAME);
-        GameRegistry.registerBlock(ancientWoodPlate, LocalizationStrings.ANCIENTWOODPLATE_NAME);
-        GameRegistry.registerBlock(ancientWoodStairs, LocalizationStrings.ANCIENTWOODSTAIRS_NAME);
-        GameRegistry.registerBlock(ancientWoodSingleSlab, LocalizationStrings.ANCIENTWOOD_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(ancientWoodDoubleSlab, LocalizationStrings.ANCIENTWOOD_DOUBLESLAB_NAME);
-        GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENTSTONESTAIRS_NAME);
-        GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENTSTONE_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENTSTONE_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(amberOre, LocalizationStrings.AMBER_ORE_NAME);
+        GameRegistry.registerBlock(ancientStone, LocalizationStrings.ANCIENT_STONE_NAME);
+        GameRegistry.registerBlock(ancientStonebrick, LocalizationStrings.ANCIENT_STONE_BRICK_NAME);
+        GameRegistry.registerBlock(ancientWood, LocalizationStrings.ANCIENT_WOOD_NAME);
+        GameRegistry.registerBlock(ancientWoodPillar, LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
+        GameRegistry.registerBlock(ancientGlass, LocalizationStrings.ANCIENT_GLASS_NAME);
+        GameRegistry.registerBlock(ancientWoodPlate, LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
+        GameRegistry.registerBlock(ancientWoodStairs, LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
+        GameRegistry.registerBlock(ancientWoodSingleSlab, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(ancientWoodDoubleSlab, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
+        GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(figurine, LocalizationStrings.FIGURINE_NAME);
+
         
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0)+".name", "Ancient Wood Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0)+".name", "Ancient Stone Slab");
-        
-//        LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palae SingleSlab");
-		GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
+
+        GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', blockSkull});
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', skullLantern});
 		GameRegistry.addRecipe(new ItemStack(blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Block.glass, 'Y', new ItemStack(Item.dyePowder, 1, 2), 'W', Item.bucketWater, 'Z', Item.ingotIron});
@@ -1067,34 +974,21 @@ public class Fossil implements IPacketHandler
 		GameRegistry.addRecipe(new ItemStack(skullStick, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Item.stick});
 		GameRegistry.addRecipe(new ItemStack(drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
 		GameRegistry.addRecipe(new ItemStack(feederIdle, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeWood, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeStone, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeDiamond, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeWood, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeStone, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeDiamond, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeWood, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeStone, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeDiamond, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordWood, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordStone, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordDiamond, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelWood, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelStone, gem});
-		//GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelIron, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelGold, gem});
 		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelDiamond, gem});
 		
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, EnumDinoType.values()[i].DNAItem});
+			GameRegistry.addShapelessRecipe(new ItemStack(archNotebook), new Object[] {Item.book, this.relic});
+
 		
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(rawChickenSoup, 1, 0), new Object[] {Item.bucketEmpty, Item.chickenRaw});
@@ -1166,26 +1060,17 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntityMLighting.class, 		"FriendlyLighting", 	4, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityFailuresaurus.class, 	"Failuresaurus", 		5, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityBones.class, 			"Bones", 				6, this, 250, 5, true);
-
-		EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);
-		
-		
+		EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);	
 		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 	12, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPigBoss.class, 			"PigBoss", 				13, this, 250, 5, true);
-		
-		
-		
 		EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntityBrachiosaurus.class, 	"Brachiosaurus", 		23, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
-		//EntityRegistry.registerModEntity(EntitySpinosaurus.class, 		"Spinosaurus", 			25, this, 250, 5, true);
-	      EntityRegistry.registerModEntity(EntityDodo.class,           "Dodo",              25, this, 250, 5, true);
-	       EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
-           EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class,           "CultivatedDodoEgg",              27, this, 250, 5, true);
-          // EntityRegistry.registerModEntity(EntityPregnantChicken.class,           "PregnantChicken",              27, this, 250, 5, true);
+	    EntityRegistry.registerModEntity(EntityDodo.class,           "Dodo",              25, this, 250, 5, true);
+	    EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class,           "CultivatedDodoEgg",              27, this, 250, 5, true);
 
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(),EnumDinoType.values()[i].name(),200+i, this, 250, 5, true);
@@ -1195,28 +1080,14 @@ public class Fossil implements IPacketHandler
 
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FAILURESAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", Localizations.getLocalizedString(LocalizationStrings.MOB_BONES));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Nautilus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_NAUTILUS));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Velociraptor.name", Localizations.getLocalizedString(LocalizationStrings.DINO_VELOCIRAPTOR));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Triceratops.name", Localizations.getLocalizedString(LocalizationStrings.DINO_TRICERATOPS));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Tyrannosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_TREX));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.FriendlyPigZombie.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FPZ));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PigBoss.name", Localizations.getLocalizedString(LocalizationStrings.BOSS_ANU));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Pterosaur.name", Localizations.getLocalizedString(LocalizationStrings.DINO_PTEROSAUR));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Plesiosaur.name", Localizations.getLocalizedString(LocalizationStrings.DINO_PLESIOSAUR));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Mosasaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_MOSASAURUS));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Stegosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_STEGOSAURUS));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Dilophosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_DILOPHOSAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_COW));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_PIG));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SMILODON));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Brachiosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_BRACHIOSAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO));
-//        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantChicken.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_CHICKEN));
-        //LanguageRegistry.instance().addStringLocalization("entity.fossil.Spinosaurus.name", Localizations.getLocalizedString(LocalizationStrings.DINO_SPINOSAURUS));
-
-        
         
         for(int i=0;i<EnumDinoType.values().length;i++)
         	LanguageRegistry.instance().addStringLocalization("entity.fossil."+EnumDinoType.values()[i].name()+".name", Localizations.getLocalizedString("Dino."+EnumDinoType.values()[i].name()));
@@ -1228,7 +1099,6 @@ public class Fossil implements IPacketHandler
 		
 		GameRegistry.registerWorldGenerator(new FossilGenerator());
 		GameRegistry.registerWorldGenerator(new TarGenerator());
-		//GameRegistry.registerWorldGenerator(new WorldGenPalaeoraphe());//not needed?
 		if(FossilOptions.Gen_Ships)
 			GameRegistry.registerWorldGenerator(new WorldGenShips());
 		if(FossilOptions.Gen_Academy)
@@ -1243,12 +1113,12 @@ public class Fossil implements IPacketHandler
 		NetworkRegistry.instance().registerChannel(this, "RiderInput");
 		NetworkRegistry.instance().registerChannel(this, "PteroFlight");
 
-		GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCKCULTIVATEIDLE_NAME);
-		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCKANALYZERIDLE_NAME);
-		GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCKWORKTABLEIDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
-		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.TFEEDERIDLE_NAME);
-		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCKTIMEMACHINE_NAME);
+		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
+		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
 		
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.SERVER);
@@ -1261,62 +1131,12 @@ public class Fossil implements IPacketHandler
         
 	}
 	
-	/*public static void fillCreativeList()
-    {
-        int var2 = 0;
-        int var0;
 
-        for (var0 = 0; var0 < EnumDinoType.values().length; ++var0)
-        {
-            MultiTotalList[var2++] = new ItemStack(dna, 1, var0);
-        }
-
-        for (var0 = 0; var0 < EnumDinoType.values().length; ++var0)
-        {
-            MultiTotalList[var2++] = new ItemStack(ancientegg, 1, var0);
-        }
-
-        for (var0 = 0; var0 < EnumDinoType.values().length; ++var0)
-        {
-            MultiTotalList[var2++] = new ItemStack(rawDinoMeat, 1, var0);
-        }
-
-        int var1;
-
-        for (var1 = 0; var1 < EnumAnimalType.values().length; ++var1)
-        {
-            MultiTotalList[var2++] = new ItemStack(animalDNA, 1, var1);
-        }
-
-        for (var1 = 0; var1 < EnumEmbyos.values().length; ++var1)
-        {
-            MultiTotalList[var2++] = new ItemStack(embyoSyringe, 1, var1);
-        }
-
-        for (var1 = 0; var1 < 2; ++var1)
-        {
-            MultiTotalList[var2++] = new ItemStack(chickenSoup, 1, var1);
-        }
-
-        SingleTotalList = new ItemStack[] {new ItemStack(blockFossil, 1, 0), new ItemStack(blockSkull, 1, 0), new ItemStack(skullLantern, 1, 0), new ItemStack(blockanalyzerIdle, 1, 0), new ItemStack(blockcultivateIdle, 1, 0), new ItemStack(blockworktableIdle, 1, 0), new ItemStack(ferns, 1, 0), new ItemStack(drum, 1, 0), new ItemStack(feederIdle, 1, 0), new ItemStack(blockPermafrost, 1, 0), new ItemStack(blockIcedStone, 1, 0)};
-    }*/
-	/*
-    public static String GetLangTextByKey(String var0)
-	{
-		String var1 = LangProps.getProperty(var0, "");
-		if(var1=="" && DebugMode)
-				System.err.println("Error finding language key entry: " + var0);
-		//if(var1=="")
-		//	var1="--Empty--";
-		return var1;
-	}
-	*/
 
 	public static void ShowMessage(String var0, EntityPlayer var1)
 	{
 			if (var1 != null)
 			{
-				//var1.getTranslator().currentLanguage==>Use to give each Player the language messages he needs if possible
     			var1.addChatMessage(var0);
 			}
 	}
@@ -1329,174 +1149,6 @@ public class Fossil implements IPacketHandler
 		}
 	}
 
-	/*public static int EnumToInt(EnumOrderType var0)
-	{// NOT NEEDED BY ANYONE==>USE .ordinal
-			return var0.ToInt();
-	}*/
-    
-
-
-	/*private static void UTF8Reader(Properties var0)
-	{
-		System.out.println("LANGUAGE: "+Minecraft.getMinecraft().gameSettings.language);
-
-		try
-		{
-			//InputStream i0=Fossil.class.getResourceAsStream(file);
-			//BufferedReader var2 = new BufferedReader(new InputStreamReader(Fossil.class.getResourceAsStream(file), "UTF-8"));
-			BufferedReader var2 = new BufferedReader(new FileReader(file));
-			for (String var3 = var2.readLine(); var3 != null; var3 = var2.readLine())//"/Fossillang/" + var1 + ".lang"
-			{
-	    		var3 = var3.trim();
-	
-	    		if (!var3.startsWith("#"))
-	    		{
-	        		String[] var4 = var3.split("=");
-	        		if (var4 != null && var4.length == 2)
-	        		{
-	        			var0.setProperty(var4[0], var4[1]);
-	        			if(Fossil.DebugMode)
-	        				System.out.println("SUCCESS: "+var4[0]+" added");
-	        		}
-	    		}
-			}
-		}
-		catch(IOException e)
-		{
-			System.err.println("Error loading language file: " + e.getMessage());
-		}
-	}*/
-
-	/*private void SetupOptions()
-	{
-		boolean var1 = false;
-
-		try
-		{
-			Properties var2 = FossilCfgLoader.loadOptionConfig();
-			Properties var3 = new Properties();
-
-			if (var2 != null)
-			{
-				String var4;
-
-				if (var2.containsKey("AnuSpawn") && !var1)
-				{
-					var4 = var2.getProperty("AnuSpawn");
-
-					if (FossilOptions.isNegtiveWord(var4))
-					{
-						FossilOptions.ShouldAnuSpawn = false;
-					}
-				}
-
-				if (var2.containsKey("SpawnShipWrecks") && !var1)
-				{
-					var4 = var2.getProperty("SpawnShipWrecks");
-
-					if (FossilOptions.isNegtiveWord(var4))
-					{
-						FossilOptions.SpawnShipwrecks = false;
-					}
-				}
-
-        if (var2.containsKey("SpawnWeaponShop") && !var1)
-        {
-            var4 = var2.getProperty("SpawnWeaponShop");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.SpawnWeaponShop = false;
-            }
-        }
-
-        if (var2.containsKey("SpawnAcademy") && !var1)
-        {
-            var4 = var2.getProperty("SpawnAcademy");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.SpawnAcademy = false;
-            }
-        }
-
-        if (var2.containsKey("DinoGrows") && !var1)
-        {
-            var4 = var2.getProperty("DinoGrows");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.DinoGrows = false;
-            }
-        }
-
-        if (var2.containsKey("DinoHunger") && !var1)
-        {
-            var4 = var2.getProperty("DinoHunger");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.DinoHunger = false;
-            }
-        }
-
-        if (var2.containsKey("TRexBreakingBlocks") && !var1)
-        {
-            var4 = var2.getProperty("TRexBreakingBlocks");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.TRexBreakingBlocks = false;
-            }
-        }
-
-        if (var2.containsKey("BraBreakingBlocks") && !var1)
-        {
-            var4 = var2.getProperty("BraBreakingBlocks");
-
-            if (FossilOptions.isNegtiveWord(var4))
-            {
-                FossilOptions.BraBreakingBlocks = false;
-            }
-        }
-    }
-
-    var3.setProperty("AnuSpawn", FossilOptions.ShouldAnuSpawn ? "true" : "false");
-    var3.setProperty("SpawnShipWrecks", FossilOptions.SpawnShipwrecks ? "true" : "false");
-    var3.setProperty("SpawnWeaponShop", FossilOptions.SpawnWeaponShop ? "true" : "false");
-    var3.setProperty("SpawnAcademy", FossilOptions.SpawnAcademy ? "true" : "false");
-    var3.setProperty("DinoGrows", FossilOptions.DinoGrows ? "true" : "false");
-    var3.setProperty("DinoHunger", FossilOptions.DinoHunger ? "true" : "false");
-    var3.setProperty("TRexBreakingBlocks", FossilOptions.TRexBreakingBlocks ? "true" : "false");
-    var3.setProperty("BraBreakingBlocks", FossilOptions.BraBreakingBlocks ? "true" : "false");
-    var3.setProperty("PalaeorapheSpawn", FossilOptions.PalaeorapheSpawn ? "true" : "false");
-    FossilCfgLoader.saveOptionConfig(var3);
-    
-		}
-		catch (IOException var5)
-		{
-			;
-		}
-	}*/
-
-	/*public static String GetEmbyoName(EnumEmbyos var0)
-	{
-		String var1 = "";
-
-		switch (var0.ordinal())
-		{
-        	case 1:
-        	case 2:
-        	case 3:
-            var1 = " " + StringTranslate.getInstance().translateNamedKey("entity." + var0.toString()).toString();
-            break;
-
-        	default:
-            var1 = GetLangTextByKey("AnimalType." + var0.toString());
-		}
-
-		return var1;
-	}*/
 	
 	@Mod.EventHandler
 	public void PostInit(FMLPostInitializationEvent event)
@@ -1557,42 +1209,7 @@ public class Fossil implements IPacketHandler
 	            throw new RuntimeException(e);
 	        }
 		}
-		/*if("DinoHealth".equals(packet.channel))ISNT NEEDED, DATAWATCHER USED FOR THAT
-		{
-			DataInputStream in = new DataInputStream(new ByteArrayInputStream(packet.data));
-			try
-	        {
-				int EntityID = in.readInt();
-				int ServerHealth = in.readInt();
-				
-				Entity E0 =((EntityClientPlayerMP)player).worldObj.getEntityByID(EntityID);
-				if(E0 instanceof EntityDinosaur)
-					((EntityDinosaur) E0).setEntityHealth(ServerHealth);
-	        }
-	        catch (IOException e)
-	        {
-	            throw new RuntimeException(e);
-	        }
-		}*/
-		/*if("RiddenPos".equals(packet.channel))ISNT NEEDED, REPLACED BY USE OF TELEPORT PACKAGE
-		{
-			DataInputStream in = new DataInputStream(new ByteArrayInputStream(packet.data));
-			try
-	        {
-				int EntityID = in.readInt();
-				double posX  = in.readDouble();
-				double posY  = in.readDouble();
-				double posZ  = in.readDouble();
-				float Yaw    = in.readFloat();
-				float Pitch  = in.readFloat();
-				
-				Entity E0 =((EntityClientPlayerMP)player).worldObj.getEntityByID(EntityID);
-				E0.setPositionAndRotation(posX, posY, posZ, Yaw, Pitch);
-	        }
-	        catch (IOException e)
-	        {
-	            throw new RuntimeException(e);
-	        }
-		}*/
+
 	}
+
 }

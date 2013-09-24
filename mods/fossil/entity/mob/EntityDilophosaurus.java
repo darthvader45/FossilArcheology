@@ -242,12 +242,12 @@ public class EntityDilophosaurus extends EntityDinosaur
                         if (var2 < 5.0F)
                         {
                             //this.moveSpeed = 2.0F;
-                	        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(2.0D);
+                	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(2.0D);
                         }
                         else
                         {
 //                	        // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-                	        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(1.0D);
+                	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
                         }
                     }
                 }
@@ -264,7 +264,7 @@ public class EntityDilophosaurus extends EntityDinosaur
 
         if (!this.worldObj.isRemote)
         {
-            this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
+            this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
         }
     }
 

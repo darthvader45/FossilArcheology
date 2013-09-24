@@ -29,6 +29,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -76,7 +77,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
-        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(8, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(5, new DinoAIWander(this, 1.0D));

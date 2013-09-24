@@ -13,16 +13,21 @@ import java.nio.file.Files;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.AbstractResourcePack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
 public class DinoSoundHandler {
+	
+	private static final String[] Records = {
+		"Bones"};
 
 	//Load sounds
 	@ForgeSubscribe
@@ -107,12 +112,17 @@ public class DinoSoundHandler {
 		
 }
 
+
+	
+	
 	// Load music
 	@SideOnly(Side.CLIENT)
 	@ForgeSubscribe
 	public void onSoundsLoaded(SoundLoadEvent event)
 	{	
-		event.manager.soundPoolStreaming.addSound(Fossil.modid + ":" + "record_bones.wav");
+		event.manager.soundPoolStreaming.addSound(Fossil.modid + ":" + "Bones.wav");
 		event.manager.soundPoolStreaming.addSound(Fossil.modid + ":" + "record_jp_theme.wav");
 	}
+	
+
 }

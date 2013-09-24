@@ -19,7 +19,7 @@ public class RenderPigBoss extends RenderBiped
         return loc;
     }
     
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityPigBoss)par1Entity);
     }
@@ -54,11 +54,11 @@ public class RenderPigBoss extends RenderBiped
         {
             if (var1.FireballCount >= 50)
             {
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/PigBossCharged_r.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/PigBossCharged_r.png"));
             }
             else
             {
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/PigBoss_r.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/PigBoss_r.png"));
             }
 
             float var4 = (1.0F - var1.getBrightness(1.0F)) * 0.5F;

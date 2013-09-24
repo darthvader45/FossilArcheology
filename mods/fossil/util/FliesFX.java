@@ -14,7 +14,7 @@ public class FliesFX extends EntityFX
 {
 	//declare your variables
 	public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
-	private static TextureManager textureManager = Minecraft.getMinecraft().func_110434_K(); //get the TextureManager instance
+	private static TextureManager textureManager = Minecraft.getMinecraft().getTextureManager(); //get the TextureManager instance
 	
 	float particleScaleOverTime;
 
@@ -57,7 +57,7 @@ public class FliesFX extends EntityFX
         }
         this.particleScale = this.particleScaleOverTime * f6;
         Minecraft mc = FMLClientHandler.instance().getClient();
-        textureManager.func_110577_a(resourceloc);
+        textureManager.bindTexture(resourceloc);
         float f0 = (float) this.particleTextureIndexX / 16F;
         float f7 = f0 + 0.0624375F;
         float f8 = (float) this.particleTextureIndexX / 16F;

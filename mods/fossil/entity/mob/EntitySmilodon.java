@@ -92,21 +92,20 @@ public class EntitySmilodon extends EntityTameable
         this.setTamed(false);
     }
     
-    protected void func_110147_ax()
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
 
         if (this.isTamed())
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
         }
         else
         {
-            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
         }
     }
-
 
 
     /**
@@ -141,13 +140,13 @@ public class EntitySmilodon extends EntityTameable
      */
     protected void updateAITick()
     {
-        this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
+        this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, Float.valueOf(this.func_110143_aJ()));
+        this.dataWatcher.addObject(18, Float.valueOf(this.getHealth()));
         this.dataWatcher.addObject(19, new Byte((byte)0));
         this.dataWatcher.addObject(20, new Byte((byte)BlockColored.getBlockFromDye(1)));
     }
@@ -498,7 +497,7 @@ public class EntitySmilodon extends EntityTameable
                         this.setIsTamed(true);
                         this.setPathToEntity((PathEntity)null);
                         this.aiSit.setSitting(true);
-                        this.setEntityHealth(20);
+                        this.setHealth(20);
                         this.setOwner(var1.username);
                         this.showHeartsOrSmokeFX(true);
                         this.worldObj.setEntityState(this, (byte)7);
@@ -519,7 +518,7 @@ public class EntitySmilodon extends EntityTameable
             {
                 ItemFood var3 = (ItemFood)Item.itemsList[var2.itemID];
 
-                if (this.TamedInterest(var2.itemID) && this.dataWatcher.func_111145_d(18) < 20.0F)
+                if (this.TamedInterest(var2.itemID) && this.getHealth() < 20.0F)
                 {
                     --var2.stackSize;
                     this.heal(var3.getHealAmount());
@@ -592,7 +591,7 @@ public class EntitySmilodon extends EntityTameable
     @SideOnly(Side.CLIENT)
     public float getTailRotation()
     {
-        return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20.0F - this.dataWatcher.func_111145_d(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+        return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20.0F - this.getHealth()) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
     }
 
     /**

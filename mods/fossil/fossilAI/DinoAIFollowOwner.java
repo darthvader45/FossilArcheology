@@ -112,7 +112,7 @@ public class DinoAIFollowOwner extends EntityAIBase
 
                 if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f))
                 {
-                    if (!this.DinoEntity.func_110167_bD())
+                    if (!this.DinoEntity.getLeashed())
                     {
                         if (this.DinoEntity.getDistanceSqToEntity(this.theOwner) >= 144.0D)
                         {

@@ -51,7 +51,7 @@ public class RenderDodo extends RenderLiving
     }
 
     
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityDodo)par1Entity);
     }

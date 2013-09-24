@@ -1,11 +1,16 @@
 package mods.fossil.entity.mob;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.MathHelper;
 
-public class ModelBrachiosaurus extends ModelDinosaurs
+public class ModelBrachiosaurus extends ModelBase
 {
+	float yoffset = 0.0F;
     ModelRenderer Snout = (new ModelRenderer(this, 50, 8)).setTextureSize(64, 32);
     ModelRenderer Head;
     ModelRenderer Crest;
@@ -63,50 +68,52 @@ public class ModelBrachiosaurus extends ModelDinosaurs
         
         this.Neck = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        this.Neck.setRotationPoint(0.0F, -6.0F, -10.5F);
+        this.Neck.setRotationPoint(0.0F, -6.0F-yoffset, -10.5F);
         this.setRotation(this.Neck, -((float)Math.PI / 4F), 0.0F, 0.0F);
         this.Neck.mirror = true;
         this.Neck1 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck1.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        this.Neck1.setRotationPoint(0.0F, -4.5F, -9.0F);
+        this.Neck1.setRotationPoint(0.0F, -4.5F-yoffset, -9.0F);
         this.setRotation(this.Neck1, -0.9599311F, 0.0F, 0.0F);
         this.Neck1.mirror = true;
         this.Neck2 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck2.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        this.Neck2.setRotationPoint(0.0F, -3.0F, -8.0F);
+        this.Neck2.setRotationPoint(0.0F, -3.0F-yoffset, -8.0F);
         this.setRotation(this.Neck2, -1.23464F, 0.0F, 0.0F);
         this.Neck2.mirror = true;
         this.Neck3 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck3.addBox(-1.5F, 0.0F, 2.0F, 3, 2, 2);
-        this.Neck3.setRotationPoint(0.0F, -1.5F, -7.5F);
+        this.Neck3.setRotationPoint(0.0F, -1.5F-yoffset, -7.5F);
         this.setRotation(this.Neck3, -1.343904F, 0.0F, 0.0F);
         this.Neck3.mirror = true;
         this.Neck4 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck4.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        this.Neck4.setRotationPoint(0.0F, -1.5F, -7.5F);
+        this.Neck4.setRotationPoint(0.0F, -1.5F-yoffset, -7.5F);
         this.setRotation(this.Neck4, -1.343904F, 0.0F, 0.0F);
         this.Neck4.mirror = true;
         this.Neck5 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck5.addBox(-1.5F, 0.0F, 4.0F, 3, 2, 2);
-        this.Neck5.setRotationPoint(0.0F, -1.5F, -7.5F);
+        this.Neck5.setRotationPoint(0.0F, -1.5F-yoffset, -7.5F);
         this.setRotation(this.Neck5, -1.343904F, 0.0F, 0.0F);
         this.Neck5.mirror = true;
         this.Neck6 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
         this.Neck6.addBox(-1.5F, 0.0F, 6.0F, 3, 2, 2);
-        this.Neck6.setRotationPoint(0.0F, -1.5F, -7.5F);
+        this.Neck6.setRotationPoint(0.0F, -1.5F-yoffset, -7.5F);
         this.setRotation(this.Neck6, -1.343904F, 0.0F, 0.0F);
         this.Neck6.mirror = true;
         this.Neck7 = (new ModelRenderer(this, 34, 11)).setTextureSize(64, 32);
         this.Neck7.addBox(-2.0F, -1.0F, -0.5F, 4, 3, 3);
-        this.Neck7.setRotationPoint(0.0F, 6.0F, -6.5F);
+        this.Neck7.setRotationPoint(0.0F, 6.0F-yoffset, -6.5F);
         this.setRotation(this.Neck7, -0.9637522F, 0.0F, 0.0F);
         this.Neck7.mirror = true;
         
         this.Lower_Neck = (new ModelRenderer(this, 32, 24)).setTextureSize(64, 32);
         this.Lower_Neck.addBox(-2.5F, -0.5F, -0.5F, 5, 4, 4);
-        this.Lower_Neck.setRotationPoint(0.0F, 7.0F, -5.0F);
+        this.Lower_Neck.setRotationPoint(0.0F, 7.0F-yoffset, -5.0F);
         this.setRotation(this.Lower_Neck, -0.8377581F, 0.0F, 0.0F);
         this.Lower_Neck.mirror = true;
+        
+
         
         
         //Body
@@ -134,8 +141,6 @@ public class ModelBrachiosaurus extends ModelDinosaurs
         this.Lower_Body.setRotationPoint(0.0F, 0.0F, 5.0F);
         this.setRotation(this.Lower_Body, -0.3346075F, 0.0F, 0.0F);
         this.Lower_Body.mirror = true;
-        
-
         
         //Tail
         this.Tail = (new ModelRenderer(this, 0, 13)).setTextureSize(64, 32);
@@ -245,8 +250,10 @@ public class ModelBrachiosaurus extends ModelDinosaurs
      */
     public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
     {
+        float var14 = 0.0225F;
         super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+  //      this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+
         this.Head.render(var7);
         this.Neck.render(var7);
         this.Neck1.render(var7);

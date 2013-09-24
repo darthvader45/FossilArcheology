@@ -81,7 +81,7 @@ public class DinoAIStarvation extends EntityAIBase
 
     private void handleStarvation()
     {
-    	if(this.mover.func_110143_aJ()<=5)
+    	if(this.mover.getHealth()<=5)
     		this.mover.SendStatusMessage(EnumSituation.Starve);
         this.mover.attackEntityFrom(DamageSource.starve, 5);
     }

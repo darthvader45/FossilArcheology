@@ -4,6 +4,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import mods.fossil.CommonProxy;
 import mods.fossil.Fossil;
+import mods.fossil.blocks.BlockFigurineRenderer;
+import mods.fossil.blocks.BlockFigurineTileEntity;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
@@ -36,6 +38,7 @@ import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.entity.mob.ModelAnkylosaurus;
+import mods.fossil.entity.mob.ModelBrachiosaurus;
 import mods.fossil.entity.mob.ModelCompsognathus;
 import mods.fossil.entity.mob.ModelDilophosaurus;
 import mods.fossil.entity.mob.ModelFailuresaurus;
@@ -43,6 +46,7 @@ import mods.fossil.entity.mob.ModelMammoth;
 import mods.fossil.entity.mob.ModelNautilus;
 import mods.fossil.entity.mob.ModelPachycephalosaurus;
 import mods.fossil.entity.mob.ModelPigBoss;
+import mods.fossil.entity.mob.ModelPlesiosaur;
 import mods.fossil.entity.mob.ModelPterosaurGround;
 import mods.fossil.entity.mob.ModelSmilodon;
 import mods.fossil.entity.mob.ModelSpinosaurus;
@@ -83,6 +87,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderVillager;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
@@ -92,7 +97,7 @@ public class ClientProxy extends CommonProxy
 	{
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneboard.class, new RenderStoneboard());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderTriceratops(new ModelTriceratops(), new ModelTriceratops(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderTriceratops(new ModelTriceratops(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderVelociraptor(new ModelVelociraptor(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTRex.class, new RenderTRex(new ModelTRex(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));
@@ -100,7 +105,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyPigZombie.class, new RenderBiped(new ModelZombie(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPterosaur.class, new RenderPterosaur(new ModelPterosaurGround(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderNautilus(new ModelNautilus(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlesiosaur.class, new RenderPlesiosaur(0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPlesiosaur.class, new RenderPlesiosaur(new ModelPlesiosaur(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMosasaurus.class, new RenderMosasaurus(0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityStegosaurus.class, new RenderStegosaurus(new ModelStegosaurus(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDinoEgg.class, new RenderDinoEgg(1.5F));
@@ -127,6 +132,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntitySpecialRenderer()
 	{
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
+        ClientRegistry.bindTileEntitySpecialRenderer(BlockFigurineTileEntity.class, new BlockFigurineRenderer());
 	}
 	
 	@Override

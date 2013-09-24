@@ -23,7 +23,7 @@ public class GuiAnalyzer extends GuiContainer
 
     protected void drawGuiContainerForegroundLayer()
     {
-        this.fontRenderer.drawString(LocalizationStrings.BLOCKANALYZERIDLE_NAME, 19, 6, 4210752);
+        this.fontRenderer.drawString(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME, 19, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
@@ -34,7 +34,7 @@ public class GuiAnalyzer extends GuiContainer
     {
         //int var4 = this.mc.renderEngine.getTexture("/fossil/textures/UIAnalyzer.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.func_110434_K().func_110577_a(loc);
+        mc.getTextureManager().bindTexture(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

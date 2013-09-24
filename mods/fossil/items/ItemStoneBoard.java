@@ -20,17 +20,16 @@ public class ItemStoneBoard extends Item
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
-    public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10)
+    public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10)
     {
-        if (var7 == 0 || var7 == 1)
+        if (direction == 0 || direction == 1)
             return false;
         else
         {
-            int var11 = Direction.facingToDirection[var7];
-            System.out.println(String.valueOf(var11));
-            EntityStoneboard var12 = new EntityStoneboard(var3, var4, var5, var6, var11);
+            int var11 = Direction.facingToDirection[direction];
+            EntityStoneboard var12 = new EntityStoneboard(world, x, y, z, var11);
 
-            if (!var2.canPlayerEdit(var4, var5, var6, var7, var1))
+            if (!var2.canPlayerEdit(x, y, z, direction, var1))
             {
                 return false;
             }
@@ -38,9 +37,9 @@ public class ItemStoneBoard extends Item
             {
                 if (var12 != null && var12.onValidSurface())
                 {
-                    if (!var3.isRemote)
+                    if (!world.isRemote)
                     {
-                        var3.spawnEntityInWorld(var12);
+                        world.spawnEntityInWorld(var12);
                     }
                     --var1.stackSize;
                 }

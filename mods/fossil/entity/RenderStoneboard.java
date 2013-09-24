@@ -17,12 +17,7 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderStoneboard extends Render
 {
-    //private Random rand = new Random();
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private static final ResourceLocation field_110807_a = new ResourceLocation("textures/painting/paintings_kristoffer_zetterstrand.png");
 	
     public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9)
     {
@@ -33,7 +28,7 @@ public class RenderStoneboard extends Render
             GL11.glTranslatef((float)var2, (float)var4, (float)var6);
             GL11.glRotatef(var8, 0.0F, 1.0F, 0.0F);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/Stone_Boards.png"));
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/Stone_Boards.png"));
             EnumStoneboard var10 = entitystoneboard.art;
             float var11 = 0.0625F;
             GL11.glScalef(var11, var11, var11);
@@ -150,6 +145,12 @@ public class RenderStoneboard extends Render
     {
         this.func_158_a((EntityStoneboard)var1, var2, var4, var6, var8, var9);
     }
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

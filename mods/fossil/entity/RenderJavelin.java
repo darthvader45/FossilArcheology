@@ -17,29 +17,29 @@ public class RenderJavelin extends Render
         switch (var1.SelfMaterial.ordinal())
         {
             case 1:
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/StoneJavelin.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/StoneJavelin.png"));
                 break;
 
             case 2:
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/IronJavelin.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/IronJavelin.png"));
                 break;
 
             case 4:
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/GoldJavelin.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/GoldJavelin.png"));
                 break;
 
             case 3:
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
                 break;
 
             case 0:
             default:
-                this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
+                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
         }
 
         if (var1 instanceof EntityAncientJavelin)
         {
-            this.renderManager.renderEngine.func_110577_a(new ResourceLocation("fossil:textures/AncientJavelin.png"));
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/AncientJavelin.png"));
         }
 
         GL11.glPushMatrix();
@@ -112,7 +112,7 @@ public class RenderJavelin extends Render
     }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

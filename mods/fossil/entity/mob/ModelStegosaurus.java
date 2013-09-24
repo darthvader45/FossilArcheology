@@ -1,5 +1,8 @@
 package mods.fossil.entity.mob;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -117,6 +120,7 @@ public class ModelStegosaurus extends ModelDinosaurs
         this.setRotation(this.T4, 0.2617994F, 0.0F, 0.0F);
         this.T4.mirror = true;
     }
+    
 
     /**
      * Sets the models various rotation angles then renders the model.

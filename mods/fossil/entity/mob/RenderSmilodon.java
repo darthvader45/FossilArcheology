@@ -17,7 +17,7 @@ public class RenderSmilodon extends RenderLiving
         return loc;
     }
     
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntitySmilodon)par1Entity);
     }

@@ -32,7 +32,7 @@ public class RenderDinoEgg extends Render
         float var12 = 0.75F;
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
-        this.renderManager.renderEngine.func_110577_a(new ResourceLocation(var1.getTexture()));
+        this.renderManager.renderEngine.bindTexture(new ResourceLocation(var1.getTexture()));
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         this.MainModel.render(var1, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -53,9 +53,9 @@ public class RenderDinoEgg extends Render
     {
         this.renderDinoEgg((EntityDinoEgg)var1, var2, var4, var6, var8, var9);
     }
-
+    
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

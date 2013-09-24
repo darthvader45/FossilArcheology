@@ -52,4 +52,12 @@ public class ItemFossilRecord extends ItemRecord
     {
     	this.itemIcon = reg.registerIcon(Fossil.modid + ":record_bones");
     }
+    
+    /**
+     * Return the record item corresponding to the given name.
+     */
+    public static ItemFossilRecord getRecord(String par0Str)
+    {
+        return (ItemFossilRecord)records.get(par0Str);
+    }
 }

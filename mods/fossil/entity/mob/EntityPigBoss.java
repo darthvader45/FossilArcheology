@@ -74,12 +74,11 @@ public class EntityPigBoss extends EntityZombie
         }
     }
     */
-    @Override
-    protected void func_110147_ax()
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(4.0D);
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(1.0D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
     }
     
     /**
@@ -155,7 +154,7 @@ public class EntityPigBoss extends EntityZombie
     {
         Entity var1 = super.findPlayerToAttack();
 
-        if (var1 instanceof EntityPlayer && ((EntityPlayer)var1).func_110143_aJ() > 0)
+        if (var1 instanceof EntityPlayer && ((EntityPlayer)var1).getHealth() > 0)
         {
             this.Mouth.SendSpeech(EnumPigBossSpeaks.Hello);
 

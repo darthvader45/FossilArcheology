@@ -185,7 +185,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         //this.blockBreakingBehavior.execute();
         if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         	BlockInteractive();
-        if (this.func_110143_aJ() > 0)
+        if (this.getHealth() > 0)
         {
             /*this.field_25054_c = this.field_25048_b;
 

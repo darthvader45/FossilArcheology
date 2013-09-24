@@ -1,30 +1,25 @@
 package mods.fossil.entity.mob;
 
+import java.util.Map;
+
 import mods.fossil.entity.mob.ModelPterosaurFlying;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.google.common.collect.Maps;
+
 public class RenderPterosaur extends RenderLiving
 {
-
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Pterosaur.png");
-    
-    protected ResourceLocation func_110919_a(EntityPterosaur par1Entity)
-    {
-        return loc;
-    }
-    
-    protected ResourceLocation func_110775_a(Entity par1Entity)
-    {
-        return this.func_110919_a((EntityPterosaur)par1Entity);
-    }
+    private static final Map field_110852_a = Maps.newHashMap();
+    private static final ResourceLocation texture_location = new ResourceLocation("fossil:textures/mob/Pterosaur.png");
     
     public boolean FlyingModel = false;
     public boolean LandingModel = false;
@@ -33,9 +28,9 @@ public class RenderPterosaur extends RenderLiving
     public ModelBase FlyModel = new ModelPterosaurFlying();
     public ModelBase LandModel = new ModelPTSLanding();
 
-    public RenderPterosaur(ModelBase var1, float var2)
+    public RenderPterosaur(ModelBase modelbase, float var2)
     {
-        super(var1, var2);
+        super(modelbase, var2);
     }
 
     /**
@@ -60,7 +55,7 @@ public class RenderPterosaur extends RenderLiving
         return var1 + var3 * var4;
     }
 
-    public void renderCow(EntityPterosaur var1, double var2, double var4, double var6, float var8, float var9)
+    public void renderPterosaur(EntityPterosaur var1, double var2, double var4, double var6, float var8, float var9)
     {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
@@ -91,8 +86,8 @@ public class RenderPterosaur extends RenderLiving
             GL11.glScalef(var1.getDinoWidth(), -var1.getDinoHeight(), var1.getDinoLength());
             this.preRenderCallback(var1, var9);
             GL11.glTranslatef(0.0F, -24.0F * var14 - 0.0078125F, 0.0F);
-            float var15 = var1.prevLimbYaw + (var1.limbYaw - var1.prevLimbYaw) * var9;
-            float var16 = var1.limbSwing - var1.limbYaw * (1.0F - var9);
+            float var15 = var1.prevLimbSwingAmount + (var1.limbSwingAmount - var1.prevLimbSwingAmount) * var9;
+            float var16 = var1.limbSwing - var1.limbSwingAmount * (1.0F - var9);
 
             if (var15 > 1.0F)
             {
@@ -220,10 +215,15 @@ public class RenderPterosaur extends RenderLiving
         GL11.glPopMatrix();
         this.passSpecialRender(var1, var2, var4, var6);
     }
-
-    public void doRenderLiving(EntityLiving var1, double var2, double var4, double var6, float var8, float var9)
+    
+    protected ResourceLocation func_110849_a(EntityAnkylosaurus par1EntityAnkylosaurus)
     {
-        this.renderCow((EntityPterosaur)var1, var2, var4, var6, var8, var9);
+                    return texture_location;
+    }
+
+    public void doRenderLiving(EntityLivingBase var1, double var2, double var4, double var6, float var8, float var9)
+    {
+        this.renderPterosaur((EntityPterosaur)var1, var2, var4, var6, var8, var9);
     }
 
     /**
@@ -257,6 +257,11 @@ public class RenderPterosaur extends RenderLiving
         }
 
         this.LandingModel = ((EntityPterosaur)var1).Landing;
-        this.renderCow((EntityPterosaur)var1, var2, var4, var6, var8, var9);
+        this.renderPterosaur((EntityPterosaur)var1, var2, var4, var6, var8, var9);
+    }
+    
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+        return this.func_110849_a((EntityAnkylosaurus)par1Entity);
     }
 }

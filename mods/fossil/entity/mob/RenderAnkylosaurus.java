@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -20,37 +21,21 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderAnkylosaurus extends RenderLiving
 {
-    private static final Map field_110852_a = Maps.newHashMap();
-    private static final ResourceLocation texture_location = new ResourceLocation("fossil:textures/mob/Ankylosaurus.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Ankylosaurus.png");
 
     public RenderAnkylosaurus(ModelBase par1ModelBase, float par2)
     {
         super(par1ModelBase, par2);
     }
 
-    protected void func_110847_a(EntityAnkylosaurus par1EntityAnkylosaurus, float par2)
+    /**
+     * Applies the scale to the transform matrix
+     * 
+     * Use this to grow the dinonsaur with age.
+     */
+    protected void preRenderScale(EntityAnkylosaurus entitydinosaur, float par2)
     {
-        float f1 = 1.0F;
-        GL11.glScalef(f1, f1, f1);
-        super.preRenderCallback(par1EntityAnkylosaurus, par2);
-    }
-
-    protected void func_110846_a(EntityAnkylosaurus par1EntityAnkylosaurus, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
-        if (par1EntityAnkylosaurus.isInvisible())
-        {
-            this.mainModel.setRotationAngles(par2, par3, par4, par5, par6, par7, par1EntityAnkylosaurus);
-        }
-        else
-        {
-            this.func_110777_b(par1EntityAnkylosaurus);
-            this.mainModel.render(par1EntityAnkylosaurus, par2, par3, par4, par5, par6, par7);
-        }
-    }
-
-    protected ResourceLocation func_110849_a(EntityAnkylosaurus par1EntityAnkylosaurus)
-    {
-                    return texture_location;
+        GL11.glScalef(entitydinosaur.getDinoWidth(), entitydinosaur.getDinoHeight(), entitydinosaur.getDinoLength());
     }
 
     /**
@@ -59,19 +44,21 @@ public class RenderAnkylosaurus extends RenderLiving
      */
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        this.func_110847_a((EntityAnkylosaurus)par1EntityLivingBase, par2);
+        this.preRenderScale((EntityAnkylosaurus)par1EntityLivingBase, par2);
     }
-
+    
+    protected ResourceLocation func_110919_a(EntityAnkylosaurus par1Entity)
+    {
+        return loc;
+    }
+  
     /**
-     * Renders the model in RenderLiving
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-        this.func_110846_a((EntityAnkylosaurus)par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
+        return this.func_110919_a((EntityAnkylosaurus)par1Entity);
     }
+    
 
-    protected ResourceLocation func_110775_a(Entity par1Entity)
-    {
-        return this.func_110849_a((EntityAnkylosaurus)par1Entity);
-    }
 }

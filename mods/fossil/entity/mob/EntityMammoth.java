@@ -88,13 +88,13 @@ public class EntityMammoth extends EntityTameable implements IShearable
         return true;
     }
     
-    protected void func_110147_ax()
+    
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(24.0D);
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(24.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
     }
-
     
     private void setPedia()
     {Fossil.ToPedia = (Object)this;}

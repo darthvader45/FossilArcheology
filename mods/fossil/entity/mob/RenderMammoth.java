@@ -19,7 +19,7 @@ public class RenderMammoth extends RenderLiving
         return loc;
     }
     
-    protected ResourceLocation func_110775_a(Entity par1Entity)
+    protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityMammoth)par1Entity);
     }
@@ -77,8 +77,8 @@ public class RenderMammoth extends RenderLiving
 
             this.preRenderCallback(var1, var9);
             GL11.glTranslatef(0.0F, -24.0F * var14 - 0.0078125F, 0.0F);
-            float var15 = var1.prevLimbYaw + (var1.limbYaw - var1.prevLimbYaw) * var9;
-            float var16 = var1.limbSwing - var1.limbYaw * (1.0F - var9);
+            float var15 = var1.prevLimbSwingAmount + (var1.limbSwingAmount - var1.prevLimbSwingAmount) * var9;
+            float var16 = var1.limbSwing - var1.limbSwingAmount * (1.0F - var9);
 
             if (var1.isChild())
             {

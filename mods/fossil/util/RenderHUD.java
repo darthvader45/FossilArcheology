@@ -22,7 +22,7 @@ public class RenderHUD implements ITickHandler
 {
 	
 	public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
-	private static TextureManager textureManager = Minecraft.getMinecraft().func_110434_K(); //get the TextureManager instance
+	private static TextureManager textureManager = Minecraft.getMinecraft().getTextureManager(); //get the TextureManager instance
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData)
 	{
