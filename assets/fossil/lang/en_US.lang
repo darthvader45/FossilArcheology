@@ -1,3 +1,7 @@
+#English Localization - Updated for Build 6 DEV (1.6.2)
+#Default language file
+
+#Tab Groups
 itemgroup.FArmor=Ancient Armor
 itemgroup.FBlocks=Ancient Blocks
 itemgroup.FCombat=Ancient Weapons
@@ -5,6 +9,8 @@ itemgroup.FFood=Ancient Foods
 itemgroup.FItems=Ancient Items
 itemgroup.FMaterial=Ancient Materials
 itemgroup.FTools=Ancient Tools
+
+#Blocks
 tile.fossil.name=Fossil
 tile.skullBlock.name=Skull
 tile.skullLantern.name=Skull Lantern
@@ -40,6 +46,9 @@ tile.ancientGlass.name=Ancient Glass
 tile.ancientWoodPlate.name=Ancient Wooden Plate
 tile.ancientWoodStairs.name=Ancient Wooden Stairs
 tile.ancientStoneStairs.name=Ancient Stone Stairs
+tile.figurine.name=Wooden Figurine
+
+#Items
 item.bioFossil.name=Bio-Fossil
 item.relicScrap.name=Relic Scrap
 item.stoneTablet.name=Stone Tablet
@@ -156,22 +165,30 @@ item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
 item.archNotebook.name=Archaeology Notebook
+
+#Dinosaur related chat messages
 dnaName.head=DNA of 
 dnaName.tail=
 embryoName.head=Embryo of 
 embryoName.tail=
 meatName.head=Meat of 
 meatName.tail=
-mGCName.head=Magic Conch:
+mGCName.head=Magic Conch: 
 mGCName.tail=
 dEggName.head=Egg of 
 dEggName.tail=
+
+#Achievements
 achieve.pigBossOnEarth.Name=You broke the rules!
 achieve.pigBossOnEarth.Desc=Summoned Anu.
+
+#Order chat messages
 order.head=Order: 
 order.Stay=Stay
 order.Follow=Follow
 order.FreeMove=Free Move
+
+#Dinosaur status chat messages
 status.Hungry.head=
 status.Hungry= is hungry.
 status.Starve.head=
@@ -191,7 +208,9 @@ status.Nervous= too nervous to hunt itself.
 status.GemErrorYoung=This T-Rex is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
 status.GemErrorHealth=This T-Rex has already been tamed.
-status.EssenceFail=Essence of Chicken had no effect.
+status.essencefail=Essence of Chicken had no effect.
+
+#Dinosaur Names
 Dino.Triceratops=Triceratops
 Dino.Velociraptor=Velociraptor
 Dino.TRex=Tyrannosaurus
@@ -206,12 +225,16 @@ Dino.Spinosaurus=Spinosaurus
 Dino.Compsognathus=Compsognathus
 Dino.Ankylosaurus=Ankylosaurus
 Dino.Pachycephalosaurus=Pachycephalosaurus
+
+#Non-dinosaur names
 animal.mammoth=Mammoth
 animal.smilodon=Smilodon
-"animal.pregnant.cow=Pregnant Cow
-"animal.pregnant.pig=Pregnant Pig   
-"animal.pregnant.sheep=Pregnant Sheep  
+animal.pregnant.cow=Pregnant Cow
+animal.pregnant.pig=Pregnant Pig   
+animal.pregnant.sheep=Pregnant Sheep  
 animal.dodo=Dodo
+
+#Pedia text
 pedia.text.owner=Owner:
 pedia.text.chest=* Chests
 pedia.text.caution=!Dangerous!
@@ -235,6 +258,8 @@ pedia.embryo.Chicken=Chicken
 pedia.embryo.Smilodon=Smilodon
 pedia.embryo.Mammoth=Mammoth
 pedia.embryo.Dodo=Dodo
+
+#Anu speaking lines
 anuSpeaker.self=Anu: 
 anuSpeaker.hello=Kneel before me, resistance is futile.
 anuSpeaker.bareHand=Bare hands... Stupid, but brave.
@@ -248,25 +273,33 @@ anuSpeaker.summon=Servants, your Master calls.
 anuSpeaker.trans=Brutes, wake up your wisdom.
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Lets rain some fire!
-dialogue -->
+
+#Friendly pigmen speaking lines
 fpzSpeaker.self=Pig Zombies: 
 fpzSpeaker.selfKill=We can't live without leader!
 fpzSpeaker.lifeFor.head=My life for 
 fpzSpeaker.lifeFor.tail=!
 fpzSpeaker.anuSommon=All hail Anu!!
+
+#Dinosaur egg chat messages
 dinoegg.hatched=A dinosaur egg has hatched!
 dinoegg.noSpace=This egg cannot spawn here.	
 dinoegg.head=An egg of 
 dinoegg.dry= died because it was too dry.	
 dinoegg.cold= died because it was too cold.
+
+#Cultivator chat messages
 cultivate.outBreak=Warning! Cultivating failed!
 
+#Drum chat messages
 drum.trigger=Drum Order: 
 drum.ordering=Ordering 
 drum.tRex1=Ordering T-Rexes to breakfast.
 drum.tRex2=Ordering T-Rexes to lunch.
 drum.tRex3=Ordering T-Rexes to dinner.
-"mob.bones=Bones
-"mob.fpz=Friendly Pig Zombies
-"mob.failuresaurus=Failursaurus
-"boss.Anu=Anu
+
+#Hostile mob names
+mob.bones=Bones
+mob.fpz=Friendly Pig Zombies
+mob.failuresaurus=Failursaurus
+boss.Anu=Anu

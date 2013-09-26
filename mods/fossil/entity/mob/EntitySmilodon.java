@@ -1,16 +1,9 @@
 package mods.fossil.entity.mob;
 
-import java.util.List;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.EntityAIBegSC;
-import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -44,10 +37,13 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySmilodon extends EntityTameable
 {
@@ -610,10 +606,10 @@ public class EntitySmilodon extends EntityTameable
     public void ShowPedia(GuiPedia p0)
     {
     	p0.reset();
-    	p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SMILODON), 97, 23,40,90,245);
+    	p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), 97, 23,40,90,245);
     	if(this.isTamed())
     	{
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);

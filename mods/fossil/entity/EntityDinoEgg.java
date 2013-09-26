@@ -18,6 +18,7 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityCompsognathus;
@@ -34,7 +35,6 @@ import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.guiBlocks.GuiPedia;
 import mods.fossil.items.ItemAncientEgg;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -473,16 +473,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 	
 	            if (this.DinoInside == EnumDinoType.Mosasaurus)
 	            {
-	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_DRY);
+	                var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_DRY);
 	            }
 	            else
 	            {
-	                var6 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_WET);
+	                var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_WET);
 	            }
 	
-	            String var1 = Localizations.getLocalizedString(LocalizationStrings.DINOEGG_HEAD);
+	            String var1 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HEAD);
 	            if(FMLCommonHandler.instance().getSide().isServer())
-	            	Fossil.ShowMessage(var1 + Localizations.getLocalizedString("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
+	            	Fossil.ShowMessage(var1 + StatCollector.translateToLocal("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
         	}
         	this.setDead();
         }
@@ -546,7 +546,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     {
                         this.worldObj.spawnEntityInWorld((Entity)var5);
                         if (var4!=null)
-                            Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DINOEGG_HATCHED), var4);
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), var4);
                         
                     }
                     this.setDead();
@@ -554,7 +554,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 else
                 {
                 	//System.err.println("EGGERROR-NOPLACE");
-                    Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.DINOEGG_NOSPACE), var4);
+                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), var4);
                     this.setBirthTick(this.getBirthTick()-500);
                     //System.err.println("EGGERROR3"+String.valueOf(i));
                 }
@@ -673,28 +673,28 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }*/
     	p0.reset();
     	p0.PrintItemXY(it0, 120, 7);
-    	p0.PrintStringLR(/*Fossil.GetLangTextByKey("PediaText.egg.Head")+ " "+*/Localizations.getLocalizedString("Dino."+this.DinoInside.toString()), false, 1,40,90,245);
+    	p0.PrintStringLR(/*Fossil.GetLangTextByKey("PediaText.egg.Head")+ " "+*/StatCollector.translateToLocal("Dino."+this.DinoInside.toString()), false, 1,40,90,245);
     	int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
     	String stat;
     	if (this.DinoInside == EnumDinoType.Mosasaurus)
         {
             if (this.getBirthTick() >= 0)
-                stat = Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WET);
+                stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WET);
             else
-                stat = Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_DRY);
+                stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DRY);
         }
         else 
         {
         	if (this.getBirthTick() >= 0)
-	            stat = Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WARM);
+	            stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
 	        else
-	            stat = Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_COLD);
+	            stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_COLD);
         }
-        p0.PrintStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_STATUS), false, 2,40,90,245);
+        p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_STATUS), false, 2,40,90,245);
         p0.PrintStringLR(stat, false, 3);
         if (this.getBirthTick() >= 0)
         {
-        	p0.PrintStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4,40,90,245);
+        	p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4,40,90,245);
         	p0.PrintStringLR(String.valueOf(quot) + "/100", false, 5);
         }
         /*String var2 = "";

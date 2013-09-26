@@ -1,69 +1,50 @@
 package mods.fossil.entity.mob;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.List;
+import java.util.Random;
+
+import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.fossilAI.DinoAIControlledByPlayer;
+import mods.fossil.fossilAI.DinoAIGrowup;
+import mods.fossil.fossilAI.DinoAIStarvation;
+import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
+import mods.fossil.fossilEnums.EnumSituation;
+import mods.fossil.guiBlocks.TileEntityFeeder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.potion.Potion;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+
 import com.google.common.io.ByteArrayDataInput;
-
-
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.util.List;
-import java.util.Random;
-
-import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
-import mods.fossil.entity.EntityDinoEgg;
-import mods.fossil.fossilAI.DinoAIControlledByPlayer;
-import mods.fossil.fossilAI.DinoAIEat;
-import mods.fossil.fossilAI.DinoAIGrowup;
-import mods.fossil.fossilAI.DinoAIStarvation;
-import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.fossilEnums.EnumSituation;
-import mods.fossil.guiBlocks.GuiPedia;
-import mods.fossil.guiBlocks.TileEntityFeeder;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathFinder;
-import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.potion.Potion;
-import net.minecraft.src.ModLoader;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 
 public abstract class EntityDinosaur extends EntityTameable implements IEntityAdditionalSpawnData
 {
@@ -116,6 +97,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected DinoAIControlledByPlayer ridingHandler;
     public EnumOrderType OrderStatus;
     
+    private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
+    private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
+    private static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
+    
 	// EntityDinosaur Constructor
     public EntityDinosaur(World var1,EnumDinoType T0)
     {
@@ -160,7 +145,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	setSize(this.getDinoWidth(),this.getDinoHeight());
     	setPosition(this.posX, this.posY, this.posZ);
-    	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(getSpeed());
+    	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getHealth() + this.getDinoAge()*this.SelfType.HealthInc);
+ //   	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.);
     }
 	
     public void InitSize()//Necessary to overload existing
@@ -224,32 +210,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
 	return this.getDinoAge() >= this.SelfType.TeenAge;
 	}
-	
-    /**
-     * Returns the MaxHealth of the Dino depending on the age
-     */
-    public float getDinoMaxHealth()
-    {
-    	if( this.SelfType != null )
-    	{
-    		return this.SelfType.Health0 + this.getDinoAge()*this.SelfType.HealthInc;
-    	}
-    	else
-    	{
-    		return 11;
-    	}
-    }
-    	
-//    @Override
-    protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(getDinoMaxHealth());
-    }
-
-
-    	
-
         	
     /**
      * Returns the MaxHunger of the Dino
@@ -262,10 +222,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Returns the Speed of the Dino depending on the age
      */
+    /*
     public float getSpeed()
     {
     	return this.SelfType.Speed0+this.getDinoAge()*this.SelfType.SpeedInc;
     }
+    */
 
     public DinoAIControlledByPlayer getRidingHandler()
     {
@@ -459,32 +421,38 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
         return 360;
     }
-
+    
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-//    	String fullName = Localizations.getLocalizedString("Dino."+this.SelfType.toString());
+//    	String fullName = StatCollector.translateToLocal("Dino."+this.SelfType.toString());
 //    	String truncatedName = fullName.substring(0, 12);
     			
     	p0.reset();
-    	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
+//    	p0.PrintItemXY(this.SelfType.DNAItem, 120, 7);
+    	p0.PrintPictXY(new ResourceLocation("fossil:textures/items/"+ this.SelfType.toString() +"_DNA.png"), 120, 7, 16, 16);
 //    	p0.PrintStringXY(truncatedName, 97, 23,40,90,245);
-    	p0.PrintStringXY(Localizations.getLocalizedString("Dino."+this.SelfType.toString()), 97, 23,40,90,245);
-    	p0.PrintPictXY(new ResourceLocation("fossil:textures/gui/PediaClock.png"), 97, 34,8,8);
-    	p0.PrintPictXY(new ResourceLocation("fossil:textures/gui/PediaHeart.png"), 97, 46,9,9);
-    	p0.PrintPictXY(new ResourceLocation("fossil:textures/gui/PediaFood.png"), 97, 58,9,9);
+    	
+    	if (this.hasCustomNameTag())
+    	p0.PrintStringXY(this.getCustomNameTag(), 97, 24,40,90,245);
+    	p0.PrintStringXY(StatCollector.translateToLocal("Dino."+this.SelfType.toString()), 97, 34,0,0,0);
+    	
+    	p0.PrintPictXY(pediaclock, 97, 46,8,8);
+    	p0.PrintPictXY(pediaheart, 97, 58,9,9);
+    	p0.PrintPictXY(pediafood, 97, 70,9,9);
     	if(this.getDinoAge()==1)
-    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_WARM), 109, 35);
+    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM), 109, 46);
     	else
-    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ Localizations.getLocalizedString(LocalizationStrings.PEDIA_EGG_DAYS), 109, 35);
-    	p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 109, 47); //display the health
-    	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 109, 59);
+    		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), 109, 46);
+    	p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 109, 58); //display the health
+    	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 109, 70);
     	
     	if(this.SelfType.isRideable() && this.isAdult())
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
     	if(this.SelfType.isTameable() && this.isTamed())
     	{
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+    		
+    		p0.AddStringLR( StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);
@@ -589,13 +557,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         return var1.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
     }
     
+    
     /**
      * the movespeed used for the new AI system
      */
+    /*
     public float getAIMoveSpeed()
     {
         return this.getSpeed();
     }
+    */
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {
     	Vec3 pos = null;
@@ -711,11 +682,11 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	//EntityPlayer P = (EntityPlayer)this.riddenByEntity;
     	if(this.RiderForward>0)
-    		Speed += (this.getSpeed()*2.0F - Speed) * 0.1F*this.RiderForward;
+    		Speed += (2.0F - Speed) * 0.1F*this.RiderForward;
     	else
     		if(Speed>0)
     		{
-    			Speed += (this.getSpeed()*2.0F - Speed) * 0.4F*this.RiderForward;//Break faster
+    			Speed += (2.0F - Speed) * 0.4F*this.RiderForward;//Break faster
     			if(Speed<0)Speed=0;
     		}
     		//else//No more Backward movement when ridden!
@@ -887,7 +858,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void SendOrderMessage(EnumOrderType var1)
     {
 
-        String S = Localizations.getLocalizedString(LocalizationStrings.ORDER_HEAD)+ Localizations.getLocalizedString("order." + var1.toString());
+        String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD)+ StatCollector.translateToLocal("order." + var1.toString());
         Fossil.ShowMessage(S, (EntityPlayer)this.getOwner());
     }
 
@@ -895,9 +866,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
 		if(this.getOwner()!=null && this.getDistanceToEntity(this.getOwner())<50.0F);
 		{
-			String Status1=Localizations.getLocalizedString("status." + var1.toString()+".head");
+			String Status1=StatCollector.translateToLocal("status." + var1.toString()+".head");
 			String Dino=this.SelfType.toString();
-			String Status2=Localizations.getLocalizedString("status." + var1.toString());
+			String Status2=StatCollector.translateToLocal("status." + var1.toString());
 			Fossil.ShowMessage(Status1+Dino+Status2,(EntityPlayer)this.getOwner());
 		}
     }
@@ -1343,23 +1314,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         	}
         	//System.out.println("Client has set Rider Input data!");
     	}
-        else
-        {
-        	/*
-        	if(this.health!=this.prevHealth)
-        	{
-        		this.setHealthData();
-        		this.prevHealth=this.health;
-        	}*/
-        	if(this.getHealth()!=this.prevHealth)
-        	{
-        		this.getHealth();
-        		this.prevHealth=getHealth();
-        	}
-        	//if(this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX)!=this.health)
-        	//	this.setHealthData();
-        	//System.out.print("Server:");
-        }
+
         //System.out.println("Data:"+String.valueOf(this.dataWatcher.getWatchableObjectInt(HEALTH_INDEX)));
         this.HandleBreed();
         super.onLivingUpdate();
@@ -1396,7 +1351,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             	        return true;
             	     }
                     if (!this.worldObj.isRemote)
-                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
             	     return false;
             	}
             	if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))

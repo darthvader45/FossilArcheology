@@ -1,10 +1,10 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityFailuresaurus extends EntityZombie
 {

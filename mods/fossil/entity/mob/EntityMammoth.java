@@ -2,14 +2,9 @@ package mods.fossil.entity.mob;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
-import mods.fossil.guiBlocks.GuiPedia;
+import mods.fossil.client.gui.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -37,9 +32,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.IShearable;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityMammoth extends EntityTameable implements IShearable
 {
@@ -248,10 +247,10 @@ public class EntityMammoth extends EntityTameable implements IShearable
     public void ShowPedia(GuiPedia p0)
     {
     	p0.reset();
-    	p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23,40,90,245);
+    	p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23,40,90,245);
     	if(this.isTamed())
     	{
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);

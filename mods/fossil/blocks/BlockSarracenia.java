@@ -2,12 +2,15 @@ package mods.fossil.blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import mods.fossil.Fossil;
 import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BlockSarracenia extends BlockFlower
@@ -46,6 +49,20 @@ public class BlockSarracenia extends BlockFlower
     public void registerIcons(IconRegister par1IconRegister)
     {
     	this.blockIcon = par1IconRegister.registerIcon("fossil:Sarracenia");
+    }
+    
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
+    {
+
+	ItemStack itemstack = player.inventory.getCurrentItem();
+	
+	if (FMLCommonHandler.instance().getSide().isClient() && itemstack.itemID == Fossil.archNotebook.itemID)
+    {
+	    player.openGui(Fossil.instance, 6, world, x, y, z);
+        return true;
+    }
+
+    return true;
     }
 
 }

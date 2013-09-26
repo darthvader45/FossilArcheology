@@ -19,7 +19,6 @@ import mods.fossil.blocks.BlockAncientWoodPlate;
 import mods.fossil.blocks.BlockAncientWoodSlab;
 import mods.fossil.blocks.BlockAncientWoodStairs;
 import mods.fossil.blocks.BlockFern;
-import mods.fossil.blocks.BlockFigurine;
 import mods.fossil.blocks.BlockFossil;
 import mods.fossil.blocks.BlockFossilSkull;
 import mods.fossil.blocks.BlockIcedStone;
@@ -78,11 +77,12 @@ import mods.fossil.guiBlocks.BlockDrum;
 import mods.fossil.guiBlocks.BlockFeeder;
 import mods.fossil.guiBlocks.BlockTimeMachine;
 import mods.fossil.guiBlocks.BlockWorktable;
-import mods.fossil.guiBlocks.RenderFeeder;
 import mods.fossil.guiBlocks.TileEntityAnalyzer;
 import mods.fossil.guiBlocks.TileEntityCultivate;
 import mods.fossil.guiBlocks.TileEntityDrum;
 import mods.fossil.guiBlocks.TileEntityFeeder;
+import mods.fossil.guiBlocks.TileEntityFigurine;
+import mods.fossil.guiBlocks.TileEntityFigurineEntity;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.items.*;
@@ -95,9 +95,11 @@ import mods.fossil.tabs.TabFItems;
 import mods.fossil.tabs.TabFMaterial;
 import mods.fossil.tabs.TabFTools;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSign;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.creativetab.CreativeTabs;
@@ -111,7 +113,9 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.Achievement;
+import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
@@ -231,7 +235,7 @@ public class Fossil implements IPacketHandler
     public static BlockHalfSlab ancientStoneSingleSlab;
     public static BlockHalfSlab ancientStoneDoubleSlab;
     public static Block marble;
-    public static Block figurine;
+    public static Block blockfigurine;
 	
     //Items
     public static Item biofossil;
@@ -395,7 +399,7 @@ public class Fossil implements IPacketHandler
     public static int ancientStoneSingleSlabID;
     public static int ancientStoneDoubleSlabID;
     public static int marbleID;
-    public static int figurineID;
+    public static int blockfigurineID;
 	
     //Items
     public static int biofossilID;
@@ -588,7 +592,7 @@ public class Fossil implements IPacketHandler
         ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME, 3040).getInt(3040);
         ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt(3041);
         marbleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt(3042);
-        figurineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
+        blockfigurineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
 
         
 		//Items
@@ -639,6 +643,7 @@ public class Fossil implements IPacketHandler
         cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt(10044);
         fossilRecordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt(10045);
         archNotebookID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt(10046);
+        
 
         //10045
         //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
@@ -723,7 +728,8 @@ public class Fossil implements IPacketHandler
         //DINOSAUR IDS START AT 10125, GIVE PLENTY OF BUFFER ROOM
 		for(int i=0;i<EnumDinoType.values().length;i++)
         	RAWIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "raw"+EnumDinoType.values()[i].name(), 10125+i).getInt(10125+i);
-		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10135).getInt(10135);
+		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt(10124);
+		
 		
 		
 		//Config options
@@ -797,7 +803,7 @@ public class Fossil implements IPacketHandler
         ancientStoneDoubleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         marble  = new BlockMarble(marbleID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.MARBLE_NAME);
-        figurine  = new BlockFigurine(figurineID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
+        blockfigurine = new TileEntityFigurine(blockfigurineID, Material.wood).setHardness(0.3F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFBlocks);
         
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -954,7 +960,7 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
-        GameRegistry.registerBlock(figurine, LocalizationStrings.FIGURINE_NAME);
+        GameRegistry.registerBlock(blockfigurine, LocalizationStrings.FIGURINE_NAME);
 
         
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palaeoraphe Slab");
@@ -1068,9 +1074,9 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
-	    EntityRegistry.registerModEntity(EntityDodo.class,           "Dodo",              25, this, 250, 5, true);
+	    EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
 	    EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class,           "CultivatedDodoEgg",              27, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
 
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(),EnumDinoType.values()[i].name(),200+i, this, 250, 5, true);
@@ -1078,19 +1084,19 @@ public class Fossil implements IPacketHandler
 		EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river,BiomeGenBase.ocean});
 		
 
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FAILURESAURUS));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", Localizations.getLocalizedString(LocalizationStrings.MOB_BONES));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.FriendlyPigZombie.name", Localizations.getLocalizedString(LocalizationStrings.MOB_FPZ));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PigBoss.name", Localizations.getLocalizedString(LocalizationStrings.BOSS_ANU));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_COW));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_PREGNANT_PIG));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_SMILODON));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_MAMMOTH));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FAILURESAURUS));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", StatCollector.translateToLocal(LocalizationStrings.MOB_BONES));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.FriendlyPigZombie.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FPZ));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PigBoss.name", StatCollector.translateToLocal(LocalizationStrings.BOSS_ANU));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_COW));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_PIG));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO));
         
         for(int i=0;i<EnumDinoType.values().length;i++)
-        	LanguageRegistry.instance().addStringLocalization("entity.fossil."+EnumDinoType.values()[i].name()+".name", Localizations.getLocalizedString("Dino."+EnumDinoType.values()[i].name()));
+        	LanguageRegistry.instance().addStringLocalization("entity.fossil."+EnumDinoType.values()[i].name()+".name", StatCollector.translateToLocal("Dino."+EnumDinoType.values()[i].name()));
         
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();
@@ -1119,6 +1125,7 @@ public class Fossil implements IPacketHandler
 		GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
 		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
+		GameRegistry.registerTileEntity(TileEntityFigurineEntity.class, LocalizationStrings.FIGURINE_NAME);
 		
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
 		TickRegistry.registerTickHandler(new RenderHUD(), Side.SERVER);

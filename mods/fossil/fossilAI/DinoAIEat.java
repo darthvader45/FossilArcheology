@@ -196,7 +196,7 @@ public class DinoAIEat extends EntityAIBase
                 this.destX=this.targetMob.posX;
                 this.destY=this.targetMob.posY;
                 this.destZ=this.targetMob.posZ;
-                this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getSpeed());
+                this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getAIMoveSpeed());
             }
             else
             {
@@ -243,7 +243,7 @@ public class DinoAIEat extends EntityAIBase
             this.typeofTarget=NO_TARGET;
         }
         else
-            this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getSpeed());
+            this.Dino.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, this.Dino.getAIMoveSpeed());
     }
 
     private Vec3 getNearestItem(int SEARCH_RANGE)

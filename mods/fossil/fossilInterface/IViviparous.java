@@ -1,7 +1,7 @@
 package mods.fossil.fossilInterface;
 
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumAnimalType;
-import mods.fossil.guiBlocks.GuiPedia;
 
 public interface IViviparous
 {

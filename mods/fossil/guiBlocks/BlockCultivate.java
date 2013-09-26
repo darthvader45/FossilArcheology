@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -224,7 +225,7 @@ public class BlockCultivate extends BlockContainer
     public void onBlockRemovalLost(World var1, int var2, int var3, int var4, boolean var5)
     {
         keepFurnaceInventory = false;
-        String var6 = Localizations.getLocalizedString(LocalizationStrings.CULTIVATE_OUTBREAK);
+        String var6 = StatCollector.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
 
         for (int var7 = 0; var7 < var1.playerEntities.size(); ++var7)
         {

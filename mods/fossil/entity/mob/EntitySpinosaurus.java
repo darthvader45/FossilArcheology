@@ -1,31 +1,17 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
-import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
-import mods.fossil.fossilAI.DinoAIFollowOwner;
-import mods.fossil.fossilAI.DinoAIGrowup;
-import mods.fossil.fossilAI.DinoAIStarvation;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
-import mods.fossil.fossilAI.WaterDinoAISwimming;
-import mods.fossil.fossilEnums.EnumDinoFoodItem;
-import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.fossilInterface.IWaterDino;
-import mods.fossil.guiBlocks.GuiPedia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
@@ -33,22 +19,15 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -423,14 +402,14 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                     {
                         if (!this.worldObj.isRemote)
                         {
-                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
                         }
                         }
                         if (!this.isAdult())
                         {
                             if (!this.worldObj.isRemote)
                             {
-                        Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
                             }
                         }
                         return true;
@@ -451,7 +430,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
             {
                 if (!this.worldObj.isRemote)
                 {
-                Fossil.ShowMessage(Localizations.getLocalizedString(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
+                Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                 return true;
                 }
             }
@@ -591,9 +570,9 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     {
     	super.ShowPedia(p0);
     	if(this.isWeak())
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
     	if (!this.isWeak() && !this.isTamed()  && this.isAdult())
-    		p0.AddStringLR(Localizations.getLocalizedString(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
     		
     }
 

@@ -251,7 +251,7 @@ public enum EnumDinoType
         Ankylosaurus.setItems(       Item.stick);//,         Fossil.rawAnkylosaurus,  Fossil.dnaAnkylosaurus,  Fossil.eggAnkylosaurus);
         Ankylosaurus.setDimensions(0.5F, 0.25F, 0.5F, 0.25F, 0.5F, 0.25F);
         Ankylosaurus.setAges(-1, -1, 13);
-        Ankylosaurus.setProperties(21, 1, 4, 3, 0.17F, 0.016F, 500);
+        Ankylosaurus.setProperties(21, 3, 4, 3, 0.17F, 0.016F, 500);
         Ankylosaurus.setExperience(0.5F, 0.2F);
         
         Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Wheat);

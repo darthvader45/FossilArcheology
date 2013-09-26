@@ -1,18 +1,20 @@
 package mods.fossil.client;
 
+import mods.fossil.client.gui.GuiAnalyzer;
+import mods.fossil.client.gui.GuiCultivate;
+import mods.fossil.client.gui.GuiFeeder;
+import mods.fossil.client.gui.GuiNotebook;
+import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.client.gui.GuiTimeMachine;
+import mods.fossil.client.gui.GuiWorktable;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.guiBlocks.ContainerAnalyzer;
 import mods.fossil.guiBlocks.ContainerCultivate;
 import mods.fossil.guiBlocks.ContainerFeeder;
+import mods.fossil.guiBlocks.ContainerNotebook;
 import mods.fossil.guiBlocks.ContainerPedia;
 import mods.fossil.guiBlocks.ContainerTimeMachine;
 import mods.fossil.guiBlocks.ContainerWorktable;
-import mods.fossil.guiBlocks.GuiAnalyzer;
-import mods.fossil.guiBlocks.GuiCultivate;
-import mods.fossil.guiBlocks.GuiFeeder;
-import mods.fossil.guiBlocks.GuiPedia;
-import mods.fossil.guiBlocks.GuiTimeMachine;
-import mods.fossil.guiBlocks.GuiWorktable;
 import mods.fossil.guiBlocks.TileEntityAnalyzer;
 import mods.fossil.guiBlocks.TileEntityCultivate;
 import mods.fossil.guiBlocks.TileEntityFeeder;
@@ -41,6 +43,7 @@ public class FossilGuiHandler implements IGuiHandler
 		case 3: return new ContainerWorktable(player.inventory, (TileEntityWorktable) tile_entity);
 		case 4: return new ContainerPedia();
 		case 5: return new ContainerTimeMachine(player.inventory, (TileEntityTimeMachine) tile_entity);
+		case 6: return new ContainerNotebook();
 		
 		}
 		return null;
@@ -59,8 +62,9 @@ public class FossilGuiHandler implements IGuiHandler
 		case 1: return new GuiCultivate(player.inventory, (TileEntityCultivate) tile_entity);
 		case 2: return new GuiFeeder(player.inventory, (TileEntityFeeder) tile_entity);
 		case 3: return new GuiWorktable(player.inventory, (TileEntityWorktable) tile_entity);
-		case 4: return new GuiPedia(/*player.inventory/*, EntityDinosaur.pediaingDino, world*/);
+		case 4: return new GuiPedia();
 		case 5: return new GuiTimeMachine(player.inventory, (TileEntityTimeMachine) tile_entity);
+		case 6: return new GuiNotebook();
 		
 		}
 

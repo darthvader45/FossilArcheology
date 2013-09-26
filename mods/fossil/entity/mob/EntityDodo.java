@@ -1,12 +1,8 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
-import mods.fossil.guiBlocks.GuiPedia;
+import mods.fossil.client.gui.GuiPedia;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
@@ -20,9 +16,13 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityDodo extends EntityAnimal
 {
@@ -235,11 +235,14 @@ public class EntityDodo extends EntityAnimal
         return this;
     }
 
+    private static final ResourceLocation dodoeggicon = new ResourceLocation("fossil:textures/items/Egg_Cultivated_Dodo.png");
+    
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintStringXY(Localizations.getLocalizedString(LocalizationStrings.ANIMAL_DODO), 97, 23,40,90,245);
-        p0.PrintItemXY(Fossil.dodoEgg, 120, 7);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO), 97, 23,40,90,245);
+//        p0.PrintItemXY(Fossil.dodoEgg, 120, 7);
+        p0.PrintPictXY(dodoeggicon, 120, 7, 4, 4);
     }
 }

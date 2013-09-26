@@ -1,6 +1,5 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.FPZAIFollowOwner;
 import mods.fossil.fossilAI.FPZAIOwnerHurtByTarget;
@@ -21,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class EntityFriendlyPigZombie extends EntityMob
 {

@@ -1,44 +1,24 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.Random;
-
 import mods.fossil.Fossil;
-import mods.fossil.client.DinoSoundHandler;
-import mods.fossil.client.FossilOptions;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
-import mods.fossil.fossilAI.DinoAIGrowup;
-import mods.fossil.fossilAI.DinoAIStarvation;
 import mods.fossil.fossilAI.DinoAIWander;
-import mods.fossil.fossilEnums.EnumDinoFoodItem;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.fossilEnums.EnumSituation;
-import mods.fossil.guiBlocks.GuiPedia;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -48,60 +28,36 @@ import net.minecraft.world.World;
 public class EntityBrachiosaurus extends EntityDinosaur
 {
     public boolean isTamed = false;
-    //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
     
-    //public String OwnerName;
     final float PUSHDOWN_HARDNESS = 5.0F;
-    //protected final int AGE_LIMIT = 36;
 
     public EntityBrachiosaurus(World var1)
     {
         super(var1,EnumDinoType.Brachiosaurus);
-        //this.setSize(1.5F, 1.5F);
-        //this.health = 8;
-        //this.experienceValue=5;
-        /*this.Width0=1.5F;
-        this.WidthInc=0.2F;
-        this.Length0=2.0F;
-        this.LengthInc=0.52F;
-        this.Height0=1.2F;
-        this.HeightInc=0.16F;
         
-        this.HitboxXfactor=10.0F;
-        this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;
-        
-        //this.BaseattackStrength=;
-        //this.AttackStrengthIncrease=;
-        //this.BreedingTime=;
-        //this.BaseSpeed=;
-        //this.SpeedIncrease=;
-        this.MaxAge=36;
-        //this.BaseHealth=;
-        this.HealthIncrease=5;
-        this.AdultAge=12;
-        //this.AgingTicks=;
-        this.MaxHunger=500;
-        //this.Hungrylevel=;*/
         this.updateSize();
         
-        //this.setHunger(this.getHungerLimit());
         this.getNavigator().setAvoidsWater(true);
-        //this.tasks.addTask(0, new DinoAIGrowup(this, 36));
-        //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
-        //this.tasks.addTask(6, new DinoAIEatLeavesWithHeight(this, 24));//, this.HuntLimit));
-        //this.tasks.addTask(6, new DinoAIUseFeederWithHeight(this, 24));//, this.HuntLimit));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
 
+    
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+    }
+    
+    
     @Override
     /**
      * Returns the sound this mob makes while it's alive.
@@ -126,10 +82,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         return "fossil:brachiosaurus_death";
     } 
-    /*public int getHungerLimit()
-    {
-        return 500;
-    }*/
+
 
     /**
      * Returns true if the Entity AI code should be run
@@ -142,21 +95,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {
     	Vec3 pos = null;
-    	/*for (int dx = -1; dx != -(SEARCH_RANGE+1); dx+=(dx<0)?(dx*-2):(-(2*dx+1)))//Creates the following order: -1,1,-2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-        {
-    		System.out.println(String.valueOf(dx));
-            for (int dy = -5; dy < 4; dy++)
-            {
-                for (int dz = -1; dz != -(SEARCH_RANGE+1); dz+=(dz<0)?(dz*-2):(-(2*dz+1)))//Creates the following order: -1,1,-2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-                {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+dx), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+dz))))
-                    {
-                    	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+dx),MathHelper.floor_double(this.posY+dy),MathHelper.floor_double(this.posZ+dz));
-                    	return pos;
-                    }
-                }
-            }
-        }*/
     	
     	for(int r=1;r<=SEARCH_RANGE;r++)
     	{
@@ -197,31 +135,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
     }
     public TileEntityFeeder GetNearestFeeder(int SEARCH_RANGE)
     {
-    	/*for (int dx = -2; dx != -(SEARCH_RANGE+1); dx+=(dx<0)?(dx*-2):(-(2*dx+1)))//Creates the following order: -2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-        {
-            for (int dy = -5; dy < 4; dy++)
-            {
-                for (int dz = -2; dz != -(SEARCH_RANGE+1); dz+=(dz<0)?(dz*-2):(-(2*dz+1)))//Creates the following order: -2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-                {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight())
-                    {
-                    	TileEntity fed = this.worldObj.getBlockTileEntity(MathHelper.floor_double(this.posX+dx), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+dz));
-
-                        if (fed != null && fed instanceof TileEntityFeeder && ((TileEntityFeeder)fed).isFilled())
-                        {
-                        	//pos = Vec3.createVectorHelper(this.posX+dx,this.posY+dy,this.posY+dz);
-                        	return (TileEntityFeeder)fed;//pos;
-                        }
-                    }
-                }
-            }
-        }
-    	return null;*/
-    	//World var1 = this.entityVar.worldObj;
-        //double var3 = this.entityVar.posX;
-        //double var5 = this.entityVar.posY;
-        //double var7 = this.entityVar.posZ;
-        //boolean var9 = true;
         double var10 = 0.0D;
         double var12 = (double)(SEARCH_RANGE * SEARCH_RANGE * 2);
 
@@ -260,30 +173,12 @@ public class EntityBrachiosaurus extends EntityDinosaur
         return super.interact(var1);
     }
 
+    
     public EntityBrachiosaurus spawnBabyAnimal(EntityAnimal var1)
     {
         return null;
     }
 
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    /*public void writeEntityToNBT(NBTTagCompound var1)
-    {
-        super.writeEntityToNBT(var1);
-        //var1.setByte("OrderStatus", (byte)Fossil.EnumToInt(this.OrderStatus));//already done
-    }*/
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    /*public void readEntityFromNBT(NBTTagCompound var1)
-    {
-        super.readEntityFromNBT(var1);
-        //this.InitSize();
-        //this.OrderStatus = EnumOrderType.values()[var1.getByte("OrderStatus")];//already done
-    }*/
     /**
      * Called to update the entity's position/logic.
      */
@@ -324,16 +219,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         return this.getEyeHeight() / 2.0F;
     }
-
-    /*/** Should'nt bee needed as the speed itself is applied to tha age already
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     *
-    public float getSpeedModifier()
-    {
-        float var1 = 1.0F + (float)Math.floor((double)((float)this.getDinoAge() / 5.0F));
-        return var1;
-    }*/
 
     public int BlockInteractive()
     {
@@ -446,47 +331,4 @@ public class EntityBrachiosaurus extends EntityDinosaur
             }
         }
     }
-
-    /*private void HandleRiding()
-    {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerSP && this.onGround)
-        {
-            if (((EntityPlayerSP)this.riddenByEntity).movementInput.jump)
-            {
-                this.jump();
-                ((EntityPlayerSP)this.riddenByEntity).movementInput.jump = false;
-            }
-
-            for (this.rotationYaw -= ((EntityPlayerSP)this.riddenByEntity).movementInput.moveStrafe * 5.0F; this.rotationYaw < -180.0F; this.rotationYaw += 360.0F)
-            {
-                ;
-            }
-
-            while (this.rotationYaw >= 180.0F)
-            {
-                this.rotationYaw -= 360.0F;
-            }
-            this.moveForward = ((EntityPlayerSP)this.riddenByEntity).movementInput.moveForward * this.moveSpeed;
-        }
-    }*/
-
-    /*public void updateSize()
-    {
-        this.setSize((float)(1.5D + 0.15D * (double)((float)this.getDinoAge())), (float)(1.5D + 0.15D * (double)((float)this.getDinoAge())));
-    }
-
-    public float getGLX()
-    {
-        return (float)(1.5D + 0.3D * (double)((float)this.getDinoAge()));
-    }
-
-    public float getGLY()
-    {
-        return (float)(1.5D + 0.3D * (double)((float)this.getDinoAge()));
-    }*/
-
-    /*public EntityAgeable func_90011_a(EntityAgeable var1)
-    {
-        return null;
-    }*/
 }
