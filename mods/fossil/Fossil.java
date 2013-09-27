@@ -236,6 +236,13 @@ public class Fossil implements IPacketHandler
     public static BlockHalfSlab ancientStoneDoubleSlab;
     public static Block marble;
     public static Block blockfigurine;
+    
+	private static final String[] blockfigurinenames = { 
+		"Pristine Steve Figurine", "Pristine Skeleton Figurine", "Pristine Zombie Figurine", "Pristine Enderman Figurine",
+		"Pristine Zombie Pigman Figurine", "Damaged Steve Figurine", "Damaged Skeleton Figurine", "Damaged Zombie Figurine",
+		"Damaged Enderman Figurine", "Damaged Zombie Pigman Figurine", "Broken Steve Figurine", "Broken Skeleton Figurine",
+		"Broken Zombie Figurine", "Broken Enderman Figurine", "Broken Zombie Pigman Figurine", "Mysterious Figurine"
+	};
 	
     //Items
     public static Item biofossil;
@@ -960,7 +967,14 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
-        GameRegistry.registerBlock(blockfigurine, LocalizationStrings.FIGURINE_NAME);
+//        GameRegistry.registerBlock(blockfigurine, LocalizationStrings.FIGURINE_NAME);
+        GameRegistry.registerBlock(blockfigurine, ItemFigurine.class, LocalizationStrings.FIGURINE_NAME);
+        
+		for (int ix = 0; ix < 16; ix++) {
+			ItemStack blockfigurineStack = new ItemStack(blockfigurine, 1, ix);
+			LanguageRegistry.addName(blockfigurineStack, blockfigurinenames[blockfigurineStack.getItemDamage()]);
+		}
+        
 
         
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palaeoraphe Slab");

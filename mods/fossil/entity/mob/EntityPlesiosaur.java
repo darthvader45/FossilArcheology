@@ -765,15 +765,15 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             }
         }*/
     	if(this.RiderForward>0)
-    		Speed += (this.getSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.1F*this.RiderForward;
+    		Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.1F*this.RiderForward;
     	else
     		if(Speed>0)
     		{
-    			Speed += (this.getSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.4F*this.RiderForward;//Break faster
+    			Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.4F*this.RiderForward;//Break faster
     			if(Speed<0)Speed=0;
     		}
     		else
-    			Speed += (this.getSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.06F*this.RiderForward;
+    			Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.06F*this.RiderForward;
     	this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw - (this.isInWater()?this.RiderStrafe*2.0F:this.RiderStrafe*5.0F));
     	if(this.isInWater())
     	{

@@ -52,6 +52,10 @@ public class RenderFigurine extends TileEntitySpecialRenderer {
             GL11.glPushMatrix();
             // this line rotates renderer
             GL11.glRotatef(dir * (90), 0F, 1F, 0F);
+            // scale the model
+            GL11.glScalef( 0.5F, 0.5F, 0.5F);
+            // move it down because of scaling
+            GL11.glTranslatef(0F, 1.5F, 0F);
             // gets the texture for model
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(resourceloc);
             // renders the model

@@ -478,7 +478,7 @@ public class EntityPterosaur extends EntityDinosaur
                 if (this.Landing)
                 {
                     this.AirPitch = 10.0F;
-                    this.AirSpeed = 1.5F * this.getSpeed();
+                    this.AirSpeed = 1.5F * this.getAIMoveSpeed();
 
                     if (!this.isCollidedVertically)
                         this.motionY = -0.2D;
@@ -519,7 +519,7 @@ public class EntityPterosaur extends EntityDinosaur
                     		this.AirPitch=0.0F;
                     }
                     
-                    if(this.AirPitch<-25.0F || (this.AirSpeed>this.getSpeed()*2.5/MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch<0F) || this.wingpause>0)
+                    if(this.AirPitch<-25.0F || (this.AirSpeed>this.getAIMoveSpeed()*2.5/MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch<0F) || this.wingpause>0)
                     {
                     	if(this.wingpause>0)
                     		this.wingpause--;
@@ -562,11 +562,11 @@ public class EntityPterosaur extends EntityDinosaur
                     
                     //this.AirSpeed=this.getSpeed()*2.5F*MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F);
                     
-                    if(this.AirSpeed>this.getSpeed()*2.5*MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch>=0F)//slow down when rising
+                    if(this.AirSpeed>this.getAIMoveSpeed()*2.5*MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch>=0F)//slow down when rising
                 		this.AirSpeed*=0.99F;
-                    if(this.AirSpeed>this.getSpeed()*2.5/MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch<0F)//slow down when too fast
+                    if(this.AirSpeed>this.getAIMoveSpeed()*2.5/MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F) && this.AirPitch<0F)//slow down when too fast
                 		this.AirSpeed*=0.995F;
-                    if(this.AirSpeed<this.getSpeed()*2.5*MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F))
+                    if(this.AirSpeed<this.getAIMoveSpeed()*2.5*MathHelper.cos(this.AirPitch * (float)Math.PI / 180.0F))
                 		this.AirSpeed*=1.01F;
                 	if(this.AirPitch<0F)
                 		this.AirSpeed-=MathHelper.sin(this.AirPitch * (float)Math.PI / 180.0F)*0.005F;//get faster
@@ -643,11 +643,11 @@ public class EntityPterosaur extends EntityDinosaur
 
                 this.setMoveForward(this.RiderForward * this.moveSpeed);*/
             	if(this.RiderForward>0)
-            		Speed += (this.getSpeed()*2.0F - Speed) * 0.3F*this.RiderForward;
+            		Speed += (this.getAIMoveSpeed()*2.0F - Speed) * 0.3F*this.RiderForward;
             	else
             		if(Speed>0)
             		{
-            			Speed += (this.getSpeed()*2.0F - Speed) * 0.8F*this.RiderForward;//Break faster
+            			Speed += (this.getAIMoveSpeed()*2.0F - Speed) * 0.8F*this.RiderForward;//Break faster
             			if(Speed<0)Speed=0;
             		}
             		//else

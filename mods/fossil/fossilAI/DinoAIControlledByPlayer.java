@@ -109,7 +109,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     	currentSpeed=this.motionTarget.HandleRiding(currentSpeed,(float)speedBoostTime/(float)maxSpeedBoostTime);
         
         EntityPlayer P = (EntityPlayer)this.motionTarget.riddenByEntity;
-        if (!P.capabilities.isCreativeMode && this.currentSpeed >= this.motionTarget.getSpeed() * 0.5F && this.motionTarget.getRNG().nextFloat() < 0.006F && !this.speedBoosted)
+        if (!P.capabilities.isCreativeMode && this.currentSpeed >= this.motionTarget.getAIMoveSpeed() * 0.5F && this.motionTarget.getRNG().nextFloat() < 0.006F && !this.speedBoosted)
         {//decrease the whips uses left
             ItemStack I = P.getHeldItem();
             if (I != null && I.itemID == Fossil.whip.itemID)
