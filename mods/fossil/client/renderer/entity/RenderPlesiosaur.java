@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderPlesiosaur extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Plesiosaur.png");
+    //private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Plesiosaur.png");
 
     public RenderPlesiosaur(ModelBase par1ModelBase, float par2)
     {
@@ -49,7 +49,7 @@ public class RenderPlesiosaur extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntityPlesiosaur par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

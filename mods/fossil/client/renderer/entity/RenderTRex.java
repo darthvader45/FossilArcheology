@@ -15,11 +15,11 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderTRex extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/TRex.png");
+   // private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/TRex.png");
     
     protected ResourceLocation func_110919_a(EntityTRex par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

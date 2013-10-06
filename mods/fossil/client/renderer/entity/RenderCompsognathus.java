@@ -22,7 +22,7 @@ public class RenderCompsognathus extends RenderLiving
 {
 	
 	
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Compsognathus.png");
+//    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Compsognathus.png");
 
     final float SwingConst = 0.261799F;
     final int SwingStep = 15;
@@ -55,7 +55,8 @@ public class RenderCompsognathus extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntityCompsognathus par1Entity)
     {
-        return loc;
+
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

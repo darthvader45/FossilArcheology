@@ -47,6 +47,8 @@ import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntitySheep;
@@ -96,16 +98,24 @@ public class EntityAnkylosaurus extends EntityDinosaur
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+
     }
 	
     /**
-     * Returns true if the newer Entity AI code should be run
+     * Returns the texture's file path as a String.
      */
-    public boolean isAIEnabled()
+    @Override
+    public String getTexture()
     {
-        return !this.isModelized();
+        if (this.isModelized())
+            return super.getTexture();
+            switch (this.getSubSpecies())
+            {
+                default:
+                	return "fossil:textures/mob/Ankylosaurus.png";
+            }
     }
-	
+    
     /**
      * main AI tick function, replaces updateEntityActionState
      */
@@ -181,21 +191,12 @@ public class EntityAnkylosaurus extends EntityDinosaur
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
     
-    
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getDinoHeight() * 0.65D + 0.07D * (double)(12 - this.getDinoAge()), this.posZ);
-        }
-    }
-    
     /**
      * Applies a velocity to each of the entities pushing them away from each other. Args: entity
      */
     public void applyEntityCollision(Entity var1)
     {
-        if (var1 instanceof EntityLiving && this.riddenByEntity != null && this.onGround && this.RiderSneak==true)
+        if (var1 instanceof EntityLiving && this.riddenByEntity != null && this.onGround)
         {//you can hurt others with the dino while you ride it
             //this.onKillEntity((EntityLiving)var1);
             ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
@@ -210,11 +211,5 @@ public class EntityAnkylosaurus extends EntityDinosaur
     {
         return new EntityAnkylosaurus(this.worldObj);
     }
-    
-	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

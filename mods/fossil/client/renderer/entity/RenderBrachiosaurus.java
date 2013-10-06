@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBrachiosaurus extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Brachiosaurus.png");
+//    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Brachiosaurus.png");
     
     public RenderBrachiosaurus(float var1)
     {
@@ -29,7 +29,7 @@ public class RenderBrachiosaurus extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntityBrachiosaurus par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

@@ -49,7 +49,7 @@ public class RenderSpinosaurus extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntitySpinosaurus par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

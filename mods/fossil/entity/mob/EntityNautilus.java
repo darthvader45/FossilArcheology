@@ -49,7 +49,6 @@ public class EntityNautilus extends EntityWaterMob
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
 
-
     /**
      * Called to update the entity's position/logic.
      */

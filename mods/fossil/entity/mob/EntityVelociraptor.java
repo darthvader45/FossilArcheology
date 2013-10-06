@@ -17,6 +17,7 @@ import net.minecraft.block.StepSound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -124,6 +125,13 @@ public class EntityVelociraptor extends EntityDinosaur
         this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
     }
 
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+
+    }
     /**
      * Returns true if the newer Entity AI code should be run
      */

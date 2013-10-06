@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderTriceratops extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Triceratops_Adult_1.png");
+//    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Triceratops_Adult_1.png");
     
     public RenderTriceratops(ModelBase par1ModelBase, float par2)
     {
@@ -49,7 +49,7 @@ public class RenderTriceratops extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntityTriceratops par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)

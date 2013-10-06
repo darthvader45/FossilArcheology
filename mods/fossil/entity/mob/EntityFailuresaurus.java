@@ -42,6 +42,6 @@ public class EntityFailuresaurus extends EntityZombie
      */
     public String getTexture()
     {
-        return "/mods/fossil/textures/mob/Failuresaurus.png";
+        return "fossil:textures/mob/Failuresaurus.png";
     }
 }

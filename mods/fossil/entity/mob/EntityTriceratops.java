@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -40,32 +41,7 @@ public class EntityTriceratops extends EntityDinosaur
         super(var1,EnumDinoType.Triceratops);
         this.OrderStatus = EnumOrderType.FreeMove;
         this.looksWithInterest = false;
-        //this.health = 8;
-        //this.experienceValue=3;
-        
-        /*this.Width0=1.2F;
-        this.WidthInc=0.4F;
-        this.Length0=1.1F;
-        this.LengthInc=0.7F;
-        this.Height0=1.2F;
-        this.HeightInc=0.36F;
-        
-        /*this.HitboxXfactor=5.0F;
-        this.HitboxYfactor=5.0F;
-        this.HitboxZfactor=5.0F;*
-        
-        this.BaseattackStrength=3;
-        //this.AttackStrengthIncrease=;
-        //this.BreedingTime=;
-        //this.BaseSpeed=;
-        this.SpeedIncrease=0.016F;
-        this.MaxAge=13;
-        this.BaseHealth=21;
-        this.HealthIncrease=1;
-        //this.AdultAge=;
-        //this.AgingTicks=;
-        this.MaxHunger=500;
-        //this.Hungrylevel=;*/
+
         this.updateSize();
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
@@ -85,6 +61,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(10, new EntityAILookIdle(this));
     }
 
+    
     /**
      * Returns true if the newer Entity AI code should be run
      */
@@ -93,6 +70,14 @@ public class EntityTriceratops extends EntityDinosaur
         return !this.isModelized();
     }
 
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+
+    }
+    
     /**
      * Returns the texture's file path as a String.
      */
@@ -105,16 +90,16 @@ public class EntityTriceratops extends EntityDinosaur
         	switch (this.getSubSpecies())
             {
                 case 1:
-                    return "/mods/fossil/textures/mob/Triceratops_Adult_1.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Adult_1.png";
 
                 case 2:
-                    return "/mods/fossil/textures/mob/Triceratops_Adult_2.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Adult_2.png";
 
                 case 3:
-                    return "/mods/fossil/textures/mob/Triceratops_Adult_3.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Adult_3.png";
 
                 default:
-                    return "/mods/fossil/textures/mob/Triceratops_Adult_1.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Adult_1.png";
             }
         }
         if(this.isTeen())
@@ -122,31 +107,31 @@ public class EntityTriceratops extends EntityDinosaur
         	switch (this.getSubSpecies())
             {
                 case 1:
-                    return "/mods/fossil/textures/mob/Triceratops_Teen_1.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Teen_1.png";
 
                 case 2:
-                    return "/mods/fossil/textures/mob/Triceratops_Teen_2.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Teen_2.png";
 
                 case 3:
-                    return "/mods/fossil/textures/mob/Triceratops_Teen_3.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Teen_3.png";
 
                 default:
-                    return "/mods/fossil/textures/mob/Triceratops_Teen_1.png";
+                    return Fossil.modid + ":textures/mob/Triceratops_Teen_1.png";
             }
         }
 		switch (this.getSubSpecies())
         {
             case 1:
-                return "/mods/fossil/textures/mob/Triceratops_Baby_1.png";
+                return Fossil.modid + ":textures/mob/Triceratops_Baby_1.png";
 
             case 2:
-                return "/mods/fossil/textures/mob/Triceratops_Baby_2.png";
+                return Fossil.modid + ":textures/mob/Triceratops_Baby_2.png";
 
             case 3:
-                return "/mods/fossil/textures/mob/Triceratops_Baby_3.png";
+                return Fossil.modid + ":textures/mob/Triceratops_Baby_3.png";
 
             default:
-                return "/fossil/textures/mob/Triceratops_Baby_1.png";
+                return Fossil.modid + ":textures/mob/Triceratops_Baby_1.png";
         }
 
     }

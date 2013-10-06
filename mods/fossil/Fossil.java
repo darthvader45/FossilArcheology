@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import mods.fossil.util.RenderHUD;
 import mods.fossil.blocks.BlockAmberOre;
 import mods.fossil.blocks.BlockAncientGlass;
 import mods.fossil.blocks.BlockAncientStone;
@@ -19,6 +18,8 @@ import mods.fossil.blocks.BlockAncientWoodPlate;
 import mods.fossil.blocks.BlockAncientWoodSlab;
 import mods.fossil.blocks.BlockAncientWoodStairs;
 import mods.fossil.blocks.BlockFern;
+import mods.fossil.blocks.BlockFigurine;
+import mods.fossil.blocks.BlockFigurineItem;
 import mods.fossil.blocks.BlockFossil;
 import mods.fossil.blocks.BlockFossilSkull;
 import mods.fossil.blocks.BlockIcedStone;
@@ -33,12 +34,14 @@ import mods.fossil.blocks.BlockPermafrost;
 import mods.fossil.blocks.BlockSarracenia;
 import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
-import mods.fossil.blocks.BlockVolcanicRock;
 import mods.fossil.blocks.BlockVolcanicBrick;
+import mods.fossil.blocks.BlockVolcanicRock;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
-import mods.fossil.client.Localizations;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.renderer.item.ItemFigurineRenderer;
+import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.entity.BehaviorJavelinDispense;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
@@ -47,9 +50,8 @@ import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
-import mods.fossil.entity.mob.EntityAnkylosaurus;
+import mods.fossil.entity.EntityWhipAttack;
 import mods.fossil.entity.mob.EntityBones;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
@@ -82,27 +84,57 @@ import mods.fossil.guiBlocks.TileEntityCultivate;
 import mods.fossil.guiBlocks.TileEntityDrum;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
-import mods.fossil.guiBlocks.TileEntityFigurineEntity;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
-import mods.fossil.items.*;
-import mods.fossil.items.forge.*;
+import mods.fossil.items.ItemAmber;
+import mods.fossil.items.ItemAncientEgg;
+import mods.fossil.items.ItemAncientHelmet;
+import mods.fossil.items.ItemAncientsword;
+import mods.fossil.items.ItemBioFossil;
+import mods.fossil.items.ItemChickenEss;
+import mods.fossil.items.ItemCultivatedDodoEgg;
+import mods.fossil.items.ItemDodoEgg;
+import mods.fossil.items.ItemEmbryoSyringe;
+import mods.fossil.items.ItemFeet;
+import mods.fossil.items.ItemFemurs;
+import mods.fossil.items.ItemFernSeed;
+import mods.fossil.items.ItemFossilRecord;
+import mods.fossil.items.ItemIcedMeat;
+import mods.fossil.items.ItemJavelin;
+import mods.fossil.items.ItemMagicConch;
+import mods.fossil.items.ItemRibCage;
+import mods.fossil.items.ItemSkullHelmet;
+import mods.fossil.items.ItemStoneBoard;
+import mods.fossil.items.ItemWhip;
+import mods.fossil.items.ItemWhipAttack;
+import mods.fossil.items.forge.ForgeAxe;
+import mods.fossil.items.forge.ForgeFood;
+import mods.fossil.items.forge.ForgeHoe;
+import mods.fossil.items.forge.ForgeItem;
+import mods.fossil.items.forge.ForgePickaxe;
+import mods.fossil.items.forge.ForgeShovel;
+import mods.fossil.items.forge.ForgeSword;
 import mods.fossil.tabs.TabFArmor;
 import mods.fossil.tabs.TabFBlocks;
 import mods.fossil.tabs.TabFCombat;
 import mods.fossil.tabs.TabFFood;
 import mods.fossil.tabs.TabFItems;
 import mods.fossil.tabs.TabFMaterial;
+import mods.fossil.tabs.TabFTest;
 import mods.fossil.tabs.TabFTools;
-import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.renderer.tileentity.RenderFeeder;
+import mods.fossil.util.FossilBonemealEvent;
+import mods.fossil.util.FossilTradeHandler;
+import mods.fossil.util.RenderHUD;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
-import net.minecraft.block.BlockSign;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -113,20 +145,13 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.Achievement;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityEggInfo;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -146,8 +171,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
-import mods.fossil.util.FossilBonemealEvent;
-import mods.fossil.util.FossilTradeHandler;
 
 @Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = "1.6.2 Build 6.0 DEV")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -184,6 +207,7 @@ public class Fossil implements IPacketHandler
 	public static CreativeTabs tabFArmor = new TabFArmor(CreativeTabs.getNextID(), "Fossil Armor");
 	public static CreativeTabs tabFTools = new TabFTools(CreativeTabs.getNextID(), "Fossil Deco");
 	public static CreativeTabs tabFMaterial = new TabFMaterial(CreativeTabs.getNextID(), "Fossil Material");
+	public static CreativeTabs tabFTest = new TabFTest(CreativeTabs.getNextID(), "Fossil Test");
 	
 	//public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
 	
@@ -235,14 +259,7 @@ public class Fossil implements IPacketHandler
     public static BlockHalfSlab ancientStoneSingleSlab;
     public static BlockHalfSlab ancientStoneDoubleSlab;
     public static Block marble;
-    public static Block blockfigurine;
-    
-	private static final String[] blockfigurinenames = { 
-		"Pristine Steve Figurine", "Pristine Skeleton Figurine", "Pristine Zombie Figurine", "Pristine Enderman Figurine",
-		"Pristine Zombie Pigman Figurine", "Damaged Steve Figurine", "Damaged Skeleton Figurine", "Damaged Zombie Figurine",
-		"Damaged Enderman Figurine", "Damaged Zombie Pigman Figurine", "Broken Steve Figurine", "Broken Skeleton Figurine",
-		"Broken Zombie Figurine", "Broken Enderman Figurine", "Broken Zombie Pigman Figurine", "Mysterious Figurine"
-	};
+    public static Block figurineBlock;
 	
     //Items
     public static Item biofossil;
@@ -272,6 +289,7 @@ public class Fossil implements IPacketHandler
     public static Item diamondjavelin;
     public static Item ancientJavelin;
     public static Item whip;
+    public static Item whipAttack;
     public static Item legBone;
 	public static Item claw;
 	public static Item foot;
@@ -292,6 +310,7 @@ public class Fossil implements IPacketHandler
 	public static Item cultivatedDodoEgg;
 	public static Item dodoWing;
 	public static Item dodoWingCooked;
+	public static Item figurineItem;
 
 	
     //Armor
@@ -406,7 +425,7 @@ public class Fossil implements IPacketHandler
     public static int ancientStoneSingleSlabID;
     public static int ancientStoneDoubleSlabID;
     public static int marbleID;
-    public static int blockfigurineID;
+    public static int figurineBlockID;
 	
     //Items
     public static int biofossilID;
@@ -436,6 +455,7 @@ public class Fossil implements IPacketHandler
     public static int diamondjavelinID;
     public static int ancientJavelinID;
     public static int whipID;
+    public static int whipAttackID;
 	public static int legBoneID;
 	public static int clawID;
 	public static int footID;
@@ -456,7 +476,7 @@ public class Fossil implements IPacketHandler
 	public static int cultivatedDodoEggID;
 	public static int dodoWingID;
     public static int dodoWingCookedID;
-
+    public static int figurineItemID;
     
 	//Armor
 	public static int skullHelmetID;
@@ -546,8 +566,8 @@ public class Fossil implements IPacketHandler
     	
     	VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
     	
-    	VillagerRegistry.instance().registerVillagerId(10); 
-    	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:mob/Archaeologist.png"));
+//    	VillagerRegistry.instance().registerVillagerId(10); 
+//    	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:mob/Archaeologist.png"));
         
     	
 		Configuration var2 = new Configuration(event.getSuggestedConfigurationFile());
@@ -599,7 +619,7 @@ public class Fossil implements IPacketHandler
         ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME, 3040).getInt(3040);
         ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt(3041);
         marbleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt(3042);
-        blockfigurineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
+        figurineBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
 
         
 		//Items
@@ -737,6 +757,9 @@ public class Fossil implements IPacketHandler
         	RAWIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "raw"+EnumDinoType.values()[i].name(), 10125+i).getInt(10125+i);
 		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt(10124);
 		
+		figurineItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10125).getInt(10125);
+        whipAttackID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_ATTACK_NAME, 10126).getInt(10126);
+		
 		
 		
 		//Config options
@@ -810,7 +833,7 @@ public class Fossil implements IPacketHandler
         ancientStoneDoubleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         marble  = new BlockMarble(marbleID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.MARBLE_NAME);
-        blockfigurine = new TileEntityFigurine(blockfigurineID, Material.wood).setHardness(0.3F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFBlocks);
+        figurineBlock = new BlockFigurine(figurineBlockID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
         
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
 		Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -848,6 +871,7 @@ public class Fossil implements IPacketHandler
 		diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD,"Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
 		ancientJavelin = new ItemJavelin(ancientJavelinID, EnumToolMaterial.IRON,"Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
 		whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
+		whipAttack = new ItemWhipAttack(whipAttackID).setUnlocalizedName(LocalizationStrings.WHIP_ATTACK_NAME).setCreativeTab(this.tabFCombat);
         legBone = new ForgeItem(legBoneID,"Leg_Bone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME).setCreativeTab(this.tabFItems);
 		claw = new ForgeItem(clawID,"Claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME).setCreativeTab(this.tabFItems);
 		foot = new ForgeItem(footID,"Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
@@ -908,6 +932,8 @@ public class Fossil implements IPacketHandler
         dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
         dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
 		
+//        figurineItem = new ItemFigurine(figurineItemID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFTest);
+        
         // Music Discs
         fossilrecordBones = new ItemFossilRecord(fossilRecordID, "Bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
 
@@ -967,15 +993,13 @@ public class Fossil implements IPacketHandler
         GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
-//        GameRegistry.registerBlock(blockfigurine, LocalizationStrings.FIGURINE_NAME);
-        GameRegistry.registerBlock(blockfigurine, ItemFigurine.class, LocalizationStrings.FIGURINE_NAME);
-        
-		for (int ix = 0; ix < 16; ix++) {
-			ItemStack blockfigurineStack = new ItemStack(blockfigurine, 1, ix);
-			LanguageRegistry.addName(blockfigurineStack, blockfigurinenames[blockfigurineStack.getItemDamage()]);
-		}
-        
-
+        //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
+        GameRegistry.registerBlock(figurineBlock, BlockFigurineItem.class);
+		
+    	for (int i=0;i < 16; ++i)
+    	{
+    		LanguageRegistry.addName(new ItemStack(figurineBlock, 1, i), BlockFigurine.figurineTypes[i]);
+    	}
         
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0)+".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0)+".name", "Ancient Wood Slab");
@@ -1091,6 +1115,7 @@ public class Fossil implements IPacketHandler
 	    EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
 	    EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityWhipAttack.class, 		"Whip Attack",			28, this, 75, 1, true);
 
 		for(int i=0;i<EnumDinoType.values().length;i++)
 			EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(),EnumDinoType.values()[i].name(),200+i, this, 250, 5, true);
@@ -1139,10 +1164,9 @@ public class Fossil implements IPacketHandler
 		GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
 		GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
-		GameRegistry.registerTileEntity(TileEntityFigurineEntity.class, LocalizationStrings.FIGURINE_NAME);
+		GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");
 		
-		TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
-		TickRegistry.registerTickHandler(new RenderHUD(), Side.SERVER);
+		//TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
 		
 		RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
 		
@@ -1166,7 +1190,7 @@ public class Fossil implements IPacketHandler
 	{
 			 if (DebugMode)
 		{
-    			System.out.println(var0);
+    			System.out.println("FOSSIL DEBUG: " + var0);
 		}
 	}
 

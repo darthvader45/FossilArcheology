@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFigurineBase extends ModelBase
+public class ModelFigurine extends ModelBase
 {
   //fields
     ModelRenderer Body;
@@ -12,7 +12,7 @@ public class ModelFigurineBase extends ModelBase
     ModelRenderer ArmLeft;
     ModelRenderer ArmRight;
   
-  public ModelFigurineBase()
+  public ModelFigurine()
   {
     textureWidth = 64;
     textureHeight = 32;

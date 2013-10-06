@@ -586,61 +586,27 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer var1)
+    @Override
+    public boolean interactFirst(EntityPlayer player)
     {
 
-    	//this.dataWatcher.updateObject(0, Byte.valueOf((byte)(this.dataWatcher.getWatchableObjectByte(0) & (byte)(0x11111110))));
-    	//this.dataWatcher.updateObject(0, (byte)0);
-    	//this.dataWatcher.updateObject(0, Byte.valueOf((byte)(this.dataWatcher.getWatchableObjectByte(0) & ~(1 << 0))));
-    	ItemStack var2 = var1.inventory.getCurrentItem();
-        if (var2 == null)
+    	ItemStack itemstack = player.inventory.getCurrentItem();
+        if (itemstack == null)
         {
-        	/*int id;
-        	switch(this.DinoInside)
-        	{
-    	    	case Triceratops:  id=Fossil.eggTriceratops.itemID;break;
-    	    	case Stegosaurus:  id= Fossil.eggStegosaurus.itemID;break;
-    	    	case Mosasaurus:   id= Fossil.eggMosasaurus.itemID;break;
-    	    	case Raptor:	    id= Fossil.eggRaptor.itemID;break;
-    	    	case TRex:		   id= Fossil.eggTRex.itemID;break;
-    	    	case Pterosaur:	  id= Fossil.eggPterosaur.itemID;break;
-    	    	case Plesiosaur:  id= Fossil.eggPlesiosaur.itemID;break;
-    	    	case Brachiosaurus:id= Fossil.eggBrachiosaurus.itemID;break;
-    	    	case Utahraptor:   id= Fossil.eggUtahraptor.itemID;break;
-    	    	default: id= Fossil.eggTriceratops.itemID;break;
-        	}
-        	System.out.println(String.valueOf(Fossil.eggTriceratops.itemID));
-        	Item var7=new ItemAncientEgg(id);*/
         	Item i0 = this.DinoInside.EggItem;
-        	/*switch(this.DinoInside)
-        	{
-    	    	case Triceratops:  i0=Fossil.eggTriceratops;break;
-    	    	case Stegosaurus:  i0= Fossil.eggStegosaurus;break;
-    	    	case Mosasaurus:   i0= Fossil.eggMosasaurus;break;
-    	    	case Velociraptor:	    i0= Fossil.eggVelociraptor;break;
-    	    	case TRex:		   i0= Fossil.eggTRex;break;
-    	    	case Pterosaur:	  i0= Fossil.eggPterosaur;break;
-    	    	case Plesiosaur:  i0= Fossil.eggPlesiosaur;break;
-    	    	case Brachiosaurus:i0= Fossil.eggBrachiosaurus;break;
-    	    	case Dilophosaurus:   i0= Fossil.eggDilophosaurus;break;
-    	    	case Spinosaurus:   i0= Fossil.eggSpinosaurus;break;
-    	    	default: i0= Fossil.eggTriceratops;System.out.println("FAULTY EGG!!!!:Dinotype " + String.valueOf(var1)+ " does not exist!");break;
-        	}*/
-        	
-        	//System.out.println(String.valueOf(var7.itemID));
+
             ItemStack var3 = new ItemStack(i0/*this.DinoInside.EggItem/*var7*/, 1, 1);
-            if (var1.inventory.addItemStackToInventory(var3))
+            if (player.inventory.addItemStackToInventory(var3))
             {
-                this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 this.setDead();
             }
             return true;
         }
-        else if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+        else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem().itemID == Fossil.dinoPedia.itemID)
         {
-            //this.showpedia(var1);
         	this.setPedia();
-            var1.openGui(Fossil.instance/*var1*/, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+        	player.openGui(Fossil.instance, 4, worldObj, (int)posX, (int)posY, (int)posZ);
             return true;
         }
         return false;
@@ -672,7 +638,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             default:it0=Fossil.eggTriceratops;
         }*/
     	p0.reset();
-    	p0.PrintItemXY(it0, 120, 7);
+    	p0.PrintItemXY(it0, 140, 7);
     	p0.PrintStringLR(/*Fossil.GetLangTextByKey("PediaText.egg.Head")+ " "+*/StatCollector.translateToLocal("Dino."+this.DinoInside.toString()), false, 1,40,90,245);
     	int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
     	String stat;

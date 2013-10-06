@@ -1,11 +1,8 @@
 package mods.fossil.client;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import mods.fossil.CommonProxy;
 import mods.fossil.Fossil;
 import mods.fossil.client.model.ModelAnkylosaurus;
-import mods.fossil.client.model.ModelBrachiosaurus;
 import mods.fossil.client.model.ModelCompsognathus;
 import mods.fossil.client.model.ModelDilophosaurus;
 import mods.fossil.client.model.ModelDodo;
@@ -28,6 +25,7 @@ import mods.fossil.client.renderer.entity.RenderCompsognathus;
 import mods.fossil.client.renderer.entity.RenderDilophosaurus;
 import mods.fossil.client.renderer.entity.RenderDinoEgg;
 import mods.fossil.client.renderer.entity.RenderDodo;
+import mods.fossil.client.renderer.entity.RenderEntityWhipAttack;
 import mods.fossil.client.renderer.entity.RenderFailuresaurus;
 import mods.fossil.client.renderer.entity.RenderJavelin;
 import mods.fossil.client.renderer.entity.RenderMammoth;
@@ -44,14 +42,16 @@ import mods.fossil.client.renderer.entity.RenderStoneboard;
 import mods.fossil.client.renderer.entity.RenderTRex;
 import mods.fossil.client.renderer.entity.RenderTriceratops;
 import mods.fossil.client.renderer.entity.RenderVelociraptor;
-import mods.fossil.client.renderer.tileentity.RenderFigurine;
+import mods.fossil.client.renderer.item.ItemFigurineRenderer;
 import mods.fossil.client.renderer.tileentity.RenderTNClock;
+import mods.fossil.client.renderer.tileentity.TileEntityFigurineRenderer;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
+import mods.fossil.entity.EntityWhipAttack;
 import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
@@ -75,21 +75,17 @@ import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.guiBlocks.TileEntityFigurine;
-import mods.fossil.guiBlocks.TileEntityFigurineEntity;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderChicken;
 import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderVillager;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -126,15 +122,15 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityAnkylosaurus.class, new RenderAnkylosaurus(new ModelAnkylosaurus(), 0.75F));
         RenderingRegistry.registerEntityRenderingHandler(EntityPachycephalosaurus.class, new RenderPachycephalosaurus(new ModelPachycephalosaurus(), 0.5F));
 		//RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurineEntity.class, new RenderFigurine());
-
-		
+    	MinecraftForgeClient.registerItemRenderer(Fossil.figurineBlock.blockID, new ItemFigurineRenderer());
+    	RenderingRegistry.registerEntityRenderingHandler(EntityWhipAttack.class, new RenderEntityWhipAttack());
 	}
 	
 	@Override
 	public void registerTileEntitySpecialRenderer()
 	{
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
+    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());
 
 	}
 	

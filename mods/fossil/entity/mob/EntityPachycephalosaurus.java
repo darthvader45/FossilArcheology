@@ -10,6 +10,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -62,6 +63,14 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
 
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+
+    }
+    
     @Override
     public boolean attackEntityAsMob(Entity var1)
     {
