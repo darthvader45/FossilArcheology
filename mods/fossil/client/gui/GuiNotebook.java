@@ -1,365 +1,236 @@
 package mods.fossil.client.gui;
-/*
-import java.awt.image.BufferedImage;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import mods.fossil.Fossil;
-import mods.fossil.entity.EntityDinoEgg;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.EntityDodo;
-import mods.fossil.entity.mob.EntityMammoth;
-import mods.fossil.entity.mob.EntityPregnantCow;
-import mods.fossil.entity.mob.EntityPregnantPig;
-import mods.fossil.entity.mob.EntityPregnantSheep;
-import mods.fossil.entity.mob.EntitySmilodon;
-import net.minecraft.client.Minecraft;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import mods.fossil.client.gui.elements.FossilGuiButton;
+import mods.fossil.client.gui.elements.FossilGuiPage;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-@SideOnly(Side.CLIENT)
-public class GuiNotebook extends GuiContainer
-{
- 
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Arch_Notebook.png");
-	public final int xSizeOfTexture = 176;
-	public final int ySizeOfTexture = 88;
-	
-    public GuiNotebook()
-    {
-        super(new ContainerNotebook());
-        this.xSize = 254;
-        this.ySize = 188;
-    }
-	
+public class GuiNotebook extends GuiScreen{
     
-    public void initGui()
-    {
-    this.buttonList.clear();
-
-    int posX = (this.width - xSizeOfTexture) / 2;
-    int posY = (this.height - ySizeOfTexture) / 2;
-
-    this.buttonList.add(new GuiButton(0, posX+ 40, posY + 40, 100, 20, "no use"));
-    }
+    private static final ResourceLocation placeholder = new ResourceLocation("fossil:textures/items/Dodo_DNA.png");
+    private static final ResourceLocation notebook_background = new ResourceLocation("fossil:textures/gui/Arch_Notebook.png");
     
-    
-    @Override
-    public boolean doesGuiPauseGame()
-    {
-    return false;
-    }
-    
+	private RenderItem itemRender;
+    int update = 0;
+    // The name of the file to open.
 
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(loc);
-        int var5 = (this.width - this.xSize) / 2;
-        int var6 = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-    }
-	
-}
-*/
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+    // This will reference one line at a time
+    String line = null;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.util.ChatAllowedCharacters;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-@SideOnly(Side.CLIENT)
-public class GuiNotebook extends GuiScreen
-{
-	private static final ResourceLocation bookGuiTextures = new ResourceLocation("fossil:textures/gui/Arch_Notebook.png");
-
-
-    /** Update ticks since the gui was opened */
-    private int updateCount;
     private int bookImageWidth = 254;
     private int bookImageHeight = 188;
-    private int bookTotalPages = 5;
-    private int currPage;
-    private NBTTagList bookPages;
-    private String bookTitle = "";
-    private FossilGuiButtonNextPage buttonNextPage;
-    private FossilGuiButtonNextPage buttonPreviousPage;
-    private GuiButton buttonDone;
+    public FossilGuiPage buttonNextPage;
+    public FossilGuiPage buttonPreviousPage;
+    public int BookPages;
+    public int BookPagesTotal = 1;
+    public FossilGuiButton buttonIcon;
 
-    /** The GuiButton to sign this book. */
-    private GuiButton buttonSign;
-    private GuiButton buttonFinalize;
-    private GuiButton buttonCancel;
+	public void initGui()
+	{
+		buttonList.clear();
+		int var1 = (this.width - this.bookImageWidth) / 2;
+		int var2 = (this.height - this.bookImageHeight) / 2;
+        this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, var1 + 200, var2 + 140, true, BookPages));
+        this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, var1 + 30, var2 + 140, false, BookPages));
+        this.itemRender = new RenderItem();
+		addButtonByPage(BookPages);
+	}
+	
+	public void addImgByPage(int page) 
+	{
+		if(page==0)
+		{
+			this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+50, ((this.height - this.bookImageHeight) / 2)+28, 49, 194, 82, 12);
+		}
+		else if(page<6)
+		{
+			 this.mc.renderEngine.bindTexture(placeholder);
+			 int a = 0;
+			 
+			 for(int i=1; i<6;i++)
+			 {	 
+				if(page==i)
+				{
+					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+108, ((this.height - this.bookImageHeight) / 2)+85, a+i, 0, 50, 50);
+					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+131, ((this.height - this.bookImageHeight) / 2)+8, a+i, 51, 25, 25);					 
+				} 
+				a+=50;	
+			 }
+		}
+		
+		if(page==6)
+		{
+			this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+70, ((this.height - this.bookImageHeight) / 2)+28, 180, 194, 40, 12);
+		}
+		else
+		{
+			int a = 0;
+			this.mc.renderEngine.bindTexture(placeholder);
+			
+			for(int i=7; i<11;i++)
+			{  	
+               if(page==i)
+               {      			
+					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+108, ((this.height - this.bookImageHeight) / 2)+85, a+i-6, 76, 50, 50);
+					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+131, ((this.height - this.bookImageHeight) / 2)+8, a+i-6, 126, 25, 25);					 			
+               }
+               a+=50;
+			}
+			
+			if(page==7||page==8)
+	        {
+					GL11.glDisable(GL11.GL_LIGHTING);
+					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+	        		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+	        		GL11.glEnable(GL11.GL_LIGHTING);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					GL11.glDepthMask(true);
+					GL11.glEnable(GL11.GL_DEPTH_TEST);
+	        }
+			if(page==9)
+	        {
+					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+	        		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+	        		RenderHelper.enableGUIStandardItemLighting();
+					GL11.glDepthMask(true);
+					GL11.glEnable(GL11.GL_DEPTH_TEST);
+//					RenderHelper.enableStandardItemLighting();
+			}
+		}
+	}
+	
 
-    public GuiNotebook()
-    {
 
-        if (this.bookPages == null)
-        {
-            this.bookPages = new NBTTagList("pages");
-            this.bookPages.appendTag(new NBTTagString("1", ""));
-            this.bookTotalPages = 2;
-        }
-    }
+	public void addTextByPage(int page)
+	{
+		 int var1 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.2F);
+		 int var2 = MathHelper.floor_float((this.height - this.bookImageHeight) / 2.2F);
+		 
+		 int var3 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.0F + 10);
+		 int var4 = MathHelper.floor_float((this.height - this.bookImageHeight) / 1.2F);
+	
+		 GL11.glPushMatrix();
+		 GL11.glScalef(1.10F, 1.10F, 1.10F);	
+		 GL11.glPopMatrix();
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
-    public void updateScreen()
-    {
-        super.updateScreen();
-        ++this.updateCount;
-    }
+		 
+		 var1 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.4F);
+		 var2 = MathHelper.floor_float((this.height - this.bookImageHeight) / 2.4F);
+		 
+		 var3 = MathHelper.floor_float((this.width - this.bookImageWidth) / 1.2F);
+		 var4 = MathHelper.floor_float((this.height - this.bookImageHeight) / 1.2F);
+	
+		 
+		 GL11.glPushMatrix();
+		 GL11.glScalef(1.20F, 1.20F, 1.20F);
+		 GL11.glPopMatrix();
+		 
+		 
+		 GL11.glPushMatrix();
+		 GL11.glScalef(0.6F, 0.6F, 0.6F);
+		 GL11.glPopMatrix();
+	}
+	
+	public void addButtonByPage(int page)
+	{
+		int var1 = (this.width - this.bookImageWidth) / 2;
+		int var2 = (this.height - this.bookImageHeight) / 2;
+		
+		if(page == 6)
+		{
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(7, var1+35, var2+75, 10));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(8, var1+75, var2+55, 12));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(9, var1+115, var2+75, 14));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(10, var1+75, var2+95, 16));
+		}
+		
+		if(page == 0)
+		{
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, var1+35, var2+55, 0));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(3, var1+75, var2+55, 2));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(4, var1+115, var2+55, 4));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(5, var1+55, var2+95, 6));
+	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(6, var1+95, var2+95, 8));
+		}
+	}
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
-    public void initGui()
-    {
-        this.buttonList.clear();
-        Keyboard.enableRepeatEvents(true);
+	public void triggerButtons(GuiButton button)
+	{
+		switch(button.id)
+		{
+			case 2:	this.BookPages = 1;	break;
+			case 3:	this.BookPages = 2;	break;
+			case 4:	this.BookPages = 3;	break;
+			case 5:	this.BookPages = 4;	break;
+			case 6:	this.BookPages = 5;	break;
+			case 7:	this.BookPages = 7;	break;
+			case 8:	this.BookPages = 8;	break;
+			case 9:	this.BookPages = 9;	break;
+			case 10: this.BookPages = 10; break;
+		}
+	}
+	
+	public void updateTick()
+	{
+		update++;
+		if(update>50)
+		{
+			update=0;
+			addImgByPage(this.BookPages); 
+		}
+	}
 
-            this.buttonList.add(this.buttonDone = new GuiButton(0, this.width / 2 - 100, 4 + this.bookImageHeight, 200, 20, I18n.getString("gui.done")));
+	@Override
+	public void actionPerformed(GuiButton button)
+	{
+		if(button.id==0&&BookPages<BookPagesTotal) 
+		{
+			BookPages+=1;
+		}
+		else {}
+		
+		if(button.id==1&&BookPages>0)
+		{
+			BookPages-=1;
+		}
+		else {}
+		
+		this.triggerButtons(button);
+		this.initGui();
+		this.updateScreen();
+	}
 
-        int i = (this.width - this.bookImageWidth) / 2;
-        byte b0 = 2;
-        this.buttonList.add(this.buttonNextPage = new FossilGuiButtonNextPage(1, i + 120, b0 + 154, true));
-        this.buttonList.add(this.buttonPreviousPage = new FossilGuiButtonNextPage(2, i + 38, b0 + 154, false));
-        this.updateButtons();
-    }
-
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
-    public void onGuiClosed()
-    {
-        Keyboard.enableRepeatEvents(false);
-    }
-
-    private void updateButtons()
-    {
-        this.buttonNextPage.drawButton = (this.currPage < this.bookTotalPages - 1);
-        this.buttonPreviousPage.drawButton = this.currPage > 0;
-    }
-
-    /**
-     * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
-     */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 0)
-            {
-                this.mc.displayGuiScreen((GuiScreen)null);
-            }
-            else if (par1GuiButton.id == 1)
-            {
-                if (this.currPage < this.bookTotalPages - 1)
-                {
-                    ++this.currPage;
-                }
-            }
-            else if (par1GuiButton.id == 2)
-            {
-                if (this.currPage > 0)
-                {
-                    --this.currPage;
-                }
-            }
-
-            this.updateButtons();
-        }
-    }
-
-    private void addNewPage()
-    {
-        if (this.bookPages != null && this.bookPages.tagCount() < 50)
-        {
-            this.bookPages.appendTag(new NBTTagString("" + (this.bookTotalPages + 1), ""));
-            ++this.bookTotalPages;
-        }
-    }
-
-    
-    @Override
-    public boolean doesGuiPauseGame()
-    {
-    return false;
-    }
-    
-    /**
-     * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
-     */
-    protected void keyTyped(char par1, int par2)
-    {
-        super.keyTyped(par1, par2);
-    }
-
-    /**
-     * Processes keystrokes when editing the text of a book
-     */
-    private void keyTypedInBook(char par1, int par2)
-    {
-        switch (par1)
-        {
-            case 22:
-                this.func_74160_b(GuiScreen.getClipboardString());
-                return;
-            default:
-                switch (par2)
-                {
-                    case 14:
-                        String s = this.func_74158_i();
-
-                        if (s.length() > 0)
-                        {
-                            this.func_74159_a(s.substring(0, s.length() - 1));
-                        }
-
-                        return;
-                    case 28:
-                    case 156:
-                        this.func_74160_b("\n");
-                        return;
-                    default:
-                        if (ChatAllowedCharacters.isAllowedCharacter(par1))
-                        {
-                            this.func_74160_b(Character.toString(par1));
-                        }
-                }
-        }
-    }
-
-    private void func_74162_c(char par1, int par2)
-    {
-        switch (par2)
-        {
-            case 14:
-                if (!this.bookTitle.isEmpty())
-                {
-                    this.bookTitle = this.bookTitle.substring(0, this.bookTitle.length() - 1);
-                    this.updateButtons();
-                }
-
-                return;
-            case 28:
-            case 156:
-                if (!this.bookTitle.isEmpty())
-                {
-                    this.mc.displayGuiScreen((GuiScreen)null);
-                }
-
-                return;
-            default:
-                if (this.bookTitle.length() < 16 && ChatAllowedCharacters.isAllowedCharacter(par1))
-                {
-                    this.bookTitle = this.bookTitle + Character.toString(par1);
-                    this.updateButtons();
-                }
-        }
-    }
-
-    private String func_74158_i()
-    {
-        if (this.bookPages != null && this.currPage >= 0 && this.currPage < this.bookPages.tagCount())
-        {
-            NBTTagString nbttagstring = (NBTTagString)this.bookPages.tagAt(this.currPage);
-            return nbttagstring.toString();
-        }
-        else
-        {
-            return "";
-        }
-    }
-
-    private void func_74159_a(String par1Str)
-    {
-        if (this.bookPages != null && this.currPage >= 0 && this.currPage < this.bookPages.tagCount())
-        {
-            NBTTagString nbttagstring = (NBTTagString)this.bookPages.tagAt(this.currPage);
-            nbttagstring.data = par1Str;
-        }
-    }
-
-    private void func_74160_b(String par1Str)
-    {
-        String s1 = this.func_74158_i();
-        String s2 = s1 + par1Str;
-        int i = this.fontRenderer.splitStringWidth(s2 + "" + EnumChatFormatting.BLACK + "_", 118);
-
-        if (i <= 118 && s2.length() < 256)
-        {
-            this.func_74159_a(s2);
-        }
-    }
-
-    /**
-     * Draws the screen and all the components in it.
-     */
-    public void drawScreen(int par1, int par2, float par3)
-    {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(bookGuiTextures);
-        int k = (this.width - this.bookImageWidth) / 2;
-        byte b0 = 2;
-        this.drawTexturedModalRect(k, b0, 0, 0, this.bookImageWidth, this.bookImageHeight);
-        String s;
-        String s1;
-        int l;
-
-        {
-            s = String.format(I18n.getString("book.pageIndicator"), new Object[] {Integer.valueOf(this.currPage + 1), Integer.valueOf(this.bookTotalPages)});
-            s1 = "";
-
-            if (this.bookPages != null && this.currPage >= 0 && this.currPage < this.bookPages.tagCount())
-            {
-                NBTTagString nbttagstring = (NBTTagString)this.bookPages.tagAt(this.currPage);
-                s1 = nbttagstring.toString();
-            }
-
-            l = this.fontRenderer.getStringWidth(s);
-            this.fontRenderer.drawString(s, k - l + this.bookImageWidth - 44, b0 + 16, 0);
-            this.fontRenderer.drawSplitString(s1, k + 36, b0 + 16 + 16, 116, 0);
-        }
-
-        super.drawScreen(par1, par2, par3);
-    }
-
-    static ResourceLocation func_110404_g()
-    {
-        return bookGuiTextures;
-    }
+	public void drawScreen(int par1, int par2, float par3)
+	{
+		 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		 this.mc.renderEngine.bindTexture(notebook_background);
+		 int var5 = (this.width - this.bookImageWidth) / 2;
+		 int var6 = ((this.height - this.bookImageHeight) / 2)-10;
+		 this.drawTexturedModalRect(var5, var6, 0, 0, this.bookImageWidth, this.bookImageHeight);
+		 int var1 = (this.width - this.bookImageWidth) / 2;
+		 int var2 = (this.height - this.bookImageHeight) / 2;
+		 int var3 = 0;
+		 addImgByPage(BookPages);
+		 addTextByPage(BookPages);
+		 if(BookPages==0)this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+22, ((this.height - this.bookImageHeight) / 2)+11, 0, 240, 136, 15);
+		 if(BookPages>=9)
+		 {
+			 var3 = 4;
+		 }
+		 fontRenderer.drawString(Integer.toString(BookPages+1), var1+89-var3, var2 + 145, 0x2b2b2b, false);
+	     super.drawScreen(par1, par2, par3);
+	}
+	
 }
