@@ -11,6 +11,7 @@ import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIWander;
+import mods.fossil.fossilAI.DinoAIFlying;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumSituation;
 import net.minecraft.block.Block;
@@ -35,7 +36,7 @@ import net.minecraft.world.WorldServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityPterosaur extends EntityDinosaur
+public class EntityPterosaur extends EntityFlyingDino
 {
     //protected final int AGE_LIMIT = 8;
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
@@ -64,7 +65,7 @@ public class EntityPterosaur extends EntityDinosaur
         super(var1,EnumDinoType.Pterosaur);
         this.looksWithInterest = false;
         this.updateSize();
-        
+        this.tasks.addTask( 0, new DinoAIFlying( this ));
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
@@ -83,6 +84,8 @@ public class EntityPterosaur extends EntityDinosaur
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        
+        this.inWater = true;
     }
 
     /**
@@ -364,7 +367,7 @@ public class EntityPterosaur extends EntityDinosaur
 
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
-     */
+    
     protected void fall(float var1)
     {
         if (this.riddenByEntity != null && !this.Landing)
@@ -374,6 +377,7 @@ public class EntityPterosaur extends EntityDinosaur
 
         int var2 = (int)Math.ceil((double)(var1 - 3.0F));
 
+        
         if (!this.worldObj.isRemote)
         {
             if (var2 > 0)
@@ -387,7 +391,7 @@ public class EntityPterosaur extends EntityDinosaur
                 }
             }
         }
-    }
+    } */
 
     public boolean CheckSpace()
     {
@@ -667,8 +671,9 @@ public class EntityPterosaur extends EntityDinosaur
     /**
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-     */
+  
     protected void updateFallState(double par1, boolean par3) {}
+      */
 
     public EntityPterosaur spawnBabyAnimal(EntityAgeable var1)
     {
@@ -700,133 +705,6 @@ public class EntityPterosaur extends EntityDinosaur
 	{
 		return this.spawnBabyAnimal(var1);
 	}
-	/**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-        double var9;
-
-        if (this.isInWater())
-        {
-            var9 = this.posY;
-            this.moveFlying(par1, par2, this.isAIEnabled() ? 0.04F : 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.800000011920929D;
-            this.motionY *= 0.800000011920929D;
-            this.motionZ *= 0.800000011920929D;
-            this.motionY -= 0.02D;
-
-            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-            {
-                this.motionY = 0.30000001192092896D;
-            }
-        }
-        else if (this.handleLavaMovement())
-        {
-            var9 = this.posY;
-            this.moveFlying(par1, par2, 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.5D;
-            this.motionY *= 0.5D;
-            this.motionZ *= 0.5D;
-            this.motionY -= 0.02D;
-
-            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-            {
-                this.motionY = 0.30000001192092896D;
-            }
-        }
-        else
-        {
-            float var3 = 0.91F;
-
-            if (this.onGround)
-            {
-                var3 = 0.54600006F;
-                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var4 > 0)
-                {
-                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
-                }
-            }
-
-            float var8 = 0.16277136F / (var3 * var3 * var3);
-            float var5;
-
-            if (this.onGround)
-            {
-                if (this.isAIEnabled())
-                {
-                    var5 = this.getAIMoveSpeed();
-                }
-                else
-                {
-                    var5 = this.getAIMoveSpeed();
-                }
-
-                var5 *= var8;
-            }
-            else
-            {
-                var5 = this.jumpMovementFactor;
-            }
-
-            this.moveFlying(par1, par2, var5);
-            var3 = 0.91F;
-
-            if (this.onGround)
-            {
-                var3 = 0.54600006F;
-                int var6 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var6 > 0)
-                {
-                    var3 = Block.blocksList[var6].slipperiness * 0.71F;
-                }
-            }
-
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-            if (this.isCollidedHorizontally && this.isOnLadder())
-            {
-                this.motionY = 0.2D;
-            }
-
-            if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded))
-            {
-                if (this.posY > 0.0D)
-                {
-                    this.motionY = -0.1D;
-                }
-                else
-                {
-                    this.motionY = 0.0D;
-                }
-            }
-            else
-            {
-            	if(this.riddenByEntity==null || this.AirSpeed<=0F)
-            		this.motionY -= 0.08D;
-            }
-
-            this.motionY *= 0.9800000190734863D;
-            this.motionX *= (double)var3;
-            this.motionZ *= (double)var3;
-        }
-
-        //this.prevLegYaw = this.legYaw;
-        var9 = this.posX - this.prevPosX;
-        double var12 = this.posZ - this.prevPosZ;
-        float var11 = MathHelper.sqrt_double(var9 * var9 + var12 * var12) * 4.0F;
-
-        if (var11 > 1.0F)
-        {
-            var11 = 1.0F;
-        }
-
-        //this.legYaw += (var11 - this.legYaw) * 0.4F;
-        //this.legSwing += this.legYaw;
-    }
+	
+	
 }
