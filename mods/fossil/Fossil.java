@@ -88,6 +88,7 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
+import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilSpawnEggs;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
@@ -1188,6 +1189,8 @@ public class Fossil implements IPacketHandler
 		
 		proxy.registerTileEntitySpecialRenderer();
         proxy.registerRenderThings();
+        
+        FossilOreDictionary.oreRegistration();
         
 	}
 	
