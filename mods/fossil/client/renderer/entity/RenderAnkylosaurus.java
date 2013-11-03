@@ -50,7 +50,7 @@ public class RenderAnkylosaurus extends RenderLiving
     
     protected ResourceLocation func_110919_a(EntityAnkylosaurus par1Entity)
     {
-        return loc;
+        return new ResourceLocation(par1Entity.getTexture());
     }
   
     /**

@@ -40,7 +40,6 @@ import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.renderer.item.ItemFigurineRenderer;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.entity.BehaviorJavelinDispense;
 import mods.fossil.entity.EntityAncientJavelin;
@@ -66,13 +65,16 @@ import mods.fossil.entity.mob.EntityPterosaur;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.gens.AcademyGenerator;
 import mods.fossil.gens.FossilGenerator;
 import mods.fossil.gens.TarGenerator;
-import mods.fossil.gens.WorldGenAcademy;
-import mods.fossil.gens.WorldGenShips;
-import mods.fossil.gens.WorldGenWeaponShop;
+import mods.fossil.gens.VolcanicRockGenerator;
+//import mods.fossil.gens.TarGenerator;
+//import mods.fossil.gens.WorldGenAcademy;
+//import mods.fossil.gens.WorldGenShips;
+//import mods.fossil.gens.WorldGenWeaponShop;
 import mods.fossil.gens.WorldGeneratorPalaeoraphe;
-import mods.fossil.gens.WorldGeneratorVolcanicRock;
+//import mods.fossil.gens.WorldGeneratorVolcanicRock;
 import mods.fossil.guiBlocks.BlockAnalyzer;
 import mods.fossil.guiBlocks.BlockCultivate;
 import mods.fossil.guiBlocks.BlockDrum;
@@ -86,6 +88,7 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
+import mods.fossil.handler.FossilSpawnEggs;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
 import mods.fossil.items.ItemAncientHelmet;
@@ -124,7 +127,6 @@ import mods.fossil.tabs.TabFTest;
 import mods.fossil.tabs.TabFTools;
 import mods.fossil.util.FossilBonemealEvent;
 import mods.fossil.util.FossilTradeHandler;
-import mods.fossil.util.RenderHUD;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
@@ -145,7 +147,6 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.AchievementPage;
@@ -168,11 +169,10 @@ import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = "1.6.2 Build 6.0 DEV")
+@Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = "1.6.4 Build 6.0 DEV")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class Fossil implements IPacketHandler
@@ -929,8 +929,8 @@ public class Fossil implements IPacketHandler
 		rawChickenSoup = new ForgeItem(rawChickenSoupID,"Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
 		chickenEss = new ItemChickenEss(chickenEssID, 10, 0.0F, false,"Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Item.glassBottle).setCreativeTab(this.tabFFood);
 		sjl = new ForgeFood(sjlID, 8, 2.0F, false,"Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(this.tabFFood);
-        dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
-        dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
+        dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true,"Raw_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
+        dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true,"Cooked_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
 		
 //        figurineItem = new ItemFigurine(figurineItemID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFTest);
         
@@ -1137,21 +1137,36 @@ public class Fossil implements IPacketHandler
         for(int i=0;i<EnumDinoType.values().length;i++)
         	LanguageRegistry.instance().addStringLocalization("entity.fossil."+EnumDinoType.values()[i].name()+".name", StatCollector.translateToLocal("Dino."+EnumDinoType.values()[i].name()));
         
+        FossilSpawnEggs.addSpawnEggs();
+        
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();
 		EnumDinoFoodMob.init();
 
 		
 		GameRegistry.registerWorldGenerator(new FossilGenerator());
+		
+		if(FossilOptions.Gen_Palaeoraphe)
+		GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe());
+		
 		GameRegistry.registerWorldGenerator(new TarGenerator());
+		GameRegistry.registerWorldGenerator(new VolcanicRockGenerator());
+		
+		
+		if(FossilOptions.Gen_Academy)
+		GameRegistry.registerWorldGenerator(new AcademyGenerator());
+		/*
+
 		if(FossilOptions.Gen_Ships)
 			GameRegistry.registerWorldGenerator(new WorldGenShips());
 		if(FossilOptions.Gen_Academy)
 			GameRegistry.registerWorldGenerator(new WorldGenAcademy());
-		if(FossilOptions.Gen_Palaeoraphe)
-			GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe());
+
+
 		GameRegistry.registerWorldGenerator(new WorldGenWeaponShop());
-		GameRegistry.registerWorldGenerator(new WorldGeneratorVolcanicRock());
+
+		*/
+
 		
 		NetworkRegistry.instance().registerChatListener(messagerHandler);
 		NetworkRegistry.instance().registerGuiHandler(this, GH);
@@ -1186,11 +1201,11 @@ public class Fossil implements IPacketHandler
 			}
 	}
 
-	public static void DebugMessage(String var0)
+	public static void Console(String var0)
 	{
 			 if (DebugMode)
 		{
-    			System.out.println("FOSSIL DEBUG: " + var0);
+    			System.out.println("[FOSSIL]: " + var0);
 		}
 	}
 

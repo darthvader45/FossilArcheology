@@ -6,7 +6,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import mods.fossil.Fossil;
 import mods.fossil.gens.WorldGenPalaeoraphe;
 import net.minecraft.block.Block;

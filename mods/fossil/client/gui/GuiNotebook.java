@@ -19,7 +19,6 @@ import org.lwjgl.opengl.GL12;
 
 public class GuiNotebook extends GuiScreen{
     
-    private static final ResourceLocation placeholder = new ResourceLocation("fossil:textures/items/Dodo_DNA.png");
     private static final ResourceLocation notebook_background = new ResourceLocation("fossil:textures/gui/Arch_Notebook.png");
     
 	private RenderItem itemRender;
@@ -56,7 +55,6 @@ public class GuiNotebook extends GuiScreen{
 		}
 		else if(page<6)
 		{
-			 this.mc.renderEngine.bindTexture(placeholder);
 			 int a = 0;
 			 
 			 for(int i=1; i<6;i++)
@@ -77,7 +75,6 @@ public class GuiNotebook extends GuiScreen{
 		else
 		{
 			int a = 0;
-			this.mc.renderEngine.bindTexture(placeholder);
 			
 			for(int i=7; i<11;i++)
 			{  	
@@ -125,6 +122,12 @@ public class GuiNotebook extends GuiScreen{
 		 GL11.glScalef(1.10F, 1.10F, 1.10F);	
 		 GL11.glPopMatrix();
 
+		 if(page==1)
+		 {
+			 //TODO
+			 
+			 fontRenderer.drawString("This needs to be dynamically loaded from a text file.", var3, var4+65, 0x2b2b2b, false);
+		 }
 		 
 		 var1 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.4F);
 		 var2 = MathHelper.floor_float((this.height - this.bookImageHeight) / 2.4F);
@@ -172,13 +175,6 @@ public class GuiNotebook extends GuiScreen{
 		{
 			case 2:	this.BookPages = 1;	break;
 			case 3:	this.BookPages = 2;	break;
-			case 4:	this.BookPages = 3;	break;
-			case 5:	this.BookPages = 4;	break;
-			case 6:	this.BookPages = 5;	break;
-			case 7:	this.BookPages = 7;	break;
-			case 8:	this.BookPages = 8;	break;
-			case 9:	this.BookPages = 9;	break;
-			case 10: this.BookPages = 10; break;
 		}
 	}
 	

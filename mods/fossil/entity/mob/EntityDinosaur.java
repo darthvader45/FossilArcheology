@@ -132,7 +132,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	setSize(this.getDinoWidth(),this.getDinoHeight());
     	setPosition(this.posX, this.posY, this.posZ);
     	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getHealth() + this.getDinoAge()*this.SelfType.HealthInc);
- //   	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.);
     }
 	
     public void InitSize()//Necessary to overload existing
@@ -204,16 +203,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	return this.SelfType.MaxHunger;
     }
-    
-    /**
-     * Returns the Speed of the Dino depending on the age
-     */
-    /*
-    public float getSpeed()
-    {
-    	return this.SelfType.Speed0+this.getDinoAge()*this.SelfType.SpeedInc;
-    }
-    */
 
     public DinoAIControlledByPlayer getRidingHandler()
     {
@@ -245,10 +234,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.dataWatcher.addObject(HUNGER_TICK_DATA_INDEX, new Integer(300));
         this.dataWatcher.addObject(SUBSPECIES_INDEX, new Integer(1));
         this.dataWatcher.addObject(MODELIZED_INDEX, new Byte((byte) - 1));
-//        this.dataWatcher.addObject(HEALTH_INDEX, new Integer(10));
-   //this.dataWatcher.addObject(RIDER_STRAFE_INDEX, new Integer(300));
-        //this.dataWatcher.addObject(RIDER_FORWARD_INDEX, new Integer(1));
-        //this.dataWatcher.addObject(RIDER_JUMP_INDEX, new Integer(0));
     }
 
     public int getSubSpecies()
@@ -344,9 +329,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         if (this.getHungerTick() > 0)
             this.setHungerTick(this.getHungerTick() - 1);
     }
-
-    
-    
+ 
     /**
      * Placeholder, returns the attack strength, should be customized for every Dino
      */
@@ -359,7 +342,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      * Called when the entity is attacked.
      */
     public boolean attackEntityFrom(DamageSource var1, int var2)
-    {//when modelized just drop the model else handle normal attacking
+    {
+    	//when modelized just drop the model else handle normal attacking
         return this.modelizedDrop() ? true : super.attackEntityFrom(var1, var2);
     }
 
@@ -371,12 +355,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Returns the texture's file path as a String.
      */
-    
     public String getTexture()
     {
         return this.isModelized() ? this.getModelTexture() : "fossil:textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
-    
 
     /**
      * Get number of ticks, at least during which the living entity will be silent.
@@ -394,34 +376,41 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	
     	if (this.hasCustomNameTag())
     	p0.PrintStringXY(this.getCustomNameTag(), 140, 24,40,90,245);
-    	p0.PrintStringXY(StatCollector.translateToLocal("Dino."+this.SelfType.toString()), 140, 34,0,0,0);
     	
+    	
+    	p0.PrintStringXY(StatCollector.translateToLocal("Dino."+this.SelfType.toString()), 140, 34,0,0,0);
     	p0.PrintPictXY(pediaclock, 140, 46,8,8);
     	p0.PrintPictXY(pediaheart, 140, 58,9,9);
     	p0.PrintPictXY(pediafood, 140, 70,9,9);
+    	
     	if(this.getDinoAge()==1)
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), 152, 46);
     	else
     		p0.PrintStringXY(String.valueOf(this.getDinoAge()) +" "+ StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), 152, 46);
+ 
     	p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 152, 58); //display the health
     	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 152, 70);
     	
     	if(this.SelfType.isRideable() && this.isAdult())
     		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+
     	if(this.SelfType.isTameable() && this.isTamed())
     	{
-    		
     		p0.AddStringLR( StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
     		String s0=this.getOwnerName();
+    		
     		if(s0.length()>11)
     			s0=this.getOwnerName().substring(0, 11);
+    		
     		p0.AddStringLR(s0, true);
     	}
+    	
     	for(int i=0; i<this.SelfType.FoodItemList.index;i++)
     	{
     		if(this.SelfType.FoodItemList.getItem(i)!=null)
     			p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
     	}
+    	
     	/*for(int i=0; i<this.SelfType.FoodBlockList.index;i++)
     	{
     		if(this.SelfType.FoodBlockList.getBlock(i)!=null)
@@ -521,34 +510,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         return var1.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
     }
     
-    
-    /**
-     * the movespeed used for the new AI system
-     */
-    /*
-    public float getAIMoveSpeed()
-    {
-        return this.getSpeed();
-    }
-    */
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {
     	Vec3 pos = null;
-    	/*for (int dx = -1; dx != -(SEARCH_RANGE+1); dx+=(dx<0)?(dx*-2):(-(2*dx+1)))//Creates the following order: -1,1,-2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-        {
-    		System.out.println(String.valueOf(dx));
-            for (int dy = -5; dy < 4; dy++)
-            {
-                for (int dz = -1; dz != -(SEARCH_RANGE+1); dz+=(dz<0)?(dz*-2):(-(2*dz+1)))//Creates the following order: -1,1,-2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
-                {
-                    if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+dx), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+dz))))
-                    {
-                    	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+dx),MathHelper.floor_double(this.posY+dy),MathHelper.floor_double(this.posZ+dz));
-                    	return pos;
-                    }
-                }
-            }
-        }*/
+
     	for(int r=1;r<=SEARCH_RANGE;r++)
     	{
 	    	for (int ds = -r; ds <=r; ds++)
@@ -589,41 +554,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
     public TileEntityFeeder GetNearestFeeder(int SEARCH_RANGE)
     {
-        /*Vec3 var2 = null;
-        //double var3 = this.posX;
-        //double var5 = this.posY;
-        //double var7 = this.posZ;
-        //int var9 = SEARCH_RANGE / 2;
-        double var10 = 0.0D;
-        double var12 = (double)(SEARCH_RANGE * SEARCH_RANGE * 2);
-
-        for (int var15 = (int)(this.posX - (double)SEARCH_RANGE); var15 < (int)(this.posX + (double)SEARCH_RANGE); ++var15)
-        {
-            for (int var16 = (int)(this.posY - (double)SEARCH_RANGE/2D); var16 < (int)(this.posY + (double)SEARCH_RANGE/2D); ++var16)
-            {
-                for (int var17 = (int)(this.posZ - (double)SEARCH_RANGE); var17 < (int)(this.posZ + (double)SEARCH_RANGE); ++var17)
-                {
-                    if (var16 >= 0 && var16 <= this.worldObj.getHeight())
-                    {
-                        TileEntity var14 = this.worldObj.getBlockTileEntity(var15, var16, var17);
-
-                        if (var14 != null && var14 instanceof TileEntityFeeder && ((TileEntityFeeder)var14).isFilled())
-                        {
-                            var10 = ((double)var15 - this.posX) * ((double)var15 - this.posX) + ((double)var17 - this.posZ) * ((double)var17 - this.posZ);
-
-                            if (var10 < var12)
-                            {
-                                var12 = var10;
-                                var2 = Vec3.createVectorHelper((double)var15, (double)var16, (double)var17);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return var2;*/
-        //Vec3 pos = null;
     	for (int dx = -2; dx != -(SEARCH_RANGE+1); dx+=(dx<0)?(dx*-2):(-(2*dx+1)))//Creates the following order: -2,2,-3,3,-4,1,....,10, stops with 10. looks at near places, first
         {
             for (int dy = -5; dy < 4; dy++)
@@ -856,37 +786,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         }
     }
 
-    /*public static String GetNameByEnum(EnumDinoType var0, boolean var1)
-    {
-        String var2 = "Dino.";
-        String var3 = ".Plural";
-        String var4 = Fossil.GetLangTextByKey("Dino." + var0.toString());
-        String var5 = Fossil.GetLangTextByKey("Dino." + var0.toString() + ".Plural");
-
-        if (var5.equals(" "))
-            var5 = var4;
-
-        return var1 ? var5 : var4;
-    }*/
-
-    /*public void PediaTextCorrection(EnumDinoType var1, EntityPlayer var2)
-    {
-        SelfName = GetNameByEnum(var1, false);
-        String var3 = "PediaText.";
-        Fossil.ShowMessage(SelfName, var2);
-        OwnerText = Fossil.GetLangTextByKey("PediaText.owner");
-        UntamedText = Fossil.GetLangTextByKey("PediaText.Untamed");
-        EnableChestText = Fossil.GetLangTextByKey("PediaText.EnableChest");
-        AgeText = Fossil.GetLangTextByKey("PediaText.Age");
-        HelthText = Fossil.GetLangTextByKey("PediaText.Health");
-        HungerText = Fossil.GetLangTextByKey("PediaText.Hunger");
-        CautionText = Fossil.GetLangTextByKey("PediaText.Caution");
-        RidiableText = Fossil.GetLangTextByKey("PediaText.Ridiable");
-        WeakText = Fossil.GetLangTextByKey("PediaText.Weak");
-        FlyText = Fossil.GetLangTextByKey("PediaText.Fly");
-    }*/
-
-
     public float GetDistanceWithXYZ(double var1, double var3, double var5)
     {
         return (float)Math.sqrt(Math.pow(this.posX - var1, 2.0D) + Math.pow(this.posY - var3, 2.0D) + Math.pow(this.posZ - var5, 2.0D));
@@ -945,22 +844,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	if(this.isModelized())
     		return Item.bone.itemID;
     	return this.SelfType.DropItem.itemID;
-    	/*switch(this.SelfType)
-    	{
-	    	case Triceratops:  return Fossil.rawTriceratops.itemID;
-	    	case Stegosaurus:  return Fossil.rawStegosaurus.itemID;
-	    	case Mosasaurus:   return Fossil.rawMosasaurus.itemID;
-	    	case Velociraptor: return Fossil.rawVelociraptor.itemID;
-	    	case TRex:		   return Fossil.rawTRex.itemID;
-	    	case Pterosaur:	   return Fossil.rawPterosaur.itemID;
-	    	case Plesiosaur:   return Fossil.rawPlesiosaur.itemID;
-	    	case Brachiosaurus:return Fossil.rawBrachiosaurus.itemID;
-	    	case Dilophosaurus:return Fossil.rawDilophosaurus.itemID;
-	        case Spinosaurus:return Fossil.rawSpinosaurus.itemID;
-	    	default: return Fossil.rawTriceratops.itemID;
-    	}*/
-        //return this.isModelized() ? Item.bone.itemID : Fossil.rawDinoMeat.itemID;
     }
+    
     /**
      * Drops the rare drops
      */
@@ -993,6 +878,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		this.entityDropItem(new ItemStack(id, 1, 0/*var4*/), 0.5F);
         return 0;
     }
+    
     /**
      Strange function Handling some additional effect when healing, but parameter is absolute unclear
       */
@@ -1023,15 +909,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected void dropFewItems(boolean var1, int var2)
     {
         int var3 = this.getDropItemId();
-        //int var4 = this.isModelized() ? 0 : this.SelfType.ordinal();
         if (var3 > 0)
         {
-            //int var5 = this.getDinoAge();
-
-           // for (int var6 = 0; var6 < var5; ++var6)
-            //{
                 this.entityDropItem(new ItemStack(var3, MathHelper.ceiling_float_int(this.getDinoAge()/2.0F)/*1*/,0/* var4*/), 0.5F);
-            //}
             this.DropRareDrop();
         }
     }
@@ -1078,8 +958,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         }
     }
 
-    
-    
     /**
      * Returns the volume for the sounds this mob makes.
      */
@@ -1206,15 +1084,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
         return false;
     }
-    /**
-     * Called to update the entity's position/logic.
-     */
-    /*
-    public void onUpdate()
-    {
-        super.onUpdate();
-    }
-    */
     
     public void onLivingUpdate()
     {
@@ -1461,33 +1330,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	                    this.setPathToEntity((PathEntity)null);
 	                    this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal()+1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
 	                    this.SendOrderMessage(this.OrderStatus);
-	
-	                    /*switch (this.OrderStatus)
-	                    {//This is not neccessary anymore because the sitting is handled directly through the orderstatus
-	                        case Stay:
-	                            this.setSitting(true);
-	                            break;
-	
-	                        case Follow:
-	                            this.setSitting(false);
-	                            break;
-	
-	                        case FreeMove:
-	                            this.setSitting(false);
-	                    }*/
-	                    /*switch (EntityTriceratops$1.$SwitchMap$mod_Fossil$EnumOrderType[this.OrderStatus.ordinal()])
-	                    {
-	                        case 1:
-	                            this.setSitting(true);
-	                            break;
-	
-	                        case 2:
-	                            this.setSitting(false);
-	                            break;
-	
-	                        case 3:
-	                            this.setSitting(false);
-	                    }*/
 	                }
 	                return true;
             	}
@@ -1527,19 +1369,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
     public void readSpawnData(ByteArrayDataInput var1) {}
 
-    /*public abstract float getGLX();
-
-    public abstract float getGLY();
-
-    public float getGLZ()
-    {
-        return this.getGLX();
-    }*/
-
-    /*public String[] additionalPediaMessage()
-    {
-        return null;
-    }*/
     
     @Override
 	public EntityAgeable createChild(EntityAgeable var1) 

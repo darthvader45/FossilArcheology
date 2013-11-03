@@ -44,6 +44,8 @@ public enum EnumDinoFoodItem
 	Compsognathus(EnumDinoType.Compsognathus.DropItem,20,3),
 	Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem,50,3),
 	DinoMeatCooked(Fossil.cookedDinoMeat,50,5),	
+	DodoWing(Fossil.dodoWing, 20, 2),
+	DodoWingCooked(Fossil.dodoWingCooked, 30, 3),
 	;
     public Item item;
     public int FoodValue;

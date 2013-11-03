@@ -12,7 +12,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 
 
-public class WorldGeneratorVolcanicRock implements IWorldGenerator {
+public class VolcanicRockGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,

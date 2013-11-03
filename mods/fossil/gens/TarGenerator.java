@@ -3,6 +3,7 @@ package mods.fossil.gens;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.gens.structure.WorldGenTarPit;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenSwamp;

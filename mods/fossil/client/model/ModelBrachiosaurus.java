@@ -1,14 +1,54 @@
 package mods.fossil.client.model;
 
+import info.ata4.minecraft.dragon.client.model.DragonModel;
+import info.ata4.minecraft.dragon.client.model.anim.TickFloat;
+import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
+import info.ata4.minecraft.dragon.util.math.MathX;
+
 import org.lwjgl.opengl.GL11;
 
+import mods.fossil.client.model.anims.ModelAnimTail;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelBrachiosaurus extends ModelBase
 {
+	
+    // entity parameters
+    private float ticksExisted;
+    private float moveTime;
+    private float moveSpeed;
+    private float lookYaw;
+    private float lookPitch;
+    private double prevRenderYawOffset;
+    private double yawAbs;
+    
+    // timing vars
+    private float animBase;
+    private float cycleOfs;
+    private float anim;
+    private float ground;
+    private float flutter;
+    private float walk;
+    private float sit;
+    private float jaw;
+    private float speed;
+    
+    private float partialTicks;
+    
+    // timing interp vars
+    private TickFloat animTimer = new TickFloat();
+    private TickFloat groundTimer = new TickFloat(1).setLimit(0, 1);
+    private TickFloat flutterTimer = new TickFloat().setLimit(0, 1);
+    private TickFloat walkTimer = new TickFloat().setLimit(0, 1);
+    private TickFloat sitTimer = new TickFloat().setLimit(0, 1);
+    private TickFloat jawTimer = new TickFloat().setLimit(0, 1);
+    private TickFloat speedTimer = new TickFloat(1).setLimit(0, 1);
+    
+    
 	float yoffset = 0.0F;
     ModelRenderer Snout = (new ModelRenderer(this, 50, 8)).setTextureSize(64, 32);
     ModelRenderer Head;
@@ -238,12 +278,18 @@ public class ModelBrachiosaurus extends ModelBase
         Body.addChild(Front_ThighRight);
         Body.addChild(Front_ThighLeft);
         
-        
-
+        float legspeed = 0.5F;
+		float legRotationLimit = 1.4F;
+        ModelAnimTail tailModule = new ModelAnimTail(Tail, .15F, .025F, legspeed);
         
         
     }
-
+    public void setLook(float lookYaw, float lookPitch) {
+        // don't twist the Neck
+        this.lookYaw = MathX.clamp(lookYaw, -120, 120);
+        this.lookPitch = MathX.clamp(lookPitch, -90, 90);
+    }
+    
     /**
      * Sets the models various rotation angles then renders the model.
      */
@@ -275,13 +321,12 @@ public class ModelBrachiosaurus extends ModelBase
 
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
-        //if (var7==false)
-        {
+/*
             this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1)* 0.2662F + 1) * 1.0F * var2/2F;
             this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.2662F + (float)Math.PI) * 1.0F * var2/2F;
             this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.2662F + (float)Math.PI +2) * 1.0F * var2/2F;
             this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.2662F + 1) * 1.0F * var2/2F;
-
-        }
+*/
     }
+    
 }

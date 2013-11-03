@@ -1,15 +1,18 @@
 package mods.fossil.entity.mob;
 
 import java.util.List;
+import java.util.Random;
 
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -47,6 +50,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         super(var1,EnumDinoType.Pachycephalosaurus);
         this.looksWithInterest = false;
         this.updateSize();
+        this.OrderStatus = EnumOrderType.FreeMove;
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -77,7 +81,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
         if (this.rand.nextInt(16) < 9 && var1 instanceof EntityLiving)
-        {//Has chance to blind the prey, after that handle normal attacking 
+        {
             this.headButt();
         }
         return super.attackEntityAsMob(var1);
@@ -131,16 +135,17 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         switch (this.getSubSpecies())
         {
             case 1:
-                return "/mods/fossil/textures/mob/Pachy-Lime.png";
+                return "fossil:textures/mob/Pachy-Lime.png";
 
             case 2:
-                return "/mods/fossil/textures/mob/Pachy-Monochrome.png";
+                return "fossil:textures/mob/Pachy-Monochrome.png";
                 
             case 3:
-                return "/mods/fossil/textures/mob/Pachy-Pumpkin.png";
+                return "fossil:textures/mob/Pachy-Pumpkin.png";
 
             default:
-                return "/mods/fossil/textures/mob/Pachy-Pumpkin.png";
+            	
+                return "fossil:textures/mob/Pachy-Pumpkin.png";
         }
     }
 
@@ -434,4 +439,17 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 	{
 		return null;
 	}
+	
+    @Override
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
+    {
+            par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+            Random random = new Random();
+
+            this.setSubSpecies(random.nextInt(3) + 1);
+            
+        	this.setDinoAge(this.SelfType.AdultAge);
+
+            return par1EntityLivingData;
+    }
 }

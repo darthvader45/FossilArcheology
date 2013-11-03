@@ -519,6 +519,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         ((EntityPachycephalosaurus)var5).setSubSpecies(2);
                     else
                         ((EntityPachycephalosaurus)var5).setSubSpecies(3);break;
+                        
                     case Compsognathus:var5 = new EntityCompsognathus(this.worldObj);
                         if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenDesert)
                         ((EntityCompsognathus)var5).setSubSpecies(1);
