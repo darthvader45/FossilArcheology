@@ -85,7 +85,7 @@ public enum EnumDinoType
     
     
     //Age Limit of The Dino, standard is 12
-    public int MaxAge = 12;
+    public int MaxAge = 999;
     //Age When Dino gets adult, starts Breeding, is Ridable...
     public int AdultAge = 6;
     //Age When Dino gets teen..
@@ -278,7 +278,7 @@ public enum EnumDinoType
     	
         Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
-        Velociraptor.setAges(-1, -1, 9);
+        Velociraptor.setAges(-1, -1, -1);
         Velociraptor.setProperties(21, 1, -1, -1, 0.3F, 0.025F, -1);
         Velociraptor.setExperience(0.7F, 0.7F);
         

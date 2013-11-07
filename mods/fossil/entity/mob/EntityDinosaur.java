@@ -83,6 +83,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected DinoAIControlledByPlayer ridingHandler;
     public EnumOrderType OrderStatus;
 
+
     
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
@@ -116,18 +117,18 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public float getDinosaurSize()
     {
     	float step;
+
     	
+		step = (this.maxSize - this.minSize)/(this.adultAge+1);
+
+		
     	// If the dinosaur is past "Adult" age, slow down growth.
     	if(this.getDinoAge() > this.adultAge)
     	{
-    		step = ((this.maxSize - this.minSize)/(adultAge+1)) * 0.25F;
+        return this.minSize + (step*this.adultAge);
     	}
-    	else
-    	{
-    		step = (this.maxSize - this.minSize)/(adultAge+1);
-    	}
-    	
-        return (this.minSize + (step*this.getDinoAge()));
+
+        return this.minSize + (step*this.getDinoAge());
     }
     /**
      * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
@@ -815,12 +816,15 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Shows hearts or smoke, true=heart, false=smoke
      */
-    public void showHeartsOrSmokeFX(boolean var1)
+    public void showHeartsOrSmokeFX(boolean hearts, boolean poof)
     {
         String var2 = "heart";
 
-        if (!var1)
+        if (!hearts && !poof)
             var2 = "smoke";
+        
+        if (!hearts && poof)
+        	var2 = "cloud";
 
         for (int var3 = 0; var3 < 7; ++var3)
         {
@@ -931,14 +935,15 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	if(var1 == HEART_MESSAGE)
     	{
-    		this.showHeartsOrSmokeFX(true);
+    		this.showHeartsOrSmokeFX(true, true);
     	}
     	else if(var1 == SMOKE_MESSAGE)
     	{
-    		this.showHeartsOrSmokeFX(false);
+    		this.showHeartsOrSmokeFX(false, false);
     	}
     	else if(var1 == AGING_MESSAGE)
     	{
+    		this.showHeartsOrSmokeFX(false, true);
     		//System.out.println("AGING RECEIVED!");
     		this.updateSize();
     	} 
@@ -1218,19 +1223,20 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             {
             	if (var2.itemID == Fossil.dinoPedia.itemID && !var1.worldObj.isRemote && var2.getDisplayName().equalsIgnoreCase("debugpedia"))
             	{
-            		//TODO://
+            		//TODO:DEBUG//
             		Fossil.Console("----- DEBUG -----");
             		//Fossil.Console("Step: " + this.Step);
             		//Fossil.Console("SizeMin: " + this.SizeMin);
-            		//Fossil.Console("SizeMax: " + this.SizeMax);
-            	//	Fossil.Console("AdultAge: " + this.SelfType.AdultAge);
-            	//	Fossil.Console("getDinoAge: " + this.getDinoAge());
-            		//Fossil.Console("getDinosaurSize: " + this.getDinosaurSize);
+            		//Fossil.Console("adultstep: " + adultstep);
+            		Fossil.Console("AdultAge: " + this.SelfType.AdultAge);
+            		Fossil.Console("getDinoAge: " + this.getDinoAge());
+            		Fossil.Console("getDinosaurSize: " + this.getDinosaurSize());
             		Fossil.Console("------ ----------");
             	}
             	if (var2.itemID == Fossil.chickenEss.itemID && !var1.worldObj.isRemote)
             	{// Be grown up by chicken essence
             		if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
+                	if (this.getHunger() > 0)
             	    {
             			--var2.stackSize;
             	        if (var2.stackSize <= 0)

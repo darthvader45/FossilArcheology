@@ -509,11 +509,11 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         if (var1 == 7)
         {
-            this.showHeartsOrSmokeFX(true);
+            this.showHeartsOrSmokeFX(true, true);
         }
         else if (var1 == 6)
         {
-            this.showHeartsOrSmokeFX(false);
+            this.showHeartsOrSmokeFX(false, false);
         }
         else if (var1 == 8)
         {

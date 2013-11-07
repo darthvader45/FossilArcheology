@@ -364,7 +364,8 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
      */
     public Icon getIcon(int par1, int par2)
     {
-        return (par2 & 3) == 1 ? this.iconArray[this.iconType][1] : ((par2 & 3) == 3 ? this.iconArray[this.iconType][3] : ((par2 & 3) == 2 ? this.iconArray[this.iconType][2] : this.iconArray[this.iconType][0]));
+       // return (par2 & 3) == 1 ? this.iconArray[this.iconType][1] : ((par2 & 3) == 3 ? this.iconArray[this.iconType][3] : ((par2 & 3) == 2 ? this.iconArray[this.iconType][2] : this.iconArray[this.iconType][0]));
+        return this.iconArray[0][this.graphicsLevel?1:0];
     }
 
     @SideOnly(Side.CLIENT)
