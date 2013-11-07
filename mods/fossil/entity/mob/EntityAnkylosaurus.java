@@ -14,13 +14,10 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,14 +27,29 @@ import net.minecraft.world.World;
 public class EntityAnkylosaurus extends EntityDinosaur
 {
     private int angerLevel;
-    
 
 	public EntityAnkylosaurus(World world) {
         super(world, EnumDinoType.Ankylosaurus);
-        
-        this.OrderStatus = EnumOrderType.FreeMove;
+
         this.updateSize();
         this.setSubSpecies((new Random()).nextInt(3) + 1);
+
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Ankylosaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.5F, 1.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 3.0F;
+
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -62,12 +74,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
 
     }
-    
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
     /**
      * Returns the texture's file path as a String.
      */
@@ -169,18 +176,5 @@ public class EntityAnkylosaurus extends EntityDinosaur
     public EntityAnkylosaurus spawnBabyAnimal(EntityAgeable var1)
     {
         return new EntityAnkylosaurus(this.worldObj);
-    }
-
-    @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
-    {
-            par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
-            Random random = new Random();
-
-            this.setSubSpecies(random.nextInt(3) + 1);
-            
-        	this.setDinoAge(this.SelfType.AdultAge);
-
-            return par1EntityLivingData;
     }
 }

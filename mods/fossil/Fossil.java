@@ -90,6 +90,7 @@ import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
+import mods.fossil.handler.FossilRecipeHandler;
 import mods.fossil.handler.FossilSpawnEggs;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
@@ -1007,98 +1008,6 @@ public class Fossil implements IPacketHandler
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0)+".name", "Ancient Wood Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0)+".name", "Ancient Stone Slab");
 
-        GameRegistry.addRecipe(new ItemStack(skullLantern, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Block.torchWood});
-		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', blockSkull});
-		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 5, 15), new Object[] {"X", 'X', skullLantern});
-		GameRegistry.addRecipe(new ItemStack(blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Block.glass, 'Y', new ItemStack(Item.dyePowder, 1, 2), 'W', Item.bucketWater, 'Z', Item.ingotIron});
-		GameRegistry.addRecipe(new ItemStack(blockanalyzerIdle, 1), new Object[] {"XYX", "XWX", 'X', Item.ingotIron, 'Y', relic, 'W', biofossil});
-		GameRegistry.addRecipe(new ItemStack(blockworktableIdle, 1), new Object[] {"X", "Y", 'X', Item.paper, 'Y', Block.workbench});
-		
-		for(int i=0;i<EnumDinoType.values().length;i++)
-			GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});
-		
-		GameRegistry.addRecipe(new ItemStack(skullStick, 1), new Object[] {"X", "Y", 'X', blockSkull, 'Y', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
-		GameRegistry.addRecipe(new ItemStack(feederIdle, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeGold, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemAxe), new Object[] {Item.axeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeGold, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemPickaxe), new Object[] {Item.pickaxeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeGold, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemHoe), new Object[] {Item.hoeDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordGold, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemSword), new Object[] {Item.swordDiamond, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelGold, gem});
-		GameRegistry.addShapelessRecipe(new ItemStack(gemShovel), new Object[] {Item.shovelDiamond, gem});
-		
-		for(int i=0;i<EnumDinoType.values().length;i++)
-			GameRegistry.addShapelessRecipe(new ItemStack(dinoPedia), new Object[] {Item.book, EnumDinoType.values()[i].DNAItem});
-			GameRegistry.addShapelessRecipe(new ItemStack(archNotebook), new Object[] {Item.book, this.relic});
-
-		
-		
-		GameRegistry.addShapelessRecipe(new ItemStack(rawChickenSoup, 1, 0), new Object[] {Item.bucketEmpty, Item.chickenRaw});
-		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 1), new Object[] {new ItemStack(magicConch, 1, 0)});
-		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 2), new Object[] {new ItemStack(magicConch, 1, 1)});
-		GameRegistry.addShapelessRecipe(new ItemStack(magicConch, 1, 0), new Object[] {new ItemStack(magicConch, 1, 2)});
-		GameRegistry.addRecipe(new ItemStack(chickenEss, 8), new Object[] {"XXX", "XYX", "XXX", 'X', Item.glassBottle, 'Y', cookedChickenSoup});
-		GameRegistry.addRecipe(new ItemStack(whip, 1), new Object[] {"XXS", "XTS", "TXS", 'T', Item.stick, 'S', Item.silk});
-		
-		GameRegistry.addRecipe(new ItemStack(volcanicBrick, 4), new Object[] {"VV", "VV", 'V', this.volcanicRock});
-		
-		GameRegistry.addRecipe(new ItemStack(palaePlanks, 4), new Object[] {"P", 'P', this.palmLog});
-		GameRegistry.addRecipe(new ItemStack(Block.woodenButton, 1), new Object[] {"P", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Item.stick, 3), new Object[] { "P", "P", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Block.pressurePlatePlanks, 1), new Object[] { "PP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Item.boat, 1), new Object[] { "PXP", "PPP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Item.bowlEmpty, 3), new Object[] { "PXP", "XPX", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Block.workbench, 1), new Object[] { "PP", "PP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Item.doorWood, 1), new Object[] {"PPX", "PPX", "PPX", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Block.trapdoor, 2), new Object[] { "PPP", "PPP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] {"PPP", "PXP", "PPP", 'P', this.palaePlanks});
-		
-		GameRegistry.addRecipe(new ItemStack(Item.shovelWood, 1), new Object[] {"P", "S", "S", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.swordWood, 1), new Object[] {"P", "P", "S", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.hoeWood, 1), new Object[] {"PP", "XS", "XS", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.hoeWood, 1), new Object[] {"PP", "SX", "SX", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.axeWood, 1), new Object[] {"PP", "PS", "XS", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.axeWood, 1), new Object[] {"PP", "SP", "SX", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.pickaxeWood, 1), new Object[] {"PPP", "XSX", "XSX", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Block.fenceGate, 1), new Object[] { "SPS", "SPS", 'P', this.palaePlanks, 'S', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(Item.sign, 3), new Object[] {"PPP", "PPP", "XSX", 'P', this.palaePlanks, 'S', Item.stick});
-		
-		GameRegistry.addRecipe(new ItemStack(Item.bed, 1), new Object[] { "WWW", "PPP", 'P', this.palaePlanks, 'W',blockanalyzerActive.cloth});
-		GameRegistry.addRecipe(new ItemStack(Block.jukebox, 1), new Object[] {"PPP", "PDP", "PPP", 'P', this.palaePlanks, 'D', Item.diamond});
-		GameRegistry.addRecipe(new ItemStack(Block.music, 1), new Object[] {"PPP", "PRP", "PPP", 'P', this.palaePlanks, 'R', Item.redstone});
-		GameRegistry.addRecipe(new ItemStack(Block.pistonBase, 1), new Object[] {"PPP", "CIC", "CRC", 'P', this.palaePlanks, 'R', Item.redstone, 'I',Item.ingotIron,'C',Block.cobblestone});
-		GameRegistry.addRecipe(new ItemStack(Block.bookShelf, 1), new Object[] {"PPP", "BBB", "PPP", 'P', this.palaePlanks, 'B', Item.book});
-		
-		GameRegistry.addRecipe(new ItemStack(palaeSingleSlab, 6), new Object[] {"PPP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(palaeStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', this.palaePlanks});
-		GameRegistry.addRecipe(new ItemStack(palaeStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', this.palaePlanks});
-		
-	    GameRegistry.addRecipe(new ItemStack(ancientWoodSingleSlab, 6), new Object[] {"PPP", 'P', this.ancientWood});
-	    GameRegistry.addRecipe(new ItemStack(ancientWoodStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', this.ancientWood});
-	    GameRegistry.addRecipe(new ItemStack(ancientWoodStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', this.ancientWood});
-	    
-	       GameRegistry.addRecipe(new ItemStack(ancientStoneSingleSlab, 6), new Object[] {"PPP", 'P', this.ancientStone});
-	        GameRegistry.addRecipe(new ItemStack(ancientStoneStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', this.ancientStone});
-	        GameRegistry.addRecipe(new ItemStack(ancientStoneStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', this.ancientStone});
-		
-		GameRegistry.addRecipe(new ItemStack(feet, 1), new Object[] {"* *","# #", '#', this.foot, '*', this.claw});
-		GameRegistry.addRecipe(new ItemStack(femurs, 1), new Object[] {"###","* *","# #", '#', Item.bone,'*', this.legBone});
-		GameRegistry.addRecipe(new ItemStack(ribCage, 1), new Object[] {"# #"," # ","###", '#', Item.bone});
-		GameRegistry.addRecipe(new ItemStack(skullHelmet, 1), new Object[] {"#X#","# #", '#', Item.bone,'X', Fossil.skull});
-		
-        GameRegistry.addSmelting(rawChickenSoup.itemID, new ItemStack(cookedChickenSoup), 3.0F);
-        GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem.itemID, new ItemStack(Fossil.sjl), 3.0F);
-        
-        for(int i=0;i<EnumDinoType.values().length;i++)
-        	if(i!=4)//Nautilus treated specially
-        	GameRegistry.addSmelting(EnumDinoType.values()[i].DropItem.itemID, new ItemStack(cookedDinoMeat), 3.0F);
-        
-        GameRegistry.addSmelting(icedMeat.itemID, new ItemStack(Item.beefCooked), 3.0F);
-        GameRegistry.addSmelting(dodoWing.itemID, new ItemStack(Fossil.dodoWingCooked), 3.0F);
 		
 		EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, 5, false);
 		EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
@@ -1192,6 +1101,7 @@ public class Fossil implements IPacketHandler
         proxy.registerRenderThings();
         
         FossilOreDictionary.oreRegistration();
+        FossilRecipeHandler.addRecipe();
         GameRegistry.registerPickupHandler(new FossilPickupHandler());
         
 	}

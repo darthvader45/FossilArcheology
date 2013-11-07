@@ -122,6 +122,9 @@ public enum EnumDinoType
     public float Exp0 = 1.0f;
     //Experience increase per day for the dino
     public float ExpInc = 0.2f;
+
+	private float DinoSizeMin = 1.0f;
+	private float DinoSizeMax = 10.0f;
     
     
     /**
@@ -157,6 +160,11 @@ public enum EnumDinoType
     	if(Max>0)this.MaxAge=Max;
     }
     
+    private void setDinoSize(float SizeMin, float SizeMax)
+    {
+    	this.DinoSizeMin = SizeMin;
+    	this.DinoSizeMax = SizeMax;
+    }
     /**
      * sets the Dimensions for the Dino: starting width,width increase,same for length and height
      */
@@ -176,10 +184,11 @@ public enum EnumDinoType
     private void setProperties(float H0,float HInc,int Str0,int StrInc,float Sp0,float SpInc, int Hunger)
     {
     	if(H0>0)this.Health0=H0;
-    	if(HInc>0)this.HealthInc=HInc;
     	if(Str0>0)this.Strength0=Str0;
-    	if(StrInc>0)this.StrengthInc=StrInc;
     	if(Sp0>0)this.Speed0=Sp0;
+    	
+    	if(HInc>0)this.HealthInc=HInc;
+    	if(StrInc>0)this.StrengthInc=StrInc;
     	if(SpInc>0)this.SpeedInc=SpInc;
     	
     	if(Hunger>0)this.MaxHunger=Hunger;
@@ -249,8 +258,9 @@ public enum EnumDinoType
         Pachycephalosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
     	
         Ankylosaurus.setItems(       Item.stick);//,         Fossil.rawAnkylosaurus,  Fossil.dnaAnkylosaurus,  Fossil.eggAnkylosaurus);
+        Ankylosaurus.setDinoSize(1.0F, 10.0F);
         Ankylosaurus.setDimensions(0.5F, 0.25F, 0.5F, 0.25F, 0.5F, 0.25F);
-        Ankylosaurus.setAges(-1, -1, 13);
+        Ankylosaurus.setAges(-1, 6, 13);
         Ankylosaurus.setProperties(21, 3, 4, 3, 0.17F, 0.016F, 500);
         Ankylosaurus.setExperience(0.5F, 0.2F);
         
@@ -265,21 +275,6 @@ public enum EnumDinoType
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Palae);
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.RedFlower);
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
-    	
-        Ankylosaurus.setItems(       Item.stick);//,         Fossil.rawAnkylosaurus,  Fossil.dnaAnkylosaurus,  Fossil.eggAnkylosaurus);
-        Ankylosaurus.setDimensions(0.5F, 0.25F, 0.5F, 0.25F, 0.5F, 0.25F);
-        Ankylosaurus.setAges(-1, -1, 13);
-        Ankylosaurus.setProperties(21, 1, 4, 3, 0.17F, 0.016F, 500);
-        Ankylosaurus.setExperience(0.5F, 0.2F);
-        
-        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Wheat);
-        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Melon);
-        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Apple);
-        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Bread);
-        Ankylosaurus.FoodItemList.addItem(EnumDinoFoodItem.Potato);
-        
-        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);
-        Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.Leaves);
     	
         Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);

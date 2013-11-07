@@ -50,7 +50,22 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         super(var1,EnumDinoType.Pachycephalosaurus);
         this.looksWithInterest = false;
         this.updateSize();
-        this.OrderStatus = EnumOrderType.FreeMove;
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Pachycephalosaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.0F, 1.5F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 3.0F;
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -439,17 +454,4 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 	{
 		return null;
 	}
-	
-    @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
-    {
-            par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
-            Random random = new Random();
-
-            this.setSubSpecies(random.nextInt(3) + 1);
-            
-        	this.setDinoAge(this.SelfType.AdultAge);
-
-            return par1EntityLivingData;
-    }
 }

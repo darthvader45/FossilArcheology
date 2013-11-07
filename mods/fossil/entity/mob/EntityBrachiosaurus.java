@@ -38,9 +38,24 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public EntityBrachiosaurus(World var1)
     {
         super(var1,EnumDinoType.Brachiosaurus);
-        
-        this.OrderStatus = EnumOrderType.FreeMove;
         this.updateSize();
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Brachiosaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.5F, 2.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 4.5F;
+
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -65,7 +80,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
     }
-    
     
     /**
      * Returns the texture's file path as a String.

@@ -61,6 +61,24 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
 
         this.updateSize(); 
         
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Plesiosaur.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.5F, 1.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 6.0F;
+        
+        
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
@@ -96,13 +114,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             }
     }
     
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return !this.isModelized();
-    }
+
 
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
@@ -559,7 +571,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getDinoHeight() * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
         }
     }
 

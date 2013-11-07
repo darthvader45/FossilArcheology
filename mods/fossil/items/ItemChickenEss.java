@@ -1,5 +1,9 @@
 package mods.fossil.items;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.items.forge.ForgeFood;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,5 +23,11 @@ public class ItemChickenEss extends ForgeFood
     {
         var3.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
         //return super.onFoodEaten(var1, var2, var3);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean i)
+    {
+    list.add("Feed this to your dinosaurs to make them grow!");
     }
 }

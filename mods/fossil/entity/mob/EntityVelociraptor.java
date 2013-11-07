@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import java.util.Vector;
 
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
@@ -92,6 +93,27 @@ public class EntityVelociraptor extends EntityDinosaur
         //this.Hungrylevel=;*/
         this.updateSize();
         
+        
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Velociraptor.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.5F, 1.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 0.25F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 0.5F;
+        
+        
+        
+        
         //this.setHunger(this.getHungerLimit());
         //this.attackStrength = 2 + this.getDinoAge();
         this.getNavigator().setAvoidsWater(true);
@@ -132,14 +154,6 @@ public class EntityVelociraptor extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
 
     }
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-    
 
     /*protected void entityInit()
     {
@@ -168,31 +182,31 @@ public class EntityVelociraptor extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return "/mods/fossil/textures/mob/raptor_blue_adult.png";
+                    return Fossil.modid + ":textures/mob/Velociraptor_Blue_Adult.png";
 
                 case 2:
-                    return "/mods/fossil/textures/mob/raptor_green_adult.png";
+                    return Fossil.modid + ":textures/mob/Velociraptor_Green_Adult.png";
                     
                 case 3:
-                    return "/mods/fossil/textures/mob/raptor_brown_adult.png";
+                    return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
 
                 default:
-                	return "/mods/fossil/textures/mob/raptor_brown_adult.png";
+                	return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
             }
         }
         switch (this.getSubSpecies())
         {
             case 1:
-                return "/mods/fossil/textures/mob/raptor_blue_Baby.png";
+                return Fossil.modid + ":textures/mob/Velociraptor_Blue_Baby.png";
 
             case 2:
-                return "/mods/fossil/textures/mob/raptor_green_Baby.png";
+                return Fossil.modid + ":textures/mob/Velociraptor_Green_Baby.png";
             
             case 3:
-                return "/mods/fossil/textures/mob/raptor_brown_Baby.png";
+                return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
 
             default:
-            	return "/mods/fossil/textures/mob/raptor_brown_Baby.png";
+            	return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
         }
     }
     

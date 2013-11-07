@@ -70,6 +70,27 @@ public class EntityStegosaurus extends EntityDinosaur
         
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Stegosaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.0F, 0.8F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 8.0F;
+        
+        
+        
+        
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
@@ -80,22 +101,14 @@ public class EntityStegosaurus extends EntityDinosaur
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
-
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return this.riddenByEntity == null;
-    }
     
     public String getTexture()
     {
         if (this.isModelized())
             return super.getModelTexture();
         if(this.isAdult())
-            return "/mods/fossil/textures/mob/Stegosaurus_Adult.png";
-		return "/mods/fossil/textures/mob/Stegosaurus_Baby.png";
+            return "fossil:textures/mob/Stegosaurus_Adult.png";
+		return "fossil:textures/mob/Stegosaurus_Baby.png";
     }
 
 

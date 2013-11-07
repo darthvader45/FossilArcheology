@@ -1,10 +1,14 @@
 
 package mods.fossil.client.model;
 
+import org.lwjgl.opengl.GL11;
+
+import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.MathHelper;
 
 public class ModelAnkylosaurus extends ModelBase
@@ -178,8 +182,11 @@ public class ModelAnkylosaurus extends ModelBase
   
   public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
   {
+	  EntityAnkylosaurus entitydinosaur = (EntityAnkylosaurus)var1;
+	  
       super.render(var1, var2, var3, var4, var5, var6, var7);
       this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+      
     Head.render(var7);
     Mouth.render(var7);
     Head_Block.render(var7);
@@ -214,6 +221,7 @@ public class ModelAnkylosaurus extends ModelBase
       float initialOffset = PI / 2;
       float offset = PI * 2 / 11;
       float currentAngle = 0;
+      
       //if (var7==false)
           this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1)* 0.63330555F + 1) * 1.0F * var2;
           this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;

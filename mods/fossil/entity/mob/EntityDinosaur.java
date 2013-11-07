@@ -21,6 +21,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,10 +67,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public boolean RiderJump=false;
     public boolean RiderSneak=false;
     
-    //Factors enlarging the Hitbox to a senseful value
-    public float HitboxXfactor=1.0F;
-    public float HitboxYfactor=1.0F;
-    public float HitboxZfactor=1.0F;
+    public float minSize;
+    public float maxSize;
+    public int adultAge;
     
     public EnumDinoType SelfType = null;
     
@@ -82,10 +82,14 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     //public static EntityDinosaur pediaingDino = null;
     protected DinoAIControlledByPlayer ridingHandler;
     public EnumOrderType OrderStatus;
+
     
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     private static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
+    
+
+
     
 	// EntityDinosaur Constructor
     public EntityDinosaur(World var1,EnumDinoType T0)
@@ -98,30 +102,60 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger/2);
         this.setHealth( this.SelfType.Health0 );
-        
+     //   this.setSize(this.FuckinAy,this.FuckinAy);
         // MC Entity calls setPosition which expects the bounding box to be set,
         // so unfortunately since we're storing our width/length in getDinoWidth (etc),
         // we have to set this again since now SelfType is set to something.
-        this.setBoundingBox();
+     //   this.setBoundingBox();
     }
+    
+    /**
+     * Interpolate the size of the dinosaur based on the day 0 value and the max adult value.
+     * If the dinosaur is past Adult age, continue to grow but have diminished growth.
+     */
+    public float getDinosaurSize()
+    {
+    	float step;
+    	
+    	// If the dinosaur is past "Adult" age, slow down growth.
+    	if(this.getDinoAge() > this.adultAge)
+    	{
+    		step = ((this.maxSize - this.minSize)/(adultAge+1)) * 0.25F;
+    	}
+    	else
+    	{
+    		step = (this.maxSize - this.minSize)/(adultAge+1);
+    	}
+    	
+        return (this.minSize + (step*this.getDinoAge()));
+    }
+    /**
+     * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
+     */
+    public void setScaleForAge(boolean par1)
+    {
+            this.setScale(this.getDinosaurSize());
+    }
+	
+    /*
     public void setPosition(double par1, double par3, double par5)
     {
         this.posX = par1;
         this.posY = par3;
         this.posZ = par5;
-        float w_2 = this.getDinoWidth() / 2.0F * this.HitboxZfactor;
-		float l_2 = this.getDinoLength() / 2.0F * this.HitboxXfactor;
-        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.getDinoHeight()*this.HitboxYfactor, this.posZ + (double)l_2);      
+        float w_2 = this.width / 2.0F * this.HitboxZfactor;
+		float l_2 = this.width / 2.0F * this.HitboxXfactor;
+        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.height*this.HitboxYfactor, this.posZ + (double)l_2);      
     
      }
     
     protected void setBoundingBox()
     {
-        float w_2 = this.getDinoWidth() / 2.0F * this.HitboxZfactor;
-      float l_2 = this.getDinoLength() / 2.0F * this.HitboxXfactor;
-        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.getDinoHeight()*this.HitboxYfactor, this.posZ + (double)l_2);      
+        float w_2 = this.width / 2.0F * this.HitboxZfactor;
+      float l_2 = this.width / 2.0F * this.HitboxXfactor;
+        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.height*this.HitboxYfactor, this.posZ + (double)l_2);      
     }
-    
+    */
     protected int getExperiencePoints(EntityPlayer par1EntityPlayer)
     {
         return MathHelper.floor_float(this.SelfType.Exp0+(float)this.getDinoAge()*this.SelfType.ExpInc);
@@ -129,16 +163,27 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	
     public void updateSize()
     {
-    	setSize(this.getDinoWidth(),this.getDinoHeight());
-    	setPosition(this.posX, this.posY, this.posZ);
+  
+    	/*
+    this.Step = ((this.SizeMax - this.SizeMin)/(this.SelfType.AdultAge + 1));
+    this.FuckinAy = this.SizeMin + (this.Step * this.getDinoAge());
+	
+    	setSize(this.FuckinAy, this.FuckinAy);
+*/
+    	
+    	//setSize(this.getDinoWidth(),this.getDinoHeight());
+ //   	setPosition(this.posX, this.posY, this.posZ);
     	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getHealth() + this.getDinoAge()*this.SelfType.HealthInc);
     }
 	
+    /*
     public void InitSize()//Necessary to overload existing
     {
 	this.updateSize();
 	}
+	*/
 	
+    /*
     public float getDinoWidth()
     {
     	if( this.SelfType != null )
@@ -174,12 +219,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		return 1.0F;
     	}
     }
-    
+        */
     private void setPedia()
     {
 	Fossil.ToPedia = (Object)this;
 	}
-    
+
     /**
      * Tells if the Dino is a Adult
      */
@@ -470,11 +515,11 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     }
 
     /**
-     * Returns true if the Entity AI code should be run
+     * Returns true if the newer Entity AI code should be run
      */
     public boolean isAIEnabled()
     {
-    	return false;
+        return !this.isModelized() || this.riddenByEntity == null;
     }
     
     /**
@@ -1087,6 +1132,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     
     public void onLivingUpdate()
     {
+
+    	
     	if(this.worldObj.isRemote)
     	{
     		/*System.out.println(String.valueOf(this.ticksExisted%100));
@@ -1169,6 +1216,18 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
             if (var2 != null)
             {
+            	if (var2.itemID == Fossil.dinoPedia.itemID && !var1.worldObj.isRemote && var2.getDisplayName().equalsIgnoreCase("debugpedia"))
+            	{
+            		//TODO://
+            		Fossil.Console("----- DEBUG -----");
+            		//Fossil.Console("Step: " + this.Step);
+            		//Fossil.Console("SizeMin: " + this.SizeMin);
+            		//Fossil.Console("SizeMax: " + this.SizeMax);
+            	//	Fossil.Console("AdultAge: " + this.SelfType.AdultAge);
+            	//	Fossil.Console("getDinoAge: " + this.getDinoAge());
+            		//Fossil.Console("getDinosaurSize: " + this.getDinosaurSize);
+            		Fossil.Console("------ ----------");
+            	}
             	if (var2.itemID == Fossil.chickenEss.itemID && !var1.worldObj.isRemote)
             	{// Be grown up by chicken essence
             		if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
@@ -1382,5 +1441,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected boolean canDespawn()
     {
         return false;
+    }
+    
+
+    @Override
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
+    {
+            par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+            Random random = new Random();
+
+            this.setSubSpecies(random.nextInt(3) + 1);
+            
+        	this.setDinoAge(this.SelfType.AdultAge);
+
+            return par1EntityLivingData;
     }
 }

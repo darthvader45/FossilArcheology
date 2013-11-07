@@ -57,11 +57,30 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         //this.moveSpeed = 0.3F;
         //this.health = 10;
         //this.experienceValue=20;
-        this.HitboxXfactor=1.4F;
-        this.HitboxYfactor=1.4F;
-        this.HitboxZfactor=1.4F;
 
         this.updateSize();
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Spinosaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.0F, 1.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 7.0F;
+        
+        
+        
+        
+        
+        
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -79,14 +98,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
     }
-
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return this.riddenByEntity == null && !this.isWeak();
-    }
     
     protected void applyEntityAttributes()
     {
@@ -94,15 +105,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.50000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
 
-    }
-    
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    protected boolean canTriggerWalking()
-    {
-        return false;
     }
 
     /**
@@ -502,22 +504,16 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     /**
      * Returns the texture's file path as a String.
      */
+    @Override
     public String getTexture()
     {
-        return "/mods/fossil/textures/mob/Spinosaurus_Adult.png";
-    }
-
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    protected void jump()
-    {
- //       if (!this.isInWater())
-            this.isAirBorne = true;
-        
-            this.motionY = 0.5;
-            ForgeHooks.onLivingJump(this);
-
+        if (this.isModelized())
+            return super.getTexture();
+            switch (this.getSubSpecies())
+            {
+                default:
+                	return "fossil:textures/mob/Spinosaurus_Adult.png";
+            }
     }
 
     public boolean isWeak()

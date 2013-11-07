@@ -39,12 +39,37 @@ public class EntityTriceratops extends EntityDinosaur
     public EntityTriceratops(World var1)
     {
         super(var1,EnumDinoType.Triceratops);
-        this.OrderStatus = EnumOrderType.FreeMove;
         this.looksWithInterest = false;
-
         this.updateSize();
-        
         this.setSubSpecies((new Random()).nextInt(3) + 1);
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Triceratops.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(0.8F, 0.8F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 8.0F;        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         this.getNavigator().setAvoidsWater(true);
         //this.tasks.addTask(0, new DinoAIGrowup(this));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
@@ -61,14 +86,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(10, new EntityAILookIdle(this));
     }
 
-    
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return !this.isModelized();
-    }
+
 
     protected void applyEntityAttributes()
     {
@@ -157,16 +175,6 @@ public class EntityTriceratops extends EntityDinosaur
         //this.setSelfAngry(var1.getBoolean("Angry"));
         //this.InitSize();
     }*/
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    protected void jump()
-    {
-        this.motionY = 0.5;
-        this.isAirBorne = true;
-        ForgeHooks.onLivingJump(this);
-    }
-
 
     /**
      * Called to update the entity's position/logic.
@@ -375,7 +383,7 @@ public class EntityTriceratops extends EntityDinosaur
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getDinoHeight() * 0.65D + 0.07D * (double)(12 - this.getDinoAge()), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.65D + 0.07D * (double)(12 - this.getDinoAge()), this.posZ);
         }
     }
 

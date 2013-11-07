@@ -38,10 +38,47 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     public EntityMosasaurus(World par1World)
     {
         super(par1World, EnumDinoType.Mosasaurus);
-        this.setSize(1.0F, 1.0F);
+
+
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.5F, 0.5F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 3.0F;
+        
+        
         this.experienceValue = 5;
     }
     
+    public String getTexture()
+    {
+        if (this.isModelized())
+            return super.getModelTexture();
+        if(this.isAdult())
+            return "fossil:textures/mob/Mosasaurus.png";
+		return "fossil:textures/mob/Mosasaurus.png";
+    }
+    
+    /**
+     * Returns true if the Entity AI code should be run
+     * 
+     * Overriding because Mosasaur are dumb.
+     */
+    @Override
+    public boolean isAIEnabled()
+    {
+    	return false;
+    }
     
     /**
      * Called when the entity is attacked.

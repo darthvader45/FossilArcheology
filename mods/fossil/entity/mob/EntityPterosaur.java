@@ -65,6 +65,28 @@ public class EntityPterosaur extends EntityFlyingDino
         super(var1,EnumDinoType.Pterosaur);
         this.looksWithInterest = false;
         this.updateSize();
+        
+        
+        
+        /*
+         * EDIT VARIABLES PER DINOSAUR TYPE
+         */
+        
+        this.adultAge = EnumDinoType.Pterosaur.AdultAge;
+        
+        // Set initial size for hitbox. (length/width, height)
+        this.setSize(1.0F, 1.0F);
+        
+        // Size of dinosaur at day 0.
+        this.minSize = 1.0F;
+        
+        // Size of dinosaur at age Adult.
+        this.maxSize = 4.0F;
+        
+        
+        
+        
+        
         this.tasks.addTask( 0, new DinoAIFlying( this ));
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
@@ -118,14 +140,6 @@ public class EntityPterosaur extends EntityFlyingDino
     protected boolean canTriggerWalking()
     {
         return false;
-    }
-
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return this.isModelized() ? false : true;//this.riddenByEntity == null;
     }
     
     /*protected void entityInit()
@@ -326,7 +340,7 @@ public class EntityPterosaur extends EntityFlyingDino
 
     public void updateRiderPosition()
     {
-        float var1 = -this.getDinoHeight();
+        float var1 = -this.height;
 
         if (this.riddenByEntity != null)
         {

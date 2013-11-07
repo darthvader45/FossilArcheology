@@ -4,40 +4,34 @@ import mods.fossil.entity.mob.EntityStegosaurus;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class RenderStegosaurus extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Stegosaurus_Adult.png");
-    
-    public RenderStegosaurus(ModelBase var1, float var2)
+
+    public RenderStegosaurus(ModelBase par1ModelBase, float par2)
     {
-        super(var1, var2);
-        this.setRenderPassModel(var1);
+        super(par1ModelBase, par2);
     }
     
-    public RenderStegosaurus(ModelBase var1, ModelBase var2, float var3)
-    {
-        super(var1, var3);
-        this.setRenderPassModel(var2);
-    }
     
     /**
      * Applies the scale to the transform matrix
      * 
      * Use this to grow the dinonsaur with age.
      */
-    protected void preRenderScale(EntityStegosaurus entitystegosaurus, float par2)
+    protected void preRenderScale(EntityStegosaurus entitydinosaur, float par2)
     {
-        GL11.glScalef(entitystegosaurus.getDinoWidth(), entitystegosaurus.getDinoHeight(), entitystegosaurus.getDinoLength());
+        GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
     }
-
+    
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
@@ -51,10 +45,14 @@ public class RenderStegosaurus extends RenderLiving
     {
         return new ResourceLocation(par1Entity.getTexture());
     }
-    
+  
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityStegosaurus)par1Entity);
     }
-}
+    
 
+}
