@@ -103,7 +103,7 @@ public class EntityVelociraptor extends EntityDinosaur
         this.adultAge = EnumDinoType.Velociraptor.AdultAge;
         
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.0F);
+        this.setSize(1.5F, 1.5F);
         
         // Size of dinosaur at day 0.
         this.minSize = 0.25F;
