@@ -109,4 +109,3 @@ public class BlockIcedStone extends Block
         this.blockIcon = par1IconRegister.registerIcon("fossil:Iced_Stone");
     }
 }
-

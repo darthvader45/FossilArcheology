@@ -220,6 +220,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     /**
      * Called to update the entity's position/logic.
      */
+    /*
     public void onUpdate()
     {
         super.onUpdate();
@@ -228,6 +229,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
             this.BlockInteractive();
         }
     }
+    */
 
     /**
      * Applies a velocity to each of the entities pushing them away from each other. Args: entity
@@ -251,14 +253,14 @@ public class EntityBrachiosaurus extends EntityDinosaur
 
     public float getEyeHeight()
     {
-        return 4.0F + (float)this.getDinoAge() / 1.8F;
+        return 2.0F + (float)this.getDinoAge() / 1.8F;
     }
 
     public float getHalfHeight()
     {
-        return this.getEyeHeight() / 2.0F;
+        return this.getEyeHeight() / 2.0F + 0.7F;
     }
-
+/*
     public int BlockInteractive()
     {
 
@@ -290,7 +292,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
         return 0;
     }
-
+*/
     private boolean isObjectTooTall(int var1, int var2, int var3)
     {
         return (float)this.GetObjectTall(var1, var2, var3) > this.getHalfHeight();
@@ -330,7 +332,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight() * 1.5D, this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
         }
     }
 

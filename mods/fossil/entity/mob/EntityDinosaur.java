@@ -406,6 +406,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         return this.isModelized() ? this.getModelTexture() : "fossil:textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
+    public void moveEntityWithHeading(float par1, float par2)
+    {
+    	if(!isModelized())
+    		super.moveEntityWithHeading(par1, par2);
+    	else
+    	{
+            this.motionX *= 0.0D;
+            this.motionZ *= 0.0D;
+    	}
+    }
     /**
      * Get number of ticks, at least during which the living entity will be silent.
      */
@@ -418,7 +428,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void ShowPedia(GuiPedia p0)
     {		
     	p0.reset();
-    	p0.PrintPictXY(new ResourceLocation("fossil:textures/items/"+ this.SelfType.toString() +"_DNA.png"), 163, 7, 16, 16);
+    	p0.PrintPictXY(new ResourceLocation("fossil:textures/items/"+ this.SelfType.toString() +"_DNA.png"), 175, 7, 16, 16);
     	
     	if (this.hasCustomNameTag())
     	p0.PrintStringXY(this.getCustomNameTag(), 140, 24,40,90,245);
@@ -436,10 +446,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
  
     	p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 152, 58); //display the health
     	p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 152, 70);
-    	
-    	if(this.SelfType.isRideable() && this.isAdult())
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-
+ 
     	if(this.SelfType.isTameable() && this.isTamed())
     	{
     		p0.AddStringLR( StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
@@ -451,19 +458,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		p0.AddStringLR(s0, true);
     	}
     	
+    	if(this.SelfType.isRideable() && this.isAdult())
+    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+
+
+    	
     	for(int i=0; i<this.SelfType.FoodItemList.index;i++)
     	{
     		if(this.SelfType.FoodItemList.getItem(i)!=null)
     			p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
     	}
-    	
-    	/*for(int i=0; i<this.SelfType.FoodBlockList.index;i++)
-    	{
-    		if(this.SelfType.FoodBlockList.getBlock(i)!=null)
-    		{
-    			p0.AddMiniItem(i0);
-    		}
-    	}*/
     	//TODO show all blocks the dino can eat
     }
     
@@ -520,7 +524,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public boolean isAIEnabled()
     {
-        return !this.isModelized() || this.riddenByEntity == null;
+        return !this.isModelized();
     }
     
     /**
@@ -1221,6 +1225,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
             if (var2 != null)
             {
+            	/*
             	if (var2.itemID == Fossil.dinoPedia.itemID && !var1.worldObj.isRemote && var2.getDisplayName().equalsIgnoreCase("debugpedia"))
             	{
             		//TODO:DEBUG//
@@ -1233,6 +1238,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             		Fossil.Console("getDinosaurSize: " + this.getDinosaurSize());
             		Fossil.Console("------ ----------");
             	}
+            	*/
             	if (var2.itemID == Fossil.chickenEss.itemID && !var1.worldObj.isRemote)
             	{// Be grown up by chicken essence
             		if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)

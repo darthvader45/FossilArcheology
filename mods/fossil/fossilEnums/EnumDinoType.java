@@ -46,7 +46,7 @@ public enum EnumDinoType
     Mosasaurus(EntityMosasaurus.class, 		C.NOTHING),
     Stegosaurus(EntityStegosaurus.class, 	C.TAME | C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,C.TAME | C.CARRY | C.CARNIVORE),
-    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.HERBIVORE),
+    Brachiosaurus(EntityBrachiosaurus.class,C.MODEL | C.TAME | C.RIDE | C.HERBIVORE),
     Spinosaurus(EntitySpinosaurus.class, 	C.CARNIVORE),
     Compsognathus(EntityCompsognathus.class,C.CARNIVORE | C.TAME),
     Ankylosaurus(EntityAnkylosaurus.class,  C.TAME  | C.HERBIVORE),

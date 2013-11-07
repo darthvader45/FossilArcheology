@@ -354,7 +354,7 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
      */
     public boolean isOpaqueCube()
     {
-        return !this.graphicsLevel;
+        return this.graphicsLevel;
     }
 
     @SideOnly(Side.CLIENT)
@@ -384,6 +384,7 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
+    /*
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));
@@ -391,6 +392,7 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
         par3List.add(new ItemStack(par1, 1, 2));
         par3List.add(new ItemStack(par1, 1, 3));
     }
+    */
 
     /**
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage

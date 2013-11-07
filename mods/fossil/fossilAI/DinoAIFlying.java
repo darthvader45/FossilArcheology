@@ -30,7 +30,7 @@ public class DinoAIFlying extends EntityAIBase {
 	// =============
 	//	DEBUG VALUES
 	// =============
-	boolean 					g_bDebugFlying = true;
+	boolean 					g_bDebugFlying = false;
 
 	// =============
 	//  CONSTANTS

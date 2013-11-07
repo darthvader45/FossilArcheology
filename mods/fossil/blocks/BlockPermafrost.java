@@ -37,47 +37,7 @@ public class BlockPermafrost extends BlockBreakable
         return super.shouldSideBeRendered(var1, var2, var3, var4, 1 - var5);
     }
 
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
-    public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5)
-    {
-    	return;
-        /*if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - Block.lightOpacity[this.blockID] && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime()))
-        {
-            for (int var6 = -1; var6 <= 1; ++var6)
-            {
-                for (int var7 = -1; var7 <= 1; ++var7)
-                {
-                    for (int var8 = -1; var8 <= 1; ++var8)
-                    {
-                        if (var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.waterMoving.blockID || var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.waterStill.blockID)
-                        {
-                            var1.setBlock(var2 + var6, var3 + var7, var4 + var8, Block.ice.blockID);
-                        }
-
-                        if (var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.lavaMoving.blockID || var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.lavaStill.blockID || var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.fire.blockID)
-                        {
-                            var1.setBlock(var2, var3, var4, Block.dirt.blockID);
-                            return;
-                        }
-
-                        if (var1.getBlockId(var2 + var6, var3 + var7, var4 + var8) == Block.stone.blockID)
-                        {
-                            var1.setBlock(var2 + var6, var3 + var7, var4 + var8, Fossil.blockIcedStone.blockID);
-                            //var1.setBlock(var2 + var6, var3 + var7, var4 + var8, 1);
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            var1.setBlock(var2, var3, var4, Block.dirt.blockID,0,2);
-        }*/
-    }
-
+ 
     /**
      * Ticks the block if it's been scheduled
      */
