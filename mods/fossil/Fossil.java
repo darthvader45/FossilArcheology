@@ -812,7 +812,7 @@ public class Fossil implements IPacketHandler
         blockFossil = new BlockFossil(blockFossilID, 1).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_FOSSIL_NAME).setCreativeTab(this.tabFBlocks);
         blockSkull = new BlockFossilSkull(blockSkullID, false).setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SKULL_NAME).setCreativeTab(this.tabFBlocks);
         palmLog = new BlockPalmLog(palmLogID).setStepSound(Block.soundWoodFootstep).setHardness(1.4F)/*.setResistance(1.0F)*/.setUnlocalizedName(LocalizationStrings.PALAE_LOG_NAME);
-        palmLeaves = new BlockPalmLeaves(palmLeavesID, 53).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALAE_LEAVES_NAME);
+        palmLeaves = new BlockPalmLeaves(palmLeavesID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALAE_LEAVES_NAME);
         palmSap = new BlockPalmSapling(palmSapID).setStepSound(Block.soundGrassFootstep).setHardness(0.2F).setResistance(1F).setUnlocalizedName(LocalizationStrings.PALAE_SAP_NAME);
         palaePlanks = new BlockPalaePlanks(palaePlanksID, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAE_PLANKS_NAME);
         palaeDoubleSlab = (BlockHalfSlab)(new BlockPalaeSlab(palaeDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.PALAE_DOUBLESLAB_NAME);
@@ -1059,7 +1059,7 @@ public class Fossil implements IPacketHandler
 		
 		GameRegistry.registerWorldGenerator(new FossilGenerator());
 		
-		if(FossilOptions.Gen_Palaeoraphe)
+		//if(FossilOptions.Gen_Palaeoraphe)
 		GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe());
 		
 		GameRegistry.registerWorldGenerator(new TarGenerator());

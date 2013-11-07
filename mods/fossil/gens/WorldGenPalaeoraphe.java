@@ -24,57 +24,12 @@ public class WorldGenPalaeoraphe extends WorldGenerator
         	return false;
         }
         //int deltaY = 5;
-        int deltaY = var2.nextInt(6);
-        for(int y=var4+1;y<=var4+10+deltaY;y++)
+        int deltaY = var2.nextInt(10);
+        for(int y=(var4-1)+1;y<=var4+10+deltaY;y++)
             var1.setBlock(var3, y, var5, Fossil.palmLog.blockID);
-            /*var1.setBlockAndMetadata(var3, var4 + 2, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 3, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 4, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 5, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 6, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 6, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 7, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 8, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 9, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 10, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 11, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 12, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 13, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 15, var5, Fossil.palmLog.blockID, 0);*/
+
 		 var4=var4-5+deltaY;
-            /*var1.setBlockAndMetadata(var3 + 1, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 2, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 3, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 4, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 5, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 + 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 + 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 + 3, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 + 4, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 13, var5 + 5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 1, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 2, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 3, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 4, var4 + 14, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 5, var4 + 13, var5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 - 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 - 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 - 3, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 14, var5 - 4, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3, var4 + 13, var5 - 5, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 1, var4 + 14, var5 + 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 1, var4 + 14, var5 - 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 1, var4 + 14, var5 + 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 1, var4 + 14, var5 - 1, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 2, var4 + 14, var5 + 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 2, var4 + 14, var5 - 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 2, var4 + 14, var5 + 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 2, var4 + 14, var5 - 2, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 3, var4 + 13, var5 + 3, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 + 3, var4 + 13, var5 - 3, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 3, var4 + 13, var5 + 3, Fossil.palmLog.blockID, 0);
-            var1.setBlockAndMetadata(var3 - 3, var4 + 13, var5 - 3, Fossil.palmLog.blockID, 0);*/
+
             
 		    var1.setBlock(var3, var4 + 16, var5, Fossil.palmLeaves.blockID);
             var1.setBlock(var3 + 1, var4 + 15, var5, Fossil.palmLeaves.blockID);

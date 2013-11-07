@@ -40,15 +40,14 @@ public class EntityDodo extends EntityAnimal
     {
         super(par1World);
 
-        this.setSize(0.3F, 0.7F);
+        this.setSize(0.5F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
-        float f = 0.25F;
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, new EntityAIMate(this, f));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.melonSeeds.itemID, false));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-        this.tasks.addTask(5, new EntityAIWander(this, f));
+        this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
+        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.0D, Item.melonSeeds.itemID, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
+        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }
@@ -105,7 +104,7 @@ public class EntityDodo extends EntityAnimal
 
         if (!this.onGround && this.motionY < 0.0D)
         {
-            this.motionY *= 1.1D;
+            this.motionY *= 0.6D;
         }
 
         this.field_70886_e += this.field_70889_i * 2.0F;
