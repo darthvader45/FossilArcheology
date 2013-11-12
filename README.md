@@ -25,8 +25,8 @@ So huge thanks to [Flammarilva](https://github.com/fls81245) for the awesome mod
 ###### Language Contributors
 Octo-Docto (Spanish)  
 Roody (Dutch)  
-[Gusanito](https://github.com/Gusanito) (Spanish)
-[crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)
+[Gusanito](https://github.com/Gusanito) (Spanish)  
+[crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)  
 
 *If you have contributed to language credits but are not listed, please contact
 the Revival team at FA.Revival@gmail.com*
