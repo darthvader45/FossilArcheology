@@ -1,8 +1,5 @@
 package mods.fossil;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -40,6 +37,7 @@ import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.gui.GuiBoneHelmet;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.entity.BehaviorDodoEggDispense;
 import mods.fossil.entity.BehaviorJavelinDispense;
@@ -52,7 +50,6 @@ import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.EntityWhipAttack;
 import mods.fossil.entity.mob.EntityBones;
-import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
@@ -62,7 +59,6 @@ import mods.fossil.entity.mob.EntityPigBoss;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
-import mods.fossil.entity.mob.EntityPterosaur;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -89,10 +85,12 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
+import mods.fossil.handler.FossilConnectionHandler;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
 import mods.fossil.handler.FossilRecipeHandler;
 import mods.fossil.handler.FossilSpawnEggs;
+import mods.fossil.handler.FossilTradeHandler;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
 import mods.fossil.items.ItemAncientHelmet;
@@ -130,24 +128,19 @@ import mods.fossil.tabs.TabFMaterial;
 import mods.fossil.tabs.TabFTest;
 import mods.fossil.tabs.TabFTools;
 import mods.fossil.util.FossilBonemealEvent;
-import mods.fossil.util.FossilTradeHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.Achievement;
@@ -166,25 +159,34 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IChatListener;
-import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = "1.6.4 Build 6.0 DEV")
+@Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = Fossil.modversion)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-public class Fossil implements IPacketHandler
+public class Fossil
 {
 	public static final String modid = "fossil";
+	public static final String modversion = "Build 6.0 DEV";
+	
+	/*
+	 * Set mod state here
+	 * 0 = Dev build
+	 * 1 = Beta build
+	 * 2 = Release build
+	 */
+	public static final int modState = 0;
 	
 	@SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
 	public static CommonProxy proxy;
+	
+	
 	
 	@Instance("fossil")
 	public static Fossil instance;
@@ -195,6 +197,8 @@ public class Fossil implements IPacketHandler
 	public static Object ToPedia;
 	
 	public static IChatListener messagerHandler = new FossilMessageHandler();
+	
+
 	
 	/*
 	 * If DebugMode = true
@@ -1066,7 +1070,7 @@ public class Fossil implements IPacketHandler
 		GameRegistry.registerWorldGenerator(new VolcanicRockGenerator());
 		
 		
-		if(FossilOptions.Gen_Academy)
+	//	if(FossilOptions.Gen_Academy)
 		GameRegistry.registerWorldGenerator(new AcademyGenerator());
 		/*
 
@@ -1083,8 +1087,7 @@ public class Fossil implements IPacketHandler
 		
 		NetworkRegistry.instance().registerChatListener(messagerHandler);
 		NetworkRegistry.instance().registerGuiHandler(this, GH);
-		NetworkRegistry.instance().registerChannel(this, "RiderInput");
-		NetworkRegistry.instance().registerChannel(this, "PteroFlight");
+		NetworkRegistry.instance().registerConnectionHandler(new FossilConnectionHandler());
 
 		GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
@@ -1133,60 +1136,10 @@ public class Fossil implements IPacketHandler
 		Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
         Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
         Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
-	}
 
-	@Override
-	public void onPacketData(INetworkManager manager,Packet250CustomPayload packet, Player player)
-	{
-		if("RiderInput".equals(packet.channel))
-		{
-			DataInputStream in = new DataInputStream(new ByteArrayInputStream(packet.data));
-			try
-	        {
-				int EntityID = in.readInt();
-				float Strafe = in.readFloat();
-				float Forward = in.readFloat();
-				boolean Jump = in.readBoolean();
-				boolean Sneak = in.readBoolean();
-				Entity E0 =((EntityPlayerMP)player).worldObj.getEntityByID(EntityID);
-				if(E0 instanceof EntityDinosaur)
-				{
-					((EntityDinosaur) E0).RiderForward=Forward;
-					((EntityDinosaur) E0).RiderJump=Jump;
-					((EntityDinosaur) E0).RiderStrafe=Strafe;
-					((EntityDinosaur) E0).RiderSneak=Sneak;
-				}
-	        }
-	        catch (IOException e)
-	        {
-	            throw new RuntimeException(e);
-	        }
-		}
-		if("PteroFlight".equals(packet.channel))
-		{
-			DataInputStream in = new DataInputStream(new ByteArrayInputStream(packet.data));
-			try
-	        {
-				int EntityID = in.readInt();
-				float Angle = in.readFloat();
-				float Pitch = in.readFloat();
-				float Wing = in.readFloat();
-				
-				Entity E0 =((EntityClientPlayerMP)player).worldObj.getEntityByID(EntityID);
-				if(E0 instanceof EntityPterosaur)
-				{
-					((EntityPterosaur)E0).AirAngle=Angle;
-					((EntityPterosaur)E0).AirPitch=Pitch;
-					((EntityPterosaur)E0).WingState=Wing;
-					//System.out.println("CLIENT:"+String.valueOf(Wing));
-				}
-	        }
-	        catch (IOException e)
-	        {
-	            throw new RuntimeException(e);
-	        }
-		}
-
+        MinecraftForge.EVENT_BUS.register(new GuiBoneHelmet(Minecraft.getMinecraft()));
+	
+	
 	}
 
 }

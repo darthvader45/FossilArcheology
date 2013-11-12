@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -22,16 +23,16 @@ public class ItemFemurs extends ItemArmor
 		itemIcon = iconRegister.registerIcon("fossil:Bone_Legs");
     }
 
-    public String getArmorTextureFile(ItemStack par1)
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
     {
-        if ( par1.itemID == Fossil.skullHelmet.itemID|| par1.itemID == Fossil.ribCage.itemID|| par1.itemID == Fossil.feet.itemID)
+        if ( stack.itemID == Fossil.skullHelmet.itemID|| stack.itemID == Fossil.ribCage.itemID|| stack.itemID == Fossil.feet.itemID)
         {
-              return "/mods/fossil/textures/armor/bone_1.png";
+              return "fossil:textures/armor/bone_1.png";
         }
-        if(par1.itemID == Fossil.femurs.itemID)
+        if(stack.itemID == Fossil.femurs.itemID)
 		{
-              return "/mods/fossil/textures/armor/bone_2.png";
+              return "fossil:textures/armor/bone_2.png";
         }
-			  return "/mods/fossil/textures/armor/bone_2.png";
-    }
+			  return "fossil:textures/armor/bone_2.png";
+    }	
 }

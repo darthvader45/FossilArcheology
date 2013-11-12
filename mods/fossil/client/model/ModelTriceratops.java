@@ -1,7 +1,5 @@
 package mods.fossil.client.model;
 
-import org.lwjgl.opengl.GL11;
-
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -125,20 +123,6 @@ public class ModelTriceratops extends ModelDinosaurs
     {
         super.render(var1, var2, var3, var4, var5, var6, var7);
         this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
-        
-  
-        
-        if (this.isChild)
-        {
-            float f6 = 2.0F;
-            GL11.glPushMatrix();
-            GL11.glScalef(2.0F * 1.5F, 2.0F * 1.5F, 2.0F * 1.5F);
-            GL11.glTranslatef(0.0F, 16.0F * var7, 0.2F);
-            this.horn_1_R.render(var7);
-            GL11.glPopMatrix();
-        }
-        
-        
         this.noumenon1.render(var7);
         this.noumenon2.render(var7);
         this.noumenon3.render(var7);
@@ -156,7 +140,7 @@ public class ModelTriceratops extends ModelDinosaurs
         this.horn_3.render(var7);
         this.head1.render(var7);
         this.head11.render(var7);
-        //this.horn_1_R.render(var7);
+        this.horn_1_R.render(var7);
         this.horn_1_R1.render(var7);
         this.horn_2_L.render(var7);
         this.horn_1_R2.render(var7);

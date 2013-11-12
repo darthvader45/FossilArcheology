@@ -197,7 +197,8 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 
             if (this.canEntityBeSeen(this.targetedEntity))
             {
-            	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+           // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+            	this.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
             	Vec3 vec3 = this.getLook(1.0F);
             }
         }
@@ -208,7 +209,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     }
 
     /**
-     * True if the ghast has an unobstructed line of travel to the waypoint.
+     * True if the Mosasaur has an unobstructed line of travel to the waypoint.
      */
     private boolean isCourseTraversable(double par1, double par3, double par5, double par7)
     {

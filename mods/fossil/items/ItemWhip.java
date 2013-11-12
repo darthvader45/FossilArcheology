@@ -54,10 +54,11 @@ public class ItemWhip extends ItemCarrotOnAStick
     		EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
 
 //            if (D.getRidingHandler().isControlledByPlayer() && I.getMaxDamage() - I.getItemDamage() >= 5)
-    		 if (D.getRidingHandler().isControlledByPlayer())
+
+    		if (D.getAIControlledByPlayer().isControlledByPlayer())
             {
     		     
-                D.getRidingHandler().boostSpeed();
+             //   D.getRidingHandler().boostSpeed();
                 //System.out.println("SPEED BOOSTED!");
                 //System.out.println("Damage before:"+String.valueOf(I.getItemDamage()));
                 I.damageItem(1, P);

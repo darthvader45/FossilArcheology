@@ -17,7 +17,7 @@ public class ItemAncientHelmet extends ItemArmor
  
     public String getArmorTexture(ItemStack par1)
     {
-    	return "/mods/fossil/textures/armor/TextureAncientHelmet.png";
+    	return "fossil:textures/armor/TextureAncientHelmet.png";
     }
 	
     @Override

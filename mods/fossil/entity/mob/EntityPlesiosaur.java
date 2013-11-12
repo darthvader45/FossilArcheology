@@ -9,6 +9,7 @@ import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
@@ -19,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -42,7 +44,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     public boolean isBaby = true;*/
     //public int RushTick = 0;
     
-    
+    final EntityAIControlledByPlayer aiControlledByPlayer;    
     
     
     
@@ -80,7 +82,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         
         
         this.getNavigator().setCanSwim(true);
-        this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
@@ -88,6 +89,9 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
+        
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
     }
 
 	
@@ -97,6 +101,14 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
 
+    }
+    
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
     }
     
     /**

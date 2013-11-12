@@ -10,6 +10,7 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilAI.DinoAIFlying;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -19,6 +20,7 @@ import net.minecraft.block.StepSound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -56,6 +58,8 @@ public class EntityPterosaur extends EntityFlyingDino
     public int wingpause=0;
     public boolean Landing = false;
     
+    final EntityAIControlledByPlayer aiControlledByPlayer;
+    
     //public static final int AIR_ANGLE_INDEX = 26;
     //public static final int AIR_PITCH_INDEX = 27;
     //public static final int WING_STATE_INDEX = 25;
@@ -91,7 +95,6 @@ public class EntityPterosaur extends EntityFlyingDino
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
-        this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         //this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
         //this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
@@ -107,7 +110,18 @@ public class EntityPterosaur extends EntityFlyingDino
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        
         this.inWater = true;
+    }
+    
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
     }
 
     /**

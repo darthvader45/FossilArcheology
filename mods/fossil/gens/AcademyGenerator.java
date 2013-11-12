@@ -5,6 +5,7 @@ import java.util.logging.Level;
 
 import mods.fossil.Fossil;
 import mods.fossil.gens.structure.WorldGeneratorAcademy;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenDesert;
@@ -36,6 +37,16 @@ public class AcademyGenerator implements IWorldGenerator
 			break;
 		}
 	}
+	
+	  protected int[] GetValidSpawnBlocks()
+	    {
+	        return new int[]
+	        {
+	            Block.grass.blockID,
+	            Block.dirt.blockID,
+	            Block.sand.blockID
+	        };
+	    }
 
 	private final void generateStructure(World world, Random rand, int chunkX, int chunkZ)
 	{
@@ -46,9 +57,10 @@ public class AcademyGenerator implements IWorldGenerator
 		//WorldGeneratorAcademy gen = new WorldGeneratorAcademy();
 		FossilStructureGenerator gen = new FossilStructureGenerator();
 		
-        if((biome instanceof BiomeGenDesert) || (biome instanceof BiomeGenJungle) || (biome instanceof BiomeGenTaiga) || (biome instanceof BiomeGenPlains))// then add ||BiomeGenXYZ if you want more.
-        {
-            if(rand.nextInt(1000) == 0) //adjust the number in nextInt(). Higher values == rarer. Default = 20
+    //    if((biome instanceof BiomeGenDesert) || (biome instanceof BiomeGenJungle) || (biome instanceof BiomeGenTaiga) || (biome instanceof BiomeGenPlains))// then add ||BiomeGenXYZ if you want more.
+    //    {
+            //if(rand.nextInt(1000) == 0) //adjust the number in nextInt(). Higher values == rarer. Default = 20
+    		    if (rand.nextFloat() < 0.001F)
             {
             	Fossil.Console("Generating Academy...");
 
@@ -88,6 +100,6 @@ public class AcademyGenerator implements IWorldGenerator
             	
             }
         }
-	}
+//	}
 		
 }

@@ -38,6 +38,11 @@ public class RenderDodo extends RenderLiving
         return (MathHelper.sin(f1) + 1.0F) * f2;
     }
 
+    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    {
+        this.renderDodo((EntityDodo)par1EntityLiving, par2, par4, par6, par8, par9);
+    }
+    
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
@@ -45,12 +50,6 @@ public class RenderDodo extends RenderLiving
     {
         return this.getWingRotation((EntityDodo)par1EntityLiving, par2);
     }
-
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.renderDodo((EntityDodo)par1EntityLiving, par2, par4, par6, par8, par9);
-    }
-
     
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {

@@ -7,6 +7,7 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
@@ -15,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -35,6 +37,8 @@ public class EntityTriceratops extends EntityDinosaur
     private boolean field_25052_g;*/
     //public int RushTick = 0;
     public boolean Running = false;
+    
+    final EntityAIControlledByPlayer aiControlledByPlayer;
 
     public EntityTriceratops(World var1)
     {
@@ -74,7 +78,6 @@ public class EntityTriceratops extends EntityDinosaur
         //this.tasks.addTask(0, new DinoAIGrowup(this));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
@@ -84,9 +87,20 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(10, new EntityAILookIdle(this));
+        
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
     }
-
-
+    
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
+    }
+    
+    
 
     protected void applyEntityAttributes()
     {

@@ -1,4 +1,4 @@
-package mods.fossil.util;
+package mods.fossil.handler;
 
 import java.util.Random;
 

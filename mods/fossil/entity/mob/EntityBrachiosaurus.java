@@ -1,19 +1,15 @@
 package mods.fossil.entity.mob;
 
-import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
-import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.guiBlocks.TileEntityFeeder;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -23,24 +19,22 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityBrachiosaurus extends EntityDinosaur
 {
     public boolean isTamed = false;
     
-    final float PUSHDOWN_HARDNESS = 5.0F;
-
+//    final float PUSHDOWN_HARDNESS = 5.0F;
+    final EntityAIControlledByPlayer aiControlledByPlayer;
+    
     public EntityBrachiosaurus(World var1)
     {
         super(var1,EnumDinoType.Brachiosaurus);
         this.updateSize();
         
-        
+
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
@@ -59,7 +53,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.ridingHandler = new DinoAIControlledByPlayer(this));//, 0.34F));
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -68,11 +62,20 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
+        //this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
+    }
     
     protected void applyEntityAttributes()
     {

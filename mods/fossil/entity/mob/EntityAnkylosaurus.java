@@ -6,6 +6,7 @@ import java.util.Random;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
@@ -15,6 +16,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -28,6 +30,8 @@ public class EntityAnkylosaurus extends EntityDinosaur
 {
     private int angerLevel;
 
+    final EntityAIControlledByPlayer aiControlledByPlayer;
+    
 	public EntityAnkylosaurus(World world) {
         super(world, EnumDinoType.Ankylosaurus);
 
@@ -52,7 +56,9 @@ public class EntityAnkylosaurus extends EntityDinosaur
 
         
         this.getNavigator().setAvoidsWater(true);
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
@@ -64,8 +70,18 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
+        
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 	
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
+    }
+    
 	
     protected void applyEntityAttributes()
     {
@@ -176,5 +192,23 @@ public class EntityAnkylosaurus extends EntityDinosaur
     public EntityAnkylosaurus spawnBabyAnimal(EntityAgeable var1)
     {
         return new EntityAnkylosaurus(this.worldObj);
+    }
+    
+    public float getEyeHeight()
+    {
+        return (float)this.getDinoAge() / 1.9F;
+    }
+
+    public float getRidingHeight()
+    {
+        return this.getEyeHeight() + 0.3F;
+    }
+    
+    public void updateRiderPosition()
+    {
+        if (this.riddenByEntity != null)
+        {
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRidingHeight(), this.posZ);
+        }
     }
 }

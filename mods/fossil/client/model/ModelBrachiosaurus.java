@@ -1,17 +1,9 @@
 package mods.fossil.client.model;
 
-import info.ata4.minecraft.dragon.client.model.DragonModel;
-import info.ata4.minecraft.dragon.client.model.anim.TickFloat;
-import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
-import info.ata4.minecraft.dragon.util.math.MathX;
-
-import org.lwjgl.opengl.GL11;
-
-import mods.fossil.client.model.anims.ModelAnimTail;
+import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelBrachiosaurus extends ModelBase
@@ -38,15 +30,6 @@ public class ModelBrachiosaurus extends ModelBase
     private float speed;
     
     private float partialTicks;
-    
-    // timing interp vars
-    private TickFloat animTimer = new TickFloat();
-    private TickFloat groundTimer = new TickFloat(1).setLimit(0, 1);
-    private TickFloat flutterTimer = new TickFloat().setLimit(0, 1);
-    private TickFloat walkTimer = new TickFloat().setLimit(0, 1);
-    private TickFloat sitTimer = new TickFloat().setLimit(0, 1);
-    private TickFloat jawTimer = new TickFloat().setLimit(0, 1);
-    private TickFloat speedTimer = new TickFloat(1).setLimit(0, 1);
     
     
 	float yoffset = 0.0F;
@@ -280,15 +263,10 @@ public class ModelBrachiosaurus extends ModelBase
         
         float legspeed = 0.5F;
 		float legRotationLimit = 1.4F;
-        ModelAnimTail tailModule = new ModelAnimTail(Tail, .15F, .025F, legspeed);
         
         
     }
-    public void setLook(float lookYaw, float lookPitch) {
-        // don't twist the Neck
-        this.lookYaw = MathX.clamp(lookYaw, -120, 120);
-        this.lookPitch = MathX.clamp(lookPitch, -90, 90);
-    }
+
     
     /**
      * Sets the models various rotation angles then renders the model.
@@ -297,7 +275,7 @@ public class ModelBrachiosaurus extends ModelBase
     {
         float var14 = 0.0225F;
         super.render(var1, var2, var3, var4, var5, var6, var7);
-  //      this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+        this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
 
         this.Head.render(var7);
         this.Neck.render(var7);
@@ -327,6 +305,17 @@ public class ModelBrachiosaurus extends ModelBase
             this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.2662F + (float)Math.PI +2) * 1.0F * var2/2F;
             this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.2662F + 1) * 1.0F * var2/2F;
 */
+    	
+        this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1)* 0.63330555F + 1) * 1.0F * var2;
+        this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
+        this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI +2) * 1.0F * var2;
+        this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
+        
+        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.2F + var2);
+        this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.15F + var2);
+        this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);         
+        this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.05F + var2); 
+        
     }
     
 }

@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import info.ata4.minecraft.dragon.server.util.ItemUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.List;
@@ -23,6 +25,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -80,8 +83,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public ItemStack ItemInMouth = null;
     
     //public static EntityDinosaur pediaingDino = null;
-    protected DinoAIControlledByPlayer ridingHandler;
     public EnumOrderType OrderStatus;
+	private EntityAIControlledByPlayer aiControlledByPlayer;
 
 
     
@@ -250,11 +253,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	return this.SelfType.MaxHunger;
     }
 
-    public DinoAIControlledByPlayer getRidingHandler()
-    {
-        return this.ridingHandler;
-    }
-
     public boolean isModelized()
     {
         return this.dataWatcher.getWatchableObjectByte(MODELIZED_INDEX) >= 0;
@@ -414,6 +412,11 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	{
             this.motionX *= 0.0D;
             this.motionZ *= 0.0D;
+    	}
+    	
+    	if (this.riddenByEntity != null || this.isAdult())
+    	{
+    		this.stepHeight = 1.0F;
     	}
     }
     /**
@@ -1212,21 +1215,21 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer var1)
+    public boolean interact(EntityPlayer player)
     {
     	//this.getClass();//needed to set which is the actual instance using this function
         if (this.isModelized())
         {
-            return this.modelizedInteract(var1);
+            return this.modelizedInteract(player);
         }
         else
         {
-            ItemStack var2 = var1.inventory.getCurrentItem();
+            ItemStack var2 = player.inventory.getCurrentItem();
 
             if (var2 != null)
             {
             	/*
-            	if (var2.itemID == Fossil.dinoPedia.itemID && !var1.worldObj.isRemote && var2.getDisplayName().equalsIgnoreCase("debugpedia"))
+            	if (var2.itemID == Fossil.dinoPedia.itemID && !player.worldObj.isRemote && var2.getDisplayName().equalsIgnoreCase("debugpedia"))
             	{
             		//TODO:DEBUG//
             		Fossil.Console("----- DEBUG -----");
@@ -1239,7 +1242,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             		Fossil.Console("------ ----------");
             	}
             	*/
-            	if (var2.itemID == Fossil.chickenEss.itemID && !var1.worldObj.isRemote)
+            	if (var2.itemID == Fossil.chickenEss.itemID && !player.worldObj.isRemote)
             	{// Be grown up by chicken essence
             		if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
                 	if (this.getHunger() > 0)
@@ -1247,20 +1250,20 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             			--var2.stackSize;
             	        if (var2.stackSize <= 0)
             	        {
-            	        	var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+            	        	player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
             	        }
-            	        var1.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle, 1));
+            	        player.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle, 1));
             	        this.setDinoAgeTick(/*this.AgingTicks*/this.getDinoAgeTick()+2000);
             	        this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
             	        return true;
             	     }
                     if (!this.worldObj.isRemote)
-                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
             	     return false;
             	}
             	if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))
             	{//Item is one of the dinos food items
-            		if(!var1.worldObj.isRemote)
+            		if(!player.worldObj.isRemote)
             		{
 	            		if(this.getMaxHunger()>this.getHunger())
 	                	{	//The Dino is Hungry and it can eat the item
@@ -1283,12 +1286,12 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	                		--var2.stackSize;
 		                    /*if (var2.stackSize <= 0)
 		                    {
-		                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+		                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 		                    }*/
 		                    if(!this.isTamed() && this.SelfType.isTameable() && (new Random()).nextInt(10)==1)//taming probability 10% (not TREX!)
 		                    {
 		                    	this.setTamed(true);
-		                    	this.setOwner(var1.username);
+		                    	this.setOwner(player.username);
 		                    	//showHeartsOrSmokeFX(true);
 		                    	this.worldObj.setEntityState(this, HEART_MESSAGE);
 		                    }
@@ -1302,7 +1305,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	            				--var2.stackSize;
 	    	                    /*if (var2.stackSize <= 0)
 	    	                    {
-	    	                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+	    	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	    	                    }*/
 	    	                    return true;
 	            			}
@@ -1315,7 +1318,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	            					--var2.stackSize;
 	        	                    /*if (var2.stackSize <= 0)
 	        	                    {
-	        	                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+	        	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	        	                    }*/
 	            				}
 	            			}
@@ -1329,18 +1332,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	            {//DINOPEDIA
     	                //EntityDinosaur.pediaingDino = this;
             			this.setPedia();
-    	                var1.openGui(Fossil.instance/*var1*/, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+    	                player.openGui(Fossil.instance/*player*/, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
     	                return true;
     	            }
             		if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
     	            {
-    	                var1.rotationYaw = this.rotationYaw;
-    	                var1.mountEntity(this);
-    	                this.setPathToEntity((PathEntity)null);
-    	                this.renderYawOffset = this.rotationYaw;
-    	                return true;
+    	              //  player.rotationYaw = this.rotationYaw;
+    	              //  player.mountEntity(this);
+    	              //  this.setPathToEntity((PathEntity)null);
+    	               // this.renderYawOffset = this.rotationYaw;
+    	                setRidingPlayer(player);
+    	            //    return true;
     	            }
-            		if (this.SelfType.OrderItem!= null && var2.itemID == this.SelfType.OrderItem.itemID && this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName()))
+            		if (this.SelfType.OrderItem!= null && var2.itemID == this.SelfType.OrderItem.itemID && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
                 	{//THIS DINOS ITEM TO BE CONTROLLED WITH
     	                if (!this.worldObj.isRemote)
     	                {
@@ -1370,13 +1374,13 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	                }
     	                return true;
                 	}
-            		if(this.SelfType.canCarryItems()&& var2.itemID != Fossil.dinoPedia.itemID && this.ItemInMouth == null && ((this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName())) || (new Random()).nextInt(40)==1 ))
+            		if(this.SelfType.canCarryItems()&& var2.itemID != Fossil.dinoPedia.itemID && this.ItemInMouth == null && ((this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName())) || (new Random()).nextInt(40)==1 ))
         			{//The dino takes the item if: able to, has nothing now and is tamed by the user or willingly(2.5%)
         				this.HoldItem(var2);
         				--var2.stackSize;
 	                    if (var2.stackSize <= 0)
 	                    {
-	                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	                    }
 	                    return true;
         			}
@@ -1384,16 +1388,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             }
             else
             {// Klicked with bare hands
-            	if(this.ItemInMouth != null && this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName()))
+            	if(this.ItemInMouth != null && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
             	{//Give the Item to the Player, but only if it's the owner           		
-                    if (var1.inventory.addItemStackToInventory(this.ItemInMouth))
+                    if (player.inventory.addItemStackToInventory(this.ItemInMouth))
                     {
-                        this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                        this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                         this.ItemInMouth = null;
                         return true;
                     }
             	}
-            	if(this.SelfType.OrderItem == null && this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName()))
+            	if(this.SelfType.OrderItem == null && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
             	{//This dino is controlled without a special item
             		if (!this.worldObj.isRemote)
 	                {
@@ -1404,16 +1408,16 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 	                }
 	                return true;
             	}
-            	if (this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == var1))
+            	if (this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
 	            {
-	                var1.rotationYaw = this.rotationYaw;
-	                var1.mountEntity(this);
+	                player.rotationYaw = this.rotationYaw;
+	                player.mountEntity(this);
 	                this.setPathToEntity((PathEntity)null);
 	                this.renderYawOffset = this.rotationYaw;
 	                return true;
 	            }
             }
-            return super.interact(var1);
+            return super.interact(player);
         }
     }
 
@@ -1467,5 +1471,32 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         	this.setDinoAge(this.SelfType.AdultAge);
 
             return par1EntityLivingData;
+    }
+
+    /**
+     * Return the AI task for player control.
+     */
+    public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
+    }
+
+    public EntityPlayer getRidingPlayer() {
+        if (riddenByEntity instanceof EntityPlayer) {
+            return (EntityPlayer) riddenByEntity;
+        } else {
+            return null;
+        }
+    }
+    
+    public void setRidingPlayer(EntityPlayer player) {
+        player.rotationYaw = this.rotationYaw;
+        player.rotationPitch = this.rotationPitch;
+        player.mountEntity(this);
+    }
+    
+    public void riderJump() {
+    	Fossil.Console("isRiderJumping");
+        motionY += 0.5;
     }
 }

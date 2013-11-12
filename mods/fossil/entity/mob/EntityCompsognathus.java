@@ -97,7 +97,7 @@ public class EntityCompsognathus extends EntityDinosaur
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.31D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
     }
     
     /**
