@@ -10,6 +10,16 @@ itemgroup.FItems=Ancient Items
 itemgroup.FMaterial=Ancient Materials
 itemgroup.FTools=Ancient Tools
 
+#Achievements
+achievement.FirstEgg=First Dinosaur!
+achievement.AllEggs=All Dionsaur Eggs
+achievement.FoundFossils=Digging for Bones
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=You brought back your first dinosaur!
+achievement.AllEggs.desc=You've found all the dinosaur eggs!
+achievement.FoundFossils.desc=You've found some fossils!
+
 #Blocks
 tile.fossil.name=Fossil
 tile.skullBlock.name=Skull

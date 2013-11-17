@@ -1,5 +1,7 @@
 package mods.fossil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -64,6 +66,8 @@ import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.gens.AcademyGenerator;
 import mods.fossil.gens.FossilGenerator;
+import mods.fossil.gens.FossilWaterStructureGenerator;
+import mods.fossil.gens.ShipWreckGenerator;
 import mods.fossil.gens.TarGenerator;
 import mods.fossil.gens.VolcanicRockGenerator;
 //import mods.fossil.gens.TarGenerator;
@@ -85,7 +89,9 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
+import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionHandler;
+import mods.fossil.handler.FossilCraftingHandler;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
 import mods.fossil.handler.FossilRecipeHandler;
@@ -150,6 +156,7 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Property;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -191,6 +198,7 @@ public class Fossil
 	@Instance("fossil")
 	public static Fossil instance;
 	 
+
 	public static FossilGuiHandler GH = new FossilGuiHandler();
 	public static FossilOptions FossilOptions;
 	public static Properties LangProps = new Properties();
@@ -198,7 +206,7 @@ public class Fossil
 	
 	public static IChatListener messagerHandler = new FossilMessageHandler();
 	
-
+	public Configuration config;
 	
 	/*
 	 * If DebugMode = true
@@ -219,8 +227,6 @@ public class Fossil
 	
 	//public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
 	
-    public static Achievement pigbossOnEarth = (new Achievement(18000, "PigbossOnEarth", 0, 0, new ItemStack(Item.dyePowder, 1, 4), (Achievement)null)).registerAchievement();
-    public static AchievementPage selfArcPage = new AchievementPage("FOSSIL / ARCHEOLOGY", new Achievement[] {pigbossOnEarth});
     
 	//Blocks
 	public static Block blockFossil;
@@ -571,213 +577,214 @@ public class Fossil
  //       Localizations.loadLanguages();
     	MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
     	
-    	
+        FossilAchievementHandler.loadAchievements();
     	VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
     	
 //    	VillagerRegistry.instance().registerVillagerId(10); 
 //    	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:mob/Archaeologist.png"));
         
     	
-		Configuration var2 = new Configuration(event.getSuggestedConfigurationFile());
+    	config = new Configuration(event.getSuggestedConfigurationFile());
 		try
 		{
-			var2.load();
+			config.load();
 		
 		//Blocks
-		blockFossilID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt(3000);
-		blockSkullID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SKULL_NAME, 3001).getInt(3001);
-		skullLanternID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SKULL_LANTERN_NAME, 3002).getInt(3002);
-        blockanalyzerIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME, 3003).getInt(3003);
-        blockanalyzerActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME, 3004).getInt(3004);
-        blockcultivateIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME, 3005).getInt(3005);
-        blockcultivateActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME, 3006).getInt(3006);
-        blockworktableIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 3007).getInt(3007);
-        blockworktableActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME, 3008).getInt(3008);
-        blockTimeMachineID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_TIMEMACHINE_NAME, 3009).getInt(3009);
-        fernsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERN_BLOCK_NAME, 3010).getInt(3010);
-        drumID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.DRUM_NAME, 3012).getInt(3012);
-        feederIdleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_IDLE_NAME, 3013).getInt(3013);
-        feederActiveID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_ACTIVE_NAME, 3014).getInt(3014);
-        blockPermafrostID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_PERMAFROST_NAME, 3015).getInt(3015);
-        blockIcedStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ICEDSTONE_NAME, 3016).getInt(3016);
-        volcanicAshID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ASH_NAME, 3017).getInt(3017);
-        volcanicRockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_NAME, 3018).getInt(3018);
-        volcanicRockHotID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_HOT_NAME, 3019).getInt(3019);
-        tarID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.TAR_NAME, 3020).getInt(3020);
-        palmLogID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LOG_NAME, 3021).getInt(3021);
-        palmLeavesID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LEAVES_NAME, 3022).getInt(3022);
-        palmSapID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SAP_NAME, 3023).getInt(3023);
-        palaePlanksID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_PLANKS_NAME, 3024).getInt(3024);
-        palaeSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SINGLESLAB_NAME, 3024).getInt(3024);
-        palaeDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_DOUBLESLAB_NAME, 3025).getInt(3025);
-        palaeStairsID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_STAIRS_NAME, 3026).getInt(3026);
-        sarracinaID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
-		volcanicBrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_BRICK_NAME, 3028).getInt(3028);
-		amberOreID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.AMBER_ORE_NAME, 3029).getInt(3029);
-		ancientStoneID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_NAME, 3030).getInt(3030);
-		ancientStonebrickID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_BRICK_NAME, 3031).getInt(3031);
-		ancientWoodID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_NAME, 3032).getInt(3032);
-        ancientWoodPillarID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME, 3033).getInt(3033);
-        ancientGlassID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_GLASS_NAME, 3034).getInt(3034);
-        ancientWoodPlateID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PLATE_NAME, 3035).getInt(3035);
-        ancientWoodStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME, 3036).getInt(3036);
-        ancientWoodSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME, 3037).getInt(3037);
-        ancientWoodDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME, 3038).getInt(3038);
-        ancientStoneStairsID= var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME, 3039).getInt(3039);
-        ancientStoneSingleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME, 3040).getInt(3040);
-        ancientStoneDoubleSlabID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt(3041);
-        marbleID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt(3042);
-        figurineBlockID = var2.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
+		blockFossilID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt(3000);
+		blockSkullID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SKULL_NAME, 3001).getInt(3001);
+		skullLanternID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SKULL_LANTERN_NAME, 3002).getInt(3002);
+        blockanalyzerIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME, 3003).getInt(3003);
+        blockanalyzerActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME, 3004).getInt(3004);
+        blockcultivateIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME, 3005).getInt(3005);
+        blockcultivateActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME, 3006).getInt(3006);
+        blockworktableIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 3007).getInt(3007);
+        blockworktableActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME, 3008).getInt(3008);
+        blockTimeMachineID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_TIMEMACHINE_NAME, 3009).getInt(3009);
+        fernsID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FERN_BLOCK_NAME, 3010).getInt(3010);
+        drumID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.DRUM_NAME, 3012).getInt(3012);
+        feederIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_IDLE_NAME, 3013).getInt(3013);
+        feederActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FEEDER_ACTIVE_NAME, 3014).getInt(3014);
+        blockPermafrostID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_PERMAFROST_NAME, 3015).getInt(3015);
+        blockIcedStoneID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_ICEDSTONE_NAME, 3016).getInt(3016);
+        volcanicAshID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ASH_NAME, 3017).getInt(3017);
+        volcanicRockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_NAME, 3018).getInt(3018);
+        volcanicRockHotID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_ROCK_HOT_NAME, 3019).getInt(3019);
+        tarID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.TAR_NAME, 3020).getInt(3020);
+        palmLogID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LOG_NAME, 3021).getInt(3021);
+        palmLeavesID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_LEAVES_NAME, 3022).getInt(3022);
+        palmSapID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SAP_NAME, 3023).getInt(3023);
+        palaePlanksID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_PLANKS_NAME, 3024).getInt(3024);
+        palaeSingleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_SINGLESLAB_NAME, 3024).getInt(3024);
+        palaeDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_DOUBLESLAB_NAME, 3025).getInt(3025);
+        palaeStairsID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.PALAE_STAIRS_NAME, 3026).getInt(3026);
+        sarracinaID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.SARRACINA_NAME, 3027).getInt(3027);
+		volcanicBrickID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_BRICK_NAME, 3028).getInt(3028);
+		amberOreID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.AMBER_ORE_NAME, 3029).getInt(3029);
+		ancientStoneID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_NAME, 3030).getInt(3030);
+		ancientStonebrickID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_BRICK_NAME, 3031).getInt(3031);
+		ancientWoodID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_NAME, 3032).getInt(3032);
+        ancientWoodPillarID= config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME, 3033).getInt(3033);
+        ancientGlassID= config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_GLASS_NAME, 3034).getInt(3034);
+        ancientWoodPlateID= config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_PLATE_NAME, 3035).getInt(3035);
+        ancientWoodStairsID= config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME, 3036).getInt(3036);
+        ancientWoodSingleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME, 3037).getInt(3037);
+        ancientWoodDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME, 3038).getInt(3038);
+        ancientStoneStairsID= config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME, 3039).getInt(3039);
+        ancientStoneSingleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME, 3040).getInt(3040);
+        ancientStoneDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt(3041);
+        marbleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt(3042);
+        figurineBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt(3043);
 
         
 		//Items
-        biofossilID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
-        relicID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RELIC_NAME, 10001).getInt(10001);
-        stoneboardID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TABLET_NAME, 10002).getInt(10002);
-        ancientSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_SWORD_NAME, 10003).getInt(10003);
-        brokenSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SWORD_NAME, 10004).getInt(10004);
-        fernSeedID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FERNSEED_NAME, 10005).getInt(10005);
-        ancienthelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_HELMET_NAME, 10006).getInt(10006);
-        brokenhelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HELMET_NAME, 10007).getInt(10007);
-        skullStickID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_STICK_NAME, 10008).getInt(10008);
-        gemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_GEM_NAME, 10009).getInt(10009);
-        gemAxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_AXE_NAME, 10010).getInt(10010);
-        gemPickaxeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_PICKAXE_NAME, 10011).getInt(10011);
-        gemSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SWORD_NAME, 10012).getInt(10012);
-        gemHoeID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_HOE_NAME, 10013).getInt(10013);
-        gemShovelID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SHOVEL_NAME, 10014).getInt(10014);
-        dinoPediaID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOPEDIA_NAME, 10015).getInt(10015);
-        emptyShellID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMPTY_SHELL_NAME, 10016).getInt(10016);
-        magicConchID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.MAGIC_CONCH_NAME, 10017).getInt(10017);
-        icedMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ICED_MEAT_NAME, 10018).getInt(10018);
-        woodjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WOOD_JAVELIN_NAME, 10019).getInt(10019);
-        stonejavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.STONE_JAVELIN_NAME, 10020).getInt(10020);
-        ironjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.IRON_JAVELIN_NAME, 10021).getInt(10021);
-        goldjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.GOLD_JAVELIN_NAME, 10022).getInt(10022);
-        diamondjavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DIAMOND_JAVELIN_NAME, 10023).getInt(10023);
-        ancientJavelinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_JAVELIN_NAME, 10024).getInt(10024);
-        whipID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_NAME, 10025).getInt(10025);
-        legBoneID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LEGBONE_NAME, 10026).getInt(10026);
-        clawID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CLAW_NAME, 10027).getInt(10027);
-        footID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOOT_NAME, 10028).getInt(10028);
-        skullID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_NAME, 10029).getInt(10029);
-        brokenSaplingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SAPLING_NAME, 10030).getInt(10030);
-        amberID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.AMBER_NAME, 10031).getInt(10031);
-        ancientVaseID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_NAME, 10032).getInt(10032);
-        ancientVaseBrokenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_BROKEN_NAME, 10033).getInt(10033);
-        boneArrowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ARROW_NAME, 10034).getInt(10034);
-        boneBowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_BOW_NAME, 10035).getInt(10035);
-        boneGlueID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_GLUE_NAME, 10036).getInt(10036);
-        boneRodID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ROD_NAME, 10037).getInt(10037);
-        boneSwordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_SWORD_NAME, 10038).getInt(10038);
-        powderyStringID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERY_STRING_NAME, 10039).getInt(10039);
-//        ancientWoodPlateID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt(10040);
-        animalCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
-        dinoCoinID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_COIN_NAME, 10042).getInt(10042);
-        dodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_EGG_NAME, 10043).getInt(10043);
-        cultivatedDodoEggID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt(10044);
-        fossilRecordID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt(10045);
-        archNotebookID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt(10046);
+        biofossilID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt(10000);
+        relicID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RELIC_NAME, 10001).getInt(10001);
+        stoneboardID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TABLET_NAME, 10002).getInt(10002);
+        ancientSwordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_SWORD_NAME, 10003).getInt(10003);
+        brokenSwordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SWORD_NAME, 10004).getInt(10004);
+        fernSeedID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FERNSEED_NAME, 10005).getInt(10005);
+        ancienthelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_HELMET_NAME, 10006).getInt(10006);
+        brokenhelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HELMET_NAME, 10007).getInt(10007);
+        skullStickID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_STICK_NAME, 10008).getInt(10008);
+        gemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_GEM_NAME, 10009).getInt(10009);
+        gemAxeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_AXE_NAME, 10010).getInt(10010);
+        gemPickaxeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_PICKAXE_NAME, 10011).getInt(10011);
+        gemSwordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SWORD_NAME, 10012).getInt(10012);
+        gemHoeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_HOE_NAME, 10013).getInt(10013);
+        gemShovelID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SCARAB_SHOVEL_NAME, 10014).getInt(10014);
+        dinoPediaID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOPEDIA_NAME, 10015).getInt(10015);
+        emptyShellID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMPTY_SHELL_NAME, 10016).getInt(10016);
+        magicConchID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.MAGIC_CONCH_NAME, 10017).getInt(10017);
+        icedMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ICED_MEAT_NAME, 10018).getInt(10018);
+        woodjavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WOOD_JAVELIN_NAME, 10019).getInt(10019);
+        stonejavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.STONE_JAVELIN_NAME, 10020).getInt(10020);
+        ironjavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.IRON_JAVELIN_NAME, 10021).getInt(10021);
+        goldjavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.GOLD_JAVELIN_NAME, 10022).getInt(10022);
+        diamondjavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DIAMOND_JAVELIN_NAME, 10023).getInt(10023);
+        ancientJavelinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_JAVELIN_NAME, 10024).getInt(10024);
+        whipID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_NAME, 10025).getInt(10025);
+        legBoneID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LEGBONE_NAME, 10026).getInt(10026);
+        clawID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CLAW_NAME, 10027).getInt(10027);
+        footID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOOT_NAME, 10028).getInt(10028);
+        skullID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_NAME, 10029).getInt(10029);
+        brokenSaplingID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_SAPLING_NAME, 10030).getInt(10030);
+        amberID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.AMBER_NAME, 10031).getInt(10031);
+        ancientVaseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_NAME, 10032).getInt(10032);
+        ancientVaseBrokenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENT_VASE_BROKEN_NAME, 10033).getInt(10033);
+        boneArrowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ARROW_NAME, 10034).getInt(10034);
+        boneBowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_BOW_NAME, 10035).getInt(10035);
+        boneGlueID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_GLUE_NAME, 10036).getInt(10036);
+        boneRodID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ROD_NAME, 10037).getInt(10037);
+        boneSwordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_SWORD_NAME, 10038).getInt(10038);
+        powderyStringID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERY_STRING_NAME, 10039).getInt(10039);
+//        ancientWoodPlateID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt(10040);
+        animalCoinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt(10041);
+        dinoCoinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_COIN_NAME, 10042).getInt(10042);
+        dodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_EGG_NAME, 10043).getInt(10043);
+        cultivatedDodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt(10044);
+        fossilRecordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt(10045);
+        archNotebookID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt(10046);
         
 
         //10045
-        //newItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
+        //newItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt(10046);
 		
 		//Armor
-		skullHelmetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt(10047);
-		ribCageID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt(10048);
-		femursID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEMURS_NAME, 10049).getInt(10049);
-		feetID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEET_NAME, 10050).getInt(10050);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10051).getInt(10051);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10052).getInt(10052);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10053).getInt(10053);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10054).getInt(10054);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10055).getInt(10055);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10056).getInt(10056);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10057).getInt(10057);
-		//newArmorID = var2.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10058).getInt(10058);
+		skullHelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt(10047);
+		ribCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt(10048);
+		femursID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEMURS_NAME, 10049).getInt(10049);
+		feetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEET_NAME, 10050).getInt(10050);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10051).getInt(10051);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10052).getInt(10052);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10053).getInt(10053);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10054).getInt(10054);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10055).getInt(10055);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10056).getInt(10056);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10057).getInt(10057);
+		//newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10058).getInt(10058);
 	
 		//DNA
-		//dnaID = var2.getItem(Configuration.CATEGORY_ITEM, "dna", 10059).getInt(10059);
+		//dnaID = config.getItem(Configuration.CATEGORY_ITEM, "dna", 10059).getInt(10059);
         for(int i=0;i<EnumDinoType.values().length;i++)
-        	DNAIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "dna"+EnumDinoType.values()[i].name(), 10060+i).getInt(10060+i);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10071).getInt(10071);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10072).getInt(10072);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10073).getInt(10073);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10074).getInt(10074);
-		//newDinoDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10075).getInt(10075);
+        	DNAIds[i] = config.getItem(Configuration.CATEGORY_ITEM, "dna"+EnumDinoType.values()[i].name(), 10060+i).getInt(10060+i);
+		//newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10071).getInt(10071);
+		//newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10072).getInt(10072);
+		//newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10073).getInt(10073);
+		//newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10074).getInt(10074);
+		//newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10075).getInt(10075);
 
 		//Animal DNA
-		//animalDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "animalDNA", 10076).getInt(10076);
-		dnaPigID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PIG_NAME, 10077).getInt(10077);
-		dnaSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SHEEP_NAME, 10078).getInt(10078);
-		dnaCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COW_NAME, 10079).getInt(10079);
-		dnaChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt(10080);
-		dnaSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SMILODON_NAME, 10081).getInt(10081);
-		dnaMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt(10082);
-	    dnaDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DODO_NAME, 10083).getInt(10083);
+		//animalDNAID = config.getItem(Configuration.CATEGORY_ITEM, "animalDNA", 10076).getInt(10076);
+		dnaPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PIG_NAME, 10077).getInt(10077);
+		dnaSheepID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SHEEP_NAME, 10078).getInt(10078);
+		dnaCowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COW_NAME, 10079).getInt(10079);
+		dnaChickenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt(10080);
+		dnaSmilodonID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SMILODON_NAME, 10081).getInt(10081);
+		dnaMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt(10082);
+	    dnaDodoID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DODO_NAME, 10083).getInt(10083);
 		
 		//MobDNA
-		//mobDNAID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt(10083);
-		//dnaPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10084).getInt(10084);
-		//dnaZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10085).getInt(10085);
-		//dnaGhastID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10086).getInt(10086);
-		//dnaWitherID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10087).getInt(10087);
-		//dnaSpiderID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10088).getInt(10088);
-		//dnaSkeletonID = var2.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10089).getInt(10089);
+		//mobDNAID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt(10083);
+		//dnaPigZombieID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10084).getInt(10084);
+		//dnaZombieID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10085).getInt(10085);
+		//dnaGhastID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10086).getInt(10086);
+		//dnaWitherID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10087).getInt(10087);
+		//dnaSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10088).getInt(10088);
+		//dnaSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10089).getInt(10089);
 
 		//Ancient Egg
-		//ancienteggID = var2.getItem(Configuration.CATEGORY_ITEM, "ancientegg", 10090).getInt(10090);
+		//ancienteggID = config.getItem(Configuration.CATEGORY_ITEM, "ancientegg", 10090).getInt(10090);
         for(int i=0;i<EnumDinoType.values().length;i++)
-        	EGGIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "egg"+EnumDinoType.values()[i].name(), 10091+i).getInt(10091+i);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt(10102);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10103).getInt(10103);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10104).getInt(10104);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10105).getInt(10105);
-		//eggNewID = var2.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10106).getInt(10106);
+        	EGGIds[i] = config.getItem(Configuration.CATEGORY_ITEM, "egg"+EnumDinoType.values()[i].name(), 10091+i).getInt(10091+i);
+		//eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt(10102);
+		//eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10103).getInt(10103);
+		//eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10104).getInt(10104);
+		//eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10105).getInt(10105);
+		//eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10106).getInt(10106);
 	
 		//Embryos
-		//embyoSyringeID = var2.getItem(Configuration.CATEGORY_ITEM, "embyoSyringe", 10107).getInt(10107);
-        embryoPigID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10108).getInt(10108);
-        embryoSheepID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SHEEP_NAME, 10109).getInt(10109);
-        embryoCowID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_COW_NAME, 10110).getInt(10110);
-        embryoChickenID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
-        embryoSmilodonID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt(10112);
-        embryoMammothID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
-//        embryoDodoID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt(10114);
-		//embryoPigZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
-		//embryoZombieID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
-		//embryoGhastID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt(10116);
-		//embryoWitherID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoWither", 10117).getInt(10117);
-		//embryoSkeletonID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoSkeleton", 10118).getInt(10118);
-		//embryoSpiderID = var2.getItem(Configuration.CATEGORY_ITEM, "embryoSpider", 10119).getInt(10119);
+		//embyoSyringeID = config.getItem(Configuration.CATEGORY_ITEM, "embyoSyringe", 10107).getInt(10107);
+        embryoPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10108).getInt(10108);
+        embryoSheepID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SHEEP_NAME, 10109).getInt(10109);
+        embryoCowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_COW_NAME, 10110).getInt(10110);
+        embryoChickenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt(10111);
+        embryoSmilodonID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt(10112);
+        embryoMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt(10113);
+//        embryoDodoID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt(10114);
+		//embryoPigZombieID = config.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt(10114);
+		//embryoZombieID = config.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt(10115);
+		//embryoGhastID = config.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt(10116);
+		//embryoWitherID = config.getItem(Configuration.CATEGORY_ITEM, "embryoWither", 10117).getInt(10117);
+		//embryoSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "embryoSkeleton", 10118).getInt(10118);
+		//embryoSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "embryoSpider", 10119).getInt(10119);
 		
 		//Food
-		cookedChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.COOKED_CHICKEN_SOUP_NAME, 10120).getInt(10120);
-		rawChickenSoupID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_CHICKEN_SOUP_NAME, 10121).getInt(10121);
-		chickenEssID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EOC_NAME, 10122).getInt(10122);
-		sjlID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SJL_NAME, 10123).getInt(10123);
-        dodoWingID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_NAME, 10200).getInt(10200);
-        dodoWingCookedID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_COOKED_NAME, 10201).getInt(10201);
+		cookedChickenSoupID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.COOKED_CHICKEN_SOUP_NAME, 10120).getInt(10120);
+		rawChickenSoupID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RAW_CHICKEN_SOUP_NAME, 10121).getInt(10121);
+		chickenEssID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EOC_NAME, 10122).getInt(10122);
+		sjlID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SJL_NAME, 10123).getInt(10123);
+        dodoWingID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_NAME, 10200).getInt(10200);
+        dodoWingCookedID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_COOKED_NAME, 10201).getInt(10201);
         
         //DINOSAUR IDS START AT 10125, GIVE PLENTY OF BUFFER ROOM
 		for(int i=0;i<EnumDinoType.values().length;i++)
-        	RAWIds[i] = var2.getItem(Configuration.CATEGORY_ITEM, "raw"+EnumDinoType.values()[i].name(), 10125+i).getInt(10125+i);
-		cookedDinoMeatID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt(10124);
+        	RAWIds[i] = config.getItem(Configuration.CATEGORY_ITEM, "raw"+EnumDinoType.values()[i].name(), 10125+i).getInt(10125+i);
+		cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt(10124);
 		
-		figurineItemID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10125).getInt(10125);
-        whipAttackID = var2.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_ATTACK_NAME, 10126).getInt(10126);
+		figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10125).getInt(10125);
+        whipAttackID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_ATTACK_NAME, 10126).getInt(10126);
 		
 		
 		
 		//Config options
-		FossilOptions.Gen_Palaeoraphe = var2.get("option", "Palaeoraphe", false).getBoolean(false);
-		FossilOptions.Gen_Academy = var2.get("option", "Academy", true).getBoolean(true);
-		FossilOptions.Gen_Ships = var2.get("option", "Ships", true).getBoolean(true);
-		FossilOptions.Heal_Dinos = var2.get("option", "Heal_Dinos", true).getBoolean(true);
-		FossilOptions.Dinos_Starve = var2.get("option", "Dinos_Starve", true).getBoolean(true);
-		FossilOptions.Dino_Block_Breaking = var2.get("option", "Dino_Block_Breaking", true).getBoolean(true);
-		FossilOptions.Skull_Overlay = var2.get("option", "Skull_Overlay", false).getBoolean(false);
+		FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
+		FossilOptions.Gen_Academy = config.get("option", "Academy", true).getBoolean(true);
+		FossilOptions.Gen_Ships = config.get("option", "Ships", true).getBoolean(true);
+		FossilOptions.Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
+		FossilOptions.Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
+		FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
+		FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
+		FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
 		}
         catch (Exception var7)
         {
@@ -785,13 +792,17 @@ public class Fossil
         }
         finally
         {
-            var2.save();
+            config.save();
         }
 		if (event.getSide() == Side.CLIENT)
     		proxy.registerSounds();	
+		if (event.getSide() == Side.CLIENT)
+    		proxy.registerEvents();	
+		
+
 	}
-	
-	@SuppressWarnings("static-access")
+    
+	//@SuppressWarnings("static-access")
 	@Mod.EventHandler
 	public void Init(FMLInitializationEvent event)
 	{
@@ -1072,6 +1083,8 @@ public class Fossil
 		
 	//	if(FossilOptions.Gen_Academy)
 		GameRegistry.registerWorldGenerator(new AcademyGenerator());
+		
+		//GameRegistry.registerWorldGenerator(new ShipWreckGenerator());
 		/*
 
 		if(FossilOptions.Gen_Ships)
@@ -1105,13 +1118,15 @@ public class Fossil
 		proxy.registerTileEntitySpecialRenderer();
         proxy.registerRenderThings();
         
+
         FossilOreDictionary.oreRegistration();
         FossilRecipeHandler.addRecipe();
         GameRegistry.registerPickupHandler(new FossilPickupHandler());
+        GameRegistry.registerCraftingHandler(new FossilCraftingHandler());
         
-	}
-	
 
+
+	}
 
 	public static void ShowMessage(String var0, EntityPlayer var1)
 	{
@@ -1137,7 +1152,8 @@ public class Fossil
         Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
         Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
 
-        MinecraftForge.EVENT_BUS.register(new GuiBoneHelmet(Minecraft.getMinecraft()));
+
+
 	
 	
 	}

@@ -35,6 +35,7 @@ public class FossilOptions
 	public static boolean Dinos_Starve;
 	public static boolean Dino_Block_Breaking;
 	public static boolean Skull_Overlay;
+	public static boolean LoginMessage;
 	
 	public void Load(Configuration config)
 	{
@@ -46,5 +47,6 @@ public class FossilOptions
 		Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
 		Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
 		Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
+		LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
 	}
 }

@@ -178,7 +178,17 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     {
         boolean var1 = this.furnaceCookTime > 0;
         boolean var2 = false;
+        
+        int cookValue;
 
+        if (Fossil.DebugMode){
+        	cookValue = 300;
+        }
+        else
+        {
+        	cookValue = 6000;
+        }
+        
         if (this.furnaceBurnTime > 0)
         {
             --this.furnaceBurnTime;
@@ -216,8 +226,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
             if (this.isBurning() && this.canSmelt())
             {
                 ++this.furnaceCookTime;
-
-                if (this.furnaceCookTime == 6000)
+                
+                if (this.furnaceCookTime == cookValue)
                 {
                     this.furnaceCookTime = 0;
                     this.smeltItem();

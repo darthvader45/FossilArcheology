@@ -2,6 +2,7 @@ package mods.fossil.client;
 
 import mods.fossil.CommonProxy;
 import mods.fossil.Fossil;
+import mods.fossil.client.gui.GuiBoneHelmet;
 import mods.fossil.client.model.ModelAnkylosaurus;
 import mods.fossil.client.model.ModelBrachiosaurus;
 import mods.fossil.client.model.ModelCompsognathus;
@@ -78,6 +79,7 @@ import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
@@ -140,6 +142,11 @@ public class ClientProxy extends CommonProxy
 	public void registerSounds()
 	{
 		MinecraftForge.EVENT_BUS.register(new DinoSoundHandler());
+	}
+	
+	public void registerEvents()
+	{
+        MinecraftForge.EVENT_BUS.register(new GuiBoneHelmet(Minecraft.getMinecraft()));
 	}
 	
 }

@@ -40,17 +40,17 @@ public enum EnumDinoType
 	//													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
     Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
-    TRex(EntityTRex.class, 								  					  C.RIDE  	| C.CARNIVORE),
+    TRex(EntityTRex.class, 								  		  C.TAME  	| C.RIDE  	| C.CARNIVORE),
     Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
     Plesiosaur(EntityPlesiosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
     Stegosaurus(EntityStegosaurus.class, 				C.MODEL | C.TAME  				| C.HERBIVORE),
     Dilophosaurus(EntityDilophosaurus.class,					  C.TAME  	| C.CARRY 	| C.CARNIVORE),
     Brachiosaurus(EntityBrachiosaurus.class,			C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
-    Spinosaurus(EntitySpinosaurus.class, 												  C.CARNIVORE),
+    Spinosaurus(EntitySpinosaurus.class, 						  C.TAME				| C.CARNIVORE),
     Compsognathus(EntityCompsognathus.class,					  C.TAME				| C.CARNIVORE),
     Ankylosaurus(EntityAnkylosaurus.class,  					  C.TAME  	| C.RIDE  	| C.HERBIVORE),
     Pachycephalosaurus(EntityPachycephalosaurus.class, 			  C.TAME 				| C.HERBIVORE),
-    Mosasaurus(EntityMosasaurus.class, 					C.NOTHING),
+    Mosasaurus(EntityMosasaurus.class, 							  		  				  C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING);
     
     private final Class dinoClass;

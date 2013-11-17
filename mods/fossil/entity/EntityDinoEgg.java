@@ -441,11 +441,11 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     {
     	//this.getClass();//needed to set which is the actual instance using this function
         float var2 = this.getBrightness(1.0F);
-        EntityPlayer var4 = null;
+        EntityPlayer player = null;
 
         if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null)
         {
-            var4 = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
+            player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         }
 
         if (this.DinoInside == EnumDinoType.Mosasaurus)
@@ -467,7 +467,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }
         if (this.getBirthTick() <= -this.HatchingNeedTime)
         {
-        	if(var4!=null)
+        	if(player!=null)
         	{
 	            String var6;
 	
@@ -482,7 +482,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 	
 	            String var1 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HEAD);
 	            if(FMLCommonHandler.instance().getSide().isServer())
-	            	Fossil.ShowMessage(var1 + StatCollector.translateToLocal("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, var4);
+	            	Fossil.ShowMessage(var1 + StatCollector.translateToLocal("Dino."+this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
         	}
         	this.setDead();
         }
@@ -528,14 +528,14 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Ankylosaurus:var5 = new EntityAnkylosaurus(this.worldObj);break;
 
                     default:
-                        Fossil.ShowMessage("Bug: Impossible result.", var4);
+                        Fossil.ShowMessage("Bug: Impossible result.", player);
                         //System.err.println("EGGERROR2"+String.valueOf(i));
                         this.setDead();
                         return;
                 }
-                if(((EntityDinosaur)var5).SelfType.isTameable() && var4 != null)
+                if(((EntityDinosaur)var5).SelfType.isTameable() && player != null)
                 {// Tameable and player next to it
-                	((EntityDinosaur)var5).setOwner(var4.username);
+                	((EntityDinosaur)var5).setOwner(player.username);
                     ((EntityDinosaur)var5).setTamed(true);
                 }
 
@@ -546,8 +546,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     //if (!this.worldObj.isRemote)
                     {
                         this.worldObj.spawnEntityInWorld((Entity)var5);
-                        if (var4!=null)
-                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), var4);
+                        if (player!=null)
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
                         
                     }
                     this.setDead();
@@ -555,7 +555,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 else
                 {
                 	//System.err.println("EGGERROR-NOPLACE");
-                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), var4);
+                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
                     this.setBirthTick(this.getBirthTick()-500);
                     //System.err.println("EGGERROR3"+String.valueOf(i));
                 }

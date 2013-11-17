@@ -18,5 +18,13 @@ if(item.getEntityItem().itemID == Fossil.palmLog.blockID)
 	player.triggerAchievement(AchievementList.mineWood);
 }
 
+if(item.getEntityItem().itemID == Fossil.biofossil.itemID)
+{
+ player.addStat(FossilAchievementHandler.FoundFossils, 1);
+}
+
+
+
+
 }
 }

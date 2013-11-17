@@ -121,6 +121,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     
     protected void updateEntityActionState()
     {
+    	super.updateEntityActionState();
         double d4 = 64.0D;
         double d0 = this.waypointX - this.posX;
         double d1 = this.waypointY - this.posY;

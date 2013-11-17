@@ -159,7 +159,7 @@ public class EntityPigBoss extends EntityZombie
 
             if (!this.worldObj.provider.isHellWorld)
             {
-                ((EntityPlayer)var1).addStat(Fossil.pigbossOnEarth, 1);
+         //       ((EntityPlayer)var1).addStat(Fossil.pigbossOnEarth, 1);
             }
         }
 

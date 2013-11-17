@@ -72,7 +72,7 @@ public class GuiBoneHelmet extends Gui
     GL11.glDisable(GL11.GL_DEPTH_TEST);
     GL11.glDepthMask(false);
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-    GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.6F);
+    GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.3F);
     GL11.glDisable(GL11.GL_ALPHA_TEST);
     this.mc.getTextureManager().bindTexture( new ResourceLocation("fossil:textures/gui/skullhelmetblur.png"));
     myDrawTexturedModalRect(0, 0, width, height);

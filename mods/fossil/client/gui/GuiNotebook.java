@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import mods.fossil.client.gui.elements.FossilGuiButton;
 import mods.fossil.client.gui.elements.FossilGuiPage;
+import mods.fossil.client.gui.elements.dinosaurs.PediaDinosaur;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -46,68 +47,6 @@ public class GuiNotebook extends GuiScreen{
         this.itemRender = new RenderItem();
 		addButtonByPage(BookPages);
 	}
-	
-	public void addImgByPage(int page) 
-	{
-		if(page==0)
-		{
-			this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+50, ((this.height - this.bookImageHeight) / 2)+28, 49, 194, 82, 12);
-		}
-		else if(page<6)
-		{
-			 int a = 0;
-			 
-			 for(int i=1; i<6;i++)
-			 {	 
-				if(page==i)
-				{
-					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+108, ((this.height - this.bookImageHeight) / 2)+85, a+i, 0, 50, 50);
-					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+131, ((this.height - this.bookImageHeight) / 2)+8, a+i, 51, 25, 25);					 
-				} 
-				a+=50;	
-			 }
-		}
-		
-		if(page==6)
-		{
-			this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+70, ((this.height - this.bookImageHeight) / 2)+28, 180, 194, 40, 12);
-		}
-		else
-		{
-			int a = 0;
-			
-			for(int i=7; i<11;i++)
-			{  	
-               if(page==i)
-               {      			
-					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+108, ((this.height - this.bookImageHeight) / 2)+85, a+i-6, 76, 50, 50);
-					this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+131, ((this.height - this.bookImageHeight) / 2)+8, a+i-6, 126, 25, 25);					 			
-               }
-               a+=50;
-			}
-			
-			if(page==7||page==8)
-	        {
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	        		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-	        		GL11.glEnable(GL11.GL_LIGHTING);
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glDepthMask(true);
-					GL11.glEnable(GL11.GL_DEPTH_TEST);
-	        }
-			if(page==9)
-	        {
-					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	        		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-	        		RenderHelper.enableGUIStandardItemLighting();
-					GL11.glDepthMask(true);
-					GL11.glEnable(GL11.GL_DEPTH_TEST);
-//					RenderHelper.enableStandardItemLighting();
-			}
-		}
-	}
-	
 
 
 	public void addTextByPage(int page)
@@ -125,8 +64,16 @@ public class GuiNotebook extends GuiScreen{
 		 if(page==1)
 		 {
 			 //TODO
-			 
-			 fontRenderer.drawString("This needs to be dynamically loaded from a text file.", var3, var4+65, 0x2b2b2b, false);
+			 String[] dinoArrayLeft = PediaDinosaur.leftPage;
+			 String[] dinoArrayRight = PediaDinosaur.rightPage;
+			 for(int i = 0; i < dinoArrayLeft.length; i++) {
+				 fontRenderer.drawString(dinoArrayLeft[i], var3, var4+(12*i), 0x2b2b2b, false);
+			 }
+			for(int i2 = 0; i2 < dinoArrayLeft.length; i2++) {
+				fontRenderer.drawString(dinoArrayRight[i2], var3 + 120, var4+(12*i2), 0x2b2b2b, false);
+			}
+			
+			// fontRenderer.drawString("This needs to be dynamically loaded from a text file.", var3, var4+65, 0x2b2b2b, false);
 		 }
 		 
 		 var1 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.4F);
@@ -146,11 +93,13 @@ public class GuiNotebook extends GuiScreen{
 		 GL11.glPopMatrix();
 	}
 	
+
 	public void addButtonByPage(int page)
 	{
 		int var1 = (this.width - this.bookImageWidth) / 2;
 		int var2 = (this.height - this.bookImageHeight) / 2;
 		
+		/*
 		if(page == 6)
 		{
 	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(7, var1+35, var2+75, 10));
@@ -158,6 +107,7 @@ public class GuiNotebook extends GuiScreen{
 	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(9, var1+115, var2+75, 14));
 	        this.buttonList.add(this.buttonIcon = new FossilGuiButton(10, var1+75, var2+95, 16));
 		}
+		*/
 		
 		if(page == 0)
 		{
@@ -178,15 +128,6 @@ public class GuiNotebook extends GuiScreen{
 		}
 	}
 	
-	public void updateTick()
-	{
-		update++;
-		if(update>50)
-		{
-			update=0;
-			addImgByPage(this.BookPages); 
-		}
-	}
 
 	@Override
 	public void actionPerformed(GuiButton button)
@@ -218,7 +159,6 @@ public class GuiNotebook extends GuiScreen{
 		 int var1 = (this.width - this.bookImageWidth) / 2;
 		 int var2 = (this.height - this.bookImageHeight) / 2;
 		 int var3 = 0;
-		 addImgByPage(BookPages);
 		 addTextByPage(BookPages);
 		 if(BookPages==0)this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2)+22, ((this.height - this.bookImageHeight) / 2)+11, 0, 240, 136, 15);
 		 if(BookPages>=9)
@@ -228,5 +168,21 @@ public class GuiNotebook extends GuiScreen{
 		 fontRenderer.drawString(Integer.toString(BookPages+1), var1+89-var3, var2 + 145, 0x2b2b2b, false);
 	     super.drawScreen(par1, par2, par3);
 	}
+	
+    /**
+     * Returns true if this GUI should pause the game when it is displayed in single-player
+     */
+    public boolean doesGuiPauseGame()
+    {
+        return false;
+    }
+    
+    /**
+     * Called when the screen is unloaded. Used to disable keyboard repeat events
+     */
+    public void onGuiClosed()
+    {
+        super.onGuiClosed();
+    }
 	
 }
