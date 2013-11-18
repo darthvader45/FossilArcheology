@@ -31,6 +31,7 @@ public class ShipWreckGenerator implements IWorldGenerator
 		case 0:
 			// 25% chance of a single structure per chunk; could make a weighted list
 			// Recall that a chunk is only 16x16 blocks in area, so this is quite a lot of structures
+			 if (random.nextFloat() < 0.001F) // MAGIC NUMBURRRRRRRRRRRRRRRRRRR  (/캯�)/ :㉩막Ħ막ㅊ
 				generateStructure(world, random, chunkX * 16, chunkZ * 16);
 			break;
 		default:
@@ -46,12 +47,7 @@ public class ShipWreckGenerator implements IWorldGenerator
 		// Need to create a new instance each time or the generate() methods may overlap themselves and cause a crash
 		//WorldGeneratorAcademy gen = new WorldGeneratorAcademy();
 		FossilWaterStructureGenerator gen = new FossilWaterStructureGenerator();
-		
-      //  if((biome instanceof BiomeGenDesert) || (biome instanceof BiomeGenJungle) || (biome instanceof BiomeGenTaiga) || (biome instanceof BiomeGenPlains))// then add ||BiomeGenXYZ if you want more.
-       // {
-            //if(rand.nextInt(1000) == 0) //adjust the number in nextInt(). Higher values == rarer. Default = 20
-    		    if (rand.nextFloat() < 0.01F) // RANDOM. MAGIC. NUMBURRRRRRRRRRRRRRRRRRR  (/캯�)/ :㉩막Ħ막ㅊ
-            {
+
 
             	int struct; // This will store a random index of the structure to generate
 
@@ -68,17 +64,17 @@ public class ShipWreckGenerator implements IWorldGenerator
 
             	// find ground level, ignoring blocks such as grass and water
  
-            	while ((!world.doesBlockHaveSolidTopSurface(x, y+4, z))//  && y > world.provider.getAverageGroundLevel())
-            				&& (!world.doesBlockHaveSolidTopSurface(x + 10, y+4, z + 11)
-                			|| !world.doesBlockHaveSolidTopSurface(x - 10, y+4, z - 11)
-                			|| !world.doesBlockHaveSolidTopSurface(x + 10, y+4, z - 11)
-                			|| !world.doesBlockHaveSolidTopSurface(x - 10, y+4, z + 11))
+            	while ((!world.doesBlockHaveSolidTopSurface(x, y+2, z))//  && y > world.provider.getAverageGroundLevel())
+            			//	&& (!world.doesBlockHaveSolidTopSurface(x + 10, y+4, z + 11)
+                		//	|| !world.doesBlockHaveSolidTopSurface(x - 10, y+4, z - 11)
+                		//	|| !world.doesBlockHaveSolidTopSurface(x + 10, y+4, z - 11)
+                		//	|| !world.doesBlockHaveSolidTopSurface(x - 10, y+4, z + 11))
                 			)
             	{	
             		--y;
             	}
 		        
-            	if(!world.doesBlockHaveSolidTopSurface(x, y+4, z)
+            	if(!world.doesBlockHaveSolidTopSurface(x, y+(rand.nextInt(5)), z)
             		//	|| !world.doesBlockHaveSolidTopSurface(x + 10, y, z + 11)
             	//		|| !world.doesBlockHaveSolidTopSurface(x - 10, y, z - 11)
             	//		|| !world.doesBlockHaveSolidTopSurface(x + 10, y, z - 11)
@@ -107,8 +103,5 @@ public class ShipWreckGenerator implements IWorldGenerator
 
             	
             }
-    		    
-        }
-	//}
 		
 }

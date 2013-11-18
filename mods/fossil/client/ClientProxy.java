@@ -23,6 +23,7 @@ import mods.fossil.client.model.ModelTRex;
 import mods.fossil.client.model.ModelTriceratops;
 import mods.fossil.client.model.ModelVelociraptor;
 import mods.fossil.client.renderer.entity.RenderAnkylosaurus;
+import mods.fossil.client.renderer.entity.RenderBones;
 import mods.fossil.client.renderer.entity.RenderBrachiosaurus;
 import mods.fossil.client.renderer.entity.RenderCompsognathus;
 import mods.fossil.client.renderer.entity.RenderDilophosaurus;
@@ -115,7 +116,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmilodon.class, new RenderSmilodon(new ModelSmilodon(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAncientJavelin.class, new RenderJavelin());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBiped(new ModelBiped(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBones());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrachiosaurus.class, new RenderBrachiosaurus(new ModelBrachiosaurus(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderMammoth(new ModelMammoth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderSpinosaurus(new ModelSpinosaurus(), 0.5F));

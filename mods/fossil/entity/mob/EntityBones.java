@@ -5,13 +5,22 @@ import mods.fossil.fossilAI.EntityAIDeadBones;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 public class EntityBones extends EntityMob
 {
@@ -21,7 +30,13 @@ public class EntityBones extends EntityMob
     {
         super(var1);
 //        this.texture = "/mob/skeleton.png";
-        this.tasks.addTask(1, new EntityAIDeadBones(this));
+    //    this.tasks.addTask(1, new EntityAIDeadBones(this));
+        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.experienceValue=7;
     }
 
@@ -106,7 +121,10 @@ public class EntityBones extends EntityMob
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
-    protected void jump() {}
+    protected void jump()
+    {
+super.jump();
+    }
 
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking

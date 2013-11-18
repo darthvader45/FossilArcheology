@@ -14,7 +14,6 @@ import mods.fossil.gens.structure.academy.Academy4;
 import mods.fossil.gens.structure.academy.Academy5;
 import mods.fossil.gens.structure.academy.Academy6;
 import mods.fossil.gens.structure.academy.AcademyUtil;
-import mods.fossil.gens.structure.shipwreck.ShipWreck1;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -84,19 +83,19 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 		{
 		case AcademyUtil.CUSTOM_CHEST:
 			return Block.chest.blockID;
-		case ShipWreck1.CUSTOM_DISPENSER:
+		case AcademyUtil.CUSTOM_DISPENSER:
 			return Block.dispenser.blockID;
-		case ShipWreck1.ITEM_FRAME: // same as PAINTING
+		case AcademyUtil.ITEM_FRAME: // same as PAINTING
 			return Block.torchWood.blockID;
-		case ShipWreck1.PAINTING:
+		case AcademyUtil.PAINTING:
 			return Block.torchWood.blockID; // need to do post-generation setting of this entity
-		case ShipWreck1.SPAWN_VILLAGER:
+		case AcademyUtil.SPAWN_VILLAGER:
 			return Block.torchWood.blockID; // using this, the villager will be spawned post-generation
-		case ShipWreck1.CUSTOM_SKULL:
+		case AcademyUtil.CUSTOM_SKULL:
 			return Block.skull.blockID;
-		case ShipWreck1.CUSTOM_SIGNWALL:
+		case AcademyUtil.CUSTOM_SIGNWALL:
 			return Block.signWall.blockID;
-		case ShipWreck1.CUSTOM_SIGNPOST:
+		case AcademyUtil.CUSTOM_SIGNPOST:
 			return Block.signPost.blockID;
 		case AcademyUtil.RANDOM_HOLE: // Used customData1 to store the real block id
 			return customData1;
@@ -189,7 +188,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 				}
 			}
 			break;
-		case ShipWreck1.CUSTOM_DISPENSER:
+		case AcademyUtil.CUSTOM_DISPENSER:
 		// We're going to take advantage of addItemToTileInventory's return value to fill
 		// the container to the brim; note that this way is better than the for loop from
 		// above because it doesn't waste processing time - it stops as soon as it is full
@@ -200,13 +199,13 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 			addmore = addItemToTileInventory(world, new ItemStack(customData1, 64, 0), x, y, z);
 		}
 		break;
-		case ShipWreck1.CUSTOM_SIGNWALL: // no 'break' so it goes into the next case
-		case ShipWreck1.CUSTOM_SIGNPOST:
+		case AcademyUtil.CUSTOM_SIGNWALL: // no 'break' so it goes into the next case
+		case AcademyUtil.CUSTOM_SIGNPOST:
 			// An array that stores up to 4 Strings, the max capacity of a sign
 			// Best to allocate the array to the size you need
 			String[] text;
 			// Set different text for each custom sign, using different colors
-			if (customData1 == ShipWreck1.CUSTOM_SIGN_1)
+			if (customData1 == AcademyUtil.CUSTOM_SIGN_1)
 			{
 				// max number of lines is 4; any more than that will be ignored
 				text = new String[5];
@@ -226,11 +225,11 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 			// Use this easy method to add text to the sign's tile entity:
 			setSignText(world, text, x, y, z);
 			break;
-		case ShipWreck1.CUSTOM_SKULL:
+		case AcademyUtil.CUSTOM_SKULL:
 			// Easily set the skull type or player name if you know it:
 			setSkullData(world, "", customData1, x, y, z);
 			break;
-		case ShipWreck1.ITEM_FRAME:
+		case AcademyUtil.ITEM_FRAME:
 			ItemStack frame = new ItemStack(Item.itemFrame);
 			// To save you lots of trouble, there are ready-made methods to handle placing
 			// hanging entities and set ItemFrame items (with or without rotation)
@@ -244,7 +243,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 			// or this one if you want to specify rotation:
 			// setItemFrameStack(world, x, y, z, facing, new ItemStack(customData,1,0),2);
 			break;
-		case ShipWreck1.PAINTING:
+		case AcademyUtil.PAINTING:
 			ItemStack painting = new ItemStack(Item.painting);
 			facing = setHangingEntity(world, painting, x, y, z);
 			// choose painting you want based on custom data; look at EnumArt for painting names
@@ -290,7 +289,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 			if (world.rand.nextFloat() < 0.25F)
 				world.setBlockToAir(x, y, z);
 			break;
-		case ShipWreck1.SPAWN_VILLAGER:
+		case AcademyUtil.SPAWN_VILLAGER:
 			// here I'm using customData as the villagerID
 			Entity bob = new EntityVillager(world, customData1);
 			//Entity X = new EntityHorse(world);

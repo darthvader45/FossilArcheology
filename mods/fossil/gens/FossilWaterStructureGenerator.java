@@ -18,8 +18,10 @@ import mods.fossil.gens.structure.academy.Academy5;
 import mods.fossil.gens.structure.academy.Academy6;
 import mods.fossil.gens.structure.academy.AcademyUtil;
 import mods.fossil.gens.structure.shipwreck.ShipWreck1;
+import mods.fossil.gens.structure.shipwreck.ShipWreckUtil;
 import mods.fossil.gens.structure.shipwreck.ShipWreck2;
 import mods.fossil.gens.structure.shipwreck.ShipWreck3;
+import mods.fossil.gens.structure.shipwreck.ShipWreckUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -71,23 +73,23 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 		LogHelper.log(Level.FINE, "Getting real id from fake id: " + fakeID);
 		switch(fakeID) 
 		{
-		case AcademyUtil.CUSTOM_CHEST:
+		case ShipWreckUtil.CUSTOM_CHEST:
 			return Block.chest.blockID;
-		case ShipWreck1.CUSTOM_DISPENSER:
+		case ShipWreckUtil.CUSTOM_DISPENSER:
 			return Block.dispenser.blockID;
-		case ShipWreck1.ITEM_FRAME: // same as PAINTING
+		case ShipWreckUtil.ITEM_FRAME: // same as PAINTING
 			return Block.torchWood.blockID;
-		case ShipWreck1.PAINTING:
+		case ShipWreckUtil.PAINTING:
 			return Block.torchWood.blockID; // need to do post-generation setting of this entity
-		case ShipWreck1.SPAWN_VILLAGER:
+		case ShipWreckUtil.SPAWN_VILLAGER:
 			return Block.torchWood.blockID; // using this, the villager will be spawned post-generation
-		case ShipWreck1.CUSTOM_SKULL:
+		case ShipWreckUtil.CUSTOM_SKULL:
 			return Block.skull.blockID;
-		case ShipWreck1.CUSTOM_SIGNWALL:
+		case ShipWreckUtil.CUSTOM_SIGNWALL:
 			return Block.signWall.blockID;
-		case ShipWreck1.CUSTOM_SIGNPOST:
+		case ShipWreckUtil.CUSTOM_SIGNPOST:
 			return Block.signPost.blockID;
-		case ShipWreck1.RANDOM_HOLE: // Used customData1 to store the real block id
+		case ShipWreckUtil.RANDOM_HOLE: // Used customData1 to store the real block id
 			return customData1;
 		default:
 			// note that SPAWN_VILLAGER would return 0 by default if we didn't set a custom id above,
@@ -172,7 +174,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 				}
 			}
 			break;
-		case ShipWreck1.CUSTOM_DISPENSER:
+		case ShipWreckUtil.CUSTOM_DISPENSER:
 		// We're going to take advantage of addItemToTileInventory's return value to fill
 		// the container to the brim; note that this way is better than the for loop from
 		// above because it doesn't waste processing time - it stops as soon as it is full
@@ -183,13 +185,13 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 			addmore = addItemToTileInventory(world, new ItemStack(customData1, 64, 0), x, y, z);
 		}
 		break;
-		case ShipWreck1.CUSTOM_SIGNWALL: // no 'break' so it goes into the next case
-		case ShipWreck1.CUSTOM_SIGNPOST:
+		case ShipWreckUtil.CUSTOM_SIGNWALL: // no 'break' so it goes into the next case
+		case ShipWreckUtil.CUSTOM_SIGNPOST:
 			// An array that stores up to 4 Strings, the max capacity of a sign
 			// Best to allocate the array to the size you need
 			String[] text;
 			// Set different text for each custom sign, using different colors
-			if (customData1 == ShipWreck1.CUSTOM_SIGN_1)
+			if (customData1 == ShipWreckUtil.CUSTOM_SIGN_1)
 			{
 				// max number of lines is 4; any more than that will be ignored
 				text = new String[5];
@@ -209,11 +211,11 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 			// Use this easy method to add text to the sign's tile entity:
 			setSignText(world, text, x, y, z);
 			break;
-		case ShipWreck1.CUSTOM_SKULL:
+		case ShipWreckUtil.CUSTOM_SKULL:
 			// Easily set the skull type or player name if you know it:
 			setSkullData(world, "", customData1, x, y, z);
 			break;
-		case ShipWreck1.ITEM_FRAME:
+		case ShipWreckUtil.ITEM_FRAME:
 			ItemStack frame = new ItemStack(Item.itemFrame);
 			// To save you lots of trouble, there are ready-made methods to handle placing
 			// hanging entities and set ItemFrame items (with or without rotation)
@@ -227,7 +229,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 			// or this one if you want to specify rotation:
 			// setItemFrameStack(world, x, y, z, facing, new ItemStack(customData,1,0),2);
 			break;
-		case ShipWreck1.PAINTING:
+		case ShipWreckUtil.PAINTING:
 			ItemStack painting = new ItemStack(Item.painting);
 			facing = setHangingEntity(world, painting, x, y, z);
 			// choose painting you want based on custom data; look at EnumArt for painting names
@@ -235,7 +237,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 			// use following method to set painting and update client automatically
 			setPaintingArt(world, custom, x, y, z, facing);
 			break;
-		case ShipWreck1.RANDOM_HOLE:
+		case ShipWreckUtil.RANDOM_HOLE:
 			// One way to generate holes would be to set a random int once per structure,
 			// then remove only hole blocks with that value, allowing for custom patterns
 			//if (random_hole == customData2)
@@ -244,10 +246,10 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 			// another way that doesn't use customData2 would be to use world.rand.nextFloat()
 			// use whatever value you want to check against, I used 0.25F so 25% will become holes
 			// this way is nice because we don't need to set customData2 for all these blocks
-			if (world.rand.nextFloat() < 0.05F)
+			if (world.rand.nextFloat() < 0.25F)
 				world.setBlockToAir(x, y, z);
 			break;
-		case ShipWreck1.SPAWN_VILLAGER:
+		case ShipWreckUtil.SPAWN_VILLAGER:
 			// here I'm using customData as the villagerID
 			Entity bob = new EntityVillager(world, customData1);
 			//Entity X = new EntityHorse(world);

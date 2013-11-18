@@ -161,3 +161,18 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+/assets/fossil/textures/blocks/figurines/enderman.psd
+/assets/fossil/textures/blocks/figurines/figurine_0.psd
+/assets/fossil/textures/blocks/test.png
+/assets/fossil/textures/gui/Arch_Notebook.psd
+/assets/fossil/textures/gui/notebook.psd
+
+/assets/fossil/textures/painting/Stone_Boards.png
+/mods/fossil/client/gui/Test.txt
+/mods/fossil/client/model/DinoAnimHelper.java
+/mods/fossil/client/model/anims/ModelAnimHead.java
+/mods/fossil/client/model/anims/ModelAnimTail.java
+/mods/fossil/client/model/anims/Module.java
+
+/assets/fossil/textures/mob/Pterosaur2.png

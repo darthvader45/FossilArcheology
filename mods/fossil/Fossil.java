@@ -1084,7 +1084,7 @@ public class Fossil
 	//	if(FossilOptions.Gen_Academy)
 		GameRegistry.registerWorldGenerator(new AcademyGenerator());
 		
-		//GameRegistry.registerWorldGenerator(new ShipWreckGenerator());
+		GameRegistry.registerWorldGenerator(new ShipWreckGenerator());
 		/*
 
 		if(FossilOptions.Gen_Ships)

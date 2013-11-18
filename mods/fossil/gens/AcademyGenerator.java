@@ -34,8 +34,7 @@ public class AcademyGenerator implements IWorldGenerator
 			// not currently generating anything in the nether
 			// generateNether(world, random, chunkX * 16, chunkZ * 16);
 			break;
-		case 0:
-			
+		case 0:			
 			// Recall that a chunk is only 16x16 blocks in area, so this is quite a lot of structures
 			 if (random.nextFloat() < 0.001F) // MAGIC NUMBURRRRRRRRRRRRRRRRRRR  (/°O°)/ :¨º¸·¨¤¸·¤º
 			 {
