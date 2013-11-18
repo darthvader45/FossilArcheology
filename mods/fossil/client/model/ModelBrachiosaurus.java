@@ -306,6 +306,10 @@ public class ModelBrachiosaurus extends ModelBase
             this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.2662F + 1) * 1.0F * var2/2F;
 */
     	
+        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
+        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+
+    	
         this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1)* 0.63330555F + 1) * 1.0F * var2;
         this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
         this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI +2) * 1.0F * var2;

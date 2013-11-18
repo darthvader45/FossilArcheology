@@ -184,6 +184,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
       float offset = PI * 2 / 11;
       float currentAngle = 0;
       
+      this.Head.rotateAngleZ = var5 / (180F / (float)Math.PI);
+      this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
       
       
           this.RUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;

@@ -221,7 +221,7 @@ public class ModelAnkylosaurus extends ModelBase
       float initialOffset = PI / 2;
       float offset = PI * 2 / 11;
       float currentAngle = 0;
-      
+
       //if (var7==false)
           this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1)* 0.63330555F + 1) * 1.0F * var2;
           this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;

@@ -112,10 +112,18 @@ public class ModelCompsognathus extends ModelBase
   
   public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6)
   {
+      this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
+      this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+      
       this.RightThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
       this.LeftThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-      this.RightLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-      this.LeftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
+      this.RightLeg.rotationPointX = this.RightThigh.rotationPointX;
+      this.RightLeg.rotationPointZ = this.RightThigh.rotationPointZ;
+      this.RightLeg.rotateAngleX = this.RightThigh.rotateAngleX;
+      this.LeftLeg.rotateAngleX = this.LeftThigh.rotateAngleX;
+      
+      this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.3F + var2);
+      this.Tail.rotateAngleX = 0.01F * MathHelper.sin(var3 * (float)0.3F + var2);
   }
 
 }
