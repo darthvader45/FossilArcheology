@@ -1,11 +1,14 @@
 package mods.fossil.entity.mob;
 
+import info.ata4.minecraft.dragon.DragonMounts;
+import info.ata4.minecraft.dragon.server.entity.ai.DragonFlightWaypoint;
 import info.ata4.minecraft.dragon.server.util.ItemUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
@@ -20,12 +23,18 @@ import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.attributes.AttributeInstance;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -86,8 +95,17 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public EnumOrderType OrderStatus;
 	private EntityAIControlledByPlayer aiControlledByPlayer;
 
-
     
+    private int angerLevel;
+    
+	public double BaseHealth;
+	public double BaseDamage;
+	public double BaseSpeed;    
+    
+	public double healthModValue;
+	public double damageModValue;
+	public double speedModValue;
+ 
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     private static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
@@ -106,11 +124,26 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger/2);
         this.setHealth( this.SelfType.Health0 );
-     //   this.setSize(this.FuckinAy,this.FuckinAy);
-        // MC Entity calls setPosition which expects the bounding box to be set,
-        // so unfortunately since we're storing our width/length in getDinoWidth (etc),
-        // we have to set this again since now SelfType is set to something.
-     //   this.setBoundingBox();
+    }
+    
+    /**
+     * Override this and set temporary variables to the attributes.
+     */
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        
+        getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
+        setAttributes();
+    }
+    
+    /**
+     * Overrided in unique entity classes.
+     */
+    private void setAttributes() {
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
     }
     
     /**
@@ -121,10 +154,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     {
     	float step;
 
-    	
 		step = (this.maxSize - this.minSize)/(this.adultAge+1);
-
-		
+	
     	// If the dinosaur is past "Adult" age, slow down growth.
     	if(this.getDinoAge() > this.adultAge)
     	{
@@ -133,6 +164,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
         return this.minSize + (step*this.getDinoAge());
     }
+    
     /**
      * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
      */
@@ -165,65 +197,45 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         return MathHelper.floor_float(this.SelfType.Exp0+(float)this.getDinoAge()*this.SelfType.ExpInc);
     }
 	
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
     public void updateSize()
     {
-  
-    	/*
-    this.Step = ((this.SizeMax - this.SizeMin)/(this.SelfType.AdultAge + 1));
-    this.FuckinAy = this.SizeMin + (this.Step * this.getDinoAge());
-	
-    	setSize(this.FuckinAy, this.FuckinAy);
-*/
-    	
-    	//setSize(this.getDinoWidth(),this.getDinoHeight());
- //   	setPosition(this.posX, this.posY, this.posZ);
-    	//this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getHealth() + this.getDinoAge()*this.SelfType.HealthInc);
+        double healthMod = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() + (double)this.healthMod();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(healthMod);
+        
+        double damageMod = this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + (double)this.damageMod();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(damageMod);
+        
+       // double speedMod = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() + (double)this.speedMod();
+     //   this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedMod);
     }
-	
-    /*
-    public void InitSize()//Necessary to overload existing
+
+    /**
+     * Get dinosaur's health growth value
+     */
+    public float healthMod()
     {
-	this.updateSize();
-	}
-	*/
-	
-    /*
-    public float getDinoWidth()
-    {
-    	if( this.SelfType != null )
-    	{
-    		return this.SelfType.Width0 + this.SelfType.WidthInc * (float)this.getDinoAge();
-    	}
-    	else
-    	{
-    		return 1.0F;
-    	}
+        return (float)healthModValue;
     }
-	
-    public float getDinoHeight()
+    
+    /**
+     * Get dinosaur's damage growth value
+     */
+    public float damageMod()
     {
-    	if( this.SelfType != null )
-    	{
-    		return this.SelfType.Height0 + this.SelfType.HeightInc * (float)this.getDinoAge();
-    	}
-    	else
-    	{
-    		return 1.0F;
-    	}
+        return (float)damageModValue;
     }
-	
-    public float getDinoLength()
+    
+    /**
+     * Get dinosaur's speed growth value
+     */
+    public double speedMod()
     {
-    	if( this.SelfType != null )
-    	{
-    		return this.SelfType.Length0 + this.SelfType.LengthInc * (float)this.getDinoAge();
-    	}
-    	else
-    	{
-    		return 1.0F;
-    	}
+        return speedModValue;
     }
-        */
+
     private void setPedia()
     {
 	Fossil.ToPedia = (Object)this;
@@ -419,12 +431,19 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     		this.stepHeight = 1.0F;
     	}
     }
+    
+    
     /**
      * Get number of ticks, at least during which the living entity will be silent.
      */
     public int getTalkInterval()
     {
         return 360;
+    }
+    
+    @Override
+    public boolean isOnLadder() {
+        return false;
     }
     
     @SideOnly(Side.CLIENT)
@@ -551,23 +570,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected boolean isMovementCeased()
     {
     	return this.OrderStatus == EnumOrderType.Stay;
-    }
-    
-    public boolean attackEntityAsMob(Entity var1)
-    {
-        int var2 = this.getAttackStrength();
-
-        if (this.isPotionActive(Potion.damageBoost))
-        {
-            var2 += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
-        }
-
-        if (this.isPotionActive(Potion.weakness))
-        {
-            var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
-        }
-
-        return var1.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
     }
     
     public Vec3 getBlockToEat(int SEARCH_RANGE)
@@ -753,6 +755,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     }
     public void HandleBreed()
     {
+    	
         if (this.isAdult())
         {
             --this.BreedTick;
@@ -796,6 +799,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
                 this.BreedTick = this.SelfType.BreedingTicks;
             }
         }
+        
+    	return;
     }
 
     public boolean CheckSpace()
@@ -808,7 +813,47 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         PathEntity var3 = this.worldObj.getPathEntityToEntity(this, var1, 16.0F, true, false, true, false);
         this.setPathToEntity(var3);
     }
+    
+    
+    @Override
+    public boolean attackEntityAsMob(Entity victim) {
+        float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        int knockback = 0;
 
+        if (victim instanceof EntityLivingBase) {
+            attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
+            knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
+        }
+
+        boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
+
+        if (attacked) {
+            if (knockback > 0) {
+                double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                double vy = 0.1;
+                double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                victim.addVelocity(vx, vy, vz);
+                
+                motionX *= 0.6;
+                motionZ *= 0.6;
+            }
+
+            if (victim instanceof EntityLivingBase) {
+                EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
+            }
+            
+            setLastAttacker(victim);
+            
+            // play eating sound
+           // float volume = getSoundVolume() * 0.7f;
+            //float pitch = getSoundPitch();
+            //worldObj.playSoundAtEntity(this, "random.eat", volume, pitch);
+        }
+
+        return attacked;
+    }
+    
+    
     public void SendOrderMessage(EnumOrderType var1)
     {
 
@@ -1027,8 +1072,10 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected float getSoundVolume()
     {
-    	float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.3F;
-        return temp;
+    	//float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.3F;
+        //return temp;
+    	float soundVolume = this.isModelized() ? 0.0F : 2 - this.getDinoAge();
+    	return soundVolume;
     }
     
     /**
@@ -1036,7 +1083,21 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected float getSoundPitch()
     {
-        return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.2F;
+        //return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.2F;
+        return super.getSoundPitch() * (2 - this.getDinoAge());
+    }
+    
+    /**
+     * Plays step sound at given x, y, z for the entity
+     */
+    @Override
+    protected void playStepSound(int x, int y, int z, int blockId) {
+        if (inWater) {
+        } else if (!this.isAdult()) {
+            super.playStepSound(x, y, z, blockId);
+        } else {
+        	super.playStepSound(x, y, z, blockId);
+        }
     }
 
     /**
@@ -1117,7 +1178,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             this.setOwner(var2);
             this.setTamed(true);
         }
-        this.updateSize();
+        //this.updateSize();
         //this.worldObj.setEntityState(this, this.AGING_MESSAGE);//This seems to be in client-> senseless
     }
 
@@ -1352,6 +1413,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     	                    {
     	                    	this.getNavigator().clearPathEntity();
     	                    	this.setPathToEntity(null);
+    	                    	this.setSitting(true);
     	                    }
     	                }
     	                return true;

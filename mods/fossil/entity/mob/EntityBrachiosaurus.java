@@ -9,13 +9,16 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,10 +57,10 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
-        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -233,26 +236,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
     }
     */
-
-    /**
-     * Applies a velocity to each of the entities pushing them away from each other. Args: entity
-     */
-    public void applyEntityCollision(Entity var1)
-    {
-        if (!this.isModelized())
-        {
-            if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.onGround && ((EntityLiving)var1).getEyeHeight() < this.getHalfHeight())
-            {
-                this.onKillEntity((EntityLiving)var1);
-                ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
-            }
-            else
-            {
-                super.applyEntityCollision(var1);
-            }
-        }
-    }
-    
 
     public float getEyeHeight()
     {

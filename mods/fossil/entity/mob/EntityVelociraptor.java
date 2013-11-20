@@ -19,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -27,6 +28,7 @@ import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,63 +36,30 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityVelociraptor extends EntityDinosaur
 {
     private boolean looksWithInterest;
-    /*public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
-    private float field_25048_b;
-    private float field_25054_c;
-    private boolean isWolfShaking;
-    private boolean field_25052_g;
-    private float timeWolfIsShaking;
-    private float prevTimeWolfIsShaking;
-    public ItemStack ItemInMouth = null;
-    public int BreedTick = 3000;*/
+
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
     public Vector MemberList = new Vector();
-    //public float SwingAngle = -1000.0F;
-    //public int FleeingTick = 0;
-    //public int DoorOpeningTick = 0; SEEMS TO BE PLANNED
 
     public EntityVelociraptor(World var1)
     {
         super(var1,EnumDinoType.Velociraptor);
         this.looksWithInterest = false;
-        //this.CheckSkin();
-        //this.setSize(0.3F, 0.3F);
-        //this.moveSpeed = 0.3F;
-        //this.health = 10;
-        //this.experienceValue=7;
-        
-        /*this.Width0=0.3F;
-        this.WidthInc=0.12F;
-        this.Length0=0.3F;
-        this.LengthInc=0.13F;
-        this.Height0=0.3F;
-        this.HeightInc=0.1F;
-        //this.BaseattackStrength=;
-        //this.AttackStrengthIncrease=;
-        //this.BreedingTime=;
-        this.BaseSpeed=0.3F;
-        this.SpeedIncrease=0.025F;
-        this.MaxAge=9;
-        this.BaseHealth=21;
-        this.HealthIncrease=1;
-        //this.AdultAge=;
-        //this.AgingTicks=;
-        //this.MaxHunger=;
-        //this.Hungrylevel=;*/
         this.updateSize();
         
         
@@ -111,47 +80,35 @@ public class EntityVelociraptor extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 0.5F;
         
+    	this.healthModValue = 3;
+    	this.damageModValue = 2;
+    	this.speedModValue = 0.01;
         
-        
-        
-        //this.setHunger(this.getHungerLimit());
-        //this.attackStrength = 2 + this.getDinoAge();
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
-        //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
+//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
+//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
-        //this.tasks.addTask(6, new DinoAIUseFeeder(this, 24/*, this.HuntLimit*/, EnumDinoEating.Carnivorous));
-        /*this.tasks.addTask(6, new DinoAIPickItem(this, Item.porkRaw, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Item.beefRaw, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Item.chickenRaw, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Item.porkCooked, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Item.beefCooked, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Item.chickenCooked, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Fossil.rawDinoMeat, this.moveSpeed, 24, this.HuntLimit));
-        this.tasks.addTask(6, new DinoAIPickItem(this, Fossil.cookedDinoMeat, this.moveSpeed, 24, this.HuntLimit));*/
         this.tasks.addTask(6, new DinoAIEat(this, 24));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
-        //this.tasks.addTask(7, new DinoAILearnChest(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+ //       this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
     }
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
 
     }
 
@@ -223,6 +180,7 @@ public class EntityVelociraptor extends EntityDinosaur
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
+    /*
     protected void jump()
     {
         this.motionY = 0.41999998688697815D * (double)(1 + this.getDinoAge() / 16);
@@ -236,6 +194,7 @@ public class EntityVelociraptor extends EntityDinosaur
 
         this.isAirBorne = true;
     }
+    */
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
@@ -309,12 +268,15 @@ public class EntityVelociraptor extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
+        
+        /*
         if(this.LearningChestTick>0 && this.isNearbyChest() && this.isAdult())
         {
         	this.LearningChestTick--;
         	if(this.LearningChestTick==0)
         		this.SendStatusMessage(EnumSituation.LearningChest);//, this.SelfType);
         }
+        */
         /*this.field_25054_c = this.field_25048_b;
 
         if (this.looksWithInterest)
@@ -331,6 +293,7 @@ public class EntityVelociraptor extends EntityDinosaur
             this.numTicksToChaseTarget = 10;
         }*/
     }
+    /*
     public boolean isLearnedChest()
     {
         return this.LearningChestTick == 0;
@@ -352,7 +315,7 @@ public class EntityVelociraptor extends EntityDinosaur
         }
         return false;
     }
-
+*/
     /*public boolean getSelfShaking()
     {
         return false;
@@ -404,6 +367,7 @@ public class EntityVelociraptor extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
+    /*
     public boolean attackEntityFrom(DamageSource var1, int var2)
     {
         Entity var3 = var1.getEntity();
@@ -449,7 +413,7 @@ public class EntityVelociraptor extends EntityDinosaur
             return false;
         }
     }
-
+*/
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
@@ -462,6 +426,7 @@ public class EntityVelociraptor extends EntityDinosaur
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
+    /*
     protected void attackEntity(Entity var1, float var2)
     {
         if (var1.isDead)
@@ -488,7 +453,7 @@ public class EntityVelociraptor extends EntityDinosaur
             var1.attackEntityFrom(DamageSource.causeMobDamage(this), 2 + this.getDinoAge());
         }
     }
-
+*/
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
@@ -566,6 +531,7 @@ public class EntityVelociraptor extends EntityDinosaur
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    /*
     protected void fall(float var1)
     {
         if (this.riddenByEntity != null)
@@ -592,10 +558,11 @@ public class EntityVelociraptor extends EntityDinosaur
             }
         }
     }
-
+*/
     /**
      * Time remaining during which the Animal is sped up and flees.
      */
+    /*
     protected void updateWanderPath()
     {
         boolean var1 = false;
@@ -630,6 +597,7 @@ public class EntityVelociraptor extends EntityDinosaur
             }
         }
     }
+    */
 
    /* private void InitSize()
     {
@@ -763,11 +731,12 @@ public class EntityVelociraptor extends EntityDinosaur
         return new EntityVelociraptor(this.worldObj);
     }
 
+    /*
     public boolean IsIdle()
     {
         return this.motionX < 0.03125D && this.motionY < 0.03125D && this.motionZ < 0.03125D;
     }
-
+*/
     /*public void setLearntChest(boolean var1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(24);
@@ -802,4 +771,14 @@ public class EntityVelociraptor extends EntityDinosaur
 	{
 		return null;
 	}
+
+    /**
+     * Causes this entity to do an upwards motion (jumping).
+     */
+	@Override
+    protected void jump()
+    {
+		super.jump();
+    }
+
 }

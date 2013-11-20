@@ -38,7 +38,7 @@ import net.minecraft.world.WorldServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityPterosaur extends EntityFlyingDino
+public class EntityPterosaur extends EntityDinosaur
 {
     //protected final int AGE_LIMIT = 8;
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
@@ -91,7 +91,7 @@ public class EntityPterosaur extends EntityFlyingDino
         
         
         
-        this.tasks.addTask( 0, new DinoAIFlying( this ));
+      //  this.tasks.addTask( 0, new DinoAIFlying( this ));
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));

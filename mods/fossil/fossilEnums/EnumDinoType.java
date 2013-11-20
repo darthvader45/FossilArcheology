@@ -279,7 +279,7 @@ public enum EnumDinoType
     	
         Velociraptor.setItems(		Item.bone);//,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
-        Velociraptor.setAges(-1, -1, -1);
+        Velociraptor.setAges(-1, 6, -1);
         Velociraptor.setProperties(21, 1, -1, -1, 0.3F, 0.025F, -1);
         Velociraptor.setExperience(0.7F, 0.7F);
         
