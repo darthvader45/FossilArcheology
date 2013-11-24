@@ -176,3 +176,30 @@ pip-log.txt
 /mods/fossil/client/model/anims/Module.java
 
 /assets/fossil/textures/mob/Pterosaur2.png
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# gradle
+.gradle
+build
+gradle-app.setting
+
+# eclipse
+.settings
+.metadata
+.classpath
+.project
+bin
+eclipse
+
+# intellij
+out
+*.idea
+*.iml
+*.ipr
+.iws
