@@ -22,15 +22,15 @@ public enum EnumStoneboard
     AnciTM("AnciTM", 32, 32, 96, 0),
     ModTM("ModTM", 16, 32, 128, 0),
     VigTM("VigTM", 32, 32, 144, 0);
-    
+
     public static final int maxArtTitleLength = "annoyangry".length();
-    
+
     public final String title;
     public final int sizeX;
     public final int sizeY;
     public final int offsetX;
     public final int offsetY;
- //   public static final EnumStoneboard[] allArt = new EnumStoneboard[]{Lighting, Sociel, Greatwar, Killboss, Portol, Herobine, FlatCreep, annoyangry, Rex1, Rex2, Rex3, Rex4, Puzzle, GunFight, Pricess, Mosa, HolyMosa, AnciTM, ModTM, VigTM};
+//   public static final EnumStoneboard[] allArt = new EnumStoneboard[]{Lighting, Sociel, Greatwar, Killboss, Portol, Herobine, FlatCreep, annoyangry, Rex1, Rex2, Rex3, Rex4, Puzzle, GunFight, Pricess, Mosa, HolyMosa, AnciTM, ModTM, VigTM};
 
     private EnumStoneboard(String par3Str, int par4, int par5, int par6, int par7)
     {

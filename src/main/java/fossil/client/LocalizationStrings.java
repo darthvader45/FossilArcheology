@@ -1,9 +1,8 @@
 package mods.fossil.client;
 
-public class LocalizationStrings {
-    
-	
-	//Blocks
+public class LocalizationStrings
+{
+    //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
     public static final String SKULL_LANTERN_NAME = "skullLantern";
@@ -30,7 +29,7 @@ public class LocalizationStrings {
     public static final String VOLCANIC_ASH_NAME = "volcanicAsh";
     public static final String VOLCANIC_ROCK_NAME = "volcanicRock";
     public static final String VOLCANIC_ROCK_HOT_NAME = "volcanicRockHot";
-    public static final String VOLCANIC_BRICK_NAME = "volcanicBrick";    
+    public static final String VOLCANIC_BRICK_NAME = "volcanicBrick";
     public static final String SARRACINA_NAME = "sarracina";
     public static final String FERN_BLOCK_NAME = "fernBlock";
     public static final String T_FEEDER_IDLE_NAME = "tilefeeder";
@@ -41,15 +40,15 @@ public class LocalizationStrings {
     public static final String ANCIENT_WOOD_PILLAR_NAME = "ancientWoodPillar";
     public static final String ANCIENT_GLASS_NAME = "ancientGlass";
     public static final String ANCIENT_WOOD_PLATE_NAME = "ancientWoodPlate";
-    public static final String ANCIENT_WOOD_STAIRS_NAME = "ancientWoodStairs";    
+    public static final String ANCIENT_WOOD_STAIRS_NAME = "ancientWoodStairs";
     public static final String ANCIENT_WOOD_SINGLESLAB_NAME = "ancientWoodSlab";
     public static final String ANCIENT_WOOD_DOUBLESLAB_NAME = "ancientWoodSlabDouble";
-    public static final String ANCIENT_STONE_STAIRS_NAME = "ancientStoneStairs";   
+    public static final String ANCIENT_STONE_STAIRS_NAME = "ancientStoneStairs";
     public static final String ANCIENT_STONE_SINGLESLAB_NAME = "ancientStoneSlab";
     public static final String ANCIENT_STONE_DOUBLESLAB_NAME = "ancientStoneSlabDouble";
     public static final String MARBLE_NAME = "marble";
-	public static final String FIGURINE_NAME = "figurine";
-    
+    public static final String FIGURINE_NAME = "figurine";
+
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
     public static final String RELIC_NAME = "relicScrap";
@@ -83,7 +82,7 @@ public class LocalizationStrings {
     public static final String DIAMOND_JAVELIN_NAME = "diamondJavelin";
     public static final String ANCIENT_JAVELIN_NAME = "ancientJavelin";
     public static final String WHIP_NAME = "whip";
-	public static final String WHIP_ATTACK_NAME = "whipAttack";
+    public static final String WHIP_ATTACK_NAME = "whipAttack";
     public static final String MAGIC_CONCH_NAME = "magicConch";
     public static final String LEGBONE_NAME = "legBone";
     public static final String CLAW_NAME = "claw";
@@ -111,8 +110,8 @@ public class LocalizationStrings {
     public static final String DODO_WING_NAME = "dodoWing";
     public static final String DODO_WING_COOKED_NAME = "dodoWingCooked";
     public static final String POTTERY_NAME = "Pottery";
-	public static final String ITEM_FIGURINE_NAME = "itemfigurine";
-    
+    public static final String ITEM_FIGURINE_NAME = "itemfigurine";
+
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
     public static final String DNA_SHEEP_NAME = "dnaSheep";
@@ -121,7 +120,7 @@ public class LocalizationStrings {
     public static final String DNA_SMILODON_NAME = "dnaSmilodon";
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
     public static final String DNA_DODO_NAME = "dnaDodo";
-    
+
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
     public static final String EMBRYO_SHEEP_NAME = "embryoSheep";
@@ -130,7 +129,7 @@ public class LocalizationStrings {
     public static final String EMBRYO_SMILODON_NAME = "embryoSmilodon";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     public static final String EMBRYO_DODO_NAME = "embryoDodo";
-    
+
     //Tabs
     public static final String FARMOR_NAME = "Ancient Armor";
     public static final String FBLOCKS_NAME = "Ancient Blocks";
@@ -139,7 +138,7 @@ public class LocalizationStrings {
     public static final String FITEMS_NAME = "Ancient Items";
     public static final String FMATERIAL_NAME = "Ancient Materials";
     public static final String FTOOLS_NAME = "Ancient Tools";
-    
+
     //Pedia Hatching Text
     public static final String PEDIA_EGG_DRY = "pediaEggDry";
     public static final String PEDIA_EGG_WET = "pediaEggWet";
@@ -149,15 +148,15 @@ public class LocalizationStrings {
     public static final String PEDIA_EGG_PROGRESS = "pedia.eggProgress";
     public static final String PEDIA_EGG_DAY = "pedia.eggDay";
     public static final String PEDIA_EGG_DAYS = "pedia.eggDays";
-    
-    //Pedia Text   
+
+    //Pedia Text
     public static final String PEDIA_TEXT_OWNER = "pedia.text.owner";
     public static final String PEDIA_TEXT_CHEST = "pedia.text.chest";
     public static final String PEDIA_TEXT_CAUTION = "pedia.text.caution";
     public static final String PEDIA_TEXT_RIDEABLE = "pedia.text.rideable";
     public static final String PEDIA_TEXT_WEAK = "pedia.text.weak";
     public static final String PEDIA_TEXT_FLY = "pedia.text.fly";
-    
+
     //pedia embryo text
     public static final String PEDIA_EMBRYO_INSIDE = "pedia.embryo.inside";
     public static final String PEDIA_EMBRYO_GROWING = "pedia.embryo.growing";
@@ -168,7 +167,7 @@ public class LocalizationStrings {
     public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
     public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
     public static final String PEDIA_EMBRYO_DODO = "pedia.embryo.dodo";
-    
+
     //Dino Egg Messages
     public static final String DINOEGG_HATCHED = "dinoegg.hatched";
     public static final String DINOEGG_NOSPACE = "dinoegg.noSpace";
@@ -177,55 +176,46 @@ public class LocalizationStrings {
     public static final String DINOEGG_COLD = "dinoegg.cold";
     public static final String DINOEGG_WET = "dinoegg.wet";
     public static final String DINOEGG_WARM = "dinoegg.warm";
- 
+
     //Order commands
     public static final String ORDER_HEAD = "order.head";
     public static final String ORDER_STAY = "order.stay";
     public static final String ORDER_FOLLOW = "order.follow";
     public static final String ORDER_FREEMOVE = "order.freeMove";
-    
+
     //Animal names
     public static final String ANIMAL_MAMMOTH = "animal.mammoth";
     public static final String ANIMAL_SMILODON = "animal.smilodon";
     public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
-    public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";   
-    public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";   
-    public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken"; 
-    public static final String ANIMAL_DODO = "animal.dodo"; 
-    
+    public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";
+    public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";
+    public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken";
+    public static final String ANIMAL_DODO = "animal.dodo";
 
     //Trex scarab messages
-    public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";  
+    public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";
     public static final String STATUS_GEM_ERROR_HEALTH = "status.GemErrorHealth";
     public static final String STATUS_GEM_ERROR_TAMED = "status.GemErrorTamed";
     public static final String STATUS_ESSENCE_FAIL = "status.essencefail";
-    
+
     //Cultivator messages
-    public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";  
-    
+    public static final String CULTIVATE_OUTBREAK = "cultivate.outBreak";
+
     //Drum
-    public static final String DRUM_TRIGGER = "drum.trigger"; 
-    public static final String DRUM_ORDERING = "drum.order"; 
-    public static final String DRUM_TREX = "drum.tRex"; 
-    
+    public static final String DRUM_TRIGGER = "drum.trigger";
+    public static final String DRUM_ORDERING = "drum.order";
+    public static final String DRUM_TREX = "drum.tRex";
+
     //Mob names
     public static final String MOB_FPZ = "mob.fpz";
     public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
     public static final String BOSS_ANU = "boss.Anu";
     public static final String MOB_BONES = "mob.bones";
-    
+
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
 
-
-
-    
     //Dinosaur strings are handled through DinoEnum.
 
-    
-
-   
-    
-    
 }

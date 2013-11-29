@@ -38,7 +38,9 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
         super(var1);
     }
     private void setPedia()
-    {Fossil.ToPedia = (Object)this;}
+    {
+        Fossil.ToPedia = (Object)this;
+    }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
@@ -59,7 +61,9 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
         this.EmbryoProgress = var1.getInteger("EmbryoProgress");
 
         if (var1.hasKey("Inside"))
+        {
             this.Embryo = EnumAnimalType.values()[var1.getByte("Inside")];
+        }
     }
 
     public void SetEmbryo(EnumAnimalType var1)
@@ -76,10 +80,11 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
 
         if (FMLCommonHandler.instance().getSide().isClient() && var2 != null && var2.itemID == Fossil.dinoPedia.itemID)
         {
-        	this.setPedia();
-        	var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+            this.setPedia();
+            var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
             return true;
         }
+
         return super.interact(var1);
     }
 
@@ -101,7 +106,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
         //int var10000 = this.EmbryoProgress;
         this.getClass();
 
-        if (this.EmbryoProgress==this.Embryo.GrowTime)//var10000 == 3000)
+        if (this.EmbryoProgress == this.Embryo.GrowTime) //var10000 == 3000)
         {
             Object var2;
 
@@ -118,7 +123,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
                 case Cow:
                     var2 = new EntityCow(this.worldObj);
                     break;
-                    
+
                 case Chicken:
                     var2 = new EntityChicken(this.worldObj);
                     break;
@@ -163,20 +168,20 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
-    	p0.reset();
-    	p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE),false);
-    	p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo."+this.Embryo.toString()),false);
-    	p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING),false);
-    	p0.AddStringLR(String.valueOf(quot) + "/100", false);
-    	
-    	/*
+        int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
+        p0.reset();
+        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false);
+        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+        p0.AddStringLR(String.valueOf(quot) + "/100", false);
+        /*
         String var2 = "";
         this.UpdatePediaText();
         int var3 = (int)Math.floor((double)((float)this.EmbyoProgress / 3000.0F * 100.0F));
         Fossil.ShowMessage(this.InsideText + Fossil.GetEmbyoName(this.Embyos), var1);
         Fossil.ShowMessage(this.GrowingText + var3 + "%", var1);
-    */}
+        */
+    }
 
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {

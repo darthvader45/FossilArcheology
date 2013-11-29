@@ -14,18 +14,17 @@ import org.lwjgl.opengl.GL12;
 public class RenderMammoth extends RenderLiving
 {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Mammoth.png");
-    
+
     protected ResourceLocation func_110919_a(EntityMammoth par1Entity)
     {
         return loc;
     }
-    
+
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityMammoth)par1Entity);
     }
-    
-    
+
     public RenderMammoth(ModelBase var1, float var2)
     {
         super(var1, var2);

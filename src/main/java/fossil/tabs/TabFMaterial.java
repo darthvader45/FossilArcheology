@@ -8,23 +8,21 @@ import mods.fossil.client.Localizations;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class TabFMaterial extends CreativeTabs 
+public class TabFMaterial extends CreativeTabs
 {
-
-	public TabFMaterial(int par1, String par2Str)
+    public TabFMaterial(int par1, String par2Str)
     {
-            super(par1, par2Str);
+        super(par1, par2Str);
     }
-    
+
     @SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
-       return EnumDinoType.Brachiosaurus.EggItem.itemID;
+        return EnumDinoType.Brachiosaurus.EggItem.itemID;
     }
-    
+
     public String getTranslatedTabLabel()
     {
         return LocalizationStrings.FMATERIAL_NAME;
     }
-	
 }

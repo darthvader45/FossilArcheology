@@ -8,21 +8,20 @@ import net.minecraft.world.biome.WorldChunkManagerHell;
 
 public class WorldTypeFossil extends WorldType
 {
-	private BiomeGenBase BiomeGen;
+    private BiomeGenBase BiomeGen;
 
-	public WorldTypeFossil(int par1, String par2Str)
-	{
-		super(par1, par2Str);
-	}
+    public WorldTypeFossil(int par1, String par2Str)
+    {
+        super(par1, par2Str);
+    }
 
-	public String getTranslateName()
-	{
-		return "Dino Test";
-	}
+    public String getTranslateName()
+    {
+        return "Dino Test";
+    }
 
-	public WorldChunkManager getChunkManager(World var1)
-	{
-		return new WorldChunkManagerHell(BiomeGen.desert, 0.5F, 0.5F);
-	}
-
+    public WorldChunkManager getChunkManager(World var1)
+    {
+        return new WorldChunkManagerHell(BiomeGen.desert, 0.5F, 0.5F);
+    }
 }

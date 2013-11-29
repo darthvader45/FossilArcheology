@@ -17,30 +17,28 @@ public class BlockAncientWoodPillar extends Block
     @SideOnly(Side.CLIENT)
     private Icon Top;
 
-	public BlockAncientWoodPillar(int par1, Material var2Material)
+    public BlockAncientWoodPillar(int par1, Material var2Material)
     {
-	    
-	    
         super(par1, Material.wood);
         setBurnProperties(this.blockID, 5, 10);
         this.setCreativeTab(Fossil.tabFBlocks);
     }
-    
-	@Override
+
+    @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar"); //adding in a texture, 1.5.1 style!
+        this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar"); //adding in a texture, 1.5.1 style!
         this.Top = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar_Top");
     }
-	
+
     // this sets the amount droped when broken.
     public int quantityDropped(Random par1Random)
     {
         return 1;
     }
-    
+
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
-    // making stone drop cobblestone. 
+    // making stone drop cobblestone.
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return Fossil.palmLog.blockID;
@@ -51,9 +49,9 @@ public class BlockAncientWoodPillar extends Block
      */
     public Icon getIcon(int var1, int var2)
     {
-        return ((var2&12)==0 && var1 < 2) || ((var2&12)==8 && var1 > 1 && var1 < 4) || ((var2&12)==4 && var1 > 3)? this.Top : this.blockIcon;
+        return ((var2 & 12) == 0 && var1 < 2) || ((var2 & 12) == 8 && var1 > 1 && var1 < 4) || ((var2 & 12) == 4 && var1 > 3) ? this.Top : this.blockIcon;
     }
-	
+
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
@@ -91,7 +89,7 @@ public class BlockAncientWoodPillar extends Block
     {
         return var0 & 3;
     }
-    
+
     /**
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.

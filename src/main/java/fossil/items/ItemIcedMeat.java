@@ -32,11 +32,10 @@ public class ItemIcedMeat extends ItemSword
         var1.damageItem(1000, var6);
         return true;
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Iced_Meat");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Iced_Meat");
+    }
 }

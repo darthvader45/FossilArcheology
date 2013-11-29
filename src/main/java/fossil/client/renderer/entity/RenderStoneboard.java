@@ -2,9 +2,6 @@ package mods.fossil.client.renderer.entity;
 
 import java.util.Random;
 
-
-
-
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.fossilEnums.EnumStoneboard;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -20,7 +17,7 @@ import org.lwjgl.opengl.GL12;
 public class RenderStoneboard extends Render
 {
     private static final ResourceLocation field_110807_a = new ResourceLocation("textures/painting/paintings_kristoffer_zetterstrand.png");
-	
+
     public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9)
     {
         if (entitystoneboard.art != null)
@@ -148,11 +145,10 @@ public class RenderStoneboard extends Render
         this.func_158_a((EntityStoneboard)var1, var2, var4, var6, var8, var9);
     }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

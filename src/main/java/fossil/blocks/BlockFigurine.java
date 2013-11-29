@@ -30,47 +30,48 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFigurine extends BlockContainer
 {
-	
-	public static final String[] figurineTypes = {
-		"Pristine Steve Figurine",
-		"Pristine Skeleton Figurine",
-		"Pristine Zombie Figurine",
-		"Pristine Enderman Figurine",
-		"Pristine Zombie Pigman Figurine",
-		"Damaged Steve Figurine",
-		"Damaged Skeleton Figurine",
-		"Damaged Zombie Figurine",
-		"Damaged Enderman Figurine",
-		"Damaged Zombie Pigman Figurine",
-		"Broken Steve Figurine",
-		"Broken Skeleton Figurine",
-		"Broken Zombie Figurine",
-		"Broken Enderman Figurine",
-		"Broken Zombie Pigman Figurine",
-		"Mysterious Figurine"
-	};
-	public static final String[] shortname = {
-		"figurine_0",
-		"figurine_1",
-		"figurine_2",
-		"figurine_3",
-		"figurine_4",
-		"figurine_5",
-		"figurine_6",
-		"figurine_7",
-		"figurine_8",
-		"figurine_9",
-		"figurine_10",
-		"figurine_11",
-		"figurine_12",
-		"figurine_13",
-		"figurine_14",
-		"figurine_15",
-		"figurine_16",
-	};
-	
+    public static final String[] figurineTypes =
+    {
+        "Pristine Steve Figurine",
+        "Pristine Skeleton Figurine",
+        "Pristine Zombie Figurine",
+        "Pristine Enderman Figurine",
+        "Pristine Zombie Pigman Figurine",
+        "Damaged Steve Figurine",
+        "Damaged Skeleton Figurine",
+        "Damaged Zombie Figurine",
+        "Damaged Enderman Figurine",
+        "Damaged Zombie Pigman Figurine",
+        "Broken Steve Figurine",
+        "Broken Skeleton Figurine",
+        "Broken Zombie Figurine",
+        "Broken Enderman Figurine",
+        "Broken Zombie Pigman Figurine",
+        "Mysterious Figurine"
+    };
+    public static final String[] shortname =
+    {
+        "figurine_0",
+        "figurine_1",
+        "figurine_2",
+        "figurine_3",
+        "figurine_4",
+        "figurine_5",
+        "figurine_6",
+        "figurine_7",
+        "figurine_8",
+        "figurine_9",
+        "figurine_10",
+        "figurine_11",
+        "figurine_12",
+        "figurine_13",
+        "figurine_14",
+        "figurine_15",
+        "figurine_16",
+    };
+
     private Icon[] icons;
-	
+
     public BlockFigurine(int par1)
     {
         super(par1, Material.wood);
@@ -86,11 +87,11 @@ public class BlockFigurine extends BlockContainer
     {
         for (int j = 0; j < figurineTypes.length; ++j)
         {
-        	list.add(new ItemStack(par1, 1, j));
+            list.add(new ItemStack(par1, 1, j));
         }
     }
-    
-	/**
+
+    /**
      * The type of render function that is called for this block
      */
     public int getRenderType()
@@ -120,7 +121,7 @@ public class BlockFigurine extends BlockContainer
      */
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-                this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.5F, 0.7F);
+        this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.5F, 0.7F);
     }
 
     /**
@@ -140,14 +141,11 @@ public class BlockFigurine extends BlockContainer
     {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
-        
         TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
-
-            ((TileEntityFigurine)tileentity).setFigurineType(par6ItemStack.getItemDamage());
-            ((TileEntityFigurine)tileentity).setFigurineRotation(1);
+        ((TileEntityFigurine)tileentity).setFigurineType(par6ItemStack.getItemDamage());
+        ((TileEntityFigurine)tileentity).setFigurineRotation(1);
     }
 
-    
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place
      */
@@ -155,7 +153,7 @@ public class BlockFigurine extends BlockContainer
     {
         return par1;
     }
-    
+
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
@@ -191,7 +189,6 @@ public class BlockFigurine extends BlockContainer
         return par1;
     }
 
-
     /**
      * Called on server worlds only when the block has been replaced by a different block ID, or the same block with a
      * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
@@ -206,6 +203,7 @@ public class BlockFigurine extends BlockContainer
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
         ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+
         if ((metadata & 8) == 0)
         {
             ItemStack itemstack = new ItemStack(Fossil.figurineItem.itemID, 1, this.getDamageValue(world, x, y, z));
@@ -215,8 +213,10 @@ public class BlockFigurine extends BlockContainer
             {
                 return drops;
             }
+
             drops.add(itemstack);
         }
+
         return drops;
     }
 
@@ -227,7 +227,6 @@ public class BlockFigurine extends BlockContainer
     {
         return Fossil.figurineItem.itemID;
     }
-
 
     private boolean func_82528_d(World par1World, int par2, int par3, int par4, int par5)
     {
@@ -242,7 +241,6 @@ public class BlockFigurine extends BlockContainer
         }
     }
 
-
     @SideOnly(Side.CLIENT)
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -251,7 +249,6 @@ public class BlockFigurine extends BlockContainer
     {
         return icons[meta];
     }
-
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconregister)

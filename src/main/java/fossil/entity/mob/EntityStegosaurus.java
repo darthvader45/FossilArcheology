@@ -37,7 +37,7 @@ public class EntityStegosaurus extends EntityDinosaur
 
     public EntityStegosaurus(World var1)
     {
-        super(var1,EnumDinoType.Stegosaurus);
+        super(var1, EnumDinoType.Stegosaurus);
         this.looksWithInterest = false;
         //this.SubSpecies = (new Random()).nextInt(3) + 1;
         //this.texture = "/mods/fossil/textures/Stegosaurus_Baby.png";
@@ -46,8 +46,6 @@ public class EntityStegosaurus extends EntityDinosaur
         //this.moveSpeed = 0.3F;
         //this.health = 8;
         //this.experienceValue=3;
-        
-        
         /*this.Width0=1.2F;
         this.WidthInc=0.5F;
         this.Length0=1.0F;
@@ -67,50 +65,42 @@ public class EntityStegosaurus extends EntityDinosaur
         this.MaxHunger=500;
         this.Hungrylevel=0.9F;*/
         this.updateSize();
-        
         this.setSubSpecies((new Random()).nextInt(3) + 1);
-        
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Stegosaurus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 0.8F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
-        
-        
-        
-        
-        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this,1.0D, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
     }
-    
+
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getModelTexture();
-        if(this.isAdult())
-            return "fossil:textures/mob/Stegosaurus_Adult.png";
-		return "fossil:textures/mob/Stegosaurus_Baby.png";
-    }
+        }
 
+        if (this.isAdult())
+        {
+            return "fossil:textures/mob/Stegosaurus_Adult.png";
+        }
+
+        return "fossil:textures/mob/Stegosaurus_Baby.png";
+    }
 
     protected void updateEntityActionState()
     {
@@ -261,7 +251,7 @@ public class EntityStegosaurus extends EntityDinosaur
      */
     public boolean interact(EntityPlayer var1)
     {
-    	//Add special item interaction code here
+        //Add special item interaction code here
         return super.interact(var1);
     }
     public void handleHealthUpdate(byte var1)
@@ -298,12 +288,12 @@ public class EntityStegosaurus extends EntityDinosaur
         if (var1)
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-  //          this.moveSpeed = 2.0F;
+            //          this.moveSpeed = 2.0F;
         }
         else
         {
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-    //        this.moveSpeed = 0.5F;
+            //        this.moveSpeed = 0.5F;
         }
     }
 
@@ -391,9 +381,9 @@ public class EntityStegosaurus extends EntityDinosaur
         return this.spawnBabyAnimal(var1);
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		return null;
-	}
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        return null;
+    }
 }

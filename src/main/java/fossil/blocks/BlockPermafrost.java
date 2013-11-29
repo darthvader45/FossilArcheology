@@ -37,7 +37,6 @@ public class BlockPermafrost extends BlockBreakable
         return super.shouldSideBeRendered(var1, var2, var3, var4, 1 - var5);
     }
 
- 
     /**
      * Ticks the block if it's been scheduled
      */
@@ -61,17 +60,17 @@ public class BlockPermafrost extends BlockBreakable
                         continue;
                     }
 
-                    var1.setBlock(var2, var3, var4, Block.stone.blockID,0,2);
+                    var1.setBlock(var2, var3, var4, Block.stone.blockID, 0, 2);
                     return;
                 }
 
-                var1.setBlock(var2 + var7, var3 + var8, var4 + var9, Block.ice.blockID,0,2);
+                var1.setBlock(var2 + var7, var3 + var8, var4 + var9, Block.ice.blockID, 0, 2);
                 return;
             }
         }
         else
         {
-            var1.setBlock(var2, var3, var4, Block.dirt.blockID,0,2);
+            var1.setBlock(var2, var3, var4, Block.dirt.blockID, 0, 2);
         }
     }
 
@@ -83,11 +82,10 @@ public class BlockPermafrost extends BlockBreakable
         int var4 = (new Random()).nextInt(20000);
         return var4 >= 0 && var4 < 4000 ? Fossil.fernSeed.itemID : (var4 >= 4000 && var4 < 8000 ? Fossil.blockSkull.blockID : (var4 >= 8000 && var4 < 12000 ? Fossil.icedMeat.itemID : (var4 >= 12000 && var4 < 16000 ? Item.bone.itemID : (var4 >= 16000 && var4 < 20000 ? Item.book.itemID : Block.dirt.blockID))));
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.blockIcon = par1IconRegister.registerIcon("fossil:Permafrost");
+        this.blockIcon = par1IconRegister.registerIcon("fossil:Permafrost");
     }
-    
 }

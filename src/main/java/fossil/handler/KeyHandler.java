@@ -24,68 +24,84 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public class KeyHandler {
-    
+public class KeyHandler
+{
     private String name;
     private boolean down;
-    
-    public KeyHandler() {
+
+    public KeyHandler()
+    {
     }
-    
-    public KeyHandler(String name, boolean down) {
+
+    public KeyHandler(String name, boolean down)
+    {
         this.name = name;
         this.down = down;
     }
-    
-    public KeyHandler(KeyBinding kb) {
+
+    public KeyHandler(KeyBinding kb)
+    {
         this(kb.keyDescription, kb.pressed);
     }
-    
-    public KeyHandler(Packet250CustomPayload packet) {
+
+    public KeyHandler(Packet250CustomPayload packet)
+    {
         read(packet.data);
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public boolean isDown() {
+    public boolean isDown()
+    {
         return down;
     }
 
-    public void setDown(boolean down) {
+    public void setDown(boolean down)
+    {
         this.down = down;
     }
-    
-    public final byte[] write() {
+
+    public final byte[] write()
+    {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(bos);
-        
-        try {
+
+        try
+        {
             dos.writeUTF(name);
             dos.writeBoolean(down);
             dos.close();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Fossil.Console("Can't write packet " + ex);
         }
 
         return bos.toByteArray();
     }
-    
-    public final void read(byte[] data) {
+
+    public final void read(byte[] data)
+    {
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         DataInputStream dis = new DataInputStream(bis);
-        
-        try {
+
+        try
+        {
             name = dis.readUTF();
             down = dis.readBoolean();
             dis.close();
-        } catch (IOException ex) {
-        	Fossil.Console("Can't read packet" + ex);
+        }
+        catch (IOException ex)
+        {
+            Fossil.Console("Can't read packet" + ex);
         }
     }
 }

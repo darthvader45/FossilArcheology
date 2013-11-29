@@ -67,6 +67,7 @@ public class ContainerFeeder extends Container
                 var2.sendProgressBarUpdate(this, 1, this.tileEntityFeeder.MeatCurrent);
             }
         }
+
         this.lastVegValue = this.tileEntityFeeder.VegCurrent;
         this.lastMeatValue = this.tileEntityFeeder.MeatCurrent;
     }

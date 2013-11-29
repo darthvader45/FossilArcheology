@@ -13,7 +13,7 @@ public class WaterDinoAIWander extends EntityAIBase
     private double yPosition;
     private double zPosition;
     private double speed;
-    
+
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -31,11 +31,12 @@ public class WaterDinoAIWander extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-         if (this.entity.getRNG().nextInt(120) != 0)
+        if (this.entity.getRNG().nextInt(120) != 0)
         {
             return false;
         }
-		return true;
+
+        return true;
     }
 
     /**
@@ -43,7 +44,7 @@ public class WaterDinoAIWander extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-return false;
+        return false;
     }
 
     /**
@@ -51,12 +52,9 @@ return false;
      */
     public void startExecuting()
     {
-
-                this.entity.motionX = (double)(this.randomMotionVecX * this.randomMotionSpeed);
-                this.entity.motionY = (double)(this.randomMotionVecY * this.randomMotionSpeed);
-                this.entity.motionZ = (double)(this.randomMotionVecZ * this.randomMotionSpeed);
-
+        this.entity.motionX = (double)(this.randomMotionVecX * this.randomMotionSpeed);
+        this.entity.motionY = (double)(this.randomMotionVecY * this.randomMotionSpeed);
+        this.entity.motionZ = (double)(this.randomMotionVecZ * this.randomMotionSpeed);
         this.entity.moveEntity(this.entity.motionX, this.entity.motionY, this.entity.motionZ);
     }
-    
 }

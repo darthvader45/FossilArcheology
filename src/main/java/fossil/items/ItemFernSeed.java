@@ -40,7 +40,7 @@ public class ItemFernSeed extends Item
             if (var11 == Block.grass.blockID && var3.isAirBlock(var4, var5 + 1, var6) && BlockFern.CheckUnderTree(var3, var4, var5, var6))
             {
                 var3.setBlock(var4, var5 + 1, var6, this.matchingBlockID);
-                var3.setBlockMetadataWithNotify(var4, var5 + 1, var6, (new Random()).nextInt(2)*8,2);
+                var3.setBlockMetadataWithNotify(var4, var5 + 1, var6, (new Random()).nextInt(2) * 8, 2);
                 --var1.stackSize;
                 return true;
             }
@@ -50,11 +50,10 @@ public class ItemFernSeed extends Item
             }
         }
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Fern_Seeds");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Fern_Seeds");
+    }
 }

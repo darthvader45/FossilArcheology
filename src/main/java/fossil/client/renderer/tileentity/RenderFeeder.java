@@ -10,16 +10,21 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderFeeder implements ISimpleBlockRenderingHandler{
+public class RenderFeeder implements ISimpleBlockRenderingHandler
+{
+    public static final RenderFeeder INSTANCE = new RenderFeeder();
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+    {
+        int meta = 3;
 
-	public static final RenderFeeder INSTANCE = new RenderFeeder();
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
-		int meta=3;
-		if(block.blockID==Fossil.feederActive.blockID)meta=1;
-		Tessellator tessellator = Tessellator.instance;
-		block.setBlockBoundsForItemRender();
+        if (block.blockID == Fossil.feederActive.blockID)
+        {
+            meta = 1;
+        }
+
+        Tessellator tessellator = Tessellator.instance;
+        block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -48,31 +53,36 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler{
         renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 5, meta));
         tessellator.draw();
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-	}
+    }
 
-	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
+    @Override
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+    {
         int direction = renderer.blockAccess.getBlockMetadata(x, y, z) & 3;
-        if(direction>0)
-        	renderer.uvRotateTop = direction-1;
+
+        if (direction > 0)
+        {
+            renderer.uvRotateTop = direction - 1;
+        }
         else
-        	renderer.uvRotateTop = 3;
+        {
+            renderer.uvRotateTop = 3;
+        }
+
         boolean flag = renderer.renderStandardBlock(block, x, y, z);
         renderer.uvRotateTop = 0;
         return flag;
-	}
+    }
 
-	@Override
-	public boolean shouldRender3DInInventory()
-	{
-		return true;
-	}
+    @Override
+    public boolean shouldRender3DInInventory()
+    {
+        return true;
+    }
 
-	@Override
-	public int getRenderId()
-	{
-		return 2303;
-	}
-
+    @Override
+    public int getRenderId()
+    {
+        return 2303;
+    }
 }

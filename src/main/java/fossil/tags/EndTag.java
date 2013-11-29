@@ -1,6 +1,5 @@
 package mods.fossil.tags;
 
-
 public final class EndTag extends Tag
 {
     public EndTag()

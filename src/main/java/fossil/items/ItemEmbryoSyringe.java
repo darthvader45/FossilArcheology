@@ -26,20 +26,20 @@ import net.minecraft.item.ItemStack;
 public class ItemEmbryoSyringe extends Item
 {
     //private String[] ItemNames = new String[] {"EmbyoPig", "EmbyoSheep", "EmbyoCow", "EmbyoSmilodon", "EmbyoMammoth"};
-	int AnimalType;
+    int AnimalType;
     public ItemEmbryoSyringe(int var1, int AnimalType0)
     {
         super(var1);
         //this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.maxStackSize = 64;
-        this.AnimalType=AnimalType0;
+        this.AnimalType = AnimalType0;
     }
-    
+
     @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:"+EnumAnimalType.values()[AnimalType].name()+"_Syringe");
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:" + EnumAnimalType.values()[AnimalType].name() + "_Syringe");
     }
 
     /*
@@ -86,17 +86,41 @@ public class ItemEmbryoSyringe extends Item
                 ((EntitySheep)var3).setFleeceColor(((EntitySheep)par3EntityLivingBase).getFleeceColor());
                 ((EntitySheep)var3).setSheared(((EntitySheep)par3EntityLivingBase).getSheared());
             }
-            
 
             if (var3 != null)
             {
-            	EnumAnimalType e0=EnumAnimalType.Chicken;
-            	if(par1ItemStack.itemID==Fossil.embryoChicken.itemID)e0=EnumAnimalType.Chicken;
-            	if(par1ItemStack.itemID==Fossil.embryoCow.itemID)e0=EnumAnimalType.Cow;
-            	if(par1ItemStack.itemID==Fossil.embryoMammoth.itemID)e0=EnumAnimalType.Mammoth;
-            	if(par1ItemStack.itemID==Fossil.embryoPig.itemID)e0=EnumAnimalType.Pig;
-            	if(par1ItemStack.itemID==Fossil.embryoSmilodon.itemID)e0=EnumAnimalType.Smilodon;
-            	if(par1ItemStack.itemID==Fossil.embryoSheep.itemID)e0=EnumAnimalType.Sheep;
+                EnumAnimalType e0 = EnumAnimalType.Chicken;
+
+                if (par1ItemStack.itemID == Fossil.embryoChicken.itemID)
+                {
+                    e0 = EnumAnimalType.Chicken;
+                }
+
+                if (par1ItemStack.itemID == Fossil.embryoCow.itemID)
+                {
+                    e0 = EnumAnimalType.Cow;
+                }
+
+                if (par1ItemStack.itemID == Fossil.embryoMammoth.itemID)
+                {
+                    e0 = EnumAnimalType.Mammoth;
+                }
+
+                if (par1ItemStack.itemID == Fossil.embryoPig.itemID)
+                {
+                    e0 = EnumAnimalType.Pig;
+                }
+
+                if (par1ItemStack.itemID == Fossil.embryoSmilodon.itemID)
+                {
+                    e0 = EnumAnimalType.Smilodon;
+                }
+
+                if (par1ItemStack.itemID == Fossil.embryoSheep.itemID)
+                {
+                    e0 = EnumAnimalType.Sheep;
+                }
+
 //                if(var1.itemID==Fossil.embryoDodo.itemID)e0=EnumAnimalType.Dodo;
                 ((IViviparous)var3).SetEmbryo(e0);
                 ((EntityAnimal)var3).setLocationAndAngles(par3EntityLivingBase.posX, par3EntityLivingBase.posY, par3EntityLivingBase.posZ, par3EntityLivingBase.rotationYaw, par3EntityLivingBase.rotationPitch);
@@ -104,13 +128,15 @@ public class ItemEmbryoSyringe extends Item
 
                 if (!par3EntityLivingBase.worldObj.isRemote)
                 {
-                	par3EntityLivingBase.worldObj.spawnEntityInWorld((EntityAnimal)var3);
+                    par3EntityLivingBase.worldObj.spawnEntityInWorld((EntityAnimal)var3);
                 }
 
                 --par1ItemStack.stackSize;
             }
+
             return true;
         }
+
         return false;
     }
 }

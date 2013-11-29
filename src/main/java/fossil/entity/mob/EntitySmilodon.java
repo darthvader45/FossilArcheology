@@ -84,10 +84,10 @@ public class EntitySmilodon extends EntityTameable
         this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 200, false));
         this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 200, false));
         this.targetTasks.addTask(8, new EntityAITargetNonTamed(this, EntityVillager.class, 200, false));
-        this.experienceValue=5;
+        this.experienceValue = 5;
         this.setTamed(false);
     }
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -103,7 +103,6 @@ public class EntitySmilodon extends EntityTameable
         }
     }
 
-
     /**
      * Returns true if the newer Entity AI code should be run
      */
@@ -112,7 +111,9 @@ public class EntitySmilodon extends EntityTameable
         return true;
     }
     private void setPedia()
-    {Fossil.ToPedia = (Object)this;}
+    {
+        Fossil.ToPedia = (Object)this;
+    }
 
     /**
      * Sets the active target the Task system uses for tracking
@@ -147,7 +148,6 @@ public class EntitySmilodon extends EntityTameable
         this.dataWatcher.addObject(20, new Byte((byte)BlockColored.getBlockFromDye(1)));
     }
 
-    
     /**
      * Plays step sound at given x, y, z for the entity
      */
@@ -462,12 +462,14 @@ public class EntitySmilodon extends EntityTameable
     public boolean interact(EntityPlayer var1)
     {
         ItemStack var2 = var1.inventory.getCurrentItem();
-        if (var2!=null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+
+        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
         {
-        	this.setPedia();
+            this.setPedia();
             var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
             return true;
         }
+
         if (!this.isTamed())
         {
             if (var2 != null && this.isInterest(var2.itemID) && !this.isAngry())
@@ -605,17 +607,23 @@ public class EntitySmilodon extends EntityTameable
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	p0.reset();
-    	p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), 97, 23,40,90,245);
-    	if(this.isTamed())
-    	{
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-    		String s0=this.getOwnerName();
-    		if(s0.length()>11)
-    			s0=this.getOwnerName().substring(0, 11);
-    		p0.AddStringLR(s0, true);
-    	}
-    	p0.PrintItemXY(Fossil.embryoSmilodon, 120, 7);
+        p0.reset();
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), 97, 23, 40, 90, 245);
+
+        if (this.isTamed())
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+            String s0 = this.getOwnerName();
+
+            if (s0.length() > 11)
+            {
+                s0 = this.getOwnerName().substring(0, 11);
+            }
+
+            p0.AddStringLR(s0, true);
+        }
+
+        p0.PrintItemXY(Fossil.embryoSmilodon, 120, 7);
     }
 
     public boolean isAngry()
@@ -636,7 +644,7 @@ public class EntitySmilodon extends EntityTameable
             this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
         }
     }
-    
+
     /**
      * Return this wolf's collar color.
      */
@@ -661,7 +669,6 @@ public class EntitySmilodon extends EntityTameable
     public void setIsTamed(boolean var1)
     {
 //        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
         if (var1)
         {
             this.dataWatcher.updateObject(19, Byte.valueOf((byte)1));
@@ -674,18 +681,18 @@ public class EntitySmilodon extends EntityTameable
 
     public EntitySmilodon spawnBabyAnimal(EntityAgeable par1EntityAgeable)
     {
-    	EntitySmilodon entitysmilodon = new EntitySmilodon(this.worldObj);
+        EntitySmilodon entitysmilodon = new EntitySmilodon(this.worldObj);
         String s = this.getOwnerName();
 
         if (s != null && s.trim().length() > 0)
         {
-        	entitysmilodon.setOwner(s);
-        	entitysmilodon.setTamed(true);
+            entitysmilodon.setOwner(s);
+            entitysmilodon.setTamed(true);
         }
 
         return entitysmilodon;
     }
-    
+
     public void func_70918_i(boolean par1)
     {
         if (par1)
@@ -697,7 +704,7 @@ public class EntitySmilodon extends EntityTameable
             this.dataWatcher.updateObject(19, Byte.valueOf((byte)0));
         }
     }
-    
+
     public boolean lookswithinterest()
     {
         return this.dataWatcher.getWatchableObjectByte(19) == 1;
@@ -729,12 +736,12 @@ public class EntitySmilodon extends EntityTameable
         return null;
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		EntityAgeable var2 = (new EntitySmilodon(this.worldObj));
-		var2.setGrowingAge(-24000);
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        EntityAgeable var2 = (new EntitySmilodon(this.worldObj));
+        var2.setGrowingAge(-24000);
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-		return var2;
-	}
+        return var2;
+    }
 }

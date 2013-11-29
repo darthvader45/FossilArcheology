@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderDodo extends RenderLiving
 {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Dodo_Brown.png");
-    
+
     public RenderDodo(ModelBase par1ModelBase, float par2)
     {
         super(par1ModelBase, par2);
@@ -25,7 +25,7 @@ public class RenderDodo extends RenderLiving
     {
         super.doRenderLiving(par1Entity, par2, par4, par6, par8, par9);
     }
-    
+
     protected ResourceLocation func_110919_a(EntityDodo par1Entity)
     {
         return loc;
@@ -42,7 +42,7 @@ public class RenderDodo extends RenderLiving
     {
         this.renderDodo((EntityDodo)par1EntityLiving, par2, par4, par6, par8, par9);
     }
-    
+
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
@@ -50,12 +50,12 @@ public class RenderDodo extends RenderLiving
     {
         return this.getWingRotation((EntityDodo)par1EntityLivingBase, par2);
     }
-    
+
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityDodo)par1Entity);
     }
-    
+
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
      * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic

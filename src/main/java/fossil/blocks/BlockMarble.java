@@ -34,4 +34,3 @@ public class BlockMarble extends Block
         this.blockIcon = par1IconRegister.registerIcon("fossil:Marble_StoneBrick");
     }
 }
-

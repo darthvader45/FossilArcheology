@@ -2,7 +2,6 @@ package mods.fossil.guiBlocks;
 
 import java.util.Random;
 
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -123,7 +122,7 @@ public class BlockTimeMachine extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.Top : par1==0 ? this.Bottom : par1<4? this.blockIcon : this.Side2;
+        return par1 == 1 ? this.Top : par1 == 0 ? this.Bottom : par1 < 4 ? this.blockIcon : this.Side2;
     }
 
     /**
@@ -141,7 +140,7 @@ public class BlockTimeMachine extends BlockContainer
 
             if (var10 != null)
             {
-            	var5.openGui(Fossil.instance, 5, var1, var2, var3, var4);
+                var5.openGui(Fossil.instance, 5, var1, var2, var3, var4);
             }
 
             return true;

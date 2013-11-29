@@ -20,12 +20,12 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class ItemFossilRecord extends ItemRecord
-{	
+{
     private static final Map records = new HashMap();
-    
+
     /** The name of the record. */
     public final String recordName;
-    
+
     public ItemFossilRecord(int id, String par2Str)
     {
         super(id, par2Str);
@@ -46,13 +46,13 @@ public class ItemFossilRecord extends ItemRecord
     {
         return EnumRarity.rare;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister reg)
     {
-    	this.itemIcon = reg.registerIcon(Fossil.modid + ":record_bones");
+        this.itemIcon = reg.registerIcon(Fossil.modid + ":record_bones");
     }
-    
+
     /**
      * Return the record item corresponding to the given name.
      */

@@ -43,11 +43,9 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     public int SubSpecies = 1;
     public boolean isBaby = true;*/
     //public int RushTick = 0;
-    
-    final EntityAIControlledByPlayer aiControlledByPlayer;    
-    
-    
-    
+
+    final EntityAIControlledByPlayer aiControlledByPlayer;
+
     public float TargetY = 0.0F;
     private float randomMotionSpeed;
     private float randomMotionVecX = 0.0F;
@@ -57,30 +55,20 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
 
     public EntityPlesiosaur(World var1)
     {
-        super(var1,EnumDinoType.Plesiosaur);
+        super(var1, EnumDinoType.Plesiosaur);
         this.looksWithInterest = false;
         this.setSubSpecies((new Random()).nextInt(3) + 1);
-
-        this.updateSize(); 
-        
-        
-        
+        this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Plesiosaur.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.0F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 6.0F;
-        
-        
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
@@ -89,20 +77,17 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
-        
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
     }
 
-	
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-
     }
-    
+
     /**
      * Return the AI task for player control.
      */
@@ -110,7 +95,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     {
         return this.aiControlledByPlayer;
     }
-    
+
     /**
      * Returns the texture's file path as a String.
      */
@@ -118,15 +103,16 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getTexture();
-            switch (this.getSubSpecies())
-            {
-                default:
-                	return "fossil:textures/mob/Plesiosaur_adult.png";
-            }
-    }
-    
+        }
 
+        switch (this.getSubSpecies())
+        {
+            default:
+                return "fossil:textures/mob/Plesiosaur_adult.png";
+        }
+    }
 
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
@@ -179,7 +165,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
     public void onUpdate()
     {
         super.onUpdate();
-
         /*if (this.isInWater())
         {
             if (!this.hasPath() && this.riddenByEntity == null)
@@ -198,33 +183,32 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
                     this.motionZ *= 0.8D;
                 }
             }*/
-
-            /*if ((!this.isOnSurface() && (double)this.TargetY > this.posY || (double)this.TargetY < this.posY) && !this.isCollidedVertically)
+        /*if ((!this.isOnSurface() && (double)this.TargetY > this.posY || (double)this.TargetY < this.posY) && !this.isCollidedVertically)
+        {
+            if ((double)this.TargetY > this.posY)
             {
-                if ((double)this.TargetY > this.posY)
-                {
-                    this.motionY += 0.02D;
-                }
-                else
-                {
-                    this.motionY -= 0.1D;
-                }
-
-                if (this.motionY > 0.4D)
-                {
-                    this.motionY = 0.4D;
-                }
-
-                if (this.motionY < -2.0D)
-                {
-                    this.motionY = -2.0D;
-                }
+                this.motionY += 0.02D;
+            }
+            else
+            {
+                this.motionY -= 0.1D;
             }
 
-            if (Math.abs(this.posY - (double)this.TargetY) <= 0.125D)
+            if (this.motionY > 0.4D)
             {
-                this.motionY = 0.0D;
-            }*/
+                this.motionY = 0.4D;
+            }
+
+            if (this.motionY < -2.0D)
+            {
+                this.motionY = -2.0D;
+            }
+        }
+
+        if (Math.abs(this.posY - (double)this.TargetY) <= 0.125D)
+        {
+            this.motionY = 0.0D;
+        }*/
         //}
     }
 
@@ -478,7 +462,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
      */
     public boolean interact(EntityPlayer var1)
     {
-    	//Add special item interaction code here
+        //Add special item interaction code here
         return super.interact(var1);
     }
 
@@ -742,39 +726,62 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
                 this.TargetY = (float)this.posY;
             }
         }*/
-    	if(this.RiderForward>0)
-    		Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.1F*this.RiderForward;
-    	else
-    		if(Speed>0)
-    		{
-    			Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.4F*this.RiderForward;//Break faster
-    			if(Speed<0)Speed=0;
-    		}
-    		else
-    			Speed += (this.getAIMoveSpeed()*(this.isInWater()?3.2F:1.3F) - Speed) * 0.06F*this.RiderForward;
-    	this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw - (this.isInWater()?this.RiderStrafe*2.0F:this.RiderStrafe*5.0F));
-    	if(this.isInWater())
-    	{
-    		if(this.RiderJump)
-            	this.motionY+=(0.4F-this.motionY)*0.1F;
-    		else if(this.RiderSneak)
-            	this.motionY+=(-0.4F-this.motionY)*0.1F;
-    		else this.motionY+= this.motionY<0? 0.01F : -0.01F;//Make the upwards motion slower
-    		if((this.isOnSurface() && this.motionY>0F) || (this.motionY>-0.01F && this.motionY<0.01F))
-    			this.motionY=0.0F;
-    		if(this.RiderJump && this.isOnSurface())
-    			this.jump();
-    	}
-    	else
-    	{
-    		if(this.RiderJump)
+        if (this.RiderForward > 0)
+        {
+            Speed += (this.getAIMoveSpeed() * (this.isInWater() ? 3.2F : 1.3F) - Speed) * 0.1F * this.RiderForward;
+        }
+        else if (Speed > 0)
+        {
+            Speed += (this.getAIMoveSpeed() * (this.isInWater() ? 3.2F : 1.3F) - Speed) * 0.4F * this.RiderForward; //Break faster
+
+            if (Speed < 0)
             {
-            	this.getJumpHelper().setJumping();
-            	this.RiderJump=false;
+                Speed = 0;
             }
-    	}
-    	this.moveEntityWithHeading(0.0F, Speed+Speed*(0.3F+0.85F*MathHelper.sin(SpeedBoosted*(float)Math.PI)));
-    	//this.posY+=this.motionY;
+        }
+        else
+        {
+            Speed += (this.getAIMoveSpeed() * (this.isInWater() ? 3.2F : 1.3F) - Speed) * 0.06F * this.RiderForward;
+        }
+
+        this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw - (this.isInWater() ? this.RiderStrafe * 2.0F : this.RiderStrafe * 5.0F));
+
+        if (this.isInWater())
+        {
+            if (this.RiderJump)
+            {
+                this.motionY += (0.4F - this.motionY) * 0.1F;
+            }
+            else if (this.RiderSneak)
+            {
+                this.motionY += (-0.4F - this.motionY) * 0.1F;
+            }
+            else
+            {
+                this.motionY += this.motionY < 0 ? 0.01F : -0.01F;    //Make the upwards motion slower
+            }
+
+            if ((this.isOnSurface() && this.motionY > 0F) || (this.motionY > -0.01F && this.motionY < 0.01F))
+            {
+                this.motionY = 0.0F;
+            }
+
+            if (this.RiderJump && this.isOnSurface())
+            {
+                this.jump();
+            }
+        }
+        else
+        {
+            if (this.RiderJump)
+            {
+                this.getJumpHelper().setJumping();
+                this.RiderJump = false;
+            }
+        }
+
+        this.moveEntityWithHeading(0.0F, Speed + Speed * (0.3F + 0.85F * MathHelper.sin(SpeedBoosted * (float)Math.PI)));
+        //this.posY+=this.motionY;
         return Speed;
     }
 
@@ -799,7 +806,8 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
 
     public int BlockInteractive()
     {
-    	int destroyed=0;
+        int destroyed = 0;
+
         for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
         {
             for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
@@ -836,6 +844,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
                 }
             }
         }
+
         return destroyed;
     }
 
@@ -850,8 +859,11 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         {
             this.increaseHunger(100);
         }
-        if(Fossil.FossilOptions.Heal_Dinos)
-        	this.heal(5);
+
+        if (Fossil.FossilOptions.Heal_Dinos)
+        {
+            this.heal(5);
+        }
     }
 
     public void SetOrder(EnumOrderType var1)
@@ -886,12 +898,12 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         return this.spawnBabyAnimal(var1);
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		return this.spawnBabyAnimal(var1);
-	}
-	/**
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        return this.spawnBabyAnimal(var1);
+    }
+    /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
     public void moveEntityWithHeading(float par1, float par2)
@@ -906,8 +918,8 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             this.motionX *= 0.800000011920929D;
             this.motionY *= 0.800000011920929D;
             this.motionZ *= 0.800000011920929D;
- //           if(this.riddenByEntity==null)
-            	this.motionY += 0.02D;//TODO + -> - gravity is on it if not ridden, then handling the riding...going straight forward
+//           if(this.riddenByEntity==null)
+            this.motionY += 0.02D;//TODO + -> - gravity is on it if not ridden, then handling the riding...going straight forward
 
             if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
             {
@@ -978,6 +990,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
                     var3 = Block.blocksList[var6].slipperiness * 0.91F;
                 }
             }
+
 //            System.out.println(String.valueOf(this.motionY));
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
@@ -994,10 +1007,10 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             }
             else
             {
-            	if(!this.isInWater())
-            	{
-            		this.motionY -= 0.08D;
-            	}
+                if (!this.isInWater())
+                {
+                    this.motionY -= 0.08D;
+                }
             }
 
             this.motionY *= 0.9800000190734863D;

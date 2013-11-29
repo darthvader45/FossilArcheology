@@ -55,10 +55,11 @@ public class RenderDinoEgg extends Render
     {
         this.renderDinoEgg((EntityDinoEgg)var1, var2, var4, var6, var8, var9);
     }
-    
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

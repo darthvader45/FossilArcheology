@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiCultivate extends GuiContainer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Cultivate.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Cultivate.png");
     private TileEntityCultivate furnaceInventory;
 
     public GuiCultivate(InventoryPlayer var1, TileEntity var2)

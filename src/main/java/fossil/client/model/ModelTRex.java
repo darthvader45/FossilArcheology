@@ -111,7 +111,6 @@ public class ModelTRex extends ModelDinosaurs
         this.foot_L_3.rotateAngleY = 0.0F;
         this.foot_L_3.rotateAngleZ = 0.0F;
         this.foot_L_3.mirror = false;
-        
         //tail tip
         this.noumenon_5 = new ModelRenderer(this, 10, 6);
         this.noumenon_5.addBox(-1.0F, 0.0F, 0.0F, 2, 2, 6, 0.0F);

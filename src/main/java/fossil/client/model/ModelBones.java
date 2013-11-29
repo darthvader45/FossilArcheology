@@ -42,7 +42,7 @@ public class ModelBones extends ModelZombie
     public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
     {
         //this.aimedBow = ((EntityBones)par1EntityLivingBase).getSkeletonType() == 1;
-    	this.aimedBow = true;
+        this.aimedBow = true;
         super.setLivingAnimations(par1EntityLivingBase, par2, par3, par4);
     }
 

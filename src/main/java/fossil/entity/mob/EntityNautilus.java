@@ -31,7 +31,7 @@ public class EntityNautilus extends EntityWaterMob
     private float randomMotionVecY = 0.0F;
     private float randomMotionVecZ = 0.0F;
     public int BreedTick = 3000;
-    public boolean isOwned=false;
+    public boolean isOwned = false;
 
     public EntityNautilus(World var1)
     {
@@ -39,9 +39,9 @@ public class EntityNautilus extends EntityWaterMob
         this.setSize(0.95F, 0.95F);
         this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
         //this.experienceValue=1;
-        this.isOwned=false;
+        this.isOwned = false;
     }
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -133,9 +133,11 @@ public class EntityNautilus extends EntityWaterMob
                     this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                     this.setDead();
                 }
+
                 return true;
             }
         }
+
         return false;
     }
 
@@ -272,7 +274,8 @@ public class EntityNautilus extends EntityWaterMob
                         }
                     }
                     else
-                    {//damage them
+                    {
+                        //damage them
                         EntityNautilus var5 = (EntityNautilus)((EntityNautilus)var3.get(var4));
                         var5.attackEntityFrom(DamageSource.starve, 100);
                     }
@@ -287,20 +290,21 @@ public class EntityNautilus extends EntityWaterMob
                 }
                 else
                 {
-                	EntityNautilus var6 = null;
+                    EntityNautilus var6 = null;
 
-	                if ((new Random()).nextInt(100)+1 < var2)
-	                {
-	                    var6 = new EntityNautilus(this.worldObj);
-	                    var6.setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-	
-	                    if (this.worldObj.checkNoEntityCollision(var6.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var6, var6.boundingBox).size() == 0 && this.worldObj.isAnyLiquid(var6.boundingBox))
-	                    {
-	                        this.worldObj.spawnEntityInWorld(var6);
-	                    }
-	                }
+                    if ((new Random()).nextInt(100) + 1 < var2)
+                    {
+                        var6 = new EntityNautilus(this.worldObj);
+                        var6.setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
+
+                        if (this.worldObj.checkNoEntityCollision(var6.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var6, var6.boundingBox).size() == 0 && this.worldObj.isAnyLiquid(var6.boundingBox))
+                        {
+                            this.worldObj.spawnEntityInWorld(var6);
+                        }
+                    }
                 }
             }
+
             this.BreedTick = 3000;
         }
     }
@@ -309,9 +313,11 @@ public class EntityNautilus extends EntityWaterMob
      */
     protected boolean canDespawn()
     {
-    	if(this.isOwned)
-    		return false;
-    	return true;
-    }
+        if (this.isOwned)
+        {
+            return false;
+        }
 
+        return true;
+    }
 }

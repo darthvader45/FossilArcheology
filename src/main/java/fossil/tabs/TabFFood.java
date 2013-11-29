@@ -7,23 +7,21 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class TabFFood extends CreativeTabs 
+public class TabFFood extends CreativeTabs
 {
-
-	public TabFFood(int par1, String par2Str)
+    public TabFFood(int par1, String par2Str)
     {
-            super(par1, par2Str);
+        super(par1, par2Str);
     }
-    
+
     @SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
-       return Fossil.cookedChickenSoup.itemID;
+        return Fossil.cookedChickenSoup.itemID;
     }
-    
+
     public String getTranslatedTabLabel()
     {
         return LocalizationStrings.FFOOD_NAME;
     }
-	
 }

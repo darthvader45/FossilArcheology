@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiAnalyzer extends GuiContainer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Analyser.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Analyser.png");
     private TileEntityAnalyzer analyzerInventory;
 
     public GuiAnalyzer(InventoryPlayer var1, TileEntity var2)

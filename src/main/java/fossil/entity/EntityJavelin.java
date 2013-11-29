@@ -33,10 +33,10 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
     private int zTile = -1;
     private int inTile = 0;
     private int inData = 0;
-    
+
     private int ticksInGround;
     private int ticksInAir = 0;
-    
+
     protected  boolean inGround = false;
     private double damage = 2.0D;
     public boolean arrowCritical;
@@ -45,7 +45,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
 
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
-    
+
     public EntityJavelin(World var1)
     {
         super(var1);
@@ -63,7 +63,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
         super(var1, var32, var3);
         //this.SelfMaterial = EnumToolMaterial.WOOD;
         this.SelfMaterial = var4;
-        this.damaged= damagevalue;
+        this.damaged = damagevalue;
     }
 
     public EntityJavelin(World var1, EntityLiving var2, float var3)
@@ -71,7 +71,6 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
         super(var1, var2, var3);
         this.SelfMaterial = EnumToolMaterial.WOOD;
     }
-
 
     /**
      * Called to update the entity's position/logic.
@@ -138,7 +137,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
             Vec3 vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks_do_do(vec3, vec31, false, true);
             vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX/2, this.posY + this.motionY/2, this.posZ + this.motionZ/2);
+            vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX / 2, this.posY + this.motionY / 2, this.posZ + this.motionZ / 2);
 
             if (movingobjectposition != null)
             {
@@ -197,7 +196,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
                 if (movingobjectposition.entityHit != null)
                 {
                     f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    int i1 = MathHelper.ceiling_double_int((double)f2 * this.damage/3.0D);
+                    int i1 = MathHelper.ceiling_double_int((double)f2 * this.damage / 3.0D);
                     i1 += this.SelfMaterial.getDamageVsEntity();
 
                     if (this.getIsCritical())
@@ -354,10 +353,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
             this.doBlockCollisions();
         }
     }
-    
-    
-    
-    
+
     /**
      * Called by a player entity when they collide with an entity
      */
@@ -379,11 +375,10 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
                 this.setDead();
             }
         }
-    }    
-    
+    }
+
     protected boolean addJavelinToPlayer(EntityPlayer var1)
     {
-        
         /*ItemStack var2;
 
         switch (this.SelfMaterial.ordinal())//EntityJavelin$1.$SwitchMap$net$minecraft$item$EnumToolMaterial[this.SelfMaterial.ordinal()])
@@ -408,10 +403,10 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
             case 4:
                 var2 = new ItemStack(Fossil.goldjavelin, 1);
         }*/
-        System.out.println("pickup1: "+damaged);
-    	ItemStack var2=new ItemStack(GetJavelinByMaterial(),1);
+        System.out.println("pickup1: " + damaged);
+        ItemStack var2 = new ItemStack(GetJavelinByMaterial(), 1);
         var2.setItemDamage(var2.getMaxDamage() - damaged);
-                return var1.inventory.addItemStackToInventory(var2);
+        return var1.inventory.addItemStackToInventory(var2);
     }
 
     public float getShadowSize()

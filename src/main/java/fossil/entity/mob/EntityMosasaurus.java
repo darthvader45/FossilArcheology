@@ -23,93 +23,83 @@ import net.minecraft.world.World;
 
 public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 {
-
     private Entity targetedEntity;
-    
+
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
-    public double waypointZ;    
-	private double deltaX;
-	private double deltaY;
-	private double deltaZ;
-	private double length;
+    public double waypointZ;
+    private double deltaX;
+    private double deltaY;
+    private double deltaZ;
+    private double length;
 
     public EntityMosasaurus(World par1World)
     {
         super(par1World, EnumDinoType.Mosasaurus);
-
-
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 0.5F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 3.0F;
-        
-        
         this.experienceValue = 5;
     }
-    
+
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getModelTexture();
-        if(this.isAdult())
+        }
+
+        if (this.isAdult())
+        {
             return "fossil:textures/mob/Mosasaurus.png";
-		return "fossil:textures/mob/Mosasaurus.png";
+        }
+
+        return "fossil:textures/mob/Mosasaurus.png";
     }
-    
+
     /**
      * Returns true if the Entity AI code should be run
-     * 
+     *
      * Overriding because Mosasaur are dumb.
      */
     @Override
     public boolean isAIEnabled()
     {
-    	return false;
+        return false;
     }
-    
+
     /**
      * Called when the entity is attacked.
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
-            return super.attackEntityFrom(par1DamageSource, par2);
+        return super.attackEntityFrom(par1DamageSource, par2);
     }
-    
-    
-    
+
     /**
      * Called by a player entity when they collide with an entity
      */
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
-            if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength() +1))
-            {
-                this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            }
+        if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength() + 1))
+        {
+            this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+        }
     }
-    
 
-    
     protected void entityInit()
     {
         super.entityInit();
     }
 
-    
-    
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -117,11 +107,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
     }
 
-    
-    
     protected void updateEntityActionState()
     {
-    	super.updateEntityActionState();
+        super.updateEntityActionState();
         double d4 = 64.0D;
         double d0 = this.waypointX - this.posX;
         double d1 = this.waypointY - this.posY;
@@ -130,18 +118,18 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 
         if (d3 < 1.0D || d3 > 3600.0D)
         {
-        	if (this.isInWater())
-        	{
+            if (this.isInWater())
+            {
                 this.waypointX = this.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
                 this.waypointY = this.posY - (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 1.0F);
                 this.waypointZ = this.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        	}
-        	else
-        	{
-        		this.waypointX = this.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        		this.waypointY = this.posY - (double)((this.rand.nextFloat() * 2.0F) * 1.0F);
-        		this.waypointZ = this.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-        	}
+            }
+            else
+            {
+                this.waypointX = this.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+                this.waypointY = this.posY - (double)((this.rand.nextFloat() * 2.0F) * 1.0F);
+                this.waypointZ = this.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            }
         }
 
         if (this.courseChangeCooldown-- <= 0)
@@ -168,28 +156,24 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
             this.targetedEntity = null;
         }
 
-            this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
+        this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
 
-
-        if (this.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater() 
-        		&&  this.targetedEntity.getDistanceSqToEntity(this) < d4 * d4)
+        if (this.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
+                &&  this.targetedEntity.getDistanceSqToEntity(this) < d4 * d4)
         {
-        	// Simple "pathfinding" to attack closest player.
-        	this.deltaX = this.targetedEntity.posX - this.posX;
-        	this.deltaY = this.targetedEntity.posY - this.posY;
-        	this.deltaZ = this.targetedEntity.posZ - this.posZ;
-        	this.length = Math.sqrt( deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
-        	
-        	//Normalize?
-        	deltaX /= length + 1.5D;
-        	deltaY /= length + 1.5D;
-        	deltaZ /= length + 1.5D;
-        	
-        	//Set waypoint for player's current location.
+            // Simple "pathfinding" to attack closest player.
+            this.deltaX = this.targetedEntity.posX - this.posX;
+            this.deltaY = this.targetedEntity.posY - this.posY;
+            this.deltaZ = this.targetedEntity.posZ - this.posZ;
+            this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            //Normalize?
+            deltaX /= length + 1.5D;
+            deltaY /= length + 1.5D;
+            deltaZ /= length + 1.5D;
+            //Set waypoint for player's current location.
             this.waypointX += deltaX;
             this.waypointY += deltaY;
             this.waypointZ += deltaZ;
-            
             //Now move.
             double d5 = this.targetedEntity.posX - this.posX;
             double d6 = this.targetedEntity.posY - this.posY;
@@ -198,9 +182,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 
             if (this.canEntityBeSeen(this.targetedEntity))
             {
-           // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
-            	this.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
-            	Vec3 vec3 = this.getLook(1.0F);
+                // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                this.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
+                Vec3 vec3 = this.getLook(1.0F);
             }
         }
         else
@@ -228,6 +212,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
                 return false;
             }
         }
+
         return true;
     }
 

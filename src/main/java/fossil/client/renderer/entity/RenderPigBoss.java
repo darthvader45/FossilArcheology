@@ -15,17 +15,17 @@ public class RenderPigBoss extends RenderBiped
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/PigBoss.png");
     private static final ResourceLocation loc2 = new ResourceLocation("fossil:textures/mob/PigBoss_r.png");
     private static final ResourceLocation loc3 = new ResourceLocation("fossil:textures/mob/PigBossCharged_r.png");
-    
+
     protected ResourceLocation func_110919_a(EntityPigBoss par1Entity)
     {
         return loc;
     }
-    
+
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntityPigBoss)par1Entity);
     }
-    
+
     public RenderPigBoss(ModelBiped var1, float var2)
     {
         super(var1, var2);

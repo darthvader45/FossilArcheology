@@ -34,4 +34,3 @@ public class BlockAncientStonebrick extends Block
         this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Stonebricks");
     }
 }
-

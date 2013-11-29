@@ -68,15 +68,27 @@ public class BlockWorktable extends BlockContainer
             int var8 = var1.getBlockId(var2 + 1, var3, var4);
             byte var9 = 3;
 
-            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])var9 = 3;
+            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])
+            {
+                var9 = 3;
+            }
 
-            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])var9 = 2;
+            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])
+            {
+                var9 = 2;
+            }
 
-            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])var9 = 5;
+            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])
+            {
+                var9 = 5;
+            }
 
-            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])var9 = 4;
+            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])
+            {
+                var9 = 4;
+            }
 
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var9,2);
+            var1.setBlockMetadataWithNotify(var2, var3, var4, var9, 2);
         }
     }
 
@@ -122,7 +134,7 @@ public class BlockWorktable extends BlockContainer
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Arch_Table_Side1");
         this.Side2 = par1IconRegister.registerIcon("fossil:Arch_Table_Side2");
-        this.Top = this.isActive? par1IconRegister.registerIcon("fossil:Arch_Table_Top_Active") : par1IconRegister.registerIcon("fossil:Arch_Table_Top_Idle");
+        this.Top = this.isActive ? par1IconRegister.registerIcon("fossil:Arch_Table_Top_Active") : par1IconRegister.registerIcon("fossil:Arch_Table_Top_Idle");
         this.Bottom = par1IconRegister.registerIcon("fossil:Arch_Table_Bottom");
     }
 
@@ -131,7 +143,7 @@ public class BlockWorktable extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.Top : par1==0 ? this.Bottom : (par2&1)==0? this.blockIcon : this.Side2;
+        return par1 == 1 ? this.Top : par1 == 0 ? this.Bottom : (par2 & 1) == 0 ? this.blockIcon : this.Side2;
     }
 
     /**
@@ -145,7 +157,7 @@ public class BlockWorktable extends BlockContainer
         }
         else
         {
-        	var5.openGui(Fossil.instance, 3, var1, var2, var3, var4);
+            var5.openGui(Fossil.instance, 3, var1, var2, var3, var4);
             return true;
         }
     }
@@ -166,7 +178,7 @@ public class BlockWorktable extends BlockContainer
         }
 
         keepFurnaceInventory = false;
-        var1.setBlockMetadataWithNotify(var2, var3, var4, var5,2);
+        var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
         var6.validate();
         var1.setBlockTileEntity(var2, var3, var4, var6);
     }
@@ -186,13 +198,25 @@ public class BlockWorktable extends BlockContainer
     {
         int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (var6 == 0)var1.setBlockMetadataWithNotify(var2, var3, var4, 2,2);
+        if (var6 == 0)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 2, 2);
+        }
 
-        if (var6 == 1)var1.setBlockMetadataWithNotify(var2, var3, var4, 5,2);
+        if (var6 == 1)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 5, 2);
+        }
 
-        if (var6 == 2)var1.setBlockMetadataWithNotify(var2, var3, var4, 3,2);
+        if (var6 == 2)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 3, 2);
+        }
 
-        if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2);
+        if (var6 == 3)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 4, 2);
+        }
     }
 
     /**
@@ -206,37 +230,38 @@ public class BlockWorktable extends BlockContainer
 
             if (var7 != null)
             {
-            for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
-            {
-                ItemStack var9 = var7.getStackInSlot(var8);
-
-                if (var9 != null)
+                for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
                 {
-                    float var10 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                    float var11 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                    float var12 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                    ItemStack var9 = var7.getStackInSlot(var8);
 
-                    while (var9.stackSize > 0)
+                    if (var9 != null)
                     {
-                        int var13 = this.furnaceRand.nextInt(21) + 10;
+                        float var10 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var11 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var12 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-                        if (var13 > var9.stackSize)
+                        while (var9.stackSize > 0)
                         {
-                            var13 = var9.stackSize;
-                        }
+                            int var13 = this.furnaceRand.nextInt(21) + 10;
 
-                        var9.stackSize -= var13;
-                        EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var10), (double)((float)var3 + var11), (double)((float)var4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
-                        float var15 = 0.05F;
-                        var14.motionX = (double)((float)this.furnaceRand.nextGaussian() * var15);
-                        var14.motionY = (double)((float)this.furnaceRand.nextGaussian() * var15 + 0.2F);
-                        var14.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var15);
-                        var1.spawnEntityInWorld(var14);
+                            if (var13 > var9.stackSize)
+                            {
+                                var13 = var9.stackSize;
+                            }
+
+                            var9.stackSize -= var13;
+                            EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var10), (double)((float)var3 + var11), (double)((float)var4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                            float var15 = 0.05F;
+                            var14.motionX = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var14.motionY = (double)((float)this.furnaceRand.nextGaussian() * var15 + 0.2F);
+                            var14.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var1.spawnEntityInWorld(var14);
+                        }
                     }
                 }
             }
         }
-        }
+
         super.breakBlock(var1, var2, var3, var4, var5, var6);
     }
 }

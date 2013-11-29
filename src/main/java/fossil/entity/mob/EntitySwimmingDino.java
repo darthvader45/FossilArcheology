@@ -11,12 +11,11 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
     {
         super(world, dinotype);
     }
-    
+
     public boolean canBreatheUnderwater()
     {
         return true;
     }
-   
 
     public void moveEntityWithHeading(float par1, float par2)
     {
@@ -38,7 +37,6 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
         }
         else
         {
-
             float f2 = 0.91F;
 
             if (this.onGround)
@@ -72,7 +70,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
             this.motionY *= (double)f2;
             this.motionZ *= (double)f2;
         }
-        
+
         this.prevLimbSwingAmount = this.limbSwingAmount;
         double d0 = this.posX - this.prevPosX;
         double d1 = this.posZ - this.prevPosZ;
@@ -85,9 +83,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
 
         this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
         this.limbSwing += this.limbSwingAmount;
-
     }
-    
 
     /**
      * returns true if this entity is by a ladder, false otherwise

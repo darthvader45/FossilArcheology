@@ -121,7 +121,6 @@ public class ModelStegosaurus extends ModelDinosaurs
         this.setRotation(this.T4, 0.2617994F, 0.0F, 0.0F);
         this.T4.mirror = true;
     }
-    
 
     /**
      * Sets the models various rotation angles then renders the model.

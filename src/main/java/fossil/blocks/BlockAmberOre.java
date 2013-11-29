@@ -22,7 +22,7 @@ public class BlockAmberOre extends Block
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return this.blockID == Fossil.amberOre.blockID ? Fossil.amber.itemID :this.blockID;
+        return this.blockID == Fossil.amberOre.blockID ? Fossil.amber.itemID : this.blockID;
     }
 
     /**
@@ -82,7 +82,7 @@ public class BlockAmberOre extends Block
     {
         return this.blockID == Fossil.amberOre.blockID ? 4 : 0;
     }
-    
+
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Amber_Ore");

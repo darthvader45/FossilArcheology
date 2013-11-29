@@ -40,7 +40,7 @@ public class FPZAIOwnerHurtTarget extends EntityAITarget
                 this.theTarget = var1.getLastAttacker();
                 int i = var1.getLastAttackerTime();
                 return i != this.field_142050_e && this.isSuitableTarget(this.theTarget, false) && this.fpz.func_142018_a(this.theTarget, var1);
-           }
+            }
         }
     }
 

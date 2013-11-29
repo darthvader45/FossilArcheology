@@ -25,10 +25,9 @@ public class EntityDodoEgg extends EntityThrowable
     {
         super(par1World, par2, par4, par6);
     }
-    
+
     public String getTexture()
     {
-
         return "/mods/fossil/textures/items/Egg_Dodo.png";
     }
 

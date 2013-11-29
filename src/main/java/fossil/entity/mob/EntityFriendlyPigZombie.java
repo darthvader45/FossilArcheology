@@ -75,8 +75,7 @@ public class EntityFriendlyPigZombie extends EntityMob
      */
     public void onUpdate()
     {
- //       this.moveSpeed = this.entityToAttack == null ? 0.5F : 0.95F;
-
+//       this.moveSpeed = this.entityToAttack == null ? 0.5F : 0.95F;
         if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0)
         {
             this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
@@ -217,14 +216,16 @@ public class EntityFriendlyPigZombie extends EntityMob
         return this.Leader;
     }
 
-	public EntityLivingBase func_130012_q() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public EntityLivingBase func_130012_q()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public boolean func_142018_a(EntityLivingBase theTarget,
-			EntityLivingBase var1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean func_142018_a(EntityLivingBase theTarget,
+                                 EntityLivingBase var1)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

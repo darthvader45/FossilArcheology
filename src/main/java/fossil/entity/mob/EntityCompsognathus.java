@@ -47,7 +47,7 @@ public class EntityCompsognathus extends EntityDinosaur
     private boolean looksWithInterest;
     private float field_70926_e;
     private float field_70924_f;
-    
+
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
@@ -55,27 +55,19 @@ public class EntityCompsognathus extends EntityDinosaur
 
     public EntityCompsognathus(World var1)
     {
-        super(var1,EnumDinoType.Compsognathus);
+        super(var1, EnumDinoType.Compsognathus);
         this.looksWithInterest = false;
         this.updateSize();
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Compsognathus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.0F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 0.25F;
-        
         // Size of dinosaur at age Adult.
-        this.maxSize = 1.0F;        
-        
-
+        this.maxSize = 1.0F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
@@ -99,7 +91,7 @@ public class EntityCompsognathus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.31D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
     }
-    
+
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
@@ -125,25 +117,28 @@ public class EntityCompsognathus extends EntityDinosaur
             this.setAngry(true);
         }
     }
-    
+
     /**
      * Returns the texture's file path as a String.
      */
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getTexture();
-            switch (this.getSubSpecies())
-            {
-                case 1:
-                    return "fossil:textures/mob/Compsognathus_Purple.png";
+        }
 
-                case 2:
-                    return "fossil:textures/mob/Compsognathus_Green.png";
+        switch (this.getSubSpecies())
+        {
+            case 1:
+                return "fossil:textures/mob/Compsognathus_Purple.png";
 
-                default:
-                	return "fossil:textures/mob/Compsognathus_Green.png";
-            }
+            case 2:
+                return "fossil:textures/mob/Compsognathus_Green.png";
+
+            default:
+                return "fossil:textures/mob/Compsognathus_Green.png";
+        }
     }
 
     /**
@@ -161,9 +156,8 @@ public class EntityCompsognathus extends EntityDinosaur
     public void readEntityFromNBT(NBTTagCompound var1)
     {
         super.readEntityFromNBT(var1);
-        this.LearningChestTick=var1.getInteger("LearningChestTick");
+        this.LearningChestTick = var1.getInteger("LearningChestTick");
     }
-
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
@@ -179,22 +173,27 @@ public class EntityCompsognathus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        if(this.LearningChestTick>0 && this.isNearbyChest() && this.isAdult())
+
+        if (this.LearningChestTick > 0 && this.isNearbyChest() && this.isAdult())
         {
-        	this.LearningChestTick--;
-        	if(this.LearningChestTick==0)
-        		this.SendStatusMessage(EnumSituation.LearningChest);//, this.SelfType);
+            this.LearningChestTick--;
+
+            if (this.LearningChestTick == 0)
+            {
+                this.SendStatusMessage(EnumSituation.LearningChest);    //, this.SelfType);
+            }
         }
     }
-    
+
     public boolean isLearnedChest()
     {
         return this.LearningChestTick == 0;
     }
-    
+
     private boolean isNearbyChest()
     {
         TileEntity var5 = null;
+
         for (int var6 = -10; var6 <= 10; ++var6)
         {
             for (int var7 = 0; var7 <= 3; ++var7)
@@ -202,11 +201,15 @@ public class EntityCompsognathus extends EntityDinosaur
                 for (int var8 = -10; var8 <= 10; ++var8)
                 {
                     var5 = this.worldObj.getBlockTileEntity((int)(this.posX + (double)var6), (int)(this.posY + (double)var7), (int)(this.posZ + (double)var8));
+
                     if (var5 instanceof TileEntityChest)
+                    {
                         return true;
+                    }
                 }
             }
         }
+
         return false;
     }
 
@@ -237,7 +240,6 @@ public class EntityCompsognathus extends EntityDinosaur
     {
         return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * par1) * 0.15F * (float)Math.PI;
     }
-    
 
     /**
      * Called when the entity is attacked.
@@ -313,13 +315,15 @@ public class EntityCompsognathus extends EntityDinosaur
         }
     }
 
-
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	super.ShowPedia(p0);
-    	if(this.LearningChestTick==0)
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        super.ShowPedia(p0);
+
+        if (this.LearningChestTick == 0)
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        }
     }
 
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)

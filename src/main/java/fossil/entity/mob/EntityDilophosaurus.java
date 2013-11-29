@@ -44,20 +44,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityDilophosaurus extends EntityDinosaur
 {
     private boolean looksWithInterest;//IS THAT WORKING?
-    
-    
+
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
     //private float field_25048_b;
     //private float field_25054_c;//HAS something todo with look with interest
     //private boolean field_25052_g;
-    
+
     /*private boolean isWolfShaking;
     private float timeWolfIsShaking;//FIND OUT WHAT THIS IS FOR
     private float prevTimeWolfIsShaking;*/
-    
+
     //public ItemStack ItemInMouth = null;
     public int LearningChestTick = 900;
-    
+
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
     public Vector MemberList = new Vector();//ARE THEESE 5 DOING ANYTHING AND WORKING CORRECTLY?
@@ -66,28 +65,19 @@ public class EntityDilophosaurus extends EntityDinosaur
 
     public EntityDilophosaurus(World var1)
     {
-        super(var1,EnumDinoType.Dilophosaurus);
+        super(var1, EnumDinoType.Dilophosaurus);
         this.looksWithInterest = false;
-
         this.updateSize();
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Dilophosaurus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.5F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 0.5F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 2.0F;
-        
-        
         //this.attackStrength = 2 + this.getDinoAge();
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -112,20 +102,21 @@ public class EntityDilophosaurus extends EntityDinosaur
     public boolean attackEntityAsMob(Entity var1)
     {
         if (this.rand.nextInt(16) < 4 && var1 instanceof EntityLiving)
-        {//Has chance to blind the prey, after that handle normal attacking 
+        {
+            //Has chance to blind the prey, after that handle normal attacking
             ((EntityLiving)var1).addPotionEffect(new PotionEffect(Potion.blindness.id, this.rand.nextInt(110) + 10, 0));
         }
+
         return super.attackEntityAsMob(var1);
     }
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.34000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-
     }
-    
+
     /**
      * Returns the texture's file path as a String.
      */
@@ -133,12 +124,15 @@ public class EntityDilophosaurus extends EntityDinosaur
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getTexture();
-            switch (this.getSubSpecies())
-            {
-                default:
-                	return "fossil:textures/mob/Dilophosaurus_Adult.png";
-            }
+        }
+
+        switch (this.getSubSpecies())
+        {
+            default:
+                return "fossil:textures/mob/Dilophosaurus_Adult.png";
+        }
     }
 
     /**
@@ -177,7 +171,7 @@ public class EntityDilophosaurus extends EntityDinosaur
     {
         super.readEntityFromNBT(var1);
         //this.setSelfAngry(var1.getBoolean("Angry"));
-        this.LearningChestTick=var1.getInteger("LearningChestTick");
+        this.LearningChestTick = var1.getInteger("LearningChestTick");
         //this.setSelfSitting(var1.getBoolean("Sitting"));
         //this.InitSize();
         //this.OrderStatus = EnumOrderType.values()[var1.getByte("OrderStatus")];
@@ -190,7 +184,6 @@ public class EntityDilophosaurus extends EntityDinosaur
         }*/
     }
 
-
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
@@ -200,7 +193,8 @@ public class EntityDilophosaurus extends EntityDinosaur
     }
 
     protected void updateEntityActionState()
-    {//TODO
+    {
+        //TODO
         super.updateEntityActionState();
         EntityPlayer var1 = this.worldObj.getPlayerEntityByName(this.getOwnerName());
 
@@ -224,12 +218,12 @@ public class EntityDilophosaurus extends EntityDinosaur
                         if (var2 < 5.0F)
                         {
                             //this.moveSpeed = 2.0F;
-                	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(2.0D);
+                            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(2.0D);
                         }
                         else
                         {
 //                	        // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-                	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
+                            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
                         }
                     }
                 }
@@ -253,6 +247,7 @@ public class EntityDilophosaurus extends EntityDinosaur
     private boolean isNearbyChest()
     {
         TileEntity var5 = null;
+
         for (int var6 = -10; var6 <= 10; ++var6)
         {
             for (int var7 = 0; var7 <= 3; ++var7)
@@ -260,11 +255,15 @@ public class EntityDilophosaurus extends EntityDinosaur
                 for (int var8 = -10; var8 <= 10; ++var8)
                 {
                     var5 = this.worldObj.getBlockTileEntity((int)(this.posX + (double)var6), (int)(this.posY + (double)var7), (int)(this.posZ + (double)var8));
+
                     if (var5 instanceof TileEntityChest)
+                    {
                         return true;
+                    }
                 }
             }
         }
+
         return false;
     }
     /**
@@ -273,14 +272,19 @@ public class EntityDilophosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        if(this.LearningChestTick>0 && this.isNearbyChest() && this.isAdult())
+
+        if (this.LearningChestTick > 0 && this.isNearbyChest() && this.isAdult())
         {
-        	this.LearningChestTick--;
-        	if(this.LearningChestTick==0)
-        		this.SendStatusMessage(EnumSituation.LearningChest);//, this.SelfType);
+            this.LearningChestTick--;
+
+            if (this.LearningChestTick == 0)
+            {
+                this.SendStatusMessage(EnumSituation.LearningChest);    //, this.SelfType);
+            }
         }
+
         /*this.field_25054_c = this.field_25048_b;
-		//HAS something todo with look with interest
+        //HAS something todo with look with interest
         if (this.looksWithInterest)
         {
             this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
@@ -366,12 +370,15 @@ public class EntityDilophosaurus extends EntityDinosaur
                 {
                     var3 = ((EntityArrow)var3).shootingEntity;
                 }
+
                 if (var3 instanceof EntityLiving)
                 {
                     this.setTarget((EntityLiving)var3);
                 }
+
                 if (var3 instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)var3).username.equalsIgnoreCase(this.getOwnerName()))
-                {//Hit by the owner->untame
+                {
+                    //Hit by the owner->untame
                     this.setTamed(false);
                     this.setOwner("");
                     this.SendStatusMessage(EnumSituation.Betrayed);
@@ -444,7 +451,7 @@ public class EntityDilophosaurus extends EntityDinosaur
      */
     public boolean interact(EntityPlayer var1)
     {
-    	//Add special item interaction code here
+        //Add special item interaction code here
         return super.interact(var1);
     }
 
@@ -574,9 +581,12 @@ public class EntityDilophosaurus extends EntityDinosaur
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	super.ShowPedia(p0);
-    	if(this.LearningChestTick==0)
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        super.ShowPedia(p0);
+
+        if (this.LearningChestTick == 0)
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        }
     }
 
     public EntityDilophosaurus spawnBabyAnimal(EntityAgeable var1)
@@ -619,9 +629,9 @@ public class EntityDilophosaurus extends EntityDinosaur
         return this.spawnBabyAnimal(var1);
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		return null;
-	}
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        return null;
+    }
 }

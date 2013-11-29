@@ -28,32 +28,24 @@ import net.minecraft.world.World;
 public class EntityBrachiosaurus extends EntityDinosaur
 {
     public boolean isTamed = false;
-    
+
 //    final float PUSHDOWN_HARDNESS = 5.0F;
     final EntityAIControlledByPlayer aiControlledByPlayer;
-    
+
     public EntityBrachiosaurus(World var1)
     {
-        super(var1,EnumDinoType.Brachiosaurus);
+        super(var1, EnumDinoType.Brachiosaurus);
         this.updateSize();
-        
-
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Brachiosaurus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 2.0F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 4.5F;
-
-        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
@@ -64,9 +56,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
-        
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-        
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         //this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -79,14 +69,14 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         return this.aiControlledByPlayer;
     }
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
     }
-    
+
     /**
      * Returns the texture's file path as a String.
      */
@@ -94,14 +84,17 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getTexture();
-            switch (this.getSubSpecies())
-            {
-                default:
-                	return "fossil:textures/mob/Brachiosaurus.png";
-            }
+        }
+
+        switch (this.getSubSpecies())
+        {
+            default:
+                return "fossil:textures/mob/Brachiosaurus.png";
+        }
     }
-    
+
     @Override
     /**
      * Returns the sound this mob makes while it's alive.
@@ -116,7 +109,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     protected String getHurtSound()
     {
-    	return "fossil:brachiosaurus_hurt";
+        return "fossil:brachiosaurus_hurt";
     }
     @Override
     /**
@@ -125,26 +118,26 @@ public class EntityBrachiosaurus extends EntityDinosaur
     protected String getDeathSound()
     {
         return "fossil:brachiosaurus_death";
-    } 
+    }
 
     public int getVerticalFaceSpeed()
     {
         return this.isSitting() ? 70 : super.getVerticalFaceSpeed();
     }
-    
+
     /*
      * TODO: This still needed?
 
     public Vec3 getBlockToEat(int SEARCH_RANGE)
     {
     	Vec3 pos = null;
-    	
+
     	for(int r=1;r<=SEARCH_RANGE;r++)
     	{
-	    	for (int ds = -r; ds <=r; ds++)
-	        {
-	            for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
-	            {
+        	for (int ds = -r; ds <=r; ds++)
+            {
+                for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
+                {
                     if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ-r));
@@ -155,12 +148,12 @@ public class EntityBrachiosaurus extends EntityDinosaur
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+ds), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+r));
                     	return pos;
                     }
-	            }
-	        }
-	    	for (int ds = -r+1; ds <=r-1; ds++)
-	        {
-	    		for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
-	            {
+                }
+            }
+        	for (int ds = -r+1; ds <=r-1; ds++)
+            {
+        		for (int dy = (int)this.getEyeHeight()+2; dy >= (int)this.getEyeHeight()-2; dy--)
+                {
                     if(this.posY+dy >= 0 && this.posY+dy <= this.worldObj.getHeight() && this.SelfType.FoodBlockList.CheckBlockById(this.worldObj.getBlockId(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds))))
                     {
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX-r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
@@ -171,8 +164,8 @@ public class EntityBrachiosaurus extends EntityDinosaur
                     	pos = Vec3.createVectorHelper(MathHelper.floor_double(this.posX+r), MathHelper.floor_double(this.posY+dy), MathHelper.floor_double(this.posZ+ds));
                     	return pos;
                     }
-	            }
-	        }
+                }
+            }
     	}
     	return null;
     }
@@ -213,11 +206,10 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     public boolean interact(EntityPlayer var1)
     {
-    	//Add special item interaction code here
+        //Add special item interaction code here
         return super.interact(var1);
     }
 
-    
     public EntityBrachiosaurus spawnBabyAnimal(EntityAnimal var1)
     {
         return null;
@@ -246,39 +238,38 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         return this.getEyeHeight() / 2.0F + 0.7F;
     }
-/*
-    public int BlockInteractive()
-    {
-
-        for (int var5 = (int)Math.round(this.boundingBox.minX) - 1; var5 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var5)
+    /*
+        public int BlockInteractive()
         {
-            for (int var9 = 0; var9 <= (int)this.getHalfHeight(); ++var9)
+            for (int var5 = (int)Math.round(this.boundingBox.minX) - 1; var5 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var5)
             {
-                for (int var6 = (int)Math.round(this.boundingBox.minZ) - 1; var6 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var6)
+                for (int var9 = 0; var9 <= (int)this.getHalfHeight(); ++var9)
                 {
-                    int var10 = (int)Math.round(this.boundingBox.minY) + var9;
-                    int var8 = this.worldObj.getBlockId(var5, var10, var6);
-
-                    if (Block.blocksList[var8] != null)
+                    for (int var6 = (int)Math.round(this.boundingBox.minZ) - 1; var6 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var6)
                     {
-                        float var10000 = Block.blocksList[var8].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+                        int var10 = (int)Math.round(this.boundingBox.minY) + var9;
+                        int var8 = this.worldObj.getBlockId(var5, var10, var6);
 
-                        if (var10000 < 0.5F || (this.RiderSneak && (var10000<2.0F || var8 == Block.wood.blockID || var8 == Block.planks.blockID || var8 == Block.woodDoubleSlab.blockID || var8 == Block.woodSingleSlab.blockID)))
+                        if (Block.blocksList[var8] != null)
                         {
-                            int var7 = this.GetObjectTall(var5, var10, var6);
+                            float var10000 = Block.blocksList[var8].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
 
-                            if (var7 > 0 && !this.isObjectTooTall(var7 + var9))
+                            if (var10000 < 0.5F || (this.RiderSneak && (var10000<2.0F || var8 == Block.wood.blockID || var8 == Block.planks.blockID || var8 == Block.woodDoubleSlab.blockID || var8 == Block.woodSingleSlab.blockID)))
                             {
-                                this.DestroyTower(var5, var10, var6, var7);
+                                int var7 = this.GetObjectTall(var5, var10, var6);
+
+                                if (var7 > 0 && !this.isObjectTooTall(var7 + var9))
+                                {
+                                    this.DestroyTower(var5, var10, var6, var7);
+                                }
                             }
                         }
                     }
                 }
             }
+            return 0;
         }
-        return 0;
-    }
-*/
+    */
     private boolean isObjectTooTall(int var1, int var2, int var3)
     {
         return (float)this.GetObjectTall(var1, var2, var3) > this.getHalfHeight();
@@ -321,5 +312,4 @@ public class EntityBrachiosaurus extends EntityDinosaur
             this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
         }
     }
-
 }

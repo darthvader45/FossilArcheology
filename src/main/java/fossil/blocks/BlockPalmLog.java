@@ -18,17 +18,17 @@ import net.minecraft.world.World;
 
 public class BlockPalmLog extends Block
 {
-	public static final String[] woodType = new String[] {"palmLog"};
-	@SideOnly(Side.CLIENT)
+    public static final String[] woodType = new String[] {"palmLog"};
+    @SideOnly(Side.CLIENT)
     private Icon Top;
-    
+
     public BlockPalmLog(int par1)
     {
-    	super(par1, Material.wood);
+        super(par1, Material.wood);
         setBurnProperties(this.blockID, 5, 5);
         this.setCreativeTab(Fossil.tabFBlocks);
     }
-    
+
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
@@ -45,15 +45,15 @@ public class BlockPalmLog extends Block
      */
     public Icon getIcon(int var1, int var2)
     {
-        return ((var2&12)==0 && var1 < 2) || ((var2&12)==8 && var1 > 1 && var1 < 4) || ((var2&12)==4 && var1 > 3)? this.Top : this.blockIcon;
+        return ((var2 & 12) == 0 && var1 < 2) || ((var2 & 12) == 8 && var1 > 1 && var1 < 4) || ((var2 & 12) == 4 && var1 > 3) ? this.Top : this.blockIcon;
     }
 
-    // this sets how the block is rendered. i recomend keeping it at 31. 
+    // this sets how the block is rendered. i recomend keeping it at 31.
     public int getRenderType()
     {
         return 31;
     }
-    
+
     // this sets the amount droped when broken.
     public int quantityDropped(Random par1Random)
     {
@@ -61,13 +61,13 @@ public class BlockPalmLog extends Block
     }
 
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
-    // making stone drop cobblestone. 
+    // making stone drop cobblestone.
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return Fossil.palmLog.blockID;
     }
 
-    // this essentially helps leaves to decay when they are not conected to wood. 
+    // this essentially helps leaves to decay when they are not conected to wood.
     public void breakBlock(World var1, int var2, int var3, int var4, int var5, int var6)
     {
         byte var7 = 4;

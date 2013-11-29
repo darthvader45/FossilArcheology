@@ -9,7 +9,7 @@ public enum EnumOrderType
 
     public final EnumOrderType Next()
     {
-    	return this.values()[(this.ordinal()+1)%this.values().length];
+        return this.values()[(this.ordinal() + 1) % this.values().length];
         /*switch (this.ordinal())
         {
             case 1:return Follow;

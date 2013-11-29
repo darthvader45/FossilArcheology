@@ -31,11 +31,11 @@ public class ItemBioFossil extends Item
         super(var1);
         this.maxStackSize = 64;
     }
-    
+
     @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Bio_Fossil");
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Bio_Fossil");
     }
 
     public boolean tryPlaceIntoWorld(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6/*, int var7, float var8, float var9, float var10*/)
@@ -134,15 +134,19 @@ public class ItemBioFossil extends Item
         double var20 = 5.0D;
         Vec3 var22 = var13.addVector((double)var18 * var20, (double)var17 * var20, (double)var19 * var20);
         MovingObjectPosition var23 = this.getMovingObjectPositionFromPlayer(var2, var3, true);
-        if(var23==null)
-        	return var1;
-        else if(var23.typeOfHit == EnumMovingObjectType.TILE && var2.getBlockMaterial(var23.blockX, var23.blockY, var23.blockZ).isSolid())
-	        {
-	            int var34 = var23.blockX;
-	            int var32 = var23.blockY;
-	            int var33 = var23.blockZ;
-	            this.tryPlaceIntoWorld(var1, var3, var2, var34, var32, var33);
-	        }
+
+        if (var23 == null)
+        {
+            return var1;
+        }
+        else if (var23.typeOfHit == EnumMovingObjectType.TILE && var2.getBlockMaterial(var23.blockX, var23.blockY, var23.blockZ).isSolid())
+        {
+            int var34 = var23.blockX;
+            int var32 = var23.blockY;
+            int var33 = var23.blockZ;
+            this.tryPlaceIntoWorld(var1, var3, var2, var34, var32, var33);
+        }
+
         return var1;
     }
 }

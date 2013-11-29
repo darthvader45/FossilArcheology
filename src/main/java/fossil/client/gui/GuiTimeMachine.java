@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiTimeMachine extends GuiContainer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Timemachine.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Timemachine.png");
     private TileEntityTimeMachine timeMachineInstance;
     final int SQR_WIDTH = 34;
     final int SQR_HEIGHT = 13;

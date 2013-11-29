@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import info.ata4.minecraft.dragon.server.entity.ai.ground.EntityAIHunt;
+
 import java.util.Random;
 
 import mods.fossil.Fossil;
@@ -9,6 +11,7 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIHunt;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
@@ -25,9 +28,13 @@ import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
@@ -39,7 +46,7 @@ import net.minecraft.world.World;
 public class EntityTRex extends EntityDinosaur
 {
     private static float health = 10;
-	public final int Areas = 15;
+    public final int Areas = 15;
     //public final float HuntLimit = (float)this.getHungerLimit() * 0.8F;
     private boolean looksWithInterest;
     /*private float field_25048_b;
@@ -55,54 +62,46 @@ public class EntityTRex extends EntityDinosaur
 
     public EntityTRex(World var1)
     {
-        super(var1,EnumDinoType.TRex);
+        super(var1, EnumDinoType.TRex);
         //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
         this.looksWithInterest = false;
-
         this.updateSize();
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.TRex.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.25F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 4.5F;
-        
-        
-        
-        
-        
-        
-        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        //this.attackStrength = 4 + this.getDinoAge();
-        //this.tasks.addTask(0, new DinoAIGrowup(this, 8, 23));
-        //this.tasks.addTask(0, new DinoAIStarvation(this));
-        //this.tasks.addTask(1, new DinoAIAvoidEntityWhenYoung(this, EntityPlayer.class, 8.0F, 0.3F, 0.35F));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new DinoAIEat(this, 24));
+        this.tasks.addTask(4, new DinoAIEat(this, 60));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
-        
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        
+        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
+        
     }
 
+    /**
+     * Returns true if the newer Entity AI code should be run
+     */
+    @Override
+    public boolean isAIEnabled()
+    {
+        return !this.isModelized() || !this.isWeak();
+    }
     
     /**
      * Return the AI task for player control.
@@ -111,15 +110,13 @@ public class EntityTRex extends EntityDinosaur
     {
         return this.aiControlledByPlayer;
     }
-    
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.50000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.40000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
         //this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
-
     }
 
     //protected void updateEntityActionState() {}
@@ -138,22 +135,12 @@ public class EntityTRex extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
+
         //this.blockBreakingBehavior.execute();
         //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         //    BlockInteractive();
         if (this.getHealth() > 0)
         {
-            /*this.field_25054_c = this.field_25048_b;
-
-            if (this.looksWithInterest)
-            {
-                this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
-            }
-            else
-            {
-                this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
-            }*/
-
             if (this.looksWithInterest)
             {
                 this.numTicksToChaseTarget = 10;
@@ -172,16 +159,6 @@ public class EntityTRex extends EntityDinosaur
         }
     }
 
-    /*public boolean getSelfShaking()
-    {
-        return false;
-    }
-
-    public float getInterestedAngle(float var1)
-    {
-        return (this.field_25054_c + (this.field_25048_b - this.field_25054_c) * var1) * 0.15F * (float)Math.PI;
-    }*/
-
     public float getEyeHeight()
     {
         return 2.0F + (float)this.getDinoAge() / 1.8F;
@@ -191,11 +168,11 @@ public class EntityTRex extends EntityDinosaur
     {
         return this.getEyeHeight() + 0.2F;
     }
-/*
-    /**
-     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
-     * use in wolves.
-     */
+    /*
+        /**
+         * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
+         * use in wolves.
+         */
     public int getVerticalFaceSpeed()
     {
         return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
@@ -265,8 +242,9 @@ public class EntityTRex extends EntityDinosaur
                 }
                 else
                 {
-                this.setTarget((EntityLiving)var3);
+                    this.setTarget((EntityLiving)var3);
                 }
+
                 return super.attackEntityFrom(var1, var2);
             }
         }
@@ -352,23 +330,27 @@ public class EntityTRex extends EntityDinosaur
 
         if (var2 != null)
         {
-        	
             if (var2.itemID == Fossil.gem.itemID)
             {
                 if (this.isWeak() && !this.isTamed())
                 {
-                    if(Fossil.FossilOptions.Heal_Dinos)
+                    if (Fossil.FossilOptions.Heal_Dinos)
+                    {
                         this.heal(200);
+                    }
+
                     this.increaseHunger(500);
                     this.setTamed(true);
                     setPathToEntity(null);
                     setAttackTarget(null);
                     this.setOwner(var1.username);
                     --var2.stackSize;
+
                     if (var2.stackSize <= 0)
                     {
                         var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
                     }
+
                     return true;
                 }
                 else
@@ -377,36 +359,38 @@ public class EntityTRex extends EntityDinosaur
                     {
                         if (!this.worldObj.isRemote)
                         {
-                        	Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),var1);
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH), var1);
                         }
                     }
+
                     if (!this.isAdult())
                     {
-                    	if (!this.worldObj.isRemote)
+                        if (!this.worldObj.isRemote)
                         {
-                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),var1);
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG), var1);
                         }
                     }
+
                     return false;
                 }
-             }
-             
-        if (!Fossil.DebugMode)
-        {
-            if(var2.itemID == Fossil.chickenEss.itemID)
+            }
+
+            if (!Fossil.DebugMode)
             {
-                if (!this.worldObj.isRemote)
+                if (var2.itemID == Fossil.chickenEss.itemID)
                 {
-                Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
-                return true;
+                    if (!this.worldObj.isRemote)
+                    {
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
+                        return true;
+                    }
                 }
             }
-         }
         }
+
         return super.interact(var1);
-        
     }
-    
+
     public boolean CheckSpace()
     {
         return !this.isEntityInsideOpaqueBlock();
@@ -415,7 +399,9 @@ public class EntityTRex extends EntityDinosaur
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
-        		this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRideHeight(), this.posZ);
+        {
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRideHeight(), this.posZ);
+        }
     }
 
     /*
@@ -466,7 +452,7 @@ public class EntityTRex extends EntityDinosaur
         this.setOwner("");
         this.setPathToEntity(this.worldObj.getEntityPathToXYZ(this, var14, var6, var15, (float)var2, true, false, true, false));
     }
-*/
+    */
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
@@ -474,7 +460,10 @@ public class EntityTRex extends EntityDinosaur
     public void onLivingUpdate()
     {
         if (!this.isWeak())
+        {
             this.handleScream();
+        }
+
         super.onLivingUpdate();
     }
 
@@ -483,12 +472,21 @@ public class EntityTRex extends EntityDinosaur
      */
     public String getTexture()
     {
-        if(this.isModelized())
+        if (this.isModelized())
+        {
             return super.getTexture();
+        }
+
         if (this.isWeak())
+        {
             return Fossil.modid + ":textures/mob/TRexWeak.png";
-        if (this.isAdult() && !this.isTamed()) 
+        }
+
+        if (this.isAdult() && !this.isTamed())
+        {
             return Fossil.modid + ":textures/mob/TRex_Adult.png";
+        }
+
         return Fossil.modid + ":textures/mob/TRex.png";
     }
 
@@ -522,9 +520,8 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean isWeak()
     {
-    	this.setSitting(true);
-        return this.getHealth() < 15 && this.getDinoAge()>5 && !this.isTamed(); 
-    	//return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
+        return this.getHealth() < 15 && this.getDinoAge() > 5 && !this.isTamed();
+        //return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
     }
 
     private void HandleWeak()
@@ -548,11 +545,16 @@ public class EntityTRex extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
         super.ShowPedia(p0);
-        if(this.isWeak())
+
+        if (this.isWeak())
+        {
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+        }
+
         if (!this.isWeak() && !this.isTamed()  && this.isAdult())
+        {
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
-            
+        }
     }
 
     public EntityTRex spawnBabyAnimal(EntityAgeable var1)
@@ -568,14 +570,14 @@ public class EntityTRex extends EntityDinosaur
     public float getSpeedModifier()
     {
         float var1 = 1.0F;
-        
+
         if (this.IsHungry() || (attackingPlayer != null))
         {
             var1 *=1.5F;
         }
         else if (this.getDinoAge() < 3)
         {
- //           var1 = super.getSpeedModifier();
+    //           var1 = super.getSpeedModifier();
 
             if (this.fleeingTick > 0)
             {
@@ -631,7 +633,7 @@ public class EntityTRex extends EntityDinosaur
     }
     */
     @Override
-    public EntityAgeable createChild(EntityAgeable var1) 
+    public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
     }

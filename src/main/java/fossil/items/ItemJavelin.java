@@ -22,18 +22,18 @@ public class ItemJavelin extends Item
     public ItemJavelin(int var1, EnumToolMaterial var2, String TextureFileName0)
     {
         super(var1);
-        this.maxStackSize=16;
+        this.maxStackSize = 16;
         this.setMaxDamage(30);
         //this.iconIndex = 48;
         this.hasSubtypes = false;
         this.SelfMaterial = var2;
-        this.TextureFileName=TextureFileName0;
+        this.TextureFileName = TextureFileName0;
     }
-    
+
     @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:"+TextureFileName);
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:" + TextureFileName);
     }
 
     /**
@@ -69,13 +69,13 @@ public class ItemJavelin extends Item
 
             Object var8;
 
-            if (this.itemID!=Fossil.ancientJavelin.itemID)//!this.isAncient)
+            if (this.itemID != Fossil.ancientJavelin.itemID) //!this.isAncient)
             {
-                var8 = new EntityJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial,var1.getMaxDamage()-(var1.getItemDamage()+1));
+                var8 = new EntityJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
             }
             else
             {
-                var8 = new EntityAncientJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial,var1.getMaxDamage()-(var1.getItemDamage()+1));
+                var8 = new EntityAncientJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
             }
 
             if (var7 == 1.0F)

@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 
 public class BlockSarracenia extends BlockFlower
 {
-
     public BlockSarracenia(int var1)
     {
         super(var1, Material.grass);
@@ -23,11 +22,11 @@ public class BlockSarracenia extends BlockFlower
     }
 
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
-	{
-		FossilFX.spawnParticle("flies", i+0.5, j+1.0, k+0.5, 0.0D, 1.5D, 0.0D);
-		FossilFX.spawnParticle("flies", i+0.5, j+0.5, k, 0.0D, 1.5D, 0.0D);
-		FossilFX.spawnParticle("flies", i, j+0.5, k+0.5, 0.0D, 1.5D, 0.0D);
-	}
+    {
+        FossilFX.spawnParticle("flies", i + 0.5, j + 1.0, k + 0.5, 0.0D, 1.5D, 0.0D);
+        FossilFX.spawnParticle("flies", i + 0.5, j + 0.5, k, 0.0D, 1.5D, 0.0D);
+        FossilFX.spawnParticle("flies", i, j + 0.5, k + 0.5, 0.0D, 1.5D, 0.0D);
+    }
 
     /**
      * Returns the ID of the items to drop on destruction.
@@ -44,25 +43,23 @@ public class BlockSarracenia extends BlockFlower
     {
         return 1;
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.blockIcon = par1IconRegister.registerIcon("fossil:Sarracenia");
+        this.blockIcon = par1IconRegister.registerIcon("fossil:Sarracenia");
     }
-    
+
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
     {
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
-	ItemStack itemstack = player.inventory.getCurrentItem();
-	
-	if (FMLCommonHandler.instance().getSide().isClient() && itemstack.itemID == Fossil.archNotebook.itemID)
-    {
-	    player.openGui(Fossil.instance, 6, world, x, y, z);
+        if (FMLCommonHandler.instance().getSide().isClient() && itemstack.itemID == Fossil.archNotebook.itemID)
+        {
+            player.openGui(Fossil.instance, 6, world, x, y, z);
+            return true;
+        }
+
         return true;
     }
-
-    return true;
-    }
-
 }

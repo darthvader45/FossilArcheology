@@ -11,31 +11,30 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-public class ItemFigurineRenderer implements IItemRenderer 
+public class ItemFigurineRenderer implements IItemRenderer
 {
-	
-private ModelFigurine modelfigurine;
+    private ModelFigurine modelfigurine;
 
-	public ItemFigurineRenderer() 
-	{
-		modelfigurine = new ModelFigurine();
-	}
-	
-	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) 
-	{
-			return true;
-	}
-	
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) 
-	{
-		return true;
-	}
+    public ItemFigurineRenderer()
+    {
+        modelfigurine = new ModelFigurine();
+    }
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    @Override
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
+        return true;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
         TileEntityRenderer.instance.renderTileEntityAt(new TileEntityFigurine(), 0.0D, 1.0D, 0.0D, 0.0F);
-		
-	}
+    }
 }

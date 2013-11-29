@@ -19,7 +19,7 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory
-{	
+{
     private ItemStack[] feederItemStacks = new ItemStack[2];
     public int MeatCurrent = 0;
     public int MeatMax = 10000;
@@ -190,34 +190,38 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     public void updateEntity()
     {
         boolean var1 = false;
-        int var2 = ((this.MeatCurrent > 0)?2:0) + ((this.VegCurrent > 0)?1:0);
+        int var2 = ((this.MeatCurrent > 0) ? 2 : 0) + ((this.VegCurrent > 0) ? 1 : 0);
 
         if (!this.worldObj.isRemote)
         {
             int var3;
 
-            if (this.feederItemStacks[0] != null && this.MeatCurrent<this.MeatMax && EnumDinoFoodItem.foodtype(this.feederItemStacks[0].itemID)==EnumDinoFoodItem.ISCARNIVOROUS)//the carnivore part
-            {//there is an item in, its carn. food and there is space
-            	
-            	int val=EnumDinoFoodItem.getItemFood(this.feederItemStacks[0].itemID);
-            	
-            	//if(this.feederItemStacks[0].getItem() instanceof fossil.items.ItemDinoMeat)
-            	{//TODO the feeder contains the raw food of the dino....he wont eat out of it anymore until it has been emptied!
-            		/*if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTriceratops.itemID)this.ContainType[EnumDinoType.Triceratops.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawVelociraptor.itemID)this.ContainType[EnumDinoType.Velociraptor.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTRex.itemID)this.ContainType[EnumDinoType.TRex.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawStegosaurus.itemID)this.ContainType[EnumDinoType.Stegosaurus.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPterosaur.itemID)this.ContainType[EnumDinoType.Pterosaur.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPlesiosaur.itemID)this.ContainType[EnumDinoType.Plesiosaur.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawMosasaurus.itemID)this.ContainType[EnumDinoType.Mosasaurus.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawDilophosaurus.itemID)this.ContainType[EnumDinoType.Dilophosaurus.ordinal()]=true;
-            		if(this.feederItemStacks[0].getItem().itemID==Fossil.rawBrachiosaurus.itemID)this.ContainType[EnumDinoType.Brachiosaurus.ordinal()]=true;
+            if (this.feederItemStacks[0] != null && this.MeatCurrent < this.MeatMax && EnumDinoFoodItem.foodtype(this.feederItemStacks[0].itemID) == EnumDinoFoodItem.ISCARNIVOROUS) //the carnivore part
+            {
+                //there is an item in, its carn. food and there is space
+                int val = EnumDinoFoodItem.getItemFood(this.feederItemStacks[0].itemID);
+                //if(this.feederItemStacks[0].getItem() instanceof fossil.items.ItemDinoMeat)
+                {
+                    //TODO the feeder contains the raw food of the dino....he wont eat out of it anymore until it has been emptied!
+                    /*if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTriceratops.itemID)this.ContainType[EnumDinoType.Triceratops.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawVelociraptor.itemID)this.ContainType[EnumDinoType.Velociraptor.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTRex.itemID)this.ContainType[EnumDinoType.TRex.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawStegosaurus.itemID)this.ContainType[EnumDinoType.Stegosaurus.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPterosaur.itemID)this.ContainType[EnumDinoType.Pterosaur.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPlesiosaur.itemID)this.ContainType[EnumDinoType.Plesiosaur.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawMosasaurus.itemID)this.ContainType[EnumDinoType.Mosasaurus.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawDilophosaurus.itemID)this.ContainType[EnumDinoType.Dilophosaurus.ordinal()]=true;
+                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawBrachiosaurus.itemID)this.ContainType[EnumDinoType.Brachiosaurus.ordinal()]=true;
                     if(this.feederItemStacks[0].getItem().itemID==Fossil.rawSpinosaurus.itemID)this.ContainType[EnumDinoType.Spinosaurus.ordinal()]=true;*/
-            		if(EnumDinoType.isDinoDrop(this.feederItemStacks[0].getItem()))
-            			this.ContainType[EnumDinoType.getIndex(this.feederItemStacks[0].getItem())]=true;
-            	}
-            	if (val * this.feederItemStacks[0].stackSize + this.MeatCurrent < this.MeatMax)
-                {//can take all of it
+                    if (EnumDinoType.isDinoDrop(this.feederItemStacks[0].getItem()))
+                    {
+                        this.ContainType[EnumDinoType.getIndex(this.feederItemStacks[0].getItem())] = true;
+                    }
+                }
+
+                if (val * this.feederItemStacks[0].stackSize + this.MeatCurrent < this.MeatMax)
+                {
+                    //can take all of it
                     this.MeatCurrent += val * this.feederItemStacks[0].stackSize;
                     var1 = true;
                     this.feederItemStacks[0] = null;
@@ -238,9 +242,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                 }
             }
 
-            if (this.feederItemStacks[1] != null && this.VegCurrent<this.VegMax && (EnumDinoFoodItem.foodtype(this.feederItemStacks[1].itemID)==EnumDinoFoodItem.ISHERBIVOROUS || EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID)>0))//herbivore part
+            if (this.feederItemStacks[1] != null && this.VegCurrent < this.VegMax && (EnumDinoFoodItem.foodtype(this.feederItemStacks[1].itemID) == EnumDinoFoodItem.ISHERBIVOROUS || EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID) > 0)) //herbivore part
             {
-            	int val=EnumDinoFoodItem.getItemFood(this.feederItemStacks[1].itemID)+EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID);
+                int val = EnumDinoFoodItem.getItemFood(this.feederItemStacks[1].itemID) + EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID);
+
                 if (val * this.feederItemStacks[1].stackSize + this.VegCurrent < this.VegMax)
                 {
                     this.VegCurrent += val * this.feederItemStacks[1].stackSize;
@@ -263,9 +268,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                 }
             }
 
-            if (var2 != (((this.MeatCurrent > 0)?2:0) + ((this.VegCurrent > 0)?1:0)))
+            if (var2 != (((this.MeatCurrent > 0) ? 2 : 0) + ((this.VegCurrent > 0) ? 1 : 0)))
             {
-            	BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0, this.MeatCurrent > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0, this.MeatCurrent > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
                 //BlockFeeder.updateFurnaceBlockState(var4, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
 
@@ -287,34 +292,47 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     public void openChest() {}
 
     public void closeChest() {}
-    
+
     /**
      * takes a dino type and returns true, if the feeder is !!!EMPTY!!! for that Dino!
      * Returns false if the dino is a carnivore and its own meat is in the feeder
      */
-    public boolean CheckIsEmpty(EnumDinoType t)
+    public boolean CheckIsEmpty(EnumDinoType dinotype)
     {
-        if (((!t.isHerbivore() || this.VegCurrent==0) && (!t.isCarnivore() || this.MeatCurrent==0)) || this.ContainType[t.ordinal()])
-            return true;//the dino wont eat from the feeder if it can smell its own flesh (filled with raw flesh)
+        if (((!dinotype.isHerbivore() || this.VegCurrent == 0) && (!dinotype.isCarnivore() || this.MeatCurrent == 0))) // || this.ContainType[dinotype.ordinal()])
+        {
+            return true;    //the dino wont eat from the feeder if it can smell its own flesh (filled with raw flesh)
+        }
+
         return false;
     }
 
-    public int Feed(EntityDinosaur var1, EnumDinoType t)
+    public int Feed(EntityDinosaur dinosaur, EnumDinoType dinotype)
     {
-    	int a=0;
-    	int m=this.MeatCurrent;
-        while (!this.CheckIsEmpty(t) && var1.increaseHunger(1))
+        int feedamount = 0;
+        int meat = this.MeatCurrent;
+
+        while (!this.CheckIsEmpty(dinotype) && dinosaur.increaseHunger(1))
         {
-            if (t.isCarnivore() && this.MeatCurrent>0)//if meatcurrent=0 it eats veggie food and the dino can eat and there is food, see checkisempty
-            	--this.MeatCurrent;
+            if (dinotype.isCarnivore() && this.MeatCurrent > 0)//if meatcurrent=0 it eats veggie food and the dino can eat and there is food, see checkisempty
+            {
+                --this.MeatCurrent;
+            }
             else
+            {
                 --this.VegCurrent;
-            a++;
+            }
+
+            feedamount++;
         }
-        if(m>0 && this.MeatCurrent==0)//the carn. part is empty so it cant contain raw dino meat
-        	this.ClearTypeRecord();
-        BlockFeeder.updateFurnaceBlockState(this.VegCurrent>0, this.MeatCurrent>0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-        return a;//amount fed to the dino
+
+        if (meat > 0 && this.MeatCurrent == 0) //the carn. part is empty so it cant contain raw dino meat
+        {
+            this.ClearTypeRecord();
+        }
+
+        BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0, this.MeatCurrent > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        return feedamount;//amount fed to the dino
     }
 
     /*@Deprecated
@@ -397,32 +415,37 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
         return this.VegCurrent;
     }
 
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+    @Override
+    public boolean isInvNameLocalized()
+    {
+        return false;
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
