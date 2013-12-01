@@ -17,5 +17,4 @@ minecraft {
     version = '1.6.4-9.11.1.964'
 }
 
-group = 'mods.fossil'
 version = '1.6.2 Build 6 [DEV]'
