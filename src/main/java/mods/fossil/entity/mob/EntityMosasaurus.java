@@ -263,4 +263,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     {
         return 1;
     }
+
+    @Override
+    public Entity getOwner() {
+        return null;
+    }
 }

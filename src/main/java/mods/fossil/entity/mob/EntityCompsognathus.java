@@ -330,4 +330,9 @@ public class EntityCompsognathus extends EntityDinosaur
     {
         return new EntityCompsognathus(this.worldObj);
     }
+
+    @Override
+    public Entity getOwner() {
+        return null;
+    }
 }

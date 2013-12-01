@@ -312,4 +312,9 @@ public class EntityTriceratops extends EntityDinosaur
     {
         return null;
     }
+
+    @Override
+    public Entity getOwner() {
+        return null;
+    }
 }

@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -220,5 +221,10 @@ public class EntityFlyingDino extends EntityDinosaur
     public void SetAirborne(boolean _bAirborne)
     {
         this.isAirBorne = _bAirborne;
+    }
+
+    @Override
+    public Entity getOwner() {
+        return null;
     }
 }

@@ -312,4 +312,9 @@ public class EntityBrachiosaurus extends EntityDinosaur
             this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
         }
     }
+
+    @Override
+    public Entity getOwner() {
+        return null;
+    }
 }

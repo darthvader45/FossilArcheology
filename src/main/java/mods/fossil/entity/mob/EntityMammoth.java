@@ -443,4 +443,9 @@ public class EntityMammoth extends EntityTameable implements IShearable
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
         return var2;
     }
+
+    @Override
+    public Entity getOwner() {
+        return null;
+    }
 }
