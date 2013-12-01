@@ -53,6 +53,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory, ISi
             {
                 this.startMemory();
             }
+
             //if (this.memoryArray != null && this.memoryMDArray != null && this.isCharged())
             //	this.startWork();
         }
@@ -378,8 +379,12 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory, ISi
                     {
                         this.memoryMDArray[var1][var2][var3] = 0;
                     }
-                    if(var4==Block.dirt.blockID)
-                    	var4=Fossil.palaePlanks.blockID;
+
+                    if (var4 == Block.dirt.blockID)
+                    {
+                        var4 = Fossil.palaePlanks.blockID;
+                    }
+
                     this.memoryArray[var1][var2][var3] = var4;
                 }
             }
@@ -399,32 +404,37 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory, ISi
         }
     }
 
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+    @Override
+    public boolean isInvNameLocalized()
+    {
+        return false;
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

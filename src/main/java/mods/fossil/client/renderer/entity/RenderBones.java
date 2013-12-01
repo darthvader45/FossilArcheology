@@ -26,10 +26,10 @@ public class RenderBones extends RenderBiped
 
     protected void scaleSkeleton(EntityBones par1EntitySkeleton, float par2)
     {
- //       if (par1EntitySkeleton.getSkeletonType() == 1)
- //       {
-            GL11.glScalef(1.2F, 1.2F, 1.2F);
- //       }
+//       if (par1EntitySkeleton.getSkeletonType() == 1)
+//       {
+        GL11.glScalef(1.2F, 1.2F, 1.2F);
+//       }
     }
 
     protected void func_82422_c()
@@ -39,8 +39,8 @@ public class RenderBones extends RenderBiped
 
     protected ResourceLocation func_110860_a(EntityBones par1EntitySkeleton)
     {
-  //      return par1EntitySkeleton.getSkeletonType() == 1 ? witherSkeletonTextures : skeletonTextures;
-    	return skeletonTextures;
+        //      return par1EntitySkeleton.getSkeletonType() == 1 ? witherSkeletonTextures : skeletonTextures;
+        return skeletonTextures;
     }
 
     protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving)

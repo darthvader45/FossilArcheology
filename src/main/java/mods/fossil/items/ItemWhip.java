@@ -32,7 +32,7 @@ public class ItemWhip extends ItemCarrotOnAStick
     {
         return true;
     }
-    
+
     @SideOnly(Side.CLIENT)
 
     /**
@@ -49,16 +49,15 @@ public class ItemWhip extends ItemCarrotOnAStick
      */
     public ItemStack onItemRightClick(ItemStack I, World W, EntityPlayer P)
     {
-    	if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
+        if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
         {
-    		EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
+            EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
 
 //            if (D.getRidingHandler().isControlledByPlayer() && I.getMaxDamage() - I.getItemDamage() >= 5)
 
-    		if (D.getAIControlledByPlayer().isControlledByPlayer())
+            if (D.getAIControlledByPlayer().isControlledByPlayer())
             {
-    		     
-             //   D.getRidingHandler().boostSpeed();
+                //   D.getRidingHandler().boostSpeed();
                 //System.out.println("SPEED BOOSTED!");
                 //System.out.println("Damage before:"+String.valueOf(I.getItemDamage()));
                 I.damageItem(1, P);
@@ -77,19 +76,16 @@ public class ItemWhip extends ItemCarrotOnAStick
                 W.spawnEntityInWorld(new EntityWhipAttachment(W, P));
             }
             */
-
             P.swingItem();
-            W.playSoundAtEntity(P, "fossil:whip",1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            W.playSoundAtEntity(P, "fossil:whip", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
         }
 
-        
         return I;
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		this.itemIcon = iconRegister.registerIcon("fossil:Whip");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        this.itemIcon = iconRegister.registerIcon("fossil:Whip");
+    }
 }

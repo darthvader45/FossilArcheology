@@ -39,7 +39,6 @@ public class EntityDodo extends EntityAnimal
     public EntityDodo(World par1World)
     {
         super(par1World);
-
         this.setSize(0.5F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -59,20 +58,22 @@ public class EntityDodo extends EntityAnimal
     {
         return true;
     }
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
-    
+
     private void setPedia()
-    {Fossil.ToPedia = (Object)this;}
-    
+    {
+        Fossil.ToPedia = (Object)this;
+    }
+
     public String getTexture()
     {
-        return "fossil:textures//mob/Dodo_Brown.png";   
+        return "fossil:textures//mob/Dodo_Brown.png";
     }
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
@@ -146,7 +147,6 @@ public class EntityDodo extends EntityAnimal
         return "fossil:dodo_death";
     }
 
-    
     /**
      * Returns the volume for the sounds this mob makes.
      */
@@ -154,7 +154,7 @@ public class EntityDodo extends EntityAnimal
     {
         return 0.2F;
     }
-    
+
     /**
      * Plays step sound at given x, y, z for the entity
      */
@@ -200,12 +200,14 @@ public class EntityDodo extends EntityAnimal
     public boolean interact(EntityPlayer var1)
     {
         ItemStack var2 = var1.inventory.getCurrentItem();
-        if (var2!=null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+
+        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
         {
-        	this.setPedia();
+            this.setPedia();
             var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
             return true;
         }
+
         return super.interact(var1);
     }
     /**
@@ -230,17 +232,18 @@ public class EntityDodo extends EntityAnimal
         return this.spawnBabyAnimal(par1EntityAgeable);
     }
 
-    public Object Imprinting(double posX, double posY, double posZ) {
+    public Object Imprinting(double posX, double posY, double posZ)
+    {
         return this;
     }
 
     private static final ResourceLocation dodoeggicon = new ResourceLocation("fossil:textures/items/Egg_Cultivated_Dodo.png");
-    
+
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO), 97, 23,40,90,245);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO), 97, 23, 40, 90, 245);
 //        p0.PrintItemXY(Fossil.dodoEgg, 120, 7);
         p0.PrintPictXY(dodoeggicon, 120, 7, 4, 4);
     }

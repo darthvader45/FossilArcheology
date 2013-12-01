@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiFeeder extends GuiContainer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
     private TileEntityFeeder FeederInventory;
 
     public GuiFeeder(InventoryPlayer var1, TileEntity var2)

@@ -30,18 +30,15 @@ public class EntityBones extends EntityMob
     {
         super(var1);
 //        this.texture = "/mob/skeleton.png";
-    //    this.tasks.addTask(1, new EntityAIDeadBones(this));
+        //    this.tasks.addTask(1, new EntityAIDeadBones(this));
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.experienceValue=7;
+        this.experienceValue = 7;
     }
-
-
-
 
     /**
      * Returns true if the newer Entity AI code should be run
@@ -57,7 +54,7 @@ public class EntityBones extends EntityMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
-    
+
     /**
      * Returns the sound this mob makes when it is hurt.
      */
@@ -123,7 +120,7 @@ public class EntityBones extends EntityMob
      */
     protected void jump()
     {
-super.jump();
+        super.jump();
     }
 
     /**

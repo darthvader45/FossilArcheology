@@ -178,17 +178,17 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     {
         boolean var1 = this.furnaceCookTime > 0;
         boolean var2 = false;
-        
         int cookValue;
 
-        if (Fossil.DebugMode){
-        	cookValue = 300;
+        if (Fossil.DebugMode)
+        {
+            cookValue = 300;
         }
         else
         {
-        	cookValue = 6000;
+            cookValue = 6000;
         }
-        
+
         if (this.furnaceBurnTime > 0)
         {
             --this.furnaceBurnTime;
@@ -226,7 +226,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
             if (this.isBurning() && this.canSmelt())
             {
                 ++this.furnaceCookTime;
-                
+
                 if (this.furnaceCookTime == cookValue)
                 {
                     this.furnaceCookTime = 0;
@@ -306,15 +306,48 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         if (var1 != null)
         {
             int var2 = var1.getItem().itemID;
-            if(var2 == Fossil.biofossil.itemID) return 300;
-            if(var2 == Item.porkRaw.itemID)return 3000;
-            if(var2 == Item.fishRaw.itemID)return 3000;
-            if(var2 == Item.beefRaw.itemID)return 4000;
-            if(var2 == Item.chickenRaw.itemID)return 1500;
-            if(var2 == Item.egg.itemID)return 1000;
-            if(var2 == Item.slimeBall.itemID)return 800;
-            if(var2 == Item.bucketMilk.itemID)return 6000;
+
+            if (var2 == Fossil.biofossil.itemID)
+            {
+                return 300;
+            }
+
+            if (var2 == Item.porkRaw.itemID)
+            {
+                return 3000;
+            }
+
+            if (var2 == Item.fishRaw.itemID)
+            {
+                return 3000;
+            }
+
+            if (var2 == Item.beefRaw.itemID)
+            {
+                return 4000;
+            }
+
+            if (var2 == Item.chickenRaw.itemID)
+            {
+                return 1500;
+            }
+
+            if (var2 == Item.egg.itemID)
+            {
+                return 1000;
+            }
+
+            if (var2 == Item.slimeBall.itemID)
+            {
+                return 800;
+            }
+
+            if (var2 == Item.bucketMilk.itemID)
+            {
+                return 6000;
+            }
         }
+
         return 0;
     }
 
@@ -333,42 +366,81 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
     private ItemStack CheckSmelt(ItemStack var1)
     {
-       /* if (var1.itemID == Fossil.dna.itemID)
-        {
-            return new ItemStack(Fossil.ancientegg, 1, var1.getItemDamage());
-        }
-        else if (var1.itemID == Fossil.animalDNA.itemID)
-        {
-            int var2 = var1.getItemDamage();
-            return var2 != 3 ? new ItemStack(Fossil.embyoSyringe, 1, var2 > 3 ? var2 - 1 : var2) : new ItemStack(Item.egg, 1);
-        }
-        else
-        {
-            return null;
-        }*/
-    	/*if(var1.itemID==Fossil.dnaTriceratops.itemID)return new ItemStack(Fossil.eggTriceratops, 1);
-    	if(var1.itemID==Fossil.dnaBrachiosaurus.itemID)return new ItemStack(Fossil.eggBrachiosaurus, 1);
-    	if(var1.itemID==Fossil.dnaPlesiosaur.itemID)return new ItemStack(Fossil.eggPlesiosaur, 1);
-    	if(var1.itemID==Fossil.dnaVelociraptor.itemID)return new ItemStack(Fossil.eggVelociraptor, 1);
+        /* if (var1.itemID == Fossil.dna.itemID)
+         {
+             return new ItemStack(Fossil.ancientegg, 1, var1.getItemDamage());
+         }
+         else if (var1.itemID == Fossil.animalDNA.itemID)
+         {
+             int var2 = var1.getItemDamage();
+             return var2 != 3 ? new ItemStack(Fossil.embyoSyringe, 1, var2 > 3 ? var2 - 1 : var2) : new ItemStack(Item.egg, 1);
+         }
+         else
+         {
+             return null;
+         }*/
+        /*if(var1.itemID==Fossil.dnaTriceratops.itemID)return new ItemStack(Fossil.eggTriceratops, 1);
+        if(var1.itemID==Fossil.dnaBrachiosaurus.itemID)return new ItemStack(Fossil.eggBrachiosaurus, 1);
+        if(var1.itemID==Fossil.dnaPlesiosaur.itemID)return new ItemStack(Fossil.eggPlesiosaur, 1);
+        if(var1.itemID==Fossil.dnaVelociraptor.itemID)return new ItemStack(Fossil.eggVelociraptor, 1);
         if(var1.itemID==Fossil.dnaSpinosaurus.itemID)return new ItemStack(Fossil.eggSpinosaurus, 1);
-    	if(var1.itemID==Fossil.dnaTRex.itemID)return new ItemStack(Fossil.eggTRex, 1);
-    	if(var1.itemID==Fossil.dnaDilophosaurus.itemID)return new ItemStack(Fossil.eggDilophosaurus, 1);
-    	if(var1.itemID==Fossil.dnaMosasaurus.itemID)return new ItemStack(Fossil.eggMosasaurus, 1);
-    	if(var1.itemID==Fossil.dnaPterosaur.itemID)return new ItemStack(Fossil.eggPterosaur, 1);
-    	if(var1.itemID==Fossil.dnaStegosaurus.itemID)return new ItemStack(Fossil.eggStegosaurus, 1);
-    	if(var1.itemID==Fossil.dnaNautilus.itemID)return new ItemStack(Fossil.shellNautilus, 1);*/
-    	
-    	if(var1.itemID==Fossil.brokenSapling.itemID)return new ItemStack(Fossil.palmSap, 1);
-    	if(var1.itemID==Fossil.dnaSheep.itemID)return new ItemStack(Fossil.embryoSheep, 1);
-    	if(var1.itemID==Fossil.dnaCow.itemID)return new ItemStack(Fossil.embryoCow, 1);
-    	if(var1.itemID==Fossil.dnaChicken.itemID)return new ItemStack(Fossil.embryoChicken, 1);
-    	if(var1.itemID==Fossil.dnaPig.itemID)return new ItemStack(Fossil.embryoPig, 1);
-    	if(var1.itemID==Fossil.dnaSmilodon.itemID)return new ItemStack(Fossil.embryoSmilodon, 1);
-    	if(var1.itemID==Fossil.dnaMammoth.itemID)return new ItemStack(Fossil.embryoMammoth, 1);
-        if(var1.itemID==Fossil.dnaDodo.itemID)return new ItemStack(Fossil.dodoEgg, 1);
-        if(var1.itemID==Fossil.dnaDodo.itemID)return new ItemStack(Fossil.cultivatedDodoEgg, 1);
-    	if(EnumDinoType.getEgg(var1.getItem())!=null)return new ItemStack(EnumDinoType.getEgg(var1.getItem()),1);//converts dino dna to dino egg
-    	return null;
+        if(var1.itemID==Fossil.dnaTRex.itemID)return new ItemStack(Fossil.eggTRex, 1);
+        if(var1.itemID==Fossil.dnaDilophosaurus.itemID)return new ItemStack(Fossil.eggDilophosaurus, 1);
+        if(var1.itemID==Fossil.dnaMosasaurus.itemID)return new ItemStack(Fossil.eggMosasaurus, 1);
+        if(var1.itemID==Fossil.dnaPterosaur.itemID)return new ItemStack(Fossil.eggPterosaur, 1);
+        if(var1.itemID==Fossil.dnaStegosaurus.itemID)return new ItemStack(Fossil.eggStegosaurus, 1);
+        if(var1.itemID==Fossil.dnaNautilus.itemID)return new ItemStack(Fossil.shellNautilus, 1);*/
+        if (var1.itemID == Fossil.brokenSapling.itemID)
+        {
+            return new ItemStack(Fossil.palmSap, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaSheep.itemID)
+        {
+            return new ItemStack(Fossil.embryoSheep, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaCow.itemID)
+        {
+            return new ItemStack(Fossil.embryoCow, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaChicken.itemID)
+        {
+            return new ItemStack(Fossil.embryoChicken, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaPig.itemID)
+        {
+            return new ItemStack(Fossil.embryoPig, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaSmilodon.itemID)
+        {
+            return new ItemStack(Fossil.embryoSmilodon, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaMammoth.itemID)
+        {
+            return new ItemStack(Fossil.embryoMammoth, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaDodo.itemID)
+        {
+            return new ItemStack(Fossil.dodoEgg, 1);
+        }
+
+        if (var1.itemID == Fossil.dnaDodo.itemID)
+        {
+            return new ItemStack(Fossil.cultivatedDodoEgg, 1);
+        }
+
+        if (EnumDinoType.getEgg(var1.getItem()) != null)
+        {
+            return new ItemStack(EnumDinoType.getEgg(var1.getItem()), 1);    //converts dino dna to dino egg
+        }
+
+        return null;
     }
 
     public void openChest() {}
@@ -394,31 +466,36 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         return null;
     }
 
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+    @Override
+    public boolean isInvNameLocalized()
+    {
+        return false;
+    }
 
-	@Override
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+        return false;
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

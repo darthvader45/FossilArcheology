@@ -165,7 +165,6 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
                             for (j2 = -b0; j2 <= b0; ++j2)
                             {
                                 k2 = par1World.getBlockId(par2 + l1, par3 + i2, par4 + j2);
-
                                 Block block = Block.blocksList[k2];
 
                                 if (block != null && block.canSustainLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
@@ -364,8 +363,8 @@ public class BlockPalmLeaves extends BlockLeavesBase implements IShearable
      */
     public Icon getIcon(int par1, int par2)
     {
-       // return (par2 & 3) == 1 ? this.iconArray[this.iconType][1] : ((par2 & 3) == 3 ? this.iconArray[this.iconType][3] : ((par2 & 3) == 2 ? this.iconArray[this.iconType][2] : this.iconArray[this.iconType][0]));
-        return this.iconArray[0][this.graphicsLevel?1:0];
+        // return (par2 & 3) == 1 ? this.iconArray[this.iconType][1] : ((par2 & 3) == 3 ? this.iconArray[this.iconType][3] : ((par2 & 3) == 2 ? this.iconArray[this.iconType][2] : this.iconArray[this.iconType][0]));
+        return this.iconArray[0][this.graphicsLevel ? 1 : 0];
     }
 
     @SideOnly(Side.CLIENT)

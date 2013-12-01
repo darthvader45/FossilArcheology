@@ -2,7 +2,6 @@ package mods.fossil.entity.mob;
 
 import mods.fossil.fossilEnums.EnumPigmenSpeaks;
 
-
 public class PigmenSpeaker
 {
     EntityFriendlyPigZombie speaker = null;

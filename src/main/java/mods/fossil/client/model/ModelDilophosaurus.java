@@ -1,6 +1,5 @@
 package mods.fossil.client.model;
 
-
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -227,20 +226,17 @@ public class ModelDilophosaurus extends ModelDinosaurs
             this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
             this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
             this.Jaw1.rotateAngleX = this.Jaw2.rotateAngleX
-            		= this.Crest.rotateAngleX = this.Crest2.rotateAngleX
-            		= this.Crest3.rotateAngleX = this.Crest4.rotateAngleX = this.Head.rotateAngleX;
+                                     = this.Crest.rotateAngleX = this.Crest2.rotateAngleX
+                                             = this.Crest3.rotateAngleX = this.Crest4.rotateAngleX = this.Head.rotateAngleX;
             this.Jaw1.rotateAngleY = this.Jaw2.rotateAngleY
-            		= this.Crest.rotateAngleY = this.Crest2.rotateAngleY
-            		= this.Crest3.rotateAngleY = this.Crest4.rotateAngleY = this.Head.rotateAngleY;
-            
-
+                                     = this.Crest.rotateAngleY = this.Crest2.rotateAngleY
+                                             = this.Crest3.rotateAngleY = this.Crest4.rotateAngleY = this.Head.rotateAngleY;
             this.Thigh2.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
             this.Heel2.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2 - 0.372F;
             this.Feet2.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
             this.Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
             this.Heel1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2 - 0.372F;
             this.Feet1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-            
         }
     }
 }

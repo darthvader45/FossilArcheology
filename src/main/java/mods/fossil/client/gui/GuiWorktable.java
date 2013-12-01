@@ -1,6 +1,5 @@
 package mods.fossil.client.gui;
 
-
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.guiBlocks.ContainerWorktable;
@@ -15,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiWorktable extends GuiContainer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
     private TileEntityWorktable furnaceInventory;
 
     public GuiWorktable(InventoryPlayer var1, TileEntity var2)

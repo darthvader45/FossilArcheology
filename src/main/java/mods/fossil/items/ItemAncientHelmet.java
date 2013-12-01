@@ -8,22 +8,20 @@ import net.minecraft.item.ItemStack;
 
 public class ItemAncientHelmet extends ItemArmor
 {
-	public ItemAncientHelmet(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) 
-	{
-		
-          super(par1, par2EnumArmorMaterial, par3, par4);
-          this.setCreativeTab(Fossil.tabFArmor);
+    public ItemAncientHelmet(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4)
+    {
+        super(par1, par2EnumArmorMaterial, par3, par4);
+        this.setCreativeTab(Fossil.tabFArmor);
     }
- 
+
     public String getArmorTexture(ItemStack par1)
     {
-    	return "fossil:textures/armor/TextureAncientHelmet.png";
+        return "fossil:textures/armor/TextureAncientHelmet.png";
     }
-	
+
     @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Ancient_Helm");
-	}
-	
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Ancient_Helm");
+    }
 }

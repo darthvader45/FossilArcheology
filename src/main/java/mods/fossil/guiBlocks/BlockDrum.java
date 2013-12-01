@@ -19,10 +19,10 @@ import net.minecraft.world.World;
 
 public class BlockDrum extends BlockContainer
 {
-	Icon Top1;
-	Icon Top2;
-	Icon Top3;
-	Icon Bottom;
+    Icon Top1;
+    Icon Top2;
+    Icon Top3;
+    Icon Bottom;
     public BlockDrum(int var1)
     {
         super(var1, Material.wood);
@@ -33,7 +33,7 @@ public class BlockDrum extends BlockContainer
     {
         return "/fossil/textures/Fos_terrian.png";
     }*/
-    
+
     /**
      * Returns the ID of the items to drop on destruction.
      */
@@ -93,8 +93,11 @@ public class BlockDrum extends BlockContainer
         }
         else
         {
-        	if(par1==0)
-        		return Bottom;
+            if (par1 == 0)
+            {
+                return Bottom;
+            }
+
             switch (par2)
             {
                 case 0:
@@ -144,6 +147,7 @@ public class BlockDrum extends BlockContainer
             var10.TriggerOrder(var5);
             var1.setBlockMetadataWithNotify(var2, var3, var4, var10.Order.ordinal(), var6);
         }
+
         return true;
     }
 
@@ -155,8 +159,11 @@ public class BlockDrum extends BlockContainer
         if (!var1.isRemote)
         {
             TileEntityDrum var6 = (TileEntityDrum)var1.getBlockTileEntity(var2, var3, var4);
+
             if (var5.inventory.getCurrentItem() != null)
+            {
                 var6.SendOrder(var5.inventory.getCurrentItem().itemID, var5);
+            }
         }
     }
 

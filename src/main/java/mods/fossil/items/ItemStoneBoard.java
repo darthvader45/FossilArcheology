@@ -23,7 +23,9 @@ public class ItemStoneBoard extends Item
     public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10)
     {
         if (direction == 0 || direction == 1)
+        {
             return false;
+        }
         else
         {
             int var11 = Direction.facingToDirection[direction];
@@ -41,17 +43,18 @@ public class ItemStoneBoard extends Item
                     {
                         world.spawnEntityInWorld(var12);
                     }
+
                     --var1.stackSize;
                 }
+
                 return true;
             }
         }
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Stone_Tablet");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Stone_Tablet");
+    }
 }

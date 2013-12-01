@@ -21,54 +21,66 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public class FossilPacketHandler implements IPacketHandler {
-    
+public class FossilPacketHandler implements IPacketHandler
+{
     public static final String CHANNEL = "FossilPackets";
-    
+
     private static FossilPacketHandler instance;
 
-    public static FossilPacketHandler getInstance() {
-        if (instance == null) {
+    public static FossilPacketHandler getInstance()
+    {
+        if (instance == null)
+        {
             instance = new FossilPacketHandler();
         }
+
         return instance;
     }
-    
+
     private Map<String, Map<String, Boolean>> playerKeys = new HashMap<String, Map<String, Boolean>>();
-    
-    private FossilPacketHandler() {
+
+    private FossilPacketHandler()
+    {
     }
-    
+
     @Override
-    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-        if (player instanceof EntityPlayerMP) {
+    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
+    {
+        if (player instanceof EntityPlayerMP)
+        {
             EntityPlayerMP playerMP = (EntityPlayerMP) player;
             KeyHandler rk = new KeyHandler(packet);
-            
             Map<String, Boolean> playerKeyMap;
-            if (!playerKeys.containsKey(playerMP.username)) {
+
+            if (!playerKeys.containsKey(playerMP.username))
+            {
                 playerKeyMap = new HashMap<String, Boolean>();
                 playerKeys.put(playerMP.username, playerKeyMap);
-            } else {
+            }
+            else
+            {
                 playerKeyMap = playerKeys.get(playerMP.username);
             }
+
             playerKeyMap.put(rk.getName(), rk.isDown());
         }
     }
-    
-    public boolean isKeyPressed(String username, String keyname) {
+
+    public boolean isKeyPressed(String username, String keyname)
+    {
         Map<String, Boolean> playerKeyMap = playerKeys.get(username);
-        
-        if (playerKeyMap == null) {
+
+        if (playerKeyMap == null)
+        {
             return false;
         }
-        
+
         Boolean pressed = playerKeyMap.get(keyname);
-        
         return pressed != null && pressed.booleanValue();
     }
-    
-    public void clearKeyMapping() {
+
+    public void clearKeyMapping()
+    {
         playerKeys.clear();
     }
 }

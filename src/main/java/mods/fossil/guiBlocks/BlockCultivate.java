@@ -5,7 +5,6 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.Localizations;
@@ -107,7 +106,7 @@ public class BlockCultivate extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon(this.isActive? "fossil:Culture_Sides_Active" : "fossil:Culture_Sides_Idle");
+        this.blockIcon = par1IconRegister.registerIcon(this.isActive ? "fossil:Culture_Sides_Active" : "fossil:Culture_Sides_Idle");
         this.Bottom = par1IconRegister.registerIcon("fossil:Culture_Bottom");
         this.Top = par1IconRegister.registerIcon("fossil:Culture_Top");
     }
@@ -145,7 +144,7 @@ public class BlockCultivate extends BlockContainer
         }
         else
         {
-        	var5.openGui(Fossil.instance, 1, var1, var2, var3, var4);
+            var5.openGui(Fossil.instance, 1, var1, var2, var3, var4);
             return true;
         }
     }
@@ -166,7 +165,7 @@ public class BlockCultivate extends BlockContainer
         }
 
         keepFurnaceInventory = false;
-        var1.setBlockMetadataWithNotify(var2, var3, var4, var5,2);
+        var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
         var6.validate();
         var1.setBlockTileEntity(var2, var3, var4, var6);
     }
@@ -176,7 +175,7 @@ public class BlockCultivate extends BlockContainer
      */
     public TileEntity createNewTileEntity(World var1)
     {
-    	return new TileEntityCultivate();
+        return new TileEntityCultivate();
     }
 
     /**
@@ -229,9 +228,12 @@ public class BlockCultivate extends BlockContainer
 
         for (int var7 = 0; var7 < var1.playerEntities.size(); ++var7)
         {
-        	EntityPlayer P=(EntityPlayer)var1.playerEntities.get(var7);
-        	if(Math.pow(var2-P.posX,2D)+Math.pow(var3-P.posY,2D)+Math.pow(var4-P.posZ,2D)<10000)//Only for Players closer than 100 Metres
-        		Fossil.ShowMessage(var6,P);
+            EntityPlayer P = (EntityPlayer)var1.playerEntities.get(var7);
+
+            if (Math.pow(var2 - P.posX, 2D) + Math.pow(var3 - P.posY, 2D) + Math.pow(var4 - P.posZ, 2D) < 10000) //Only for Players closer than 100 Metres
+            {
+                Fossil.ShowMessage(var6, P);
+            }
         }
 
         this.ReturnIron(var1, var2, var3, var4);
@@ -280,39 +282,40 @@ public class BlockCultivate extends BlockContainer
         {
             TileEntityCultivate var7 = (TileEntityCultivate)var1.getBlockTileEntity(var2, var3, var4);
 
-            if(var7 instanceof TileEntityCultivate)
+            if (var7 instanceof TileEntityCultivate)
             {
-		        for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
-		        {
-		            ItemStack var9 = var7.getStackInSlot(var8);
-		
-		            if (var9 != null)
-		            {
-		                float var10 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-		                float var11 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-		                float var12 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-		
-		                while (var9.stackSize > 0)
-		                {
-		                    int var13 = this.furnaceRand.nextInt(21) + 10;
-		
-		                    if (var13 > var9.stackSize)
-		                    {
-		                        var13 = var9.stackSize;
-		                    }
-		
-		                    var9.stackSize -= var13;
-		                    EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var10), (double)((float)var3 + var11), (double)((float)var4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
-		                    float var15 = 0.05F;
-		                    var14.motionX = (double)((float)this.furnaceRand.nextGaussian() * var15);
-		                    var14.motionY = (double)((float)this.furnaceRand.nextGaussian() * var15 + 0.2F);
-		                    var14.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var15);
-		                    var1.spawnEntityInWorld(var14);
-		                }
-		            }
-		        }
+                for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
+                {
+                    ItemStack var9 = var7.getStackInSlot(var8);
+
+                    if (var9 != null)
+                    {
+                        float var10 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var11 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var12 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+
+                        while (var9.stackSize > 0)
+                        {
+                            int var13 = this.furnaceRand.nextInt(21) + 10;
+
+                            if (var13 > var9.stackSize)
+                            {
+                                var13 = var9.stackSize;
+                            }
+
+                            var9.stackSize -= var13;
+                            EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var10), (double)((float)var3 + var11), (double)((float)var4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                            float var15 = 0.05F;
+                            var14.motionX = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var14.motionY = (double)((float)this.furnaceRand.nextGaussian() * var15 + 0.2F);
+                            var14.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var1.spawnEntityInWorld(var14);
+                        }
+                    }
+                }
             }
         }
+
         super.breakBlock(var1, var2, var3, var4, var5, var6);
     }
 

@@ -25,10 +25,9 @@ public class EntityCultivatedDodoEgg extends EntityThrowable
     {
         super(par1World, par2, par4, par6);
     }
-    
+
     public String getTexture()
     {
-
         return "/mods/fossil/textures/items/Egg_Cultivated_Dodo.png";
     }
 
@@ -44,10 +43,10 @@ public class EntityCultivatedDodoEgg extends EntityThrowable
 
         if (!this.worldObj.isRemote)
         {
-                EntityDodo entitydodo = new EntityDodo(this.worldObj);
-                entitydodo.setGrowingAge(-24000);
-                entitydodo.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                this.worldObj.spawnEntityInWorld(entitydodo);
+            EntityDodo entitydodo = new EntityDodo(this.worldObj);
+            entitydodo.setGrowingAge(-24000);
+            entitydodo.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+            this.worldObj.spawnEntityInWorld(entitydodo);
         }
 
         if (!this.worldObj.isRemote)

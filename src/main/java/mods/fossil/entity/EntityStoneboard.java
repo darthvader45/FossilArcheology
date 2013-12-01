@@ -43,7 +43,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 
     public EntityStoneboard(World var1, int var2, int var3, int var4, int var5)
     {
-        this(var1);        
+        this(var1);
         this.xPosition = var2;
         this.yPosition = var3;
         this.zPosition = var4;
@@ -123,21 +123,45 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         float var7 = (float)this.zPosition + 0.5F;
         float var8 = 0.5625F;
 
-        if (var1 == 2)var7 -= var8;
+        if (var1 == 2)
+        {
+            var7 -= var8;
+        }
 
-        if (var1 == 1)var5 -= var8;
+        if (var1 == 1)
+        {
+            var5 -= var8;
+        }
 
-        if (var1 == 0)var7 += var8;
+        if (var1 == 0)
+        {
+            var7 += var8;
+        }
 
-        if (var1 == 3)var5 += var8;
+        if (var1 == 3)
+        {
+            var5 += var8;
+        }
 
-        if (var1 == 2)var5 -= this.func_411_c(this.art.sizeX);
+        if (var1 == 2)
+        {
+            var5 -= this.func_411_c(this.art.sizeX);
+        }
 
-        if (var1 == 1)var7 += this.func_411_c(this.art.sizeX);
+        if (var1 == 1)
+        {
+            var7 += this.func_411_c(this.art.sizeX);
+        }
 
-        if (var1 == 0)var5 += this.func_411_c(this.art.sizeX);
+        if (var1 == 0)
+        {
+            var5 += this.func_411_c(this.art.sizeX);
+        }
 
-        if (var1 == 3)var7 -= this.func_411_c(this.art.sizeX);
+        if (var1 == 3)
+        {
+            var7 -= this.func_411_c(this.art.sizeX);
+        }
 
         var6 += this.func_411_c(this.art.sizeY);
         this.setPosition((double)var5, (double)var6, (double)var7);
@@ -178,12 +202,10 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         {
             int Width = Math.max(1, this.art.sizeX / 16);   //Size of The Tablet
             int Height = Math.max(1, this.art.sizeY / 16);
-            
-            
             int xPos = this.xPosition;          //Starting Position of the Tablet
             int yPos = MathHelper.floor_double(this.posY - (double)((float)this.art.sizeY / 32.0F)); // Center is where you clicked: start at -sizeY/2
             int zPos = this.zPosition;
-            
+
             if (this.direction == 0 || this.direction == 2)//adjust the center for the corresponding directions
             {
                 xPos = MathHelper.floor_double(this.posX - (double)((float)this.art.sizeX / 32.0F));
@@ -200,13 +222,17 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
                 {
                     if (this.direction != 2 || this.direction != 0)
                     {
-                        if(!this.worldObj.getBlockMaterial(this.xPosition, yPos + up, zPos + side).isSolid())
+                        if (!this.worldObj.getBlockMaterial(this.xPosition, yPos + up, zPos + side).isSolid())
+                        {
                             return false;
+                        }
                     }
                     else
                     {
-                        if(!this.worldObj.getBlockMaterial(xPos + side, yPos + up, this.zPosition).isSolid())
+                        if (!this.worldObj.getBlockMaterial(xPos + side, yPos + up, this.zPosition).isSolid())
+                        {
                             return false;
+                        }
                     }
                 }
             }
@@ -220,6 +246,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
                     return false;
                 }
             }
+
             return true;
         }
     }
@@ -302,7 +329,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
             this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Fossil.stoneboard)));
         }
     }
-*/
+    */
     /**
      * Adds to the current velocity of the entity. Args: x, y, z
      */

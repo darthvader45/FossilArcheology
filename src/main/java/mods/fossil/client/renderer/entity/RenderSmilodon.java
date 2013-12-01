@@ -1,6 +1,5 @@
 package mods.fossil.client.renderer.entity;
 
-
 import mods.fossil.entity.mob.EntitySmilodon;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -10,19 +9,18 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSmilodon extends RenderLiving
 {
-	
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Smilodon_Adult.png");
-    
+
     protected ResourceLocation func_110919_a(EntitySmilodon par1Entity)
     {
         return loc;
     }
-    
+
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
         return this.func_110919_a((EntitySmilodon)par1Entity);
     }
-    
+
     public RenderSmilodon(ModelBase var1, float var2)
     {
         super(var1, var2);
@@ -32,7 +30,7 @@ public class RenderSmilodon extends RenderLiving
     {
         super.doRenderLiving(var1, var2, var4, var6, var8, var9);
     }
-    
+
     protected float func_25004_a(EntitySmilodon var1, float var2)
     {
         return var1.getTailRotation();

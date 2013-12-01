@@ -9,47 +9,46 @@ import net.minecraft.util.Vec3;;
 
 public class EntityFlyingDino extends EntityDinosaur
 {
-	// =============
-	// CONSTANTS
-	// =============
-	final private float		FLY_TO_POINT_BASE_SPEED = 0.25f;
-	final private float		FLY_TO_POINT_SPEED = 0.05f;
-	final private float		FLY_TO_POINT_MAX_SPEED = 20.0f;
-	
-	// =============
-	// MEMBERS
-	// =============
-	private float			m_fFlightDestinationX = 0;
-	private float			m_fFlightDestinationY = 0;
-	private float			m_fFlightDestinationZ = 0;
-	private float			m_fCurrentFlightSpeed = 0;
-	
-	// =============
-	// CLASS METHODS
-	// =============
-	
-	public EntityFlyingDino( World _TheWorld, EnumDinoType _DinoType )
-	{
-		super( _TheWorld, _DinoType );
+    // =============
+    // CONSTANTS
+    // =============
+    final private float		FLY_TO_POINT_BASE_SPEED = 0.25f;
+    final private float		FLY_TO_POINT_SPEED = 0.05f;
+    final private float		FLY_TO_POINT_MAX_SPEED = 20.0f;
 
-    	this.getNavigator().setCanSwim(true);
-	}
-	
-	 /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-	protected void fall( float par1 )
-	{
-		// Intentionally left blank.		
-	}
-	
-	 /**
-     * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
-     * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-     */
+    // =============
+    // MEMBERS
+    // =============
+    private float			m_fFlightDestinationX = 0;
+    private float			m_fFlightDestinationY = 0;
+    private float			m_fFlightDestinationZ = 0;
+    private float			m_fCurrentFlightSpeed = 0;
+
+    // =============
+    // CLASS METHODS
+    // =============
+
+    public EntityFlyingDino(World _TheWorld, EnumDinoType _DinoType)
+    {
+        super(_TheWorld, _DinoType);
+        this.getNavigator().setCanSwim(true);
+    }
+
+    /**
+    * Called when the mob is falling. Calculates and applies fall damage.
+    */
+    protected void fall(float par1)
+    {
+        // Intentionally left blank.
+    }
+
+    /**
+    * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
+    * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
+    */
     protected void updateFallState(double par1, boolean par3)
     {
-    	// Intentionally left blank.
+        // Intentionally left blank.
     }
 
     /**
@@ -124,114 +123,102 @@ public class EntityFlyingDino extends EntityDinosaur
         this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
         this.limbSwing += this.limbSwingAmount;
     }
-    
+
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-
         // Update flight.
-       // if( this.isAirBorne )
+        // if( this.isAirBorne )
         {
-        	//if( this.worldObj.isAirBlock( (int)m_fFlightDestinationX, (int)m_fFlightDestinationY, (int)m_fFlightDestinationZ ) == false  )
-        	//{
-        	//	return;
-        	//}
-        	
-        	double dToDestX = m_fFlightDestinationX - posX;
+            //if( this.worldObj.isAirBlock( (int)m_fFlightDestinationX, (int)m_fFlightDestinationY, (int)m_fFlightDestinationZ ) == false  )
+            //{
+            //	return;
+            //}
+            double dToDestX = m_fFlightDestinationX - posX;
             double dToDestY = m_fFlightDestinationY - posY;
             double dToDestZ = m_fFlightDestinationZ - posZ;
             double dToDestDotProduct = dToDestX * dToDestX + dToDestY * dToDestY + dToDestZ * dToDestZ;
-        	
-            dToDestDotProduct = (double)MathHelper.sqrt_double( dToDestDotProduct );
+            dToDestDotProduct = (double)MathHelper.sqrt_double(dToDestDotProduct);
 
-            if( isCourseTraversable( dToDestX, dToDestY, dToDestZ, dToDestDotProduct) )
-            { 
-            	float fFlightSpeed = m_fCurrentFlightSpeed + FLY_TO_POINT_BASE_SPEED;
-            	
-            	if( fFlightSpeed > FLY_TO_POINT_MAX_SPEED )
-            	{
-            		fFlightSpeed = FLY_TO_POINT_MAX_SPEED;
-            	}
-            	
-            	motionX = (dToDestX / dToDestDotProduct) * fFlightSpeed;
-           	 	motionY = (dToDestY / dToDestDotProduct) * fFlightSpeed;
-           	 	motionZ = (dToDestZ / dToDestDotProduct) * fFlightSpeed;
-           	        	 	
-           	 	float f = (float)(Math.atan2( motionZ, motionX ) * 180.0D / Math.PI) - 90.0F;
-                float f1 = MathHelper.wrapAngleTo180_float( f - rotationYaw );
+            if (isCourseTraversable(dToDestX, dToDestY, dToDestZ, dToDestDotProduct))
+            {
+                float fFlightSpeed = m_fCurrentFlightSpeed + FLY_TO_POINT_BASE_SPEED;
+
+                if (fFlightSpeed > FLY_TO_POINT_MAX_SPEED)
+                {
+                    fFlightSpeed = FLY_TO_POINT_MAX_SPEED;
+                }
+
+                motionX = (dToDestX / dToDestDotProduct) * fFlightSpeed;
+                motionY = (dToDestY / dToDestDotProduct) * fFlightSpeed;
+                motionZ = (dToDestZ / dToDestDotProduct) * fFlightSpeed;
+                float f = (float)(Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+                float f1 = MathHelper.wrapAngleTo180_float(f - rotationYaw);
                 //m_edDinoAgent.moveForward = 0.5F;
                 rotationYaw += f1;
             }
-        	
         }
-        
-        
     }
-    
+
     /*
     * True if the ghast has an unobstructed line of travel to the waypoint.
     */
-   private boolean isCourseTraversable(double _X, double _Y, double _Z, double Dot )
-   {
-       double d4 = ( _X - posX) / Dot;
-       double d5 = ( _Y - posY) / Dot;
-       double d6 = ( _Z - posZ) / Dot;
-       AxisAlignedBB axisalignedbb = boundingBox.copy();
-
-       for (int i = 1; (double)i < Dot; ++i)
-       {
-           axisalignedbb.offset(d4, d5, d6);
-
-           if ( worldObj.getCollidingBoundingBoxes( this, axisalignedbb ).isEmpty() == false)
-           {
-               return false;
-           }
-       }
-
-       return true;
-   }
-
-    
-    public boolean FlyToPoint( float _X, float _Y, float _Z, float _fSpeed )
+    private boolean isCourseTraversable(double _X, double _Y, double _Z, double Dot)
     {
-    	if( this.worldObj.isAirBlock( (int)_X, (int)_Y, (int)_Z ) == false  )
-    	{
-    		return false;
-    	}
-    	
-    	m_fFlightDestinationX = _X;
-    	m_fFlightDestinationY = _Y;
-    	m_fFlightDestinationZ = _Z;
-    	m_fCurrentFlightSpeed = _fSpeed;
-    	
-    	return true;
+        double d4 = (_X - posX) / Dot;
+        double d5 = (_Y - posY) / Dot;
+        double d6 = (_Z - posZ) / Dot;
+        AxisAlignedBB axisalignedbb = boundingBox.copy();
+
+        for (int i = 1; (double)i < Dot; ++i)
+        {
+            axisalignedbb.offset(d4, d5, d6);
+
+            if (worldObj.getCollidingBoundingBoxes(this, axisalignedbb).isEmpty() == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public boolean FlyToPoint( Vec3 _vPoint, float _fSpeed )
+    public boolean FlyToPoint(float _X, float _Y, float _Z, float _fSpeed)
     {
-    	if( _vPoint == null )
-    	{
-    		return false;
-    	}
-    	
-    	boolean bResult = FlyToPoint( (float)_vPoint.xCoord, (float)_vPoint.yCoord, (float)_vPoint.zCoord, _fSpeed );
-    	
-    	return bResult;
+        if (this.worldObj.isAirBlock((int)_X, (int)_Y, (int)_Z) == false)
+        {
+            return false;
+        }
+
+        m_fFlightDestinationX = _X;
+        m_fFlightDestinationY = _Y;
+        m_fFlightDestinationZ = _Z;
+        m_fCurrentFlightSpeed = _fSpeed;
+        return true;
     }
-    
-	// =====================
-	// ACCESSORS & MODIFIERS
-	// =====================
-    
-    public void SetInWater( boolean _bInWater )
+
+    public boolean FlyToPoint(Vec3 _vPoint, float _fSpeed)
     {
-    	this.inWater = _bInWater;    	
-    	
+        if (_vPoint == null)
+        {
+            return false;
+        }
+
+        boolean bResult = FlyToPoint((float)_vPoint.xCoord, (float)_vPoint.yCoord, (float)_vPoint.zCoord, _fSpeed);
+        return bResult;
     }
-    
-    public void SetAirborne( boolean _bAirborne )
+
+    // =====================
+    // ACCESSORS & MODIFIERS
+    // =====================
+
+    public void SetInWater(boolean _bInWater)
     {
-    	this.isAirBorne = _bAirborne;
+        this.inWater = _bInWater;
     }
-    
+
+    public void SetAirborne(boolean _bAirborne)
+    {
+        this.isAirBorne = _bAirborne;
+    }
 }

@@ -30,18 +30,18 @@ public class ItemAncientEgg extends Item
     public static final int TypeCount = EnumDinoType.values().length;
     private int DinoType;
 
-    public ItemAncientEgg(int var1,int DinoType0)
+    public ItemAncientEgg(int var1, int DinoType0)
     {
         super(var1);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.maxStackSize = 1;
-        this.DinoType=DinoType0;
+        this.DinoType = DinoType0;
     }
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("fossil:"+EnumDinoType.values()[DinoType].name()+"_Egg");
+        this.itemIcon = par1IconRegister.registerIcon("fossil:" + EnumDinoType.values()[DinoType].name() + "_Egg");
     }
 
     /**
@@ -112,7 +112,9 @@ public class ItemAncientEgg extends Item
                         {
                             --var32;
                         }
-                        EnumDinoType i=this.GetTypeFromInt(/*var1.itemID*/var3.inventory.getCurrentItem().getItem());
+
+                        EnumDinoType i = this.GetTypeFromInt(/*var1.itemID*/var3.inventory.getCurrentItem().getItem());
+
                         if (!spawnCreature(var2, i, (double)((float)var34 + 0.5F), (double)((float)var32 + 1.0F), (double)((float)var33 + 0.5F)))
                         {
                             return var1;
@@ -137,7 +139,7 @@ public class ItemAncientEgg extends Item
         if (var1 == EnumDinoType.Nautilus)
         {
             var8 = new EntityNautilus(var0);
-            ((EntityNautilus)var8).isOwned=true;
+            ((EntityNautilus)var8).isOwned = true;
         }
         else
         {
@@ -155,20 +157,20 @@ public class ItemAncientEgg extends Item
 
     private EnumDinoType GetTypeFromInt(Item var1)
     {
-    	/*if(var1==Fossil.eggTriceratops.itemID)return EnumDinoType.Triceratops;
-    	if(var1==Fossil.eggBrachiosaurus.itemID)return EnumDinoType.Brachiosaurus;
-    	if(var1==Fossil.eggPlesiosaur.itemID)return EnumDinoType.Plesiosaur;
-    	if(var1==Fossil.eggVelociraptor.itemID)return EnumDinoType.Velociraptor;
-    	if(var1==Fossil.eggTRex.itemID)return EnumDinoType.TRex;
-    	if(var1==Fossil.eggDilophosaurus.itemID)return EnumDinoType.Dilophosaurus;
-    	if(var1==Fossil.eggMosasaurus.itemID)return EnumDinoType.Mosasaurus;
-    	if(var1==Fossil.eggPterosaur.itemID)return EnumDinoType.Pterosaur;
-    	if(var1==Fossil.eggStegosaurus.itemID)return EnumDinoType.Stegosaurus;
-    	if(var1==Fossil.shellNautilus.itemID)return EnumDinoType.Nautilus;
-    	if(var1==Fossil.eggSpinosaurus.itemID)return EnumDinoType.Spinosaurus;
+        /*if(var1==Fossil.eggTriceratops.itemID)return EnumDinoType.Triceratops;
+        if(var1==Fossil.eggBrachiosaurus.itemID)return EnumDinoType.Brachiosaurus;
+        if(var1==Fossil.eggPlesiosaur.itemID)return EnumDinoType.Plesiosaur;
+        if(var1==Fossil.eggVelociraptor.itemID)return EnumDinoType.Velociraptor;
+        if(var1==Fossil.eggTRex.itemID)return EnumDinoType.TRex;
+        if(var1==Fossil.eggDilophosaurus.itemID)return EnumDinoType.Dilophosaurus;
+        if(var1==Fossil.eggMosasaurus.itemID)return EnumDinoType.Mosasaurus;
+        if(var1==Fossil.eggPterosaur.itemID)return EnumDinoType.Pterosaur;
+        if(var1==Fossil.eggStegosaurus.itemID)return EnumDinoType.Stegosaurus;
+        if(var1==Fossil.shellNautilus.itemID)return EnumDinoType.Nautilus;
+        if(var1==Fossil.eggSpinosaurus.itemID)return EnumDinoType.Spinosaurus;
 
-    	System.out.println("FAULT!!!!:Dinotype " + String.valueOf(var1)+ " does not exist!");
-    	return EnumDinoType.Triceratops;*/
-    	return EnumDinoType.values()[EnumDinoType.getIndex(var1)];
+        System.out.println("FAULT!!!!:Dinotype " + String.valueOf(var1)+ " does not exist!");
+        return EnumDinoType.Triceratops;*/
+        return EnumDinoType.values()[EnumDinoType.getIndex(var1)];
     }
 }

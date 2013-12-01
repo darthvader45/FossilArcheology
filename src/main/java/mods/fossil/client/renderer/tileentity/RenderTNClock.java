@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderTNClock extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/blocks/TNClock.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/blocks/TNClock.png");
     private ModelTNClock MainModel = new ModelTNClock();
     private int UpdateTick = 0;
     private final int TickReset = 600;

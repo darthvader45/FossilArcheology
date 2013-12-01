@@ -29,7 +29,7 @@ public class EntityAncientJavelin extends EntityJavelin
     {
         super(var1, var32, var3, var4, damagevalue);
         this.SelfMaterial = var4;
-        this.damaged=damagevalue;
+        this.damaged = damagevalue;
     }
 
     public EntityAncientJavelin(World var1, EntityLiving var2, float var3)
@@ -66,17 +66,21 @@ public class EntityAncientJavelin extends EntityJavelin
     {
         if (this.inGround && !this.lighteningShot)
         {
-        	if((new Random()).nextInt(100)<30)
-        		this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, this.posX, this.posY, this.posZ));
+            if ((new Random()).nextInt(100) < 30)
+            {
+                this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, this.posX, this.posY, this.posZ));
+            }
+
             this.lighteningShot = true;
         }
+
         super.onUpdate();
     }
 
     protected boolean addJavelinToPlayer(EntityPlayer var1)
     {
         ItemStack var2 = new ItemStack(Fossil.ancientJavelin, 1);
-        var2.setItemDamage(var2.getMaxDamage()-damaged);
+        var2.setItemDamage(var2.getMaxDamage() - damaged);
         return var1.inventory.addItemStackToInventory(var2);
     }
 }

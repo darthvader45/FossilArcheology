@@ -47,26 +47,19 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 
     public EntityPachycephalosaurus(World var1)
     {
-        super(var1,EnumDinoType.Pachycephalosaurus);
+        super(var1, EnumDinoType.Pachycephalosaurus);
         this.looksWithInterest = false;
         this.updateSize();
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Pachycephalosaurus.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.5F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 3.0F;
-        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
@@ -87,27 +80,27 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-
     }
-    
+
     @Override
     public boolean attackEntityAsMob(Entity var1)
     {
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
+
         if (this.rand.nextInt(16) < 9 && var1 instanceof EntityLiving)
         {
             this.headButt();
         }
+
         return super.attackEntityAsMob(var1);
     }
-    
+
     public void knockBack(Entity var1, int var2, double var3, double var5)
     {
-            super.knockBack(var1, var2, var3, var5);
+        super.knockBack(var1, var2, var3, var5);
     }
-    
-    
+
     private void headButt()
     {
         List var1 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D));
@@ -131,12 +124,10 @@ public class EntityPachycephalosaurus extends EntityDinosaur
                 {
                     var3.knockBack(this, 0, var4 * 25.0D, var6 * 25.0D);
                 }
-
-
             }
         }
     }
-    
+
     /**
      * Returns true if the newer Entity AI code should be run
      */
@@ -144,7 +135,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     {
         return this.riddenByEntity == null;
     }
-    
+
     public String getTexture()
     {
         switch (this.getSubSpecies())
@@ -154,12 +145,11 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 
             case 2:
                 return "fossil:textures/mob/Pachy-Monochrome.png";
-                
+
             case 3:
                 return "fossil:textures/mob/Pachy-Pumpkin.png";
 
             default:
-            	
                 return "fossil:textures/mob/Pachy-Pumpkin.png";
         }
     }
@@ -203,11 +193,12 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
+
         if (this.attackTimer > 0)
         {
             --this.attackTimer;
         }
-        
+
         if (this.looksWithInterest)
         {
             this.numTicksToChaseTarget = 10;
@@ -236,8 +227,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         return this.isSitting();// || this.field_25052_g;
     }
 
-   
-    
     /**
      * Called when the entity is attacked.
      */
@@ -245,7 +234,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     {
         Entity var3 = var1.getEntity();
         this.setSitting(false);
-
 
         if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
         {
@@ -304,7 +292,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
      */
     public boolean interact(EntityPlayer var1)
     {
-    	//Add special item interaction code here
+        //Add special item interaction code here
         return super.interact(var1);
     }
     public void handleHealthUpdate(byte var1)
@@ -313,6 +301,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         {
             this.attackTimer = 10;
         }
+
         if (var1 == 7)
         {
             this.showHeartsOrSmokeFX(true, true);
@@ -414,13 +403,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         }
         else
         {
-
             super.applyEntityCollision(var1);
-
         }
     }
-    
-    
 
     public EntityPachycephalosaurus spawnBabyAnimal(EntityAgeable var1)
     {
@@ -441,17 +426,16 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     {
         return this.spawnBabyAnimal(var1);
     }*/
-    
+
     @SideOnly(Side.CLIENT)
     public int getAttackTimer()
     {
         return this.attackTimer;
     }
-    
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		return null;
-	}
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        return null;
+    }
 }

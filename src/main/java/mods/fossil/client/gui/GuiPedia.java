@@ -32,23 +32,22 @@ import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer
-{	
-	private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
-	
+{
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
 
 //    public static final int rightLeftAlign = 140; //Left aligntment position for text on the RIGHT page of the pedia
 //    public int leftLeftAlign = 140; //Left aligntment position for text on the LEFT page of the pedia
-	int left;//counter for text added on the left side
-	int right;//same for the right side
-	int items;//counter for the minipics down
+    int left;//counter for text added on the left side
+    int right;//same for the right side
+    int items;//counter for the minipics down
     public GuiPedia(/*InventoryPlayer var1*/)
     {
         super(new ContainerPedia());
         this.xSize = 256;
         this.ySize = 180;
-        left=0;
-        right=0;
-        items=0;
+        left = 0;
+        right = 0;
+        items = 0;
     }
 
     /**
@@ -63,85 +62,100 @@ public class GuiPedia extends GuiContainer
      */
     public void reset()
     {
-    	this.left=0;
-    	this.right=0;
-    	this.items=0;
+        this.left = 0;
+        this.right = 0;
+        this.items = 0;
     }
     /**
      * Print a String to left or Right, starting with line 0
      */
-    public void PrintStringLR(String str0,boolean left0,int line)
+    public void PrintStringLR(String str0, boolean left0, int line)
     {
-    	this.fontRenderer.drawString(str0, 59+(left0? 0 : 81), 12*(line+1), 4210752);
+        this.fontRenderer.drawString(str0, 59 + (left0 ? 0 : 81), 12 * (line + 1), 4210752);
     }
-    public void PrintStringLR(String str0,boolean left0,int line,int r,int g,int b)
+    public void PrintStringLR(String str0, boolean left0, int line, int r, int g, int b)
     {
-    	int col=(r << 16) | (g << 8) | b;
-    	this.fontRenderer.drawString(str0, 59+(left0? 0 : 81), 12*(line+1), col);
+        int col = (r << 16) | (g << 8) | b;
+        this.fontRenderer.drawString(str0, 59 + (left0 ? 0 : 81), 12 * (line + 1), col);
     }
-    
+
     /**
      * Add a String to the left or right side, starting with 0
      */
-    public void AddStringLR(String str0,boolean left0)
+    public void AddStringLR(String str0, boolean left0)
     {
-    	this.fontRenderer.drawString(str0, 24+(left0? 0 : 81), 12*((left0?this.left++:this.right++)+1), 4210752);
+        this.fontRenderer.drawString(str0, 24 + (left0 ? 0 : 81), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
     }
-    public void AddStringLR(String str0,boolean left0,int r,int g,int b)
+    public void AddStringLR(String str0, boolean left0, int r, int g, int b)
     {
-    	int col=(r << 16) | (g << 8) | b;
-    	this.fontRenderer.drawString(str0, 24+(left0? 0 : 81), 12*((left0?this.left++:this.right++)+1), col);
+        int col = (r << 16) | (g << 8) | b;
+        this.fontRenderer.drawString(str0, 24 + (left0 ? 0 : 81), 12 * ((left0 ? this.left++ : this.right++) + 1), col);
     }
     /**
      * Print a String to X,Y
      */
-    public void PrintStringXY(String str0,int x0,int y0)
+    public void PrintStringXY(String str0, int x0, int y0)
     {
-    	this.fontRenderer.drawString(str0, x0, y0, 4210752);
+        this.fontRenderer.drawString(str0, x0, y0, 4210752);
     }
-    public void PrintStringXY(String str0,int x0,int y0,int r,int g,int b)
+    public void PrintStringXY(String str0, int x0, int y0, int r, int g, int b)
     {
-    	int col=(r << 16) | (g << 8) | b;
-    	this.fontRenderer.drawString(str0, x0, y0, col);
+        int col = (r << 16) | (g << 8) | b;
+        this.fontRenderer.drawString(str0, x0, y0, col);
     }
-    
+
     /**
      * Print a Symbol at X,Y with zoom factor zoom: x*16 pixels. 0 means 8,-1 means 4
      */
-    public void PrintItemXY(Item it0,int x0,int y0)
+    public void PrintItemXY(Item it0, int x0, int y0)
     {
-    	this.PrintItemXY(it0, x0, y0,1);
+        this.PrintItemXY(it0, x0, y0, 1);
     }
-    public void PrintItemXY(Item it0,int x0,int y0, int zoom)
+    public void PrintItemXY(Item it0, int x0, int y0, int zoom)
     {
-    	TextureManager r0 = Minecraft.getMinecraft().renderEngine;
-    	
-    	int i=zoom*16;
-    	if(i<0)i=4;
-    	if(i==0)i=8;
-    	if(i>160)i=160;
-    	GL11.glDisable(GL11.GL_LIGHTING);
+        TextureManager r0 = Minecraft.getMinecraft().renderEngine;
+        int i = zoom * 16;
+
+        if (i < 0)
+        {
+            i = 4;
+        }
+
+        if (i == 0)
+        {
+            i = 8;
+        }
+
+        if (i > 160)
+        {
+            i = 160;
+        }
+
+        GL11.glDisable(GL11.GL_LIGHTING);
         this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-    	RenderItem r= new RenderItem();
-    	ItemStack it=new ItemStack(it0,1);
-    	Icon icon = it.getIconIndex();
-    	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderItem r = new RenderItem();
+        ItemStack it = new ItemStack(it0, 1);
+        Icon icon = it.getIconIndex();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawTexturedModelRectFromIcon(x0, y0, icon, i, i);
-    	GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
-    
+
     /**
      * Places a half-sized item at the bottom of dinopedia
      */
     public void AddMiniItem(Item it0)
-    {this.PrintItemXY(it0, 140+8*(items%8),130-8*(items/8),0);items++;}
-    
+    {
+        this.PrintItemXY(it0, 140 + 8 * (items % 8), 130 - 8 * (items / 8), 0);
+        items++;
+    }
+
     /**
      * Print a Picture at X,Y
      */
-    public void PrintPictXY(ResourceLocation str0,int x0,int y0,int width,int height)
+    public void PrintPictXY(ResourceLocation str0, int x0, int y0, int width, int height)
     {
-    	this.mc.getTextureManager().bindTexture(str0);
+        this.mc.getTextureManager().bindTexture(str0);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
         Tessellator var9 = Tessellator.instance;
         var9.startDrawingQuads();
@@ -156,14 +170,45 @@ public class GuiPedia extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int var1, int var2)
     {
-    	if(Fossil.ToPedia instanceof EntityDinosaur)((EntityDinosaur)Fossil.ToPedia).ShowPedia(this);	
-    	if(Fossil.ToPedia instanceof EntityDinoEgg)((EntityDinoEgg)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntityPregnantCow)((EntityPregnantCow)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntityPregnantPig)((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntityPregnantSheep)((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntityMammoth)((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
-    	if(Fossil.ToPedia instanceof EntitySmilodon)((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
-        if(Fossil.ToPedia instanceof EntityDodo)((EntityDodo)Fossil.ToPedia).ShowPedia(this);
+        if (Fossil.ToPedia instanceof EntityDinosaur)
+        {
+            ((EntityDinosaur)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityDinoEgg)
+        {
+            ((EntityDinoEgg)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityPregnantCow)
+        {
+            ((EntityPregnantCow)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityPregnantPig)
+        {
+            ((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityPregnantSheep)
+        {
+            ((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityMammoth)
+        {
+            ((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntitySmilodon)
+        {
+            ((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
+        }
+
+        if (Fossil.ToPedia instanceof EntityDodo)
+        {
+            ((EntityDodo)Fossil.ToPedia).ShowPedia(this);
+        }
     }
 
     /**
@@ -179,14 +224,13 @@ public class GuiPedia extends GuiContainer
      */
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
-    	int x = var2;
-    	int y = var3;
+        int x = var2;
+        int y = var3;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(loc);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-
     }
 
     /**

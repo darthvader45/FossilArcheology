@@ -44,8 +44,8 @@ public class EntityPigBoss extends EntityZombie
     {
         super(var1);
 //        this.texture = "/mods/fossil/textures/mob/PigBoss.png";
- //       this.moveSpeed = 0.5F;
- //       this.health = 100;
+//       this.moveSpeed = 0.5F;
+//       this.health = 100;
         this.isImmuneToFire = true;
     }
 
@@ -79,7 +79,7 @@ public class EntityPigBoss extends EntityZombie
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
     }
-    
+
     /**
      * Called to update the entity's position/logic.
      */
@@ -98,7 +98,7 @@ public class EntityPigBoss extends EntityZombie
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
     @SuppressWarnings("unused")
-	public boolean getCanSpawnHere()
+    public boolean getCanSpawnHere()
     {
         if (true/*!FossilOptions.ShouldAnuSpawn//TODO*/)
         {
@@ -113,7 +113,8 @@ public class EntityPigBoss extends EntityZombie
                 return false;
             }
             else
-            {	//No more in 1.5....what was that supposed to do?
+            {
+                //No more in 1.5....what was that supposed to do?
                 //List var2 = this.worldObj.getEntitiesWithinAABB(EntityPigBoss.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(200.0D, 200.0D, 200.0D));
                 //var1 = var2.size() < 2;
                 return var1;
@@ -159,7 +160,7 @@ public class EntityPigBoss extends EntityZombie
 
             if (!this.worldObj.provider.isHellWorld)
             {
-         //       ((EntityPlayer)var1).addStat(Fossil.pigbossOnEarth, 1);
+                //       ((EntityPlayer)var1).addStat(Fossil.pigbossOnEarth, 1);
             }
         }
 
@@ -176,21 +177,19 @@ public class EntityPigBoss extends EntityZombie
 
         if (this.FireballCount < 50)
         {
- //           if (this.texture != "/mods/fossil/textures/PigBoss.png")
+//           if (this.texture != "/mods/fossil/textures/PigBoss.png")
             {
-  //              this.texture = "/mods/fossil/textures/PigBoss.png";
+                //              this.texture = "/mods/fossil/textures/PigBoss.png";
             }
-
             ++this.FireballCount;
         }
 
         if (this.FireballCount > 50 && this.getAttackMode() == 1 && this.getAITarget() != null)
         {
-    //        if (this.texture != "/mods/fossil/textures/PigBoss_Charging.png")
+            //        if (this.texture != "/mods/fossil/textures/PigBoss_Charging.png")
             {
-   //             this.texture = "/mods/fossil/textures/PigBoss_Charging.png";
+                //             this.texture = "/mods/fossil/textures/PigBoss_Charging.png";
             }
-
             this.setPathToEntity((PathEntity)null);
             this.faceEntity(this.getAITarget(), 30.0F, 30.0F);
         }
@@ -410,7 +409,7 @@ public class EntityPigBoss extends EntityZombie
 
             if (var1 == 0)
             {
- //               this.moveSpeed = 0.9F;
+//               this.moveSpeed = 0.9F;
             }
 
             if (var1 == 1)

@@ -58,32 +58,22 @@ public class EntityVelociraptor extends EntityDinosaur
 
     public EntityVelociraptor(World var1)
     {
-        super(var1,EnumDinoType.Velociraptor);
+        super(var1, EnumDinoType.Velociraptor);
         this.looksWithInterest = false;
         this.updateSize();
-        
-        
-        
-        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        
         this.adultAge = EnumDinoType.Velociraptor.AdultAge;
-        
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.5F);
-        
         // Size of dinosaur at day 0.
         this.minSize = 0.25F;
-        
         // Size of dinosaur at age Adult.
         this.maxSize = 0.5F;
-        
-    	this.healthModValue = 3;
-    	this.damageModValue = 2;
-    	this.speedModValue = 0.01;
-        
+        this.healthModValue = 3;
+        this.damageModValue = 2;
+        this.speedModValue = 0.01;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
@@ -100,7 +90,7 @@ public class EntityVelociraptor extends EntityDinosaur
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
- //       this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+//       this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
     }
 
     protected void applyEntityAttributes()
@@ -109,7 +99,6 @@ public class EntityVelociraptor extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
-
     }
 
     /*protected void entityInit()
@@ -133,7 +122,10 @@ public class EntityVelociraptor extends EntityDinosaur
     public String getTexture()
     {
         if (this.isModelized())
+        {
             return super.getModelTexture();
+        }
+
         if (this.isAdult())
         {
             switch (this.getSubSpecies())
@@ -143,14 +135,15 @@ public class EntityVelociraptor extends EntityDinosaur
 
                 case 2:
                     return Fossil.modid + ":textures/mob/Velociraptor_Green_Adult.png";
-                    
+
                 case 3:
                     return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
 
                 default:
-                	return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
+                    return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
             }
         }
+
         switch (this.getSubSpecies())
         {
             case 1:
@@ -158,16 +151,15 @@ public class EntityVelociraptor extends EntityDinosaur
 
             case 2:
                 return Fossil.modid + ":textures/mob/Velociraptor_Green_Baby.png";
-            
+
             case 3:
                 return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
 
             default:
-            	return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
+                return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
         }
     }
-    
-    
+
     @Override
     /**
      * Returns the sound this mob makes while it's alive.
@@ -203,7 +195,6 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         super.writeEntityToNBT(var1);
         var1.setInteger("LearningChestTick", this.LearningChestTick);
-
         /*if (this.ItemInMouth != null)
         {
             var1.setShort("Itemid", (short)this.ItemInMouth.itemID);
@@ -216,7 +207,6 @@ public class EntityVelociraptor extends EntityDinosaur
             var1.setByte("ItemCount", (byte)0);
             var1.setShort("ItemDamage", (short)0);
         }*/
-
         //var1.setBoolean("Angry", this.isSelfAngry());
         //var1.setBoolean("Sitting", this.isSelfSitting());
         //var1.setInteger("SubType", this.getSubSpecies());
@@ -229,7 +219,7 @@ public class EntityVelociraptor extends EntityDinosaur
     public void readEntityFromNBT(NBTTagCompound var1)
     {
         super.readEntityFromNBT(var1);
-        this.LearningChestTick=var1.getInteger("LearningChestTick");
+        this.LearningChestTick = var1.getInteger("LearningChestTick");
         /*short var2 = var1.getShort("Itemid");
         byte var3 = var1.getByte("ItemCount");
         short var4 = var1.getShort("ItemDamage");
@@ -242,16 +232,13 @@ public class EntityVelociraptor extends EntityDinosaur
         {
             this.ItemInMouth = null;
         }*/
-
         //this.setSelfAngry(var1.getBoolean("Angry"));
         //this.setSelfSitting(var1.getBoolean("Sitting"));
-
         /*if (var1.hasKey("SubType"))
         {
             this.setSubSpecies(var1.getInteger("SubType"));
         }*/
-
-       // this.InitSize();
+        // this.InitSize();
     }
 
     /**
@@ -268,7 +255,6 @@ public class EntityVelociraptor extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        
         /*
         if(this.LearningChestTick>0 && this.isNearbyChest() && this.isAdult())
         {
@@ -315,7 +301,7 @@ public class EntityVelociraptor extends EntityDinosaur
         }
         return false;
     }
-*/
+    */
     /*public boolean getSelfShaking()
     {
         return false;
@@ -413,7 +399,7 @@ public class EntityVelociraptor extends EntityDinosaur
             return false;
         }
     }
-*/
+    */
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
@@ -453,13 +439,14 @@ public class EntityVelociraptor extends EntityDinosaur
             var1.attackEntityFrom(DamageSource.causeMobDamage(this), 2 + this.getDinoAge());
         }
     }
-*/
+    */
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
     public boolean interact(EntityPlayer var1)
     {
         ItemStack var2 = var1.inventory.getCurrentItem();
+
         if (var2 != null)
         {
             if (var2.getItem().getItemUseAction(var2) == EnumAction.bow)
@@ -467,6 +454,7 @@ public class EntityVelociraptor extends EntityDinosaur
                 return false;
             }
         }
+
         return super.interact(var1);
     }
 
@@ -496,8 +484,6 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }*/
-
-
 
     /*public void setSelfSitting(boolean var1)
     {
@@ -558,7 +544,7 @@ public class EntityVelociraptor extends EntityDinosaur
             }
         }
     }
-*/
+    */
     /**
      * Time remaining during which the Animal is sped up and flees.
      */
@@ -599,18 +585,18 @@ public class EntityVelociraptor extends EntityDinosaur
     }
     */
 
-   /* private void InitSize()
-    {
-        this.CheckSkin();
-        this.updateSize();
-        this.setPosition(this.posX, this.posY, this.posZ);
-    }
+    /* private void InitSize()
+     {
+         this.CheckSkin();
+         this.updateSize();
+         this.setPosition(this.posX, this.posY, this.posZ);
+     }
 
-    public void updateSize()
-    {
-    	this.setSize((float)(0.30000001192092896D + 0.1D * (double)((float)this.getAge())), (float)(0.30000001192092896D + 0.1D * (double)((float)this.getAge())));
-    }*/
-    
+     public void updateSize()
+     {
+     	this.setSize((float)(0.30000001192092896D + 0.1D * (double)((float)this.getAge())), (float)(0.30000001192092896D + 0.1D * (double)((float)this.getAge())));
+     }*/
+
     /*public boolean HandleEating(int var1)
     {
         if (this.getHunger() >= this.getHungerLimit())
@@ -648,9 +634,12 @@ public class EntityVelociraptor extends EntityDinosaur
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	super.ShowPedia(p0);
-    	if(this.LearningChestTick==0)
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        super.ShowPedia(p0);
+
+        if (this.LearningChestTick == 0)
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
+        }
     }
     /*public void ShowPedia(EntityPlayer var1)
     {
@@ -736,7 +725,7 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         return this.motionX < 0.03125D && this.motionY < 0.03125D && this.motionZ < 0.03125D;
     }
-*/
+    */
     /*public void setLearntChest(boolean var1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(24);
@@ -766,19 +755,18 @@ public class EntityVelociraptor extends EntityDinosaur
         return null;
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		return null;
-	}
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        return null;
+    }
 
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
-	@Override
-    protected void jump()
+    @Override
+    public void jump()
     {
-		super.jump();
+        super.jump();
     }
-
 }

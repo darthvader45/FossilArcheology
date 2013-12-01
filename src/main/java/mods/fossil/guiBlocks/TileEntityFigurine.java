@@ -48,11 +48,11 @@ public class TileEntityFigurine extends TileEntity
         this.writeToNBT(nbttagcompound);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, nbttagcompound);
     }
-    
+
     @Override
     public void onDataPacket(INetworkManager netManager, Packet132TileEntityData packet)
     {
-     readFromNBT(packet.data);
+        readFromNBT(packet.data);
     }
 
     /**

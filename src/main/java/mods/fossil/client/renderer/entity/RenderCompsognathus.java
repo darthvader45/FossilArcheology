@@ -15,23 +15,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderCompsognathus extends RenderLiving
 {
-
     public RenderCompsognathus(ModelBase par1ModelBase, float par2)
     {
         super(par1ModelBase, par2);
     }
-    
-    
+
     /**
      * Applies the scale to the transform matrix
-     * 
+     *
      * Use this to grow the dinonsaur with age.
      */
     protected void preRenderScale(EntityCompsognathus entitydinosaur, float par2)
     {
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
     }
-    
+
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
@@ -40,12 +38,12 @@ public class RenderCompsognathus extends RenderLiving
     {
         this.preRenderScale((EntityCompsognathus)par1EntityLivingBase, par2);
     }
-    
+
     protected ResourceLocation func_110919_a(EntityCompsognathus par1Entity)
     {
         return new ResourceLocation(par1Entity.getTexture());
     }
-  
+
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
@@ -53,6 +51,4 @@ public class RenderCompsognathus extends RenderLiving
     {
         return this.func_110919_a((EntityCompsognathus)par1Entity);
     }
-    
-
 }

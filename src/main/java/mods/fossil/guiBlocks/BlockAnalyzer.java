@@ -31,7 +31,6 @@ public class BlockAnalyzer extends BlockContainer
     private Icon Top;
     @SideOnly(Side.CLIENT)
     private Icon Front;
-    
 
     public BlockAnalyzer(int var1, boolean var2)
     {
@@ -46,7 +45,7 @@ public class BlockAnalyzer extends BlockContainer
     }*/
     public int getRenderType()
     {
-    	return 2303;
+        return 2303;
     }
 
     /**
@@ -76,15 +75,27 @@ public class BlockAnalyzer extends BlockContainer
             int var8 = var1.getBlockId(var2 + 1, var3, var4);
             byte var9 = 3;
 
-            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])var9 = 3;
+            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])
+            {
+                var9 = 3;
+            }
 
-            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])var9 = 2;
+            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])
+            {
+                var9 = 2;
+            }
 
-            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])var9 = 5;
+            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])
+            {
+                var9 = 5;
+            }
 
-            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])var9 = 4;
+            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])
+            {
+                var9 = 4;
+            }
 
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var9,2);
+            var1.setBlockMetadataWithNotify(var2, var3, var4, var9, 2);
         }
     }
 
@@ -117,7 +128,7 @@ public class BlockAnalyzer extends BlockContainer
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Analyser_Sides");
         this.Top = par1IconRegister.registerIcon("fossil:Analyser_Top");
-        this.Front = this.isActive? par1IconRegister.registerIcon("fossil:Analyser_Front_Active") : par1IconRegister.registerIcon("fossil:Analyser_Front_Idle");
+        this.Front = this.isActive ? par1IconRegister.registerIcon("fossil:Analyser_Front_Active") : par1IconRegister.registerIcon("fossil:Analyser_Front_Idle");
     }
 
     /**
@@ -125,9 +136,9 @@ public class BlockAnalyzer extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.Top : ((par1 == par2 && par1!=0) || (par2==3 && par1==0) ? this.Front : this.blockIcon);
+        return par1 == 1 ? this.Top : ((par1 == par2 && par1 != 0) || (par2 == 3 && par1 == 0) ? this.Front : this.blockIcon);
     }
-    
+
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
@@ -176,7 +187,7 @@ public class BlockAnalyzer extends BlockContainer
             }
 
             keepFurnaceInventory = false;
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var5,2);
+            var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
             var6.validate();
             var1.setBlockTileEntity(var2, var3, var4, var6);
         }
@@ -189,13 +200,25 @@ public class BlockAnalyzer extends BlockContainer
     {
         int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (var6 == 0)var1.setBlockMetadataWithNotify(var2, var3, var4, 2,2);
+        if (var6 == 0)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 2, 2);
+        }
 
-        if (var6 == 1)var1.setBlockMetadataWithNotify(var2, var3, var4, 5,2);
+        if (var6 == 1)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 5, 2);
+        }
 
-        if (var6 == 2)var1.setBlockMetadataWithNotify(var2, var3, var4, 3,2);
+        if (var6 == 2)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 3, 2);
+        }
 
-        if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2);
+        if (var6 == 3)
+        {
+            var1.setBlockMetadataWithNotify(var2, var3, var4, 4, 2);
+        }
     }
 
     /**

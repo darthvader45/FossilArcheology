@@ -76,8 +76,8 @@ public class TarBubblesFX extends EntityFX
         {
             this.setDead();
         }
-        
-        float f = (float)this.particleMaxAge/4;
+
+        float f = (float)this.particleMaxAge / 4;
 
         if (this.rand.nextFloat() > f)
         {

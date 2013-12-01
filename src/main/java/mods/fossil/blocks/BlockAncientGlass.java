@@ -60,7 +60,7 @@ public class BlockAncientGlass extends BlockBreakable
     {
         return true;
     }
-    
+
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Glass");

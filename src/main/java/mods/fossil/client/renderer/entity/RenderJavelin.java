@@ -1,6 +1,5 @@
 package mods.fossil.client.renderer.entity;
 
-
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityJavelin;
 import net.minecraft.client.renderer.Tessellator;
@@ -113,9 +112,10 @@ public class RenderJavelin extends Render
         this.renderJavelin((EntityJavelin)var1, var2, var4, var6, var8, var9);
     }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -76,7 +76,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.experienceValue=5;
+        this.experienceValue = 5;
     }
 
     /**
@@ -86,17 +86,18 @@ public class EntityMammoth extends EntityTameable implements IShearable
     {
         return true;
     }
-    
-    
+
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(24.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.20000000298023224D);
     }
-    
+
     private void setPedia()
-    {Fossil.ToPedia = (Object)this;}
+    {
+        Fossil.ToPedia = (Object)this;
+    }
     public boolean attackEntityAsMob(Entity var1)
     {
         this.swingTick = 10;
@@ -227,15 +228,16 @@ public class EntityMammoth extends EntityTameable implements IShearable
 
         if (var2 != null)
         {
-        	if(var2.getItem().equals(Fossil.chickenEss))
-        	{
-        		this.setGrowingAge(this.getGrowingAge() + 2000);
-        		var2.stackSize--;
-        		return true;
-        	}
-        	if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+            if (var2.getItem().equals(Fossil.chickenEss))
             {
-            	this.setPedia();
+                this.setGrowingAge(this.getGrowingAge() + 2000);
+                var2.stackSize--;
+                return true;
+            }
+
+            if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+            {
+                this.setPedia();
                 var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
                 return true;
             }
@@ -246,17 +248,23 @@ public class EntityMammoth extends EntityTameable implements IShearable
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-    	p0.reset();
-    	p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23,40,90,245);
-    	if(this.isTamed())
-    	{
-    		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-    		String s0=this.getOwnerName();
-    		if(s0.length()>11)
-    			s0=this.getOwnerName().substring(0, 11);
-    		p0.AddStringLR(s0, true);
-    	}
-    	p0.PrintItemXY(Fossil.embryoMammoth, 120, 7);
+        p0.reset();
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23, 40, 90, 245);
+
+        if (this.isTamed())
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+            String s0 = this.getOwnerName();
+
+            if (s0.length() > 11)
+            {
+                s0 = this.getOwnerName().substring(0, 11);
+            }
+
+            p0.AddStringLR(s0, true);
+        }
+
+        p0.PrintItemXY(Fossil.embryoMammoth, 120, 7);
     }
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {
@@ -427,12 +435,12 @@ public class EntityMammoth extends EntityTameable implements IShearable
         return null;
     }*/
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable var1) 
-	{
-		EntityAgeable var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
-		var2.setGrowingAge(-24000);
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+        EntityAgeable var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
+        var2.setGrowingAge(-24000);
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-		return var2;
-	}
+        return var2;
+    }
 }

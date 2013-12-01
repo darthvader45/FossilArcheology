@@ -19,8 +19,6 @@ public class BlockTar extends Block
         super(i, Material.sand);
         this.setCreativeTab(Fossil.tabFBlocks);
     }
-    
-    
 
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
@@ -32,17 +30,15 @@ public class BlockTar extends Block
         entity.fallDistance = 0.0F;
         entity.motionZ = 0.000000000000000004D;
     }
-    
+
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {
         double var6 = (double)((float)i + random.nextFloat());
         double var8 = (double)j - 0.05D;
         double var10 = (double)((float)k + random.nextFloat());
-        FossilFX.spawnParticle("tarBubble", var6, var8+1, var10, 0.0D, 0.0D, 0.0D);
+        FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D);
 //        FossilFX.spawnParticle("flies", i+0.5, j+1.0, k+0.5, 0.0D, 1.5D, 0.0D);
-        
         world.playSound((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "fossil:tar", random.nextFloat() * 0.3F + 0.1F, random.nextFloat() * 1.0F + 0.0F, false);
-
     }
 
     /**
@@ -69,7 +65,7 @@ public class BlockTar extends Block
     {
         return 1;
     }
-    
+
     public boolean isOpaqueCube()
     {
         return true;
@@ -79,17 +75,15 @@ public class BlockTar extends Block
     {
         return true;
     }
-    
+
     public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
     {
         return true;
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Tar"); //adding in a texture, 1.5.1 style!
     }
-
-    
 }

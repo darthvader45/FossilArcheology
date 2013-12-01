@@ -76,15 +76,14 @@ public class ItemMagicConch extends Item
             }
         }
 
-        var13 = StatCollector.translateToLocal("order." +EnumOrderType.values()[var1.getItemDamage()].toString());
+        var13 = StatCollector.translateToLocal("order." + EnumOrderType.values()[var1.getItemDamage()].toString());
         Fossil.ShowMessage(var10 + var9 + var11 + " " + var13 + var12, var3);
         return var1;
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Magic_Conch");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Magic_Conch");
+    }
 }

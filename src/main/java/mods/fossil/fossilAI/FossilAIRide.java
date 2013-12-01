@@ -20,27 +20,31 @@ import net.minecraft.entity.player.EntityPlayer;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public abstract class FossilAIRide extends EntityAIBase {
-
+public abstract class FossilAIRide extends EntityAIBase
+{
     protected final EntityDinosaur dinosaur;
     protected EntityPlayer rider;
     private RemoteKeyPacketHandler remoteKey = RemoteKeyPacketHandler.getInstance();
 
-    public FossilAIRide(EntityDinosaur dinosaur) {
+    public FossilAIRide(EntityDinosaur dinosaur)
+    {
         this.dinosaur = dinosaur;
         setMutexBits(0xffffffff);
     }
-    
-    protected boolean isFlyUp() {
+
+    protected boolean isFlyUp()
+    {
         return remoteKey.isKeyPressed(rider.username, "key.dinosaur.flyUp");
     }
-    
-    protected boolean isFlyDown() {
+
+    protected boolean isFlyDown()
+    {
         return remoteKey.isKeyPressed(rider.username, "key.dinosaur.flyDown");
     }
-    
+
     @Override
-    public boolean shouldExecute() {   
+    public boolean shouldExecute()
+    {
         rider = dinosaur.getRidingPlayer();
         return rider != null;
     }

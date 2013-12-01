@@ -2,7 +2,6 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityDinosaur;
 
-
 public class WaterDinoSwimmingFloatForSun extends WaterDinoAISwimming
 {
     public WaterDinoSwimmingFloatForSun(EntityDinosaur var1, boolean var2, float var3)

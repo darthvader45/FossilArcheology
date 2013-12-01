@@ -3,7 +3,6 @@ package mods.fossil.guiBlocks;
 import java.util.Iterator;
 import java.util.List;
 
-
 //import fossil.entity.mob.EntityPterosaur;
 //import fossil.entity.mob.EntityRaptor;
 //import fossil.entity.mob.EntityTriceratops;
@@ -38,8 +37,6 @@ public class TileEntityDrum extends TileEntity
     public EnumOrderType Order;
     //public byte note;
     //public boolean previousRedstoneState;
-    
-    
 
     public TileEntityDrum()
     {
@@ -113,42 +110,49 @@ public class TileEntityDrum extends TileEntity
     }
 
     public boolean SendOrder(int var1, EntityPlayer var2)
-    {//var2.itemID == this.ItemToControl.itemID && this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName())
+    {
+        //var2.itemID == this.ItemToControl.itemID && this.isTamed() && var1.username.equalsIgnoreCase(this.getOwnerName())
         /*String var3 = "";
         String var4 = "";
         String var5 = Fossil.GetLangTextByKey("Drum.Msg.Head");
         String var6 = Fossil.GetLangTextByKey("Drum.Msg.Middle");
         String var7 = Fossil.GetLangTextByKey("Drum.Msg.Tail");*/
-        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "fossil:drum_triple", 8.0F,1.0F);// (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
-        
+        this.worldObj.playSoundEffect((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, "fossil:drum_triple", 8.0F, 1.0F); // (float)Math.pow(2.0D, (double)(this.Order.ordinal()/*ToInt() - 1*/)));
+
         if (var1 != Fossil.skullStick.itemID)//That is treated specially ;)
         {
-	        for(int i=0;i<EnumDinoType.values().length;++i)
-	        {
-	        	if(EnumDinoType.values()[i].OrderItem!=null && EnumDinoType.values()[i].OrderItem.itemID==var1)
-	        		Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("dino."+EnumDinoType.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
-	        }		//Output: Ordering Triceratops: Stay
-	        List list = this.worldObj.getEntitiesWithinAABB(EntityDinosaur.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
-	        Iterator it = list.iterator();
-	
-	        while (it.hasNext())
-	        {
-	            Entity var3 = (Entity)it.next();
-	            EntityDinosaur var4 = (EntityDinosaur)var3;
-	
-	            if (var1 == var4.SelfType.OrderItem.itemID && var4.isTamed() && var2.username.equalsIgnoreCase(var4.getOwnerName()))
-	            //{
-	                var4.SetOrder(this.Order);
-	            /*    Fossil.ShowMessage("YES",var2);
-	            }
-	            else
-	            	Fossil.ShowMessage("NOPE",var2);*/
-	        }
+            for (int i = 0; i < EnumDinoType.values().length; ++i)
+            {
+                if (EnumDinoType.values()[i].OrderItem != null && EnumDinoType.values()[i].OrderItem.itemID == var1)
+                {
+                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("dino." + EnumDinoType.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
+                }
+            }		//Output: Ordering Triceratops: Stay
+
+            List list = this.worldObj.getEntitiesWithinAABB(EntityDinosaur.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
+            Iterator it = list.iterator();
+
+            while (it.hasNext())
+            {
+                Entity var3 = (Entity)it.next();
+                EntityDinosaur var4 = (EntityDinosaur)var3;
+
+                if (var1 == var4.SelfType.OrderItem.itemID && var4.isTamed() && var2.username.equalsIgnoreCase(var4.getOwnerName()))
+                    //{
+                {
+                    var4.SetOrder(this.Order);
+                }
+
+                /*    Fossil.ShowMessage("YES",var2);
+                }
+                else
+                	Fossil.ShowMessage("NOPE",var2);*/
+            }
         }
         else
         {
-            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal()+1)), var2);
-        	List list = this.worldObj.getEntitiesWithinAABB(EntityTRex.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
+            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
+            List list = this.worldObj.getEntitiesWithinAABB(EntityTRex.class, AxisAlignedBB.getAABBPool().getAABB((double)this.xCoord, (double)this.yCoord, (double)this.zCoord, (double)this.xCoord + 1.0D, (double)this.yCoord + 1.0D, (double)this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
             Iterator it = list.iterator();
 
             while (it.hasNext())
@@ -163,6 +167,7 @@ public class TileEntityDrum extends TileEntity
                 }
             }
         }
+
         return true;
         /*if (var1 != Item.stick.itemID && var1 != Item.bone.itemID && var1 != Fossil.skullStick.itemID && var1 != Item.arrow.itemID)
         {

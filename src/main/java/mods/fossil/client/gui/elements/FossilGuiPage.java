@@ -15,7 +15,7 @@ public class FossilGuiPage extends GuiButton
     private final boolean nextPage;
     private int page;
     private int lastpage = 1;
-    
+
     public FossilGuiPage(int par1, int par2, int par3, boolean par4, int bookpage)
     {
         super(par1, par2, par3, 23, 13, "");
@@ -33,7 +33,7 @@ public class FossilGuiPage extends GuiButton
             int var5 = 4;
             int var6 = 176;
 
-            if ((var4)||(this.nextPage&&page==lastpage)||(!this.nextPage&&page==0))
+            if ((var4) || (this.nextPage && page == lastpage) || (!this.nextPage && page == 0))
             {
                 var6 += 15;
             }

@@ -1,6 +1,5 @@
 package mods.fossil.client.model;
 
-
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -165,16 +164,13 @@ public class ModelPterosaurFlying extends ModelPterosaurGround
             this.upper_mouth.rotateAngleX = this.AirPitch;
             this.lower_mouth.rotateAngleX = 0.1356083F + this.AirPitch;
             this.Left_leg.rotateAngleX = this.right_leg.rotateAngleX = ((float)Math.PI / 2F) + this.AirPitch;
-            
             this.Body.rotateAngleZ = this.AirRoll;
             this.Neck_1.rotateAngleZ = this.AirRoll;
             this.New_Shape1.rotateAngleZ = this.AirRoll;
-            
-            this.Left_wing_1.rotateAngleZ = -(float)(0.5F*(1-Math.sin(this.WingState)))+2.792527F + this.AirRoll;
-            this.Left_wing_2.rotateAngleZ = -(float)(0.5F*(1-Math.sin(this.WingState)))+this.AirRoll;
-            this.Right_wing_1.rotateAngleZ = (float)(0.5F*(1-Math.sin(this.WingState)))+-2.792527F + this.AirRoll;
-            this.Right_wing_2.rotateAngleZ = (float)(0.5F*(1-Math.sin(this.WingState)))+this.AirRoll;
-            
+            this.Left_wing_1.rotateAngleZ = -(float)(0.5F * (1 - Math.sin(this.WingState))) + 2.792527F + this.AirRoll;
+            this.Left_wing_2.rotateAngleZ = -(float)(0.5F * (1 - Math.sin(this.WingState))) + this.AirRoll;
+            this.Right_wing_1.rotateAngleZ = (float)(0.5F * (1 - Math.sin(this.WingState))) + -2.792527F + this.AirRoll;
+            this.Right_wing_2.rotateAngleZ = (float)(0.5F * (1 - Math.sin(this.WingState))) + this.AirRoll;
             this.Tail.rotateAngleZ = this.AirRoll;
             this.crown.rotateAngleZ = this.AirRoll;
             this.Head.rotateAngleZ = this.AirRoll;

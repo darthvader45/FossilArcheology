@@ -8,17 +8,16 @@ import net.minecraft.item.ItemHoe;
 
 public class ForgeHoe extends ItemHoe
 {
-	String TextureFileName;
-	public ForgeHoe(int par1, EnumToolMaterial par2EnumToolMaterial,String TextureFileName0)
-	{
-		super(par1,par2EnumToolMaterial);
-		this.TextureFileName=TextureFileName0;
-	}
-	
-	@Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:"+TextureFileName);
+    String TextureFileName;
+    public ForgeHoe(int par1, EnumToolMaterial par2EnumToolMaterial, String TextureFileName0)
+    {
+        super(par1, par2EnumToolMaterial);
+        this.TextureFileName = TextureFileName0;
     }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:" + TextureFileName);
+    }
 }

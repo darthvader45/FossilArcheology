@@ -11,18 +11,18 @@ public enum EnumAnimalType
     Smilodon(4000),
     Mammoth(6000),
     Dodo(1500);
-    
+
     public int GrowTime;
-    
+
     private EnumAnimalType(int grow0)
     {
         if (Fossil.DebugMode)
         {
-            GrowTime=100;
+            GrowTime = 100;
         }
         else
         {
-    	GrowTime=grow0;
+            GrowTime = grow0;
         }
     }
 }

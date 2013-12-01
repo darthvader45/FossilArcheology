@@ -1,6 +1,5 @@
 package mods.fossil.tags;
 
-
 public final class NBTUtils
 {
     public static String getTypeName(Class var0)

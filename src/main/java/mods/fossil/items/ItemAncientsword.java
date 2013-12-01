@@ -47,8 +47,12 @@ public class ItemAncientsword extends ItemSword
                 var3.Mouth.SendSpeech(EnumPigmenSpeaks.LifeFor, var3.LeaderName);
             }
         }
-        if(var1!=null && (new Random()).nextInt(100)<15)
-        	var1.worldObj.addWeatherEffect(new EntityMLighting(var1.worldObj, var1.posX, var1.posY, var1.posZ));
+
+        if (var1 != null && (new Random()).nextInt(100) < 15)
+        {
+            var1.worldObj.addWeatherEffect(new EntityMLighting(var1.worldObj, var1.posX, var1.posY, var1.posZ));
+        }
+
         return 4.0F + EnumToolMaterial.IRON.getDamageVsEntity() * 2.0F;
     }
 
@@ -63,11 +67,10 @@ public class ItemAncientsword extends ItemSword
         ItemStack var2 = var1.inventory.armorInventory[3];
         return var2 == null ? false : var2.itemID == Fossil.ancienthelmet.itemID;
     }
-    
-    @Override
-	public void registerIcons(IconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
-    }
 
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
+    }
 }

@@ -18,11 +18,10 @@ public class BlockVolcanicBrick extends Block
     {
         return Fossil.volcanicBrick.blockID;
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.blockIcon = par1IconRegister.registerIcon("fossil:Volcanic_Brick");
+        this.blockIcon = par1IconRegister.registerIcon("fossil:Volcanic_Brick");
     }
-    
 }

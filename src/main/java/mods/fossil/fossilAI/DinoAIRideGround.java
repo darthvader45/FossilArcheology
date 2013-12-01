@@ -21,56 +21,61 @@ import net.minecraft.util.Vec3;
 
 /**
  * AI for player-controlled ground movements.
- * 
+ *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public class DinoAIRideGround extends DinoAIRide {
-    
+public class DinoAIRideGround extends DinoAIRide
+{
     private static final float PLAYER_SPEED = 0.98f;
     private final double speed;
 
-    public DinoAIRideGround(EntityDinosaur dinosaur, double speed) {
+    public DinoAIRideGround(EntityDinosaur dinosaur, double speed)
+    {
         super(dinosaur);
         this.speed = speed;
     }
-    
-    public static boolean hasEquipped(EntityPlayer player, Item item) {
+
+    public static boolean hasEquipped(EntityPlayer player, Item item)
+    {
         ItemStack itemStack = player.getCurrentEquippedItem();
-        
-        if (itemStack == null) {
+
+        if (itemStack == null)
+        {
             return false;
         }
-        
+
         return itemStack.getItem() == item;
     }
-    
+
     @Override
-    public void startExecuting() {
-    	dinosaur.getNavigator().clearPathEntity();
+    public void startExecuting()
+    {
+        dinosaur.getNavigator().clearPathEntity();
     }
-    
+
     @Override
-    public void updateTask() {
+    public void updateTask()
+    {
         super.updateTask();
-        
         float speedX = rider.moveForward / PLAYER_SPEED;
         float speedY = rider.moveStrafing / PLAYER_SPEED;
-        
-        
-        if (hasEquipped(rider, Fossil.whip)) {
 
-        
-        float speedPlayer = Math.max(Math.abs(speedX), Math.abs(speedY));
-        Vec3 look = rider.getLookVec();
-        float dir = Math.min(speedX, 0) * -1;
-        dir += speedY / (speedX * 2 + (speedX < 0 ? -2 : 2));
-        if (dir != 0) {
-            look.rotateAroundY((float) Math.PI * dir);
-        }
+        if (hasEquipped(rider, Fossil.whip))
+        {
+            float speedPlayer = Math.max(Math.abs(speedX), Math.abs(speedY));
+            Vec3 look = rider.getLookVec();
+            float dir = Math.min(speedX, 0) * -1;
+            dir += speedY / (speedX * 2 + (speedX < 0 ? -2 : 2));
 
-        if (speedPlayer > 0) {
-        	dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
+            if (dir != 0)
+            {
+                look.rotateAroundY((float) Math.PI * dir);
+            }
+
+            if (speedPlayer > 0)
+            {
+                dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
+            }
         }
-    }
     }
 }

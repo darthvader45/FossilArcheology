@@ -22,7 +22,7 @@ public class BehaviorJavelinDispense extends BehaviorProjectileDispense
     public BehaviorJavelinDispense(MinecraftServer par1, int jav0)
     {
         this.mcServer = par1;
-        this.javelin=jav0;
+        this.javelin = jav0;
     }
 
     /**
@@ -30,25 +30,41 @@ public class BehaviorJavelinDispense extends BehaviorProjectileDispense
      */
     protected IProjectile getProjectileEntity(World par1World, IPosition par2IPosition)
     {
-    	if(this.javelin<0)
-    	{
-    		EntityAncientJavelin var3 = new EntityAncientJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
-    		var3.canBePickedUp = 1;
-    		var3.SelfMaterial=EnumToolMaterial.IRON;
-    		return var3;
-    	}
-    	EntityJavelin var3 = new EntityJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
-		var3.canBePickedUp = 1;
-		switch(this.javelin)
-		{
-			default:
-			case 0:var3.SelfMaterial=EnumToolMaterial.WOOD;break;
-			case 1:var3.SelfMaterial=EnumToolMaterial.STONE;break;
-			case 2:var3.SelfMaterial=EnumToolMaterial.IRON;break;
-			case 3:var3.SelfMaterial=EnumToolMaterial.EMERALD;break;
-			case 4:var3.SelfMaterial=EnumToolMaterial.GOLD;break;
-		
-		}
-		return var3;
+        if (this.javelin < 0)
+        {
+            EntityAncientJavelin var3 = new EntityAncientJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+            var3.canBePickedUp = 1;
+            var3.SelfMaterial = EnumToolMaterial.IRON;
+            return var3;
+        }
+
+        EntityJavelin var3 = new EntityJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+        var3.canBePickedUp = 1;
+
+        switch (this.javelin)
+        {
+            default:
+            case 0:
+                var3.SelfMaterial = EnumToolMaterial.WOOD;
+                break;
+
+            case 1:
+                var3.SelfMaterial = EnumToolMaterial.STONE;
+                break;
+
+            case 2:
+                var3.SelfMaterial = EnumToolMaterial.IRON;
+                break;
+
+            case 3:
+                var3.SelfMaterial = EnumToolMaterial.EMERALD;
+                break;
+
+            case 4:
+                var3.SelfMaterial = EnumToolMaterial.GOLD;
+                break;
+        }
+
+        return var3;
     }
 }
