@@ -1,42 +1,17 @@
 package mods.fossil.entity;
 
 import com.google.common.io.ByteArrayDataInput;
-
 import com.google.common.io.ByteArrayDataOutput;
-
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
 import mods.fossil.client.gui.GuiPedia;
-import mods.fossil.entity.mob.EntityAnkylosaurus;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
-import mods.fossil.entity.mob.EntityCompsognathus;
-import mods.fossil.entity.mob.EntityDilophosaurus;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.EntityMosasaurus;
-import mods.fossil.entity.mob.EntityPachycephalosaurus;
-import mods.fossil.entity.mob.EntityPlesiosaur;
-import mods.fossil.entity.mob.EntityPterosaur;
-import mods.fossil.entity.mob.EntityStegosaurus;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTriceratops;
-import mods.fossil.entity.mob.EntityVelociraptor;
-import mods.fossil.entity.mob.EntitySpinosaurus;
+import mods.fossil.entity.mob.*;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.items.ItemAncientEgg;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityBoat;
@@ -44,17 +19,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenDesert;
-import net.minecraft.world.biome.BiomeGenForest;
-import net.minecraft.world.biome.BiomeGenSnow;
-import net.minecraft.world.biome.BiomeGenTaiga;
+import net.minecraft.world.biome.*;
+
+import java.util.List;
 
 public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 {
