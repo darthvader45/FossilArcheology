@@ -1005,7 +1005,7 @@ public class Fossil
         GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
-        GameRegistry.registerBlock(figurineBlock, BlockFigurineItem.class);
+        GameRegistry.registerBlock(figurineBlock, LocalizationStrings.FIGURINE_NAME);
 
         for (int i = 0; i < 16; ++i)
         {
