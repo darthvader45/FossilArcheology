@@ -1,18 +1,12 @@
 package mods.fossil.gens;
 
-import java.util.Random;
-import java.util.logging.Level;
-
+import cpw.mods.fml.common.IWorldGenerator;
 import mods.fossil.Fossil;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenDesert;
-import net.minecraft.world.biome.BiomeGenJungle;
-import net.minecraft.world.biome.BiomeGenPlains;
-import net.minecraft.world.biome.BiomeGenTaiga;
+import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.IChunkProvider;
-import coolalias.structuregenapi.util.LogHelper;
-import cpw.mods.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class FossilWorldStructureGenerator implements IWorldGenerator
 {

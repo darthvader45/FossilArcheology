@@ -1,11 +1,8 @@
 package mods.fossil.entity;
 
 import com.google.common.io.ByteArrayDataInput;
-
 import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import java.util.List;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -19,12 +16,10 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet70GameEvent;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawnData
 {

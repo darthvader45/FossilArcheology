@@ -1,11 +1,11 @@
 package mods.fossil.gens;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenPalaeoraphe extends WorldGenerator
 {

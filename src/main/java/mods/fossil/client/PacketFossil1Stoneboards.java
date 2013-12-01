@@ -1,12 +1,12 @@
 package mods.fossil.client;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import mods.fossil.entity.EntityStoneboard;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.EnumArt;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class PacketFossil1Stoneboards extends Packet250CustomPayload
 {

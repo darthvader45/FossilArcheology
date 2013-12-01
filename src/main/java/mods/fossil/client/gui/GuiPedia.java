@@ -4,31 +4,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityDinoEgg;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.EntityDodo;
-import mods.fossil.entity.mob.EntityMammoth;
-import mods.fossil.entity.mob.EntityPregnantCow;
-import mods.fossil.entity.mob.EntityPregnantPig;
-import mods.fossil.entity.mob.EntityPregnantSheep;
-import mods.fossil.entity.mob.EntitySmilodon;
+import mods.fossil.entity.mob.*;
 import mods.fossil.guiBlocks.ContainerPedia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer

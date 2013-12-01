@@ -2,15 +2,10 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
-import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet34EntityTeleport;
-import net.minecraft.pathfinding.PathFinder;
-import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldServer;
 
 public class DinoAIControlledByPlayer extends EntityAIBase

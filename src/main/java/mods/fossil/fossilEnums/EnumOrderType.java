@@ -1,6 +1,5 @@
 package mods.fossil.fossilEnums;
 
-import mods.fossil.Fossil;
 public enum EnumOrderType
 {
     Stay,

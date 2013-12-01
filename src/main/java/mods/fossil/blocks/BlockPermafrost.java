@@ -1,7 +1,5 @@
 package mods.fossil.blocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
@@ -11,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockPermafrost extends BlockBreakable
 {

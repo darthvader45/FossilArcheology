@@ -2,12 +2,8 @@ package mods.fossil.items;
 
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
-import mods.fossil.entity.EntityDodoEgg;
-import mods.fossil.entity.mob.EntityDodo;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

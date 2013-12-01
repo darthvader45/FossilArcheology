@@ -1,7 +1,5 @@
 package mods.fossil.entity;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -10,6 +8,8 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class EntityAncientJavelin extends EntityJavelin
 {

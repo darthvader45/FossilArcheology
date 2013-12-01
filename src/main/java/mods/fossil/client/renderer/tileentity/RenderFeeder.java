@@ -1,14 +1,12 @@
 package mods.fossil.client.renderer.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import org.lwjgl.opengl.GL11;
 
 public class RenderFeeder implements ISimpleBlockRenderingHandler
 {

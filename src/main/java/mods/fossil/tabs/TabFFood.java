@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class TabFFood extends CreativeTabs

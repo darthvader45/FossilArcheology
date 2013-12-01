@@ -1,23 +1,7 @@
 package mods.fossil.fossilEnums;
 
 import mods.fossil.Fossil;
-import mods.fossil.entity.mob.DinoFoodBlockList;
-import mods.fossil.entity.mob.DinoFoodItemList;
-import mods.fossil.entity.mob.DinoFoodMobList;
-import mods.fossil.entity.mob.EntityAnkylosaurus;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
-import mods.fossil.entity.mob.EntityCompsognathus;
-import mods.fossil.entity.mob.EntityDilophosaurus;
-import mods.fossil.entity.mob.EntityMosasaurus;
-import mods.fossil.entity.mob.EntityNautilus;
-import mods.fossil.entity.mob.EntityPachycephalosaurus;
-import mods.fossil.entity.mob.EntityPlesiosaur;
-import mods.fossil.entity.mob.EntityPterosaur;
-import mods.fossil.entity.mob.EntitySpinosaurus;
-import mods.fossil.entity.mob.EntityStegosaurus;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTriceratops;
-import mods.fossil.entity.mob.EntityVelociraptor;
+import mods.fossil.entity.mob.*;
 import net.minecraft.item.Item;
 
 interface C

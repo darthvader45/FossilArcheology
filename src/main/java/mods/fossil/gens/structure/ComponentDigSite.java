@@ -1,9 +1,10 @@
 package mods.fossil.gens.structure;
 
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class ComponentDigSite extends WorldGenerator
 {

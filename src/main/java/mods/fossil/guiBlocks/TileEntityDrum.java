@@ -1,28 +1,24 @@
 package mods.fossil.guiBlocks;
 
+import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityTRex;
+import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.StatCollector;
+
 import java.util.Iterator;
 import java.util.List;
 
 //import fossil.entity.mob.EntityPterosaur;
 //import fossil.entity.mob.EntityRaptor;
 //import fossil.entity.mob.EntityTriceratops;
-import mods.fossil.Fossil;
-import mods.fossil.client.DinoSoundHandler;
-import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.fossilEnums.*;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 public class TileEntityDrum extends TileEntity
 {

@@ -1,20 +1,18 @@
 package mods.fossil.guiBlocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ForgeDummyContainer;
-import net.minecraft.inventory.ISidedInventory;
+
+import java.util.Random;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory
 {

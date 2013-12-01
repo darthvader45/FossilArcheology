@@ -1,7 +1,6 @@
 package mods.fossil.fossilAI;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.FossilOptions;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;

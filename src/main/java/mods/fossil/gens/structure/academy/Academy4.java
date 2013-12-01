@@ -1,6 +1,5 @@
 package mods.fossil.gens.structure.academy;
 
-import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 
 public class Academy4

@@ -2,22 +2,14 @@ package mods.fossil.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import mods.fossil.Fossil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockJukeBox;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemFossilRecord extends ItemRecord
 {

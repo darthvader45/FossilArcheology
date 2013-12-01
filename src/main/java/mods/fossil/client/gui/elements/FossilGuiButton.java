@@ -3,7 +3,6 @@ package mods.fossil.client.gui.elements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class FossilGuiButton extends GuiButton

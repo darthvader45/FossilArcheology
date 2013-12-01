@@ -1,7 +1,6 @@
 package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 

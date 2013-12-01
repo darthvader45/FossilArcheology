@@ -1,8 +1,5 @@
 package mods.fossil.entity.mob;
 
-import java.util.List;
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.material.Material;
@@ -13,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class EntityNautilus extends EntityWaterMob
 {

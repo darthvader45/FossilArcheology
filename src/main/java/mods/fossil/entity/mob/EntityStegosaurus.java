@@ -1,7 +1,5 @@
 package mods.fossil.entity.mob;
 
-import java.util.Random;
-
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -18,6 +16,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class EntityStegosaurus extends EntityDinosaur
 {

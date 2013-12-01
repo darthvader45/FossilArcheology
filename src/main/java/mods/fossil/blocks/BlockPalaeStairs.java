@@ -1,7 +1,5 @@
 package mods.fossil.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;

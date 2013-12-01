@@ -2,14 +2,9 @@ package mods.fossil.client.renderer.item;
 
 import mods.fossil.client.model.ModelFigurine;
 import mods.fossil.guiBlocks.TileEntityFigurine;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
-import org.lwjgl.opengl.GL11;
 
 public class ItemFigurineRenderer implements IItemRenderer
 {

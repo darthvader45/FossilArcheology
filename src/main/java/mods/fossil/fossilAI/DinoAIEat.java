@@ -1,32 +1,23 @@
 package mods.fossil.fossilAI;
 
-import info.ata4.minecraft.dragon.DragonMounts;
-import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
-
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.guiBlocks.TileEntityFeeder;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DinoAIEat extends EntityAIBase
 {

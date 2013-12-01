@@ -2,9 +2,6 @@ package mods.fossil.fossilAI;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 
 public class WaterDinoAIWander extends EntityAIBase
 {

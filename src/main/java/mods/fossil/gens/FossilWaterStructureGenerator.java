@@ -1,10 +1,5 @@
 package mods.fossil.gens;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.logging.Level;
-
 import coolalias.structuregenapi.util.LogHelper;
 import coolalias.structuregenapi.util.Structure;
 import coolalias.structuregenapi.util.StructureGeneratorBase;
@@ -20,9 +15,12 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
 
 public class FossilWaterStructureGenerator extends StructureGeneratorBase
 {

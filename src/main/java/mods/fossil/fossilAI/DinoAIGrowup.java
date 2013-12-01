@@ -1,12 +1,10 @@
 package mods.fossil.fossilAI;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.FossilOptions;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 
 public class DinoAIGrowup extends EntityAIBase

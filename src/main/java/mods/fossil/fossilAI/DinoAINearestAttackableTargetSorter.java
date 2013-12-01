@@ -1,8 +1,9 @@
 package mods.fossil.fossilAI;
 
-import java.util.Comparator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
+
+import java.util.Comparator;
 
 public class DinoAINearestAttackableTargetSorter implements Comparator
 {

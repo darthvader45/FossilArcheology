@@ -1,26 +1,8 @@
 package mods.fossil.fossilEnums;
 
-import mods.fossil.Fossil;
-import mods.fossil.entity.mob.EntityAnkylosaurus;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
-import mods.fossil.entity.mob.EntityCompsognathus;
-import mods.fossil.entity.mob.EntityDilophosaurus;
-import mods.fossil.entity.mob.EntityDodo;
-import mods.fossil.entity.mob.EntityMosasaurus;
-import mods.fossil.entity.mob.EntityNautilus;
-import mods.fossil.entity.mob.EntityPlesiosaur;
-import mods.fossil.entity.mob.EntityPterosaur;
-import mods.fossil.entity.mob.EntitySpinosaurus;
-import mods.fossil.entity.mob.EntityStegosaurus;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTriceratops;
-import mods.fossil.entity.mob.EntityVelociraptor;
+import mods.fossil.entity.mob.*;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 
 public enum EnumDinoFoodMob

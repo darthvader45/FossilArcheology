@@ -1,11 +1,10 @@
 package mods.fossil.handler;
 
+import cpw.mods.fml.common.IPickupNotifier;
 import mods.fossil.Fossil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.stats.AchievementList;
-import cpw.mods.fml.common.IPickupNotifier;
 
 public class FossilPickupHandler implements IPickupNotifier
 {

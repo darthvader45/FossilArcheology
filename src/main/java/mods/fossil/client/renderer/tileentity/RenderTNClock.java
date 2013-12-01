@@ -2,9 +2,6 @@ package mods.fossil.client.renderer.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import java.util.Calendar;
-
 import mods.fossil.client.model.ModelTNClock;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -12,8 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
+
+import java.util.Calendar;
 
 @SideOnly(Side.CLIENT)
 public class RenderTNClock extends TileEntitySpecialRenderer

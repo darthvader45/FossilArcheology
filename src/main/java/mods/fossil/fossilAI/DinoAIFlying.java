@@ -5,19 +5,13 @@ package mods.fossil.fossilAI;
 //=============
 
 //Parent class
-import java.util.Random;
 
-import net.minecraft.entity.ai.EntityAIBase;
-
-import net.minecraft.entity.ai.RandomPositionGenerator;
 import mods.fossil.entity.mob.EntityFlyingDino;
-import mods.fossil.fossilEnums.EnumOrderType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.Vec3;
+
+import java.util.Random;
 
 //=============
 //	CLASSES

@@ -1,9 +1,5 @@
 package mods.fossil.entity.mob;
 
-import java.util.List;
-import java.util.Random;
-
-import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumPigBossSpeaks;
 import mods.fossil.fossilEnums.EnumPigmenSpeaks;
 import net.minecraft.block.Block;
@@ -28,6 +24,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class EntityPigBoss extends EntityZombie
 {

@@ -2,8 +2,9 @@ package mods.fossil.client;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
-import java.util.EnumSet;
 import net.minecraft.client.settings.KeyBinding;
+
+import java.util.EnumSet;
 
 public class FossilKeyHandler extends KeyBindingRegistry
 {

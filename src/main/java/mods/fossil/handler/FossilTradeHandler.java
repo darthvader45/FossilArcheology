@@ -1,14 +1,14 @@
 package mods.fossil.handler;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import mods.fossil.Fossil;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
-import mods.fossil.Fossil;
+
+import java.util.Random;
 
 public class FossilTradeHandler implements IVillageTradeHandler
 {

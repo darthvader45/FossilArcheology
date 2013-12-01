@@ -1,16 +1,8 @@
 package mods.fossil.items;
 
-import java.util.Iterator;
-import java.util.List;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
-import mods.fossil.client.Localizations;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityPlesiosaur;
-import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -20,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class ItemMagicConch extends Item
 {

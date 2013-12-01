@@ -2,11 +2,9 @@ package mods.fossil.client.model;
 
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityPachycephalosaurus;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.util.MathHelper;
 
 public class ModelPachycephalosaurus extends ModelDinosaurs

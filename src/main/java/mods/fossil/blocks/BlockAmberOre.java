@@ -1,13 +1,12 @@
 package mods.fossil.blocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockAmberOre extends Block
 {

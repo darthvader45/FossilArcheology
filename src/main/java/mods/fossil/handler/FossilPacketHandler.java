@@ -11,11 +11,12 @@ package mods.fossil.handler;
 
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *

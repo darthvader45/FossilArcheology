@@ -2,18 +2,12 @@ package mods.fossil.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFishHook;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 public class ItemWhip extends ItemCarrotOnAStick
 {

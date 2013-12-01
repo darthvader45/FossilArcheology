@@ -1,7 +1,5 @@
 package mods.fossil.guiBlocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -10,8 +8,9 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockTimeMachine extends BlockContainer
 {

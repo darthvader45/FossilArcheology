@@ -1,16 +1,16 @@
 package mods.fossil.guiBlocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraft.inventory.ISidedInventory;
+
+import java.util.Random;
 
 public class TileEntityTimeMachine extends TileEntity implements IInventory, ISidedInventory
 {

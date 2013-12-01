@@ -1,7 +1,5 @@
 package mods.fossil.entity;
 
-import java.util.List;
-
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -11,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityMLighting extends EntityLightningBolt
 {

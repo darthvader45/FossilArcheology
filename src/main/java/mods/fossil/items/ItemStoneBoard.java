@@ -1,8 +1,5 @@
 package mods.fossil.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import mods.fossil.Fossil;
 import mods.fossil.entity.EntityStoneboard;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;

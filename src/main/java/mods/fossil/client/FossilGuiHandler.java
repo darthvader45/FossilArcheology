@@ -1,29 +1,11 @@
 package mods.fossil.client;
 
-import mods.fossil.client.gui.GuiAnalyzer;
-import mods.fossil.client.gui.GuiCultivate;
-import mods.fossil.client.gui.GuiFeeder;
-import mods.fossil.client.gui.GuiNotebook;
-import mods.fossil.client.gui.GuiPedia;
-import mods.fossil.client.gui.GuiTimeMachine;
-import mods.fossil.client.gui.GuiWorktable;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.guiBlocks.ContainerAnalyzer;
-import mods.fossil.guiBlocks.ContainerCultivate;
-import mods.fossil.guiBlocks.ContainerFeeder;
-import mods.fossil.guiBlocks.ContainerNotebook;
-import mods.fossil.guiBlocks.ContainerPedia;
-import mods.fossil.guiBlocks.ContainerTimeMachine;
-import mods.fossil.guiBlocks.ContainerWorktable;
-import mods.fossil.guiBlocks.TileEntityAnalyzer;
-import mods.fossil.guiBlocks.TileEntityCultivate;
-import mods.fossil.guiBlocks.TileEntityFeeder;
-import mods.fossil.guiBlocks.TileEntityTimeMachine;
-import mods.fossil.guiBlocks.TileEntityWorktable;
+import cpw.mods.fml.common.network.IGuiHandler;
+import mods.fossil.client.gui.*;
+import mods.fossil.guiBlocks.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class FossilGuiHandler implements IGuiHandler
 {

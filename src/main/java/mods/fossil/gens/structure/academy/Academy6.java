@@ -1,7 +1,5 @@
 package mods.fossil.gens.structure.academy;
 
-import net.minecraft.block.Block;
-
 public class Academy6
 {
     /** Some predefined values for custom hooks that I use in the demo structure */

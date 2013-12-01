@@ -1,22 +1,14 @@
 package mods.fossil.handler;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-
-import static java.util.Arrays.asList;
-
-import java.util.List;
-
+import cpw.mods.fml.common.ICraftingHandler;
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.items.ItemAncientEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.ICraftingHandler;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class FossilCraftingHandler implements ICraftingHandler
 {

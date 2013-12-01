@@ -1,9 +1,9 @@
 package mods.fossil.client;
 
-import java.util.logging.Logger;
-
 import mods.fossil.Fossil;
 import net.minecraftforge.common.Configuration;
+
+import java.util.logging.Logger;
 
 public class FossilOptions
 {

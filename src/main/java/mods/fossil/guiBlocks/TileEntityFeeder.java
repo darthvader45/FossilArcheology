@@ -1,22 +1,19 @@
 package mods.fossil.guiBlocks;
 
-import mods.fossil.Fossil;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.fossilEnums.*;
-import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.fossilEnums.EnumDinoFoodBlock;
+import mods.fossil.fossilEnums.EnumDinoFoodItem;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraft.inventory.ISidedInventory;
 
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory
 {

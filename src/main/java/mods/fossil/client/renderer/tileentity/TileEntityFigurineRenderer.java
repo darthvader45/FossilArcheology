@@ -1,5 +1,6 @@
 package mods.fossil.client.renderer.tileentity;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import mods.fossil.client.model.ModelFigurine;
 import mods.fossil.client.model.ModelFigurineBroken;
 import mods.fossil.guiBlocks.TileEntityFigurine;
@@ -9,10 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
 {

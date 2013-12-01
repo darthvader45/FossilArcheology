@@ -1,13 +1,10 @@
 package mods.fossil.client.model;
 
-import org.lwjgl.opengl.GL11;
-
 import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.MathHelper;
 
 public class ModelAnkylosaurus extends ModelBase

@@ -1,45 +1,16 @@
 package mods.fossil.entity.mob;
 
-import info.ata4.minecraft.dragon.server.entity.ai.ground.EntityAIHunt;
-
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
-import mods.fossil.fossilAI.DinoAIAttackOnCollide;
-import mods.fossil.fossilAI.DinoAIControlledByPlayer;
-import mods.fossil.fossilAI.DinoAIEat;
-import mods.fossil.fossilAI.DinoAIFollowOwner;
-import mods.fossil.fossilAI.DinoAIHunt;
-import mods.fossil.fossilAI.DinoAIRideGround;
-import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
-import mods.fossil.fossilAI.DinoAIWander;
+import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
-import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 

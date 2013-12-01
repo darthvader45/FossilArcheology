@@ -1,22 +1,14 @@
 package mods.fossil.client.gui;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import mods.fossil.client.gui.elements.FossilGuiButton;
 import mods.fossil.client.gui.elements.FossilGuiPage;
 import mods.fossil.client.gui.elements.dinosaurs.PediaDinosaur;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class GuiNotebook extends GuiScreen
 {

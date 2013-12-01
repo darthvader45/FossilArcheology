@@ -1,11 +1,9 @@
 package mods.fossil.handler;
 
-import mods.fossil.Fossil;
-import mods.fossil.fossilEnums.EnumDinoType;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class FossilAchievementHandler
 {

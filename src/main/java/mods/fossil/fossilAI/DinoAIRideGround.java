@@ -9,11 +9,8 @@
  */
 package mods.fossil.fossilAI;
 
-import info.ata4.minecraft.dragon.server.util.ItemUtils;
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

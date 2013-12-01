@@ -1,8 +1,5 @@
 package mods.fossil.client.gui.elements.dinosaurs;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.MathHelper;
-
 public class PediaDinosaur
 {
     public static String[] leftPage =

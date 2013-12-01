@@ -1,19 +1,11 @@
 package mods.fossil.gens;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.logging.Level;
-
+import coolalias.structuregenapi.util.LogHelper;
+import coolalias.structuregenapi.util.Structure;
+import coolalias.structuregenapi.util.StructureGeneratorBase;
 import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
-import mods.fossil.gens.structure.academy.Academy1;
-import mods.fossil.gens.structure.academy.Academy2;
-import mods.fossil.gens.structure.academy.Academy3;
-import mods.fossil.gens.structure.academy.Academy4;
-import mods.fossil.gens.structure.academy.Academy5;
-import mods.fossil.gens.structure.academy.Academy6;
-import mods.fossil.gens.structure.academy.AcademyUtil;
+import mods.fossil.gens.structure.academy.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -21,20 +13,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBeach;
-import net.minecraft.world.biome.BiomeGenDesert;
-import net.minecraft.world.biome.BiomeGenForest;
-import net.minecraft.world.biome.BiomeGenHills;
-import net.minecraft.world.biome.BiomeGenJungle;
-import net.minecraft.world.biome.BiomeGenPlains;
-import net.minecraft.world.biome.BiomeGenRiver;
-import net.minecraft.world.biome.BiomeGenSnow;
-import net.minecraft.world.biome.BiomeGenSwamp;
-import net.minecraft.world.biome.BiomeGenTaiga;
-import coolalias.structuregenapi.util.LogHelper;
-import coolalias.structuregenapi.util.Structure;
-import coolalias.structuregenapi.util.StructureGeneratorBase;
+import net.minecraft.world.biome.*;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
 
 public class FossilStructureGenerator extends StructureGeneratorBase
 {

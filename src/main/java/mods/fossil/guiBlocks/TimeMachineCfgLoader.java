@@ -1,11 +1,12 @@
 package mods.fossil.guiBlocks;
 
+import net.minecraft.client.Minecraft;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import net.minecraft.client.Minecraft;
 
 public class TimeMachineCfgLoader
 {

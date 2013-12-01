@@ -1,7 +1,6 @@
 package mods.fossil.tags;
 
 import java.io.Closeable;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

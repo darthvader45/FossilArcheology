@@ -1,13 +1,12 @@
 package mods.fossil.gens.structure;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
+
+import java.util.List;
+import java.util.Random;
 
 public class FossilVillageHandler implements IVillageCreationHandler
 {

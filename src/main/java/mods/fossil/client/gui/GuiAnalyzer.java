@@ -1,6 +1,5 @@
 package mods.fossil.client.gui;
 
-import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.guiBlocks.ContainerAnalyzer;
 import mods.fossil.guiBlocks.TileEntityAnalyzer;
@@ -9,7 +8,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiAnalyzer extends GuiContainer

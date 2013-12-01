@@ -1,18 +1,15 @@
 package mods.fossil.fossilAI;
 
+import mods.fossil.Fossil;
+import mods.fossil.entity.mob.EntityDinosaur;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAITarget;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
-
-import mods.fossil.Fossil;
-import mods.fossil.entity.mob.EntityDinosaur;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
 
 
 public class DinoAIHunt extends EntityAITarget

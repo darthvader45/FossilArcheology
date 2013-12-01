@@ -1,7 +1,5 @@
 package mods.fossil.items;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
@@ -14,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+
+import java.util.Random;
 
 public class ItemAncientsword extends ItemSword
 {

@@ -9,7 +9,6 @@
  */
 package mods.fossil.fossilAI;
 
-import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
 import info.ata4.minecraft.dragon.server.network.RemoteKeyPacketHandler;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;

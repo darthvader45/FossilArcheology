@@ -1,17 +1,16 @@
 package mods.fossil.blocks;
 
-import java.util.Random;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import mods.fossil.Fossil;
 import mods.fossil.util.FossilFX;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockSarracenia extends BlockFlower
 {

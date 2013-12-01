@@ -2,7 +2,6 @@ package mods.fossil.entity.mob;
 
 import mods.fossil.fossilEnums.EnumDinoFoodBlock;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 
 public class DinoFoodBlockList
 {

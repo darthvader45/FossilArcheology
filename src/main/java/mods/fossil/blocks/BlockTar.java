@@ -1,7 +1,5 @@
 package mods.fossil.blocks;
 
-import java.util.Random;
-
 import mods.fossil.Fossil;
 import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
@@ -11,6 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockTar extends Block
 {

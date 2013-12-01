@@ -1,7 +1,5 @@
 package mods.fossil.fossilAI;
 
-import java.util.Random;
-
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
@@ -9,6 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+
+import java.util.Random;
 
 public class DinoAIFishing extends EntityAIBase
 {
