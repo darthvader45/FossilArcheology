@@ -23,9 +23,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
         {
             this.moveFlying(par1, par2, 0.02F);
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.800000011920929D;
             this.motionY *= 0.800000011920929D;
-            this.motionZ *= 0.800000011920929D;
         }
         else if (this.handleLavaMovement())
         {
