@@ -7,7 +7,7 @@
  **    May you find forgiveness for yourself and forgive others.
  **    May you share freely, never taking more than you give.
  */
-package info.ata4.minecraft.dragon.server.network;
+package mods.fossil.handler;
 
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -21,29 +21,29 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public class RemoteKeyPacketHandler implements IPacketHandler {
+public class RemoteKeyHandler implements IPacketHandler {
     
-    public static final String CHANNEL = "DragonMounts";
+    public static final String CHANNEL = "Fossils";
     
-    private static RemoteKeyPacketHandler instance;
+    private static RemoteKeyHandler instance;
 
-    public static RemoteKeyPacketHandler getInstance() {
+    public static RemoteKeyHandler getInstance() {
         if (instance == null) {
-            instance = new RemoteKeyPacketHandler();
+            instance = new RemoteKeyHandler();
         }
         return instance;
     }
     
     private Map<String, Map<String, Boolean>> playerKeys = new HashMap<String, Map<String, Boolean>>();
     
-    private RemoteKeyPacketHandler() {
+    private RemoteKeyHandler() {
     }
     
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
         if (player instanceof EntityPlayerMP) {
             EntityPlayerMP playerMP = (EntityPlayerMP) player;
-            RemoteKey rk = new RemoteKey(packet);
+            KeyHandler rk = new KeyHandler(packet);
             
             Map<String, Boolean> playerKeyMap;
             if (!playerKeys.containsKey(playerMP.username)) {

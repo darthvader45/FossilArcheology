@@ -1,16 +1,16 @@
 package mods.fossil;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import info.ata4.minecraft.dragon.server.network.RemoteKeyPacketHandler;
+import java.util.Random;
+
 import mods.fossil.handler.FossilPacketHandler;
+import mods.fossil.handler.RemoteKeyHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-
-import java.util.Random;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy
 {
@@ -26,7 +26,7 @@ public class CommonProxy
 
     private void registerChannels()
     {
-        NetworkRegistry.instance().registerChannel(RemoteKeyPacketHandler.getInstance(), FossilPacketHandler.CHANNEL, Side.SERVER);
+        NetworkRegistry.instance().registerChannel(RemoteKeyHandler.getInstance(), FossilPacketHandler.CHANNEL, Side.SERVER);
     }
 
     public void registerEvents()

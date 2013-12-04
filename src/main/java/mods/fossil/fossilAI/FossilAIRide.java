@@ -9,8 +9,8 @@
  */
 package mods.fossil.fossilAI;
 
-import info.ata4.minecraft.dragon.server.network.RemoteKeyPacketHandler;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.handler.RemoteKeyHandler;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -23,7 +23,7 @@ public abstract class FossilAIRide extends EntityAIBase
 {
     protected final EntityDinosaur dinosaur;
     protected EntityPlayer rider;
-    private RemoteKeyPacketHandler remoteKey = RemoteKeyPacketHandler.getInstance();
+    private RemoteKeyHandler remoteKey = RemoteKeyHandler.getInstance();
 
     public FossilAIRide(EntityDinosaur dinosaur)
     {
