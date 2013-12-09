@@ -451,6 +451,10 @@ public class Fossil
     public static int fossilRecordID;
 
     static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
+    static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
+    static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
+    		
+    
     @Mod.EventHandler
     public void PreInit(FMLPreInitializationEvent event)
     {
@@ -758,11 +762,11 @@ public class Fossil
         brokenhelmet = new ForgeItem(brokenhelmetID, "Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(this.tabFMaterial);
         skullStick = new ForgeItem(skullStickID, "Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(this.tabFItems);
         gem = new ForgeItem(gemID, "Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(this.tabFItems);
-        gemAxe = new ForgeAxe(gemAxeID, EnumToolMaterial.EMERALD, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(this.tabFTools);
-        gemPickaxe = new ForgePickaxe(gemPickaxeID, EnumToolMaterial.EMERALD, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(this.tabFTools);
-        gemSword = new ForgeSword(gemSwordID, EnumToolMaterial.EMERALD, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(this.tabFCombat);;
-        gemHoe = new ForgeHoe(gemHoeID, EnumToolMaterial.EMERALD, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(this.tabFTools);
-        gemShovel = new ForgeShovel(gemShovelID, EnumToolMaterial.EMERALD, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(this.tabFTools);
+        gemAxe = new ForgeAxe(gemAxeID, scarab, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(this.tabFTools);
+        gemPickaxe = new ForgePickaxe(gemPickaxeID, scarab, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(this.tabFTools);
+        gemSword = new ForgeSword(gemSwordID, scarab, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(this.tabFCombat);;
+        gemHoe = new ForgeHoe(gemHoeID, scarab, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(this.tabFTools);
+        gemShovel = new ForgeShovel(gemShovelID, scarab, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(this.tabFTools);
         dinoPedia = new ForgeItem(dinoPediaID, "Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(this.tabFItems);
         emptyShell = new ForgeItem(emptyShellID, "Empty_Shell").setUnlocalizedName(LocalizationStrings.EMPTY_SHELL_NAME).setCreativeTab(this.tabFItems);
         magicConch = new ItemMagicConch(magicConchID).setUnlocalizedName(LocalizationStrings.MAGIC_CONCH_NAME).setCreativeTab(this.tabFTools);
@@ -773,7 +777,7 @@ public class Fossil
         ironjavelin = new ItemJavelin(ironjavelinID, EnumToolMaterial.IRON, "Iron_Javelin").setUnlocalizedName(LocalizationStrings.IRON_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         goldjavelin = new ItemJavelin(goldjavelinID, EnumToolMaterial.GOLD, "Gold_Javelin").setUnlocalizedName(LocalizationStrings.GOLD_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD, "Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
-        ancientJavelin = new ItemJavelin(ancientJavelinID, EnumToolMaterial.IRON, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
+        ancientJavelin = new ItemJavelin(ancientJavelinID, scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
         whipAttack = new ItemWhipAttack(whipAttackID).setUnlocalizedName(LocalizationStrings.WHIP_ATTACK_NAME).setCreativeTab(this.tabFCombat);
         legBone = new ForgeItem(legBoneID, "Leg_Bone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME).setCreativeTab(this.tabFItems);
