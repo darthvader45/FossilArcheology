@@ -283,7 +283,7 @@ public class ModelPlesiosaur extends ModelDinosaurs
         {
             EntityPlesiosaur var5 = (EntityPlesiosaur)var1;
             int var6 = 16 + var5.getDinoAge();
-
+/*
             if (var5.riddenByEntity != null && !var5.isOnSurface())
             {
                 this.PoseDive(var6);
@@ -292,6 +292,7 @@ public class ModelPlesiosaur extends ModelDinosaurs
             {
                 this.PoseSurface(var6);
             }
+            */
         }
     }
 

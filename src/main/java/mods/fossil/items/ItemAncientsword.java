@@ -1,19 +1,20 @@
 package mods.fossil.items;
 
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.fossilEnums.EnumPigmenSpeaks;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-
-import java.util.Random;
 
 public class ItemAncientsword extends ItemSword
 {
@@ -28,32 +29,36 @@ public class ItemAncientsword extends ItemSword
         this(var1, EnumToolMaterial.IRON);
     }
 
+    
     /**
-     * Returns the damage against a given entity.
-     */
-    public float getDamageVsEntity(Entity var1)
+    * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
+    * the damage on the stack.
+    */
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase targetentity, EntityLivingBase player)
     {
-        if (var1 != null && var1.worldObj.difficultySetting > 0 && (var1 instanceof EntityPig || var1 instanceof EntityPigZombie))
+        EntityPlayer var2 = this.SearchUser(targetentity);
+    	if (player != null && this.checkHelmet(var2))
+    	{
+        if (targetentity != null && player.worldObj.difficultySetting > 0 && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie))
         {
-            EntityPlayer var2 = this.SearchUser(var1);
 
-            if (var2 != null && this.checkHelmet(var2) && !var1.worldObj.isRemote)
+            if (!targetentity.worldObj.isRemote)
             {
-                EntityFriendlyPigZombie var3 = new EntityFriendlyPigZombie(var1.worldObj);
+                EntityFriendlyPigZombie var3 = new EntityFriendlyPigZombie(targetentity.worldObj);
                 var3.LeaderName = var2.username;
-                var3.setLocationAndAngles(var1.posX, var1.posY, var1.posZ, var1.rotationYaw, var1.rotationPitch);
-                var1.setDead();
-                var1.worldObj.spawnEntityInWorld(var3);
+                var3.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
+                targetentity.setDead();
+                targetentity.worldObj.spawnEntityInWorld(var3);
                 var3.Mouth.SendSpeech(EnumPigmenSpeaks.LifeFor, var3.LeaderName);
             }
-        }
-
-        if (var1 != null && (new Random()).nextInt(100) < 15)
-        {
-            var1.worldObj.addWeatherEffect(new EntityMLighting(var1.worldObj, var1.posX, var1.posY, var1.posZ));
-        }
-
-        return 4.0F + EnumToolMaterial.IRON.getDamageVsEntity() * 2.0F;
+        }    	
+        
+         if (targetentity != null && (new Random()).nextInt(100) < 4)
+           {
+        targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));    	
+           }
+    	}
+		return true;
     }
 
     private EntityPlayer SearchUser(Entity var1)

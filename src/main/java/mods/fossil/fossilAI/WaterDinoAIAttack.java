@@ -12,7 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class WaterDinoAIWander extends EntityAIBase
+public class WaterDinoAIAttack extends EntityAIBase
 {
     private double xPosition;
     private double yPosition;
@@ -41,7 +41,7 @@ public class WaterDinoAIWander extends EntityAIBase
     
     private World worldObj;
 
-    public WaterDinoAIWander(EntityDinosaur dinosaur, double speed)
+    public WaterDinoAIAttack(EntityDinosaur dinosaur, double speed)
     {
         this.entity = dinosaur;
         this.speed = speed;
@@ -122,10 +122,7 @@ public class WaterDinoAIWander extends EntityAIBase
             this.deltaY = this.targetedEntity.posY - this.entity.posY;
             this.deltaZ = this.targetedEntity.posZ - this.entity.posZ;
             this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
-            //Normalize?
-            deltaX /= length + 1.0D;
-            deltaY /= length + 1.0D;
-            deltaZ /= length + 1.0D;
+            
             //Set waypoint for player's current location.
             this.waypointX += deltaX;
             this.waypointY += deltaY;
@@ -138,7 +135,7 @@ public class WaterDinoAIWander extends EntityAIBase
 
             if (this.entity.canEntityBeSeen(this.targetedEntity))
             {
-                // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
+                 	this.entity.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.entity.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
                 this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
                 Vec3 vec3 = this.entity.getLook(1.0F);
             }

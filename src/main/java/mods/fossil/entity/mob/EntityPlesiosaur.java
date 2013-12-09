@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
+public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
 {
     private boolean looksWithInterest;
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
@@ -63,16 +64,18 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 6.0F;
-        this.getNavigator().setCanSwim(true);
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
-        this.tasks.addTask(7, new DinoAIEat(this, 24));
-        this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-        this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(11, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+       // this.getNavigator().setCanSwim(true);
+      //  this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+      //  this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
+      //  this.tasks.addTask(7, new DinoAIEat(this, 24));
+        //this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
+        //this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
+       // this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+       // this.tasks.addTask(11, new EntityAILookIdle(this));
+        //tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        
+        this.tasks.addTask(7, new WaterDinoAIWander(this, 2.0D));
     }
 
     protected void applyEntityAttributes()
@@ -108,15 +111,6 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         }
     }
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
     public boolean canBreatheUnderwater()
     {
         return true;
@@ -128,12 +122,13 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         {
             if (this.riddenByEntity == null)
             {
-                super.updateEntityActionState();
-
+           //     super.updateEntityActionState();
+/*
                 if (!this.isOnSurface() && (double)this.TargetY < this.posY)
                 {
                     this.TargetY = (float)(this.posY++);
                 }
+                */
 
                 if (!this.isSitting() && !this.hasPath() && (new Random()).nextInt(1000) == 5)
                 {
@@ -148,10 +143,12 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
         }
     }
 
+    /*
     public boolean isOnSurface()
     {
         return this.worldObj.isAirBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY + (double)(this.getEyeHeight() / 2.0F)), (int)Math.floor(this.posZ));
     }
+    */
 
     /**
      * Called to update the entity's position/logic.
@@ -754,7 +751,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             {
                 this.motionY += this.motionY < 0 ? 0.01F : -0.01F;    //Make the upwards motion slower
             }
-
+/*
             if ((this.isOnSurface() && this.motionY > 0F) || (this.motionY > -0.01F && this.motionY < 0.01F))
             {
                 this.motionY = 0.0F;
@@ -764,6 +761,7 @@ public class EntityPlesiosaur extends EntityDinosaur implements IWaterDino
             {
                 this.jump();
             }
+            */
         }
         else
         {

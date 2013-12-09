@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -343,10 +344,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         super.onKillEntity(var1);
         this.increaseHunger(this.SelfType.FoodMobList.getMobFood(var1.getClass()));
 
-        if (Fossil.FossilOptions.Heal_Dinos)
-        {
             this.heal(this.SelfType.FoodMobList.getMobHeal(var1.getClass()));
-        }
     }
 
     public void decreaseHunger()
@@ -396,19 +394,21 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    @Override
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
-        if (isInvulnerable(var1))
-        {
-            return false;
-        }
+    if (isInvulnerable(var1))
+    {
+    		return false;
+    }
+    	
         //when modelized just drop the model else handle normal attacking
         return this.modelizedDrop() ? true : super.attackEntityFrom(var1, var2);
     }
 
     protected String getModelTexture()
     {
-        return Fossil.modid + ":textures/mob/DinoModel" + this.SelfType.toString() + ".png";
+        return Fossil.modid + ":" + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
     /**
@@ -416,7 +416,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     public String getTexture()
     {
-        return this.isModelized() ? this.getModelTexture() : "fossil:textures/mob/DinoModel" + this.SelfType.toString() + ".png";
+        return this.isModelized() ? this.getModelTexture() : Fossil.modid + ":" + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
     public void moveEntityWithHeading(float par1, float par2)
@@ -447,6 +447,32 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         return 360;
     }
 
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return Fossil.modid + ":" + this.SelfType.toString() + "_living";
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound()
+    {
+        return Fossil.modid + ":" + this.SelfType.toString() + "_hurt";
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return Fossil.modid + ":" + this.SelfType.toString() + "_death";
+    }
+    
     @Override
     public boolean isOnLadder()
     {
@@ -457,7 +483,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation("fossil:textures/items/" + this.SelfType.toString() + "_DNA.png"), 185, 7, 16, 16);
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + this.SelfType.toString() + "_DNA.png"), 185, 7, 16, 16);
 
         if (this.hasCustomNameTag())
         {
@@ -500,10 +526,9 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
         //Display if Rideable
         if (this.SelfType.isRideable() && this.isAdult())
-        {
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-        }
 
+        if (this.SelfType.OrderItem != null)
         p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
 
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
@@ -535,7 +560,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
             {
                 this.setHunger(this.getHunger() + this.SelfType.FoodItemList.getItemFood(item0.itemID));
 
-                if (Fossil.FossilOptions.Heal_Dinos && !this.worldObj.isRemote) //!this.worldObj.isRemote)
+                if (!this.worldObj.isRemote) //!this.worldObj.isRemote)
                 {
                     this.heal(this.SelfType.FoodItemList.getItemHeal(item0.itemID));
                 }
@@ -1181,10 +1206,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
                 this.dropFewItems(false, 0);
                 this.setDead();
             }
-
             return true;
         }
-
         return false;
     }
 

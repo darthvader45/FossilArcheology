@@ -2,6 +2,7 @@ package mods.fossil.items;
 
 import mods.fossil.Fossil;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,8 @@ public class ItemAncientHelmet extends ItemArmor
         this.setCreativeTab(Fossil.tabFArmor);
     }
 
-    public String getArmorTexture(ItemStack par1)
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
     {
         return "fossil:textures/armor/TextureAncientHelmet.png";
     }

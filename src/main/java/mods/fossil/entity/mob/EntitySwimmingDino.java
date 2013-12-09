@@ -17,8 +17,37 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
         return true;
     }
 
+    /*
+    @Override
     public void moveEntityWithHeading(float par1, float par2)
     {
+
+    	
+        if (this.isInWater())
+        {
+            this.moveFlying(par1, par2, 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionY *= 0.800000011920929D;
+        }
+        else if (this.handleLavaMovement())
+        {
+            this.moveFlying(par1, par2, 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.5D;
+            this.motionY *= 0.5D;
+            this.motionZ *= 0.5D;
+        }
+        else
+        {
+    	super.moveEntityWithHeading(par1, par2);
+        }
+    }
+    */
+    
+    public void moveEntityWithHeading(float par1, float par2)
+    {
+        double d0;
+
         if (this.isInWater())
         {
             this.moveFlying(par1, par2, 0.02F);
@@ -49,7 +78,18 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
             }
 
             float f3 = 0.16277136F / (f2 * f2 * f2);
-            this.moveFlying(par1, par2, this.onGround ? 0.1F * f3 : 0.02F);
+            float f4;
+
+            if (this.onGround)
+            {
+                f4 = this.getAIMoveSpeed() * f3;
+            }
+            else
+            {
+                f4 = this.jumpMovementFactor;
+            }
+
+            this.moveFlying(par1, par2, f4);
             f2 = 0.91F;
 
             if (this.onGround)
@@ -63,25 +103,49 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
                 }
             }
 
+
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
+
+            if (this.isCollidedHorizontally && this.isOnLadder())
+            {
+                this.motionY = 0.2D;
+            }
+
+            if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded))
+            {
+                if (this.posY > 0.0D)
+                {
+                    this.motionY = -0.1D;
+                }
+                else
+                {
+                    this.motionY = 0.0D;
+                }
+            }
+            else
+            {
+                this.motionY -= 0.08D;
+            }
+
+            this.motionY *= 0.9800000190734863D;
             this.motionX *= (double)f2;
-            this.motionY *= (double)f2;
             this.motionZ *= (double)f2;
         }
 
         this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d0 = this.posX - this.prevPosX;
+        d0 = this.posX - this.prevPosX;
         double d1 = this.posZ - this.prevPosZ;
-        float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
+        float f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
 
-        if (f4 > 1.0F)
+        if (f6 > 1.0F)
         {
-            f4 = 1.0F;
+            f6 = 1.0F;
         }
 
-        this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
+        this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
         this.limbSwing += this.limbSwingAmount;
     }
+
 
     /**
      * returns true if this entity is by a ladder, false otherwise

@@ -1,24 +1,14 @@
 package mods.fossil.entity.mob;
 
 import mods.fossil.client.DinoSound;
-import mods.fossil.fossilAI.DinoAIEat;
-import mods.fossil.fossilAI.DinoAIHunt;
-import mods.fossil.fossilAI.DinoAIWander;
-import mods.fossil.fossilAI.WaterDinoAISwimming;
-import mods.fossil.fossilAI.WaterDinoAIWander;
+import mods.fossil.fossilAI.WaterDinoAIAttack;
 import mods.fossil.fossilEnums.EnumDinoType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityMosasaurus extends EntitySwimmingDino implements IMob
@@ -51,10 +41,14 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.experienceValue = 5;
         
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
-        this.tasks.addTask(7, new WaterDinoAIWander(this, 100.0D));
-        this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+        this.tasks.addTask(7, new WaterDinoAIAttack(this, 2.0D));
     }
 
+    public boolean canBreatheUnderwater()
+    {
+        return true;
+    }
+    
     public String getTexture()
     {
         if (this.isModelized())
