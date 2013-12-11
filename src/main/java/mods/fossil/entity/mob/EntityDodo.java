@@ -1,21 +1,30 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityDodo extends EntityAnimal
 {
@@ -58,16 +67,73 @@ public class EntityDodo extends EntityAnimal
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
+    
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(18, Byte.valueOf((byte)0));
+    	this.setSkin(this.worldObj.rand.nextInt(2));
+    }
+    
+    public int getSkin()
+    {
+        return this.dataWatcher.getWatchableObjectByte(18);
+    }
+
+    public void setSkin(int par1)
+    {
+        this.dataWatcher.updateObject(18, Byte.valueOf((byte)par1));
+    }
 
     private void setPedia()
     {
         Fossil.ToPedia = (Object)this;
     }
-
-    public String getTexture()
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
-        return "fossil:textures//mob/Dodo_Brown.png";
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("DodoType", this.getSkin());
     }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.setSkin(par1NBTTagCompound.getInteger("DodoType"));
+    }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return DinoSound.dodo_living;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.dodo_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.dodo_death;
+    }
+    
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
@@ -115,30 +181,6 @@ public class EntityDodo extends EntityAnimal
      * Called when the mob is falling. Calculates and applies fall damage.
      */
     protected void fall(float par1) {}
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return "fossil:dodo_living";
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return "fossil:dodo_hurt";
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return "fossil:dodo_death";
-    }
 
     /**
      * Returns the volume for the sounds this mob makes.

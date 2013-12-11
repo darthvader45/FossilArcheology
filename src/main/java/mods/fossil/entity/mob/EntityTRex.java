@@ -1,10 +1,13 @@
 package mods.fossil.entity.mob;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,7 +53,7 @@ public class EntityTRex extends EntityDinosaur
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -62,6 +65,8 @@ public class EntityTRex extends EntityDinosaur
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
+        
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         
     }
 
@@ -87,7 +92,7 @@ public class EntityTRex extends EntityDinosaur
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.40000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-        //this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
     }
 
     //protected void updateEntityActionState() {}
@@ -119,9 +124,37 @@ public class EntityTRex extends EntityDinosaur
         }
     }
 
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return DinoSound.tyrannosaurus_living;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.tyrannosaurus_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.tyrannosaurus_death;
+    }
+    
     /**
      * Applies a velocity to each of the entities pushing them away from each other. Args: entity
      */
+    
+   /*
     public void applyEntityCollision(Entity var1)
     {
         if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.SelfType.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
@@ -129,6 +162,8 @@ public class EntityTRex extends EntityDinosaur
             ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
         }
     }
+    */
+    
 
     public float getEyeHeight()
     {
@@ -234,6 +269,43 @@ public class EntityTRex extends EntityDinosaur
         return this.isAngry() || !this.isTamed() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
     }
 
+    @Override
+    public boolean attackEntityAsMob(Entity victim)
+    {
+        float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        int knockback = 0;
+
+        if (victim instanceof EntityLivingBase)
+        {
+            attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
+            knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
+        }
+
+        boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
+
+        if (attacked)
+        {
+            if (knockback > 0)
+            {
+                double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                double vy = 0.1;
+                double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                victim.addVelocity(vx, vy, vz);
+                motionX *= 0.6;
+                motionZ *= 0.6;
+            }
+
+            if (victim instanceof EntityLivingBase)
+            {
+                EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
+            }
+
+            setLastAttacker(victim);
+        }
+
+        return attacked;
+    }
+    
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
@@ -286,10 +358,10 @@ public class EntityTRex extends EntityDinosaur
     {
         super.onKillEntity(var1);
 
-        if (this.getDinoAge() >= 3)
-        {
-            this.worldObj.playSoundAtEntity(this, "fossil:tyrannosaurus_scream", this.getSoundVolume() * 2.0F, 1.0F);
-        }
+     //   if (this.getDinoAge() >= 3)
+     //   {
+            this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume() * 2.0F, 1.0F);
+     //   }
     }
 
     /**

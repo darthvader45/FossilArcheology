@@ -248,6 +248,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 //                this.getTexture = this.getModelTexture();
         }
     }
+    
+    
 
     protected void entityInit()
     {
@@ -454,7 +456,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getLivingSound()
     {
-        return Fossil.modid + ":" + this.SelfType.toString() + "_living";
+        return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
     }
     @Override
     /**
@@ -462,7 +464,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getHurtSound()
     {
-        return Fossil.modid + ":" + this.SelfType.toString() + "_hurt";
+        return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_hurt";
     }
     @Override
     /**
@@ -470,7 +472,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getDeathSound()
     {
-        return Fossil.modid + ":" + this.SelfType.toString() + "_death";
+        return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_death";
     }
     
     @Override
@@ -1079,6 +1081,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    /*
     protected float getSoundVolume()
     {
         //float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.3F;
@@ -1086,15 +1089,18 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         float soundVolume = this.isModelized() ? 0.0F : 2 - this.getDinoAge();
         return soundVolume;
     }
+    */
 
     /**
      * Gets the pitch of living sounds in living entities.
      */
+    /*
     protected float getSoundPitch()
     {
         //return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.2F;
         return super.getSoundPitch() * (2 - this.getDinoAge());
     }
+    */
 
     /**
      * Plays step sound at given x, y, z for the entity

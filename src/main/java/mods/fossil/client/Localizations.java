@@ -1,5 +1,6 @@
 package mods.fossil.client;
 
+import mods.fossil.Fossil;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
@@ -14,7 +15,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 public class Localizations
 {
-    private static final String LANG_RESOURCE_LOCATION = "fossil:fossillang/";
+    private static final String LANG_RESOURCE_LOCATION = Fossil.modid + ":" + "lang/";
 
     public static String[] localeFiles =
     {

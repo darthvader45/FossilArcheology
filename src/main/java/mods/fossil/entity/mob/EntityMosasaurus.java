@@ -3,7 +3,10 @@ package mods.fossil.entity.mob;
 import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.monster.IMob;
@@ -63,6 +66,35 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 
         return "fossil:textures/mob/Mosasaurus.png";
     }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	if(this.isInWater())
+        return DinoSound.mosasaurus_living;
+    	else
+    	return DinoSound.mosasaurus_outside;	
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.mosasaurus_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.mosasaurus_death;
+    }
 
     /**
      * Returns true if the Entity AI code should be run
@@ -104,6 +136,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
     }
 
     protected void updateEntityActionState()
@@ -111,29 +144,41 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 
     }
 
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
+    @Override
+    public boolean attackEntityAsMob(Entity victim)
     {
-        return DinoSound.mosasaurus_living;
-    }
+        float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        int knockback = 0;
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return DinoSound.mosasaurus_hurt;
-    }
+        if (victim instanceof EntityLivingBase)
+        {
+            attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
+            knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
+        }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.mosasaurus_death;
+        boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
+
+        if (attacked)
+        {
+            if (knockback > 0)
+            {
+                double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                double vy = 0.1;
+                double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback * 0.5;
+                victim.addVelocity(vx, vy, vz);
+                motionX *= 0.6;
+                motionZ *= 0.6;
+            }
+
+            if (victim instanceof EntityLivingBase)
+            {
+                EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
+            }
+
+            setLastAttacker(victim);
+        }
+
+        return attacked;
     }
 
     /**

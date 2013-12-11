@@ -1,5 +1,8 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
+
+import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -16,8 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class EntityStegosaurus extends EntityDinosaur
 {
@@ -101,6 +102,33 @@ public class EntityStegosaurus extends EntityDinosaur
 
         return "fossil:textures/mob/Stegosaurus_Baby.png";
     }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return DinoSound.stegosaurus_living;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.stegosaurus_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.stegosaurus_death;
+    }
+    
 
     protected void updateEntityActionState()
     {

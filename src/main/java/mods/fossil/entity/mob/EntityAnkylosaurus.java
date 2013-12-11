@@ -1,5 +1,6 @@
 package mods.fossil.entity.mob;
 
+import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
@@ -89,6 +90,32 @@ public class EntityAnkylosaurus extends EntityDinosaur
             default:
                 return "fossil:textures/mob/Ankylosaurus.png";
         }
+    }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return DinoSound.ankylosaurus_living;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.ankylosaurus_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.ankylosaurus_death;
     }
 
     /**

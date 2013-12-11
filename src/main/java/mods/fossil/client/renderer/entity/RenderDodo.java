@@ -1,5 +1,7 @@
 package mods.fossil.client.renderer.entity;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.entity.mob.EntityDodo;
@@ -14,7 +16,8 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderDodo extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Dodo_Brown.png");
+    private static final ResourceLocation dodoBrown = new ResourceLocation("fossil:textures/mob/Dodo_Brown.png");
+    private static final ResourceLocation dodoGray = new ResourceLocation("fossil:textures/mob/Dodo_Gray.png");
 
     public RenderDodo(ModelBase par1ModelBase, float par2)
     {
@@ -28,7 +31,15 @@ public class RenderDodo extends RenderLiving
 
     protected ResourceLocation func_110919_a(EntityDodo par1Entity)
     {
-        return loc;
+    	switch (par1Entity.getSkin())
+        {
+            case 0:
+            default:
+                return dodoBrown;
+
+            case 1:
+                return dodoGray;
+        }
     }
 
     protected float getWingRotation(EntityDodo par1EntityLiving, float par2)

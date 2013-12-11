@@ -1,5 +1,6 @@
 package mods.fossil.entity.mob;
 
+import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
@@ -80,6 +81,8 @@ public class EntityBrachiosaurus extends EntityDinosaur
                 return "fossil:textures/mob/Brachiosaurus.png";
         }
     }
+    
+    
 
     @Override
     /**
@@ -87,15 +90,16 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return "fossil:brachiosaurus_living";
+        return DinoSound.brachiosaurus_living;
     }
-    @Override
+
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound()
     {
-        return "fossil:brachiosaurus_hurt";
+        return DinoSound.brachiosaurus_hurt;
     }
     @Override
     /**
@@ -103,7 +107,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
      */
     protected String getDeathSound()
     {
-        return "fossil:brachiosaurus_death";
+        return DinoSound.brachiosaurus_death;
     }
 
     public int getVerticalFaceSpeed()

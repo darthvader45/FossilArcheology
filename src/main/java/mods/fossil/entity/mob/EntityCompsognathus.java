@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
@@ -124,6 +125,32 @@ public class EntityCompsognathus extends EntityDinosaur
         }
     }
 
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	return this.isTamed() ? DinoSound.compsognathus_living_tame : DinoSound.compsognathus_living_wild;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.compsognathus_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.compsognathus_death;
+    }
+    
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */

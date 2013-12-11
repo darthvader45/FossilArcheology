@@ -1,5 +1,5 @@
-#English Localization - Updated for Build 6 DEV (1.6.2)
-#Default language file
+#Updated for Build 6 DEV (1.6.4)
+#English (en_US) Localization File
 
 #Tab Groups
 itemgroup.FArmor=Ancient Armor
@@ -12,13 +12,15 @@ itemgroup.FTools=Ancient Tools
 
 #Achievements
 achievement.FirstEgg=First Dinosaur!
-achievement.AllEggs=All Dionsaur Eggs
+achievement.AllEggs=All Dinosaur Eggs
 achievement.FoundFossils=Digging for Bones
+achievement.pigBossOnEarth=Hail Anu
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=You brought back your first dinosaur!
 achievement.AllEggs.desc=You've found all the dinosaur eggs!
 achievement.FoundFossils.desc=You've found some fossils!
+achievement.pigBossOnEarth.desc=You summoned Anu!
 
 #Blocks
 tile.fossil.name=Fossil
@@ -187,10 +189,6 @@ mGCName.head=Magic Conch:
 mGCName.tail=
 dEggName.head=Egg of 
 dEggName.tail=
-
-#Achievements
-achieve.pigBossOnEarth.Name=You broke the rules!
-achieve.pigBossOnEarth.Desc=Summoned Anu.
 
 #Order chat messages
 order.head=Order: 

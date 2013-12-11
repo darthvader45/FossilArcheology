@@ -1,3 +1,4 @@
+#Updated for Build 6 DEV (1.6.4)
 #Simplified Chinese (zh_CN) Localization File
 
 #创造模式标签
@@ -13,11 +14,13 @@ itemgroup.FTools=古代工具
 achievement.FirstEgg=第一只恐龙!
 achievement.AllEggs=龙蛋收藏家
 achievement.FoundFossils=掘骨者
+achievement.pigBossOnEarth=你犯规我要告诉马麻!!
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=你带回了你的第一只恐龙!
 achievement.AllEggs.desc=你已发现所有的恐龙蛋!
 achievement.FoundFossils.desc=你已发现一些化石!
+achievement.pigBossOnEarth.desc=把阿努召唤到地面世界
 
 #方块
 tile.fossil.name=化石
@@ -186,10 +189,6 @@ mGCName.head=神奇海螺:
 mGCName.tail=模式
 dEggName.head=
 dEggName.tail=蛋
-
-#成就
-achieve.pigBossOnEarth.Name=你犯规我要告诉马麻!!
-achieve.pigBossOnEarth.Desc=把阿努召唤到地面世界
 
 #命令
 order.head=命令: 

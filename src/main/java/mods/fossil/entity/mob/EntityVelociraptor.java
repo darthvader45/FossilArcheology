@@ -1,8 +1,9 @@
 package mods.fossil.entity.mob;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Vector;
+
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIEat;
@@ -12,7 +13,15 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIOpenDoor;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -20,8 +29,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.Vector;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityVelociraptor extends EntityDinosaur
 {
@@ -135,6 +144,8 @@ public class EntityVelociraptor extends EntityDinosaur
                 return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
         }
     }
+    
+    
 
     @Override
     /**
@@ -142,7 +153,24 @@ public class EntityVelociraptor extends EntityDinosaur
      */
     protected String getLivingSound()
     {
-        return this.isTamed() ? "fossil:velociraptor_living_tame" : "fossil:velociraptor_living_wild";
+        return this.isTamed() ? DinoSound.velociraptor_living_tame : DinoSound.velociraptor_living_wild;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.velociraptor_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.velociraptor_death;
     }
 
     /**

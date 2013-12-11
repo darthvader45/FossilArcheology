@@ -12,11 +12,14 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderMammoth extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Mammoth.png");
+    private static final ResourceLocation adult = new ResourceLocation("fossil:textures/mob/MammothAdult.png");
+    private static final ResourceLocation fur = new ResourceLocation("fossil:textures/mob/MammothFur.png");
+    private static final ResourceLocation furless = new ResourceLocation("fossil:textures/mob/MammothFurless.png");
+    private static final ResourceLocation young = new ResourceLocation("fossil:textures/mob/MammothYoung.png");
 
     protected ResourceLocation func_110919_a(EntityMammoth par1Entity)
     {
-        return loc;
+        return adult;
     }
 
     protected ResourceLocation getEntityTexture(Entity par1Entity)

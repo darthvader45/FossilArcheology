@@ -20,7 +20,10 @@ public class ItemChickenEss extends ForgeFood
     @Override
     public void onFoodEaten(ItemStack var1, World var2, EntityPlayer var3)
     {
+        if (!var3.capabilities.isCreativeMode)
+        {
         var3.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
+        }
         //return super.onFoodEaten(var1, var2, var3);
     }
 

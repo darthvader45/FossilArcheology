@@ -1,3 +1,7 @@
+#Updated for Build 6 DEV (1.6.4)
+#Spanish - Spain (es_ES) Localization File
+
+#Tab Groups
 itemgroup.FArmor=Armadura Antigua
 itemgroup.FBlocks=Bloques Antiguos
 itemgroup.FCombat=Armas Antiguas
@@ -5,6 +9,20 @@ itemgroup.FFood=Comida Antigua
 itemgroup.FItems=Objetos Antiguos
 itemgroup.FMaterial=Materiales Antiguos
 itemgroup.FTools=Herramientas Antiguas
+
+#Achievements
+achievement.FirstEgg=First Dinosaur!
+achievement.AllEggs=All Dinosaur Eggs
+achievement.FoundFossils=Digging for Bones
+achievement.pigBossOnEarth=¡Rompiste la Regla!
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=You brought back your first dinosaur!
+achievement.AllEggs.desc=You've found all the dinosaur eggs!
+achievement.FoundFossils.desc=You've found some fossils!
+achievement.pigBossOnEarth.desc=Convocando a Anu a la tierra.
+
+#Blocks
 tile.fossil.name=Fósil
 tile.skullBlock.name=Calavera
 tile.skullLantern.name=Linterna de Calavera
@@ -40,6 +58,9 @@ tile.ancientGlass.name=Cristal Antiguo
 tile.ancientWoodPlate.name=Placa de Madera Antigua
 tile.ancientWoodStairs.name=Ancient Wooden Stairs
 tile.ancientStoneStairs.name=Ancient Stone Stairs
+tile.figurine.name=Wooden Figurine
+
+#Items
 item.bioFossil.name=Bio-Fósil
 item.relicScrap.name=Trozo de Reliquia
 item.stoneTablet.name=Tabla de Piedra
@@ -153,6 +174,8 @@ item.embryoSmilodon.name=Embrión de Tigre dientes de sable
 item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Dodo Embryo
 item.archNotebook.name=Archaeology Notebook
+
+#Dinosaur related chat messages
 dnaName.head=ADN de 
 dnaName.tail=
 embryoName.head=Embrión de 
@@ -163,12 +186,14 @@ mGCName.head=Caracola mágica:
 mGCName.tail=
 dEggName.head=Huevo de 
 dEggName.tail=
-achieve.pigBossOnEarth.Name=¡Rompiste la Regla!
-achieve.pigBossOnEarth.Desc=Convocando a Anu a la tierra.
+
+#Order chat messages
 order.head=Órden:
 order.stay=Estarse quieto
 order.follow=Seguirme
 order.freeMove=Moverse libremente
+
+#Dinosaur status chat messages
 status.hungry.head=Este 
 status.hungry= tiene hambre.
 status.starve.head=Un 
@@ -189,6 +214,8 @@ status.gemErrorYoung=Este tiranosaurio es aún muy joven.
 status.gemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
 status.GemErrorHealth=Este Tiranosaurio ya ha sido domado.
 status.EssenceFail=Essence of Chicken had no effect.
+
+#Dinosaur Names
 Dino.Triceratops=Triceratops
 Dino.Velociraptor=Velocirraptor
 Dino.TRex=Tiranosaurio
@@ -203,11 +230,16 @@ Dino.Spinosaurus=Espinosaurio
 Dino.Compsognathus=Compsognathus
 Dino.Ankylosaurus=Ankylosaurus
 Dino.Pachycephalosaurus=Pachycephalosaurus
+
+#Non-dinosaur names
 animal.mammoth=Mamút
+animal.smilodon=Smilodon
 animal.pregnant.cow=Vaca Embarazada
 animal.pregnant.pig=Cerdo Embarazado   
 animal.pregnant.sheep=Oveja Embarazada
 animal.dodo=Dodo
+
+#Pedia text
 pedia.text.owner=Dueño:
 pedia.text.chest=* Cofres
 pedia.text.caution=!Peligroso!
@@ -230,6 +262,9 @@ pedia.embryo.Cow=Vaca
 pedia.embryo.Chicken=Pollo
 pedia.embryo.SaberCat=Tigres Dientes de Sable
 pedia.embryo.Mammoth=Mamút
+pedia.embryo.Dodo=Dodo
+
+#Anu speaking lines
 anuSpeaker.self=Anu: 
 anuSpeaker.hello=Arrodíllate ante mí, la resistencia es inútil.
 anuSpeaker.bareHand=Pelear con tus manos... Estúpido, pero valiente.
@@ -243,24 +278,33 @@ anuSpeaker.summon=Mis sirvientes, el maestro os llama.
 anuSpeaker.trans=Brutos, despierten su sabiduría.
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=¡Que llueva fuego!
+
+#Friendly pigmen speaking lines
 fpzSpeaker.self=Cerdos Zombis: 
 fpzSpeaker.selfKill=¡No podemos vivir sin un líder!
 fpzSpeaker.lifeFor.head=¡Mi vida por 
 fpzSpeaker.lifeFor.tail=!
 fpzSpeaker.anuSommon=¡¡Saludad a Anu!!  
+
+#Dinosaur egg chat messages
 dinoegg.hatched=¡Un huevo de dinosaurio se ha abierto!
 dinoegg.noSpace=Este huevo no puede colocarse aquí. 
 dinoegg.head=Un huevo de 
 dinoegg.dry= pereció por secarse.   
-dinoegg.cold= pereció por congelarse.   
+dinoegg.cold= pereció por congelarse. 
+
+#Cultivator chat messages  
 cultivate.outBreak=¡Advertencia! ¡Fallo en el proceso de incuvación!
+
+#Drum chat messages
 drum.trigger=Orden de tambor: 
 drum.ordering=Ordenando a 
 drum.tRex1=Ordenando a los Tiranosaurios a desayunar.
 drum.tRex2=Ordenando a los Tiranosaurios a almorzar.
 drum.tRex3=Ordenando a los Tiranosaurios a cenar.
+
+#Hostile mob names
 mob.bones=Huesos
 mob.fpz=Cerdos Zombis Amistosos
 mob.failuresaurus=Faileosaurio
 boss.Anu=Anu
-

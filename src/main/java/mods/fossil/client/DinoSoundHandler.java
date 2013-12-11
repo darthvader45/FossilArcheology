@@ -18,13 +18,14 @@ public class DinoSoundHandler
     //Load sounds
     @SideOnly(Side.CLIENT)
     @ForgeSubscribe
-    public void onSoundLoad(SoundLoadEvent event)
+    public void onSound(SoundLoadEvent event)
     {
         for (String sound : DinoSound.files)
         {
             try
             {
-                event.manager.soundPoolSounds.addSound(sound);
+                event.manager.addSound(sound);
+                Fossil.Console("Added sound: " + sound);
             }
             catch (Exception e)
             {
@@ -32,7 +33,7 @@ public class DinoSoundHandler
             }
         }
 
-        Fossil.Log.log(Level.CONFIG, "Sounds loaded.");
+        Fossil.Console("Fossil: Sounds Loaded!");
     }
 
     // Load music

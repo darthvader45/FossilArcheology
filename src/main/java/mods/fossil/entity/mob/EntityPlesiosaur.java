@@ -1,10 +1,13 @@
 package mods.fossil.entity.mob;
 
+import java.util.List;
+import java.util.Random;
+
 import mods.fossil.Fossil;
-import mods.fossil.fossilAI.*;
+import mods.fossil.client.DinoSound;
+import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
-import mods.fossil.fossilInterface.IWaterDino;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -12,8 +15,6 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,9 +24,6 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Random;
 
 public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
 {
@@ -109,6 +107,32 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
             default:
                 return "fossil:textures/mob/Plesiosaur_adult.png";
         }
+    }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return DinoSound.plesiosaur_living;
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound()
+    {
+        return DinoSound.plesiosaur_hurt;
+    }
+    @Override
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return DinoSound.plesiosaur_death;
     }
 
     public boolean canBreatheUnderwater()

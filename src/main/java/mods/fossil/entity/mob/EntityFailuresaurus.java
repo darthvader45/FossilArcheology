@@ -25,14 +25,6 @@ public class EntityFailuresaurus extends EntityZombie
     @SideOnly(Side.CLIENT)
 
     /**
-     * Returns the texture's file path as a String.
-     */
-    /*public String getTexture()
-    {
-        return "/fossil/textures/Failuresaurus.png";
-    }*/
-
-    /**
      * Causes this entity to do an upwards motion (jumping).
      */
     protected void jump() {}
