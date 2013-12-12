@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
@@ -76,7 +78,7 @@ public class EntityTRex extends EntityDinosaur
     @Override
     public boolean isAIEnabled()
     {
-        return !this.isModelized() || !this.isWeak();
+        return !this.isModelized() && !this.isWeak();
     }
     
     /**
@@ -181,7 +183,7 @@ public class EntityTRex extends EntityDinosaur
          */
     public int getVerticalFaceSpeed()
     {
-        return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
+        return 50;
     }
 
     private void handleScream()
@@ -266,12 +268,13 @@ public class EntityTRex extends EntityDinosaur
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() || !this.isTamed() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isAngry() && !this.isTamed() && !this.isWeak() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
     }
 
     @Override
     public boolean attackEntityAsMob(Entity victim)
     {
+    	Random random = new Random();
         float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
         int knockback = 0;
 
@@ -280,9 +283,9 @@ public class EntityTRex extends EntityDinosaur
             attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
             knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
         }
-
         boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
-
+        if (random.nextInt(10) == 1)
+        this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume(), this.getDinoAge());
         if (attacked)
         {
             if (knockback > 0)
@@ -293,11 +296,6 @@ public class EntityTRex extends EntityDinosaur
                 victim.addVelocity(vx, vy, vz);
                 motionX *= 0.6;
                 motionZ *= 0.6;
-            }
-
-            if (victim instanceof EntityLivingBase)
-            {
-                EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
             }
 
             setLastAttacker(victim);
@@ -360,7 +358,7 @@ public class EntityTRex extends EntityDinosaur
 
      //   if (this.getDinoAge() >= 3)
      //   {
-            this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume() * 2.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume(), this.getDinoAge());
      //   }
     }
 
@@ -377,11 +375,7 @@ public class EntityTRex extends EntityDinosaur
             {
                 if (this.isWeak() && !this.isTamed())
                 {
-                    if (Fossil.FossilOptions.Heal_Dinos)
-                    {
-                        this.heal(200);
-                    }
-
+                    this.heal(200);
                     this.increaseHunger(500);
                     this.setTamed(true);
                     setPathToEntity(null);
@@ -563,7 +557,7 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean isWeak()
     {
-        return this.getHealth() < 15 && this.getDinoAge() > 5 && !this.isTamed();
+        return this.getHealth() < 8 && this.getDinoAge() > 5 && !this.isTamed();
         //return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
     }
 

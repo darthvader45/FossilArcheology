@@ -11,6 +11,7 @@ import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.fossilAI.DinoAIAvoidEntityWhenYoung;
 import mods.fossil.fossilAI.DinoAIGrowup;
 import mods.fossil.fossilAI.DinoAIStarvation;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -21,6 +22,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -80,6 +82,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public double healthModValue;
     public double damageModValue;
     public double speedModValue;
+    public double knockbackModValue;
 
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
@@ -117,6 +120,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
         getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
         getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+        
     }
 
     /**
@@ -177,6 +182,17 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(healthMod);
         double damageMod = this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + (double)this.damageMod();
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(damageMod);
+
+        if (this.isTeen()) {
+        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+        }
+        else if (this.isAdult()){
+            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+        }
+        else {
+            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+        }
+
         // double speedMod = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() + (double)this.speedMod();
         //   this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedMod);
     }
@@ -203,6 +219,14 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public double speedMod()
     {
         return speedModValue;
+    }
+    
+    /**
+     * Get dinosaur's knockback value
+     */
+    public double knockbackMod()
+    {
+        return knockbackModValue;
     }
 
     private void setPedia()
@@ -473,6 +497,15 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     protected String getDeathSound()
     {
         return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_death";
+    }
+    
+    /**
+     * Gets the pitch of living sounds in living entities.
+     */
+    protected float getSoundPitch()
+    {
+        return (!this.isAdult() && !this.isTeen()) ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 2.0F 
+        		: (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F;
     }
     
     @Override
@@ -1260,14 +1293,20 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
                     if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
                         if (this.getHunger() > 0)
                         {
+                            if (!player.capabilities.isCreativeMode)
+                            {
                             --var2.stackSize;
+                            }
 
                             if (var2.stackSize <= 0)
                             {
                                 player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
                             }
-
+                            
+                            if (!player.capabilities.isCreativeMode)
+                            {
                             player.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle, 1));
+                            }
                             this.setDinoAgeTick(/*this.AgingTicks*/this.getDinoAgeTick() + 2000);
                             this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
                             return true;
