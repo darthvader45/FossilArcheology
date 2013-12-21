@@ -25,7 +25,7 @@ public class DinoSoundHandler
             try
             {
                 event.manager.addSound(sound);
-                Fossil.Console("Added sound: " + sound);
+                //Fossil.Console("Added sound: " + sound);
             }
             catch (Exception e)
             {

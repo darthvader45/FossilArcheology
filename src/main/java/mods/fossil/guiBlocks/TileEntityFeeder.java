@@ -10,6 +10,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -18,6 +19,10 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory
 {
+	
+    private static final int[] slots_carn = new int[] {0}; // input
+    private static final int[] slots_herb = new int[] {1};  //output
+    
     private ItemStack[] feederItemStacks = new ItemStack[2];
     public int MeatCurrent = 0;
     public int MeatMax = 10000;
@@ -404,16 +409,6 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
         return false;
     }*/
 
-    public int getSizeInventorySide(ForgeDirection var1)
-    {
-        return 1;
-    }
-
-    public int getStartInventorySide(ForgeDirection var1)
-    {
-        return var1 == ForgeDirection.DOWN ? 1 : (var1 == ForgeDirection.UP ? 0 : 2);
-    }
-
     /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
@@ -434,34 +429,6 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     {
         return this.VegCurrent;
     }
-
-    @Override
-    public int[] getAccessibleSlotsFromSide(int var1)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j)
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack)
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
     
     /**
      * Sets the custom display name to use when opening a GUI linked to this tile entity.
@@ -469,5 +436,43 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     public void setGuiDisplayName(String par1Str)
     {
         this.field_94130_e = par1Str;
+    }
+    
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+    	return false;
+        //return (par1 == 0 ? isItemFuel(par2ItemStack) : true) ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+    }
+    
+    //(EnumDinoFoodItem.foodtype(this.feederItemStacks[1].itemID) == EnumDinoFoodItem.ISHERBIVOROUS || EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID) > 0)
+
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
+    public int[] getAccessibleSlotsFromSide(int par1)
+    {
+        return par1 == 0 ? slots_carn : slots_herb;
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return this.isItemValidForSlot(par1, par2ItemStack);
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return false;
     }
 }

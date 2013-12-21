@@ -16,9 +16,11 @@ import java.util.Random;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory
 {
-    private static final int[] slots_top = new int[] {};
-    private static final int[] slots_bottom = new int[] {10,11,12};
-    private static final int[] slots_sides = new int[] {0,1,2,3,4,5,6,7,8};
+
+    
+    private static final int[] slots_top = new int[] {}; // input
+    private static final int[] slots_bottom = new int[] {10,11,12};  //output
+    private static final int[] slots_sides = new int[] {0,1,2,3,4,5,6,7,8};//fuel
     
     private ItemStack[] analyzerItemStacks;
     public int analyzerBurnTime = 0;

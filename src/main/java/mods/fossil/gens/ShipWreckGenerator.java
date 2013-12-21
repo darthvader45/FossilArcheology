@@ -24,7 +24,7 @@ public class ShipWreckGenerator implements IWorldGenerator
 
                 // 25% chance of a single structure per chunk; could make a weighted list
                 // Recall that a chunk is only 16x16 blocks in area, so this is quite a lot of structures
-                if (random.nextFloat() < 0.001F)  //This doesn't seem to actually corellate with anything.
+                if (random.nextFloat() < 0.0005F)  //This doesn't seem to actually corellate with anything.
                 {
                     generateStructure(world, random, chunkX * 16, chunkZ * 16);
                 }

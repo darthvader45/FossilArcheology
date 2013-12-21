@@ -58,7 +58,6 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityPachycephalosaurus.class, new RenderPachycephalosaurus(new ModelPachycephalosaurus(), 0.5F));
         //RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
         MinecraftForgeClient.registerItemRenderer(Fossil.figurineBlock.blockID, new ItemFigurineRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(EntityWhipAttack.class, new RenderEntityWhipAttack());
     }
 
     @Override

@@ -33,7 +33,6 @@ import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
-import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
@@ -48,7 +47,6 @@ import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
-import mods.fossil.entity.EntityWhipAttack;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
@@ -109,7 +107,6 @@ import mods.fossil.items.ItemRibCage;
 import mods.fossil.items.ItemSkullHelmet;
 import mods.fossil.items.ItemStoneBoard;
 import mods.fossil.items.ItemWhip;
-import mods.fossil.items.ItemWhipAttack;
 import mods.fossil.items.forge.ForgeAxe;
 import mods.fossil.items.forge.ForgeFood;
 import mods.fossil.items.forge.ForgeHoe;
@@ -293,7 +290,6 @@ public class Fossil
     public static Item diamondjavelin;
     public static Item ancientJavelin;
     public static Item whip;
-    public static Item whipAttack;
     public static Item legBone;
     public static Item claw;
     public static Item foot;
@@ -458,7 +454,6 @@ public class Fossil
     public static int diamondjavelinID;
     public static int ancientJavelinID;
     public static int whipID;
-    public static int whipAttackID;
     public static int legBoneID;
     public static int clawID;
     public static int footID;
@@ -761,7 +756,6 @@ public class Fossil
 
             cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
             figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10125).getInt();
-            whipAttackID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.WHIP_ATTACK_NAME, 10126).getInt();
             
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -890,7 +884,6 @@ public class Fossil
         diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD, "Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         ancientJavelin = new ItemJavelin(ancientJavelinID, scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
-        whipAttack = new ItemWhipAttack(whipAttackID).setUnlocalizedName(LocalizationStrings.WHIP_ATTACK_NAME).setCreativeTab(this.tabFCombat);
         legBone = new ForgeItem(legBoneID, "Leg_Bone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME).setCreativeTab(this.tabFItems);
         claw = new ForgeItem(clawID, "Claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME).setCreativeTab(this.tabFItems);
         foot = new ForgeItem(footID, "Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
@@ -1038,7 +1031,6 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityWhipAttack.class, 		"Whip Attack",			28, this, 75, 1, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {

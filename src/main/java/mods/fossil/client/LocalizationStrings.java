@@ -82,7 +82,6 @@ public class LocalizationStrings
     public static final String DIAMOND_JAVELIN_NAME = "diamondJavelin";
     public static final String ANCIENT_JAVELIN_NAME = "ancientJavelin";
     public static final String WHIP_NAME = "whip";
-    public static final String WHIP_ATTACK_NAME = "whipAttack";
     public static final String MAGIC_CONCH_NAME = "magicConch";
     public static final String LEGBONE_NAME = "legBone";
     public static final String CLAW_NAME = "claw";

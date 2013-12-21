@@ -16,6 +16,10 @@ import java.util.Random;
 
 public class TileEntityCultivate extends TileEntity implements IInventory, ISidedInventory
 {
+    private static final int[] slots_top = new int[] {0}; //input
+    private static final int[] slots_bottom = new int[] {2,1}; //output
+    private static final int[] slots_sides = new int[] {1};  //fuel
+    
     private ItemStack[] cultivateItemStacks = new ItemStack[3];
     public int furnaceBurnTime = 0;
     public int currentItemBurnTime = 0;
@@ -301,7 +305,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         }
     }
 
-    private int getItemBurnTime(ItemStack var1)
+    private static int getItemBurnTime(ItemStack var1)
     {
         if (var1 != null)
         {
@@ -447,16 +451,6 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
     public void closeChest() {}
 
-    public int getSizeInventorySide(ForgeDirection var1)
-    {
-        return 1;
-    }
-
-    public int getStartInventorySide(ForgeDirection var1)
-    {
-        return var1 == ForgeDirection.DOWN ? 1 : (var1 == ForgeDirection.UP ? 0 : 2);
-    }
-
     /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
@@ -472,30 +466,46 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         return false;
     }
 
-    @Override
+    /**
+     * Return true if item is a fuel source (getItemBurnTime() > 0).
+     */
+    public static boolean isItemFuel(ItemStack par0ItemStack)
+    {
+        return getItemBurnTime(par0ItemStack) > 0;
+    }
+    
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return false;
+        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
     }
 
-    @Override
-    public int[] getAccessibleSlotsFromSide(int var1)
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
+    public int[] getAccessibleSlotsFromSide(int par1)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
     }
 
-    @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return this.isItemValidForSlot(par1, par2ItemStack);
     }
 
-    @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
     }
 }
