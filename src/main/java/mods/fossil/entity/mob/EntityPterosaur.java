@@ -833,9 +833,4 @@ public class EntityPterosaur extends EntityDinosaur
     {
         return this.spawnBabyAnimal(var1);
     }
-
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

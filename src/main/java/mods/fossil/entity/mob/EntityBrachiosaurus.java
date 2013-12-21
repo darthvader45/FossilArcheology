@@ -303,8 +303,4 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
     }
 
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

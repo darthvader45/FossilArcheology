@@ -686,9 +686,4 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     {
         return this.worldObj.isAirBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY + (double)(this.getEyeHeight() / 2.0F)), (int)Math.floor(this.posZ));
     }
-
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

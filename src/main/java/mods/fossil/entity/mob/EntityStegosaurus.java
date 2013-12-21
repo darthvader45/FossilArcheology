@@ -415,8 +415,4 @@ public class EntityStegosaurus extends EntityDinosaur
         return null;
     }
 
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

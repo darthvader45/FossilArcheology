@@ -773,9 +773,4 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         super.jump();
     }
-
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

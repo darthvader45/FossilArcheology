@@ -1047,9 +1047,4 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         //this.legYaw += (var11 - this.legYaw) * 0.4F;
         //this.legSwing += this.legYaw;
     }
-
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }

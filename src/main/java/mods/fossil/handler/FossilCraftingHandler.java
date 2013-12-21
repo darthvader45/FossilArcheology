@@ -39,9 +39,11 @@ public class FossilCraftingHandler implements ICraftingHandler
             }
         }
 
+        if (Fossil.DebugMode){
         Fossil.Console("eggsTotal: " + this.eggsTotal);
         Fossil.Console("eggsFound: " + this.eggsFound);
         Fossil.Console("" + eggsFound.containsAll(eggsTotal));
+        }
 
         if (eggsFound.containsAll(eggsTotal))
         {

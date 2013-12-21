@@ -16,16 +16,16 @@ import java.util.Random;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory
 {
+    private static final int[] slots_top = new int[] {};
+    private static final int[] slots_bottom = new int[] {10,11,12};
+    private static final int[] slots_sides = new int[] {0,1,2,3,4,5,6,7,8};
+    
     private ItemStack[] analyzerItemStacks;
     public int analyzerBurnTime = 0;
     public int currentItemBurnTime = 100;
     public int analyzerCookTime = 0;
     private int RawIndex = -1;
     private int SpaceIndex = -1;
-
-    private static final int[] field_102010_d = new int[] {0};
-    private static final int[] field_102011_e = new int[] {2, 1};
-    private static final int[] field_102009_f = new int[] {1};
 
     public TileEntityAnalyzer()
     {
@@ -530,50 +530,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     }
 
     /**
-     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
-     * block.
-     */
-    public int[] getAccessibleSlotsFromSide(int par1)
-    {
-        return par1 == 0 ? field_102011_e : (par1 == 1 ? field_102010_d : field_102009_f);
-    }
-
-    /**
-     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
-     * side
-     */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
-    {
-        return this.isStackValidForSlot(par1, par2ItemStack);
-    }
-
-    /**
-     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
-     * side
-     */
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
-    {
-        return false;
-    }
-    @Override
-    /* DEPRECATED
-    public int getSizeInventorySide(ForgeDirection side)
-    {
-        if (ForgeDummyContainer.legacyFurnaceSides)
-        {
-            if (side == ForgeDirection.DOWN) return 1;
-            if (side == ForgeDirection.UP) return 0;
-            return 2;
-        }
-        else
-        {
-            if (side == ForgeDirection.DOWN) return 2;
-            if (side == ForgeDirection.UP) return 0;
-            return 1;
-        }
-    }
-    */
-    /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
@@ -586,10 +542,39 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     {
         return false;
     }
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack)
+    
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+    }
+
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
+    public int[] getAccessibleSlotsFromSide(int par1)
+    {
+        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return this.isItemValidForSlot(par1, par2ItemStack);
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    {
+        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
     }
 }

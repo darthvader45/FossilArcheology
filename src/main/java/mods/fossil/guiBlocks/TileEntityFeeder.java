@@ -2,6 +2,7 @@ package mods.fossil.guiBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumDinoFoodBlock;
 import mods.fossil.fossilEnums.EnumDinoFoodItem;
@@ -22,6 +23,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     public int MeatMax = 10000;
     public int VegCurrent = 0;
     public int VegMax = 10000;
+    
+    private String field_94130_e;
+    
     public boolean[] ContainType = new boolean[EnumDinoType.values().length];
 
     public TileEntityFeeder()
@@ -105,9 +109,18 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
      */
     public String getInvName()
     {
-        return "Feeder";
+    	return this.isInvNameLocalized() ? this.field_94130_e : LocalizationStrings.FEEDER_ACTIVE_NAME;
     }
 
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
+     */
+    public boolean isInvNameLocalized()
+    {
+        return this.field_94130_e != null && this.field_94130_e.length() > 0;
+    }
+    
     /**
      * Reads a tile entity from NBT.
      */
@@ -130,6 +143,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
 
         this.MeatCurrent = var1.getInteger("MeatCurrent");
         this.VegCurrent = var1.getInteger("VegCurrent");
+        
+        if (var1.hasKey("CustomName"))
+        {
+            this.field_94130_e = var1.getString("CustomName");
+        }
     }
 
     /**
@@ -154,6 +172,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
         var1.setTag("Items", var2);
         var1.setInteger("MeatCurrent", this.MeatCurrent);
         var1.setInteger("VegCurrent", this.VegCurrent);
+        
+        if (this.isInvNameLocalized())
+        {
+        	var1.setString("CustomName", this.field_94130_e);
+        }
     }
 
     /**
@@ -413,12 +436,6 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     }
 
     @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
-    @Override
     public int[] getAccessibleSlotsFromSide(int var1)
     {
         // TODO Auto-generated method stub
@@ -444,5 +461,13 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     {
         // TODO Auto-generated method stub
         return false;
+    }
+    
+    /**
+     * Sets the custom display name to use when opening a GUI linked to this tile entity.
+     */
+    public void setGuiDisplayName(String par1Str)
+    {
+        this.field_94130_e = par1Str;
     }
 }

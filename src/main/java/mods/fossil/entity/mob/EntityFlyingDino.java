@@ -223,9 +223,4 @@ public class EntityFlyingDino extends EntityDinosaur
     {
         this.isAirBorne = _bAirborne;
     }
-
-    @Override
-    public Entity getOwner() {
-        return null;
-    }
 }
