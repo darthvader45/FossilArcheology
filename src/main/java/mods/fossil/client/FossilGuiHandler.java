@@ -36,6 +36,9 @@ public class FossilGuiHandler implements IGuiHandler
 
             case 6:
                 return new ContainerNotebook();
+            
+            case 7:
+            	return new ContainerSifter(player.inventory, (TileEntitySifter) tile_entity);
         }
 
         return null;
@@ -68,6 +71,9 @@ public class FossilGuiHandler implements IGuiHandler
 
             case 6:
                 return new GuiNotebook();
+                
+            case 7:
+            	return new GuiSifter(player.inventory, (TileEntitySifter) tile_entity);
         }
 
         return null;

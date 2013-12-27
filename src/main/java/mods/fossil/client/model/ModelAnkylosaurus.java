@@ -210,6 +210,7 @@ public class ModelAnkylosaurus extends ModelBase
 
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
+    	if(!var7){
         float PI = (float) Math.PI;
         float initialOffset = PI / 2;
         float offset = PI * 2 / 11;
@@ -251,5 +252,6 @@ public class ModelAnkylosaurus extends ModelBase
         this.Tail3.rotateAngleY = ((float) Math.pow(0.25F, 3)) * (MathHelper.cos(-0.6F * var1 + 1.1F * 2 * offset + PI / 9 + initialOffset)) - currentAngle;
         currentAngle = Tail1.rotateAngleY + Tail2.rotateAngleY + Tail3.rotateAngleY;
         */
+    	}
     }
 }

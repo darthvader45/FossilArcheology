@@ -108,32 +108,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
                 return "fossil:textures/mob/Plesiosaur_adult.png";
         }
     }
-    
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.plesiosaur_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.plesiosaur_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.plesiosaur_death;
-    }
 
     public boolean canBreatheUnderwater()
     {

@@ -131,24 +131,9 @@ public class EntityCompsognathus extends EntityDinosaur
      */
     protected String getLivingSound()
     {
+    	if (this.isModelized())
+    		return null;
     	return this.isTamed() ? DinoSound.compsognathus_living_tame : DinoSound.compsognathus_living_wild;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.compsognathus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.compsognathus_death;
     }
     
     /**

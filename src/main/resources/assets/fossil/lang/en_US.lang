@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4)
+#Updated for Build 6 DEV (1.6.4) HEAD10 December 25 2013 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -59,6 +59,7 @@ tile.ancientWoodPlate.name=Ancient Wooden Plate
 tile.ancientWoodStairs.name=Ancient Wooden Stairs
 tile.ancientStoneStairs.name=Ancient Stone Stairs
 tile.figurine.name=Wooden Figurine
+tile.sifter.name=Sifter
 
 #Items
 item.bioFossil.name=Bio-Fossil
@@ -115,8 +116,6 @@ item.animalCoin.name=Animal Coin
 item.dinoCoin.name=Dinosaur Coin
 item.dodoWing.name=Raw Dodo Wing
 item.dodoWingCooked.name=Cooked Dodo Wing
-item.record_bones.name=Fossil Record
-item.record_jp_theme.name=JP Theme
 item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
@@ -132,6 +131,7 @@ item.rawSpinosaurus.name=Spinosaurus Meat
 item.rawCompsognathus.name=Compsognathus Meat
 item.rawAnkylosaurus.name=Ankylosaurus Meat
 item.rawPachycephalosaurus.name=Pachycephalosaurus Meat
+item.rawDeinonychus.name=Deinonychus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
 item.eggTRex.name=TRex Egg
@@ -148,6 +148,7 @@ item.eggDodo.name=Dodo Egg
 item.eggCultivatedDodo.name=Cultivated Dodo Egg
 item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
+item.eggDeinonychus.name=Deinonychus Egg
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
 item.dnaTRex.name=TRex DNA
@@ -162,6 +163,7 @@ item.dnaSpinosaurus.name=Spinosaurus DNA
 item.dnaCompsognathus.name=Compsognathus DNA
 item.dnaAnkylosaurus.name=Ankylosaurus DNA
 item.dnaPachycephalosaurus.name=Pachycephalosaurus DNA
+item.dnaDeinonychus.name=Deinonychus DNA
 item.dnaPig.name=Pig DNA
 item.dnaSheep.name=Sheep DNA
 item.dnaCow.name=Cow DNA
@@ -233,6 +235,7 @@ Dino.Spinosaurus=Spinosaurus
 Dino.Compsognathus=Compsognathus
 Dino.Ankylosaurus=Ankylosaurus
 Dino.Pachycephalosaurus=Pachycephalosaurus
+Dino.Deinonychus=Deinonychus
 
 #Non-dinosaur names
 animal.mammoth=Mammoth
@@ -311,3 +314,7 @@ mob.bones=Bones
 mob.fpz=Friendly Pig Zombies
 mob.failuresaurus=Failursaurus
 boss.Anu=Anu
+
+#Records
+item.record_bones.name=Fossil Record
+item.record_jp_theme.name=JP Theme

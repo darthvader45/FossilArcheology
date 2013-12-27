@@ -25,8 +25,9 @@ public enum EnumDinoFoodMob
     Dilophosaurus(null, 25, 2),
     Brachiosaurus(null, 80, 5),
     Spinosaurus(null, 70, 5),
-    Compsognathus(null, 20, 3),
+    Compsognathus(null, 10, 1),
     Ankylosaurus(null, 50, 3),
+    Deinonychus(null, 35, 3),
     Dodo(EntityDodo.class, 20, 2),
     ;
     public Class preyClass;
@@ -63,5 +64,6 @@ public enum EnumDinoFoodMob
         Spinosaurus.setDetails(EntitySpinosaurus.class);
         Compsognathus.setDetails(EntityCompsognathus.class);
         Ankylosaurus.setDetails(EntityAnkylosaurus.class);
+        Deinonychus.setDetails(EntityDeinonychus.class);
     }
 }

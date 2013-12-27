@@ -70,6 +70,7 @@ import mods.fossil.guiBlocks.BlockAnalyzer;
 import mods.fossil.guiBlocks.BlockCultivate;
 import mods.fossil.guiBlocks.BlockDrum;
 import mods.fossil.guiBlocks.BlockFeeder;
+import mods.fossil.guiBlocks.BlockSifter;
 import mods.fossil.guiBlocks.BlockTimeMachine;
 import mods.fossil.guiBlocks.BlockWorktable;
 import mods.fossil.guiBlocks.TileEntityAnalyzer;
@@ -100,6 +101,7 @@ import mods.fossil.items.ItemFeet;
 import mods.fossil.items.ItemFemurs;
 import mods.fossil.items.ItemFernSeed;
 import mods.fossil.items.ItemFossilRecord;
+import mods.fossil.items.ItemHeadRelic;
 import mods.fossil.items.ItemIcedMeat;
 import mods.fossil.items.ItemJavelin;
 import mods.fossil.items.ItemMagicConch;
@@ -261,6 +263,7 @@ public class Fossil
     public static BlockHalfSlab ancientStoneDoubleSlab;
     public static Block marble;
     public static Block figurineBlock;
+    public static Block blockSifterIdle;
 
     //Items
     public static Item biofossil;
@@ -311,6 +314,8 @@ public class Fossil
     public static Item dodoWing;
     public static Item dodoWingCooked;
     public static Item figurineItem;
+    public static Item brokenHeadRelic;
+    public static Item potteryShards;
 
     //Armor
     public static Item skullHelmet;
@@ -425,7 +430,8 @@ public class Fossil
     public static int ancientStoneDoubleSlabID;
     public static int marbleID;
     public static int figurineBlockID;
-
+    public static int blockSifterIdleID;
+    
     //Items
     public static int biofossilID;
     public static int relicID;
@@ -475,6 +481,8 @@ public class Fossil
     public static int dodoWingID;
     public static int dodoWingCookedID;
     public static int figurineItemID;
+    public static int brokenHeadRelicID;
+    public static int potteryShardsID;
 
     //Armor
     public static int skullHelmetID;
@@ -557,6 +565,7 @@ public class Fossil
     static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
     static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
     static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
+    //static EnumArmorMaterial relicArmor = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
     		
     
     @Mod.EventHandler
@@ -618,6 +627,8 @@ public class Fossil
             ancientStoneDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME, 3041).getInt();
             marbleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt();
             figurineBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt();
+            blockSifterIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SIFTER_IDLE, 3044).getInt();
+            
             //Items
             biofossilID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt();
             relicID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RELIC_NAME, 10001).getInt();
@@ -715,16 +726,11 @@ public class Fossil
 
             //Ancient Egg
             //ancienteggID = config.getItem(Configuration.CATEGORY_ITEM, "ancientegg", 10090).getInt();
-            for (int i = 0; i < EnumDinoType.values().length; i++)
+            for (int i = 0; i < (EnumDinoType.values().length); i++)
             {
                 EGGIds[i] = config.getItem(Configuration.CATEGORY_ITEM, "egg" + EnumDinoType.values()[i].name(), 10091 + i).getInt();
             }
 
-            //eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10102).getInt();
-            //eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10103).getInt();
-            //eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10104).getInt();
-            //eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10105).getInt();
-            //eggNewID = config.getItem(Configuration.CATEGORY_ITEM, "eggNew", 10106).getInt();
             //Embryos
             //embyoSyringeID = config.getItem(Configuration.CATEGORY_ITEM, "embyoSyringe", 10107).getInt();
             embryoPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10108).getInt();
@@ -755,7 +761,9 @@ public class Fossil
             }
 
             cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
-            figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10125).getInt();
+            figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10200).getInt();
+            potteryShardsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POTTERY_SHARDS, 10201).getInt();
+            brokenHeadRelicID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HEAD_RELIC, 10202).getInt();
             
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -849,6 +857,8 @@ public class Fossil
         ancientStoneSingleSlab = (BlockHalfSlab)(new BlockAncientStoneSlab(ancientStoneSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         marble  = new BlockMarble(marbleID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.MARBLE_NAME);
         figurineBlock = new BlockFigurine(figurineBlockID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
+        blockSifterIdle = new BlockSifter(blockSifterIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE).setCreativeTab(this.tabFBlocks);
+        
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
         Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
         Block.fire.setBurnProperties(Fossil.palaePlanks.blockID, 5, 20);
@@ -892,6 +902,9 @@ public class Fossil
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
         cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
         archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
+        potteryShards = new ForgeItem(potteryShardsID, "Pottery_Shards").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
+        brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, EnumArmorMaterial.CLOTH, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(this.tabFArmor);
+        
         //BoneArmor
         skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
         ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);;
@@ -1005,6 +1018,7 @@ public class Fossil
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(figurineBlock, LocalizationStrings.FIGURINE_NAME);
+        GameRegistry.registerBlock(blockSifterIdle, LocalizationStrings.BLOCK_SIFTER_IDLE);
 
         for (int i = 0; i < 16; ++i)
         {
@@ -1014,7 +1028,7 @@ public class Fossil
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0) + ".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0) + ".name", "Ancient Wood Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0) + ".name", "Ancient Stone Slab");
-        EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, 5, false);
+        EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, 1, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityAncientJavelin.class, 	"AncientJavelin", 		3, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityMLighting.class, 		"FriendlyLighting", 	4, this, 250, 5, true);

@@ -48,6 +48,8 @@ public class LocalizationStrings
     public static final String ANCIENT_STONE_DOUBLESLAB_NAME = "ancientStoneSlabDouble";
     public static final String MARBLE_NAME = "marble";
     public static final String FIGURINE_NAME = "figurine";
+	public static final String BLOCK_SIFTER_IDLE = "sifter";
+	public static final String BLOCK_SIFTER_ACTIVE = "sifter";
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
@@ -110,6 +112,8 @@ public class LocalizationStrings
     public static final String DODO_WING_COOKED_NAME = "dodoWingCooked";
     public static final String POTTERY_NAME = "Pottery";
     public static final String ITEM_FIGURINE_NAME = "itemfigurine";
+    public static final String POTTERY_SHARDS = "potteryShard";
+    public static final String BROKEN_HEAD_RELIC = "brokenHeadRelic";
 
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
@@ -214,6 +218,7 @@ public class LocalizationStrings
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+
 
     //Dinosaur strings are handled through DinoEnum.
 

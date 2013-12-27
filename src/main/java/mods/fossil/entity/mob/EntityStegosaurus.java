@@ -103,32 +103,6 @@ public class EntityStegosaurus extends EntityDinosaur
         return "fossil:textures/mob/Stegosaurus_Baby.png";
     }
     
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.stegosaurus_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.stegosaurus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.stegosaurus_death;
-    }
-    
 
     protected void updateEntityActionState()
     {

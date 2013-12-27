@@ -35,14 +35,8 @@ public class CommonProxy
 
     public void registerChestItems()
     {
-        Random rand = new Random();
-        ChestGenHooks chestGenAcademyHooks = ChestGenHooks.getInfo("Academy");
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Item.paper), rand.nextInt(22), 10, 70));
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Block.dragonEgg), 1, 1, 70));
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Block.dragonEgg), 1, 1, 70));
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Block.dragonEgg), 1, 1, 70));
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Block.dragonEgg), 1, 1, 70));
-        chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Block.dragonEgg), 1, 1, 70));
-        // chance < saddle (1/16, ca. 6%, in max 8 slots -> 40% at least 1 egg, 0.48 eggs per chest): I think that's okay
+      //  Random rand = new Random();
+       // ChestGenHooks chestGenAcademyHooks = ChestGenHooks.getInfo("Academy");
+        //chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Item.paper), rand.nextInt(22), 10, 70));
     }
 }

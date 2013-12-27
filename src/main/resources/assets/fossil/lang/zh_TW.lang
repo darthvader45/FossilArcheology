@@ -60,6 +60,7 @@ tile.ancientWoodPlate.name=古代木板
 tile.ancientWoodStairs.name=古代木頭樓梯
 tile.ancientStoneStairs.name=古代石頭樓梯
 tile.figurine.name=木質雕像
+tile.sifter.name=Sifter
 
 #物品
 item.bioFossil.name=活體化石
@@ -116,8 +117,6 @@ item.animalCoin.name=動物硬幣
 item.dinoCoin.name=恐龍硬幣
 item.dodoWing.name=生渡渡鳥翅膀
 item.dodoWingCooked.name=烤渡渡鳥翅膀
-item.record_bones.name=化石唱片
-item.record_jp_theme.name=和風主題唱片
 item.dinoSteak.name=恐龍肉排
 item.rawTriceratops.name=三角龍肉
 item.rawVelociraptor.name=迅猛龍肉
@@ -133,6 +132,7 @@ item.rawSpinosaurus.name=脊龍肉
 item.rawCompsognathus.name=美颌龍肉
 item.rawAnkylosaurus.name=背甲龍肉
 item.rawPachycephalosaurus.name=腫頭龍肉
+item.rawDeinonychus.name=Deinonychus Meat
 item.eggTriceratops.name=三角龍蛋
 item.eggVelociraptor.name=迅猛龍蛋
 item.eggTRex.name=霸王龍蛋
@@ -149,6 +149,7 @@ item.eggDodo.name=渡渡鳥蛋
 item.eggCultivatedDodo.name=人工養殖渡渡鳥蛋
 item.eggAnkylosaurus.name=背甲龍蛋
 item.eggPachycephalosaurus.name=腫頭龍蛋
+item.eggDeinonychus.name=Deinonychus Egg
 item.dnaTriceratops.name=三角龍DNA
 item.dnaVelociraptor.name=迅猛龍DNA
 item.dnaTRex.name=霸王龍DNA
@@ -163,6 +164,7 @@ item.dnaSpinosaurus.name=脊龍DNA
 item.dnaCompsognathus.name=美颌龍DNA
 item.dnaAnkylosaurus.name=背甲龍DNA
 item.dnaPachycephalosaurus.name=腫頭龍DNA
+item.dnaDeinonychus.name=Deinonychus DNA
 item.dnaPig.name=豬DNA
 item.dnaSheep.name=羊DNA
 item.dnaCow.name=牛DNA
@@ -234,6 +236,7 @@ Dino.Spinosaurus=脊龍
 Dino.Compsognathus=美颌龍
 Dino.Ankylosaurus=背甲龍
 Dino.Pachycephalosaurus=腫頭龍
+Dino.Deinonychus=Deinonychus
 
 #動物名稱.
 animal.mammoth=猛犸象
@@ -250,8 +253,6 @@ pedia.text.caution=---警告:危險---
 pedia.text.rideable=* 可乘騎
 pedia.text.weak=虛弱垂死
 pedia.text.fly= * 可飛行
-
-#百科文本.
 pedia.eggWet=潮濕
 pedia.eggDry=幹燥
 pedia.eggCold=寒冷
@@ -294,9 +295,7 @@ fpzSpeaker.anuSommon=我皇阿努萬歲!!
 
 #恐龍蛋信息        
 dinoegg.hatched=有顆恐龍蛋孵化了!
-dinoegg.noSpace=這顆蛋無法放在這裏.
-
-#孵化信息                
+dinoegg.noSpace=這顆蛋無法放在這裏.           
 dinoegg.head=某顆
 dinoegg.dry=蛋因爲太幹燥死亡了        
 dinoegg.cold=蛋因爲太寒冷死亡了
@@ -316,3 +315,7 @@ mob.bones=骨架
 mob.fpz=僵屍豬人夥伴
 mob.failuresaurus=畸龍
 boss.Anu=阿努
+
+#Records
+item.record_bones.name=化石唱片
+item.record_jp_theme.name=和風主題唱片

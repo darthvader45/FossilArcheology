@@ -135,32 +135,6 @@ public class EntityDilophosaurus extends EntityDinosaur
                 return "fossil:textures/mob/Dilophosaurus_Adult.png";
         }
     }
-    
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.dilophosaurus_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.dilophosaurus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.dilophosaurus_death;
-    }
 
     /**
      * Causes this entity to do an upwards motion (jumping).

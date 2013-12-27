@@ -121,6 +121,13 @@ public class DinoSound
     public static final String compsognathus_living_wild = SOUND_PREFIX + "velociraptor_living_wild";
     public static final String compsognathus_hurt = SOUND_PREFIX + "velociraptor_hurt";
     public static final String compsognathus_attack = SOUND_PREFIX + "velociraptor_attack";
+    
+    //deinonychus
+    public static final String deinonychus_death = SOUND_PREFIX + "velociraptor_death";
+    public static final String deinonychus_living_tame = SOUND_PREFIX + "velociraptor_living_tame";
+    public static final String deinonychus_living_wild = SOUND_PREFIX + "velociraptor_living_wild";
+    public static final String deinonychus_hurt = SOUND_PREFIX + "velociraptor_hurt";
+    public static final String deinonychus_attack = SOUND_PREFIX + "velociraptor_attack";
 
     //dilophosaurus
     public static final String dilophosaurus_death = SOUND_PREFIX + "dilophosaurus_death";

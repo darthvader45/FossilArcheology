@@ -1,6 +1,7 @@
 package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +22,8 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     private static final int[] slots_top = new int[] {}; // input
     private static final int[] slots_bottom = new int[] {10,11,12};  //output
     private static final int[] slots_sides = new int[] {0,1,2,3,4,5,6,7,8};//fuel
+    
+    private String customName;
     
     private ItemStack[] analyzerItemStacks;
     public int analyzerBurnTime = 0;
@@ -101,8 +104,26 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
      */
     public String getInvName()
     {
-        return "Analyzer";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
     }
+    
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
+     */
+    public boolean isInvNameLocalized()
+    {
+        return this.customName != null && this.customName.length() > 0;
+    }
+
+    /**
+     * Sets the custom display name to use when opening a GUI linked to this tile entity.
+     */
+    public void setGuiDisplayName(String par1Str)
+    {
+        this.customName = par1Str;
+    }
+
 
     /**
      * Reads a tile entity from NBT.
@@ -127,6 +148,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
         this.analyzerBurnTime = var1.getShort("BurnTime");
         this.analyzerCookTime = var1.getShort("CookTime");
         this.currentItemBurnTime = 100;
+        
+        if (var1.hasKey("CustomName"))
+        {
+            this.customName = var1.getString("CustomName");
+        }
     }
 
     /**
@@ -148,6 +174,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 this.analyzerItemStacks[var3].writeToNBT(var4);
                 var2.appendTag(var4);
             }
+        }
+        
+        if (this.isInvNameLocalized())
+        {
+        	var1.setString("CustomName", this.customName);
         }
 
         var1.setTag("Items", var2);
@@ -320,21 +351,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                         i0 = EnumDinoType.values()[i - 1].DNAItem;
                     }
 
-                    /*switch(i)
-                    {
-                    	case 0:i0=Fossil.dnaTriceratops;break;
-                    	case 1:i0=Fossil.dnaBrachiosaurus;break;
-                    	case 2:i0=Fossil.dnaPlesiosaur;break;
-                    	case 3:i0=Fossil.dnaVelociraptor;break;
-                    	case 4:i0=Fossil.dnaTRex;break;
-                    	case 5:i0=Fossil.dnaDilophosaurus;break;
-                    	case 6:i0=Fossil.dnaMosasaurus;break;
-                    	case 7:i0=Fossil.dnaPterosaur;break;
-                    	case 8:i0=Fossil.dnaStegosaurus;break;
-                    	case 9:i0=Fossil.brokenSapling;break;
-                    	case 10:i0=Fossil.dnaNautilus;break;
-                        case 11:i0=Fossil.dnaSpinosaurus;break;
-                    }*/
                     var1 = new ItemStack(i0, 1);
                 }
             }
@@ -359,27 +375,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 var1 = new ItemStack(EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()), 1);
             }
-
-            /*if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawBrachiosaurus)
-                var1 = new ItemStack(Fossil.dnaBrachiosaurus, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawMosasaurus)
-                var1 = new ItemStack(Fossil.dnaMosasaurus, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawPlesiosaur)
-                var1 = new ItemStack(Fossil.dnaPlesiosaur, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawPterosaur)
-                var1 = new ItemStack(Fossil.dnaPterosaur, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawVelociraptor)
-                var1 = new ItemStack(Fossil.dnaVelociraptor, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawStegosaurus)
-                var1 = new ItemStack(Fossil.dnaStegosaurus, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawTRex)
-                var1 = new ItemStack(Fossil.dnaTRex, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawTriceratops)
-                var1 = new ItemStack(Fossil.dnaTriceratops, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawDilophosaurus)
-                var1 = new ItemStack(Fossil.dnaDilophosaurus, 1);
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.rawSpinosaurus)
-                var1 = new ItemStack(Fossil.dnaSpinosaurus, 1);*/
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.porkRaw)
             {
@@ -538,11 +533,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     public ItemStack getStackInSlotOnClosing(int var1)
     {
         return null;
-    }
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
     }
     
     /**

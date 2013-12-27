@@ -73,27 +73,13 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
      */
     protected String getLivingSound()
     {
+    	if(this.isModelized())
+    		return null;
+    	
     	if(this.isInWater())
         return DinoSound.mosasaurus_living;
     	else
     	return DinoSound.mosasaurus_outside;	
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.mosasaurus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.mosasaurus_death;
     }
 
     /**

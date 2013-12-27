@@ -153,9 +153,9 @@ public class ModelStegosaurus extends ModelDinosaurs
         var1.rotateAngleZ = var4;
     }
 
-    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
+    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean ismodelized)
     {
-        if (!var7)
+        if (!ismodelized)
         {
             this.H4.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.34906584F * var2 + 0.0F;
             this.H5.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.43633232F * var2 + 0.0F;

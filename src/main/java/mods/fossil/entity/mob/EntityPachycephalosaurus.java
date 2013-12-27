@@ -151,32 +151,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
                 return "fossil:textures/mob/Pachy-Pumpkin.png";
         }
     }
-
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.pachycephalosaurus_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.pachycephalosaurus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.pachycephalosaurus_death;
-    }
     
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.

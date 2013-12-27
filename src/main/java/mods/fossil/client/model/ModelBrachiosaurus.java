@@ -258,6 +258,7 @@ public class ModelBrachiosaurus extends ModelBase
 
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
+    	if(!var7){
         /*
                     this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1)* 0.2662F + 1) * 1.0F * var2/2F;
                     this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.2662F + (float)Math.PI) * 1.0F * var2/2F;
@@ -274,5 +275,6 @@ public class ModelBrachiosaurus extends ModelBase
         this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.15F + var2);
         this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
         this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.05F + var2);
+    	}
     }
 }

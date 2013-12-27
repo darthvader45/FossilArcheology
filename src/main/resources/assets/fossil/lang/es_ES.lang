@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4)
+#Updated for Build 6 DEV (1.6.4) HEAD10 December 25 2013 
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -59,6 +59,7 @@ tile.ancientWoodPlate.name=Placa de Madera Antigua
 tile.ancientWoodStairs.name=Ancient Wooden Stairs
 tile.ancientStoneStairs.name=Ancient Stone Stairs
 tile.figurine.name=Wooden Figurine
+tile.sifter.name=Sifter
 
 #Items
 item.bioFossil.name=Bio-Fósil
@@ -129,6 +130,8 @@ item.rawBrachiosaurus.name=Carne de Brachiosaurio
 item.rawSpinosaurus.name=Carne de Espinosaurio
 item.rawCompsognathus.name=Carne de Compsognathus
 item.rawAnkylosaurus.name=Carne de Ankylosaurus
+item.rawPachycephalosaurus.name=Pachycephalosaurus Meat
+item.rawDeinonychus.name=Deinonychus Meat
 item.eggTriceratops.name=Huevo de Triceratops
 item.eggVelociraptor.name=Huevo de Velocirraptor
 item.eggTRex.name=Huevo de Tiranosaurio
@@ -145,6 +148,7 @@ item.eggDodo.name=Dodo Egg
 item.eggCultivatedDodo.name=Cultivated Dodo Egg
 item.eggAnkylosaurus.name=Huevo de Ankylosaurus
 item.eggPachycephalosaurus.name=Huevo de Pachycephalosaurus
+item.eggDeinonychus.name=Deinonychus Egg
 item.dnaTriceratops.name=ADN de Triceratops
 item.dnaVelociraptor.name=ADN de Velocirraptor
 item.dnaTRex.name=ADN de Tiranosaurio
@@ -159,6 +163,7 @@ item.dnaSpinosaurus.name=ADN de Espinosaurio
 item.dnaCompsognathus.name=ADN de Compsognathus
 item.dnaAnkylosaurus.name=ADN de Ankylosaurus
 item.dnaPachycephalosaurus.name=ADN de Pachycephalosaurus
+item.dnaDeinonychus.name=Deinonychus DNA
 item.dnaPig.name=ADN de Cerdo
 item.dnaSheep.name=ADN de Oveja
 item.dnaCow.name=ADN de Vaca
@@ -230,6 +235,7 @@ Dino.Spinosaurus=Espinosaurio
 Dino.Compsognathus=Compsognathus
 Dino.Ankylosaurus=Ankylosaurus
 Dino.Pachycephalosaurus=Pachycephalosaurus
+Dino.Deinonychus=Deinonychus
 
 #Non-dinosaur names
 animal.mammoth=Mamút
@@ -308,3 +314,7 @@ mob.bones=Huesos
 mob.fpz=Cerdos Zombis Amistosos
 mob.failuresaurus=Faileosaurio
 boss.Anu=Anu
+
+#Records
+item.record_bones.name=Fossil Record
+item.record_jp_theme.name=JP Theme

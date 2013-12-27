@@ -480,6 +480,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getLivingSound()
     {
+    	if(this.isModelized())
+    		return null;
         return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
     }
     @Override
@@ -488,6 +490,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getHurtSound()
     {
+    	if(this.isModelized())
+    		return null;
         return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_hurt";
     }
     @Override
@@ -496,6 +500,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
      */
     protected String getDeathSound()
     {
+    	if(this.isModelized())
+    		return null;
         return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_death";
     }
     

@@ -578,6 +578,10 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Ankylosaurus:
                         var5 = new EntityAnkylosaurus(this.worldObj);
                         break;
+                        
+                    case Deinonychus:
+                        var5 = new EntityDeinonychus(this.worldObj);
+                        break;
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", player);

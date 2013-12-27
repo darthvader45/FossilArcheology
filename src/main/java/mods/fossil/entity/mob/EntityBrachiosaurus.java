@@ -82,34 +82,6 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
     }
     
-    
-
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.brachiosaurus_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.brachiosaurus_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.brachiosaurus_death;
-    }
-
     public int getVerticalFaceSpeed()
     {
         return this.isSitting() ? 70 : super.getVerticalFaceSpeed();

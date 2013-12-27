@@ -228,16 +228,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                 //if(this.feederItemStacks[0].getItem() instanceof fossil.items.ItemDinoMeat)
                 {
                     //TODO the feeder contains the raw food of the dino....he wont eat out of it anymore until it has been emptied!
-                    /*if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTriceratops.itemID)this.ContainType[EnumDinoType.Triceratops.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawVelociraptor.itemID)this.ContainType[EnumDinoType.Velociraptor.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawTRex.itemID)this.ContainType[EnumDinoType.TRex.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawStegosaurus.itemID)this.ContainType[EnumDinoType.Stegosaurus.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPterosaur.itemID)this.ContainType[EnumDinoType.Pterosaur.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawPlesiosaur.itemID)this.ContainType[EnumDinoType.Plesiosaur.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawMosasaurus.itemID)this.ContainType[EnumDinoType.Mosasaurus.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawDilophosaurus.itemID)this.ContainType[EnumDinoType.Dilophosaurus.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawBrachiosaurus.itemID)this.ContainType[EnumDinoType.Brachiosaurus.ordinal()]=true;
-                    if(this.feederItemStacks[0].getItem().itemID==Fossil.rawSpinosaurus.itemID)this.ContainType[EnumDinoType.Spinosaurus.ordinal()]=true;*/
+
                     if (EnumDinoType.isDinoDrop(this.feederItemStacks[0].getItem()))
                     {
                         this.ContainType[EnumDinoType.getIndex(this.feederItemStacks[0].getItem())] = true;

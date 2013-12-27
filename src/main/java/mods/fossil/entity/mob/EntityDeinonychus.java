@@ -32,30 +32,28 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityVelociraptor extends EntityDinosaur
+public class EntityDeinonychus extends EntityDinosaur
 {
-    private boolean looksWithInterest;
 
-    public int LearningChestTick = 900;
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
     public Vector MemberList = new Vector();
 
-    public EntityVelociraptor(World var1)
+    public EntityDeinonychus(World var1)
     {
-        super(var1, EnumDinoType.Velociraptor);
-        this.looksWithInterest = false;
+        super(var1, EnumDinoType.Deinonychus);
         this.updateSize();
+        
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Velociraptor.AdultAge;
+        this.adultAge = EnumDinoType.Deinonychus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.5F);
         // Size of dinosaur at day 0.
-        this.minSize = 0.25F;
+        this.minSize = 0.3F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 0.5F;
+        this.maxSize = 1.0F;
         this.healthModValue = 3;
         this.damageModValue = 2;
         this.speedModValue = 0.01;
@@ -98,7 +96,7 @@ public class EntityVelociraptor extends EntityDinosaur
      */
     protected boolean canTriggerWalking()
     {
-        return false;
+        return !this.isTeen();
     }
 
     /**
@@ -115,33 +113,23 @@ public class EntityVelociraptor extends EntityDinosaur
         {
             switch (this.getSubSpecies())
             {
-                case 1:
-                    return Fossil.modid + ":textures/mob/Velociraptor_Blue_Adult.png";
-
-                case 2:
-                    return Fossil.modid + ":textures/mob/Velociraptor_Green_Adult.png";
-
-                case 3:
-                    return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
-
-                default:
-                    return Fossil.modid + ":textures/mob/Velociraptor_brown_Adult.png";
+            default: case 1:
+                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Adult.png";
             }
         }
-
-        switch (this.getSubSpecies())
-        {
-            case 1:
-                return Fossil.modid + ":textures/mob/Velociraptor_Blue_Baby.png";
-
-            case 2:
-                return Fossil.modid + ":textures/mob/Velociraptor_Green_Baby.png";
-
-            case 3:
-                return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
-
-            default:
-                return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
+        else if (this.isTeen()) {
+            switch (this.getSubSpecies())
+            {
+            default: case 1:
+                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Teen.png";
+            }
+        }
+        else {
+            switch (this.getSubSpecies())
+            {
+            default: case 1:
+                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Baby.png";
+            }
         }
     }
     
@@ -155,35 +143,14 @@ public class EntityVelociraptor extends EntityDinosaur
     {
     	if(this.isModelized())
     		return null;
-        return this.isTamed() ? DinoSound.velociraptor_living_tame : DinoSound.velociraptor_living_wild;
+        return this.isTamed() ? DinoSound.deinonychus_living_tame : DinoSound.deinonychus_living_wild;
     }
-
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    /*
-    protected void jump()
-    {
-        this.motionY = 0.41999998688697815D * (double)(1 + this.getDinoAge() / 16);
-
-        if (this.isSprinting())
-        {
-            float var1 = this.rotationYaw * 0.01745329F;
-            this.motionX -= (double)(MathHelper.sin(var1) * 0.2F);
-            this.motionZ += (double)(MathHelper.cos(var1) * 0.2F);
-        }
-
-        this.isAirBorne = true;
-    }
-    */
-
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound var1)
     {
         super.writeEntityToNBT(var1);
-        var1.setInteger("LearningChestTick", this.LearningChestTick);
         /*if (this.ItemInMouth != null)
         {
             var1.setShort("Itemid", (short)this.ItemInMouth.itemID);
@@ -208,7 +175,6 @@ public class EntityVelociraptor extends EntityDinosaur
     public void readEntityFromNBT(NBTTagCompound var1)
     {
         super.readEntityFromNBT(var1);
-        this.LearningChestTick = var1.getInteger("LearningChestTick");
         /*short var2 = var1.getShort("Itemid");
         byte var3 = var1.getByte("ItemCount");
         short var4 = var1.getShort("ItemDamage");
@@ -244,78 +210,7 @@ public class EntityVelociraptor extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-        /*
-        if(this.LearningChestTick>0 && this.isNearbyChest() && this.isAdult())
-        {
-        	this.LearningChestTick--;
-        	if(this.LearningChestTick==0)
-        		this.SendStatusMessage(EnumSituation.LearningChest);//, this.SelfType);
-        }
-        */
-        /*this.field_25054_c = this.field_25048_b;
-
-        if (this.looksWithInterest)
-        {
-            this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
-        }
-        else
-        {
-            this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
-        }
-
-        if (this.looksWithInterest)
-        {
-            this.numTicksToChaseTarget = 10;
-        }*/
     }
-    /*
-    public boolean isLearnedChest()
-    {
-        return this.LearningChestTick == 0;
-    }
-    private boolean isNearbyChest()
-    {
-        TileEntity var5 = null;
-        for (int var6 = -10; var6 <= 10; ++var6)
-        {
-            for (int var7 = 0; var7 <= 3; ++var7)
-            {
-                for (int var8 = -10; var8 <= 10; ++var8)
-                {
-                    var5 = this.worldObj.getBlockTileEntity((int)(this.posX + (double)var6), (int)(this.posY + (double)var7), (int)(this.posZ + (double)var8));
-                    if (var5 instanceof TileEntityChest)
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
-    */
-    /*public boolean getSelfShaking()
-    {
-        return false;
-    }
-
-    public float getShadingWhileShaking(float var1)
-    {
-        return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * var1) / 2.0F * 0.25F;
-    }
-
-    public float getShakeAngle(float var1, float var2)
-    {
-        float var3 = (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * var1 + var2) / 1.8F;
-
-        if (var3 < 0.0F)
-        {
-            var3 = 0.0F;
-        }
-        else if (var3 > 1.0F)
-        {
-            var3 = 1.0F;
-        }
-
-        return MathHelper.sin(var3 * (float)Math.PI) * MathHelper.sin(var3 * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
-    }*/
 
     public float getEyeHeight()
     {
@@ -624,11 +519,6 @@ public class EntityVelociraptor extends EntityDinosaur
     public void ShowPedia(GuiPedia p0)
     {
         super.ShowPedia(p0);
-
-        if (this.LearningChestTick == 0)
-        {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
-        }
     }
     /*public void ShowPedia(EntityPlayer var1)
     {
@@ -706,7 +596,7 @@ public class EntityVelociraptor extends EntityDinosaur
 
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {
-        return new EntityVelociraptor(this.worldObj);
+        return new EntityDeinonychus(this.worldObj);
     }
 
     /*
