@@ -110,7 +110,7 @@ public class WaterDinoAIWander extends EntityAIBase
         {
             this.targetedEntity = null;
         }
-
+/*
         //this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
@@ -147,7 +147,9 @@ public class WaterDinoAIWander extends EntityAIBase
         {
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
         }
- 
+        */
+        this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
+
     }
     
 

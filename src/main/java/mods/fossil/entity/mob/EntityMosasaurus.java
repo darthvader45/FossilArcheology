@@ -1,7 +1,9 @@
 package mods.fossil.entity.mob;
 
 import mods.fossil.client.DinoSound;
+import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
+import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -10,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -44,7 +47,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.experienceValue = 5;
         
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
-        this.tasks.addTask(7, new WaterDinoAIAttack(this, 2.0D));
+        this.tasks.addTask(7, new WaterDinoAIWander(this, 2.0D));
+        this.tasks.addTask(3, new WaterDinoAIAttack(this, 2.0D));
+        this.tasks.addTask(4, new DinoAIEat(this, 60));
     }
 
     public boolean canBreatheUnderwater()
@@ -123,11 +128,6 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
-    }
-
-    protected void updateEntityActionState()
-    {
-
     }
 
     @Override

@@ -6,6 +6,7 @@ import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -41,7 +42,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMammoth extends EntityTameable implements IShearable
+public class EntityMammoth extends EntityPrehistoric implements IShearable
 {
     private static final int SIZE_MULTIFER = 5;
     private static final int EATING_TIMES_TO_GROW_FUR = 5;
@@ -77,6 +78,10 @@ public class EntityMammoth extends EntityTameable implements IShearable
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+
+        
         this.experienceValue = 5;
     }
 
@@ -249,9 +254,9 @@ public class EntityMammoth extends EntityTameable implements IShearable
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer var1)
+    public boolean interact(EntityPlayer player)
     {
-        ItemStack var2 = var1.inventory.getCurrentItem();
+        ItemStack var2 = player.inventory.getCurrentItem();
 
         if (var2 != null)
         {
@@ -265,18 +270,37 @@ public class EntityMammoth extends EntityTameable implements IShearable
             if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
             {
                 this.setPedia();
-                var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+                player.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
                 return true;
             }
+            
+            if (var2.itemID == Fossil.whip.itemID && this.isTamed() && !this.isChild() && !this.worldObj.isRemote 
+            		&& this.riddenByEntity == null && player.username.equalsIgnoreCase(this.getOwnerName())) {
+                setRidingPlayer(player);
+            }
+            
         }
 
-        return super.interact(var1);
+        return super.interact(player);
     }
+    
+    public void setRidingPlayer(EntityPlayer player)
+    {
+        player.rotationYaw = this.rotationYaw;
+        player.rotationPitch = this.rotationPitch;
+        player.mountEntity(this);
+    }
+    
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), 97, 23, 40, 90, 245);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), p0.rightIndent, 34, 40, 90, 245);
+        
+        if (this.hasCustomNameTag())
+        {
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+        }
 
         if (this.isTamed())
         {
@@ -291,7 +315,7 @@ public class EntityMammoth extends EntityTameable implements IShearable
             p0.AddStringLR(s0, true);
         }
 
-        p0.PrintItemXY(Fossil.embryoMammoth, 120, 7);
+        p0.PrintItemXY(Fossil.embryoMammoth, ((p0.xGui/2) + (p0.xGui/4)), 7);
     }
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {
@@ -462,6 +486,18 @@ public class EntityMammoth extends EntityTameable implements IShearable
         return null;
     }*/
 
+    public void moveEntityWithHeading(float par1, float par2)
+    {
+            super.moveEntityWithHeading(par1, par2);
+
+        this.stepHeight = 0.5F;
+
+        if (this.riddenByEntity != null || !this.isChild())
+        {
+            this.stepHeight = 1.0F;
+        }
+    }
+    
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
@@ -469,5 +505,23 @@ public class EntityMammoth extends EntityTameable implements IShearable
         var2.setGrowingAge(-24000);
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
         return var2;
+    }
+    
+    public float getEyeHeight()
+    {
+        return 5.3F;
+    }
+
+    public float getHalfHeight()
+    {
+        return this.getEyeHeight() / 2.0F + 0.7F;
+    }
+    
+    public void updateRiderPosition()
+    {
+        if (this.riddenByEntity != null)
+        {
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+        }
     }
 }

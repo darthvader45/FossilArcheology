@@ -122,6 +122,9 @@ public class WaterDinoAIAttack extends EntityAIBase
             this.deltaY = this.targetedEntity.posY - this.entity.posY;
             this.deltaZ = this.targetedEntity.posZ - this.entity.posZ;
             this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            deltaX /= length + 1.2D;
+            deltaY /= length + 1.2D;
+            deltaZ /= length + 1.2D;
             
             //Set waypoint for player's current location.
             this.waypointX += deltaX;
@@ -135,7 +138,7 @@ public class WaterDinoAIAttack extends EntityAIBase
 
             if (this.entity.canEntityBeSeen(this.targetedEntity))
             {
-                 	this.entity.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.entity.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
+                // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
                 this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
                 Vec3 vec3 = this.entity.getLook(1.0F);
             }
@@ -144,7 +147,6 @@ public class WaterDinoAIAttack extends EntityAIBase
         {
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
         }
- 
     }
     
 

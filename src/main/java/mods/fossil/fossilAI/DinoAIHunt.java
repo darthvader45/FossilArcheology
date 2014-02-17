@@ -53,7 +53,6 @@ public class DinoAIHunt extends EntityAITarget
                 {//No modelized Dinos for Lunch!
                     this.targetEntity = entity;
                 	this.dinosaur.setAttackTarget(entity);
-                	Fossil.Log.log(Level.INFO, "typeofTarget: " + this.targetEntity);
                 	return true;
                 }
             }

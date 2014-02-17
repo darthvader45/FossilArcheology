@@ -22,7 +22,7 @@ public class TileEntitySifterRenderer extends TileEntitySpecialRenderer {
     
 
 
-    private static final ResourceLocation field_110638_a = new ResourceLocation("fossil:textures/blocks/figurines/figurine_0.png");
+    private static final ResourceLocation field_110638_a = new ResourceLocation("fossil:textures/blocks/Sifter.png");
     private final ModelSifter modelSifter = new ModelSifter();
 	private double  theta;
 	private double angle;
@@ -39,10 +39,11 @@ public class TileEntitySifterRenderer extends TileEntitySpecialRenderer {
          this.bindTexture(field_110638_a);
          
          this.modelSifter.sifter.rotateAngleZ = 1.57079633F;
-         
+        /* 
          if(tileentity.isPowered){
          this.run(tileentity.animationOffset, 0.2F);
          }
+         */
          
          //this.modelSifter.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
          

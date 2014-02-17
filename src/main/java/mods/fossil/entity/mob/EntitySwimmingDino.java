@@ -17,33 +17,6 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
         return true;
     }
 
-    /*
-    @Override
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-
-    	
-        if (this.isInWater())
-        {
-            this.moveFlying(par1, par2, 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionY *= 0.800000011920929D;
-        }
-        else if (this.handleLavaMovement())
-        {
-            this.moveFlying(par1, par2, 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.5D;
-            this.motionY *= 0.5D;
-            this.motionZ *= 0.5D;
-        }
-        else
-        {
-    	super.moveEntityWithHeading(par1, par2);
-        }
-    }
-    */
-    
     public void moveEntityWithHeading(float par1, float par2)
     {
         double d0;
@@ -150,6 +123,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
     /**
      * returns true if this entity is by a ladder, false otherwise
      */
+    @Override
     public boolean isOnLadder()
     {
         return false;

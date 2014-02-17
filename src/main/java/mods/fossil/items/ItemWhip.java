@@ -2,7 +2,9 @@ package mods.fossil.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.test.EntityFlyingDinosaur;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemCarrotOnAStick;
@@ -43,24 +45,28 @@ public class ItemWhip extends ItemCarrotOnAStick
      */
     public ItemStack onItemRightClick(ItemStack I, World W, EntityPlayer P)
     {
-        if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
+        if (P.isRiding() && P.ridingEntity instanceof EntityFlyingDinosaur)
         {
-            EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
-
-//            if (D.getRidingHandler().isControlledByPlayer() && I.getMaxDamage() - I.getItemDamage() >= 5)
-
-            if (D.getAIControlledByPlayer().isControlledByPlayer())
-            {
-                //   D.getRidingHandler().boostSpeed();
-                //System.out.println("SPEED BOOSTED!");
-                //System.out.println("Damage before:"+String.valueOf(I.getItemDamage()));
+        	EntityFlyingDinosaur D = (EntityFlyingDinosaur)P.ridingEntity;
+        	
+        	if(!D.isFlying())
+        	{
+        	D.liftOff();
+        	}else {
+        //	D.islanding = !D.islanding;
+        	}
+        	
+        	
                 I.damageItem(1, P);
-                //System.out.println("Damage after:"+String.valueOf(I.getItemDamage()));
-                //I.setItemDamage(I.getItemDamage()+5);
-                //W.playSoundEffect(P.posX, P.posY, P.posZ, "WhipCrack", 0.5F, 1.0F);
                 P.swingItem();
                 P.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
-            }
+        }
+        else if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
+        {
+            EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
+                I.damageItem(1, P);
+                P.swingItem();
+                P.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
         }
         else
         {

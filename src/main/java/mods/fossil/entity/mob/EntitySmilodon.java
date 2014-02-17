@@ -635,7 +635,12 @@ public class EntitySmilodon extends EntityTameable
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), 97, 23, 40, 90, 245);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), p0.rightIndent, 34, 40, 90, 245);
+        
+        if (this.hasCustomNameTag())
+        {
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+        }
 
         if (this.isTamed())
         {
@@ -650,7 +655,7 @@ public class EntitySmilodon extends EntityTameable
             p0.AddStringLR(s0, true);
         }
 
-        p0.PrintItemXY(Fossil.embryoSmilodon, 120, 7);
+        p0.PrintItemXY(Fossil.embryoSmilodon, ((p0.xGui/2) + (p0.xGui/4)), 7);
     }
 
     public boolean isAngry()

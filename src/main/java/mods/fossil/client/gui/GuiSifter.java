@@ -47,6 +47,7 @@ public class GuiSifter extends GuiContainer
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         int i1;
 
+        /*
         if (this.furnaceInventory.isBurning())
         {
             i1 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
@@ -55,5 +56,6 @@ public class GuiSifter extends GuiContainer
 
         i1 = this.furnaceInventory.getCookProgressScaled(24);
         this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
+        */
     }
 }

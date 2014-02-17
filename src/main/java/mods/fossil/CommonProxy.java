@@ -5,6 +5,7 @@ import java.util.Random;
 import mods.fossil.handler.FossilPacketHandler;
 import mods.fossil.handler.RemoteKeyHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -38,5 +39,9 @@ public class CommonProxy
       //  Random rand = new Random();
        // ChestGenHooks chestGenAcademyHooks = ChestGenHooks.getInfo("Academy");
         //chestGenAcademyHooks.addItem(new WeightedRandomChestContent(new ItemStack(Item.paper), rand.nextInt(22), 10, 70));
+    }
+    
+    public ModelBiped getArmorModel(int id){
+    	return null;
     }
 }

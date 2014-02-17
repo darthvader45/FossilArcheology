@@ -11,6 +11,7 @@ package mods.fossil.fossilAI;
 
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityPrehistoric;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,7 +27,7 @@ public class DinoAIRideGround extends DinoAIRide
     private static final float PLAYER_SPEED = 0.98f;
     private final double speed;
 
-    public DinoAIRideGround(EntityDinosaur dinosaur, double speed)
+    public DinoAIRideGround(EntityPrehistoric dinosaur, double speed)
     {
         super(dinosaur);
         this.speed = speed;

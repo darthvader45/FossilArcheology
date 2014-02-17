@@ -17,7 +17,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
     public boolean isTamed = false;
 
 //    final float PUSHDOWN_HARDNESS = 5.0F;
-    final EntityAIControlledByPlayer aiControlledByPlayer;
+    //final EntityAIControlledByPlayer aiControlledByPlayer;
 
     public EntityBrachiosaurus(World var1)
     {
@@ -35,7 +35,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         this.maxSize = 4.5F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        //this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -52,10 +52,12 @@ public class EntityBrachiosaurus extends EntityDinosaur
     /**
      * Return the AI task for player control.
      */
+    /*
     public EntityAIControlledByPlayer getAIControlledByPlayer()
     {
         return this.aiControlledByPlayer;
     }
+    */
 
     protected void applyEntityAttributes()
     {

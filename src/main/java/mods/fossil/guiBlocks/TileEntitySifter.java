@@ -1,129 +1,85 @@
 package mods.fossil.guiBlocks;
 
-import java.util.Random;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ForgeDummyContainer;
 
-public class TileEntitySifter extends TileEntity implements ISidedInventory
+import java.util.Random;
+
+public class TileEntitySifter extends TileEntity implements IInventory, ISidedInventory
 {
-    private static final int[] slots_top = new int[] {0};
-    private static final int[] slots_bottom = new int[] {2, 1};
-    private static final int[] slots_sides = new int[] {1};
+
     
-    /** The current angle of the lid (between 0 and 1) */
-    public float lidAngle;
-
-    /** The angle of the lid last tick */
-    public float prevLidAngle;
+    private static final int[] slots_top = new int[] {}; // input
+    private static final int[] slots_bottom = new int[] {1,2,3,4,5};  //output
+    private static final int[] slots_sides = new int[] {0};//fuel
     
-    public boolean isPowered = false;
-
-    /**
-     * The ItemStacks that hold the items currently being used in the furnace
-     */
-    private ItemStack[] furnaceItemStacks = new ItemStack[3];
-
-    /** The number of ticks that the furnace will keep burning */
-    public int furnaceBurnTime;
-
-    /**
-     * The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for
-     */
-    public int currentItemBurnTime;
-
-    /** The number of ticks that the current item has been cooking for */
-    public int furnaceCookTime;
-    private String field_94130_e;
-
-    public long animationOffset;
-    public float speed;
+    private String customName;
     
-	public TileEntitySifter(){
-		this.animationOffset = System.nanoTime() % 400000;
-	  	this.speed = 0.0F;
-	}
-	
+    private ItemStack[] sifterItemStacks;
+    public int sifterBurnTime = 0;
+    public int currentItemBurnTime = 100;
+    public int sifterCookTime = 0;
+    private int RawIndex = -1;
+    private int SpaceIndex = -1;
+
+    public TileEntitySifter()
+    {
+        sifterItemStacks = new ItemStack[6];
+    }
     /**
      * Returns the number of slots in the inventory.
      */
     public int getSizeInventory()
     {
-        return this.furnaceItemStacks.length;
+        return this.sifterItemStacks.length;
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    public ItemStack getStackInSlot(int var1)
     {
-        return this.furnaceItemStacks[par1];
+        return this.sifterItemStacks[var1];
     }
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    public ItemStack decrStackSize(int var1, int var2)
     {
-        if (this.furnaceItemStacks[par1] != null)
+        if (this.sifterItemStacks[var1] != null)
         {
-            ItemStack itemstack;
+            ItemStack var3;
 
-            if (this.furnaceItemStacks[par1].stackSize <= par2)
+            if (this.sifterItemStacks[var1].stackSize <= var2)
             {
-                itemstack = this.furnaceItemStacks[par1];
-                this.furnaceItemStacks[par1] = null;
-                return itemstack;
+                var3 = this.sifterItemStacks[var1];
+                this.sifterItemStacks[var1] = null;
+                return var3;
             }
             else
             {
-                itemstack = this.furnaceItemStacks[par1].splitStack(par2);
+                var3 = this.sifterItemStacks[var1].splitStack(var2);
 
-                if (this.furnaceItemStacks[par1].stackSize == 0)
+                if (this.sifterItemStacks[var1].stackSize == 0)
                 {
-                    this.furnaceItemStacks[par1] = null;
+                    this.sifterItemStacks[var1] = null;
                 }
 
-                return itemstack;
+                return var3;
             }
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    /**
-     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
-     * like when you close a workbench GUI.
-     */
-    public ItemStack getStackInSlotOnClosing(int par1)
-    {
-        if (this.furnaceItemStacks[par1] != null)
-        {
-            ItemStack itemstack = this.furnaceItemStacks[par1];
-            this.furnaceItemStacks[par1] = null;
-            return itemstack;
         }
         else
         {
@@ -134,32 +90,31 @@ public class TileEntitySifter extends TileEntity implements ISidedInventory
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    public void setInventorySlotContents(int var1, ItemStack var2)
     {
-        this.furnaceItemStacks[par1] = par2ItemStack;
+        this.sifterItemStacks[var1] = var2;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        if (var2 != null && var2.stackSize > this.getInventoryStackLimit())
         {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+            var2.stackSize = this.getInventoryStackLimit();
         }
     }
-
 
     /**
      * Returns the name of the inventory.
      */
     public String getInvName()
     {
-        return this.isInvNameLocalized() ? this.field_94130_e : "tile." + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
     }
-
+    
     /**
      * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
      * language. Otherwise it will be used directly.
      */
     public boolean isInvNameLocalized()
     {
-        return this.field_94130_e != null && this.field_94130_e.length() > 0;
+        return this.customName != null && this.customName.length() > 0;
     }
 
     /**
@@ -167,66 +122,67 @@ public class TileEntitySifter extends TileEntity implements ISidedInventory
      */
     public void setGuiDisplayName(String par1Str)
     {
-        this.field_94130_e = par1Str;
+        this.customName = par1Str;
     }
+
 
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readFromNBT(NBTTagCompound var1)
     {
-        super.readFromNBT(par1NBTTagCompound);
-        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-        this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
+        super.readFromNBT(var1);
+        NBTTagList var2 = var1.getTagList("Items");
+        this.sifterItemStacks = new ItemStack[this.getSizeInventory()];
 
-        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-            byte b0 = nbttagcompound1.getByte("Slot");
+            NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+            byte var5 = var4.getByte("Slot");
 
-            if (b0 >= 0 && b0 < this.furnaceItemStacks.length)
+            if (var5 >= 0 && var5 < this.sifterItemStacks.length)
             {
-                this.furnaceItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+                this.sifterItemStacks[var5] = ItemStack.loadItemStackFromNBT(var4);
             }
         }
 
-        this.furnaceBurnTime = par1NBTTagCompound.getShort("BurnTime");
-        this.furnaceCookTime = par1NBTTagCompound.getShort("CookTime");
-        this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
-
-        if (par1NBTTagCompound.hasKey("CustomName"))
+        this.sifterBurnTime = var1.getShort("BurnTime");
+        this.sifterCookTime = var1.getShort("CookTime");
+        this.currentItemBurnTime = 100;
+        
+        if (var1.hasKey("CustomName"))
         {
-            this.field_94130_e = par1NBTTagCompound.getString("CustomName");
+            this.customName = var1.getString("CustomName");
         }
     }
 
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeToNBT(NBTTagCompound var1)
     {
-        super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setShort("BurnTime", (short)this.furnaceBurnTime);
-        par1NBTTagCompound.setShort("CookTime", (short)this.furnaceCookTime);
-        NBTTagList nbttaglist = new NBTTagList();
+        super.writeToNBT(var1);
+        var1.setShort("BurnTime", (short)this.sifterBurnTime);
+        var1.setShort("CookTime", (short)this.sifterCookTime);
+        NBTTagList var2 = new NBTTagList();
 
-        for (int i = 0; i < this.furnaceItemStacks.length; ++i)
+        for (int var3 = 0; var3 < this.sifterItemStacks.length; ++var3)
         {
-            if (this.furnaceItemStacks[i] != null)
+            if (this.sifterItemStacks[var3] != null)
             {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                nbttagcompound1.setByte("Slot", (byte)i);
-                this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
+                NBTTagCompound var4 = new NBTTagCompound();
+                var4.setByte("Slot", (byte)var3);
+                this.sifterItemStacks[var3].writeToNBT(var4);
+                var2.appendTag(var4);
             }
         }
-
-        par1NBTTagCompound.setTag("Items", nbttaglist);
-
+        
         if (this.isInvNameLocalized())
         {
-            par1NBTTagCompound.setString("CustomName", this.field_94130_e);
+        	var1.setString("CustomName", this.customName);
         }
+
+        var1.setTag("Items", var2);
     }
 
     /**
@@ -238,39 +194,24 @@ public class TileEntitySifter extends TileEntity implements ISidedInventory
         return 64;
     }
 
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Returns an integer between 0 and the passed value representing how close the current item is to being completely
-     * cooked
-     */
-    public int getCookProgressScaled(int par1)
+    public int getCookProgressScaled(int var1)
     {
-        return this.furnaceCookTime * par1 / 200;
+        return this.sifterCookTime * var1 / 200;
     }
 
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Returns an integer between 0 and the passed value representing how much burn time is left on the current fuel
-     * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
-     */
-    public int getBurnTimeRemainingScaled(int par1)
+    public int getBurnTimeRemainingScaled(int var1)
     {
         if (this.currentItemBurnTime == 0)
         {
-            this.currentItemBurnTime = 200;
+            this.currentItemBurnTime = 100;
         }
 
-        return this.furnaceBurnTime * par1 / this.currentItemBurnTime;
+        return this.sifterBurnTime * var1 / this.currentItemBurnTime;
     }
 
-    /**
-     * Returns true if the furnace is currently burning
-     */
     public boolean isBurning()
     {
-        return this.furnaceBurnTime > 0;
+        return this.sifterBurnTime > 0;
     }
 
     /**
@@ -279,168 +220,195 @@ public class TileEntitySifter extends TileEntity implements ISidedInventory
      */
     public void updateEntity()
     {
-        boolean flag = this.furnaceBurnTime > 0;
-        boolean flag1 = false;
-        float f;
-        Random rand = new Random();
+        boolean var1 = this.sifterBurnTime > 0;
+        boolean var2 = false;
 
-        if (this.furnaceBurnTime > 0)
+        if (this.sifterBurnTime > 0)
         {
-        	this.isPowered = true;
-            --this.furnaceBurnTime;
-        }
-        else
-        {
-        	this.isPowered = false;
+            --this.sifterBurnTime;
         }
 
         if (!this.worldObj.isRemote)
         {
-            if (this.furnaceBurnTime == 0 && this.canSmelt())
+            if (this.sifterBurnTime == 0 && this.canSmelt())
             {
-                this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
+                this.currentItemBurnTime = this.sifterBurnTime = 100;
 
-                if (this.furnaceBurnTime > 0)
+                if (this.sifterBurnTime > 0)
                 {
-                    flag1 = true;
-
-                    if (this.furnaceItemStacks[1] != null)
-                    {
-                        --this.furnaceItemStacks[1].stackSize;
-
-                        if (this.furnaceItemStacks[1].stackSize == 0)
-                        {
-                            this.furnaceItemStacks[1] = this.furnaceItemStacks[1].getItem().getContainerItemStack(furnaceItemStacks[1]);
-                        }
-                    }
+                    var2 = true;
                 }
             }
 
             if (this.isBurning() && this.canSmelt())
             {
-                ++this.furnaceCookTime;
+                ++this.sifterCookTime;
 
-                if (this.furnaceCookTime == 200)
+                if (this.sifterCookTime == 200)
                 {
-                    this.furnaceCookTime = 0;
+                    this.sifterCookTime = 0;
                     this.smeltItem();
-                    flag1 = true;
+                    var2 = true;
                 }
             }
             else
             {
-                this.furnaceCookTime = 0;
+                this.sifterCookTime = 0;
             }
 
-            if (flag != this.furnaceBurnTime > 0)
+            if (var1 != this.sifterBurnTime > 0)
             {
-                flag1 = true;
-                BlockSifter.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                var2 = true;
+                BlockSifter.updateFurnaceBlockState(this.sifterBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
         }
 
-        if (flag1)
+        if (var2)
         {
             this.onInventoryChanged();
         }
-        
-        this.prevLidAngle = 0.1F;
-        
-        
     }
 
-    /**
-     * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
-     */
     private boolean canSmelt()
     {
-        if (this.furnaceItemStacks[0] == null)
+        this.SpaceIndex = -1;
+        this.RawIndex = -1;
+        int var1;
+
+        for (var1 = 0; var1 < 1; ++var1)
+        {
+            if (this.sifterItemStacks[var1] != null)
+            {
+                int var2 = this.sifterItemStacks[var1].itemID;
+                
+                ItemStack itemstack = this.sifterItemStacks[var1];
+
+                if ((var2 == Block.sand.blockID)
+                		|| (var2 == Block.dirt.blockID)
+                		|| (var2 == Block.gravel.blockID)
+                		|| (var2 == Block.blockClay.blockID)
+                		|| (var2 == Fossil.volcanicAsh.blockID)
+                		)
+                {
+                    this.RawIndex = var1;
+                    break;
+                }
+            }
+        }
+
+        if (this.RawIndex == -1)
         {
             return false;
         }
         else
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
-            if (itemstack == null) return false;
-            if (this.furnaceItemStacks[2] == null) return true;
-            if (!this.furnaceItemStacks[2].isItemEqual(itemstack)) return false;
-            int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
-            return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+            for (var1 = 5; var1 > 0; --var1)
+            {
+                if (this.sifterItemStacks[var1] == null)
+                {
+                    this.SpaceIndex = var1;
+                    break;
+                }
+            }
+
+            return this.SpaceIndex != -1 && this.RawIndex != -1;
         }
     }
 
-    /**
-     * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
-     */
     public void smeltItem()
     {
         if (this.canSmelt())
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
+            ItemStack result = null;
+            int randomloot = (new Random()).nextInt(100);
+            int random = (new Random()).nextInt(100);
+            int var3;
+            
+            if (this.sifterItemStacks[this.RawIndex].itemID == Block.sand.blockID
+            	|| this.sifterItemStacks[this.RawIndex].itemID ==Block.dirt.blockID
+        		|| this.sifterItemStacks[this.RawIndex].itemID ==Block.gravel.blockID
+        		|| this.sifterItemStacks[this.RawIndex].itemID ==Block.blockClay.blockID
+        		|| this.sifterItemStacks[this.RawIndex].itemID ==Fossil.volcanicAsh.blockID
 
-            if (this.furnaceItemStacks[2] == null)
-            {
-                this.furnaceItemStacks[2] = itemstack.copy();
-            }
-            else if (this.furnaceItemStacks[2].isItemEqual(itemstack))
-            {
-                furnaceItemStacks[2].stackSize += itemstack.stackSize;
-            }
+            ) {
+            	if (randomloot < 80){
+            		Fossil.Console("Sifter no result: "+randomloot);
+            		if (random < 75){
+            			result = null;
+            		}
+            		else {
+            			result = this.sifterItemStacks[this.SpaceIndex];
+            		}
+            	}
+            	else {
+            		Fossil.Console("Sifter successful loot: "+randomloot);
+                if (random < 30)
+                {
+                	result = new ItemStack(Fossil.brokenSapling, 1);
+                }
 
-            --this.furnaceItemStacks[0].stackSize;
+                else if (random < 60)
+                {
+                	result = new ItemStack(Item.dyePowder, 3, 15);
+                }
 
-            if (this.furnaceItemStacks[0].stackSize <= 0)
-            {
-                this.furnaceItemStacks[0] = null;
+                else if (random < 80)
+                {
+                	result = new ItemStack(Block.sand, 3);
+                }
+
+                else if (random < 90)
+                {
+                	result = new ItemStack(Fossil.fernSeed, 3);
+                }
+                
+                else if (random < 95)
+                {
+                	result = new ItemStack(Fossil.fernSeed, 3);
+                }
+
+                else if (random <= 100)
+                {
+                    int i = (new Random()).nextInt(EnumDinoType.values().length + 1); //+1 for the sapling
+                    Item i0 = null;
+
+                    if (i == 0)
+                    {
+                        i0 = Fossil.brokenSapling;
+                    }
+                    else
+                    {
+                        i0 = EnumDinoType.values()[i - 1].DNAItem;
+                    }
+
+                    result = new ItemStack(i0, 1);
+                }
+            	}
             }
+            if (result != null) {
+            if (result.stackSize != 0 && this.sifterItemStacks[this.SpaceIndex] == null)
+            {
+                this.sifterItemStacks[this.SpaceIndex] = result.copy();
+            }
+            else if (this.sifterItemStacks[this.SpaceIndex].isItemEqual(result))
+            {
+            	sifterItemStacks[this.SpaceIndex].stackSize += result.stackSize;
+            }
+        }
+
+            --this.sifterItemStacks[0].stackSize;
+
+            if (this.sifterItemStacks[0].stackSize <= 0)
+            {
+                this.sifterItemStacks[0] = null;
+            }
+            
         }
     }
 
-    /**
-     * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
-     * fuel
-     */
-    public static int getItemBurnTime(ItemStack par0ItemStack)
+    private static int getItemBurnTime(ItemStack var1)
     {
-        if (par0ItemStack == null)
-        {
-            return 0;
-        }
-        else
-        {
-            int i = par0ItemStack.getItem().itemID;
-            Item item = par0ItemStack.getItem();
-
-            if (par0ItemStack.getItem() instanceof ItemBlock && Block.blocksList[i] != null)
-            {
-                Block block = Block.blocksList[i];
-
-                if (block == Block.woodSingleSlab)
-                {
-                    return 150;
-                }
-
-                if (block.blockMaterial == Material.wood)
-                {
-                    return 300;
-                }
-
-                if (block == Block.coalBlock)
-                {
-                    return 16000;
-                }
-            }
-
-            if (item instanceof ItemTool && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemSword && ((ItemSword) item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemHoe && ((ItemHoe) item).getMaterialName().equals("WOOD")) return 200;
-            if (i == Item.stick.itemID) return 100;
-            if (i == Item.coal.itemID) return 1600;
-            if (i == Item.bucketLava.itemID) return 20000;
-            if (i == Block.sapling.blockID) return 100;
-            if (i == Item.blazeRod.itemID) return 2400;
-            return GameRegistry.getFuelValue(par0ItemStack);
-        }
+        return 100;
     }
 
     /**
@@ -454,15 +422,32 @@ public class TileEntitySifter extends TileEntity implements ISidedInventory
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    public boolean isUseableByPlayer(EntityPlayer var1)
     {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
     }
 
     public void openChest() {}
 
     public void closeChest() {}
 
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+        return par1 > 8 ? false : (par1 < 8 ? isItemFuel(par2ItemStack) : true);
+    }
+
+    /**
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
+     */
+    public ItemStack getStackInSlotOnClosing(int var1)
+    {
+        return null;
+    }
+    
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */

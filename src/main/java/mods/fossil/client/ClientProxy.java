@@ -85,6 +85,7 @@ import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntitySifter;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
@@ -97,6 +98,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
+    
     @Override
     public void registerRenderThings()
     {
@@ -152,4 +154,6 @@ public class ClientProxy extends CommonProxy
     {
         MinecraftForge.EVENT_BUS.register(new GuiBoneHelmet(Minecraft.getMinecraft()));
     }
+    
+
 }

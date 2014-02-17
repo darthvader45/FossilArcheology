@@ -10,6 +10,7 @@
 package mods.fossil.fossilAI;
 
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityPrehistoric;
 import mods.fossil.handler.FossilPacketHandler;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,11 +22,11 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public abstract class DinoAIRide extends EntityAIBase
 {
-    protected final EntityDinosaur dinosaur;
+    protected final EntityPrehistoric dinosaur;
     protected EntityPlayer rider;
     private FossilPacketHandler remoteKey = FossilPacketHandler.getInstance();
 
-    public DinoAIRide(EntityDinosaur dinosaur)
+    public DinoAIRide(EntityPrehistoric dinosaur)
     {
         this.dinosaur = dinosaur;
         setMutexBits(0xffffffff);

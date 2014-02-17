@@ -2,12 +2,12 @@ package mods.fossil.client.gui;
 
 import mods.fossil.client.gui.elements.FossilGuiButton;
 import mods.fossil.client.gui.elements.FossilGuiPage;
-import mods.fossil.client.gui.elements.dinosaurs.PediaDinosaur;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiNotebook extends GuiScreen
@@ -52,9 +52,10 @@ public class GuiNotebook extends GuiScreen
 
         if (page == 1)
         {
+        	/*
             //TODO
-            String[] dinoArrayLeft = PediaDinosaur.leftPage;
-            String[] dinoArrayRight = PediaDinosaur.rightPage;
+            String[] dinoArrayLeft = PediaDinosaur.ankylosaurus_leftPage;
+            String[] dinoArrayRight = PediaDinosaur.ankylosaurus_rightPage;
 
             for (int i = 0; i < dinoArrayLeft.length; i++)
             {
@@ -65,7 +66,7 @@ public class GuiNotebook extends GuiScreen
             {
                 fontRenderer.drawString(dinoArrayRight[i2], var3 + 120, var4 + (12 * i2), 0x2b2b2b, false);
             }
-
+*/
             // fontRenderer.drawString("This needs to be dynamically loaded from a text file.", var3, var4+65, 0x2b2b2b, false);
         }
 

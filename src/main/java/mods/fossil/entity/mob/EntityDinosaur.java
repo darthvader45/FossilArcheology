@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
-public abstract class EntityDinosaur extends EntityTameable implements IEntityAdditionalSpawnData
+public abstract class EntityDinosaur extends EntityPrehistoric implements IEntityAdditionalSpawnData
 {
     //public static final int OWNER_NAME_DATA_INDEX = 17;
     public static final int HUNGER_TICK_DATA_INDEX = 18;
@@ -46,7 +46,6 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     public static final int AGE_DATA_INDEX = 21;
     public static final int SUBSPECIES_INDEX = 22;
     public static final int MODELIZED_INDEX = 23;
-//    public static final int HEALTH_INDEX = 24;
 
     public static final byte HEART_MESSAGE = 35;
     public static final byte SMOKE_MESSAGE = 36;
@@ -523,33 +522,58 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
+    
+    	
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + this.SelfType.toString() + "_DNA.png"), 185, 7, 16, 16);
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + this.SelfType.toString() + "_DNA.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
 
+        
+        /* LEFT PAGE
+         * 
+         * OWNER:
+         * (+2) OWNER NAME 
+         * RIDEABLE
+         * ORDER
+         * ABLE TO FLY
+         * ABLE TO CHEST
+         * DANGEROUS
+         * 
+         * 
+         */
+        
+        /* RIGHT PAGE
+         * 
+         * CUSTOM NAME
+         * DINOSAUR NAME
+         * DINO AGE
+         * HEALTH
+         * HUNGER
+         * 
+         */
         if (this.hasCustomNameTag())
         {
-            p0.PrintStringXY(this.getCustomNameTag(), 140, 24, 40, 90, 245);
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal("Dino." + this.SelfType.toString()), 140, 34, 0, 0, 0);
-        p0.PrintPictXY(pediaclock, 140, 46, 8, 8);
-        p0.PrintPictXY(pediaheart, 140, 58, 9, 9);
-        p0.PrintPictXY(pediafood, 140, 70, 9, 9);
+        p0.PrintStringXY(StatCollector.translateToLocal("Dino." + this.SelfType.toString()), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
+        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+        p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
 
         //Print "Day" after age
         if (this.getDinoAge() == 1)
         {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), 152, 46);
+            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), p0.rightIndent+12, 46);
         }
         else
         {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), 152, 46);
+            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), p0.rightIndent+12, 46);
         }
 
         //Display Health
-        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), 152, 58);
+        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
         //Display Hunger
-        p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), 152, 70);
+        p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
 
         //Display owner name
         if (this.SelfType.isTameable() && this.isTamed())
@@ -572,6 +596,7 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         if (this.SelfType.OrderItem != null)
         p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
 
+        
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
         {
             if (this.SelfType.FoodItemList.getItem(i) != null)
@@ -1418,14 +1443,8 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
 
                     if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable()
                             && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null
-                            && player.username.equalsIgnoreCase(this.getOwnerName()))
-                    {
-                        //  player.rotationYaw = this.rotationYaw;
-                        //  player.mountEntity(this);
-                        //  this.setPathToEntity((PathEntity)null);
-                        // this.renderYawOffset = this.rotationYaw;
+                            && player.username.equalsIgnoreCase(this.getOwnerName())) {
                         setRidingPlayer(player);
-                        //    return true;
                     }
 
                     if (this.SelfType.OrderItem != null && var2.itemID == this.SelfType.OrderItem.itemID && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
@@ -1593,9 +1612,26 @@ public abstract class EntityDinosaur extends EntityTameable implements IEntityAd
         motionY += 0.5;
     }
     
-    public boolean isInvulnerable(DamageSource var1)
-    {
-    	//Don't suffocate in walls
+    @Override
+    public void jump() {
+    	super.jump();
+    }
+    
+    public boolean isInvulnerable(DamageSource var1) {
+    	
+        Entity srcEnt = var1.getEntity();
+        if (srcEnt != null) {
+            // ignore own damage
+            if (srcEnt == this) {
+                return true;
+            }
+            
+            // ignore damage from rider
+            if (srcEnt == riddenByEntity) {
+                return true;
+            }
+        }
+        
         if (var1.damageType.equals("inWall"))
         {
             return true;

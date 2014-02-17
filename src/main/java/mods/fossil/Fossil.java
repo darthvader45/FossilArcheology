@@ -78,6 +78,7 @@ import mods.fossil.guiBlocks.TileEntityCultivate;
 import mods.fossil.guiBlocks.TileEntityDrum;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
+import mods.fossil.guiBlocks.TileEntitySifter;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilAchievementHandler;
@@ -565,7 +566,7 @@ public class Fossil
     static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
     static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
     static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
-    //static EnumArmorMaterial relicArmor = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
+    static EnumArmorMaterial RELIC = EnumHelper.addArmorMaterial("Relic", 5, new int[]{1, 3, 2, 1}, 15);
     		
     
     @Mod.EventHandler
@@ -676,7 +677,7 @@ public class Fossil
             dodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_EGG_NAME, 10043).getInt();
             cultivatedDodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt();
             fossilRecordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt();
-            archNotebookID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt();
+            //archNotebookID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt();
             //10045
             //newItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt();
             //Armor
@@ -684,7 +685,7 @@ public class Fossil
             ribCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt();
             femursID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEMURS_NAME, 10049).getInt();
             feetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FEET_NAME, 10050).getInt();
-            //newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10051).getInt();
+            brokenHeadRelicID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HEAD_RELIC, 10051).getInt();
             //newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10052).getInt();
             //newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10053).getInt();
             //newArmorID = config.getItem(Configuration.CATEGORY_ITEM, "newArmor", 10054).getInt();
@@ -763,7 +764,6 @@ public class Fossil
             cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
             figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10200).getInt();
             potteryShardsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POTTERY_SHARDS, 10201).getInt();
-            brokenHeadRelicID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BROKEN_HEAD_RELIC, 10202).getInt();
             
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -901,14 +901,14 @@ public class Fossil
         brokenSapling = new ForgeItem(brokenSaplingID, "Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
         cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
-        archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
+       // archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
         potteryShards = new ForgeItem(potteryShardsID, "Pottery_Shards").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
-        brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, EnumArmorMaterial.CLOTH, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(this.tabFArmor);
-        
+        brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
+       
         //BoneArmor
-        skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);;
-        ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);;
-        femurs = new ItemFemurs(femursID, bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);;
+        skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);
+        ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);
+        femurs = new ItemFemurs(femursID, bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);
         feet = new ItemFeet(feetID, bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFArmor);
 
         //Ancient Egg
@@ -1099,6 +1099,7 @@ public class Fossil
         GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
         GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
         GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
+        GameRegistry.registerTileEntity(TileEntitySifter.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
         GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");
         //TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
         RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);

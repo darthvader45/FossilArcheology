@@ -57,7 +57,7 @@ public class ItemEmbryoSyringe extends Item
     /**
      * dye sheep, place saddles, etc ...
      */
-    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
         if (par3EntityLivingBase instanceof EntityAnimal && ((EntityAnimal)par3EntityLivingBase).getGrowingAge() == 0)
         {
