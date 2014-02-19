@@ -12,7 +12,6 @@ package mods.fossil.fossilAI.test;
 import mods.fossil.entity.mob.test.EntityFlyingDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -29,7 +28,6 @@ public abstract class EntityAIRide extends EntityAIBase {
         this.dragon = dragon2;
         setMutexBits(0xffffffff);
     }
-    
     public static boolean consumeEquipped(EntityPlayer player) {
         ItemStack itemStack = player.getCurrentEquippedItem();
         

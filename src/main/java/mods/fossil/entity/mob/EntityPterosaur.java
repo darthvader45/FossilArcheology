@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import info.ata4.minecraft.dragon.util.UnsafeReflectionHelper;
+import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
@@ -8,13 +10,14 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIWander;
-import mods.fossil.fossilAI.test.air.EntityAILand;
-import mods.fossil.fossilAI.test.air.EntityAIPlayerLand;
 import mods.fossil.fossilAI.test.air.EntityAIRideAir;
 import mods.fossil.fossilAI.test.ground.EntityAIRideGround;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.util.DinosaurBodyHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityBodyHelper;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -22,12 +25,12 @@ import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,7 +48,7 @@ public class EntityPterosaur extends EntityFlyingDinosaur
     {
         super(var1, EnumDinoType.Pterosaur);
         this.updateSize();
-        
+        applyHacks();
         
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
@@ -58,16 +61,16 @@ public class EntityPterosaur extends EntityFlyingDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 4.0F;
 
-       // this.tasks.addTask(0, new EntityAISwimming(this));
-       // this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-       // this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
-       // this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
-       // this.tasks.addTask(7, new DinoAIEat(this, 24));
-      //  this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
+        this.tasks.addTask(7, new DinoAIEat(this, 24));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         
-      //  this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-      //  this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-       // this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 
         this.tasks.addTask(1, new EntityAIRideGround(this, 1)); // mutex all
         
@@ -78,7 +81,17 @@ public class EntityPterosaur extends EntityFlyingDinosaur
         
 
     }
-
+    
+    // HAAAAAX! For the stuff that's private and has no setters...
+    private void applyHacks() {
+        // required to fixate body while sitting. also slows down rotation while standing.
+        try {
+            int fieldIndex = UnsafeReflectionHelper.findFieldIndex(EntityLiving.class, EntityBodyHelper.class);
+            ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DinosaurBodyHelper(this), fieldIndex);
+        } catch (Exception ex) {
+            Fossil.Console( "Can't override EntityBodyHelper:" + ex);
+        }
+    }
     
     /**
      * Returns the texture's file path as a String.
@@ -94,7 +107,7 @@ public class EntityPterosaur extends EntityFlyingDinosaur
         switch (this.getSubSpecies())
         {
             default:
-                return "fossil:textures/mob/Pterosaur.png";
+                return "fossil:textures/mob/Pterosaur2.png";
         }
     }
     

@@ -8,28 +8,6 @@ import net.minecraft.util.MathHelper;
 
 public class ModelBrachiosaurus extends ModelBase
 {
-    // entity parameters
-    private float ticksExisted;
-    private float moveTime;
-    private float moveSpeed;
-    private float lookYaw;
-    private float lookPitch;
-    private double prevRenderYawOffset;
-    private double yawAbs;
-
-    // timing vars
-    private float animBase;
-    private float cycleOfs;
-    private float anim;
-    private float ground;
-    private float flutter;
-    private float walk;
-    private float sit;
-    private float jaw;
-    private float speed;
-
-    private float partialTicks;
-
     float yoffset = 0.0F;
     ModelRenderer Snout = (new ModelRenderer(this, 50, 8)).setTextureSize(64, 32);
     ModelRenderer Head;

@@ -1,23 +1,28 @@
 package mods.fossil.client.renderer.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
+import mods.fossil.client.model.ModelPterosaur;
+import mods.fossil.client.model.ModelPterosaurGround;
 import mods.fossil.entity.mob.EntityPterosaur;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderPterosaur extends RenderLiving
 {
-    public RenderPterosaur(ModelBase par1ModelBase, float par2)
+    public RenderPterosaur()
     {
-        super(par1ModelBase, par2);
+        super(new ModelPterosaur(), 0.5F);
     }
 
+    
     /**
      * Applies the scale to the transform matrix
      *

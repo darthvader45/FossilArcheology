@@ -13,6 +13,7 @@ import mods.fossil.Fossil;
 import mods.fossil.entity.mob.test.EntityFlyingDinosaur;
 import mods.fossil.fossilAI.test.EntityAIRide;
 import mods.fossil.util.ItemUtils;
+import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 
@@ -23,6 +24,10 @@ import net.minecraft.util.Vec3;
  */
 public class EntityAIRideAir extends EntityAIRide {
         
+    
+    double speedAir = 1; 
+    double verticalSpeed = 0;
+    
     public EntityAIRideAir(EntityFlyingDinosaur dragon) {
         super(dragon);
     }
@@ -32,7 +37,7 @@ public class EntityAIRideAir extends EntityAIRide {
         super.updateTask();
         
         double dist = 100;
-        
+
             Vec3 wp = dragon.getLookVec();
 
             // scale with distance
@@ -46,54 +51,27 @@ public class EntityAIRideAir extends EntityAIRide {
             wp.zCoord += dragon.posZ;
 
             dragon.getWaypoint().setVector(wp);
+
             
-            double speedAir = 1; 
-            double verticalSpeed = 0;
-            
-            // change speed with forward
+            //Changing altitude with forward and back
             if (rider.moveForward != 0) {
-                speedAir = 1;
                 verticalSpeed = -0.5f;
                 
-                // fly slower backwards
-                // (I'm surprised this is kinda working at all...)
                 if (rider.moveForward < 0) {
-                	speedAir = 1;
+                	//speedAir = 1;
                     //speedAir *= 0.5;
                 	verticalSpeed = 0.5f;
                 }
-               // Fossil.Console("RIDER.MOVEFORWARDSPEED: "+rider.moveForward);
-               // speedAir *= rider.moveForward * 0.5;
+                
             }
             
             dragon.setMoveSpeedAirHoriz(speedAir);
-            
 
             // control rotation with strafing
             if (rider.moveStrafing != 0) {
-            	
-            	dragon.AirAngle += rider.moveStrafing;
+                dragon.rotationYaw -= rider.moveStrafing * 6;
             }
-            	else
-            	{
-            		if(dragon.AirAngle>0.0)
-            			dragon.AirAngle-=0.4F;
-            		if(dragon.AirAngle<0.0)
-            			dragon.AirAngle+=0.4F;
-            		if(dragon.AirAngle>-0.4F && dragon.AirAngle<0.4F)
-            			dragon.AirAngle=0.0F;
-                }
-            
-            if (dragon.AirAngle > 3.0F)
-            	dragon.AirAngle = 3.0F;
-
-            if (dragon.AirAngle < -3.0F)
-            	dragon.AirAngle = -3.0F;
-            	
-                dragon.rotationYaw -= dragon.AirAngle;
-                dragon.rotationYaw=MathHelper.wrapAngleTo180_float(dragon.rotationYaw);
 
             dragon.setMoveSpeedAirVert(verticalSpeed);
-
     }
 }

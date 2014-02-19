@@ -9,9 +9,7 @@
  */
 package mods.fossil.fossilAI;
 
-import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityPrehistoric;
-import mods.fossil.handler.FossilPacketHandler;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -24,7 +22,6 @@ public abstract class DinoAIRide extends EntityAIBase
 {
     protected final EntityPrehistoric dinosaur;
     protected EntityPlayer rider;
-    private FossilPacketHandler remoteKey = FossilPacketHandler.getInstance();
 
     public DinoAIRide(EntityPrehistoric dinosaur)
     {
@@ -41,12 +38,6 @@ public abstract class DinoAIRide extends EntityAIBase
         return remoteKey.isKeyPressed(rider.username, "key.dragon.flyDown");
     }
     */
-
-    protected boolean isRiderJumping()
-    {
-        return remoteKey.isKeyPressed(rider.username, "key.jump");
-    }
-
     @Override
     public boolean shouldExecute()
     {

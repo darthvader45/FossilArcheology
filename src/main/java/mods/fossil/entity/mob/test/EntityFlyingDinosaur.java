@@ -49,7 +49,7 @@ public abstract class EntityFlyingDinosaur extends EntityDinosaur {
     private double airSpeedHorizonal = 1.5;
     private double airSpeedVertical = 0;
     private float yawAdd;
-    private int yawSpeed = 30;
+    private int yawSpeed = 100;
     public float AirAngle = 0;
     private int inAirTicks;
     
