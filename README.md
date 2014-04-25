@@ -49,13 +49,8 @@ It's also a good place to check on the progress of future releases. So if you ha
 ## Licence, Copyright, and Modpacks
 Flammarilva's original code is open source and can be found here: [https://github.com/fls81245/FossilArcheology](https://github.com/fls81245/FossilArcheology)
 
-The Fossils and Archeology Revival code is not actually open source and can be found here: [https://github.com/4f6f3b/FossilArcheology](https://github.com/4f6f3b/FossilArcheology)
-
-Due to the provision we have on the Revival code, we are unable to call this branch truely open source. 
-While you are free to look at, modify, and fork the Revival code; you are not free to redistribute compiled 
-Fossils and Archeology Revival code, either in part or in whole, without explicit permission from the Fossils 
-and Archeology Revival team. Compiling/modifying this only for your own personal use is fine.
+The Fossils and Archeology Revival code has recently open source and can be found here: [https://github.com/4f6f3b/FossilArcheology](https://github.com/4f6f3b/FossilArcheology)
 
 I will also put this here, since this has cropped up several times now. Regarding EXDragonith and CurlyWurly's models, no, we cannot give you permission for you to use them. EXDragonith gave us permissions to use his model pack, and as far as that's concerned doesn't extend past this mod. Any inquiries to that should be addressed to the original model authors.
 
-Right now we do not want people adding this mod to public modpacks. We are still working out most of the bugs and we have not tested compatibility with other mods. Our priority is making sure the Fossils mod works 100% before we start worrying about will it work with x mod.
+Right now we do not want people adding this mod to public modpacks. We are still working out most of the bugs and we have not tested compatibility with other mods. Our priority is making sure the Fossils mod works 100% before we start worrying about will it work with x mod. Once we are able to release a 1.6 version, we'll be allowing modpacks to use it.
