@@ -11,7 +11,7 @@ So huge thanks to [Flammarilva](https://github.com/fls81245) for the awesome mod
 
 ### Active Fossils and Archeology Revival Team
 
-[4f6f3b](https://github.com/4f6f3b)  
+
 [tyranno66](https://github.com/tyranno66)  
 
 ### Additional Credits
@@ -20,7 +20,8 @@ So huge thanks to [Flammarilva](https://github.com/fls81245) for the awesome mod
 [Chellre](https://github.com/Chellre)  
 [Shadowbeast007](https://github.com/Shadowbeast)  
 [Totara](https://github.com/TotaraStudios)  
-[artomata](https://github.com/artomata)  
+[artomata](https://github.com/artomata) 
+[4f6f3b](https://github.com/4f6f3b)
 
 ###### Language Contributors
 Octo-Docto (Spanish)  
@@ -28,8 +29,7 @@ Roody (Dutch)
 [Gusanito](https://github.com/Gusanito) (Spanish)  
 [crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)  
 
-*If you have contributed to language credits but are not listed, please contact
-the Revival team at FA.Revival@gmail.com*
+*If you have contributed to language credits but are not listed, please make a note by either contacting a dev or opening a ticket so we can properly credit.
 
 ###### Special Thanks
 [Flammarilva](https://github.com/fls81245) and the rest of Team July.
@@ -37,20 +37,20 @@ the Revival team at FA.Revival@gmail.com*
 ## Wikis
 [User Wiki](http://fossils-archeology.wikia.com/)
 
-[Developer Wiki](https://github.com/4f6f3b/FossilArcheology/wiki)
+[Developer Wiki](https://github.com/FossilsArcheologyRevival/FossilArcheology/wiki)
 
 ## Known Bugs
 For a comprehensive list of reported bugs, refer to the project issues page:
 
-[https://github.com/4f6f3b/FossilArcheology/issues?milestone=1&sort=comments&state=open](https://github.com/4f6f3b/FossilArcheology/issues?milestone=1&sort=comments&state=open)
+[https://github.com/FossilsArcheologyRevival/FossilArcheology/issues](https://github.com/FossilsArcheologyRevival/FossilArcheology/issues)
 
 It's also a good place to check on the progress of future releases. So if you have to ask "when's the next update", we'll probably link you to GitHub.
 
 ## Licence, Copyright, and Modpacks
 Flammarilva's original code is open source and can be found here: [https://github.com/fls81245/FossilArcheology](https://github.com/fls81245/FossilArcheology)
 
-The Fossils and Archeology Revival code has recently open source and can be found here: [https://github.com/4f6f3b/FossilArcheology](https://github.com/4f6f3b/FossilArcheology)
+As of April 26, 2014 the Fossils and Archeology Revival code past and present is now under the Creative Commons Attribution license (http://creativecommons.org/licenses/by/4.0/). 
+The source is now home in a public organization found here: [https://github.com/FossilsArcheologyRevival](https://github.com/FossilsArcheologyRevival).
 
-I will also put this here, since this has cropped up several times now. Regarding EXDragonith and CurlyWurly's models, no, we cannot give you permission for you to use them. EXDragonith gave us permissions to use his model pack, and as far as that's concerned doesn't extend past this mod. Any inquiries to that should be addressed to the original model authors.
+Regarding usage in modpacks and such, right now we do not guarantee compatibility with other mods. Since people have already included it in packs in the past regardless of what we say, modpack creators take full responsibility for making sure this mod plays nice with other ones.
 
-Right now we do not want people adding this mod to public modpacks. We are still working out most of the bugs and we have not tested compatibility with other mods. Our priority is making sure the Fossils mod works 100% before we start worrying about will it work with x mod. Once we are able to release a 1.6 version, we'll be allowing modpacks to use it.
