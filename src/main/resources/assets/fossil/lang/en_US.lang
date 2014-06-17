@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4) HEAD10 December 25 2013 
+#Updated for Build 6 DEV (1.6.4) HEAD11 June 12 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -179,6 +179,7 @@ item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
 item.archNotebook.name=Archaeology Notebook
+item.potteryShard.name=Pottery Shard
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -199,7 +200,7 @@ order.Follow=Follow
 order.FreeMove=Free Move
 
 #Dinosaur status chat messages
-status.Hungry.head=
+status.Hungry.head= 
 status.Hungry= is hungry.
 status.Starve.head=
 status.Starve= was starved to death.
@@ -207,17 +208,18 @@ status.LearningChest.head=A
 status.LearningChest= has learned how to use chests.
 status.Betrayed.head=This 
 status.Betrayed= won't trust mankind anymore.
-status.NoSpace.Head=This 
+status.NoSpace.Head=
 status.NoSpace= doesn't have enough space to grow.
 status.StarveEsc.head= has escaped because of starvation.
 status.SJLBite= bit the Siu-Jiu-Le and ran away.
 status.ChewTime= needs time to chew.
+status.Full.head= This 
 status.Full= is full.
 status.Nervous.Head=You made the little 
 status.Nervous= too nervous to hunt itself.
 status.GemErrorYoung=This T-Rex is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
-status.GemErrorHealth=This T-Rex has already been tamed.
+status.GemErrorTamed=This T-Rex has already been tamed.
 status.essencefail=Essence of Chicken had no effect.
 
 #Dinosaur Names
@@ -294,7 +296,7 @@ fpzSpeaker.anuSommon=All hail Anu!!
 
 #Dinosaur egg chat messages
 dinoegg.hatched=A dinosaur egg has hatched!
-dinoegg.noSpace=This egg cannot spawn here.	
+dinoegg.noSpace=This egg cannot spawn here.
 dinoegg.head=An egg of 
 dinoegg.dry= died because it was too dry.	
 dinoegg.cold= died because it was too cold.

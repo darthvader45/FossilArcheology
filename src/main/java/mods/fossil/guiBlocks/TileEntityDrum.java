@@ -278,4 +278,11 @@ public class TileEntityDrum extends TileEntity
             }
         }
     }*/
+    
+    @Override
+    public boolean canUpdate()
+    {
+        return false;
+    }
+
 }

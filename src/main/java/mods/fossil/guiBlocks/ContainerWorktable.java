@@ -21,7 +21,7 @@ public class ContainerWorktable extends Container
     {
         this.furnace = (TileEntityWorktable)var2;
         this.addSlotToContainer(new Slot(this.furnace, 0, 49, 20));
-        this.addSlotToContainer(new Slot(this.furnace, 1, 80, 53));
+        this.addSlotToContainer(new Slot(this.furnace, 1, 81, 54));
         this.addSlotToContainer(new SlotFurnace(var1.player, this.furnace, 2, 116, 21));
         int var3;
 

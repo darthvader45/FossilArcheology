@@ -49,7 +49,7 @@ public class LocalizationStrings
     public static final String MARBLE_NAME = "marble";
     public static final String FIGURINE_NAME = "figurine";
 	public static final String BLOCK_SIFTER_IDLE = "sifter";
-	public static final String BLOCK_SIFTER_ACTIVE = "sifter";
+	public static final String BLOCK_SIFTER_ACTIVE = "sifterActive";
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
@@ -143,8 +143,8 @@ public class LocalizationStrings
     public static final String FTOOLS_NAME = "Ancient Tools";
 
     //Pedia Hatching Text
-    public static final String PEDIA_EGG_DRY = "pediaEggDry";
-    public static final String PEDIA_EGG_WET = "pediaEggWet";
+    public static final String PEDIA_EGG_DRY = "pedia.EggDry";
+    public static final String PEDIA_EGG_WET = "pedia.EggWet";
     public static final String PEDIA_EGG_COLD = "pedia.eggCold";
     public static final String PEDIA_EGG_WARM = "pedia.eggWarm";
     public static final String PEDIA_EGG_STATUS = "pedia.eggStatus";
@@ -219,7 +219,16 @@ public class LocalizationStrings
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
 
+    //Dinosaur status
 
-    //Dinosaur strings are handled through DinoEnum.
+    
+    
+    
+    
+    
+    
+    
+    
+    //Dinosaur name strings are handled through DinoEnum.
 
 }
