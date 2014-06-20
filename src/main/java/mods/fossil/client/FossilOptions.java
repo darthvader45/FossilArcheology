@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 public class FossilOptions
 {
-    private static final Logger Log = Fossil.Log;
     
     public static boolean Gen_Palaeoraphe;
     public static boolean Gen_Academy;
@@ -19,6 +18,8 @@ public class FossilOptions
     public static boolean Skull_Overlay;
     public static boolean LoginMessage;
     public static boolean FossilDebug;
+    public static int Debug_Gen_Rate_Academy;
+    public static int Debug_Gen_Rate_Shipwreck;
 
     public void Load(Configuration config)
     {
@@ -32,6 +33,8 @@ public class FossilOptions
         Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
         FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
+        Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_RateAcademy", 1).getInt(1);
+        Debug_Gen_Rate_Shipwreck = config.get("debug", "Debug_Gen_RateShipwreck", 1).getInt(1);
     }
 
 }

@@ -16,7 +16,7 @@ public enum EnumAnimalType
 
     private EnumAnimalType(int grow0)
     {
-        if (Fossil.DebugMode)
+        if (Fossil.DebugMode())
         {
             GrowTime = 100;
         }

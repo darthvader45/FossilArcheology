@@ -31,7 +31,7 @@ public class DinoAIWander extends EntityAIBase
             this.entity.OrderStatus = EnumOrderType.FreeMove;
         }
 
-        if (this.entity.getRNG().nextInt(20) != 0)
+        if (this.entity.getRNG().nextInt(120) != 0)
         {
             return false;
         }

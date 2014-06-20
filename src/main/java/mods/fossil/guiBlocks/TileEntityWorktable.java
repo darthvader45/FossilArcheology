@@ -12,6 +12,11 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityWorktable extends TileEntity implements IInventory, ISidedInventory
 {
+	
+    private static final int[] slots_top = new int[] {}; // input
+    private static final int[] slots_bottom = new int[] {};  //output
+    private static final int[] slots_sides = new int[] {};//fuel
+    
     private ItemStack[] furnaceItemStacks = new ItemStack[3];
     public int furnaceBurnTime = 0;
     public int currentItemBurnTime = 0;
@@ -481,8 +486,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
     @Override
     public int[] getAccessibleSlotsFromSide(int var1)
     {
-        // TODO Auto-generated method stub
-        return null;
+    	return slots_top;
     }
 
     @Override

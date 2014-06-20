@@ -1,6 +1,5 @@
 package mods.fossil.client.renderer.entity;
 
-import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
 import mods.fossil.client.model.ModelPterosaur;
 import mods.fossil.client.model.ModelPterosaurGround;
 import mods.fossil.entity.mob.EntityPterosaur;

@@ -215,15 +215,15 @@ private ModelRenderer UpperJaw;
     model.rotateAngleZ = z;
   }
   
-  protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
+  protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean isModelized)
   {
+	  this.Head.rotateAngleX =  1.68542955F;
+	  
+	  if(!isModelized){
 	  // + 1.68542955F
 	  //this.Head.rotateAngleX = (var4 / (180F / (float)Math.PI)) + 96.5679999F;
-	  this.Head.rotateAngleX =  1.68542955F;
 	  //Fossil.Console("rotateAngleX: " Math.toDegrees(this.Head.rotateAngleX));
 	  this.Head.rotateAngleZ = var4 / (180F / (float)Math.PI);
-      //this.Head.rotateAngleX = (var4 / (180F / (float)Math.PI));
-      //this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
 	  
       this.RightLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
       this.LeftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
@@ -232,6 +232,18 @@ private ModelRenderer UpperJaw;
       this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
       this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
       this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
+	  }
+	  else {
+		  this.Head.rotateAngleZ = 0;
+		  
+	      this.RightLeg.rotateAngleX = 0;
+	      this.LeftLeg.rotateAngleX = 0;
+	      
+	      
+	      this.Tail1.rotateAngleY = 0;
+	      this.Tail2.rotateAngleY = 0;
+	      this.Tail3.rotateAngleY = 0;
+	  }
   }
 
 }

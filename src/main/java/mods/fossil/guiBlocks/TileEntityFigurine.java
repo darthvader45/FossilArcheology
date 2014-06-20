@@ -26,7 +26,14 @@ public class TileEntityFigurine extends TileEntity
         par1NBTTagCompound.setByte("FigurineType", (byte)(this.figurineType & 255));
         par1NBTTagCompound.setByte("Rot", (byte)(this.figurineRotation & 255));
     }
+    
+    @Override
+    public boolean canUpdate()
+    {
+        return false;
+    }
 
+    
     /**
      * Reads a tile entity from NBT.
      */

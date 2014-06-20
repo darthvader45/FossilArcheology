@@ -25,7 +25,7 @@ public class AcademyGenerator implements IWorldGenerator
             case 0:
 
                 // Recall that a chunk is only 16x16 blocks in area, so this is quite a lot of structures
-                if (random.nextFloat() < 0.0005F) //This doesn't seem to actually corellate with anything.
+                if (random.nextInt(999) < 1) //This doesn't seem to actually corellate with anything.
                 {
                     generateStructure(world, random, chunkX * 16, chunkZ * 16);
                     break;
@@ -50,7 +50,6 @@ public class AcademyGenerator implements IWorldGenerator
         // {
         int struct; // This will store a random index of the structure to generate
         struct = rand.nextInt(gen.structures.size());
-        Fossil.Console("[GEN] Generating " + gen.structures.get(struct).name);
         int x = chunkX + rand.nextInt(16);
         int z = chunkZ + rand.nextInt(16);
         // nice way of getting a height to work from; it returns the topmost
@@ -66,7 +65,6 @@ public class AcademyGenerator implements IWorldGenerator
                     || !world.doesBlockHaveSolidTopSurface(x - 10, y, z + 11))
               )
         {
-            Fossil.Console("LOWERING Y: " + y);
             --y;
         }
 
@@ -78,7 +76,6 @@ public class AcademyGenerator implements IWorldGenerator
                 && world.canBlockSeeTheSky(x, y, z)
                 || world.getBlockId(x, y + 1, z) == Block.waterStill.blockID)
         {
-            Fossil.Console("Failed to find suitable surface. Not generating structure. Block id " + world.getBlockId(x, y, z));
             return;
         }
         else

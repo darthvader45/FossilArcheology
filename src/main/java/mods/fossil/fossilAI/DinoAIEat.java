@@ -3,11 +3,13 @@ package mods.fossil.fossilAI;
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.guiBlocks.TileEntityFeeder;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -47,8 +49,8 @@ public class DinoAIEat extends EntityAIBase
     // The item the dino is going to take
     private TileEntityFeeder targetFeeder;
     private EntityItem targetItem;
-    private EntityItem targetBlock;
     private EntityLiving targetMob;
+    private Vec3 targetBlock;
     private EntityLivingBase targetEntity;
     private DinoAINearestAttackableTargetSorter targetSorter;
 
@@ -59,10 +61,8 @@ public class DinoAIEat extends EntityAIBase
      */
     public DinoAIEat(EntityDinosaur Dino0, int Range0)
     {
-        this.targetBlock = null;
-        this.targetItem = null;
         this.targetMob = null;
-        this.targetFeeder = null;
+        this.targetFeeder = null;	
         this.dinosaur = Dino0;
         this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
@@ -70,6 +70,14 @@ public class DinoAIEat extends EntityAIBase
         this.TimeAtThisTarget = 0;
     }
 
+    /**
+     * Determine if this AI Task is interruptible by a higher (= lower value) priority task.
+     */
+    public boolean isInterruptible()
+    {
+        return true;
+    }
+    
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
@@ -87,8 +95,7 @@ public class DinoAIEat extends EntityAIBase
 
         //Feeder has priority over other food sources.
         if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
-        {
-        	Log.log(Level.FINEST, "FOUND FEEDER.");
+        {      	
             this.destX = this.targetFeeder.xCoord;
             this.destY = this.targetFeeder.yCoord;
             this.destZ = this.targetFeeder.zCoord;
@@ -98,9 +105,16 @@ public class DinoAIEat extends EntityAIBase
         //After Feeder, check if there are items, THEN blocks on the ground to eat.
         else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
         {
-            Vec3 targetItem = this.getNearestItem(Range);
-            Vec3 targetBlock = this.dinosaur.getBlockToEat(Range);
 
+            this.targetItem = this.getNearestItem2(200);
+            if( this.targetItem != null) {
+                this.destX = targetItem.posX;
+                this.destY = targetItem.posY;
+                this.destZ = targetItem.posZ;
+            	this.typeofTarget = ITEM;
+            	return true;
+            }
+            /*
             if (targetItem != null)//Found Item, go there and eat it
             {
                 this.destX = targetItem.xCoord;
@@ -110,46 +124,23 @@ public class DinoAIEat extends EntityAIBase
                 Log.log(Level.FINEST, "ITEM FOUND!");
                 return targetItem != null;
             }
-            else if (targetBlock != null)//Found Item, go there and eat it
+            */
+            
+            if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
             {
-                this.destX = targetBlock.xCoord;
-                this.destY = targetBlock.yCoord;
-                this.destZ = targetBlock.zCoord;
-                this.typeofTarget = BLOCK;
-                Log.log(Level.FINEST, "BLOCK FOUND!");
-                return targetBlock != null;
-            }
-        }
-        /*
-        else if (!this.dinosaur.SelfType.FoodMobList.IsEmpty())
-        {
-        double d0 = this.SEARCH_RANGE;
-        List list = this.dinosaur.worldObj.getEntitiesWithinAABB(EntityLiving.class, this.dinosaur.boundingBox.expand(d0, 4.0D, d0));
-        Collections.sort(list, this.targetSorter);
-        Iterator iterator = list.iterator();
-
-        while (iterator.hasNext())
-        {
-            EntityLiving entity = (EntityLiving)iterator.next();
-
-            if (this.dinosaur.SelfType.FoodMobList.CheckMobByClass(entity.getClass()))
-            {//It's food
-                if(!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && ((EntityDinosaur) entity).isModelized()==false))
-                {//No modelized Dinos for Lunch!
-                    this.targetEntity = entity;
-                	this.dinosaur.setAttackTarget(entity);
-                    Log.log(Level.FINEST, "typeofTarget: " + this.targetEntity);
-                	return true;
+                Vec3 targetBlock = this.dinosaur.getBlockToEat(Range/2);
+                
+                if (targetBlock != null)//Found Item, go there and eat it
+                {
+                    this.destX = targetBlock.xCoord;
+                    this.destY = targetBlock.yCoord;
+                    this.destZ = targetBlock.zCoord;
+                    this.typeofTarget=BLOCK;
+                    //System.out.println("BLOCK FOUND!");
+                    return true;
                 }
             }
-            
-
-         //   this.targetEntity = (EntityLivingBase)list.get(0);
-        //    return true;
         }
-        }
-        */
-        this.targetEntity = null;
         return false;
     }
 
@@ -159,8 +150,30 @@ public class DinoAIEat extends EntityAIBase
     @Override
     public boolean continueExecuting()
     {
-    	Log.log(Level.FINEST, "typeofTarget: " + this.typeofTarget);
-        return (this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1);
+    	
+    	if( !(this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry())){
+    		return false;
+    	}
+    	else
+    	{
+    		switch(this.typeofTarget) {
+	    		case NO_TARGET:
+	    			break;
+	    		case ITEM:
+	    			return targetItem.isEntityAlive();
+	    		case BLOCK:
+	    			return this.dinosaur.SelfType.FoodBlockList.CheckBlockById(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ));
+	    		case MOB:
+	    			return targetMob != null;
+	    		case FEEDER:
+	    			return targetFeeder.isInvalid();
+	    			//return targetFeeder != null;
+	    		default:
+	    			break;
+    		}	
+    	}
+    	return false;
+        //return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
     }
 
     /**
@@ -173,84 +186,113 @@ public class DinoAIEat extends EntityAIBase
         this.dinosaur.setSitting(false);
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
+        /*
         if (Distance > Range)
         {
             endTask();
         }
+        */
 
-        Log.log(Level.FINEST, "MOVING to " + Distance);
-        this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
-        Log.log(Level.FINEST, "Coords: " + this.destX + ", " + this.destY + ", " +  this.destZ);
+        if (this.typeofTarget == FEEDER){
 
-        if (this.typeofTarget == FEEDER)
-        {
-            if (Distance < 2)
-            {
-                int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.SelfType) / 15D);
-                this.dinosaur.heal(healval);
-                this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.5D);
-                this.TimeAtThisTarget++;
-                Log.log(Level.FINEST, "TimeAtThisTarget " + this.TimeAtThisTarget);
+        	if(this.targetFeeder == null)
+        		endTask();
+        	
+        	if(Distance < SEARCH_RANGE) {
+        		this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
+        	
+        		if (Distance < 4.5D){
+        			if (this.targetFeeder != null) {
+		                int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.SelfType) / 15D);
+		                this.dinosaur.heal(healval);
+		                this.TimeAtThisTarget++;
+		
+		                if (this.TimeAtThisTarget == 100){
+		                    endTask();
+		                }
+        			}
+        		}
+        	}
+        	else {
+        		endTask();
+        	}
 
-                if (this.TimeAtThisTarget == 100)
-                {
-                    endTask();
-                }
-            }
         }
 
-        if (this.typeofTarget == ITEM)
-        {
-            if (Distance < 2.5)
-            {
-                this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.5D);
-
-                if (this.targetItem != null && !this.targetItem.isDead)
-                {
-                    int i = this.dinosaur.PickUpItem(this.targetItem.getEntityItem());
-
-                    if (i > 0)
-                    {
-                        this.targetItem.getEntityItem().stackSize = i;
-                        endTask();
-                    }
-                    else
-                    {
-                        this.targetItem.setDead();
-                        endTask();
-                    }
-                }
-            }
+        if (this.typeofTarget == ITEM){
+        	
+        	if(this.targetItem == null)
+        		endTask();
+        	if(Distance < SEARCH_RANGE) {
+	        	this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
+	            if (Distance < 2.5){
+	
+	                if (this.targetItem != null && this.targetItem.isEntityAlive()){
+	                    int i = this.dinosaur.PickUpItem(this.targetItem.getEntityItem());
+	
+	                    if (i > 0){
+	                        this.targetItem.getEntityItem().stackSize = i;
+	                        endTask();
+	                    }
+	                    else{
+	                        this.targetItem.setDead();
+	                        endTask();
+	                    }
+	                }
+	            }
+        	}
+        	else {
+        		endTask();
+        	}
         }
 
-        if (this.typeofTarget == BLOCK)
-        {
-            if (Distance < 2.5)
-            {
-                this.dinosaur.heal(this.dinosaur.SelfType.FoodBlockList.getBlockHeal(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
-                this.dinosaur.increaseHunger(this.dinosaur.SelfType.FoodBlockList.getBlockFood(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
-                this.dinosaur.worldObj.setBlock((int)destX, (int)destY, (int)destZ, 0);
-                this.TimeAtThisTarget++;
-                Log.log(Level.FINEST, "TimeAtThisTarget " + this.TimeAtThisTarget);
-
-                if (this.TimeAtThisTarget == 20)
-                {
-                    endTask();
-                }
-            }
+        if (this.typeofTarget == BLOCK) {
+        	if(!this.dinosaur.SelfType.FoodBlockList.CheckBlockById(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)))
+        		endTask();
+        	if(Distance < SEARCH_RANGE) {
+        		this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
+		            if (Distance < 2.5){
+		            	if(this.dinosaur.SelfType.FoodBlockList.CheckBlockById(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ))) {
+			                this.dinosaur.heal(this.dinosaur.SelfType.FoodBlockList.getBlockHeal(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
+			                this.dinosaur.increaseHunger(this.dinosaur.SelfType.FoodBlockList.getBlockFood(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)));
+			                this.dinosaur.worldObj.setBlock((int)destX, (int)destY, (int)destZ, 0);
+			                
+			                this.TimeAtThisTarget++;
+			                if (this.TimeAtThisTarget == 20)
+			                {
+			                    endTask();
+			                }
+		            	}
+		            }
+        	}
+        	else{
+        		endTask();
+        	}
         }
     }
 
     public void endTask()
     {
-        this.dinosaur.getNavigator().clearPathEntity();
+//        this.dinosaur.getNavigator().clearPathEntity();
         this.TimeAtThisTarget = 0;
         targetItem = null;
         targetBlock = null;
         targetFeeder = null;
         this.targetEntity = null;
         this.typeofTarget = NO_TARGET;
-        Log.log(Level.FINEST, "CLEARING");
+    }
+    
+    /**
+     * Resets the task
+     */
+    public void resetTask()
+    {
+        this.TimeAtThisTarget = 0;
+        targetItem = null;
+        targetBlock = null;
+        targetFeeder = null;
+        this.targetEntity = null;
+        this.typeofTarget = NO_TARGET;
     }
 
     private TileEntityFeeder getNearbyFeeder()
@@ -258,9 +300,9 @@ public class DinoAIEat extends EntityAIBase
         double range = 36;
         List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(TileEntityFeeder.class, this.dinosaur.boundingBox.expand(range, range, range));
 
-        for (TileEntity entity : nearbyEntities)
+        for (TileEntity entityFeeder : nearbyEntities)
         {
-            TileEntityFeeder nearbyFeeder = (TileEntityFeeder) entity;
+            TileEntityFeeder nearbyFeeder = (TileEntityFeeder) entityFeeder;
 
             if (this.dinosaur.SelfType.useFeeder())
             {
@@ -271,6 +313,30 @@ public class DinoAIEat extends EntityAIBase
         return null;
     }
 
+    private EntityItem getNearestItem2(int SEARCH_RANGE)
+    {
+        List nearbyItems = this.dinosaur.worldObj.getEntitiesWithinAABB(EntityItem.class, this.dinosaur.boundingBox.expand(SEARCH_RANGE, SEARCH_RANGE, SEARCH_RANGE));
+        Collections.sort(nearbyItems, this.targetSorter);
+        Iterator iterateNearbyItems = nearbyItems.iterator();
+        EntityItem entityItem = null;
+
+        while (iterateNearbyItems.hasNext())
+        {
+        	
+            EntityItem entityItem1 = (EntityItem) iterateNearbyItems.next();
+
+            if ((this.dinosaur.SelfType.FoodItemList.CheckItemById(entityItem1.getEntityItem().itemID) 
+            		|| this.dinosaur.SelfType.FoodBlockList.CheckBlockById(entityItem1.getEntityItem().itemID))
+            		&& this.dinosaur.getDistanceSqToEntity(entityItem1) < SEARCH_RANGE)
+            {        
+            	entityItem = entityItem1; 
+            	//SEARCH_RANGE = (int) this.dinosaur.getDistanceSqToEntity(entityItem);
+            }
+        }
+        return entityItem;
+    }
+    
+    /*
     private Vec3 getNearestItem(int SEARCH_RANGE)
     {
         List nearbyItems = this.dinosaur.worldObj.getEntitiesWithinAABB(EntityItem.class, this.dinosaur.boundingBox.expand(SEARCH_RANGE, SEARCH_RANGE, SEARCH_RANGE));
@@ -284,7 +350,9 @@ public class DinoAIEat extends EntityAIBase
 
             if (this.dinosaur.SelfType.FoodItemList.CheckItemById(entityItem.getEntityItem().itemID) || this.dinosaur.SelfType.FoodBlockList.CheckBlockById(entityItem.getEntityItem().itemID))
             {
-                this.targetItem = entityItem;
+            	Fossil.Console("targetItem: "+ entityItem);
+            		this.targetItem = entityItem;            
+            	
                 itemlocation = Vec3.createVectorHelper(entityItem.posX, entityItem.posY, entityItem.posZ);
                 break;
             }
@@ -292,5 +360,6 @@ public class DinoAIEat extends EntityAIBase
 
         return itemlocation;
     }
+    */
 
 }

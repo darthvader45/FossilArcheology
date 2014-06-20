@@ -23,6 +23,7 @@ import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -74,13 +75,14 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     private int angerLevel;
 
-    public double BaseHealth;
-    public double BaseDamage;
-    public double BaseSpeed;
+    public double baseHealth;
+    public double baseDamage;
+    public double baseSpeed;
+    
+    public double maxHealth;
+    public double maxDamage;
+    public double maxSpeed;
 
-    public double healthModValue;
-    public double damageModValue;
-    public double speedModValue;
     public double knockbackModValue;
 
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
@@ -97,19 +99,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger / 2);
-        this.setHealth(this.SelfType.Health0);
+        this.setHealth((float) this.SelfType.Health0);
     }
 
-    /**
-     * Override this and set temporary variables to the attributes.
-     */
-    @Override
-    protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
-        getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
-        setAttributes();
-    }
+
 
     /**
      * Overrided in unique entity classes.
@@ -132,7 +125,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         float step;
         step = (this.maxSize - this.minSize) / (this.adultAge + 1);
 
-        // If the dinosaur is past "Adult" age, slow down growth.
         if (this.getDinoAge() > this.adultAge)
         {
             return this.minSize + (step * this.adultAge);
@@ -149,24 +141,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         this.setScale(this.getDinosaurSize());
     }
 
-    /*
-    public void setPosition(double par1, double par3, double par5)
-    {
-        this.posX = par1;
-        this.posY = par3;
-        this.posZ = par5;
-        float w_2 = this.width / 2.0F * this.HitboxZfactor;
-    	float l_2 = this.width / 2.0F * this.HitboxXfactor;
-        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.height*this.HitboxYfactor, this.posZ + (double)l_2);
-     }
-
-    protected void setBoundingBox()
-    {
-        float w_2 = this.width / 2.0F * this.HitboxZfactor;
-      float l_2 = this.width / 2.0F * this.HitboxXfactor;
-        this.boundingBox.setBounds(this.posX - (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize, this.posZ - (double)l_2, this.posX + (double)w_2, this.posY - (double)this.yOffset + (double)this.ySize + (double)this.height*this.HitboxYfactor, this.posZ + (double)l_2);
-    }
-    */
     protected int getExperiencePoints(EntityPlayer par1EntityPlayer)
     {
         return MathHelper.floor_float(this.SelfType.Exp0 + (float)this.getDinoAge() * this.SelfType.ExpInc);
@@ -177,48 +151,36 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     public void updateSize()
     {
-        double healthMod = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() + (double)this.healthMod();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(healthMod);
-        double damageMod = this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + (double)this.damageMod();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(damageMod);
-
-        if (this.isTeen()) {
-        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
-        }
-        else if (this.isAdult()){
-            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
-        }
-        else {
-            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
-        }
-
-        // double speedMod = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() + (double)this.speedMod();
-        //   this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(speedMod);
+    	this.jump();
     }
-
-    /**
-     * Get dinosaur's health growth value
-     */
-    public float healthMod()
+    /*
+    public void updateSize()
     {
-        return (float)healthModValue;
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
-
-    /**
-     * Get dinosaur's damage growth value
-     */
-    public float damageMod()
-    {
-        return (float)damageModValue;
-    }
-
-    /**
-     * Get dinosaur's speed growth value
-     */
-    public double speedMod()
-    {
-        return speedModValue;
-    }
+    */
     
     /**
      * Get dinosaur's knockback value
@@ -411,10 +373,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Placeholder, returns the attack strength, should be customized for every Dino
      */
-    public int getAttackStrength()
+    /*
+    public double getAttackStrength()
     {
         return this.SelfType.Strength0 + this.getDinoAge() * this.SelfType.StrengthInc;
     }
+    */
 
     /**
      * Called when the entity is attacked.
@@ -425,6 +389,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     if (isInvulnerable(var1))
     {
     		return false;
+    }
+    else if (var1 == DamageSource.inWall)
+    {
+        return false;
     }
     	
         //when modelized just drop the model else handle normal attacking
@@ -449,6 +417,14 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         if (!isModelized())
         {
             super.moveEntityWithHeading(par1, par2);
+            
+
+            // this.stepHeight = 0.5F;
+
+             if (this.riddenByEntity != null || this.isAdult())
+             {
+                 this.stepHeight = 1.0F;
+             }
         }
         else
         {
@@ -456,12 +432,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             this.motionZ *= 0.0D;
         }
 
-        this.stepHeight = 0.5F;
-
-        if (this.riddenByEntity != null || this.isAdult())
-        {
-            this.stepHeight = 1.0F;
-        }
     }
 
     /**
@@ -509,8 +479,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     protected float getSoundPitch()
     {
-        return (!this.isAdult() && !this.isTeen()) ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 2.0F 
+        return (!this.isAdult() && !this.isTeen()) ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 2.5F 
         		: (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F;
+    }
+    
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    protected float getSoundVolume()
+    {
+        return (!this.isAdult() && !this.isTeen()) ? 0.4F : 1.0F;
     }
     
     @Override
@@ -615,8 +593,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         int i = item0.stackSize;
 
-        //TODO it looks like the blocks are missing here...cant be eaten
-        if (this.IsHungry() && this.SelfType.FoodItemList.CheckItemById(item0.itemID))
+        if (this.IsHungry() && (this.SelfType.FoodItemList.CheckItemById(item0.itemID) || this.SelfType.FoodBlockList.CheckBlockById(item0.itemID)))
         {
             //The Dino is Hungry and it can eat the item
             //this.showHeartsOrSmokeFX(false);
@@ -770,6 +747,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     public void HandleBreed()
     {
+
         if (this.isAdult())
         {
             --this.BreedTick;
@@ -802,8 +780,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     PartnerCount = 20;
                 }
 
-                if ((new Random()).nextInt(60) < PartnerCount)
+                if ((new Random()).nextInt(20) < PartnerCount)
                 {
+                	Fossil.Console("HANDLE BREED");
                     EntityDinoEgg var5 = null;
                     var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
@@ -887,7 +866,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         if (this.getOwner() != null && this.getDistanceToEntity(this.getOwner()) < 50.0F);
 
         {
-            String Status1 = StatCollector.translateToLocal("status." + var1.toString() + ".head");
+            String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
             String Dino = this.SelfType.toString();
             String Status2 = StatCollector.translateToLocal("status." + var1.toString());
             Fossil.ShowMessage(Status1 + Dino + Status2, (EntityPlayer)this.getOwner());
@@ -927,10 +906,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     public void FaceToCoord(int var1, int var2, int var3)
     {
-        double var4 = (double)var1;
-        double var6 = (double)var3;
-        float var8 = (float)(Math.atan2(var6, var4) * 180.0D / Math.PI) - 90.0F;
-        this.rotationYaw = this.updateRotation(this.rotationYaw, var8, 360.0F);
+    	if(!this.isModelized()){
+	        double var4 = (double)var1;
+	        double var6 = (double)var3;
+	        float var8 = (float)(Math.atan2(var6, var4) * 180.0D / Math.PI) - 90.0F;
+	        this.rotationYaw = this.updateRotation(this.rotationYaw, var8, 360.0F);
+    	}
     }
 
     private float updateRotation(float var1, float var2, float var3)
@@ -1069,7 +1050,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         {
             this.showHeartsOrSmokeFX(false, true);
             //System.out.println("AGING RECEIVED!");
-            this.updateSize();
+            //this.updateSize();
         }
         else
         {
@@ -1110,6 +1091,19 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
     }
 
+    /**
+     * Called to update the entity's position/logic.
+     */
+    public void onUpdate()
+    {
+        super.onUpdate();
+
+        if (!this.worldObj.isRemote && !this.isTamed())
+        {
+        	this.clearLeashed(true, true);
+        }
+    }
+    
     protected boolean modelizedInteract(EntityPlayer var1)
     {
         this.faceEntity(var1, 360.0F, 360.0F);
@@ -1120,6 +1114,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             if (var2.itemID == Item.bone.itemID)
             {
                 this.increaseDinoAge();
+                
+                if (!var1.capabilities.isCreativeMode)
                 --var2.stackSize;
 
                 if (var2.stackSize <= 0)
@@ -1141,30 +1137,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             super.updateEntityActionState();
         }
     }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    /*
-    protected float getSoundVolume()
-    {
-        //float temp=this.isModelized() ? 0.0F : 0.2F + 0.5F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.3F;
-        //return temp;
-        float soundVolume = this.isModelized() ? 0.0F : 2 - this.getDinoAge();
-        return soundVolume;
-    }
-    */
-
-    /**
-     * Gets the pitch of living sounds in living entities.
-     */
-    /*
-    protected float getSoundPitch()
-    {
-        //return 4.0F-3.0F * (float)this.getDinoAge()/(float)this.SelfType.MaxAge+this.rand.nextFloat()*0.2F;
-        return super.getSoundPitch() * (2 - this.getDinoAge());
-    }
-    */
 
     /**
      * Plays step sound at given x, y, z for the entity
@@ -1200,6 +1172,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         var1.setInteger("SubSpecies", this.getSubSpecies());
         var1.setByte("OrderStatus", (byte)this.OrderStatus.ordinal()/*(byte)Fossil.EnumToInt(this.OrderStatus)*/);
 
+        /*
         if (this.ItemInMouth != null)
         {
             var1.setShort("Itemid", (short)this.ItemInMouth.itemID);
@@ -1212,6 +1185,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             var1.setByte("ItemCount", (byte)0);
             var1.setShort("ItemDamage", (short)0);
         }
+        */
 
         if (this.getOwnerName() == null)
         {
@@ -1240,6 +1214,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         byte var4 = var1.getByte("ItemCount");
         short var5 = var1.getShort("ItemDamage");
 
+        /*
         if (var3 != -1)
         {
             this.ItemInMouth = new ItemStack(var3, var4, var5);
@@ -1248,6 +1223,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         {
             this.ItemInMouth = null;
         }
+        */
 
         /*if (this.getHunger() <= 0)
         {
@@ -1293,13 +1269,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     public boolean canBePushed()
     {
-        return false;
+        return this.isAdult() || this.isTeen();
     }
 
     public void onLivingUpdate()
     {
-        this.HandleBreed();
-        super.onLivingUpdate();
+    	if(!this.isModelized()){
+	        this.HandleBreed();
+	        super.onLivingUpdate();
+    	}
     }
 
     /**
@@ -1321,7 +1299,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 if (var2.itemID == Fossil.chickenEss.itemID && !player.worldObj.isRemote)
                 {
                     // Be grown up by chicken essence
-                    if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0)
+                    if (this.getDinoAge() < this.SelfType.AdultAge && this.getHunger() > 0) {
                         if (this.getHunger() > 0)
                         {
                             if (!player.capabilities.isCreativeMode)
@@ -1342,6 +1320,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
                             return true;
                         }
+                    }
 
                     if (!this.worldObj.isRemote)
                     {
@@ -1403,8 +1382,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             if (this.ItemInMouth == null)
                             {
                                 //It has nothing in it's mouth
-                                this.HoldItem(var2);
-                                --var2.stackSize;
+                               // this.HoldItem(var2);
+                                //--var2.stackSize;
                                 /*if (var2.stackSize <= 0)
                                 {
                                     player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
@@ -1416,9 +1395,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                                 if (this.SelfType.FoodItemList.getItemFood(ItemInMouth.itemID) + this.SelfType.FoodBlockList.getBlockFood(ItemInMouth.itemID) < this.SelfType.FoodItemList.getItemFood(var2.itemID) + this.SelfType.FoodBlockList.getBlockFood(var2.itemID))
                                 {
                                     //The item given is better food for the dino
-                                    entityDropItem(new ItemStack(this.ItemInMouth.itemID, 1, 0), 0.5F);//TODO Spit out the old item
-                                    this.HoldItem(var2);
-                                    --var2.stackSize;
+                                   // entityDropItem(new ItemStack(this.ItemInMouth.itemID, 1, 0), 0.5F);//TODO Spit out the old item
+                                   // this.HoldItem(var2);
+                                  //  --var2.stackSize;
                                     /*if (var2.stackSize <= 0)
                                     {
                                         player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
@@ -1432,6 +1411,17 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 }
                 else//no food, but not nothing
                 {
+                	
+                    if (var2 != null && var2.itemID == Item.leash.itemID && this.allowLeashing())
+                    {
+                        if (player.getCommandSenderName().equalsIgnoreCase(((EntityTameable)this).getOwnerName()))
+                        {
+                            this.setLeashedToEntity(player, true);
+                            --var2.stackSize;
+                            return true;
+                        }
+                    }
+
                     if (FMLCommonHandler.instance().getSide().isClient() && var2.itemID == Fossil.dinoPedia.itemID)
                     {
                         //DINOPEDIA
@@ -1455,6 +1445,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             this.isJumping = false;
                             this.setPathToEntity((PathEntity)null);
                             this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
+
                             this.SendOrderMessage(this.OrderStatus);
 
                             if (this.OrderStatus == EnumOrderType.Stay)
@@ -1471,8 +1462,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     if (this.SelfType.canCarryItems() && var2.itemID != Fossil.dinoPedia.itemID && this.ItemInMouth == null && ((this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName())) || (new Random()).nextInt(40) == 1))
                     {
                         //The dino takes the item if: able to, has nothing now and is tamed by the user or willingly(2.5%)
-                        this.HoldItem(var2);
-                        --var2.stackSize;
+                    //    this.HoldItem(var2);
+                    //    --var2.stackSize;
 
                         if (var2.stackSize <= 0)
                         {
@@ -1486,6 +1477,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             else
             {
                 // Klicked with bare hands
+            	/*
                 if (this.ItemInMouth != null && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
                 {
                     //Give the Item to the Player, but only if it's the owner
@@ -1496,7 +1488,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         return true;
                     }
                 }
-
+*/
                 if (this.SelfType.OrderItem == null && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
                 {
                     //This dino is controlled without a special item
@@ -1529,6 +1521,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     //public void CheckSkin() {}
 
+    public boolean allowLeashing()
+    {
+        return !this.getLeashed() && !(this instanceof IMob) && this.isTamed();
+    }
+    
     public int BlockInteractive()
     {
         return 0;
@@ -1574,8 +1571,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         Random random = new Random();
-        this.setSubSpecies(random.nextInt(3) + 1);
+        this.setSubSpecies(random.nextInt(4) + 1);
         this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
         return par1EntityLivingData;
     }
 
@@ -1611,10 +1610,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     	Fossil.Log.log(Level.INFO, "isRiderJumping");
         motionY += 0.5;
     }
-    
+  
     @Override
     public void jump() {
     	super.jump();
+    	this.motionY = 0.45D;
     }
     
     public boolean isInvulnerable(DamageSource var1) {
@@ -1625,17 +1625,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             if (srcEnt == this) {
                 return true;
             }
-            
+
             // ignore damage from rider
             if (srcEnt == riddenByEntity) {
                 return true;
             }
         }
-        
-        if (var1.damageType.equals("inWall"))
-        {
-            return true;
-        }
+
 		return false;
     }
 }

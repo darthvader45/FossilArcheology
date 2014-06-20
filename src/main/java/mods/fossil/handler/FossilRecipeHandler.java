@@ -17,6 +17,8 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Block.glass, 'Y', new ItemStack(Item.dyePowder, 1, 2), 'W', Item.bucketWater, 'Z', Item.ingotIron});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockanalyzerIdle, 1), new Object[] {"XYX", "XWX", 'X', Item.ingotIron, 'Y', Fossil.relic, 'W', Fossil.biofossil});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockworktableIdle, 1), new Object[] {"X", "Y", 'X', Item.paper, 'Y', Block.workbench});
+        GameRegistry.addRecipe(new ItemStack(Fossil.blockSifterIdle, 1), new Object[] {"XYX", "YZY", "YXY", 'X', Item.silk, 'Y', Block.planks, 'Z', Block.fenceIron});
+        GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
             GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});

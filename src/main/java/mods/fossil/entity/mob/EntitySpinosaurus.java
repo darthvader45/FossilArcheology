@@ -45,6 +45,14 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
+    
+    public static final double baseHealth = EnumDinoType.Spinosaurus.Health0;
+    public static final double baseDamage = EnumDinoType.Spinosaurus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Spinosaurus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Spinosaurus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Spinosaurus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Spinosaurus.SpeedMax;
 
     public EntitySpinosaurus(World var1)
     {
@@ -62,11 +70,12 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
          */
         this.adultAge = EnumDinoType.Spinosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.0F, 1.0F);
+        this.setSize(1.5F, 1.0F);
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 7.0F;
+
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 2.0D, true));
@@ -75,14 +84,15 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(6, new DinoAIEat(this, 24));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+        this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
     }
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.50000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     /**
@@ -126,23 +136,15 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         super.onUpdate();
 
         //this.blockBreakingBehavior.execute();
+        /*
         if (this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         {
             BlockInteractive();
         }
+        */
 
         if (this.getHealth() > 0)
         {
-            /*this.field_25054_c = this.field_25048_b;
-
-            if (this.looksWithInterest)
-            {
-                this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
-            }
-            else
-            {
-                this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
-            }*/
             if (this.looksWithInterest)
             {
                 this.numTicksToChaseTarget = 10;
@@ -221,7 +223,11 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      */
     public boolean attackEntityFrom(DamageSource var1, int var2)
     {
-        if (var1.getEntity() == this)
+        if (this.isEntityInvulnerable())
+        {
+            return false;
+        }
+        else if (var1.getEntity() == this)
         {
             return false;
         }
@@ -257,17 +263,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         }
     }
 
-    /**
-     * Deals damage to the entity. If its a EntityPlayer then will take damage from the armor first and then health
-     * second with the reduced value. Args: damageAmount
-     */
-    protected void damageEntity(DamageSource var1, float var2)
-    {
-        var2 = this.applyArmorCalculations(var1, var2);
-        var2 = this.applyPotionDamageCalculations(var1, var2);
-//       this.prevHealth=this.health;
-//       this.health -= var2;
-    }
 
     public boolean isAngry()
     {
@@ -279,7 +274,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isAngry() ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -313,7 +308,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                 {
                     if (this.getDinoAge() >= 3)
                     {
-                        this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
+                        this.worldObj.playSoundAtEntity(this, "trex_scream", this.getSoundVolume() * 2.0F, 1.0F);
                     }
 
                     this.Screaming = true;
@@ -322,7 +317,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         }
         else
         {
-            var1.attackEntityFrom(DamageSource.causeMobDamage(this), this.getAttackStrength());
+            var1.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
         }
     }
 
@@ -335,7 +330,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         if (this.getDinoAge() >= 3)
         {
-            this.worldObj.playSoundAtEntity(this, Fossil.modid + "tyrannosaurus_scream", this.getSoundVolume() * 2.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, Fossil.modid + "trex_scream", this.getSoundVolume() * 2.0F, 1.0F);
         }
     }
 
@@ -348,6 +343,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         if (var2 != null)
         {
+        	/*
             if (var2.itemID == Fossil.gem.itemID)
             {
                 if (this.isWeak() && !this.isTamed())
@@ -390,7 +386,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                     return true;
                 }
             }
-
+			*/
             if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
             {
                 if (var1.username.equalsIgnoreCase(this.getOwnerName()))
@@ -598,41 +594,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         return var1;
     }
-    public int BlockInteractive()
-    {
-        int destroyed = 0;
 
-        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
-        {
-            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
-            {
-                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
-                {
-                    if (!this.worldObj.isAirBlock(var1, var2, var3))
-                    {
-                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
-
-                        if (!this.inWater)
-                        {
-                            if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) < 5.0D)
-                            {
-                                if ((new Random()).nextInt(10) < 2)
-                                {
-                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
-                                }
-
-                                this.worldObj.setBlock(var1, var2, var3, 0);
-                                destroyed++;
-                                //this.RushTick = 10;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return destroyed;
-    }
 
     /*public float getGLX()
     {
@@ -659,5 +621,36 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     public boolean isOnSurface()
     {
         return this.worldObj.isAirBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY + (double)(this.getEyeHeight() / 2.0F)), (int)Math.floor(this.posZ));
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

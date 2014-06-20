@@ -217,6 +217,20 @@ public class ModelTriceratops extends ModelDinosaurs
             this.thigh_L2.rotateAngleX = MathHelper.cos(var1 / 0.63330555F) * 0.17453292F * var2 + 0.0F;
             this.leg_L2.rotateAngleX = MathHelper.cos(var1 / 0.63330555F) * 0.17453292F * var2 + 0.994461F;
         }
+        else {
+            this.noumenon1.rotateAngleX = 0;
+            this.noumenon2.rotateAngleX = 0;
+            this.noumenon3.rotateAngleX = 0;
+            this.noumenon4.rotateAngleX = 0;
+            this.thigh_R1.rotateAngleX = 0;
+            this.leg_R1.rotateAngleX = 0;
+            this.thigh_L1.rotateAngleX = 0;
+            this.leg_L1.rotateAngleX = 0;
+            this.thigh_R2.rotateAngleX = 0;
+            this.leg_R2.rotateAngleX = 0;
+            this.thigh_L2.rotateAngleX = 0;
+            this.leg_L2.rotateAngleX = 0;
+        }
     }
 
     private void SetRotation(ModelRenderer var1, float var2, float var3, float var4)

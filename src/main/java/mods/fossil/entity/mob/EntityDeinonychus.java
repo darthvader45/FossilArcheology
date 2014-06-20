@@ -8,12 +8,17 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIHunt;
+import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -24,9 +29,11 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -39,14 +46,19 @@ public class EntityDeinonychus extends EntityDinosaur
     public boolean SupportChecked = false;
     public Vector MemberList = new Vector();
 
+    public static final double baseHealth = EnumDinoType.Deinonychus.Health0;
+    public static final double baseDamage = EnumDinoType.Deinonychus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Deinonychus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Deinonychus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Deinonychus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Deinonychus.SpeedMax;
+    
     public EntityDeinonychus(World var1)
     {
         super(var1, EnumDinoType.Deinonychus);
         this.updateSize();
         
-        /*
-         * EDIT VARIABLES PER DINOSAUR TYPE
-         */
         this.adultAge = EnumDinoType.Deinonychus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.5F);
@@ -54,18 +66,16 @@ public class EntityDeinonychus extends EntityDinosaur
         this.minSize = 0.3F;
         // Size of dinosaur at age Adult.
         this.maxSize = 1.0F;
-        this.healthModValue = 3;
-        this.damageModValue = 2;
-        this.speedModValue = 0.01;
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
-//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
-//        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 5.0F, 2.0F, 2.0F));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -73,15 +83,15 @@ public class EntityDeinonychus extends EntityDinosaur
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-//       this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
-    }
+        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
+        }
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     /*protected void entityInit()
@@ -96,7 +106,7 @@ public class EntityDeinonychus extends EntityDinosaur
      */
     protected boolean canTriggerWalking()
     {
-        return !this.isTeen();
+        return this.isAdult() || this.isTeen();
     }
 
     /**
@@ -132,19 +142,7 @@ public class EntityDeinonychus extends EntityDinosaur
             }
         }
     }
-    
-    
-
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-    	if(this.isModelized())
-    		return null;
-        return this.isTamed() ? DinoSound.deinonychus_living_tame : DinoSound.deinonychus_living_wild;
-    }
+ 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
@@ -204,14 +202,6 @@ public class EntityDeinonychus extends EntityDinosaur
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
-        super.onUpdate();
-    }
-
     public float getEyeHeight()
     {
         return this.height * 0.8F;
@@ -237,60 +227,53 @@ public class EntityDeinonychus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    /*
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
-        Entity var3 = var1.getEntity();
-        boolean var4 = false;
-
-        if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
-        {
-            var2 = (var2 + 1) / 2;
-        }
-
-        if (super.attackEntityFrom(var1, var2))
-        {
-            if (!this.isAngry())
-            {
-                if (var3 instanceof EntityPlayer)
-                {
-                    this.setTamed(false);
-                    this.setOwner("");
-                    this.ItemInMouth = null;
-                    this.PreyChecked = true;
-                    var4 = true;
-                }
-
-                if (var3 instanceof EntityArrow && ((EntityArrow)var3).shootingEntity != null)
-                {
-                    var3 = ((EntityArrow)var3).shootingEntity;
-                }
-
-                if (var3 instanceof EntityLiving)
-                {
-                    this.setAttackTarget((EntityLiving)var3);
-                }
-            }
-            else if (var3 != this && var3 != null)
-            {
-                this.entityToAttack = var3;
-            }
-
-            return true;
-        }
-        else
+    	super.attackEntityFrom(par1DamageSource, par2);
+        if (this.isEntityInvulnerable())
         {
             return false;
         }
+        else
+        {
+            Entity entity = par1DamageSource.getEntity();
+            this.aiSit.setSitting(false);
+            
+
+            if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
+            {
+                par2 = (par2 + 1.0F) / 2.0F;
+            }
+
+            return super.attackEntityFrom(par1DamageSource, par2);
+        }
     }
-    */
+
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
+    
     protected Entity findPlayerToAttack()
     {
         return null;
+    }
+    
+    /**
+     * Sets the active target the Task system uses for tracking
+     */
+    public void setAttackTarget(EntityLivingBase par1EntityLivingBase)
+    {
+        super.setAttackTarget(par1EntityLivingBase);
+
+        if (par1EntityLivingBase == null)
+        {
+            this.setAngry(false);
+        }
+        else if (!this.isTamed())
+        {
+            this.setAngry(true);
+        }
     }
 
     /**
@@ -605,47 +588,43 @@ public class EntityDeinonychus extends EntityDinosaur
         return this.motionX < 0.03125D && this.motionY < 0.03125D && this.motionZ < 0.03125D;
     }
     */
-    /*public void setLearntChest(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(24);
 
-        if (var1)
-        {
-            this.dataWatcher.updateObject(24, Byte.valueOf((byte)(var2 & -17)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(24, Byte.valueOf((byte)(var2 | 16)));
-        }
-    }*/
-
-    /*public float getGLX()
-    {
-        return (float)(0.20000000298023224D + 0.1D * (double)this.getDinoAge());
-    }
-
-    public float getGLY()
-    {
-        return (float)(0.3199999928474426D + 0.1D * (double)this.getDinoAge());
-    }*/
-
-    /*public EntityAgeable func_90011_a(EntityAgeable var1)
-    {
-        return null;
-    }*/
 
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
     }
-
+    
     /**
-     * Causes this entity to do an upwards motion (jumping).
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */
     @Override
-    public void jump()
+    public void updateSize()
     {
-        super.jump();
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
+    
 }

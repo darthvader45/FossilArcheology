@@ -1,6 +1,7 @@
 package mods.fossil;
 
 import java.util.Properties;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +18,7 @@ import mods.fossil.blocks.BlockAncientWoodSlab;
 import mods.fossil.blocks.BlockAncientWoodStairs;
 import mods.fossil.blocks.BlockFern;
 import mods.fossil.blocks.BlockFigurine;
+import mods.fossil.blocks.BlockFigurineItem;
 import mods.fossil.blocks.BlockFossil;
 import mods.fossil.blocks.BlockFossilSkull;
 import mods.fossil.blocks.BlockIcedStone;
@@ -33,9 +35,10 @@ import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
+import mods.fossil.client.FossilOptions;
+import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
-import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.entity.BehaviorDodoEggDispense;
@@ -102,7 +105,6 @@ import mods.fossil.items.ItemFeet;
 import mods.fossil.items.ItemFemurs;
 import mods.fossil.items.ItemFernSeed;
 import mods.fossil.items.ItemFossilRecord;
-import mods.fossil.items.ItemHeadRelic;
 import mods.fossil.items.ItemIcedMeat;
 import mods.fossil.items.ItemJavelin;
 import mods.fossil.items.ItemMagicConch;
@@ -140,9 +142,13 @@ import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -174,7 +180,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "Build 6.0 DEV";
+    public static final String modversion = "1.6.4 Build 6.0";
 
     /*
      * Set mod state here
@@ -204,7 +210,11 @@ public class Fossil
      * If DebugMode = true
      * Dinosaur/Syringe times are accelerated but not disabled to allow for error checking.
      */
-    public static boolean DebugMode = true;
+    //public static boolean DebugMode = FossilOptions.FossilDebug;
+    public static boolean DebugMode() {
+        return false;
+    }
+    
     public static final double MESSAGE_DISTANCE = 25.0D;
 
     public static CreativeTabs tabFBlocks = new TabFBlocks(CreativeTabs.getNextID(), "Fossil Blocks");
@@ -265,6 +275,7 @@ public class Fossil
     public static Block marble;
     public static Block figurineBlock;
     public static Block blockSifterIdle;
+    public static Block blockSifterActive;
 
     //Items
     public static Item biofossil;
@@ -432,6 +443,7 @@ public class Fossil
     public static int marbleID;
     public static int figurineBlockID;
     public static int blockSifterIdleID;
+    public static int blockSifterActiveID;
     
     //Items
     public static int biofossilID;
@@ -573,11 +585,11 @@ public class Fossil
     public void PreInit(FMLPreInitializationEvent event)
     {
 //       Localizations.loadLanguages();
+    	MinecraftForge.EVENT_BUS.register(new DinoSoundHandler());
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         FossilAchievementHandler.loadAchievements();
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
-//    	VillagerRegistry.instance().registerVillagerId(10);
-//    	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:mob/Archaeologist.png"));
+    	VillagerRegistry.instance().registerVillagerId(10);
         config = new Configuration(event.getSuggestedConfigurationFile());
 
         try
@@ -629,6 +641,7 @@ public class Fossil
             marbleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.MARBLE_NAME, 3042).getInt();
             figurineBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt();
             blockSifterIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SIFTER_IDLE, 3044).getInt();
+            blockSifterActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SIFTER_ACTIVE, 3045).getInt();
             
             //Items
             biofossilID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt();
@@ -774,7 +787,9 @@ public class Fossil
             FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
             FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
             FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
-            FossilOptions.FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
+            //FossilOptions.FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
+            FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Academy", 1).getInt(1);
+            FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Shipwreck", 1).getInt(1);
             
         }
         catch (Exception var7)
@@ -841,13 +856,13 @@ public class Fossil
         volcanicRock = new BlockVolcanicRock(volcanicRockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_ROCK_NAME).setCreativeTab(this.tabFBlocks);
         volcanicBrick = new BlockVolcanicBrick(volcanicBrickID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_BRICK_NAME).setCreativeTab(this.tabFBlocks);
         sarracina = new BlockSarracenia(sarracinaID).setHardness(0.5F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName(LocalizationStrings.SARRACINA_NAME).setCreativeTab(this.tabFBlocks);
-        tar = new BlockTar(tarID, Material.sand).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
+        tar = new BlockTar(tarID, Material.water).setHardness(100.0F).setUnlocalizedName(LocalizationStrings.TAR_NAME);
         amberOre  = new BlockAmberOre(amberOreID, Material.rock).setHardness(3.0F).setUnlocalizedName(LocalizationStrings.AMBER_ORE_NAME);
         ancientStone  = new BlockAncientStone(ancientStoneID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_NAME);
         ancientStonebrick  = new BlockAncientStonebrick(ancientStonebrickID).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_BRICK_NAME);
         ancientWood  = new BlockAncientWood(ancientWoodID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_NAME);
         ancientWoodPillar = new BlockAncientWoodPillar(ancientWoodPillarID, Material.wood).setHardness(2.0F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
-        ancientGlass = new BlockAncientGlass(ancientGlassID, Material.glass, false).setHardness(0.3F).setUnlocalizedName(LocalizationStrings.ANCIENT_GLASS_NAME);
+        ancientGlass = new BlockAncientGlass(ancientGlassID, Material.glass, false).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_GLASS_NAME);
         ancientWoodPlate = new BlockAncientWoodPlate(ancientWoodPlateID, Material.wood).setHardness(0.6F).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
         ancientWoodStairs = new BlockAncientWoodStairs(ancientWoodStairsID, ancientWood).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
         ancientWoodDoubleSlab = (BlockHalfSlab)(new BlockAncientWoodSlab(ancientWoodDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
@@ -858,6 +873,7 @@ public class Fossil
         marble  = new BlockMarble(marbleID).setHardness(2.0F).setHardness(1.5F).setUnlocalizedName(LocalizationStrings.MARBLE_NAME);
         figurineBlock = new BlockFigurine(figurineBlockID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
         blockSifterIdle = new BlockSifter(blockSifterIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE).setCreativeTab(this.tabFBlocks);
+        blockSifterActive = new BlockSifter(blockSifterActiveID, true).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
         
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
         Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -902,8 +918,8 @@ public class Fossil
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
         cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
        // archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
-        potteryShards = new ForgeItem(potteryShardsID, "Pottery_Shards").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
-        brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
+        potteryShards = new ForgeItem(potteryShardsID, "AncientPotteryFragment2").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
+       // brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
        
         //BoneArmor
         skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);
@@ -960,7 +976,7 @@ public class Fossil
         dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true, "Cooked_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
 //        figurineItem = new ItemFigurine(figurineItemID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFTest);
         // Music Discs
-        fossilrecordBones = new ItemFossilRecord(fossilRecordID, "Bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
+        fossilrecordBones = new ItemFossilRecord(fossilRecordID, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
         //Initiate some other things...
         BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), -1));
         BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.woodjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 0));
@@ -1017,13 +1033,16 @@ public class Fossil
         GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
-        GameRegistry.registerBlock(figurineBlock, LocalizationStrings.FIGURINE_NAME);
+        GameRegistry.registerBlock(figurineBlock, BlockFigurineItem.class, modid + (figurineBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(blockSifterIdle, LocalizationStrings.BLOCK_SIFTER_IDLE);
 
+        
         for (int i = 0; i < 16; ++i)
         {
-            LanguageRegistry.addName(new ItemStack(figurineBlock, 1, i), BlockFigurine.figurineTypes[i]);
+        	ItemStack figurineStack = new ItemStack(figurineBlock, 1, i);
+            LanguageRegistry.addName(figurineStack, BlockFigurine.figurineTypes[i]);
         }
+        
 
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0) + ".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0) + ".name", "Ancient Wood Slab");
@@ -1065,7 +1084,7 @@ public class Fossil
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
-            LanguageRegistry.instance().addStringLocalization("entity.fossil." + EnumDinoType.values()[i].name() + ".name", StatCollector.translateToLocal("Dino." + EnumDinoType.values()[i].name()));
+            LanguageRegistry.instance().addStringLocalization("entity.fossil." + EnumDinoType.values()[i].name() + ".name", StatCollector.translateToLocal(EnumDinoType.values()[i].name()));
         }
 
         FossilSpawnEggs.addSpawnEggs();
@@ -1109,6 +1128,15 @@ public class Fossil
         FossilRecipeHandler.addRecipe();
         GameRegistry.registerPickupHandler(new FossilPickupHandler());
         GameRegistry.registerCraftingHandler(new FossilCraftingHandler());
+        
+        Random rand = new Random();
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent((new ItemStack(Fossil.figurineBlock, rand.nextInt(16))),1,2,50));
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.gem),1,1,1));
+        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.whip),1,1,75));
+        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.biofossil),3,9,50));
+        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.biofossil),3,12,75));
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.fossilrecordBones),1,1,5));
+        
 
     }
 
@@ -1122,7 +1150,7 @@ public class Fossil
 
     public static void Console(String var0)
     {
-        if (DebugMode)
+        if (DebugMode())
         {
             System.out.println("[FOSSIL]: " + var0);
         }

@@ -184,7 +184,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         boolean var2 = false;
         int cookValue;
 
-        if (Fossil.DebugMode)
+        if (Fossil.DebugMode())
         {
             cookValue = 300;
         }

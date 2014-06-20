@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -29,7 +30,10 @@ public class BlockTar extends Block
         entity.motionY = 0.070000000745058064D;
         entity.fallDistance = 0.0F;
         entity.motionZ = 0.000000000000000004D;
+        entity.attackEntityFrom(DamageSource.drown, 1);
     }
+    
+
 
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {

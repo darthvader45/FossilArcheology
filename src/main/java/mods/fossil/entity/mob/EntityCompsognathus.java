@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,6 +37,14 @@ public class EntityCompsognathus extends EntityDinosaur
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
     public Vector MemberList = new Vector();
+    
+    public static final double baseHealth = EnumDinoType.Compsognathus.Health0;
+    public static final double baseDamage = EnumDinoType.Compsognathus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Compsognathus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Compsognathus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Compsognathus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Compsognathus.SpeedMax;
 
     public EntityCompsognathus(World var1)
     {
@@ -52,11 +61,13 @@ public class EntityCompsognathus extends EntityDinosaur
         this.minSize = 0.25F;
         // Size of dinosaur at age Adult.
         this.maxSize = 1.0F;
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));
@@ -66,14 +77,18 @@ public class EntityCompsognathus extends EntityDinosaur
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
+        //this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChicken.class, 750, false));
+        
+        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
     }
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.31D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(EnumDinoType.Compsognathus.Speed0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(EnumDinoType.Compsognathus.Health0);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(EnumDinoType.Compsognathus.Strength0);
     }
 
     /**
@@ -241,6 +256,7 @@ public class EntityCompsognathus extends EntityDinosaur
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
+    	super.attackEntityFrom(par1DamageSource, par2);
         if (this.isEntityInvulnerable())
         {
             return false;
@@ -324,5 +340,36 @@ public class EntityCompsognathus extends EntityDinosaur
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {
         return new EntityCompsognathus(this.worldObj);
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

@@ -8,6 +8,7 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
@@ -35,7 +36,15 @@ public class EntityTRex extends EntityDinosaur
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
-
+    
+    public static final double baseHealth = EnumDinoType.TRex.Health0;
+    public static final double baseDamage = EnumDinoType.TRex.Strength0;
+    public static final double baseSpeed = EnumDinoType.TRex.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.TRex.HealthMax;
+    public static final double maxDamage = EnumDinoType.TRex.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.TRex.SpeedMax;
+    
     public EntityTRex(World var1)
     {
         super(var1, EnumDinoType.TRex);
@@ -52,23 +61,24 @@ public class EntityTRex extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 4.5F;
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
-        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
+        this.tasks.addTask(4, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(4, new DinoAIEat(this, 60));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+        this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         
-        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
+        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
         
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         
     }
 
@@ -92,9 +102,9 @@ public class EntityTRex extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.40000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     //protected void updateEntityActionState() {}
@@ -117,6 +127,7 @@ public class EntityTRex extends EntityDinosaur
         //this.blockBreakingBehavior.execute();
         //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         //    BlockInteractive();
+        /*
         if (this.getHealth() > 0)
         {
             if (this.looksWithInterest)
@@ -124,8 +135,17 @@ public class EntityTRex extends EntityDinosaur
                 this.numTicksToChaseTarget = 10;
             }
         }
+        */
     }
 
+    public void moveEntityWithHeading(float par1, float par2)
+    {
+    	super.moveEntityWithHeading(par1, par2);
+    	if(this.isWeak()) {
+            this.motionX *= 0.0D;
+            this.motionZ *= 0.0D;
+    	}
+    }
     
     /**
      * Applies a velocity to each of the entities pushing them away from each other. Args: entity
@@ -189,7 +209,7 @@ public class EntityTRex extends EntityDinosaur
      */
     protected boolean isMovementCeased()
     {
-        return this.isSitting();// || this.field_25052_g;
+        return this.isSitting() || this.isWeak();// || this.field_25052_g;
     }
 
     /**
@@ -197,7 +217,11 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean attackEntityFrom(DamageSource var1, int var2)
     {
-        if (var1.getEntity() == this)
+        if (this.isEntityInvulnerable())
+        {
+            return false;
+        }
+        else if (var1.getEntity() == this)
         {
             return false;
         }
@@ -243,7 +267,7 @@ public class EntityTRex extends EntityDinosaur
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() && !this.isTamed() && !this.isWeak() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return (this.isAngry() && !this.isTamed() && !this.isWeak()) ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     @Override
@@ -260,7 +284,7 @@ public class EntityTRex extends EntityDinosaur
         }
         boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
         if (random.nextInt(10) == 1)
-        this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume(), this.getDinoAge());
+        this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
         if (attacked)
         {
             if (knockback > 0)
@@ -333,7 +357,7 @@ public class EntityTRex extends EntityDinosaur
 
      //   if (this.getDinoAge() >= 3)
      //   {
-            this.worldObj.playSoundAtEntity(this, DinoSound.tyrannosaurus_scream, this.getSoundVolume(), this.getDinoAge());
+            this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
      //   }
     }
 
@@ -350,6 +374,7 @@ public class EntityTRex extends EntityDinosaur
             {
                 if (this.isWeak() && !this.isTamed())
                 {
+                	var1.triggerAchievement(FossilAchievementHandler.TheKing);
                     this.heal(200);
                     this.increaseHunger(500);
                     this.setTamed(true);
@@ -387,7 +412,7 @@ public class EntityTRex extends EntityDinosaur
                 }
             }
 
-            if (!Fossil.DebugMode)
+            if (!Fossil.DebugMode())
             {
                 if (var2.itemID == Fossil.chickenEss.itemID)
                 {
@@ -491,15 +516,34 @@ public class EntityTRex extends EntityDinosaur
 
         if (this.isWeak())
         {
-            return Fossil.modid + ":textures/mob/TRexWeak.png";
+            switch (this.getSubSpecies())
+            {
+            case 1:
+            	return Fossil.modid + ":textures/mob/TRex_Green_Weak.png";
+            default:
+            	return Fossil.modid + ":textures/mob/TRexWeak.png";
+            }
+
         }
 
         if (this.isAdult() && !this.isTamed())
         {
-            return Fossil.modid + ":textures/mob/TRex_Adult.png";
+            switch (this.getSubSpecies())
+            {
+            case 1:
+            	return Fossil.modid + ":textures/mob/TRex_Green_Adult.png";
+            default:
+            	return Fossil.modid + ":textures/mob/TRex_Adult.png";
+            }
         }
-
-        return Fossil.modid + ":textures/mob/TRex.png";
+        
+        switch (this.getSubSpecies())
+        {
+        case 1:
+        	return Fossil.modid + ":textures/mob/TRex_Green_Tame.png";
+        default:
+        	return Fossil.modid + ":textures/mob/TRex.png";
+        }
     }
 
     /**
@@ -532,7 +576,7 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean isWeak()
     {
-        return this.getHealth() < 8 && this.getDinoAge() > 5 && !this.isTamed();
+        return (this.getHealth() < 8) && (this.getDinoAge() > 5) && !this.isTamed();
         //return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
     }
 
@@ -648,5 +692,36 @@ public class EntityTRex extends EntityDinosaur
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

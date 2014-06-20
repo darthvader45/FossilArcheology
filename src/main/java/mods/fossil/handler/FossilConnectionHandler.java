@@ -22,27 +22,39 @@ public class FossilConnectionHandler implements IConnectionHandler
         switch (Fossil.modState)
         {
             case 0:
-                p.addChatMessage("You are running Fossils and Archaeology Revival " + Fossil.modversion + ".");
-                p.addChatMessage("This mod is currently in a DEVELOPMENT state and guaranteed to have serious issues.");
-                p.addChatMessage("Do NOT redistribute this build.");
-                return;
+                if (Fossil.FossilOptions.LoginMessage)
+                {
+                    p.addChatMessage("You are running Fossils and Archaeology Revival " + Fossil.modversion + ".");
+                    p.addChatMessage("Beware Fossils is not finished and features may be broken/incomplete.");
+                    p.addChatMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-");
+                    p.addChatMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology");
+                    Fossil.instance.config.load();
+                    Fossil.instance.config.get("option", "Display_Login_Message", false).set(false);
+                    Fossil.instance.config.save();
+                }
+            return;
 
             case 1:
+                if (Fossil.FossilOptions.LoginMessage)
+                {
                 p.addChatMessage("You are running Fossils and Archaeology Revival " + Fossil.modversion + ".");
                 p.addChatMessage("This mod is currently in an ALPHA/BETA state and may contain serious issues.");
-                p.addChatMessage("Report issues to https://github.com/4f6f3b/FossilArcheology/issues");
+                p.addChatMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-");
+                p.addChatMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology");
+                }
                 return;
 
             case 2:
                 if (Fossil.FossilOptions.LoginMessage)
                 {
                     p.addChatMessage("You are running Fossils and Archaeology Revival " + Fossil.modversion + ".");
-                    p.addChatMessage("Official forum and support: http://www.minecraftforum.net/topic/1708636-");
+                    p.addChatMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-");
+                    p.addChatMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology");
                     Fossil.instance.config.load();
                     Fossil.instance.config.get("option", "Display_Login_Message", false).set(false);
                     Fossil.instance.config.save();
-                    return;
                 }
+                return;
 
             default:
                 return;

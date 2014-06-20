@@ -29,6 +29,6 @@ public class BlockMarble extends Block
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Marble_StoneBrick");
+        this.blockIcon = par1IconRegister.registerIcon("fossil:MarbleStoneBrick");
     }
 }

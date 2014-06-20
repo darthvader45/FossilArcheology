@@ -1212,7 +1212,7 @@ public class Academy4
                 {},
                 {},
                 {AcademyUtil.BIOME_BLOCK, 0, 2, 2},
-                {Block.chest.blockID, 3},
+                {AcademyUtil.CUSTOM_CHEST, 3, AcademyUtil.RARE_LOOT_F3},
                 {0},
                 {0},
                 {0},

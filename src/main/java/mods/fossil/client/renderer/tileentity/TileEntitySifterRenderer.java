@@ -22,7 +22,7 @@ public class TileEntitySifterRenderer extends TileEntitySpecialRenderer {
     
 
 
-    private static final ResourceLocation field_110638_a = new ResourceLocation("fossil:textures/blocks/Sifter.png");
+    private static final ResourceLocation field_110638_a = new ResourceLocation("fossil:Sifter.png");
     private final ModelSifter modelSifter = new ModelSifter();
 	private double  theta;
 	private double angle;

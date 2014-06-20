@@ -20,5 +20,10 @@ public class FossilPickupHandler implements IPickupNotifier
         {
             player.addStat(FossilAchievementHandler.FoundFossils, 1);
         }
+        
+        if (item.getEntityItem().itemID == Fossil.icedMeat.itemID)
+        {
+            player.addStat(FossilAchievementHandler.Permafrost, 1);
+        }
     }
 }

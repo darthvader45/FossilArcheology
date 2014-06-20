@@ -19,6 +19,11 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "brachiosaurus_living2.wav",
         SOUND_RESOURCE_LOCATION + "brachiosaurus_living1.wav",
         SOUND_RESOURCE_LOCATION + "brachiosaurus_hurt1.wav",
+        SOUND_RESOURCE_LOCATION + "deinonychus_call1.wav",
+        SOUND_RESOURCE_LOCATION + "deinonychus_call2.wav",
+        SOUND_RESOURCE_LOCATION + "deinonychus_death.wav",
+        SOUND_RESOURCE_LOCATION + "deinonychus_hurt.wav",
+        SOUND_RESOURCE_LOCATION + "deinonychus_living.wav",
         SOUND_RESOURCE_LOCATION + "dilophosaurus_call1.wav",
         SOUND_RESOURCE_LOCATION + "dilophosaurus_call2.wav",
         SOUND_RESOURCE_LOCATION + "dilophosaurus_death.wav",
@@ -43,6 +48,12 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "mosasaurus_outside2.wav",
         SOUND_RESOURCE_LOCATION + "mosasaurus_outside3.wav",
         SOUND_RESOURCE_LOCATION + "mosasaurus_outside4.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_death.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_hurt1.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_hurt2.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_living1.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_living2.wav",
+        SOUND_RESOURCE_LOCATION + "pachycephalosaurus_living3.wav",
         SOUND_RESOURCE_LOCATION + "plesiosaurus_hurt.wav",
         SOUND_RESOURCE_LOCATION + "plesiosaurus_living.wav",
         SOUND_RESOURCE_LOCATION + "pterosaurus_hurt.wav",
@@ -62,18 +73,21 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "triceratops_living1.wav",
         SOUND_RESOURCE_LOCATION + "triceratops_living2.wav",
         SOUND_RESOURCE_LOCATION + "triceratops_living3.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_death1.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_death2.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_hurt.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_living1.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_living2.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_living3.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_scream1.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_scream2.wav",
-        SOUND_RESOURCE_LOCATION + "tyrannosaurus_scream3.wav",
+        SOUND_RESOURCE_LOCATION + "trex_death1.wav",
+        SOUND_RESOURCE_LOCATION + "trex_death2.wav",
+        SOUND_RESOURCE_LOCATION + "trex_hurt.wav",
+        SOUND_RESOURCE_LOCATION + "trex_living1.wav",
+        SOUND_RESOURCE_LOCATION + "trex_living2.wav",
+        SOUND_RESOURCE_LOCATION + "trex_living3.wav",
+        SOUND_RESOURCE_LOCATION + "trex_scream1.wav",
+        SOUND_RESOURCE_LOCATION + "trex_scream2.wav",
+        SOUND_RESOURCE_LOCATION + "trex_scream3.wav",
         SOUND_RESOURCE_LOCATION + "velociraptor_attack1.wav",
         SOUND_RESOURCE_LOCATION + "velociraptor_attack2.wav",
-        SOUND_RESOURCE_LOCATION + "velociraptor_hurt.wav",
+        SOUND_RESOURCE_LOCATION + "velociraptor_hurt1.wav",
+        SOUND_RESOURCE_LOCATION + "velociraptor_hurt2.wav",
+        SOUND_RESOURCE_LOCATION + "velociraptor_hurt3.wav",
+        SOUND_RESOURCE_LOCATION + "velociraptor_hurt4.wav",
         SOUND_RESOURCE_LOCATION + "velociraptor_living_tame1.wav",
         SOUND_RESOURCE_LOCATION + "velociraptor_living_tame2.wav",
         SOUND_RESOURCE_LOCATION + "velociraptor_living_wild1.wav",
@@ -123,11 +137,10 @@ public class DinoSound
     public static final String compsognathus_attack = SOUND_PREFIX + "velociraptor_attack";
     
     //deinonychus
-    public static final String deinonychus_death = SOUND_PREFIX + "velociraptor_death";
-    public static final String deinonychus_living_tame = SOUND_PREFIX + "velociraptor_living_tame";
-    public static final String deinonychus_living_wild = SOUND_PREFIX + "velociraptor_living_wild";
-    public static final String deinonychus_hurt = SOUND_PREFIX + "velociraptor_hurt";
-    public static final String deinonychus_attack = SOUND_PREFIX + "velociraptor_attack";
+    public static final String deinonychus_death = SOUND_PREFIX + "deinonychus_death";
+    public static final String deinonychus_living = SOUND_PREFIX + "deinonychus_living";
+    public static final String deinonychus_hurt = SOUND_PREFIX + "deinonychus_hurt";
+    public static final String deinonychus_call = SOUND_PREFIX + "deinonychus_call";
 
     //dilophosaurus
     public static final String dilophosaurus_death = SOUND_PREFIX + "dilophosaurus_death";
@@ -153,9 +166,9 @@ public class DinoSound
     public static final String mosasaurus_outside = SOUND_PREFIX + "mosasaurus_outside";
 
     //pachycephalosaurus
-    public static final String pachycephalosaurus_death = SOUND_PREFIX + "stegosaurus_death";
-    public static final String pachycephalosaurus_living = SOUND_PREFIX + "stegosaurus_living";
-    public static final String pachycephalosaurus_hurt = SOUND_PREFIX + "stegosaurus_hurt";
+    public static final String pachycephalosaurus_death = SOUND_PREFIX + "pachycephalosaurus_death";
+    public static final String pachycephalosaurus_living = SOUND_PREFIX + "pachycephalosaurus_living";
+    public static final String pachycephalosaurus_hurt = SOUND_PREFIX + "pachycephalosaurus_hurt";
     
     //plesiosaurus
     public static final String plesiosaur_death = SOUND_PREFIX + "plesiosaurus_death";
@@ -189,10 +202,10 @@ public class DinoSound
     public static final String triceratops_hurt = SOUND_PREFIX + "triceratops_hurt";
 
     //tyrannosaurus
-    public static final String tyrannosaurus_death = SOUND_PREFIX + "tyrannosaurus_death";
-    public static final String tyrannosaurus_living = SOUND_PREFIX + "tyrannosaurus_living";
-    public static final String tyrannosaurus_hurt = SOUND_PREFIX + "tyrannosaurus_hurt";
-    public static final String tyrannosaurus_scream = SOUND_PREFIX + "tyrannosaurus_scream";
+    public static final String trex_death = SOUND_PREFIX + "trex_death";
+    public static final String trex_living = SOUND_PREFIX + "trex_living";
+    public static final String trex_hurt = SOUND_PREFIX + "trex_hurt";
+    public static final String trex_scream = SOUND_PREFIX + "trex_scream";
 
     //velociraptor
     public static final String velociraptor_death = SOUND_PREFIX + "velociraptor_death";

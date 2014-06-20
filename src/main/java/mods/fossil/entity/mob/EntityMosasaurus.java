@@ -11,7 +11,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -31,6 +33,14 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     private double deltaZ;
     private double length;
 
+    public static final double baseHealth = EnumDinoType.Mosasaurus.Health0;
+    public static final double baseDamage = EnumDinoType.Mosasaurus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Mosasaurus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Mosasaurus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Mosasaurus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Mosasaurus.SpeedMax;
+
     public EntityMosasaurus(World par1World)
     {
         super(par1World, EnumDinoType.Mosasaurus);
@@ -47,8 +57,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.experienceValue = 5;
         
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
-        this.tasks.addTask(7, new WaterDinoAIWander(this, 2.0D));
-        this.tasks.addTask(3, new WaterDinoAIAttack(this, 2.0D));
+      // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
+        this.tasks.addTask(3, new WaterDinoAIAttack(this, 1.2D));
         this.tasks.addTask(4, new DinoAIEat(this, 60));
     }
 
@@ -95,7 +106,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     @Override
     public boolean isAIEnabled()
     {
-        return true;
+        return !this.isModelized();
     }
 
     /**
@@ -111,10 +122,12 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
      */
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
-        if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength() + 1))
-        {
-            this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-        }
+    	if(!this.isModelized()) {
+	        if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + 1)))
+	        {
+	            this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+	        }
+    	}
     }
 
     protected void entityInit()
@@ -125,9 +138,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     @Override
@@ -189,5 +202,41 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     public int getMaxSpawnedInChunk()
     {
         return 1;
+    }
+    
+    public EntityMosasaurus spawnBabyAnimal(EntityAnimal var1)
+    {
+        return new EntityMosasaurus(this.worldObj);
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

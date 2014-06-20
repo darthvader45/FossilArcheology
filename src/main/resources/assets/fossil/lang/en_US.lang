@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4) HEAD10 December 25 2013 
+#Updated for Build 6 DEV (1.6.4) HEAD13 June 20 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -12,15 +12,31 @@ itemgroup.FTools=Ancient Tools
 
 #Achievements
 achievement.FirstEgg=First Dinosaur!
-achievement.AllEggs=All Dinosaur Eggs
+achievement.AllEggs=Gotta Hatch 'Em All!
 achievement.FoundFossils=Digging for Bones
 achievement.pigBossOnEarth=Hail Anu
+achievement.Permafrost=Try not to get a cold!
+achievement.ArchWorkbench=Let's get the party started!
+achievement.Analyzer=For SCIENCE!
+achievement.CultVat=Genetic manipulation.
+achievement.Sifter=Cuz' baby I'm a Gold Digger!
+achievement.Dinopedia=Fill all the pages!
+achievement.IceAge=I do not know how you'll give birth...
+achievement.TheKing=Ruler of the Late Cretaceous.
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=You brought back your first dinosaur!
 achievement.AllEggs.desc=You've found all the dinosaur eggs!
 achievement.FoundFossils.desc=You've found some fossils!
 achievement.pigBossOnEarth.desc=You summoned Anu!
+achievement.Permafrost=What wonders could be inside it?
+achievement.ArchWorkbench=First step in becoming an archaeologist.
+achievement.Analyzer=Discovering the past!
+achievement.CultVat=Bring history back to live!
+achievement.Sifter=Even if I have to go through all the dirt!
+achievement.Dinopedia=Find all the dinos!
+achievement.IceAge=However I want the ice age back!
+achievement.TheKing=Long live the king!
 
 #Blocks
 tile.fossil.name=Fossil
@@ -179,6 +195,7 @@ item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
 item.archNotebook.name=Archaeology Notebook
+item.potteryShard.name=Pottery Shard
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -199,7 +216,7 @@ order.Follow=Follow
 order.FreeMove=Free Move
 
 #Dinosaur status chat messages
-status.Hungry.head=
+status.Hungry.head= 
 status.Hungry= is hungry.
 status.Starve.head=
 status.Starve= was starved to death.
@@ -207,17 +224,19 @@ status.LearningChest.head=A
 status.LearningChest= has learned how to use chests.
 status.Betrayed.head=This 
 status.Betrayed= won't trust mankind anymore.
-status.NoSpace.Head=This 
+status.NoSpace.head=
 status.NoSpace= doesn't have enough space to grow.
-status.StarveEsc.head= has escaped because of starvation.
+status.StarveEsc.head=
+status.StarveEsc= has escaped because of starvation.
 status.SJLBite= bit the Siu-Jiu-Le and ran away.
 status.ChewTime= needs time to chew.
+status.Full.head= This 
 status.Full= is full.
 status.Nervous.Head=You made the little 
 status.Nervous= too nervous to hunt itself.
 status.GemErrorYoung=This T-Rex is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
-status.GemErrorHealth=This T-Rex has already been tamed.
+status.GemErrorTamed=This T-Rex has already been tamed.
 status.essencefail=Essence of Chicken had no effect.
 
 #Dinosaur Names
@@ -294,7 +313,7 @@ fpzSpeaker.anuSommon=All hail Anu!!
 
 #Dinosaur egg chat messages
 dinoegg.hatched=A dinosaur egg has hatched!
-dinoegg.noSpace=This egg cannot spawn here.	
+dinoegg.noSpace=This egg cannot spawn here.
 dinoegg.head=An egg of 
 dinoegg.dry= died because it was too dry.	
 dinoegg.cold= died because it was too cold.

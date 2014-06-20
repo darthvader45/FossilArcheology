@@ -2,6 +2,7 @@ package mods.fossil.entity;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -25,6 +26,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.*;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public String ParentOwner;
     private int HatchTime;
     public final int HatchingNeedTime;
+    private static int lastBirthTick;
     public static final int HATCHING_INDEX = 18;
 
     public EntityDinoEgg(World var1, EnumDinoType var2)
@@ -57,6 +60,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         this.setSize(0.5F, 1.5F);
         this.yOffset = this.height;
         this.DinoInside = var2;
+        this.lastBirthTick = 0;
     }
 
     /**
@@ -94,7 +98,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
     protected void entityInit()
     {
-        if (Fossil.DebugMode)
+        if (Fossil.DebugMode())
         {
             this.HatchTime = 100;
         }
@@ -415,7 +419,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     private void HandleHatching()
     {
         //this.getClass();//needed to set which is the actual instance using this function
-        float var2 = this.getBrightness(1.0F);
+        float brightness = this.getBrightness(1.0F);
         EntityPlayer player = null;
 
         if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null)
@@ -427,24 +431,28 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         {
             if (this.inWater)
             {
+            	this.lastBirthTick = this.getBirthTick();
                 this.setBirthTick(this.getBirthTick() + 1);
+                
             }
             else
             {
                 this.setBirthTick(this.getBirthTick() - 1);
             }
+             
         }
-        else if ((double)var2 >= 0.5D && !this.inWater)
+        else if ((double)brightness >= 0.5D && !this.inWater)
         {
+        	this.lastBirthTick = this.getBirthTick();
             this.setBirthTick(this.getBirthTick() + 1);
+            
         }
         else
         {
             BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ);
             float var6 = var5.getFloatTemperature();
-
             //if (!this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))
-            if ((var6 <= 0.15F && var2 < 0.5) || this.inWater)
+            if ((var6 <= 0.15F && brightness < 0.5) || this.inWater)
             {
                 this.setBirthTick(this.getBirthTick() - 1);
             }
@@ -496,23 +504,41 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Velociraptor:
                         var5 = new EntityVelociraptor(this.worldObj);
 
-                        if (var3 instanceof BiomeGenForest)
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
                         {
                             ((EntityVelociraptor)var5).setSubSpecies(2);
                         }
-                        else if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenTaiga)
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
                             ((EntityVelociraptor)var5).setSubSpecies(1);
                         }
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH))
+                        {
+                        	((EntityVelociraptor)var5).setSubSpecies(3);
+                        }
                         else
                         {
-                            ((EntityVelociraptor)var5).setSubSpecies(3);
+                            ((EntityVelociraptor)var5).setSubSpecies(0);
                         }
 
                         break;
 
                     case TRex:
                         var5 = new EntityTRex(this.worldObj);
+                        
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE))
+                        {
+                        	((EntityTRex)var5).setSubSpecies(1);
+                        }
+                        else
+                        {
+                        	((EntityTRex)var5).setSubSpecies(0);
+                        }
                         break;
 
                     case Pterosaur:
@@ -546,11 +572,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Pachycephalosaurus:
                         var5 = new EntityPachycephalosaurus(this.worldObj);
 
-                        if (var3 instanceof BiomeGenForest)
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
                         {
                             ((EntityPachycephalosaurus)var5).setSubSpecies(1);
                         }
-                        else if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenTaiga)
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
                             ((EntityPachycephalosaurus)var5).setSubSpecies(2);
                         }
@@ -564,7 +591,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Compsognathus:
                         var5 = new EntityCompsognathus(this.worldObj);
 
-                        if (var3 instanceof BiomeGenSnow || var3 instanceof BiomeGenDesert)
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT))
                         {
                             ((EntityCompsognathus)var5).setSubSpecies(1);
                         }
@@ -592,9 +621,11 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                 if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
                 {
+                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
                     // Tameable and player next to it
                     ((EntityDinosaur)var5).setOwner(player.username);
                     ((EntityDinosaur)var5).setTamed(true);
+                	}
                 }
 
                 ((EntityLiving)var5).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
@@ -700,8 +731,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             default:it0=Fossil.eggTriceratops;
         }*/
         p0.reset();
-        p0.PrintItemXY(it0, 140, 7);
-        p0.PrintStringLR(/*Fossil.GetLangTextByKey("PediaText.egg.Head")+ " "+*/StatCollector.translateToLocal("Dino." + this.DinoInside.toString()), false, 1, 40, 90, 245);
+        p0.PrintItemXY(it0, 185, 7);
+        p0.PrintStringLR(StatCollector.translateToLocal("Dino." + this.DinoInside.toString()), false, 1, 40, 90, 245);
         int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
         String stat;
 
@@ -718,7 +749,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }
         else
         {
-            if (this.getBirthTick() >= 0)
+            if ((this.getBirthTick() >= 0 && this.getBirthTick() > this.lastBirthTick) || this.getBirthTick() >= 100)
             {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
             }
@@ -736,36 +767,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4, 40, 90, 245);
             p0.PrintStringLR(String.valueOf(quot) + "/100", false, 5);
         }
-
-        /*String var2 = "";
-        String var3 = Fossil.GetLangTextByKey("PediaText.egg.selfHead") + EntityDinosaur.GetNameByEnum(this.DinoInside, false) + Fossil.GetLangTextByKey("PediaText.egg.selfTail");
-        int var4 = (int)Math.floor((double)((float)this.BirthTick / (float)this.HatchingNeedTime * 100.0F));
-        Fossil.ShowMessage(var3, var1);
-
-        if (this.DinoInside == EnumDinoType.Mosasaurus)
-        {
-            if (this.BirthTick >= 0)
-            {
-                var2 = Fossil.GetLangTextByKey("PediaText.egg.wet");
-            }
-            else
-            {
-                var2 = Fossil.GetLangTextByKey("PediaText.egg.dry");
-            }
-        }
-        else if (this.BirthTick >= 0)
-        {
-            var2 = Fossil.GetLangTextByKey("PediaText.egg.warm");
-        }
-        else
-        {
-            var2 = Fossil.GetLangTextByKey("PediaText.egg.cold");
-        }
-
-        String var5 = Fossil.GetLangTextByKey("PediaText.egg.Status");
-        String var6 = Fossil.GetLangTextByKey("PediaText.egg.Progress");
-        Fossil.ShowMessage(var5 + var2, var1);
-        Fossil.ShowMessage(var6 + var4 + "/100", var1);*/
     }
 
     public void writeSpawnData(ByteArrayDataOutput var1)

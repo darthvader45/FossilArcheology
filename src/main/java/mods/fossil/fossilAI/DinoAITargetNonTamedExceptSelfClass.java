@@ -6,9 +6,12 @@ import net.minecraft.entity.passive.EntityTameable;
 
 public class DinoAITargetNonTamedExceptSelfClass extends EntityAITargetNonTamed
 {
-    public DinoAITargetNonTamedExceptSelfClass(EntityTameable var1, Class var2, float var3, int var4, boolean var5)
+    private EntityTameable theTameable;
+    
+    public DinoAITargetNonTamedExceptSelfClass(EntityTameable tameable, Class targetclass, int var4, boolean var5)
     {
-        super(var1, var2, var4, var5);
+        super(tameable, targetclass, var4, var5);
+        this.theTameable = tameable;
     }
 
     /**

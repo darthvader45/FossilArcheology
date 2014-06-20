@@ -28,7 +28,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
     
     private ItemStack[] sifterItemStacks;
     public int sifterBurnTime = 0;
-    public int currentItemBurnTime = 100;
+    public int currentItemBurnTime = 0;
     public int sifterCookTime = 0;
     private int RawIndex = -1;
     private int SpaceIndex = -1;
@@ -222,7 +222,6 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
     {
         boolean var1 = this.sifterBurnTime > 0;
         boolean var2 = false;
-
         if (this.sifterBurnTime > 0)
         {
             --this.sifterBurnTime;
@@ -267,6 +266,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
         {
             this.onInventoryChanged();
         }
+
     }
 
     private boolean canSmelt()
@@ -332,6 +332,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 
             ) {
             	if (randomloot < 80){
+            		if(Fossil.DebugMode())
             		Fossil.Console("Sifter no result: "+randomloot);
             		if (random < 75){
             			result = null;
@@ -341,30 +342,36 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
             		}
             	}
             	else {
+            		if(Fossil.DebugMode())
             		Fossil.Console("Sifter successful loot: "+randomloot);
-                if (random < 30)
+                if (random < 15)
                 {
                 	result = new ItemStack(Fossil.brokenSapling, 1);
+                }
+                
+                if (random < 30)
+                {
+                	result = new ItemStack(Fossil.sarracina, 1);
                 }
 
                 else if (random < 60)
                 {
-                	result = new ItemStack(Item.dyePowder, 3, 15);
+                	result = new ItemStack(Item.dyePowder, 1, 15);
                 }
 
                 else if (random < 80)
                 {
-                	result = new ItemStack(Block.sand, 3);
+                	result = new ItemStack(Block.sand, 1);
                 }
 
                 else if (random < 90)
                 {
-                	result = new ItemStack(Fossil.fernSeed, 3);
+                	result = new ItemStack(Fossil.fernSeed, 2);
                 }
                 
                 else if (random < 95)
                 {
-                	result = new ItemStack(Fossil.fernSeed, 3);
+                	result = new ItemStack(Fossil.potteryShards, 3);
                 }
 
                 else if (random <= 100)

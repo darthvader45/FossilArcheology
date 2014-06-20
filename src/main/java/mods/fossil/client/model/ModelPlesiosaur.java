@@ -5,6 +5,7 @@ import mods.fossil.entity.mob.EntityPlesiosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelPlesiosaur extends ModelDinosaurs
@@ -277,13 +278,13 @@ public class ModelPlesiosaur extends ModelDinosaurs
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving var1, float var2, float var3, float var4)
+    public void setLivingAnimations(EntityLivingBase var1, float var2, float var3, float var4)
     {
         if (!((EntityDinosaur)var1).isModelized())
         {
             EntityPlesiosaur var5 = (EntityPlesiosaur)var1;
             int var6 = 16 + var5.getDinoAge();
-/*
+
             if (var5.riddenByEntity != null && !var5.isOnSurface())
             {
                 this.PoseDive(var6);
@@ -292,7 +293,7 @@ public class ModelPlesiosaur extends ModelDinosaurs
             {
                 this.PoseSurface(var6);
             }
-            */
+            
         }
     }
 
@@ -574,6 +575,9 @@ public class ModelPlesiosaur extends ModelDinosaurs
     {
         if (!var7)
         {
+        	this.head.rotateAngleX = var5 / (180F / (float)Math.PI);
+        	this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
+        	/*
             this.right_arm.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -2.35619449019234D);
             this.right_leg.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -2.0943951023932D);
 
@@ -587,6 +591,12 @@ public class ModelPlesiosaur extends ModelDinosaurs
                 this.left_arm.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * -(Math.PI / 4D) * (double)var2 + -(Math.PI / 4D));
                 this.left_leg.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * -(Math.PI / 4D) * (double)var2 + -1.0471975511966D);
             }
+            */
+        }
+        else
+        {
+        	this.head.rotateAngleX = 0;
+        	this.head.rotateAngleY = 0;
         }
     }
 }

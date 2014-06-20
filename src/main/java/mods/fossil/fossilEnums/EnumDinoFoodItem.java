@@ -1,6 +1,7 @@
 package mods.fossil.fossilEnums;
 
 import mods.fossil.Fossil;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public enum EnumDinoFoodItem
@@ -32,7 +33,6 @@ public enum EnumDinoFoodItem
     ChickenSoupCooked(Fossil.cookedChickenSoup, 40, 3),
     Triceratops(EnumDinoType.Triceratops.DropItem, 50, 3),
     Velociraptor(EnumDinoType.Velociraptor.DropItem, 20, 3),
-    Deinonychus(EnumDinoType.Deinonychus.DropItem, 30, 3),
     TRex(EnumDinoType.TRex.DropItem, 20, 3),
     Pterosaur(EnumDinoType.Pterosaur.DropItem, 15, 2),
     Plesiosaur(EnumDinoType.Plesiosaur.DropItem, 30, 3),
@@ -43,6 +43,8 @@ public enum EnumDinoFoodItem
     Spinosaurus(EnumDinoType.Spinosaurus.DropItem, 20, 3),
     Compsognathus(EnumDinoType.Compsognathus.DropItem, 10, 1),
     Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem, 50, 3),
+    Pachycephalosaurus(EnumDinoType.Pachycephalosaurus.DropItem, 50,3),
+    Deinonychus(EnumDinoType.Deinonychus.DropItem, 30, 3),
     DinoMeatCooked(Fossil.cookedDinoMeat, 50, 5),
     DodoWing(Fossil.dodoWing, 20, 2),
     DodoWingCooked(Fossil.dodoWingCooked, 30, 3),

@@ -355,6 +355,22 @@ public class ModelVelociraptor extends ModelBase
                 this.HeadUpper();
             }
         }
+        else {
+            this.thigh_R2.rotateAngleX = 0;
+            this.leg_R2.rotateAngleX = 0;
+            this.horn_1_R.rotateAngleX = 0;
+            this.right_nail_1.rotateAngleX = 0;
+            this.right_nail_2.rotateAngleX = 0;
+            this.thigh_L2.rotateAngleX = 0;
+            this.leg_L2.rotateAngleX = 0;
+            this.horn_2_L.rotateAngleX = 0;
+            this.left_nail_1.rotateAngleX = 0;
+            this.left_nail_2.rotateAngleX = 0;
+            this.thigh_R1.rotateAngleX = 0;
+            this.leg_R1.rotateAngleX = 0;
+            this.thigh_L1.rotateAngleX = 0;
+            this.leg_L1.rotateAngleX = 0;
+        }
     }
 
     public boolean SwingHead(float var1, int var2)

@@ -2,6 +2,7 @@ package mods.fossil.gens;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import mods.fossil.Fossil;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -24,7 +25,7 @@ public class ShipWreckGenerator implements IWorldGenerator
 
                 // 25% chance of a single structure per chunk; could make a weighted list
                 // Recall that a chunk is only 16x16 blocks in area, so this is quite a lot of structures
-                if (random.nextFloat() < 0.0005F)  //This doesn't seem to actually corellate with anything.
+                if (random.nextInt(999) < 1)//Fossil.FossilOptions.Debug_Gen_Rate_Shipwreck)
                 {
                     generateStructure(world, random, chunkX * 16, chunkZ * 16);
                 }
@@ -43,7 +44,6 @@ public class ShipWreckGenerator implements IWorldGenerator
         FossilWaterStructureGenerator gen = new FossilWaterStructureGenerator();
         int struct; // This will store a random index of the structure to generate
         struct = rand.nextInt(gen.structures.size());
-        Fossil.Console("[GEN] Generating " + gen.structures.get(struct).name);
         int x = chunkX + rand.nextInt(16);
         int z = chunkZ + rand.nextInt(16);
         // nice way of getting a height to work from; it returns the topmost
@@ -63,7 +63,7 @@ public class ShipWreckGenerator implements IWorldGenerator
         }
 
         if (!world.doesBlockHaveSolidTopSurface(x, y, z)
-                || (!world.getBlockMaterial(x, y + 2, z).isLiquid())
+                || (world.getBlockId(x, y + 2, z) != Block.waterStill.blockID)
                 //	|| !world.doesBlockHaveSolidTopSurface(x + 10, y, z + 11)
                 //		|| !world.doesBlockHaveSolidTopSurface(x - 10, y, z - 11)
                 //		|| !world.doesBlockHaveSolidTopSurface(x + 10, y, z - 11)
@@ -71,7 +71,6 @@ public class ShipWreckGenerator implements IWorldGenerator
                 //&& world.canBlockSeeTheSky(x, y, z)
            )
         {
-            Fossil.Console("Failed to find suitable surface. Not generating structure. Block id " + world.getBlockId(x, y, z));
             return;
         }
         else
@@ -85,6 +84,6 @@ public class ShipWreckGenerator implements IWorldGenerator
         // Set structure and random facing, then generate; no offset needed here
         gen.setStructure(gen.structures.get(struct));
         gen.setStructureFacing(rand.nextInt(4));
-        gen.generate(world, rand, x, y, z);
+        gen.generate(world, rand, x, y-(rand.nextInt(3)+3), z);
     }
 }

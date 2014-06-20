@@ -29,7 +29,7 @@ public class BlockAmberOre extends Block
      */
     public int quantityDropped(Random par1Random)
     {
-        return this.blockID == Fossil.amberOre.blockID ? 2 + par1Random.nextInt(5) : 1;
+        return this.blockID == Fossil.amberOre.blockID ? 2 + par1Random.nextInt(2) : 1;
     }
 
     /**
@@ -39,7 +39,7 @@ public class BlockAmberOre extends Block
     {
         if (par1 > 0 && this.blockID != this.idDropped(0, par2Random, par1))
         {
-            int j = par2Random.nextInt(par1 + 2) - 1;
+            int j = par2Random.nextInt(par1 + 1) - 1;
 
             if (j < 0)
             {

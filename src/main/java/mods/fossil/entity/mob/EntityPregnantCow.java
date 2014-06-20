@@ -123,7 +123,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
                     break;
 
                 case Smilodon:
-                    var2 = new EntitySmilodon(this.worldObj);
+                    var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
                     break;
 
                 case Mammoth:
@@ -165,7 +165,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
         int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
         p0.reset();
         p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false);
+        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
         p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
         p0.AddStringLR(String.valueOf(quot) + "/100", false);
         /*
