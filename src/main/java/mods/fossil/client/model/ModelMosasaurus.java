@@ -207,5 +207,17 @@ public class ModelMosasaurus extends ModelDinosaurs
             this.Tail_3_dec.rotateAngleY = (float)((double)MathHelper.cos(var1 / 1.9191077F) * 0.174532925199433D * (double)var2 + 0.0D);
             this.Tail_2_dec.rotateAngleY = (float)((double)MathHelper.cos(var1 / 1.9191077F) * -0.174532925199433D * (double)var2 + 0.0D);
         }
+        else {
+            this.Body.rotateAngleY = 0;
+            this.Tail_1.rotateAngleY = 0;
+            this.Tail_2.rotateAngleY = 0;
+            this.Tail_3.rotateAngleY = 0;
+            this.right_arm.rotateAngleY = 0;
+            this.Left_arm.rotateAngleY = 0;
+            this.Right_Leg.rotateAngleY = 0;
+            this.Left_Leg.rotateAngleY = 0;
+            this.Tail_3_dec.rotateAngleY = 0;
+            this.Tail_2_dec.rotateAngleY = 0;
+        }
     }
 }

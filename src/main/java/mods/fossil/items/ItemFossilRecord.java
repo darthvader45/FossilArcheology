@@ -3,6 +3,7 @@ package mods.fossil.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemRecord;
@@ -30,7 +31,10 @@ public class ItemFossilRecord extends ItemRecord
     @SideOnly(Side.CLIENT)
     public String getRecordTitle()
     {
-        return "WhiteJoshMan - " + this.recordName;
+    	if(this.recordName == Fossil.modid + ":" + "record_bones")
+    		return "WhiteJoshMan - Bones";
+    	
+    	return this.recordName;
     }
 
     @SideOnly(Side.CLIENT)

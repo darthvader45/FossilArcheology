@@ -5,6 +5,7 @@ import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelPachycephalosaurus extends ModelDinosaurs
@@ -176,6 +177,7 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         float initialOffset = PI / 2;
         float offset = PI * 2 / 11;
         float currentAngle = 0;
+        if (!var7){
         this.Head.rotateAngleZ = var5 / (180F / (float)Math.PI);
         this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
         this.RUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
@@ -185,9 +187,21 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         currentAngle = Tail.rotateAngleY;
         this.Tail1.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + 1F * offset + initialOffset)) - currentAngle;
         currentAngle = Tail.rotateAngleY + Tail1.rotateAngleY;
+        }
+        else {
+            this.Head.rotateAngleZ = 0;
+            this.Head.rotateAngleY = 0;
+            this.RUpperThigh.rotateAngleX = 0;
+            this.LUpperThigh.rotateAngleX = 0;
+            //Tail anim
+            this.Tail.rotateAngleY = 0;
+            currentAngle = 0;
+            this.Tail1.rotateAngleY = 0;
+            currentAngle = 0;
+        }
     }
 
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4)
+    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4)
     {
         EntityPachycephalosaurus entity = (EntityPachycephalosaurus)par1EntityLiving;
         int i = entity.getAttackTimer();

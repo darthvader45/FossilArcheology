@@ -20,7 +20,30 @@ public class FossilCraftingHandler implements ICraftingHandler
     public void onCrafting(EntityPlayer player, ItemStack item,
                            IInventory craftMatrix)
     {
-        // TODO Auto-generated method stub
+        if (item.itemID == Fossil.blockworktableIdleID)
+        {
+                player.addStat(FossilAchievementHandler.ArchWorkbench, 1);
+        }
+        
+        if (item.itemID == Fossil.blockanalyzerIdleID)
+        {
+                player.addStat(FossilAchievementHandler.Analyzer, 1);
+        }
+        
+        if (item.itemID == Fossil.blockcultivateIdleID)
+        {
+                player.addStat(FossilAchievementHandler.CultVat, 1);
+        }
+        
+        if (item.itemID == Fossil.blockSifterIdleID)
+        {
+                player.addStat(FossilAchievementHandler.Sifter, 1);
+        }
+        
+        if (item.itemID == Fossil.dinoPediaID)
+        {
+                player.addStat(FossilAchievementHandler.Dinopedia, 1);
+        }
     }
 
     @Override
@@ -39,7 +62,7 @@ public class FossilCraftingHandler implements ICraftingHandler
             }
         }
 
-        if (Fossil.DebugMode){
+        if (Fossil.DebugMode()){
         Fossil.Console("eggsTotal: " + this.eggsTotal);
         Fossil.Console("eggsFound: " + this.eggsFound);
         Fossil.Console("" + eggsFound.containsAll(eggsTotal));

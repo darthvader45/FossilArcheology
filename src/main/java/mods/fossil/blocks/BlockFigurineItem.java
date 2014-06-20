@@ -9,12 +9,13 @@ public class BlockFigurineItem extends ItemBlock
     {
         super(id);
         setHasSubtypes(true);
+        
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return BlockFigurine.figurineTypes[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockFigurine.shortname[itemstack.getItemDamage()];
     }
 
     @Override

@@ -21,24 +21,34 @@ public class DinoAIGrowup extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        if (/*FossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
-        {
-            this.AITarget.increaseDinoAgeTick();
-            return this.AITarget.getDinoAgeTick() >= this.AITarget.SelfType.AgingTicks;
-        }
+
+	        if (/*FossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
+	        {
+	            this.AITarget.increaseDinoAgeTick();
+	            return this.AITarget.getDinoAgeTick() >= this.AITarget.SelfType.AgingTicks;
+	        }
 
         return false;
     }
+    
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean continueExecuting()
+    {
+        return this.shouldExecute();
+    }
+    
 
     /**
      * Updates the task
      */
-    public void updateTask()
+    public void startExecuting()
     {
         if (!this.AITarget.worldObj.isRemote)
         {
-            //this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY, this.AITarget.posZ);
-            if ((this.AITarget.CheckSpace() && this.AITarget.SelfType != EnumDinoType.Mosasaurus) || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Mosasaurus))
+            this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY+1, this.AITarget.posZ);
+            if (((this.AITarget.CheckSpace() && this.AITarget.SelfType != EnumDinoType.Mosasaurus)) || ((this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Mosasaurus)))
             {
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();
@@ -76,6 +86,7 @@ public class DinoAIGrowup extends EntityAIBase
             else
             {
                 this.AITarget.SendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.SelfType);
+
             }
         }
     }

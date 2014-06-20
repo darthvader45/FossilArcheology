@@ -19,7 +19,7 @@ public class BlockAncientWoodPillar extends Block
 
     public BlockAncientWoodPillar(int par1, Material var2Material)
     {
-        super(par1, Material.wood);
+        super(par1, var2Material);
         setBurnProperties(this.blockID, 5, 10);
         this.setCreativeTab(Fossil.tabFBlocks);
     }

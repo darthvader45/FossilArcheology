@@ -9,6 +9,7 @@ import mods.fossil.client.model.ModelCompsognathus;
 import mods.fossil.client.model.ModelDeinonychus;
 import mods.fossil.client.model.ModelDilophosaurus;
 import mods.fossil.client.model.ModelDodo;
+import mods.fossil.client.model.ModelFPZ;
 import mods.fossil.client.model.ModelFailuresaurus;
 import mods.fossil.client.model.ModelMammoth;
 import mods.fossil.client.model.ModelMosasaurus;
@@ -31,6 +32,7 @@ import mods.fossil.client.renderer.entity.RenderDeinonychus;
 import mods.fossil.client.renderer.entity.RenderDilophosaurus;
 import mods.fossil.client.renderer.entity.RenderDinoEgg;
 import mods.fossil.client.renderer.entity.RenderDodo;
+import mods.fossil.client.renderer.entity.RenderFPZ;
 import mods.fossil.client.renderer.entity.RenderFailuresaurus;
 import mods.fossil.client.renderer.entity.RenderJavelin;
 import mods.fossil.client.renderer.entity.RenderMammoth;
@@ -91,10 +93,12 @@ import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -108,7 +112,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityTRex.class, new RenderTRex(new ModelTRex(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityPigBoss.class, new RenderPigBoss(new ModelPigBoss(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyPigZombie.class, new RenderBiped(new ModelZombie(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyPigZombie.class, new RenderFPZ());
         RenderingRegistry.registerEntityRenderingHandler(EntityPterosaur.class, new RenderPterosaur());
         RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderNautilus(new ModelNautilus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityPlesiosaur.class, new RenderPlesiosaur(new ModelPlesiosaur(), 0.5F));
@@ -133,7 +137,9 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityDeinonychus.class, new RenderDeinonychus(new ModelDeinonychus(), 0.5F));
         //RenderingRegistry.registerBlockHandler(new FossilBlockRenderHandler());
         MinecraftForgeClient.registerItemRenderer(Fossil.figurineBlock.blockID, new ItemFigurineRenderer());
-        MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
+        //MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
+        
+    	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
     }
 
     @Override
@@ -141,7 +147,7 @@ public class ClientProxy extends CommonProxy
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySifter.class, new TileEntitySifterRenderer());
+       // ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySifter.class, new TileEntitySifterRenderer());
     }
 
     @Override

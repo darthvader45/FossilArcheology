@@ -2,14 +2,15 @@ package mods.fossil.client.model;
 
 import org.lwjgl.opengl.GL11;
 
-import info.ata4.minecraft.dragon.client.model.anim.DragonAnimator;
-import info.ata4.minecraft.dragon.server.entity.EntityTameableDragon;
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import mods.fossil.entity.mob.EntityPterosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 
 public class ModelPterosaur extends ModelDinosaurs {
 
@@ -167,9 +168,8 @@ public class ModelPterosaur extends ModelDinosaurs {
 	  
 	    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean modelized)
 	    {
-	    	
-	        if (modelized==false)
-	        {
+	       // if (modelized)
+	        //{
 	        	// Ground pose
 	        	this.Body.rotateAngleX =  -0.587636F;
 	        	this.Neck1.rotateAngleX = 0.261799388F;
@@ -191,7 +191,48 @@ public class ModelPterosaur extends ModelDinosaurs {
 	        	
 	        	this.RightWing2.rotateAngleX = -0.37079633F;
 	        	this.RightWing2.rotateAngleY = 1.37079633F;
-	        }
+	        //}
+	        	
+	        	if(!modelized)
+	        	{
+	                this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
+	                this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+	                this.LeftLeg1.rotateAngleX = -1.15191731F + MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
+	                this.RightLeg1.rotateAngleX = -1.15191731F + MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
+	        	}
+	        	else {
+	                this.Head.rotateAngleX = 0;
+	                this.Head.rotateAngleY = 0;
+		        	this.LeftLeg1.rotateAngleX = -1.15191731F;
+		        	this.RightLeg1.rotateAngleX = -1.15191731F;
+	        	}
 	    }
 	    
+	    public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4)
+	    {
+	        EntityPterosaur entity = (EntityPterosaur)par1EntityLiving;
+
+	        if(entity.isAirBorne) {
+	        	this.Body.rotateAngleX = 0;
+	        	this.Neck1.rotateAngleX = 0;
+	        	this.Neck2.rotateAngleX = 0;
+	        	this.Crest.rotateAngleX = 0;
+	        	this.UpperJaw.rotateAngleX = 0;
+	        	
+	        	this.LeftLeg1.rotateAngleX = 0;
+	        	this.RightLeg1.rotateAngleX = 0;
+	        	
+	        	this.LeftWing1.rotateAngleX = 0;
+	        	this.LeftWing1.rotateAngleZ = 0;
+	        	
+	        	this.LeftWing2.rotateAngleX = 0;
+	        	this.LeftWing2.rotateAngleY = 0;
+	        	
+	        	this.RightWing1.rotateAngleX = 0;
+	        	this.RightWing1.rotateAngleZ = 0;
+	        	
+	        	this.RightWing2.rotateAngleX = 0;
+	        	this.RightWing2.rotateAngleY = 0;
+	        }
+	    }
 }

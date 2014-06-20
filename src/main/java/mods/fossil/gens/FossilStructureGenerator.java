@@ -7,13 +7,18 @@ import mods.fossil.Fossil;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.gens.structure.academy.*;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.*;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -142,11 +147,12 @@ public class FossilStructureGenerator extends StructureGeneratorBase
         {
             case AcademyUtil.CUSTOM_CHEST:
                 Random rand = new Random();
+                ItemStack book = new ItemStack(Item.enchantedBook);
 
                 // Using the pre-made method addItemToTileInventory adds items to the first slot available
 
                 // Here we use customData to subtype custom_chest:
-                if (customData1 == AcademyUtil.RARE_LOOT_1)
+                if (customData1 == AcademyUtil.RARE_LOOT_F1)
                 {
                     for (int iterate = 0; iterate < rand.nextInt(10) + 3; iterate++)
                     {
@@ -171,37 +177,127 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                     }
                 }
                 // Not our specific chest, so we'll do some generic stuff
-                else
+                if (customData1 == AcademyUtil.COMMON_LOOT_F1)
                 {
                     //How many times to iterate through the list for loot
-                    for (int iterate = 0; iterate < rand.nextInt(7); iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(12); iterate++)
                     {
-                        int loot = (int)(Math.random() * 100);
+                        int loot = rand.nextInt(100);
 
-                        if (loot < 20)
+                        if (loot < 30)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.paper, rand.nextInt(22)), x, y, z);
                         }
-                        else if (loot < 40)
+                        else if (loot < 60)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.book, rand.nextInt(12)), x, y, z);
                         }
-                        else if (loot < 60)
+                        else if (loot < 80)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.bone, rand.nextInt(22)), x, y, z);
                         }
-                        else if (loot < 70)
+                        else if (loot < 90)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.writableBook, rand.nextInt(5)), x, y, z);
                         }
-                        else if (loot < 85)
+                        else if (loot < 95)
                         {
                             addItemToTileInventory(world, new ItemStack(Fossil.biofossil, rand.nextInt(22)), x, y, z);
                         }
-                        else if (loot < 95)
+                        else if (loot < 101)
                         {
                             addItemToTileInventory(world, new ItemStack(Fossil.claw, rand.nextInt(5)), x, y, z);
                         }
+                    }
+                }
+
+                if (customData1 == AcademyUtil.RARE_LOOT_F2)
+                {
+                    for (int iterate = 0; iterate < rand.nextInt(4) + 3; iterate++)
+                    {
+                        int i = (new Random()).nextInt(10); //+1 for the sapling
+                        Item i0 = null;
+                        Item i2 = null;
+                        ItemStack i1 = null;
+                        
+                        if (i < 3)
+                        addItemToTileInventory(world, new ItemStack(Fossil.dinoPedia, rand.nextInt(2)), x, y, z);
+                        else if(i < 7)
+                        	addItemToTileInventory(world, new ItemStack(Fossil.relic, rand.nextInt(10)), x, y, z);
+                        else {
+                        	addItemToTileInventory(world, new ItemStack(Fossil.potteryShards, rand.nextInt(10)), x, y, z);
+                        }                 
+                    }
+                }
+                // Not our specific chest, so we'll do some generic stuff
+                if (customData1 == AcademyUtil.COMMON_LOOT_F2)
+                {
+                    //How many times to iterate through the list for loot
+                    for (int iterate = 0; iterate < rand.nextInt(12); iterate++)
+                    {
+                        int loot = rand.nextInt(100);
+
+                        if (loot < 40)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.paper, rand.nextInt(22)), x, y, z);
+                        }
+                        else if (loot < 60)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.dyePowder , 0 , rand.nextInt(10)), x, y, z);
+                        }
+                        else if (loot < 80)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.silk, rand.nextInt(10)), x, y, z);
+                        }
+                        else if (loot < 90)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.compass, rand.nextInt(2)), x, y, z);
+                        }
+                        else if (loot < 101)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.emptyMap, rand.nextInt(5)), x, y, z);
+                        }
+                    }
+                }
+                
+                if (customData1 == AcademyUtil.RARE_LOOT_F3)
+                {
+                    //How many times to iterate through the list for loot
+                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
+                    {
+                        int loot = rand.nextInt(100);
+                        
+
+                        
+                        if (loot < 20)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.ancientGlass, rand.nextInt(10)), x, y, z);
+                        }
+                        else if (loot < 40)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.ancientWood, rand.nextInt(15)), x, y, z);
+                        }
+                        else if (loot < 50)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.whip, 1), x, y, z);
+                        }
+                        else if (loot < 60)
+                        {
+                        addItemToTileInventory(world, (new ItemStack(Fossil.figurineBlock.blockID, rand.nextInt(2), rand.nextInt(15))), x, y, z);
+                        }
+                        else if (loot < 80)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Item.ingotIron, rand.nextInt(15)), x, y, z);
+                        }
+                        else if (loot < 90)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.fossilrecordBones, 1), x, y, z);
+                        }
+                        else if (loot < 101)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.nameTag, rand.nextInt(2)), x, y, z);
+                        }
+                        
                     }
                 }
 
@@ -339,9 +435,9 @@ public class FossilStructureGenerator extends StructureGeneratorBase
             case AcademyUtil.BIOME_BLOCK:
                 BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(x, z);
 
-                if (biome instanceof BiomeGenJungle
-                        || biome instanceof BiomeGenForest
-                        || biome instanceof BiomeGenSwamp)
+                if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.FOREST)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.JUNGLE)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.SWAMP))
                 {
                     //Using a switch statement here if we want to change multiple blocks
                     switch (customData1)
@@ -359,11 +455,12 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                             break;
                     }
                 }
-                else if (biome instanceof BiomeGenPlains
-                         || biome instanceof BiomeGenHills
-                         || biome instanceof BiomeGenRiver
-                         || biome instanceof BiomeGenTaiga
-                         || biome instanceof BiomeGenSnow)
+                else if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.PLAINS)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.HILLS)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.FROZEN)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.WATER)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.WASTELAND)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MOUNTAIN))
                 {
                     switch (customData1)
                     {
@@ -380,8 +477,8 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                             break;
                     }
                 }
-                else if (biome instanceof BiomeGenBeach
-                         || biome instanceof BiomeGenDesert)
+                else if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.BEACH)
+                		|| BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.DESERT))
                 {
                     switch (customData1)
                     {

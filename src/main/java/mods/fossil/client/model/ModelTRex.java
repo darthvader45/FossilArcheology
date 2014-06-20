@@ -769,5 +769,16 @@ public class ModelTRex extends ModelDinosaurs
                 this.StandPose();
             }
         }
+        else {
+            this.head_1.rotateAngleY = 0;
+            this.head_2.rotateAngleY = 0;
+            this.head_3.rotateAngleY = 0;
+            this.foot_R_1.rotateAngleX = 0;
+            this.foot_R_2.rotateAngleX = 0;
+            this.foot_R_3.rotateAngleX = 0;
+            this.foot_L_1.rotateAngleX = 0;
+            this.foot_L_2.rotateAngleX = 0;
+            this.foot_L_3.rotateAngleX = 0;
+        }
     }
 }

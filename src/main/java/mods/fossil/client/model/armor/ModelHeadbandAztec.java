@@ -1,6 +1,5 @@
 package mods.fossil.client.model.armor;
 
-import info.ata4.minecraft.dragon.DragonMounts;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;

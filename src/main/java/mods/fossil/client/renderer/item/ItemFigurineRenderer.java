@@ -18,7 +18,8 @@ public class ItemFigurineRenderer implements IItemRenderer
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
-        return true;
+        //return true;
+        return type != ItemRenderType.INVENTORY;
     }
 
     @Override

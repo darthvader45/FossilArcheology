@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -29,6 +30,14 @@ public class EntityTriceratops extends EntityDinosaur
     public boolean Running = false;
 
     final EntityAIControlledByPlayer aiControlledByPlayer;
+    
+    public static final double baseHealth = EnumDinoType.Triceratops.Health0;
+    public static final double baseDamage = EnumDinoType.Triceratops.Strength0;
+    public static final double baseSpeed = EnumDinoType.Triceratops.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Triceratops.HealthMax;
+    public static final double maxDamage = EnumDinoType.Triceratops.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Triceratops.SpeedMax;
 
     public EntityTriceratops(World var1)
     {
@@ -46,9 +55,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
-        this.healthModValue = 1;
-        this.damageModValue = 1;
-        this.speedModValue = 0;
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
@@ -60,6 +67,8 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(10, new EntityAILookIdle(this));
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
     /**
@@ -73,9 +82,9 @@ public class EntityTriceratops extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     /**
@@ -140,18 +149,6 @@ public class EntityTriceratops extends EntityDinosaur
         }
     }
 
-
-    
-    /*public float getInterestedAngle(float var1)
-    {
-        return (this.field_25054_c + (this.field_25048_b - this.field_25054_c) * var1) * 0.15F * (float)Math.PI;
-    }*/
-
-    public float getEyeHeight()
-    {
-        return this.height * 0.8F;
-    }
-
     /**
      * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
      * use in wolves.
@@ -175,7 +172,7 @@ public class EntityTriceratops extends EntityDinosaur
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isSelfAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isSelfAngry() ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -221,11 +218,21 @@ public class EntityTriceratops extends EntityDinosaur
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
 
+    public float getEyeHeight()
+    {
+        return (float)this.getDinoAge() / 2.7F;
+    }
+
+    public float getRidingHeight()
+    {
+        return this.getEyeHeight();// + 0.1F;
+    }
+
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.65D + 0.07D * (double)(12 - this.getDinoAge()), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRidingHeight(), this.posZ - 1);
         }
     }
 
@@ -307,5 +314,36 @@ public class EntityTriceratops extends EntityDinosaur
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

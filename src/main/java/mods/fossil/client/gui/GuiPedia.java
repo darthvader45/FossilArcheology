@@ -98,12 +98,12 @@ public class GuiPedia extends GuiContainer
      */
     public void PrintStringLR(String str0, boolean left0, int line)
     {
-        this.fontRenderer.drawString(str0, 59 + (left0 ? 0 : 81), 12 * (line + 1), 4210752);
+        this.fontRenderer.drawString(str0, 70 + (left0 ? 0 : 81), 12 * (line + 1), 4210752);
     }
     public void PrintStringLR(String str0, boolean left0, int line, int r, int g, int b)
     {
         int col = (r << 16) | (g << 8) | b;
-        this.fontRenderer.drawString(str0, 59 + (left0 ? 0 : 81), 12 * (line + 1), col);
+        this.fontRenderer.drawString(str0, 70 + (left0 ? 0 : 81), 12 * (line + 1), col);
     }
 
     /**
@@ -111,13 +111,13 @@ public class GuiPedia extends GuiContainer
      */
     public void AddStringLR(String str0, boolean left0)
     {
-        this.fontRenderer.drawString(str0, 30 + (left0 ? 0 : 81), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
+        this.fontRenderer.drawString(str0, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
     }
     
     public void AddStringLR(String str0, boolean left0, int r, int g, int b)
     {
         int col = (r << 16) | (g << 8) | b;
-        this.fontRenderer.drawString(str0, 30 + (left0 ? 0 : 81), 12 * ((left0 ? this.left++ : this.right++) + 1), col);
+        this.fontRenderer.drawString(str0, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), col);
     }
     /**
      * Print a String to X,Y

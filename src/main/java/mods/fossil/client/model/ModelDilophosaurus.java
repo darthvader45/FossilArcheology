@@ -238,5 +238,21 @@ public class ModelDilophosaurus extends ModelDinosaurs
             this.Heel1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2 - 0.372F;
             this.Feet1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
         }
+        else {
+            this.Head.rotateAngleX = 0;
+            this.Head.rotateAngleY = 0;
+            this.Jaw1.rotateAngleX = this.Jaw2.rotateAngleX
+                                     = this.Crest.rotateAngleX = this.Crest2.rotateAngleX
+                                             = 0;
+            this.Jaw1.rotateAngleY = this.Jaw2.rotateAngleY
+                                     = this.Crest.rotateAngleY = this.Crest2.rotateAngleY
+                                             = 0;
+            this.Thigh2.rotateAngleX = 0;
+            this.Heel2.rotateAngleX = 0;
+            this.Feet2.rotateAngleX = 0;
+            this.Thigh1.rotateAngleX = 0;
+            this.Heel1.rotateAngleX = 0;
+            this.Feet1.rotateAngleX = 0;
+        }
     }
 }

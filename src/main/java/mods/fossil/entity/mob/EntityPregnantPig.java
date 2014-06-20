@@ -123,11 +123,11 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
                     break;
 
                 case Smilodon:
-                    var2 = new EntitySmilodon(this.worldObj);
+                    var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
                     break;
 
                 case Mammoth:
-                    var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
+                    var2 = new EntityMammoth(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
                     break;
 
                 default:

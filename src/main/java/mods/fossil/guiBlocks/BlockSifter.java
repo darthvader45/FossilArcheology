@@ -1,67 +1,55 @@
 package mods.fossil.guiBlocks;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.entity.mob.EntityFailuresaurus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockSifter extends BlockContainer
 {
-    /**
-     * Is the random generator used by furnace to drop the inventory contents in random directions.
-     */
-    private final Random furnaceRand = new Random();
-
-    /** True if this is an active furnace, false if idle */
+    //private final String VAT = "Vat.";
+    //private final String ERR_OUTBREAK = "Err.OutBreak";
+    private Random furnaceRand = new Random();
     private final boolean isActive;
-
-    /**
-     * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
-     * furnace block changes from idle to active and vice-versa.
-     */
-    private static boolean keepFurnaceInventory;
+    private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
-    private Icon furnaceIconTop;
+    private Icon Top;
     @SideOnly(Side.CLIENT)
-    private Icon furnaceIconFront;
+    private Icon Bottom;
 
-    public BlockSifter(int par1, boolean par2)
+    public BlockSifter(int var1, boolean var2)
     {
-        super(par1, Material.rock);
-        this.isActive = par2;
-    }
-
-    /**
-     * The type of render function that is called for this block
-     */
-    public int getRenderType()
-    {
-        return -1;
+        super(var1, Material.wood);
+        this.isActive = var2;
     }
 
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
+    public int idDropped(int var1, Random var2, int var3)
     {
         return Fossil.blockSifterIdle.blockID;
     }
@@ -69,34 +57,12 @@ public class BlockSifter extends BlockContainer
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    public void onBlockAdded(World var1, int var2, int var3, int var4)
     {
-        super.onBlockAdded(par1World, par2, par3, par4);
-        this.setDefaultDirection(par1World, par2, par3, par4);
+        super.onBlockAdded(var1, var2, var3, var4);
+        this.setDefaultDirection(var1, var2, var3, var4);
     }
     
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
-    
-    
-
-    /**
-     * set a blocks direction
-     */
     private void setDefaultDirection(World par1World, int par2, int par3, int par4)
     {
         if (!par1World.isRemote)
@@ -130,12 +96,46 @@ public class BlockSifter extends BlockContainer
             par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
         }
     }
+    @SideOnly(Side.CLIENT)
 
+    /**
+     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+     * is the only chance you get to register icons.
+     */
+    
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+        this.blockIcon = par1IconRegister.registerIcon("fossil:SifterSides");
+        this.Bottom = par1IconRegister.registerIcon("fossil:SifterBottom");
+        this.Top = this.isActive ? par1IconRegister.registerIcon("fossil:SifterTopActive") : par1IconRegister.registerIcon("fossil:SifterTop");
+    }
+
+    /**
+     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+     */
+    public Icon getIcon(int par1, int par2)
+    {
+    	return par1 == 1 ? this.Top : (par1 != 0 ? this.blockIcon : this.Bottom);   
+    }
+    
+
+    @SideOnly(Side.CLIENT)
+    /**
+     * A randomly called display update to be able to add particles or other items for display
+     */
+    public void randomDisplayTick(World var1, int var2, int var3, int var4, Random var5) {}
+
+    /**
+     * Returns the block texture based on the side being looked at.  Args: side
+     */
+    /*public int getBlockTextureFromSide(int var1)
+    {
+        return var1 == 1 ? 36 : (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20));
+    }*/
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    @Override
     public boolean onBlockActivated(World var1, int var2, int var3, int var4, EntityPlayer var5, int var6, float var7, float var8, float var9)
     {
         if (var1.isRemote)
@@ -149,51 +149,33 @@ public class BlockSifter extends BlockContainer
         }
     }
 
-    /**
-     * Update which block ID the furnace is using depending on whether or not it is burning
-     */
-    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
+    public static void updateFurnaceBlockState(boolean var0, World var1, int var2, int var3, int var4)
     {
-        int l = par1World.getBlockMetadata(par2, par3, par4);
-        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        int var5 = var1.getBlockMetadata(var2, var3, var4);
+        TileEntity var6 = var1.getBlockTileEntity(var2, var3, var4);
         keepFurnaceInventory = true;
 
-        if (par0)
+
+        if (var0)
         {
-            par1World.setBlock(par2, par3, par4, Fossil.blockSifterIdle.blockID); //active
+            var1.setBlock(var2, var3, var4, Fossil.blockSifterActive.blockID);
+            
         }
         else
         {
-            par1World.setBlock(par2, par3, par4, Fossil.blockSifterIdle.blockID);
+            var1.setBlock(var2, var3, var4, Fossil.blockSifterIdle.blockID);
         }
 
         keepFurnaceInventory = false;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
-
-        if (tileentity != null)
-        {
-            tileentity.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (this.isActive)
-        {
-        	
-        }
+        var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
+        var6.validate();
+        var1.setBlockTileEntity(var2, var3, var4, var6);
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World par1World)
+    public TileEntity createNewTileEntity(World var1)
     {
         return new TileEntitySifter();
     }
@@ -201,90 +183,90 @@ public class BlockSifter extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+    /*public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5)
+    {This Block doesnt care for directions!
+    	super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack)
+        int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (var6 == 0)var1.setBlockMetadataWithNotify(var2, var3, var4, 2,2);
+
+        if (var6 == 1)var1.setBlockMetadataWithNotify(var2, var3, var4, 5,2);
+
+        if (var6 == 2)var1.setBlockMetadataWithNotify(var2, var3, var4, 3,2);
+
+        if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2);
+    }*/
+
+    private void ReturnIron(World var1, int var2, int var3, int var4)
     {
-        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        ItemStack var5 = new ItemStack(Item.ingotIron, 3);
+        float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+        float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+        float var8 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-        if (l == 0)
+        while (var5.stackSize > 0)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-        }
+            int var9 = this.furnaceRand.nextInt(21) + 10;
 
-        if (l == 1)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-        }
+            if (var9 > var5.stackSize)
+            {
+                var9 = var5.stackSize;
+            }
 
-        if (l == 2)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-        }
-
-        if (l == 3)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-        }
-
-        if (par6ItemStack.hasDisplayName())
-        {
-            ((TileEntitySifter)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+            var5.stackSize -= var9;
+            EntityItem var10 = new EntityItem(var1, (double)((float)var2 + var6), (double)((float)var3 + var7), (double)((float)var4 + var8), new ItemStack(var5.itemID, var9, var5.getItemDamage()));
+            float var11 = 0.05F;
+            var10.motionX = (double)((float)this.furnaceRand.nextGaussian() * var11);
+            var10.motionY = (double)((float)this.furnaceRand.nextGaussian() * var11 + 0.2F);
+            var10.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var11);
+            var1.spawnEntityInWorld(var10);
         }
     }
 
     /**
-     * Called on server worlds only when the block has been replaced by a different block ID, or the same block with a
-     * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
-     * metadata
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    public void breakBlock(World var1, int var2, int var3, int var4, int var5, int var6)
     {
         if (!keepFurnaceInventory)
         {
-        	TileEntitySifter TileEntitySifter = (TileEntitySifter)par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntitySifter var7 = (TileEntitySifter)var1.getBlockTileEntity(var2, var3, var4);
 
-            if (TileEntitySifter != null)
+            if (var7 instanceof TileEntitySifter)
             {
-                for (int j1 = 0; j1 < TileEntitySifter.getSizeInventory(); ++j1)
+                for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
                 {
-                    ItemStack itemstack = TileEntitySifter.getStackInSlot(j1);
+                    ItemStack var9 = var7.getStackInSlot(var8);
 
-                    if (itemstack != null)
+                    if (var9 != null)
                     {
-                        float f = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float f1 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float f2 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var10 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var11 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float var12 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-                        while (itemstack.stackSize > 0)
+                        while (var9.stackSize > 0)
                         {
-                            int k1 = this.furnaceRand.nextInt(21) + 10;
+                            int var13 = this.furnaceRand.nextInt(21) + 10;
 
-                            if (k1 > itemstack.stackSize)
+                            if (var13 > var9.stackSize)
                             {
-                                k1 = itemstack.stackSize;
+                                var13 = var9.stackSize;
                             }
 
-                            itemstack.stackSize -= k1;
-                            EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
-
-                            if (itemstack.hasTagCompound())
-                            {
-                                entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                            }
-
-                            float f3 = 0.05F;
-                            entityitem.motionX = (double)((float)this.furnaceRand.nextGaussian() * f3);
-                            entityitem.motionY = (double)((float)this.furnaceRand.nextGaussian() * f3 + 0.2F);
-                            entityitem.motionZ = (double)((float)this.furnaceRand.nextGaussian() * f3);
-                            par1World.spawnEntityInWorld(entityitem);
+                            var9.stackSize -= var13;
+                            EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var10), (double)((float)var3 + var11), (double)((float)var4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                            float var15 = 0.05F;
+                            var14.motionX = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var14.motionY = (double)((float)this.furnaceRand.nextGaussian() * var15 + 0.2F);
+                            var14.motionZ = (double)((float)this.furnaceRand.nextGaussian() * var15);
+                            var1.spawnEntityInWorld(var14);
                         }
                     }
                 }
-
-                par1World.func_96440_m(par2, par3, par4, par5);
             }
         }
 
-        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+        super.breakBlock(var1, var2, var3, var4, var5, var6);
     }
 
     /**

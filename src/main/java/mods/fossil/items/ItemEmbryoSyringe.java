@@ -6,6 +6,7 @@ import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -127,6 +128,7 @@ public class ItemEmbryoSyringe extends Item
                 --par1ItemStack.stackSize;
             }
 
+            par2EntityPlayer.triggerAchievement(FossilAchievementHandler.IceAge);
             return true;
         }
 

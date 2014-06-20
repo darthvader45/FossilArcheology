@@ -31,8 +31,8 @@ public class GuiSifter extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         String s = this.furnaceInventory.isInvNameLocalized() ? this.furnaceInventory.getInvName() : I18n.getString(this.furnaceInventory.getInvName());
-        this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRenderer.drawString(I18n.getString("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString(s, this.xSize / 8 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+        //this.fontRenderer.drawString(I18n.getString("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
@@ -42,20 +42,22 @@ public class GuiSifter extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-        int i1;
+        int halfwidth = (this.width - this.xSize) / 2;
+        int halfheight = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(halfwidth, halfheight, 0, 0, this.xSize, this.ySize);
+        int scalar;
 
-        /*
+        
         if (this.furnaceInventory.isBurning())
         {
-            i1 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
+            scalar = this.furnaceInventory.getBurnTimeRemainingScaled(12);
+            //this.drawTexturedModalRect(halfwidth + 70, halfheight + 44 - scalar, 176, 12 - scalar, 14, scalar + 2);
+            //this.drawTexturedModalRect(halfwidth + 75, halfheight + 33, 181, 2, 31, 31);
         }
 
-        i1 = this.furnaceInventory.getCookProgressScaled(24);
-        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
-        */
+        scalar = this.furnaceInventory.getCookProgressScaled(26);
+        //this.drawTexturedModalRect(halfwidth + 79, halfheight + 34, 176, 14, scalar + 1, 16);
+        this.drawTexturedModalRect(halfwidth + 75, halfheight + 33, 181, 2, 31, scalar + 1);
+        
     }
 }

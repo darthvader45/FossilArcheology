@@ -1,5 +1,6 @@
 package mods.fossil.entity.mob;
 
+import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -7,71 +8,74 @@ import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class EntityAnkylosaurus extends EntityDinosaur
 {
-    private int angerLevel;
+    public boolean isTamed = false;
 
-    final EntityAIControlledByPlayer aiControlledByPlayer;
+//    final float PUSHDOWN_HARDNESS = 5.0F;
+    //final EntityAIControlledByPlayer aiControlledByPlayer;
+    
+    public static final double baseHealth = EnumDinoType.Ankylosaurus.Health0;
+    public static final double baseDamage = EnumDinoType.Ankylosaurus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Ankylosaurus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Ankylosaurus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Ankylosaurus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Ankylosaurus.SpeedMax;
 
-    public EntityAnkylosaurus(World world)
+    public EntityAnkylosaurus(World var1)
     {
-        super(world, EnumDinoType.Ankylosaurus);
+        super(var1, EnumDinoType.Ankylosaurus);
         this.updateSize();
-        this.setSubSpecies((new Random()).nextInt(3) + 1);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
         this.adultAge = EnumDinoType.Ankylosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.0F);
+        this.setSize(1.1F, 1.0F);
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 3.0F;
-        this.healthModValue = 1;
-        this.damageModValue = 1;
-        this.speedModValue = 0;
+        
         this.getNavigator().setAvoidsWater(true);
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.2F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 8.0F, 0.3F, 0.35F));
-        this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 5.0F, 2.0F));
-        this.tasks.addTask(7, new DinoAIEat(this, 24));
+        //this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(7, new DinoAIEat(this, 100));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
+        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+        //this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
     /**
      * Return the AI task for player control.
      */
+    /*
     public EntityAIControlledByPlayer getAIControlledByPlayer()
     {
         return this.aiControlledByPlayer;
     }
+    */
 
-    @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(EnumDinoType.Ankylosaurus.Speed0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(EnumDinoType.Ankylosaurus.Health0);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(EnumDinoType.Ankylosaurus.Strength0);
     }
 
     /**
@@ -92,59 +96,74 @@ public class EntityAnkylosaurus extends EntityDinosaur
         }
     }
     
-
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
-     * (Animals, Spiders at day, peaceful PigZombies).
-     */
-    protected Entity findPlayerToAttack()
+    public int getVerticalFaceSpeed()
     {
-        return this.angerLevel == 0 ? null : super.findPlayerToAttack();
+        return this.isSitting() ? 70 : super.getVerticalFaceSpeed();
     }
 
+    /**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
     public boolean interact(EntityPlayer var1)
     {
         //Add special item interaction code here
         return super.interact(var1);
     }
 
-    /**
-     * Causes this PigZombie to become angry at the supplied Entity (which will be a player).
-     */
-    private void becomeAngryAt(Entity par1Entity)
-    {
-        this.entityToAttack = par1Entity;
-        this.angerLevel = 400 + this.rand.nextInt(400);
-    }
-
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere()
-    {
-        return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
-    }
-
-    public EntityAnkylosaurus spawnBabyAnimal(EntityAgeable var1)
+    public EntityAnkylosaurus spawnBabyAnimal(EntityAnimal var1)
     {
         return new EntityAnkylosaurus(this.worldObj);
     }
 
     public float getEyeHeight()
     {
-        return (float)this.getDinoAge() / 1.9F;
+        return (float)this.getDinoAge() / 3.2F;
     }
 
-    public float getRidingHeight()
+    public float getHalfHeight()
     {
-        return this.getEyeHeight() + 0.3F;
+        return this.getEyeHeight();
     }
 
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRidingHeight(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
         }
     }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+    		
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	        
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
+    }
+
 }

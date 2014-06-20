@@ -279,15 +279,10 @@ public class ModelSpinosaurus extends ModelDinosaurs
         {
             this.Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
             this.Thigh2.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
-
-            if (Math.abs(this.Foot1.rotateAngleX) >= 0.174532F)
-            {
-                //           this.RunPose();
-            }
-            else
-            {
-//             this.StandPose();
-            }
+        }
+        else {
+            this.Thigh1.rotateAngleX = 0;
+            this.Thigh2.rotateAngleX = 0;
         }
     }
 }

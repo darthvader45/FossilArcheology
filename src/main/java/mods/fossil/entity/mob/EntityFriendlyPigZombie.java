@@ -162,14 +162,6 @@ public class EntityFriendlyPigZombie extends EntityMob
     }
 
     /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    protected int getDropItemId()
-    {
-        return Item.porkCooked.itemID;
-    }
-
-    /**
      * Returns the item that this EntityLiving is holding, if any.
      */
     public ItemStack getHeldItem()

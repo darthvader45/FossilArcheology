@@ -80,6 +80,28 @@ public class BlockFossil extends BlockStone
 
         return Block.cobblestone.blockID;
     }
+    
+    /**
+     * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
+     */
+    public int quantityDroppedWithBonus(int par1, Random par2Random)
+    {
+        if (par1 > 0 && this.blockID != this.idDropped(0, par2Random, par1))
+        {
+            int j = par2Random.nextInt(par1 + 1) - 1;
+
+            if (j < 0)
+            {
+                j = 0;
+            }
+
+            return this.quantityDropped(par2Random) * (j + 1);
+        }
+        else
+        {
+            return this.quantityDropped(par2Random);
+        }
+    }    
 
     @Override
     public void registerIcons(IconRegister par1IconRegister)

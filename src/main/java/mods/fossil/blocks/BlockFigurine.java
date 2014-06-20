@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.guiBlocks.TileEntityFigurine;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -44,23 +45,22 @@ public class BlockFigurine extends BlockContainer
     };
     public static final String[] shortname =
     {
-        "figurine_0",
-        "figurine_1",
-        "figurine_2",
-        "figurine_3",
-        "figurine_4",
-        "figurine_5",
-        "figurine_6",
-        "figurine_7",
-        "figurine_8",
-        "figurine_9",
-        "figurine_10",
-        "figurine_11",
-        "figurine_12",
-        "figurine_13",
-        "figurine_14",
-        "figurine_15",
-        "figurine_16",
+        "figurine_steve_pristine",
+        "figurine_skeleton_pristine",
+        "figurine_zombie_pristine",
+        "figurine_pigzombie_pristine",
+        "figurine_enderman_pristine",
+        "figurine_steve_damaged",
+        "figurine_skeleton_damaged",
+        "figurine_zombie_damaged",
+        "figurine_pigzombie_damaged",
+        "figurine_enderman_damaged",
+        "figurine_steve_broken",
+        "figurine_skeleton_broken",
+        "figurine_zombie_broken",
+        "figurine_pigzombie_broken",
+        "figurine_enderman_broken",
+        "figurine_steve",
     };
 
     private Icon[] icons;
@@ -72,13 +72,15 @@ public class BlockFigurine extends BlockContainer
         this.setCreativeTab(Fossil.tabFTest);
     }
 
+    
+    
     @SideOnly(Side.CLIENT)
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
     public void getSubBlocks(int par1, CreativeTabs creativetabs, List list)
     {
-        for (int j = 0; j < figurineTypes.length; ++j)
+        for (int j = 0; j < 16; ++j)
         {
             list.add(new ItemStack(par1, 1, j));
         }
@@ -132,7 +134,7 @@ public class BlockFigurine extends BlockContainer
      */
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
         TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
         ((TileEntityFigurine)tileentity).setFigurineType(par6ItemStack.getItemDamage());
@@ -199,7 +201,7 @@ public class BlockFigurine extends BlockContainer
 
         if ((metadata & 8) == 0)
         {
-            ItemStack itemstack = new ItemStack(Fossil.figurineItem.itemID, 1, this.getDamageValue(world, x, y, z));
+            ItemStack itemstack = new ItemStack(Fossil.figurineBlock.blockID, 1, this.getDamageValue(world, x, y, z));
             TileEntityFigurine tileentityfigurine = (TileEntityFigurine)world.getBlockTileEntity(x, y, z);
 
             if (tileentityfigurine == null)
@@ -246,11 +248,14 @@ public class BlockFigurine extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconregister)
     {
-        this.icons = new Icon[shortname.length];
+        icons = new Icon[16];
 
         for (int i = 0; i < shortname.length; ++i)
         {
-            this.icons[i] = iconregister.registerIcon(Fossil.modid + ":figurines/" + shortname[i]);
+        	
+           // icons[i] = iconregister.registerIcon(Fossil.modid + ":figurines/" + (this.getUnlocalizedName().substring(5)) + i);
+            icons[i] = iconregister.registerIcon(Fossil.modid + ":figurines/icons/" + "figurine_icon_" + i);
         }
     }
+    
 }

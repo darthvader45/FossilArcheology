@@ -143,8 +143,8 @@ public class LocalizationStrings
     public static final String FTOOLS_NAME = "Ancient Tools";
 
     //Pedia Hatching Text
-    public static final String PEDIA_EGG_DRY = "pedia.EggDry";
-    public static final String PEDIA_EGG_WET = "pedia.EggWet";
+    public static final String PEDIA_EGG_DRY = "pedia.eggDry";
+    public static final String PEDIA_EGG_WET = "pedia.eggWet";
     public static final String PEDIA_EGG_COLD = "pedia.eggCold";
     public static final String PEDIA_EGG_WARM = "pedia.eggWarm";
     public static final String PEDIA_EGG_STATUS = "pedia.eggStatus";

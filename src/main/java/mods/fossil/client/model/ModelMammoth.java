@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelMammoth extends ModelBase
@@ -172,7 +173,7 @@ public class ModelMammoth extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving var1, float var2, float var3, float var4)
+    public void setLivingAnimations(EntityLivingBase var1, float var2, float var3, float var4)
     {
         EntityMammoth var5 = (EntityMammoth)var1;
         int var6 = var5.getSwingTick();

@@ -82,14 +82,14 @@ public class WaterDinoAIWander extends EntityAIBase
             if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
             {
                 this.waypointX = this.entity.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-                this.waypointY = this.entity.posY - (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 4.0F);
+                this.waypointY = this.entity.posY - (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 8.0F);
                 this.waypointZ = this.entity.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
             }
         }
 
         if (this.courseChangeCooldown-- <= 0)
         {
-            this.courseChangeCooldown += this.rand.nextInt(5) + 2;
+            this.courseChangeCooldown += this.rand.nextInt(10) + 2;
             d3 = (double)MathHelper.sqrt_double(d3);
 
             if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
@@ -106,48 +106,6 @@ public class WaterDinoAIWander extends EntityAIBase
             }
         }
 
-        if (this.targetedEntity != null && this.targetedEntity.isDead)
-        {
-            this.targetedEntity = null;
-        }
-/*
-        //this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
-        this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
-
-        if (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
-                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < d4 * d4)
-        {
-            // Simple "pathfinding" to attack closest player.
-            this.deltaX = this.targetedEntity.posX - this.entity.posX;
-            this.deltaY = this.targetedEntity.posY - this.entity.posY;
-            this.deltaZ = this.targetedEntity.posZ - this.entity.posZ;
-            this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
-            //Normalize?
-            deltaX /= length + 1.0D;
-            deltaY /= length + 1.0D;
-            deltaZ /= length + 1.0D;
-            //Set waypoint for player's current location.
-            this.waypointX += deltaX;
-            this.waypointY += deltaY;
-            this.waypointZ += deltaZ;
-            //Now move.
-            double d5 = this.targetedEntity.posX - this.entity.posX;
-            double d6 = this.targetedEntity.posY - this.entity.posY;
-            double d7 = this.targetedEntity.posZ - this.entity.posZ;
-            this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(d5, d7)) * 180.0F / (float)Math.PI;
-
-            if (this.entity.canEntityBeSeen(this.targetedEntity))
-            {
-                // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
-                this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
-                Vec3 vec3 = this.entity.getLook(1.0F);
-            }
-        }
-        else
-        {
-            this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
-        }
-        */
         this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
 
     }

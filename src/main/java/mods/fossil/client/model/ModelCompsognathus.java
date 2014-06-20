@@ -1,11 +1,12 @@
 package mods.fossil.client.model;
 
+import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelCompsognathus extends ModelBase
+public class ModelCompsognathus extends ModelDinosaurs
 {
     //fields
     ModelRenderer Neck;
@@ -88,7 +89,7 @@ public class ModelCompsognathus extends ModelBase
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
+        setRotationAngles(f, f1, f2, f3, f4, f5, ((EntityDinosaur)entity).isModelized());
         Neck.render(f5);
         Head.render(f5);
         Body.render(f5);
@@ -108,17 +109,31 @@ public class ModelCompsognathus extends ModelBase
         var1.rotateAngleZ = var4;
     }
 
-    public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6)
+    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
-        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
-        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
-        this.RightThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-        this.LeftThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-        this.RightLeg.rotationPointX = this.RightThigh.rotationPointX;
-        this.RightLeg.rotationPointZ = this.RightThigh.rotationPointZ;
-        this.RightLeg.rotateAngleX = this.RightThigh.rotateAngleX;
-        this.LeftLeg.rotateAngleX = this.LeftThigh.rotateAngleX;
-        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.3F + var2);
-        this.Tail.rotateAngleX = 0.01F * MathHelper.sin(var3 * (float)0.3F + var2);
+    	if(!var7){
+	        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
+	        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+	        this.RightThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
+	        this.LeftThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
+	        this.RightLeg.rotationPointX = this.RightThigh.rotationPointX;
+	        this.RightLeg.rotationPointZ = this.RightThigh.rotationPointZ;
+	        this.RightLeg.rotateAngleX = this.RightThigh.rotateAngleX;
+	        this.LeftLeg.rotateAngleX = this.LeftThigh.rotateAngleX;
+	        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.3F + var2);
+	        this.Tail.rotateAngleX = 0.01F * MathHelper.sin(var3 * (float)0.3F + var2);
+    	}
+    	else {
+            this.Head.rotateAngleX = 0;
+            this.Head.rotateAngleY = 0;
+            this.RightThigh.rotateAngleX = 0;
+            this.LeftThigh.rotateAngleX = 0;
+            this.RightLeg.rotationPointX = this.RightThigh.rotationPointX;;
+            this.RightLeg.rotationPointZ = this.RightThigh.rotationPointZ;;
+            this.RightLeg.rotateAngleX = 0;
+            this.LeftLeg.rotateAngleX = 0;
+            this.Tail.rotateAngleY = 0;
+            this.Tail.rotateAngleX = 0;
+    	}
     }
 }

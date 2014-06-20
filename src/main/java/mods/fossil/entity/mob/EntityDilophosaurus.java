@@ -63,6 +63,15 @@ public class EntityDilophosaurus extends EntityDinosaur
     public Vector MemberList = new Vector();//ARE THEESE 5 DOING ANYTHING AND WORKING CORRECTLY?
     public float SwingAngle = -1000.0F;
     public int FleeingTick = 0;
+    
+    public static final double baseHealth = EnumDinoType.Dilophosaurus.Health0;
+    public static final double baseDamage = EnumDinoType.Dilophosaurus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Dilophosaurus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Dilophosaurus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Dilophosaurus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Dilophosaurus.SpeedMax;
+    
 
     public EntityDilophosaurus(World var1)
     {
@@ -79,13 +88,15 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.minSize = 0.5F;
         // Size of dinosaur at age Adult.
         this.maxSize = 2.0F;
-        //this.attackStrength = 2 + this.getDinoAge();
+
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         //this.tasks.addTask(0, new DinoAIGrowup(this, 8));
         //this.tasks.addTask(0, new DinoAIStarvation(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 8.0F, 0.3F, 0.35F));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 5.0F, 2.0F));
@@ -97,7 +108,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 16.0F, 50, false));
+        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
     }
 
     public boolean attackEntityAsMob(Entity var1)
@@ -114,8 +125,9 @@ public class EntityDilophosaurus extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.34000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(21.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
     /**
@@ -409,7 +421,7 @@ public class EntityDilophosaurus extends EntityDinosaur
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isAngry() ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -634,5 +646,36 @@ public class EntityDilophosaurus extends EntityDinosaur
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 }

@@ -1,5 +1,6 @@
 package mods.fossil.gens.structure.shipwreck;
 
+import mods.fossil.gens.structure.academy.AcademyUtil;
 import net.minecraft.block.Block;
 
 public class ShipWreck1
@@ -2304,8 +2305,8 @@ public class ShipWreck1
                 {},
                 {Block.doorWood.blockID, 1},
                 {Block.pressurePlatePlanks.blockID},
-                {Block.chest.blockID, 5},
-                {Block.chest.blockID, 5},
+                {ShipWreckUtil.CUSTOM_CHEST, 5, ShipWreckUtil.RARE_LOOT},   
+                {ShipWreckUtil.CUSTOM_CHEST, 5, ShipWreckUtil.COMMON_LOOT},   
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},
                 {},
@@ -2473,7 +2474,7 @@ public class ShipWreck1
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},
                 {},
                 {},
-                {Block.chest.blockID, 4},
+                {ShipWreckUtil.CUSTOM_CHEST, 4, ShipWreckUtil.RARE_LOOT},                
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},
                 {ShipWreckUtil.RANDOM_HOLE, 0, Block.planks.blockID},

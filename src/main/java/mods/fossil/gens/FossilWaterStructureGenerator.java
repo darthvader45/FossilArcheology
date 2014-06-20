@@ -136,32 +136,48 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 // Using the pre-made method addItemToTileInventory adds items to the first slot available
 
                 // Here we use customData to subtype custom_chest:
-                if (customData1 == ShipWreckUtil.RARE_LOOT_1)
+                if (customData1 == ShipWreckUtil.RARE_LOOT)
                 {
-                    for (int iterate = 0; iterate < rand.nextInt(10) + 3; iterate++)
+                    //How many times to iterate through the list for loot
+                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
                     {
-                        int i = (new Random()).nextInt(EnumDinoType.values().length + 1); //+1 for the sapling
-                        Item i0 = null;
+                        int loot = rand.nextInt(100);
+                        
 
-                        if (i == 0)
+                        
+                        if (loot < 20)
                         {
-                            i0 = Fossil.brokenSapling;
+                            addItemToTileInventory(world, new ItemStack(Item.leather, rand.nextInt(20)), x, y, z);
                         }
-                        else
+                        else if (loot < 40)
                         {
-                            i0 = EnumDinoType.values()[i - 1].DNAItem;
+                            addItemToTileInventory(world, new ItemStack(Item.swordGold, rand.nextInt(2)), x, y, z);
                         }
-
-                        int loot = (int)(Math.random() * 100);
-
-                        if (loot < 80)
+                        else if (loot < 50)
                         {
-                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.compass, 1), x, y, z);
                         }
+                        else if (loot < 60)
+                        {
+                        addItemToTileInventory(world, (new ItemStack(Fossil.figurineBlock.blockID, rand.nextInt(2), rand.nextInt(15))), x, y, z);
+                        }
+                        else if (loot < 80)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Item.goldNugget, rand.nextInt(32)), x, y, z);
+                        }
+                        else if (loot < 90)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(5)), x, y, z);
+                        }
+                        else if (loot < 101)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Item.nameTag, rand.nextInt(2)), x, y, z);
+                        }
+                        
                     }
                 }
                 // Not our specific chest, so we'll do some generic stuff
-                else
+                if (customData1 == ShipWreckUtil.COMMON_LOOT)
                 {
                     //How many times to iterate through the list for loot
                     for (int iterate = 0; iterate < rand.nextInt(7); iterate++)
@@ -170,27 +186,31 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 
                         if (loot < 20)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.paper, rand.nextInt(22)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.leather, rand.nextInt(7)), x, y, z);
                         }
                         else if (loot < 40)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.book, rand.nextInt(12)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.book, rand.nextInt(3)), x, y, z);
                         }
                         else if (loot < 60)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.bone, rand.nextInt(22)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.emptyMap, rand.nextInt(2)), x, y, z);
                         }
                         else if (loot < 70)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.writableBook, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.gunpowder, rand.nextInt(10)), x, y, z);
                         }
                         else if (loot < 85)
                         {
-                            addItemToTileInventory(world, new ItemStack(Fossil.biofossil, rand.nextInt(22)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(8)), x, y, z);
                         }
                         else if (loot < 95)
                         {
-                            addItemToTileInventory(world, new ItemStack(Fossil.claw, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.fishingRod, rand.nextInt(1)), x, y, z);
+                        }
+                        else
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Item.ingotIron, rand.nextInt(8)), x, y, z);
                         }
                     }
                 }

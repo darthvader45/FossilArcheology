@@ -178,5 +178,27 @@ public class ModelStegosaurus extends ModelDinosaurs
             this.T3.rotateAngleZ = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
             this.T4.rotateAngleZ = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
         }
+        else {
+            this.H4.rotateAngleY = 0;
+            this.H5.rotateAngleY = 0;
+            this.H6.rotateAngleY = 0;
+            this.D_L_1.rotateAngleX = 0;
+            this.D_R_1.rotateAngleX = 0;
+            this.D_L_2.rotateAngleX = 0.8726646F;
+            this.D_R_2.rotateAngleX = 0.8726646F;
+            this.DD_L_1.rotateAngleX = 0;
+            this.DD_L_1.rotateAngleY = 0;
+            this.D_D_R_1.rotateAngleX = 0;
+            this.D_D_R_1.rotateAngleY = 0;
+            this.DD_L_2.rotateAngleX = 1.22173F;
+            this.DD_L_2.rotateAngleY = 0;
+            this.DD_R_2.rotateAngleX = 1.22173F;
+            this.DD_R_2.rotateAngleY = 0;
+            this.T1.rotateAngleY = 0;
+            this.T2.rotateAngleY = 0;
+            this.T2.rotateAngleZ = 0;
+            this.T3.rotateAngleZ = 0;
+            this.T4.rotateAngleZ = 0.2617994F;
+        }
     }
 }

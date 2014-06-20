@@ -11,9 +11,12 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -35,6 +38,14 @@ public class EntityStegosaurus extends EntityDinosaur
     public int RushTick = 0;
     //public int BreedTick = 3000;
     public boolean Running = false;
+    
+    public static final double baseHealth = EnumDinoType.Stegosaurus.Health0;
+    public static final double baseDamage = EnumDinoType.Stegosaurus.Strength0;
+    public static final double baseSpeed = EnumDinoType.Stegosaurus.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Stegosaurus.HealthMax;
+    public static final double maxDamage = EnumDinoType.Stegosaurus.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Stegosaurus.SpeedMax;
 
     public EntityStegosaurus(World var1)
     {
@@ -77,6 +88,7 @@ public class EntityStegosaurus extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
+        
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
@@ -86,8 +98,18 @@ public class EntityStegosaurus extends EntityDinosaur
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
+        
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
 
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
+    }
+    
     public String getTexture()
     {
         if (this.isModelized())
@@ -245,7 +267,7 @@ public class EntityStegosaurus extends EntityDinosaur
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isSelfAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isSelfAngry() ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -387,6 +409,37 @@ public class EntityStegosaurus extends EntityDinosaur
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return null;
+    }
+    
+    /**
+     * This gets called when a dinosaur grows naturally or through Chicken Essence.
+     */
+    @Override
+    public void updateSize()
+    {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+        
+        
+    	if(this.getDinoAge() <= this.adultAge){
+	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
+	
+	        if (this.isTeen()) {
+	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+	        }
+	        else if (this.isAdult()){
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
+	        }
+	        else {
+	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
+	        }
+    	}
     }
 
 }

@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -30,7 +31,6 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -40,31 +40,32 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntitySmilodon extends EntityTameable
+public class EntitySmilodon extends EntityPrehistoric
 {
     private float field_70926_e;
     private float field_70924_f;
 
-    /** true is the wolf is wet else false */
+    /** true is the Smilodon is wet else false */
     private boolean isShaking;
     private boolean field_70928_h;
 
     /**
-     * This time increases while wolf is shaking and emitting water particles.
+     * This time increases while Smilodon is shaking and emitting water particles.
      */
-    private float timeWolfIsShaking;
-    private float prevTimeWolfIsShaking;
+    private float timeSmilodonIsShaking;
+    private float prevTimeSmilodonIsShaking;
 
     public EntitySmilodon(World var1)
     {
         super(var1);
-        this.setSize(0.8F, 0.8F);
+        this.setSize(1.5F, 1.0F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
@@ -85,8 +86,10 @@ public class EntitySmilodon extends EntityTameable
         this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 200, false));
         this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 200, false));
         this.targetTasks.addTask(8, new EntityAITargetNonTamed(this, EntityVillager.class, 200, false));
+        
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.experienceValue = 5;
-        this.setTamed(false);
     }
 
     protected void applyEntityAttributes()
@@ -180,7 +183,7 @@ public class EntitySmilodon extends EntityTameable
      */
     protected void playStepSound(int par1, int par2, int par3, int par4)
     {
-        this.playSound("mob.wolf.step", 0.15F, 1.0F);
+        this.playSound("mob.Smilodon.step", 0.15F, 1.0F);
     }
 
     /**
@@ -237,8 +240,8 @@ public class EntitySmilodon extends EntityTameable
         if (!this.worldObj.isRemote && this.isShaking && !this.field_70928_h && !this.hasPath() && this.onGround)
         {
             this.field_70928_h = true;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
+            this.timeSmilodonIsShaking = 0.0F;
+            this.prevTimeSmilodonIsShaking = 0.0F;
             this.worldObj.setEntityState(this, (byte)8);
         }
     }
@@ -279,31 +282,31 @@ public class EntitySmilodon extends EntityTameable
         {
             this.isShaking = true;
             this.field_70928_h = false;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
+            this.timeSmilodonIsShaking = 0.0F;
+            this.prevTimeSmilodonIsShaking = 0.0F;
         }
         else if ((this.isShaking || this.field_70928_h) && this.field_70928_h)
         {
-            if (this.timeWolfIsShaking == 0.0F)
+            if (this.timeSmilodonIsShaking == 0.0F)
             {
-                this.worldObj.playSoundAtEntity(this, "mob.wolf.shake", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+                this.worldObj.playSoundAtEntity(this, "mob.Smilodon.shake", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             }
 
-            this.prevTimeWolfIsShaking = this.timeWolfIsShaking;
-            this.timeWolfIsShaking += 0.05F;
+            this.prevTimeSmilodonIsShaking = this.timeSmilodonIsShaking;
+            this.timeSmilodonIsShaking += 0.05F;
 
-            if (this.prevTimeWolfIsShaking >= 2.0F)
+            if (this.prevTimeSmilodonIsShaking >= 2.0F)
             {
                 this.isShaking = false;
                 this.field_70928_h = false;
-                this.prevTimeWolfIsShaking = 0.0F;
-                this.timeWolfIsShaking = 0.0F;
+                this.prevTimeSmilodonIsShaking = 0.0F;
+                this.timeSmilodonIsShaking = 0.0F;
             }
 
-            if (this.timeWolfIsShaking > 0.4F)
+            if (this.timeSmilodonIsShaking > 0.4F)
             {
                 float var1 = (float)this.boundingBox.minY;
-                int var2 = (int)(MathHelper.sin((this.timeWolfIsShaking - 0.4F) * (float)Math.PI) * 7.0F);
+                int var2 = (int)(MathHelper.sin((this.timeSmilodonIsShaking - 0.4F) * (float)Math.PI) * 7.0F);
 
                 for (int var3 = 0; var3 < var2; ++var3)
                 {
@@ -315,32 +318,34 @@ public class EntitySmilodon extends EntityTameable
         }
     }
 
-    public boolean getWolfShaking()
+    public boolean getSmilodonShaking()
     {
         return this.isShaking;
     }
 
     public float getShadingWhileShaking(float var1)
     {
-        return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * var1) / 2.0F * 0.25F;
+        return 0.75F + (this.prevTimeSmilodonIsShaking + (this.timeSmilodonIsShaking - this.prevTimeSmilodonIsShaking) * var1) / 2.0F * 0.25F;
     }
 
-    public float getShakeAngle(float var1, float var2)
+    @SideOnly(Side.CLIENT)
+    public float getShakeAngle(float par1, float par2)
     {
-        float var3 = (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * var1 + var2) / 1.8F;
+        float f2 = (this.prevTimeSmilodonIsShaking + (this.timeSmilodonIsShaking - this.prevTimeSmilodonIsShaking) * par1 + par2) / 1.8F;
 
-        if (var3 < 0.0F)
+        if (f2 < 0.0F)
         {
-            var3 = 0.0F;
+            f2 = 0.0F;
         }
-        else if (var3 > 1.0F)
+        else if (f2 > 1.0F)
         {
-            var3 = 1.0F;
+            f2 = 1.0F;
         }
 
-        return MathHelper.sin(var3 * (float)Math.PI) * MathHelper.sin(var3 * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
+        return MathHelper.sin(f2 * (float)Math.PI) * MathHelper.sin(f2 * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
     }
 
+    @SideOnly(Side.CLIENT)
     public float getInterestedAngle(float var1)
     {
         return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * var1) * 0.15F * (float)Math.PI;
@@ -424,7 +429,7 @@ public class EntitySmilodon extends EntityTameable
      */
     protected Entity findPlayerToAttack()
     {
-        return this.isAngry() ? this.worldObj.getClosestPlayerToEntity(this, 16.0D) : null;
+        return this.isAngry() ? this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D) : null;
     }
 
     /**
@@ -519,6 +524,8 @@ public class EntitySmilodon extends EntityTameable
                 {
                     if (this.rand.nextInt(this.isChild() ? 1 : 3) == 0)
                     {
+                        this.setOwner(var1.username);
+                        this.setTamed(true);
                         this.setIsTamed(true);
                         this.setPathToEntity((PathEntity)null);
                         this.aiSit.setSitting(true);
@@ -536,6 +543,16 @@ public class EntitySmilodon extends EntityTameable
 
                 return true;
             }
+            
+            if (var1.getCommandSenderName().equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
+            {
+                this.aiSit.setSitting(!this.isSitting());
+                this.isJumping = false;
+                this.setPathToEntity((PathEntity)null);
+                this.setTarget((Entity)null);
+                this.setAttackTarget((EntityLivingBase)null);
+            }
+            
         }
         else
         {
@@ -604,8 +621,8 @@ public class EntitySmilodon extends EntityTameable
         if (var1 == 8)
         {
             this.field_70928_h = true;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
+            this.timeSmilodonIsShaking = 0.0F;
+            this.prevTimeSmilodonIsShaking = 0.0F;
         }
         else
         {
@@ -631,17 +648,66 @@ public class EntitySmilodon extends EntityTameable
     {
         return var1 == null ? false : (!(Item.itemsList[var1.itemID] instanceof ItemFood) ? false : ((ItemFood)Item.itemsList[var1.itemID]).isWolfsFavoriteMeat());
     }
+
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
+    
+    	
         p0.reset();
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), p0.rightIndent, 34, 40, 90, 245);
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + "Smilodon" + "_DNA.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
+
         
+        /* LEFT PAGE
+         * 
+         * OWNER:
+         * (+2) OWNER NAME 
+         * RIDEABLE
+         * ORDER
+         * ABLE TO FLY
+         * ABLE TO CHEST
+         * DANGEROUS
+         * 
+         * 
+         */
+        
+        /* RIGHT PAGE
+         * 
+         * CUSTOM NAME
+         * DINOSAUR NAME
+         * DINO AGE
+         * HEALTH
+         * HUNGER
+         * 
+         */
         if (this.hasCustomNameTag())
         {
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), p0.rightIndent, 34, 0, 0, 0);
+        //p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
+        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+        //p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
+
+        //Print "Day" after age
+        /*
+        if (this.getDinoAge() == 1)
+        {
+            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), p0.rightIndent+12, 46);
+        }
+        else
+        {
+            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), p0.rightIndent+12, 46);
+        }
+        */
+
+        //Display Health
+        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
+        //Display Hunger
+        //p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
+
+        //Display owner name
         if (this.isTamed())
         {
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
@@ -655,7 +721,25 @@ public class EntitySmilodon extends EntityTameable
             p0.AddStringLR(s0, true);
         }
 
-        p0.PrintItemXY(Fossil.embryoSmilodon, ((p0.xGui/2) + (p0.xGui/4)), 7);
+        //Display if Rideable
+        /*
+        if (this.isRideable() && this.isAdult())
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+
+        if (this.SelfType.OrderItem != null)
+        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
+
+        
+        for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
+        {
+            if (this.SelfType.FoodItemList.getItem(i) != null)
+            {
+                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
+            }
+        }
+        */
+
+        //TODO show all blocks the dino can eat
     }
 
     public boolean isAngry()
@@ -678,7 +762,7 @@ public class EntitySmilodon extends EntityTameable
     }
 
     /**
-     * Return this wolf's collar color.
+     * Return this Smilodon's collar color.
      */
     public int getCollarColor()
     {
@@ -686,7 +770,7 @@ public class EntitySmilodon extends EntityTameable
     }
 
     /**
-     * Set this wolf's collar color.
+     * Set this Smilodon's collar color.
      */
     public void setCollarColor(int par1)
     {
@@ -711,18 +795,33 @@ public class EntitySmilodon extends EntityTameable
         }
     }
 
-    public EntitySmilodon spawnBabyAnimal(EntityAgeable par1EntityAgeable)
+    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
     {
-        EntitySmilodon entitysmilodon = new EntitySmilodon(this.worldObj);
-        String s = this.getOwnerName();
+        EntitySmilodon var2 = new EntitySmilodon(this.worldObj);
 
-        if (s != null && s.trim().length() > 0)
+        if (this.isTamed())
         {
-            entitysmilodon.setOwner(s);
-            entitysmilodon.setTamed(true);
+            var2.setOwner(this.getOwnerName());
+            var2.setTamed(true);
         }
 
-        return entitysmilodon;
+        return var2;
+    }
+    
+    public EntitySmilodon Imprinting(double var1, double var3, double var5)
+    {
+        EntityPlayer var7 = this.worldObj.getClosestPlayer(var1, var3, var5, 50.0D);
+
+        if (var7 == null)
+        {
+            return this;
+        }
+        else
+        {
+            this.setOwner(var7.username);
+            this.setTamed(true);
+            return this;
+        }
     }
 
     public void func_70918_i(boolean par1)
@@ -752,13 +851,13 @@ public class EntitySmilodon extends EntityTameable
         {
             return false;
         }
-        else if (!(var1 instanceof EntityWolf))
+        else if (!(var1 instanceof EntitySmilodon))
         {
             return false;
         }
         else
         {
-            EntityWolf var2 = (EntityWolf)var1;
+            EntitySmilodon var2 = (EntitySmilodon)var1;
             return !var2.isTamed() ? false : (var2.isSitting() ? false : this.isInLove() && var2.isInLove());
         }
     }
@@ -771,7 +870,7 @@ public class EntitySmilodon extends EntityTameable
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        EntityAgeable var2 = (new EntitySmilodon(this.worldObj));
+        EntityAgeable var2 = (new EntitySmilodon(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
         var2.setGrowingAge(-24000);
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
         return var2;

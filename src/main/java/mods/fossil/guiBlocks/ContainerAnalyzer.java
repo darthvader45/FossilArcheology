@@ -140,7 +140,7 @@ public class ContainerAnalyzer extends Container
             if (par2 > INPUT_END && par2 < OUTPUT_END+1) // If slot is equal to Output.
             {
             	//Place INTO inventory, only check output.
-                if (!this.mergeItemStack(itemstack1, OUTPUT_END+1, 49, true)) // 13 is first slot after the outputs, 49 is last inventory slot
+                if (!this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+36+1, true)) // 13 is first slot after the outputs, 49 is last inventory slot
                 {
                     return null;
                 }
@@ -148,7 +148,7 @@ public class ContainerAnalyzer extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             }
     		// itemstack is in player inventory, try to place in appropriate furnace slot
-    		else if (par2 < INPUT_END+1) // if it's not in the INPUT
+    		else if (par2 > INPUT_END) // if it's not in the INPUT
     		{
     			// if it can be smelted, place in the input slots
     			if (itemstack1 != null)
