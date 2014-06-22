@@ -223,7 +223,7 @@ public class ModelDilophosaurus extends ModelDinosaurs
     {
         if (!var7)
         {
-            this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
+            this.Head.rotateAngleX = -var5 / (180F / (float)Math.PI);
             this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
             this.Jaw1.rotateAngleX = this.Jaw2.rotateAngleX
                                      = this.Crest.rotateAngleX = this.Crest2.rotateAngleX

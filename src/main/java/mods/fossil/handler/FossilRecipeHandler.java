@@ -38,6 +38,7 @@ public class FossilRecipeHandler
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
             GameRegistry.addShapelessRecipe(new ItemStack(Fossil.dinoPedia), new Object[] {Item.book, EnumDinoType.values()[i].DNAItem});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.dinoPedia), new Object[] {Item.book, Fossil.dnaCoelacanth});
         //GameRegistry.addShapelessRecipe(new ItemStack(Fossil.archNotebook), new Object[] {Item.book, Fossil.relic});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.rawChickenSoup, 1, 0), new Object[] {Item.bucketEmpty, Item.chickenRaw});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.magicConch, 1, 1), new Object[] {new ItemStack(Fossil.magicConch, 1, 0)});

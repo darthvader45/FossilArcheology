@@ -3,7 +3,7 @@ package mods.fossil.blocks;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -28,39 +28,6 @@ public class BlockFossilSkull extends BlockDirectional
     }*/
 
     /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    /*public int getBlockTextureFromSideAndMetadata(int var1, int var2)
-    {
-        if (var1 == 1)
-        {
-            return 65;
-        }
-        else if (var1 == 0)
-        {
-            return 65;
-        }
-        else
-        {
-            byte var3 = 48;
-
-            if (this.blockType)
-            {
-                var3 = 49;
-            }
-
-            return var2 == 2 && var1 == 2 ? var3 : (var2 == 3 && var1 == 5 ? var3 : (var2 == 0 && var1 == 3 ? var3 : (var2 == 1 && var1 == 4 ? var3 : 64)));
-        }
-    }*/
-
-    /**
-     * Returns the block texture based on the side being looked at.  Args: side
-     */
-    /*public int getBlockTextureFromSide(int var1)
-    {
-        return var1 == 1 ? 65 : (var1 == 0 ? 65 : (var1 == 3 ? 48 : 64));
-    }*/
-    /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
@@ -76,44 +43,34 @@ public class BlockFossilSkull extends BlockDirectional
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 || par1 == 0 || (par1 > 3 && par2 < 4) || (par1 < 4 && par2 > 3) ? this.blockIcon : par1 != par2 ? this.Front : this.Back;
-    }
-
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    public void onBlockAdded(World var1, int var2, int var3, int var4)
-    {
-        super.onBlockAdded(var1, var2, var3, var4);
+        return par1 == 1 ? this.Back : (par1 == 0 ? this.blockIcon : (par1 != par2 ? this.blockIcon : this.Front));
     }
 
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        switch (var6)
+        if (l == 0)
         {
-            case 0:
-                var6 = 2;
-                break;
-
-            case 1:
-                var6 = 5;
-                break;
-
-            case 2:
-                var6 = 3;
-                break;
-
-            case 3:
-                var6 = 4;
-                break;
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
         }
 
-        var1.setBlockMetadataWithNotify(var2, var3, var4, var6, 2);
-        System.out.println(String.valueOf(var6));
+        if (l == 1)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+        }
+
+        if (l == 2)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+        }
+
+        if (l == 3)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+        }
     }
 }

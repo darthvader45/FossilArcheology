@@ -1,4 +1,4 @@
-#Updated for Build 6 (1.6.4) HEAD1 June 22 2014
+﻿#Updated for Build 6 (1.6.4) HEAD3 June 22 2014
 #Simplified Chinese (zh_CN) Localization File
 
 #创造模式标签
@@ -165,6 +165,7 @@ item.eggCultivatedDodo.name=人工养殖渡渡鸟蛋
 item.eggAnkylosaurus.name=背甲龙蛋
 item.eggPachycephalosaurus.name=肿头龙蛋
 item.eggDeinonychus.name=Deinonychus Egg
+item.eggCoelacanth.name=Living Coelacanth
 item.dnaTriceratops.name=三角龙DNA
 item.dnaVelociraptor.name=迅猛龙DNA
 item.dnaTRex.name=霸王龙DNA
@@ -180,6 +181,7 @@ item.dnaCompsognathus.name=美颌龙DNA
 item.dnaAnkylosaurus.name=背甲龙DNA
 item.dnaPachycephalosaurus.name=肿头龙DNA
 item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaCoelacanth.name=Coelacanth DNA
 item.dnaPig.name=猪DNA
 item.dnaSheep.name=羊DNA
 item.dnaCow.name=牛DNA
@@ -187,6 +189,7 @@ item.dnaChicken.name=鸡DNA
 item.dnaSmilodon.name=剑齿虎DNA
 item.dnaMammoth.name=猛犸象DNA
 item.dnaDodo.name=渡渡鸟DNA
+
 item.embryoPig.name=猪胚胎
 item.embryoSheep.name=羊胚胎
 item.embryoCow.name=牛胚胎
@@ -263,6 +266,7 @@ animal.pregnant.cow=受孕牛
 animal.pregnant.pig=受孕猪   
 animal.pregnant.sheep=受孕羊  
 animal.dodo=渡渡鸟
+animal.coelacanth=Coelacanth
 
 #百科文本.恐龙信息.
 pedia.text.owner=主人:

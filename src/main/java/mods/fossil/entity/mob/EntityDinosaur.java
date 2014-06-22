@@ -666,6 +666,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         return this.OrderStatus == EnumOrderType.Stay;
     }
+    
+    public boolean canBePushed(){
+    	return !this.isSitting();
+    }
 
     /**
      * Disables a mob's ability to move on its own while true.
@@ -780,7 +784,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     PartnerCount = 20;
                 }
 
-                if ((new Random()).nextInt(20) < PartnerCount)
+                if ((new Random()).nextInt(60) < PartnerCount)
                 {
                 	Fossil.Console("HANDLE BREED");
                     EntityDinoEgg var5 = null;
@@ -1246,10 +1250,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         if (this.isModelized())
         {
-            if (!this.worldObj.isRemote)
+            if (!this.worldObj.isRemote && !this.isDead)
             {
                 this.entityDropItem(new ItemStack(Fossil.biofossil, 1), 0.0F);
-                this.dropFewItems(false, 0);
                 this.setDead();
             }
             return true;
@@ -1265,11 +1268,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public EnumOrderType getOrderType()
     {
         return this.OrderStatus;
-    }
-
-    public boolean canBePushed()
-    {
-        return this.isAdult() || this.isTeen();
     }
 
     public void onLivingUpdate()

@@ -1,4 +1,4 @@
-#Updated for Build 6 (1.6.4) HEAD14 June 22 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD14 June 22 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -45,7 +45,7 @@ tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer
 tile.cultureVat.name=Culture Vat
 tile.fossilworkbench.name=Archeology Workbench
-tile.fossil_drum.name=Drum
+tile.drum.name=Drum
 tile.feederIdle.name=Feeder
 tile.feederActive.name=Feeder
 tile.permafrost.name=Permafrost
@@ -165,6 +165,7 @@ item.eggCultivatedDodo.name=Cultivated Dodo Egg
 item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
 item.eggDeinonychus.name=Deinonychus Egg
+item.eggCoelacanth.name=Living Coelacanth
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
 item.dnaTRex.name=TRex DNA
@@ -180,6 +181,7 @@ item.dnaCompsognathus.name=Compsognathus DNA
 item.dnaAnkylosaurus.name=Ankylosaurus DNA
 item.dnaPachycephalosaurus.name=Pachycephalosaurus DNA
 item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaCoelacanth.name=Coelacanth DNA
 item.dnaPig.name=Pig DNA
 item.dnaSheep.name=Sheep DNA
 item.dnaCow.name=Cow DNA
@@ -196,6 +198,7 @@ item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
 item.archNotebook.name=Archaeology Notebook
 item.potteryShard.name=Pottery Shard
+
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 

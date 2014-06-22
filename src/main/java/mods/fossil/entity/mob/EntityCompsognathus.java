@@ -60,7 +60,7 @@ public class EntityCompsognathus extends EntityDinosaur
         // Size of dinosaur at day 0.
         this.minSize = 0.25F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 1.0F;
+        this.maxSize = 0.65F;
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));

@@ -51,6 +51,7 @@ import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.mob.EntityBones;
+import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
@@ -107,6 +108,7 @@ import mods.fossil.items.ItemFernSeed;
 import mods.fossil.items.ItemFossilRecord;
 import mods.fossil.items.ItemIcedMeat;
 import mods.fossil.items.ItemJavelin;
+import mods.fossil.items.ItemLivingCoelacanth;
 import mods.fossil.items.ItemMagicConch;
 import mods.fossil.items.ItemRibCage;
 import mods.fossil.items.ItemSkullHelmet;
@@ -180,7 +182,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.0";
+    public static final String modversion = "1.6.4 Build 6.1";
 
     /*
      * Set mod state here
@@ -328,6 +330,8 @@ public class Fossil
     public static Item figurineItem;
     public static Item brokenHeadRelic;
     public static Item potteryShards;
+    public static Item livingCoelacanth;
+
 
     //Armor
     public static Item skullHelmet;
@@ -361,6 +365,7 @@ public class Fossil
     public static Item dnaSmilodon;
     public static Item dnaMammoth;
     public static Item dnaDodo;
+    public static Item dnaCoelacanth;
 
     //Mob DNA
     //public static Item mobDNA;
@@ -511,6 +516,8 @@ public class Fossil
     public static int figurineItemID;
     public static int brokenHeadRelicID;
     public static int potteryShardsID;
+    public static int livingCoelacanthID;
+
 
     //Armor
     public static int skullHelmetID;
@@ -544,6 +551,7 @@ public class Fossil
     public static int dnaSmilodonID;
     public static int dnaMammothID;
     public static int dnaDodoID;
+    public static int dnaCoelacanthID;
 
     //Mob DNA
     //public static int mobDNAID;
@@ -720,7 +728,7 @@ public class Fossil
             fossilRecordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt();
             //archNotebookID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt();
             //10045
-            //newItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.REPLACEME_NAME, 10046).getInt();
+            livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10046).getInt();
             //Armor
             skullHelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt();
             ribCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt();
@@ -756,7 +764,9 @@ public class Fossil
             dnaSmilodonID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SMILODON_NAME, 10081).getInt();
             dnaMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_MAMMOTH_NAME, 10082).getInt();
             dnaDodoID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DODO_NAME, 10083).getInt();
-
+            dnaCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COELACANTH_NAME, 10084).getInt();
+            livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10085).getInt();
+            
             //MobDNA
             //mobDNAID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt();
             //dnaPigZombieID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10084).getInt();
@@ -950,6 +960,7 @@ public class Fossil
        // archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
         potteryShards = new ForgeItem(potteryShardsID, "AncientPotteryFragment2").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
        // brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
+        livingCoelacanth = new ItemLivingCoelacanth(livingCoelacanthID, 1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
        
         //BoneArmor
         skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);
@@ -981,6 +992,8 @@ public class Fossil
         dnaSmilodon = new ForgeItem(dnaSmilodonID, "Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SMILODON_NAME).setCreativeTab(this.tabFMaterial);
         dnaMammoth = new ForgeItem(dnaMammothID, "Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
         dnaDodo = new ForgeItem(dnaDodoID, "Dodo_DNA").setUnlocalizedName(LocalizationStrings.DNA_DODO_NAME).setCreativeTab(this.tabFMaterial);
+        dnaCoelacanth = new ForgeItem(dnaCoelacanthID, "Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
+        
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
         embryoPig = new ItemEmbryoSyringe(embryoPigID, 0).setUnlocalizedName(LocalizationStrings.EMBRYO_PIG_NAME).setCreativeTab(this.tabFItems);
@@ -1077,6 +1090,7 @@ public class Fossil
         LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0) + ".name", "Palaeoraphe Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0) + ".name", "Ancient Wood Slab");
         LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0) + ".name", "Ancient Stone Slab");
+        
         EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, 1, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityAncientJavelin.class, 	"AncientJavelin", 		3, this, 250, 5, true);
@@ -1094,12 +1108,14 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
             EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
         }
 
+        EntityRegistry.addSpawn(EntityCoelacanth.class, 3, 2, 8, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FAILURESAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", StatCollector.translateToLocal(LocalizationStrings.MOB_BONES));
@@ -1111,6 +1127,7 @@ public class Fossil
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO));
+        LanguageRegistry.instance().addStringLocalization("entity.fossil.Coelacanth.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_COELACANTH));
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {

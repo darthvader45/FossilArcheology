@@ -339,16 +339,20 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
                 if (var2 > 90)
                 {
-                    int i = (new Random()).nextInt(EnumDinoType.values().length + 1); //+1 for the sapling
+                    int i = (new Random()).nextInt(EnumDinoType.values().length + 2); //+1 for the sapling, +2 for coelacanth
                     Item i0 = null;
 
                     if (i == 0)
                     {
                         i0 = Fossil.brokenSapling;
                     }
+                    else if (i == 1)
+                    {
+                    	i0 = Fossil.dnaCoelacanth;
+                    }
                     else
                     {
-                        i0 = EnumDinoType.values()[i - 1].DNAItem;
+                        i0 = EnumDinoType.values()[i - 2].DNAItem;
                     }
 
                     var1 = new ItemStack(i0, 1);

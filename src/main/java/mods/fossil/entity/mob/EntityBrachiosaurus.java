@@ -42,7 +42,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 4.8F;
+        this.maxSize = 5.8F;
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
