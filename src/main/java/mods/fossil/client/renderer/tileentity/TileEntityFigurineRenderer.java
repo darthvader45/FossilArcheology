@@ -37,7 +37,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
     private static final ResourceLocation broken_enderman = new ResourceLocation("fossil:textures/blocks/figurines/figurine_enderman_broken.png");
     private static final ResourceLocation broken_zombiepig = new ResourceLocation("fossil:textures/blocks/figurines/figurine_pigzombie_broken.png");
 
-    private static final ResourceLocation mysterious = new ResourceLocation("fossil:textures/blocks/figurines/figurine_steve.png");
+    private static final ResourceLocation mysterious = new ResourceLocation("fossil:textures/blocks/figurines/figurine_mysterious.png");
 
     // also gets model of our block
     public TileEntityFigurineRenderer()
@@ -153,6 +153,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
 
                 case 15:
                     this.bindTexture(mysterious);
+                    this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
             }
 
