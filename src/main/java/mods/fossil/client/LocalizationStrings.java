@@ -12,7 +12,7 @@ public class LocalizationStrings
     public static final String BLOCK_CULTIVATE_ACTIVE_NAME = "cultureVatActive";
     public static final String BLOCK_WORKTABLE_IDLE_NAME = "fossilworkbench";
     public static final String BLOCK_WORKTABLE_ACTIVE_NAME = "workbenchActive";
-    public static final String DRUM_NAME = "drum";
+    public static final String DRUM_NAME = "fossil_drum";
     public static final String FEEDER_IDLE_NAME = "feederIdle";
     public static final String FEEDER_ACTIVE_NAME = "feederActive";
     public static final String BLOCK_PERMAFROST_NAME = "permafrost";

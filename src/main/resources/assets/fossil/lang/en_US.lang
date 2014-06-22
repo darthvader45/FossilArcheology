@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4) HEAD13 June 20 2014 
+#Updated for Build 6 (1.6.4) HEAD14 June 22 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -45,7 +45,7 @@ tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer
 tile.cultureVat.name=Culture Vat
 tile.fossilworkbench.name=Archeology Workbench
-tile.drum.name=Drum
+tile.fossil_drum.name=Drum
 tile.feederIdle.name=Feeder
 tile.feederActive.name=Feeder
 tile.permafrost.name=Permafrost
