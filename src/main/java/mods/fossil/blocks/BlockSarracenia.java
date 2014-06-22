@@ -49,6 +49,7 @@ public class BlockSarracenia extends BlockFlower
         this.blockIcon = par1IconRegister.registerIcon("fossil:Sarracenia");
     }
 
+    /*
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float a, float b, float c)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -61,4 +62,5 @@ public class BlockSarracenia extends BlockFlower
 
         return true;
     }
+    */
 }
