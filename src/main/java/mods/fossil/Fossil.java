@@ -188,7 +188,7 @@ public class Fossil
      * 1 = Beta build
      * 2 = Release build
      */
-    public static final int modState = 0;
+    public static final int modState = 2;
 
     @SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
     public static CommonProxy proxy;
@@ -396,6 +396,21 @@ public class Fossil
     public static Item fossilrecordBones;
 
     //Config ID INTs
+    
+    //Achievements
+    public static int a_firstEggID;
+    public static int a_allEggsID;
+    public static int a_foundFossilsID;
+    public static int a_pigBossID;
+    public static int a_permafrostID;
+    public static int a_archWorkbenchID;
+    public static int a_analyzerID;
+    public static int a_cultVatID;
+    public static int a_sifterID;
+    public static int a_dinopediaID;
+    public static int a_iceAgeID;
+    public static int a_theKingID;
+    
     //Blocks
     public static int blockFossilID;
     public static int blockSkullID;
@@ -587,7 +602,6 @@ public class Fossil
 //       Localizations.loadLanguages();
     	MinecraftForge.EVENT_BUS.register(new DinoSoundHandler());
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
-        FossilAchievementHandler.loadAchievements();
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
     	VillagerRegistry.instance().registerVillagerId(10);
         config = new Configuration(event.getSuggestedConfigurationFile());
@@ -595,6 +609,20 @@ public class Fossil
         try
         {
             config.load();
+            
+            a_firstEggID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FIRST_EGG, 5000).getInt();
+            a_allEggsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ALL_EGGS, 5001).getInt();
+            a_foundFossilsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FOUND_FOSSILS, 5002).getInt();
+            a_pigBossID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PIGBOSS, 5003).getInt();
+            a_permafrostID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PERMAFROST, 5004).getInt();
+            a_archWorkbenchID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ARCHWORKBENCH, 5005).getInt();
+            a_analyzerID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ANALYZER, 5006).getInt();
+            a_cultVatID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_CULTVAT, 5007).getInt();
+            a_sifterID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_SIFTER, 5008).getInt();
+            a_dinopediaID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_DINOPEDIA, 5009).getInt();
+            a_iceAgeID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ICEAGE, 5010).getInt();
+            a_theKingID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_THEKING, 5011).getInt();
+            
             //Blocks
             blockFossilID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt();
             blockSkullID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SKULL_NAME, 3001).getInt();
@@ -815,6 +843,8 @@ public class Fossil
         
         Log.setParent(FMLLog.getLogger());
         Log.setLevel(isDebug() ? Level.ALL : Level.INFO);
+        
+        FossilAchievementHandler.loadAchievements();
        
     }
 
