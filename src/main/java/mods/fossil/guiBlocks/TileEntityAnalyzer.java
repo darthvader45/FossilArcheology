@@ -104,7 +104,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
      */
     public String getInvName()
     {
-        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME + ".name";
     }
     
     /**

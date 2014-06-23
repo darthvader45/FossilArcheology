@@ -1,6 +1,7 @@
 package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -21,6 +22,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
     public int furnaceBurnTime = 0;
     public int currentItemBurnTime = 0;
     public int furnaceCookTime = 0;
+	private String customName;
 
     /**
      * Returns the number of slots in the inventory.
@@ -90,7 +92,24 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
      */
     public String getInvName()
     {
-        return "Worktable";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME + ".name";
+    }
+    
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
+     */
+    public boolean isInvNameLocalized()
+    {
+        return this.customName != null && this.customName.length() > 0;
+    }
+    
+    /**
+     * Sets the custom display name to use when opening a GUI linked to this tile entity.
+     */
+    public void setGuiDisplayName(String par1Str)
+    {
+        this.customName = par1Str;
     }
 
     /**
@@ -116,6 +135,11 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
         this.furnaceBurnTime = var1.getShort("BurnTime");
         this.furnaceCookTime = var1.getShort("CookTime");
         this.currentItemBurnTime = this.getItemBurnTime(this.furnaceItemStacks[1]);
+        
+        if (var1.hasKey("CustomName"))
+        {
+            this.customName = var1.getString("CustomName");
+        }
     }
 
     /**
@@ -137,6 +161,11 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
                 this.furnaceItemStacks[var3].writeToNBT(var4);
                 var2.appendTag(var4);
             }
+        }
+        
+        if (this.isInvNameLocalized())
+        {
+        	var1.setString("CustomName", this.customName);
         }
 
         var1.setTag("Items", var2);
@@ -475,12 +504,6 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
     public ItemStack getStackInSlotOnClosing(int var1)
     {
         return null;
-    }
-
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
     }
 
     @Override
