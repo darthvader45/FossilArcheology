@@ -2,12 +2,14 @@ package mods.fossil.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.Fossil;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,6 +26,11 @@ public class ItemLivingCoelacanth extends Item
 {
     public static final int TypeCount = EnumDinoType.values().length;
     private int DinoType;
+    
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+    
+    public static final String[] names = new String[] {"first", "second", "third"};
 
     public ItemLivingCoelacanth(int var1, int DinoType0)
     {
@@ -32,12 +39,50 @@ public class ItemLivingCoelacanth extends Item
         this.setMaxDamage(0);
         this.maxStackSize = 1;
         this.DinoType = DinoType0;
+        this.setHasSubtypes(true);
     }
     
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("fossil:" + "Coelacanth_live_Ocean");
+    	icons = new Icon[3];
+    	
+    	for(int i = 0; i < icons.length; i++)
+        {
+              // icons[i] = par1IconRegister.registerIcon(Fossil.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
+               switch (i)
+               {
+               case 0:
+            	   default:
+            		   icons[i] = par1IconRegister.registerIcon(Fossil.modid + ":" + "Coelacanth_live_Ocean"); break;
+        	   case 1:
+        		   icons[i] = par1IconRegister.registerIcon(Fossil.modid + ":" + "Coelacanth_live_River"); break;
+        	   case 2:
+        		   icons[i] = par1IconRegister.registerIcon(Fossil.modid + ":" + "Coelacanth_live_Swamp"); break;
+               }
+        }
+    	
+        //this.itemIcon = par1IconRegister.registerIcon("fossil:" + "Coelacanth_live_Ocean");
+    }
+    
+    public Icon getIconFromDamage(int par1)
+    {
+    return icons[par1];
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        for (int x = 0; x < 3; x++)
+        {
+            par3List.add(new ItemStack(this, 1, x));
+        }
+    }
+    
+    public String getUnlocalizedName(ItemStack par1ItemStack)
+    {
+        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
+        return super.getUnlocalizedName() + "." + names[i];
     }
 
     /**
@@ -110,8 +155,9 @@ public class ItemLivingCoelacanth extends Item
                         }
 
                         int i = this.GetTypeFromInt(var3.inventory.getCurrentItem().getItem());
+                        int j = var1.getItemDamage();
 
-                        if (!spawnCreature(var2, i, (double)((float)var34 + 0.5F), (double)((float)var32 + 1.0F), (double)((float)var33 + 0.5F)))
+                        if (!spawnCreature(var2, i, j, (double)((float)var34 + 0.5F), (double)((float)var32 + 1.0F), (double)((float)var33 + 0.5F)))
                         {
                             return var1;
                         }
@@ -128,12 +174,14 @@ public class ItemLivingCoelacanth extends Item
         }
     }
 
-    public static boolean spawnCreature(World var0, int var1, double var2, double var4, double var6)
+    public static boolean spawnCreature(World var0, int var1, int meta, double var2, double var4, double var6)
     {
         Object var8;
 
             var8 = new EntityCoelacanth(var0);
             ((EntityCoelacanth)var8).isOwned = true;
+            ((EntityCoelacanth)var8).setSkin(meta);
+            
 
         if (var8 != null)
         {

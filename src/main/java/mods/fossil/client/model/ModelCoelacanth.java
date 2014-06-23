@@ -2,6 +2,7 @@ package mods.fossil.client.model;
 
 import org.lwjgl.opengl.GL11;
 
+import mods.fossil.entity.mob.EntityCoelacanth;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -90,7 +91,7 @@ public class ModelCoelacanth extends ModelBase
   
   public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
   {
-    this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
+    this.setRotationAngles(var2, var3, var4, var5, var6, var7, (EntityCoelacanth)var1);
     setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
     
     tail.render(var7);
@@ -108,8 +109,12 @@ public class ModelCoelacanth extends ModelBase
   {
       super.setRotationAngles(var1, var2, var3, var4, var5, var6, var7);
       
+
       this.DorsalFin1.rotateAngleX = -0.632036082F;
-      
+      if (var7.isInWater() || var7.getAir() > 0) 
+      {     
+    	  this.tail.rotateAngleZ = 0F;
+    	  this.head.rotateAngleZ = 0F; 
       this.fin1.rotateAngleY = 0.4F * MathHelper.sin(var3 * 0.3F + 2.0F) + 0.4F;
       this.fin3.rotateAngleY = -(0.4F * MathHelper.sin(var3 * 0.3F + 3.0F) + 0.4F);
       this.fin1.rotateAngleX = 0.2F * MathHelper.sin(var3 * 0.3F + 3.0F) + 0.4F;
@@ -121,6 +126,15 @@ public class ModelCoelacanth extends ModelBase
       this.fin2.rotateAngleX = 0.1F * MathHelper.sin(var3 * 0.3F + 1.0F) + 0.1F;
       
       this.tail.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.15F + var2);
+      }
+      else
+      {
+    	  this.tail.rotateAngleZ = 1.57079633F;
+    	  this.head.rotateAngleZ = 1.57079633F;
+    	  
+    	  this.tail.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)1.15F + var2);
+    	  this.head.rotateAngleY = -0.2F * MathHelper.sin(var3 * (float)1.15F + var2);
+      }
   }
 
 }

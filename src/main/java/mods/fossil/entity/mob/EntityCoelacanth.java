@@ -149,7 +149,10 @@ public class EntityCoelacanth extends EntityWaterMob {
         
         if (var2 == null)
         {
-            ItemStack var3 = new ItemStack(Fossil.livingCoelacanth, 1);
+
+        	
+        	ItemStack var3 = new ItemStack(Fossil.livingCoelacanth, 1, getSkin());
+            
 
             if (var1.inventory.addItemStackToInventory(var3))
             {
