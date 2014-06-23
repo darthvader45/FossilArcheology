@@ -613,18 +613,19 @@ public class Fossil
         {
             config.load();
             
-            a_firstEggID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FIRST_EGG, 5000).getInt();
-            a_allEggsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ALL_EGGS, 5001).getInt();
-            a_foundFossilsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FOUND_FOSSILS, 5002).getInt();
-            a_pigBossID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PIGBOSS, 5003).getInt();
-            a_permafrostID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PERMAFROST, 5004).getInt();
-            a_archWorkbenchID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ARCHWORKBENCH, 5005).getInt();
-            a_analyzerID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ANALYZER, 5006).getInt();
-            a_cultVatID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_CULTVAT, 5007).getInt();
-            a_sifterID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_SIFTER, 5008).getInt();
-            a_dinopediaID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_DINOPEDIA, 5009).getInt();
-            a_iceAgeID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ICEAGE, 5010).getInt();
-            a_theKingID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_THEKING, 5011).getInt();
+            //Achievements
+            a_firstEggID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FIRST_EGG, 5011).getInt();
+            a_allEggsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ALL_EGGS, 5012).getInt();
+            a_foundFossilsID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_FOUND_FOSSILS, 5013).getInt();
+            a_pigBossID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PIGBOSS, 5014).getInt();
+            a_permafrostID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PERMAFROST, 5015).getInt();
+            a_archWorkbenchID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ARCHWORKBENCH, 5016).getInt();
+            a_analyzerID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ANALYZER, 5017).getInt();
+            a_cultVatID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_CULTVAT, 5018).getInt();
+            a_sifterID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_SIFTER, 5019).getInt();
+            a_dinopediaID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_DINOPEDIA, 5020).getInt();
+            a_iceAgeID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ICEAGE, 5021).getInt();
+            a_theKingID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_THEKING, 5022).getInt();
             
             //Blocks
             blockFossilID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt();
