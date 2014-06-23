@@ -1,7 +1,12 @@
 package mods.fossil;
 
 
+import java.util.Random;
+
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class CommonProxy
 {
@@ -28,5 +33,16 @@ public class CommonProxy
     
     public ModelBiped getArmorModel(int id){
     	return null;
+    }
+    
+    public void registerChestLoot()
+    {
+        Random rand = new Random();
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent((new ItemStack(Fossil.figurineBlock, 1, rand.nextInt(16))),1,2,25));
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.gem),1,1,2));
+        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.whip),1,1,50));
+        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.biofossil),3,9,10));
+        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.biofossil),3,12,40));
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.fossilrecordBones),1,1,5));
     }
 }

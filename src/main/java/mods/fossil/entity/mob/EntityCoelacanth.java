@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntitySquid;
@@ -144,6 +145,22 @@ public class EntityCoelacanth extends EntityWaterMob {
             this.setPedia();
             var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
             return true;
+        }
+        
+        if (var2 == null)
+        {
+            ItemStack var3 = new ItemStack(Fossil.livingCoelacanth, 1);
+
+            if (var1.inventory.addItemStackToInventory(var3))
+            {
+                if (!this.worldObj.isRemote)
+                {
+                    this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    this.setDead();
+                }
+
+                return true;
+            }
         }
 
         return super.interact(var1);

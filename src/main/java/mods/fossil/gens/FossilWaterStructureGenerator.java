@@ -167,7 +167,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 90)
                         {
-                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(5)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(16)), x, y, z);
                         }
                         else if (loot < 101)
                         {
@@ -194,7 +194,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 60)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.emptyMap, rand.nextInt(2)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.fishingRod, rand.nextInt(2)), x, y, z);
                         }
                         else if (loot < 70)
                         {
@@ -206,7 +206,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 95)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.fishingRod, rand.nextInt(1)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.swordIron, rand.nextInt(1)), x, y, z);
                         }
                         else
                         {
