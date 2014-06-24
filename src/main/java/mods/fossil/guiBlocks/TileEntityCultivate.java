@@ -419,6 +419,10 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         {
             return new ItemStack(EnumDinoType.getEgg(var1.getItem()), 1);    //converts dino dna to dino egg
         }
+        
+        if (var1.itemID == Fossil.dnaCoelacanth.itemID){
+        	return new ItemStack(Fossil.livingCoelacanth, 1);
+        }
 
         return null;
     }

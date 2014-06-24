@@ -1,13 +1,13 @@
 package mods.fossil.guiBlocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -18,8 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAnalyzer extends BlockContainer
 {
@@ -54,75 +54,58 @@ public class BlockAnalyzer extends BlockContainer
     {
         return Fossil.blockanalyzerIdle.blockID;
     }
-
+    
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World var1, int var2, int var3, int var4)
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
-        super.onBlockAdded(var1, var2, var3, var4);
-        this.setDefaultDirection(var1, var2, var3, var4);
+        super.onBlockAdded(par1World, par2, par3, par4);
+        this.setDefaultDirection(par1World, par2, par3, par4);
     }
-
-    private void setDefaultDirection(World var1, int var2, int var3, int var4)
-    {
-        if (!var1.isRemote)
-        {
-            int var5 = var1.getBlockId(var2, var3, var4 - 1);
-            int var6 = var1.getBlockId(var2, var3, var4 + 1);
-            int var7 = var1.getBlockId(var2 - 1, var3, var4);
-            int var8 = var1.getBlockId(var2 + 1, var3, var4);
-            byte var9 = 3;
-
-            if (Block.opaqueCubeLookup[var5] && !Block.opaqueCubeLookup[var6])
-            {
-                var9 = 3;
-            }
-
-            if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var5])
-            {
-                var9 = 2;
-            }
-
-            if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var8])
-            {
-                var9 = 5;
-            }
-
-            if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var7])
-            {
-                var9 = 4;
-            }
-
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var9, 2);
-        }
-    }
-
+    
     /**
-     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
+     * set a blocks direction
      */
-    /*public int getBlockTexture(IBlockAccess var1, int var2, int var3, int var4, int var5)
+    private void setDefaultDirection(World par1World, int par2, int par3, int par4)
     {
-        if (var5 == 1)
+        if (!par1World.isRemote)
         {
-            return 66;
+            int l = par1World.getBlockId(par2, par3, par4 - 1);
+            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
+            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
+            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            byte b0 = 3;
+
+            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            {
+                b0 = 3;
+            }
+
+            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            {
+                b0 = 2;
+            }
+
+            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            {
+                b0 = 5;
+            }
+
+            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            {
+                b0 = 4;
+            }
+
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
         }
-        else if (var5 == 0)
-        {
-            return 66;
-        }
-        else
-        {
-            int var6 = var1.getBlockMetadata(var2, var3, var4);
-            return var5 != var6 ? 67 : (this.isActive ? 51 : 50);
-        }
-    }*/
-    @SideOnly(Side.CLIENT)
+    }
 
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Analyser_Sides");
@@ -135,21 +118,11 @@ public class BlockAnalyzer extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-        return par1 == 1 ? this.Top : ((par1 == par2 && par1 != 0) || (par2 == 3 && par1 == 0) ? this.Front : this.blockIcon);
+
+        return par1 == 1 ? this.Top : (par1 == 0 ? this.blockIcon : (par1 != par2 ? this.blockIcon : this.Front));
+
+    //    return par1 == 1 ? this.Top : ((par1 == par2 && par1 != 0) || (par2 == 3 && par1 == 0) ? this.Front : this.blockIcon);
     }
-
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World var1, int var2, int var3, int var4, Random var5) {}
-
-    /**
-     * Returns the block texture based on the side being looked at.  Args: side
-     */
-    /*public int getBlockTextureFromSide(int var1)
-    {
-        return var1 == 1 ? 66 : (var1 == 0 ? 66 : (var1 == 3 ? 50 : 67));
-    }*/
 
     /**
      * Called upon block activation (right click on the block.)
@@ -167,56 +140,64 @@ public class BlockAnalyzer extends BlockContainer
         }
     }
 
-    public static void updateFurnaceBlockState(boolean var0, World var1, int var2, int var3, int var4)
+    /**
+     * Update which block ID the furnace is using depending on whether or not it is burning
+     */
+    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
     {
-        int var5 = var1.getBlockMetadata(var2, var3, var4);
-        TileEntity var6 = var1.getBlockTileEntity(var2, var3, var4);
+        int l = par1World.getBlockMetadata(par2, par3, par4);
+        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        keepFurnaceInventory = true;
 
-        if (var6 != null)
+        if (par0)
         {
-            keepFurnaceInventory = true;
+            par1World.setBlock(par2, par3, par4, Fossil.blockanalyzerActive.blockID);
+        }
+        else
+        {
+            par1World.setBlock(par2, par3, par4, Fossil.blockanalyzerIdle.blockID);
+        }
 
-            if (var0)
-            {
-                var1.setBlock(var2, var3, var4, Fossil.blockanalyzerActive.blockID);
-            }
-            else
-            {
-                var1.setBlock(var2, var3, var4, Fossil.blockanalyzerIdle.blockID);
-            }
+        keepFurnaceInventory = false;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 
-            keepFurnaceInventory = false;
-            var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
-            var6.validate();
-            var1.setBlockTileEntity(var2, var3, var4, var6);
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
         }
     }
-
+    
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (var6 == 0)
+        if (l == 0)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 2, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
         }
 
-        if (var6 == 1)
+        if (l == 1)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 5, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
         }
 
-        if (var6 == 2)
+        if (l == 2)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 3, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
         }
 
-        if (var6 == 3)
+        if (l == 3)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 4, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+        }
+
+        if (par6ItemStack.hasDisplayName())
+        {
+            ((TileEntityAnalyzer)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
         }
     }
 

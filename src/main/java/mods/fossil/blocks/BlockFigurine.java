@@ -60,7 +60,7 @@ public class BlockFigurine extends BlockContainer
         "figurine_zombie_broken",
         "figurine_pigzombie_broken",
         "figurine_enderman_broken",
-        "figurine_steve",
+        "figurine_mysterious",
     };
 
     private Icon[] icons;

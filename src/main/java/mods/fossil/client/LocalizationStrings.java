@@ -2,6 +2,21 @@ package mods.fossil.client;
 
 public class LocalizationStrings
 {
+	//Achievements
+	
+	public static final String ACHIEVEMENT_FIRST_EGG = "FirstEgg";
+	public static final String ACHIEVEMENT_ALL_EGGS = "AllEggs";
+	public static final String ACHIEVEMENT_FOUND_FOSSILS = "FoundFossils";
+	public static final String ACHIEVEMENT_PIGBOSS = "pigBossOnEarth";
+	public static final String ACHIEVEMENT_PERMAFROST = "Permafrost";
+	public static final String ACHIEVEMENT_ARCHWORKBENCH = "ArchWorkbench";
+	public static final String ACHIEVEMENT_ANALYZER = "Analyzer";
+	public static final String ACHIEVEMENT_CULTVAT = "CultVat";
+	public static final String ACHIEVEMENT_SIFTER = "Sifter";
+	public static final String ACHIEVEMENT_DINOPEDIA = "Dinopedia";
+	public static final String ACHIEVEMENT_ICEAGE = "IceAge";
+	public static final String ACHIEVEMENT_THEKING = "TheKing";
+	
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
@@ -12,7 +27,7 @@ public class LocalizationStrings
     public static final String BLOCK_CULTIVATE_ACTIVE_NAME = "cultureVatActive";
     public static final String BLOCK_WORKTABLE_IDLE_NAME = "fossilworkbench";
     public static final String BLOCK_WORKTABLE_ACTIVE_NAME = "workbenchActive";
-    public static final String DRUM_NAME = "drum";
+    public static final String DRUM_NAME = "fossil_drum";
     public static final String FEEDER_IDLE_NAME = "feederIdle";
     public static final String FEEDER_ACTIVE_NAME = "feederActive";
     public static final String BLOCK_PERMAFROST_NAME = "permafrost";
@@ -123,6 +138,7 @@ public class LocalizationStrings
     public static final String DNA_SMILODON_NAME = "dnaSmilodon";
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
     public static final String DNA_DODO_NAME = "dnaDodo";
+    public static final String DNA_COELACANTH_NAME = "dnaCoelacanth";
 
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
@@ -132,6 +148,9 @@ public class LocalizationStrings
     public static final String EMBRYO_SMILODON_NAME = "embryoSmilodon";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     public static final String EMBRYO_DODO_NAME = "embryoDodo";
+    
+    //Other
+    public static final String LIVING_COELACANTH_NAME = "eggCoelacanth";
 
     //Tabs
     public static final String FARMOR_NAME = "Ancient Armor";
@@ -194,6 +213,7 @@ public class LocalizationStrings
     public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";
     public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken";
     public static final String ANIMAL_DODO = "animal.dodo";
+    public static final String ANIMAL_COELACANTH = "animal.coelacanth";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";

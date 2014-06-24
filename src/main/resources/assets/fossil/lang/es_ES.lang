@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4) HEAD10 March 25 2014 
+﻿#Updated for Build 6 (1.6.4) HEAD13 June 22 2014 
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -15,12 +15,28 @@ achievement.FirstEgg=¡Tu primer dinosaurio!
 achievement.AllEggs=Todos los huevos de dinosaurio
 achievement.FoundFossils=Cavando en busca de huesos
 achievement.pigBossOnEarth=¡Rompiste la Regla!
+achievement.Permafrost=Try not to get a cold!
+achievement.ArchWorkbench=Let's get the party started!
+achievement.Analyzer=For SCIENCE!
+achievement.CultVat=Genetic manipulation.
+achievement.Sifter=Cuz' baby I'm a Gold Digger!
+achievement.Dinopedia=Fill all the pages!
+achievement.IceAge=I do not know how you'll give birth...
+achievement.TheKing=Ruler of the Late Cretaceous.
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=¡Trajiste de vuelta a tu primer dinosaurio!
 achievement.AllEggs.desc=¡Has encontrado todos los huevos de dinosaurio!
 achievement.FoundFossils.desc=¡Has encontrado algunos fósiles!
 achievement.pigBossOnEarth.desc=Convocando a Anu a la tierra.
+achievement.Permafrost=What wonders could be inside it?
+achievement.ArchWorkbench=First step in becoming an archaeologist.
+achievement.Analyzer=Discovering the past!
+achievement.CultVat=Bring history back to live!
+achievement.Sifter=Even if I have to go through all the dirt!
+achievement.Dinopedia=Find all the dinos!
+achievement.IceAge=However I want the ice age back!
+achievement.TheKing=Long live the king!
 
 #Blocks
 tile.fossil.name=Fósil
@@ -149,6 +165,7 @@ item.eggCultivatedDodo.name=Huevo de Dodo Cultivado
 item.eggAnkylosaurus.name=Huevo de Anquilosaurio
 item.eggPachycephalosaurus.name=Huevo de Paquicefalosaurio
 item.eggDeinonychus.name=Huevo de Deinonico
+item.eggCoelacanth.name=Coelacanth
 item.dnaTriceratops.name=ADN de Triceratops
 item.dnaVelociraptor.name=ADN de Velocirraptor
 item.dnaTRex.name=ADN de Tiranosaurio
@@ -164,6 +181,7 @@ item.dnaCompsognathus.name=ADN de Compsognato
 item.dnaAnkylosaurus.name=ADN de Anquilosaurio
 item.dnaPachycephalosaurus.name=ADN de Paquicefalosaurio
 item.dnaDeinonychus.name=ADN de Deinonico
+item.dnaCoelacanth.name=ADN de Coelacanth
 item.dnaPig.name=ADN de Cerdo
 item.dnaSheep.name=ADN de Oveja
 item.dnaCow.name=ADN de Vaca
@@ -179,6 +197,7 @@ item.embryoSmilodon.name=Embrión de Tigre Dientes de Sable
 item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Embrión de Dodo
 item.archNotebook.name=Cuaderno de Arqueología
+item.potteryShard.name=Pottery Shard
 
 #Dinosaur related chat messages
 dnaName.head=ADN de 
@@ -194,31 +213,33 @@ dEggName.tail=
 
 #Order chat messages
 order.head=Órden:
-order.stay=Estarse quieto
-order.follow=Seguirme
-order.freeMove=Moverse libremente
+order.Stay=Estarse quieto
+order.Follow=Seguirme
+order.FreeMove=Moverse libremente
 
 #Dinosaur status chat messages
-status.hungry.head=Este 
-status.hungry= tiene hambre.
-status.starve.head=Un 
-status.starve= ha muerto de hambre.
-status.learningChest.head=Un 
-status.learningChest= aprendió a usar cofres.
-status.betrayed.head=Este 
-status.betrayed= ya no confía en la humanidad.
-status.noSpace.Head=Este 
-status.noSpace= no tiene espacio para crecer.
-status.starveEsc= te ha dejado por el hambre.
-status.sJLBite= se comió el Siu-Jiu-Le y escapó.
-status.chewTime= necesita tiempo para masticar.
-status.full= está lleno.
-status.nervous.Head=Tú hiciste poco 
-status.nervous= depende de ti para cazar por sí mismo.
-status.gemErrorYoung=Este tiranosaurio es aún muy joven.
-status.gemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
-status.GemErrorHealth=Este Tiranosaurio ya ha sido domado.
-status.EssenceFail=El aroma a pollo no tuvo efecto.
+status.Hungry.head=Este 
+status.Hungry= tiene hambre.
+status.Starve.head=Un 
+status.Starve= ha muerto de hambre.
+status.LearningChest.head=Un 
+status.LearningChest= aprendió a usar cofres.
+status.Betrayed.head=Este 
+status.Betrayed= ya no confía en la humanidad.
+status.NoSpace.Head=Este 
+status.NoSpace= no tiene espacio para crecer.
+status.StarveEsc.head=
+status.StarveEsc= te ha dejado por el hambre.
+status.SJLBite= se comió el Siu-Jiu-Le y escapó.
+status.ShewTime= necesita tiempo para masticar.
+status.Full.head= This 
+status.Full= está lleno.
+status.Nervous.Head=Tú hiciste poco 
+status.Nervous= depende de ti para cazar por sí mismo.
+status.GemErrorYoung=Este tiranosaurio es aún muy joven.
+status.GemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
+status.GemErrorTamed=Este Tiranosaurio ya ha sido domado.
+status.essenceFail=El aroma a pollo no tuvo efecto.
 
 #Dinosaur Names
 Dino.Triceratops=Triceratops
@@ -244,6 +265,7 @@ animal.pregnant.cow=Vaca Embarazada
 animal.pregnant.pig=Cerdo Embarazado   
 animal.pregnant.sheep=Oveja Embarazada
 animal.dodo=Dodo
+animal.coelacanth=Coelacanth
 
 #Pedia text
 pedia.text.owner=Dueño:

@@ -19,7 +19,12 @@ public class RenderMammoth extends RenderLiving
 
     protected ResourceLocation func_110919_a(EntityMammoth par1Entity)
     {
-        return adult;
+    	if (par1Entity.isChild())
+        return young;
+    	else if (!par1Entity.getSheared())
+    		return adult;
+    	else
+    		return furless;
     }
 
     protected ResourceLocation getEntityTexture(Entity par1Entity)

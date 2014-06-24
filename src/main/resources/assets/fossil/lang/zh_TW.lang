@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4)
+﻿#Updated for Build 6 (1.6.4) HEAD3 June 22 2014
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -15,13 +15,28 @@ achievement.FirstEgg=第一只恐龍!
 achievement.AllEggs=龍蛋收藏家
 achievement.FoundFossils=掘骨者
 achievement.pigBossOnEarth=你犯規我要告訴馬麻!!
-
+achievement.Permafrost=Try not to get a cold!
+achievement.ArchWorkbench=Let's get the party started!
+achievement.Analyzer=For SCIENCE!
+achievement.CultVat=Genetic manipulation.
+achievement.Sifter=Cuz' baby I'm a Gold Digger!
+achievement.Dinopedia=Fill all the pages!
+achievement.IceAge=I do not know how you'll give birth...
+achievement.TheKing=Ruler of the Late Cretaceous.
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=你帶回了你的第一只恐龍!
 achievement.AllEggs.desc=你已發現所有的恐龍蛋!
 achievement.FoundFossils.desc=你已發現一些化石!
 achievement.pigBossOnEarth.desc=把阿努召喚到地面世界
+achievement.Permafrost=What wonders could be inside it?
+achievement.ArchWorkbench=First step in becoming an archaeologist.
+achievement.Analyzer=Discovering the past!
+achievement.CultVat=Bring history back to live!
+achievement.Sifter=Even if I have to go through all the dirt!
+achievement.Dinopedia=Find all the dinos!
+achievement.IceAge=However I want the ice age back!
+achievement.TheKing=Long live the king!
 
 #方塊
 tile.fossil.name=化石
@@ -150,6 +165,7 @@ item.eggCultivatedDodo.name=人工養殖渡渡鳥蛋
 item.eggAnkylosaurus.name=背甲龍蛋
 item.eggPachycephalosaurus.name=腫頭龍蛋
 item.eggDeinonychus.name=Deinonychus Egg
+item.eggCoelacanth.name=Living Coelacanth
 item.dnaTriceratops.name=三角龍DNA
 item.dnaVelociraptor.name=迅猛龍DNA
 item.dnaTRex.name=霸王龍DNA
@@ -165,6 +181,7 @@ item.dnaCompsognathus.name=美颌龍DNA
 item.dnaAnkylosaurus.name=背甲龍DNA
 item.dnaPachycephalosaurus.name=腫頭龍DNA
 item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaCoelacanth.name=Coelacanth DNA
 item.dnaPig.name=豬DNA
 item.dnaSheep.name=羊DNA
 item.dnaCow.name=牛DNA
@@ -180,6 +197,7 @@ item.embryoSmilodon.name=劍齒虎胚胎
 item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鳥胚胎
 item.archNotebook.name=考古手冊
+item.potteryShard.name=Pottery Shard
 
 #前綴/後綴
 dnaName.head=
@@ -210,16 +228,18 @@ status.Betrayed.head=這頭
 status.Betrayed=不再相信人類
 status.NoSpace.Head=這頭
 status.NoSpace=沒有足夠的空間成長
+status.StarveEsc.head=
 status.StarveEsc=因爲太餓而逃走了
 status.SJLBite=咬了燒酒螺後跑開了
 status.ChewTime=需要時間來咀嚼
+status.Full.head=
 status.Full=吃飽了
 status.Nervous.Head=你讓這頭小
 status.Nervous=太緊張以至于無法自行獵食
 status.GemErrorYoung=這頭霸王龍還太年輕了
 status.GemErrorHealth=聖甲蟲寶石無法負荷如此強的生命能量
-status.GemErrorHealth=這頭霸王龍已被馴服
-status.EssenceFail=雞精沒有起效
+status.GemErrorTamed=這頭霸王龍已被馴服
+status.essenceFail=雞精沒有起效
 
 #恐龍名稱.
 Dino.Triceratops=三角龍
@@ -245,6 +265,7 @@ animal.pregnant.cow=受孕牛
 animal.pregnant.pig=受孕豬   
 animal.pregnant.sheep=受孕羊  
 animal.dodo=渡渡鳥
+animal.coelacanth=Coelacanth
 
 #百科文本.恐龍信息.
 pedia.text.owner=主人:

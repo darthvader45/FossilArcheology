@@ -1,12 +1,18 @@
 package mods.fossil.client.model;
 
+import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
+import mods.fossil.entity.mob.EntityTRex;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelTRex extends ModelDinosaurs
 {
+	public boolean isScreaming = false;
+	
     final float SwingAngle = 0.174533F;
     public ModelRenderer noumenon_1 = new ModelRenderer(this, 4, 2);
     public ModelRenderer noumenon_2;
@@ -25,6 +31,8 @@ public class ModelTRex extends ModelDinosaurs
     public ModelRenderer head_2;
     public ModelRenderer head_3;
     public ModelRenderer New_Shape10;
+
+	private int timer;
 
     public ModelTRex()
     {
@@ -47,7 +55,7 @@ public class ModelTRex extends ModelDinosaurs
         this.hand_R.rotateAngleX = 0.6328388F;
         this.hand_R.rotateAngleY = 0.0F;
         this.hand_R.rotateAngleZ = 0.0F;
-        this.hand_R.mirror = false;
+        this.hand_R.mirror = true;
         this.hand_L = new ModelRenderer(this, 34, 0);
         this.hand_L.addBox(0.0F, -1.0F, -3.0F, 2, 2, 3, 0.0F);
         this.hand_L.setRotationPoint(2.0F, 10.0F, -9.0F);

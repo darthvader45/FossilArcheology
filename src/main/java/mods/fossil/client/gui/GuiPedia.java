@@ -8,6 +8,7 @@ import mods.fossil.Fossil;
 import mods.fossil.client.gui.elements.FossilGuiButton;
 import mods.fossil.client.gui.elements.FossilGuiPage;
 import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMammoth;
@@ -237,6 +238,11 @@ public class GuiPedia extends GuiContainer
         if (Fossil.ToPedia instanceof EntityDodo)
         {
             ((EntityDodo)Fossil.ToPedia).ShowPedia(this);
+        }
+        
+        if (Fossil.ToPedia instanceof EntityCoelacanth)
+        {
+            ((EntityCoelacanth)Fossil.ToPedia).ShowPedia(this);
         }
     	}
     }

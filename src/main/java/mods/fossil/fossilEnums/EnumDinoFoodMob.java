@@ -30,6 +30,7 @@ public enum EnumDinoFoodMob
     Pachycephalosaurus(null, 50, 3),
     Deinonychus(null, 35, 3),
     Dodo(EntityDodo.class, 20, 2),
+    Coelacanth(EntityCoelacanth.class, 20, 2),
     ;
     public Class preyClass;
     public int FoodValue;

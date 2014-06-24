@@ -154,7 +154,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 // Here we use customData to subtype custom_chest:
                 if (customData1 == AcademyUtil.RARE_LOOT_F1)
                 {
-                    for (int iterate = 0; iterate < rand.nextInt(10) + 3; iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(3) + 3; iterate++)
                     {
                         int i = (new Random()).nextInt(EnumDinoType.values().length + 1); //+1 for the sapling
                         Item i0 = null;
@@ -188,32 +188,40 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         {
                             addItemToTileInventory(world, new ItemStack(Item.paper, rand.nextInt(22)), x, y, z);
                         }
-                        else if (loot < 60)
+                        else if (loot < 40)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.book, rand.nextInt(12)), x, y, z);
                         }
-                        else if (loot < 80)
+                        else if (loot < 50)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.bone, rand.nextInt(22)), x, y, z);
                         }
-                        else if (loot < 90)
+                        else if (loot < 60)
                         {
                             addItemToTileInventory(world, new ItemStack(Item.writableBook, rand.nextInt(5)), x, y, z);
                         }
-                        else if (loot < 95)
+                        else if (loot < 75)
                         {
                             addItemToTileInventory(world, new ItemStack(Fossil.biofossil, rand.nextInt(22)), x, y, z);
                         }
+                        else if (loot < 85)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(16)), x, y, z);
+                        }
+                        else if (loot < 95)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.stonejavelin, rand.nextInt(16)), x, y, z);
+                        }
                         else if (loot < 101)
                         {
-                            addItemToTileInventory(world, new ItemStack(Fossil.claw, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Fossil.drum, 1), x, y, z);
                         }
                     }
                 }
 
                 if (customData1 == AcademyUtil.RARE_LOOT_F2)
                 {
-                    for (int iterate = 0; iterate < rand.nextInt(4) + 3; iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(1) + 3; iterate++)
                     {
                         int i = (new Random()).nextInt(10); //+1 for the sapling
                         Item i0 = null;
