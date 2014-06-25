@@ -13,6 +13,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -91,6 +92,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         this.setDirection(var5);
     }
 
+    @Override
     protected void entityInit() {}
 
     public void setDirection(int var1)
@@ -108,7 +110,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         else
         {
             var4 = 0.5F;
-            //this.rotationYaw = this.prevRotationYaw = (float)(Direction.facingToDirection[var1] * 90);//necessary?
+            this.rotationYaw = this.prevRotationYaw = (this.rotationYaw + 180) % 360;
         }
 
         var2 /= 32.0F;
@@ -161,8 +163,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 
         var6 += this.func_411_c(this.art.sizeY);
         this.setPosition((double)var5, (double)var6, (double)var7);
-        //float var9 = -0.00625F;
-        float var9 = 0.03125F;
+        float var9 = -0.00625F;
         this.boundingBox.setBounds((double)(var5 - var2 - var9), (double)(var6 - var3 - var9), (double)(var7 - var4 - var9), (double)(var5 + var2 + var9), (double)(var6 + var3 + var9), (double)(var7 + var4 + var9));
     }
 
@@ -174,6 +175,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         if (this.tickCounter1++ == 100 && !this.worldObj.isRemote)
@@ -250,6 +252,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith()
     {
         return true;
@@ -258,7 +261,8 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    @Override
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         if (!this.isDead && !this.worldObj.isRemote)
         {
@@ -273,6 +277,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1)
     {
         var1.setByte("Dir", (byte)this.direction);
@@ -285,6 +290,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1)
     {
         this.direction = var1.getByte("Dir");
@@ -312,34 +318,14 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 
         this.setDirection(this.direction);
     }
-
-    /**
-     * Tries to moves the entity by the passed in displacement. Args: x, y, z
-     */
-    /*
-    public void moveEntity(double var1, double var3, double var5)
+    
+    @Override
+    protected boolean shouldSetPosAfterLoading()
     {
-        if (!this.worldObj.isRemote && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D)
-        {
-            this.setDead();
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Fossil.stoneboard)));
-        }
+        return false;
     }
-    */
-    /**
-     * Adds to the current velocity of the entity. Args: x, y, z
-     */
-    /*
-    public void addVelocity(double var1, double var3, double var5)
-    {
-        if (!this.worldObj.isRemote && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D)
-        {
-            this.setDead();
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Fossil.stoneboard)));
-        }
-    }
-    */
 
+    @Override
     public void writeSpawnData(ByteArrayDataOutput var1)
     {
         EnumStoneboard[] var2 = EnumStoneboard.values();
@@ -357,6 +343,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 //        var1.writeInt(0);
     }
 
+    @Override
     public void readSpawnData(ByteArrayDataInput var1)
     {
         this.direction = var1.readInt();
