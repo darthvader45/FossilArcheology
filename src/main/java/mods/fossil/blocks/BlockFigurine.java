@@ -73,7 +73,7 @@ public class BlockFigurine extends BlockContainer
     {
         super(par1, Material.wood);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
-        this.setCreativeTab(Fossil.tabFTest);
+        this.setCreativeTab(Fossil.tabFFigurines);
     }
 
     
