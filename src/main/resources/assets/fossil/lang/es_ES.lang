@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD13 June 22 2014 
+﻿#Updated for Build 6 (1.6.4) HEAD14 June 27 2014 
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -9,6 +9,7 @@ itemgroup.FFood=Comida Antigua
 itemgroup.FItems=Objetos Antiguos
 itemgroup.FMaterial=Materiales Antiguos
 itemgroup.FTools=Herramientas Antiguas
+itemgroup.FFigurines=Ancient Figurines
 
 #Achievements
 achievement.FirstEgg=¡Tu primer dinosaurio!

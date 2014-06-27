@@ -37,8 +37,7 @@ public class CommonProxy
     
     public void registerChestLoot()
     {
-        Random rand = new Random();
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent((new ItemStack(Fossil.figurineBlock, 1, rand.nextInt(16))),1,2,25));
+        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent((new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(16))),1,2,25));
         ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.gem),1,1,2));
         ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.whip),1,1,50));
         ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.biofossil),3,9,10));

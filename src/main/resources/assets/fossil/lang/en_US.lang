@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD14 June 22 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD15 June 27 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -9,6 +9,7 @@ itemgroup.FFood=Ancient Foods
 itemgroup.FItems=Ancient Items
 itemgroup.FMaterial=Ancient Materials
 itemgroup.FTools=Ancient Tools
+itemgroup.FFigurines=Ancient Figurines
 
 #Achievements
 achievement.FirstEgg=First Dinosaur!

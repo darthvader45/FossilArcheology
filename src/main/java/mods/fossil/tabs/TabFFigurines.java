@@ -3,11 +3,12 @@ package mods.fossil.tabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class TabFTest extends CreativeTabs
+public class TabFFigurines extends CreativeTabs
 {
-    public TabFTest(int par1, String par2Str)
+    public TabFFigurines(int par1, String par2Str)
     {
         super(par1, par2Str);
     }
@@ -15,11 +16,11 @@ public class TabFTest extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
-        return Fossil.ancienthelmet.itemID;
+        return Fossil.figurineBlock.blockID;
     }
 
     public String getTranslatedTabLabel()
     {
-        return "Test Tab";
+    	return LocalizationStrings.FFIGURINES_NAME;
     }
 }

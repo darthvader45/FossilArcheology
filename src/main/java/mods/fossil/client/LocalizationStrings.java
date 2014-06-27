@@ -153,13 +153,14 @@ public class LocalizationStrings
     public static final String LIVING_COELACANTH_NAME = "eggCoelacanth";
 
     //Tabs
-    public static final String FARMOR_NAME = "Ancient Armor";
-    public static final String FBLOCKS_NAME = "Ancient Blocks";
-    public static final String FCOMBAT_NAME = "Ancient Weapons";
-    public static final String FFOOD_NAME = "Ancient Food";
-    public static final String FITEMS_NAME = "Ancient Items";
-    public static final String FMATERIAL_NAME = "Ancient Materials";
-    public static final String FTOOLS_NAME = "Ancient Tools";
+    public static final String FARMOR_NAME = "itemgroup.FArmor";
+    public static final String FBLOCKS_NAME = "itemgroup.FBlocks";
+    public static final String FCOMBAT_NAME = "itemgroup.FCombat";
+    public static final String FFOOD_NAME = "itemgroup.FFood";
+    public static final String FITEMS_NAME = "itemgroup.FItems";
+    public static final String FMATERIAL_NAME = "itemgroup.FMaterial";
+    public static final String FTOOLS_NAME = "itemgroup.FTools";
+    public static final String FFIGURINES_NAME = "itemgroup.FFigurines";
 
     //Pedia Hatching Text
     public static final String PEDIA_EGG_DRY = "pedia.eggDry";

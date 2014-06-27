@@ -22,6 +22,7 @@ public class ItemAncientsword extends ItemSword
     {
         super(var1, var2);
         this.maxStackSize = 1;
+        this.setMaxDamage(250);
     }
 
     public ItemAncientsword(int var1)
@@ -44,20 +45,23 @@ public class ItemAncientsword extends ItemSword
 
             if (!targetentity.worldObj.isRemote)
             {
-                EntityFriendlyPigZombie var3 = new EntityFriendlyPigZombie(targetentity.worldObj);
-                var3.LeaderName = var2.username;
-                var3.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
+                EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
+                fpz.LeaderName = var2.username;
+                fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
                 targetentity.setDead();
-                targetentity.worldObj.spawnEntityInWorld(var3);
-                var3.Mouth.SendSpeech(EnumPigmenSpeaks.LifeFor, var3.LeaderName);
+                targetentity.worldObj.spawnEntityInWorld(fpz);
+                fpz.Mouth.SendSpeech(EnumPigmenSpeaks.LifeFor, fpz.LeaderName);
             }
         }    	
         
-         if (targetentity != null && (new Random()).nextInt(100) < 4)
+        if (targetentity != null && (new Random()).nextInt(100) < 8)
            {
         targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));    	
            }
     	}
+    	
+    	par1ItemStack.damageItem(1, targetentity);
+    	
 		return true;
     }
 

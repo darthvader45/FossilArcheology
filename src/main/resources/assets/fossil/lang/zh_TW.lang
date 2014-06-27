@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD3 June 22 2014
+﻿#Updated for Build 6 (1.6.4) HEAD4 June 27 2014
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -9,6 +9,7 @@ itemgroup.FFood=古代食物
 itemgroup.FItems=古代物品
 itemgroup.FMaterial=古代材料
 itemgroup.FTools=古代工具
+itemgroup.FFigurines=Ancient Figurines
 
 #Achievements
 achievement.FirstEgg=第一只恐龍!

@@ -126,7 +126,7 @@ import mods.fossil.tabs.TabFCombat;
 import mods.fossil.tabs.TabFFood;
 import mods.fossil.tabs.TabFItems;
 import mods.fossil.tabs.TabFMaterial;
-import mods.fossil.tabs.TabFTest;
+import mods.fossil.tabs.TabFFigurines;
 import mods.fossil.tabs.TabFTools;
 import mods.fossil.util.FossilBonemealEvent;
 import net.minecraft.block.Block;
@@ -221,7 +221,7 @@ public class Fossil
     public static CreativeTabs tabFArmor = new TabFArmor(CreativeTabs.getNextID(), "Fossil Armor");
     public static CreativeTabs tabFTools = new TabFTools(CreativeTabs.getNextID(), "Fossil Deco");
     public static CreativeTabs tabFMaterial = new TabFMaterial(CreativeTabs.getNextID(), "Fossil Material");
-    public static CreativeTabs tabFTest = new TabFTest(CreativeTabs.getNextID(), "Fossil Test");
+    public static CreativeTabs tabFFigurines = new TabFFigurines(CreativeTabs.getNextID(), "Fossil Test");
 
     //public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
 
@@ -1114,6 +1114,7 @@ public class Fossil
         {
             EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
         }
+
 
         EntityRegistry.addSpawn(EntityCoelacanth.class, 3, 2, 8, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});
