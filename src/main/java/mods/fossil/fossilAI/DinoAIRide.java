@@ -29,15 +29,6 @@ public abstract class DinoAIRide extends EntityAIBase
         setMutexBits(0xffffffff);
     }
 
-    /*
-    protected boolean isFlyUp() {
-        return remoteKey.isKeyPressed(rider.username, "key.dragon.flyUp");
-    }
-
-    protected boolean isFlyDown() {
-        return remoteKey.isKeyPressed(rider.username, "key.dragon.flyDown");
-    }
-    */
     @Override
     public boolean shouldExecute()
     {

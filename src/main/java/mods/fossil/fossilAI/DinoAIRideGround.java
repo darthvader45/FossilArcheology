@@ -26,6 +26,9 @@ public class DinoAIRideGround extends DinoAIRide
 {
     private static final float PLAYER_SPEED = 0.98f;
     private final double speed;
+    
+    private int lastTimeSeenWhip = -1;
+    public int FollowTimeWithoutWhip= 120;
 
     public DinoAIRideGround(EntityPrehistoric dinosaur, double speed)
     {
@@ -44,13 +47,30 @@ public class DinoAIRideGround extends DinoAIRide
 
         return itemStack.getItem() == item;
     }
-
+    
     @Override
     public void startExecuting()
     {
         dinosaur.getNavigator().clearPathEntity();
+        this.lastTimeSeenWhip=-1;
+    }
+    
+    public boolean shouldExecute()
+    {
+    	super.shouldExecute();
+    	if (hasEquipped(rider, Fossil.whip))
+    		this.lastTimeSeenWhip=0;
+    	
+    	return this.lastTimeSeenWhip != -1;
+    	
     }
 
+    @Override
+    public void resetTask()
+    {
+        this.lastTimeSeenWhip=-1;
+    }
+    
     @Override
     public void updateTask()
     {
@@ -58,7 +78,7 @@ public class DinoAIRideGround extends DinoAIRide
         float speedX = rider.moveForward / PLAYER_SPEED;
         float speedY = rider.moveStrafing / PLAYER_SPEED;
 
-        if (hasEquipped(rider, Fossil.whip))
+        if (hasEquipped(rider, Fossil.whip) || this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1)
         {
             float speedPlayer = Math.max(Math.abs(speedX), Math.abs(speedY));
             Vec3 look = rider.getLookVec();
@@ -74,6 +94,8 @@ public class DinoAIRideGround extends DinoAIRide
             {
                 dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
             }
+            
+            this.lastTimeSeenWhip++;
         }
     }
 }
