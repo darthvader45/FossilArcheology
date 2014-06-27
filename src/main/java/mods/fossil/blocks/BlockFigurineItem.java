@@ -1,14 +1,15 @@
 package mods.fossil.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
-public class BlockFigurineItem extends ItemBlock
+public class BlockFigurineItem extends ItemBlockWithMetadata
 {
-    public BlockFigurineItem(int id)
+    public BlockFigurineItem(int id, Block block)
     {
-        super(id);
-        setHasSubtypes(true);
+        super(id, block);
         
     }
 
@@ -16,11 +17,5 @@ public class BlockFigurineItem extends ItemBlock
     public String getUnlocalizedName(ItemStack itemstack)
     {
         return getUnlocalizedName() + "." + BlockFigurine.shortname[itemstack.getItemDamage()];
-    }
-
-    @Override
-    public int getMetadata(int damage)
-    {
-        return damage;
     }
 }

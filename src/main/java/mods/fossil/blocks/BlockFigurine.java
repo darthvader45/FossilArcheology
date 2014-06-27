@@ -10,8 +10,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -64,6 +67,7 @@ public class BlockFigurine extends BlockContainer
     };
 
     private Icon[] icons;
+	private int getMeta;
 
     public BlockFigurine(int par1)
     {
@@ -141,12 +145,12 @@ public class BlockFigurine extends BlockContainer
         ((TileEntityFigurine)tileentity).setFigurineRotation(1);
     }
 
-    /**
-     * Returns the metadata of the block which this Item (ItemBlock) can place
-     */
-    public int getMetadata(int par1)
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int oldBlock, int oldMeta)
     {
-        return par1;
+        TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+        this.getMeta = getDamageValue(world, x, y, z);
+        super.breakBlock(world, x, y, z, oldBlock, oldMeta);
     }
 
     /**
@@ -164,7 +168,7 @@ public class BlockFigurine extends BlockContainer
      */
     public int idPicked(World par1World, int par2, int par3, int par4)
     {
-        return Fossil.figurineBlock.blockID;
+        return this.blockID;
     }
 
     /**
@@ -175,65 +179,24 @@ public class BlockFigurine extends BlockContainer
         TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
         return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine)tileentity).getFigurineType() : super.getDamageValue(par1World, par2, par3, par4);
     }
-
+    
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
-    public int damageDropped(int par1)
-    {
-        return par1;
-    }
-
-    /**
-     * Called on server worlds only when the block has been replaced by a different block ID, or the same block with a
-     * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
-     * metadata
-     */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-        super.breakBlock(par1World, par2, par3, par4, par5, par6);
-    }
-
+    
     @Override
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+    public int damageDropped(int meta)
     {
-        ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-
-        if ((metadata & 8) == 0)
-        {
-            ItemStack itemstack = new ItemStack(Fossil.figurineBlock.blockID, 1, this.getDamageValue(world, x, y, z));
-            TileEntityFigurine tileentityfigurine = (TileEntityFigurine)world.getBlockTileEntity(x, y, z);
-
-            if (tileentityfigurine == null)
-            {
-                return drops;
-            }
-
-            drops.add(itemstack);
-        }
-
-        return drops;
+        return this.getMeta;
     }
-
+    
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return Fossil.figurineItem.itemID;
-    }
-
-    private boolean func_82528_d(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (par1World.getBlockId(par2, par3, par4) != this.blockID)
-        {
-            return false;
-        }
-        else
-        {
-            TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
-            return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine)tileentity).getFigurineType() == par5 : false;
-        }
+    	return this.blockID;
     }
 
     @SideOnly(Side.CLIENT)
