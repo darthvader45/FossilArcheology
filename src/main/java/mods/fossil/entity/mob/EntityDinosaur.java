@@ -153,34 +153,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
     	this.jump();
     }
-    /*
-    public void updateSize()
-    {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
-        
-        
-    	if(this.getDinoAge() <= this.adultAge){
-	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
-	
-	        if (this.isTeen()) {
-	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
-	        }
-	        else if (this.isAdult()){
-	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
-	        }
-	        else {
-	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
-	        }
-    	}
-    }
-    */
     
     /**
      * Get dinosaur's knockback value

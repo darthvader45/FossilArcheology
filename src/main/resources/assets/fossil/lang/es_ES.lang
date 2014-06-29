@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD14 June 27 2014 
+﻿#Updated for Build 6 (1.6.4) HEAD15 June 28 2014 
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -149,6 +149,7 @@ item.rawCompsognathus.name=Carne de Compsognato
 item.rawAnkylosaurus.name=Carne de Anquilosaurio
 item.rawPachycephalosaurus.name=Carne de Paquicefalosaurio
 item.rawDeinonychus.name=Carne de Deinonico
+item.rawGallimimus.name=Gallimimus Meat
 item.eggTriceratops.name=Huevo de Triceratops
 item.eggVelociraptor.name=Huevo de Velocirraptor
 item.eggTRex.name=Huevo de Tiranosaurio
@@ -166,6 +167,7 @@ item.eggCultivatedDodo.name=Huevo de Dodo Cultivado
 item.eggAnkylosaurus.name=Huevo de Anquilosaurio
 item.eggPachycephalosaurus.name=Huevo de Paquicefalosaurio
 item.eggDeinonychus.name=Huevo de Deinonico
+item.eggGallimimus.name=Gallimimus Egg
 item.eggCoelacanth.name=Coelacanth
 item.dnaTriceratops.name=ADN de Triceratops
 item.dnaVelociraptor.name=ADN de Velocirraptor
@@ -182,6 +184,7 @@ item.dnaCompsognathus.name=ADN de Compsognato
 item.dnaAnkylosaurus.name=ADN de Anquilosaurio
 item.dnaPachycephalosaurus.name=ADN de Paquicefalosaurio
 item.dnaDeinonychus.name=ADN de Deinonico
+item.dnaGallimimus.name=Gallimimus DNA
 item.dnaCoelacanth.name=ADN de Coelacanth
 item.dnaPig.name=ADN de Cerdo
 item.dnaSheep.name=ADN de Oveja
@@ -258,6 +261,7 @@ Dino.Compsognathus=Compsognato
 Dino.Ankylosaurus=Anquilosaurio
 Dino.Pachycephalosaurus=Paquicefalosaurio
 Dino.Deinonychus=Deinonico
+Dino.Gallimimus=Gallimimus
 
 #Non-dinosaur names
 animal.mammoth=Mamút

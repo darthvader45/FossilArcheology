@@ -18,6 +18,11 @@ public enum EnumDinoFoodItem
     Sugar(Item.sugar, 10, 2),
     Bread(Item.bread, 25, 2),
 
+	/*
+	 * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,
+	 * but maybe trade off with higher HealValue and vice versa.
+	 */
+    
     FishRaw(Item.fishRaw, 30, 3), //this MUST BE the first carnivore food!
     FishCooked(Item.fishCooked, 40, 4),
     BeefCooked(Item.beefCooked, 50, 5),
@@ -45,6 +50,7 @@ public enum EnumDinoFoodItem
     Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem, 50, 3),
     Pachycephalosaurus(EnumDinoType.Pachycephalosaurus.DropItem, 50,3),
     Deinonychus(EnumDinoType.Deinonychus.DropItem, 30, 3),
+    Gallimimus(EnumDinoType.Gallimimus.DropItem, 35, 4),
     DinoMeatCooked(Fossil.cookedDinoMeat, 50, 5),
     DodoWing(Fossil.dodoWing, 20, 2),
     DodoWingCooked(Fossil.dodoWingCooked, 30, 3),

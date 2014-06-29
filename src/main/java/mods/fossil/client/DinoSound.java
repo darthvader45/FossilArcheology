@@ -35,6 +35,9 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "dodo_death1.wav",
         SOUND_RESOURCE_LOCATION + "drum_single.wav",
         SOUND_RESOURCE_LOCATION + "drum_triple.wav",
+        SOUND_RESOURCE_LOCATION + "placeholder.ogg",
+        SOUND_RESOURCE_LOCATION + "placeholder.ogg",
+        SOUND_RESOURCE_LOCATION + "placeholder.ogg",
         SOUND_RESOURCE_LOCATION + "mammoth_death.wav",
         SOUND_RESOURCE_LOCATION + "mammoth_hurt.wav",
         SOUND_RESOURCE_LOCATION + "mammoth_living.wav",
@@ -152,6 +155,11 @@ public class DinoSound
     public static final String dodo_death = SOUND_PREFIX + "dodo_death";
     public static final String dodo_living = SOUND_PREFIX + "dodo_living";
     public static final String dodo_hurt = SOUND_PREFIX + "dodo_hurt";
+    
+    //gallimius
+    public static final String gallimimus_death = SOUND_PREFIX + "gallimimus_death";
+    public static final String gallimimus_living = SOUND_PREFIX + "gallimimus_living";
+    public static final String gallimimus_hurt = SOUND_PREFIX + "gallimimus_hurt";
 
     //mammoth
     public static final String mammoth_death = SOUND_PREFIX + "mammoth_death";

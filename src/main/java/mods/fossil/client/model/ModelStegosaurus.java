@@ -172,11 +172,16 @@ public class ModelStegosaurus extends ModelDinosaurs
             this.DD_L_2.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
             this.DD_R_2.rotateAngleX = MathHelper.cos(var1 / 0.95955384F) * -0.17453292F * var2 + 1.2217305F;
             this.DD_R_2.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
-            this.T1.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.4886922F * var2 + 0.0F;
+            this.T1.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.4886922F * var2 + 0.0F;            
             this.T2.rotateAngleY = MathHelper.cos(var1 / 0.95955384F) * 0.34906584F * var2 + 0.0F;
             this.T2.rotateAngleZ = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
             this.T3.rotateAngleZ = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
             this.T4.rotateAngleZ = MathHelper.cos(var1 / 0.95955384F) * 0.17453292F * var2 + 0.0F;
+            
+            this.T1.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2+3));
+            this.T2.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
+            this.T3.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+            this.T4.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + var2);            
         }
         else {
             this.H4.rotateAngleY = 0;

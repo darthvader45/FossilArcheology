@@ -1,5 +1,6 @@
 package mods.fossil.client.model;
 
+import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -42,33 +43,73 @@ public class ModelSpinosaurus extends ModelDinosaurs
         textureHeight = 64;
         float yoffset = 6.5F;
 ////////////////////////////////////////////////////
+        /*
         Upper_Jaw = new ModelRenderer(this, 0, 10);
         Upper_Jaw.addBox(0F, 0F, 0F, 4, 3, 7);
         Upper_Jaw.setRotationPoint(0.5F, 1F, -7F);
         Upper_Jaw.setTextureSize(64, 64);
         Upper_Jaw.mirror = true;
         setRotation(Upper_Jaw, 0F, 0F, 0F);
+        */
+        Upper_Jaw = new ModelRenderer(this, 0, 10);
+        Upper_Jaw.addBox(-2F, 0F, -7F, 4, 3, 7);
+        Upper_Jaw.setRotationPoint(0.F, -1.5F, -5F);
+        Upper_Jaw.setTextureSize(64, 64);
+        Upper_Jaw.mirror = true;
+        setRotation(Upper_Jaw, 0F, 0F, 0F);
+        /*
         Lower_Jaw = new ModelRenderer(this, 0, 20);
         Lower_Jaw.addBox(0F, 0F, 0F, 3, 1, 6);
         Lower_Jaw.setRotationPoint(1.0F, 4F, -6F);
         Lower_Jaw.setTextureSize(64, 64);
         Lower_Jaw.mirror = true;
         setRotation(Lower_Jaw, 0F, 0F, 0F);
+        */
+        Lower_Jaw = new ModelRenderer(this, 0, 20);
+        Lower_Jaw.addBox(-1.5F, 0F, -6F, 3, 1, 6);
+        Lower_Jaw.setRotationPoint(0F, 1.5F, -5F);
+        Lower_Jaw.setTextureSize(64, 64);
+        Lower_Jaw.mirror = true;
+        setRotation(Lower_Jaw, 0F, 0F, 0F);
+        /*
         Head = new ModelRenderer(this, 0, 0);
         Head.addBox(0F, 0F, 0F, 5, 5, 5);
         Head.setRotationPoint(-0.5F, 2.0F, -9F);
         Head.setTextureSize(64, 64);
         Head.mirror = true;
         setRotation(Head, 0.5235988F, 0F, 0F);
-        Teeth = new ModelRenderer(this, 15, 0);
+        */
+        Head = new ModelRenderer(this, 0, 0);
+        Head.addBox(-2.5F, -2.5F, -5F, 5, 5, 5);
+        Head.setRotationPoint(-0.5F, 8F, -1F);
+        Head.setTextureSize(64, 64);
+        Head.mirror = true;
+        setRotation(Head, 0F, 0F, 0F);
+/*
+ *         Teeth = new ModelRenderer(this, 15, 0);
         Teeth.addBox(0F, 0F, 0F, 4, 1, 4);
         Teeth.setRotationPoint(0F, 3F, 0F);
         Teeth.setTextureSize(64, 64);
         Teeth.mirror = true;
         setRotation(Teeth, 0F, 0F, 0F);
-        Crest = new ModelRenderer(this, 0, 10);
+ */
+        Teeth = new ModelRenderer(this, 15, 0);
+        Teeth.addBox(0F, 0F, 0F, 4, 1, 4);
+        Teeth.setRotationPoint(-2.0F, 3F, -7F);
+        Teeth.setTextureSize(64, 64);
+        Teeth.mirror = true;
+        setRotation(Teeth, 0F, 0F, 0F);
+/*
+ *         Crest = new ModelRenderer(this, 0, 10);
         Crest.addBox(0F, 0F, 0F, 1, 1, 2);
         Crest.setRotationPoint(2F, 0F, -2F);
+        Crest.setTextureSize(64, 64);
+        Crest.mirror = true;
+        setRotation(Crest, 0F, 0F, 0F);
+ */
+        Crest = new ModelRenderer(this, 0, 10);
+        Crest.addBox(0F, 0F, 0F, 1, 1, 2);
+        Crest.setRotationPoint(-0.5F, -2.5F, -7F);
         Crest.setTextureSize(64, 64);
         Crest.mirror = true;
         setRotation(Crest, 0F, 0F, 0F);
@@ -90,7 +131,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
         Upper_Body.mirror = true;
         setRotation(Upper_Body, -0.5235988F, 0F, 0F);
         Upper_Body.addChild(Neck);
-        Neck.addChild(Head);
+//        Neck.addChild(Head);
         Lower_Body = new ModelRenderer(this, 0, 46);
         Lower_Body.addBox(0F, 0F, 0F, 7, 8, 10);
         Lower_Body.setRotationPoint(-3.5F, (2.5F + yoffset), 5F);
@@ -154,13 +195,13 @@ public class ModelSpinosaurus extends ModelDinosaurs
         Tail1.mirror = true;
         setRotation(Tail1, 0F, 0F, 0F);
         Tail2 = new ModelRenderer(this, 42, 13);
-        Tail2.addBox(0F, 0F, 0F, 3, 3, 8);
+        Tail2.addBox(0F, 0F, -1F, 3, 3, 8);
         Tail2.setRotationPoint(0.5F, 0.5F, 8F);
         Tail2.setTextureSize(64, 64);
         Tail2.mirror = true;
         setRotation(Tail2, 0F, 0F, 0F);
         Tail3 = new ModelRenderer(this, 50, 24);
-        Tail3.addBox(0F, 0F, 0F, 2, 2, 5);
+        Tail3.addBox(0F, 0F, -1F, 2, 2, 5);
         Tail3.setRotationPoint(0.5F, 0.5F, 8F);
         Tail3.setTextureSize(64, 64);
         Tail3.mirror = true;
@@ -243,27 +284,16 @@ public class ModelSpinosaurus extends ModelDinosaurs
         UpperArm2.addChild(LowerArm2);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
     {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
-//    Upper_Jaw.render(f5);
-//    Lower_Jaw.render(f5);
-//    Head.render(f5);
-//    Teeth.render(f5);
-//    Neck.render(f5);
-//    Crest.render(f5);
-        Upper_Body.render(f5);
-        Lower_Body.render(f5);
-//   Tail1.render(f5);
-///    Tail2.render(f5);
-//    Tail3.render(f5);
-        Thigh1.render(f5);
-        Thigh2.render(f5);
-//    Calf1.render(f5);
-//    Calf2.render(f5);
-//    Foot1.render(f5);
-//    Foot2.render(f5);
+        super.render(var1, var2, var3, var4, var5, var6, var7);
+        this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+
+        Head.render(var7);
+        Upper_Body.render(var7);
+        Lower_Body.render(var7);
+        Thigh1.render(var7);
+        Thigh2.render(var7);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -273,16 +303,62 @@ public class ModelSpinosaurus extends ModelDinosaurs
         model.rotateAngleZ = z;
     }
 
-    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
+    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean modelized)
     {
-        if (!var7)
+        if (!modelized)
         {
+            this.Head.rotateAngleX =  var5 / (180F / (float)Math.PI);
+            this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+            this.Head.rotationPointY = 8F;
+            this.Head.rotationPointZ = -1F;
+            this.Lower_Jaw.rotateAngleX = 0;
+        	
+        	this.Upper_Body.rotateAngleX = -0.5235988F;
+        	this.Upper_Body.rotationPointY = 8F;
+        	this.Upper_Body.rotationPointZ = 3F;
+        	this.Neck.rotateAngleX = 0;
+        	this.Lower_Jaw.rotateAngleX = 0;
+        	
             this.Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
             this.Thigh2.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
+            this.Calf2.rotateAngleX = 0;
+            this.Calf1.rotateAngleX = 0;
+            this.Foot1.rotateAngleX = 0;
+            
+            this.Tail1.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + (var2 + 2));
+            this.Tail2.rotateAngleY = 0.2F * MathHelper.sin(var3  * (float)0.1F +( var2+1));
+            this.Tail3.rotateAngleY = 0.25F * MathHelper.sin(var3  * (float)0.1F + var2);
+            this.Tail2.rotateAngleX = (float)Math.toRadians(10);
+            this.Tail3.rotateAngleX = (float)Math.toRadians(-15);
         }
         else {
+            this.Head.rotateAngleX =  0;
+            this.Head.rotateAngleY = 0;
+            this.Head.rotationPointY = 13;
+            this.Head.rotationPointZ = -4F;
+            this.Lower_Jaw.rotateAngleX = (float)Math.toRadians(30);
+        	
+        	this.Upper_Body.rotateAngleX = (float)Math.toRadians(10);
+        	this.Upper_Body.rotationPointY = 10F;
+        	this.Upper_Body.rotationPointZ = 0F;
+        	this.Neck.rotateAngleX = -this.Upper_Body.rotateAngleX;
+        	this.Lower_Jaw.rotateAngleX = (float)Math.toRadians(30);
+        			
             this.Thigh1.rotateAngleX = 0;
             this.Thigh2.rotateAngleX = 0;
+            this.Tail1.rotateAngleY = (float)Math.toRadians(10);
+            this.Tail2.rotateAngleY = (float)Math.toRadians(15);
+            this.Tail3.rotateAngleY = (float)Math.toRadians(10);
+            this.Tail1.rotateAngleX = (float)Math.toRadians(-10);
+            this.Tail2.rotateAngleX = (float)Math.toRadians(10);
+            this.Tail3.rotateAngleX = (float)Math.toRadians(-15);
+            
+            this.Thigh1.rotateAngleX = (float)Math.toRadians(20);
+            this.Calf1.rotateAngleX = (float)Math.toRadians(30);
+            this.Foot1.rotateAngleX = (float)Math.toRadians(0);
+            
+            this.Thigh2.rotateAngleX = (float)Math.toRadians(-20);
+            this.Calf2.rotateAngleX = (float)Math.toRadians(20);
         }
     }
 }

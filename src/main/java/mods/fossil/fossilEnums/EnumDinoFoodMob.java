@@ -7,6 +7,12 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public enum EnumDinoFoodMob
 {
+	/*
+	 * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,
+	 * but maybe trade off with higher HealValue and vice versa.
+	 * 
+	 * Overall boost values over EnumDinoFoodItem for fresh kills.
+	 */
     Player(EntityPlayer.class, 30, 2),
     Chicken(EntityChicken.class, 20, 2),
     Cow(EntityCow.class, 50, 5),
@@ -29,6 +35,7 @@ public enum EnumDinoFoodMob
     Ankylosaurus(null, 50, 3),
     Pachycephalosaurus(null, 50, 3),
     Deinonychus(null, 35, 3),
+    Gallimimus(null, 40, 4),
     Dodo(EntityDodo.class, 20, 2),
     Coelacanth(EntityCoelacanth.class, 20, 2),
     ;

@@ -38,6 +38,9 @@ public class DinoAIRideGround extends DinoAIRide
 
     public static boolean hasEquipped(EntityPlayer player, Item item)
     {
+    	if(player == null)
+    		return false;
+    	
         ItemStack itemStack = player.getCurrentEquippedItem();
 
         if (itemStack == null)
@@ -58,8 +61,10 @@ public class DinoAIRideGround extends DinoAIRide
     public boolean shouldExecute()
     {
     	super.shouldExecute();
-    	if (hasEquipped(rider, Fossil.whip))
+    	if ( hasEquipped(rider, Fossil.whip) )
     		this.lastTimeSeenWhip=0;
+    	else
+    		return false;
     	
     	return this.lastTimeSeenWhip != -1;
     	

@@ -34,6 +34,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityAnkylosaurus.class, 		0xffebc4, 0x763c11);
         registerEntityEgg(EntityPachycephalosaurus.class, 	0xdac49d, 0xa86722);
         registerEntityEgg(EntityDeinonychus.class, 			0xffffff, 0x000000);
+        registerEntityEgg(EntityGallimimus.class, 			0xffffff, 0x000000);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
     }
 

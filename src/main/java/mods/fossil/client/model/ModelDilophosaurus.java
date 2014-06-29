@@ -98,11 +98,19 @@ public class ModelDilophosaurus extends ModelDinosaurs
         this.Tail1.setRotationPoint(0.0F, 9.0F, 5.5F);
         this.setRotation(this.Tail1, 0.0F, 0.0F, 0.0F);
         this.Tail1.mirror = true;
+        /* Old static Tail2
         this.Tail2 = (new ModelRenderer(this, 36, 0)).setTextureSize(64, 32);
         this.Tail2.addBox(-1.0F, -0.5F, 0.0F, 2, 2, 12);
         this.Tail2.setRotationPoint(0.0F, 10.0F, 11.5F);
         this.setRotation(this.Tail2, 0.0F, 0.0F, 0.0F);
         this.Tail2.mirror = true;
+        */
+        this.Tail2 = (new ModelRenderer(this, 36, 0)).setTextureSize(64, 32);
+        this.Tail2.addBox(-1F, -1F, 0F, 2, 2, 12);
+        this.Tail2.setRotationPoint(0.0F, 1.5F, 6F);
+        this.setRotation(this.Tail2, 0.0F, 0.0F, 0.0F);
+        this.Tail2.mirror = true;        
+        Tail1.addChild(Tail2);
         this.Heel1 = (new ModelRenderer(this, 24, 12)).setTextureSize(64, 32);
         this.Heel1.addBox(0.0F, 2.0F, 2.0F, 2, 7, 2);
         this.Heel1.setRotationPoint(4.0F, 13.0F, 3.0F);
@@ -175,7 +183,7 @@ public class ModelDilophosaurus extends ModelDinosaurs
         this.Thigh1.render(var7);
         this.Thigh2.render(var7);
         this.Tail1.render(var7);
-        this.Tail2.render(var7);
+//        this.Tail2.render(var7);
         this.Heel1.render(var7);
         this.Heel2.render(var7);
         this.Feet1.render(var7);
@@ -237,6 +245,11 @@ public class ModelDilophosaurus extends ModelDinosaurs
             this.Thigh1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
             this.Heel1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2 - 0.372F;
             this.Feet1.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
+            
+            this.Tail1.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2 + 2));
+            this.Tail2.rotateAngleY = 0.3F * MathHelper.sin(var3  * (float)0.1F + var2);
+            this.Tail1.rotateAngleX = (float)Math.toRadians(-10);
+            this.Tail2.rotateAngleX = (float)Math.toRadians(15);
         }
         else {
             this.Head.rotateAngleX = 0;
@@ -253,6 +266,11 @@ public class ModelDilophosaurus extends ModelDinosaurs
             this.Thigh1.rotateAngleX = 0;
             this.Heel1.rotateAngleX = 0;
             this.Feet1.rotateAngleX = 0;
+            
+            this.Tail1.rotateAngleY = 0;
+            this.Tail2.rotateAngleY = 0;
+            this.Tail1.rotateAngleX = 0;
+            this.Tail2.rotateAngleX = 0;
         }
     }
 }

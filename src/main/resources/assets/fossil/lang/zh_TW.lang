@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD4 June 27 2014
+﻿#Updated for Build 6 (1.6.4) HEAD5 June 28 2014
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -149,6 +149,7 @@ item.rawCompsognathus.name=美颌龍肉
 item.rawAnkylosaurus.name=背甲龍肉
 item.rawPachycephalosaurus.name=腫頭龍肉
 item.rawDeinonychus.name=Deinonychus Meat
+item.rawGallimimus.name=Gallimimus Meat
 item.eggTriceratops.name=三角龍蛋
 item.eggVelociraptor.name=迅猛龍蛋
 item.eggTRex.name=霸王龍蛋
@@ -166,6 +167,7 @@ item.eggCultivatedDodo.name=人工養殖渡渡鳥蛋
 item.eggAnkylosaurus.name=背甲龍蛋
 item.eggPachycephalosaurus.name=腫頭龍蛋
 item.eggDeinonychus.name=Deinonychus Egg
+item.eggGallimimus.name=Gallimimus Egg
 item.eggCoelacanth.name=Living Coelacanth
 item.dnaTriceratops.name=三角龍DNA
 item.dnaVelociraptor.name=迅猛龍DNA
@@ -182,6 +184,7 @@ item.dnaCompsognathus.name=美颌龍DNA
 item.dnaAnkylosaurus.name=背甲龍DNA
 item.dnaPachycephalosaurus.name=腫頭龍DNA
 item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaGallimimus.name=Gallimimus DNA
 item.dnaCoelacanth.name=Coelacanth DNA
 item.dnaPig.name=豬DNA
 item.dnaSheep.name=羊DNA
@@ -258,6 +261,7 @@ Dino.Compsognathus=美颌龍
 Dino.Ankylosaurus=背甲龍
 Dino.Pachycephalosaurus=腫頭龍
 Dino.Deinonychus=Deinonychus
+Dino.Gallimimus=Gallimimus
 
 #動物名稱.
 animal.mammoth=猛犸象
