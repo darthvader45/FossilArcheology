@@ -58,7 +58,7 @@ public class ModelGallimimus extends ModelDinosaurs
     Head = new ModelRenderer(this, "Head");
 //    Head.setRotationPoint(1F, 1F, 1F);
 //    Head.addBox("Head", -2F, -4F, -5F, 4, 5, 5);
-    Head.setRotationPoint(0F, -5F, -5F);
+    Head.setRotationPoint(0F, -4F, -5F);
     setRotation(Head, 0F, 0F, 0F);
     Head.addBox("Head", -2F, -4F, -5F, 4, 5, 5);
     Head.mirror = true;
@@ -87,7 +87,7 @@ public class ModelGallimimus extends ModelDinosaurs
       Tail.addChild(Tail2);
       Body.addChild(Tail);
     Upper_Body = new ModelRenderer(this, "Upper_Body");
-    Upper_Body.setRotationPoint(0F, -1F, 2F);
+    Upper_Body.setRotationPoint(0F, 0F, 2F);
     setRotation(Upper_Body, 0F, 0F, 0F);
     Upper_Body.mirror = true;
       Upper_Body.addBox("Upper_Body", -2.5F, -3F, -6F, 5, 6, 6);
@@ -203,8 +203,12 @@ public class ModelGallimimus extends ModelDinosaurs
         this.Head.rotateAngleX =  var5 / (180F / (float)Math.PI);
         this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
         
-        this.Upper_Leg_Right.rotateAngleX = MathHelper.cos(var1 * 0.6362F) * 1.0F * var2;
-        this.Upper_Leg_Left.rotateAngleX = MathHelper.cos(var1 * 0.6362F + (float)Math.PI) * 1.0F * var2;
+        this.Body.rotationPointY = 9 + MathHelper.cos(var1+1) * var2/2;
+        this.Head.rotationPointY = -4 + MathHelper.cos(var1) * var2/2;
+        this.Neck.rotationPointY = -14 + MathHelper.cos(var1) * var2/2;
+        
+        this.Upper_Leg_Right.rotateAngleX = MathHelper.cos(var1 * 0.6362F) * 1.0F * var2+0.2F;
+        this.Upper_Leg_Left.rotateAngleX = MathHelper.cos(var1 * 0.6362F + (float)Math.PI) * 1.0F * var2+0.2F;
         
         this.Tail.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2 + 1));
         this.Tail2.rotateAngleY = 0.15F * MathHelper.sin(var3  * (float)0.1F + var2);
