@@ -234,8 +234,8 @@ public class ModelAnkylosaurus extends ModelDinosaurs
         this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
         this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
         this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-        this.Tail1.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.3F + var2);
-        this.Tail2.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.2F + var2);
+        this.Tail1.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
+        this.Tail2.rotateAngleY = 0.25F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
         this.Tail3.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + var2);
     	}
     	else {

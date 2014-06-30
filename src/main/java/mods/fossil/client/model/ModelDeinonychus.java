@@ -229,9 +229,8 @@ private ModelRenderer UpperJaw;
       this.LeftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
       
       
-      this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
-      this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
-      this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
+      this.Tail1.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+      this.Tail2.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + var2);
 	  }
 	  else {
 		  this.Head.rotateAngleZ = 0;
@@ -242,7 +241,6 @@ private ModelRenderer UpperJaw;
 	      
 	      this.Tail1.rotateAngleY = 0;
 	      this.Tail2.rotateAngleY = 0;
-	      this.Tail3.rotateAngleY = 0;
 	  }
   }
 
