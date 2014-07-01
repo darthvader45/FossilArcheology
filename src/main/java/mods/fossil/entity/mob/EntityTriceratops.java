@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
+import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
@@ -59,7 +60,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));

@@ -78,7 +78,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 2.0D, true));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.3D, true));
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));

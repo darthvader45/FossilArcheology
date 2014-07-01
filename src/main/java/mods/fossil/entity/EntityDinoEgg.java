@@ -610,6 +610,21 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         
                     case Deinonychus:
                         var5 = new EntityDeinonychus(this.worldObj);
+                    	if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS))
+                        		{
+                        			((EntityDeinonychus)var5).setSubSpecies(1); //Grey
+                        		}
+                        	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                        			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
+                            	{
+                            		((EntityDeinonychus)var5).setSubSpecies(2); //Black
+                            	}
+                        	else
+                            	{
+                            		((EntityDeinonychus)var5).setSubSpecies(3); //Brown
+                            	}
                         break;
                         
                     case Gallimimus:

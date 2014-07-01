@@ -544,7 +544,7 @@ public enum EnumDinoType
         Deinonychus.setItems(Item.bone);  //,			Fossil.rawDeinonychus, Fossil.dnaDeinonychus, Fossil.eggDeinonychus);
         Deinonychus.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
         Deinonychus.setAges(4, 10, -1);
-        Deinonychus.setProperties(5.0D, 11.0D, 2.0D, 10.0D, 0.23D, 0.3D, 200);
+        Deinonychus.setProperties(5.0D, 11.0D, 2.0D, 10.0D, 0.23D, 0.35D, 200);
         Deinonychus.setExperience(0.7F, 0.7F);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
@@ -573,7 +573,7 @@ public enum EnumDinoType
         Gallimimus.setItems(Item.stick);  //,			Fossil.rawGallimimus, Fossil.dnaGallimimus, Fossil.eggGallimimus);
         Gallimimus.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
         Gallimimus.setAges(4, 10, -1);
-        Gallimimus.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.3D, 0.6D, 300);
+        Gallimimus.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.3D, 0.65D, 300);
         Gallimimus.setExperience(0.7F, 0.7F);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);

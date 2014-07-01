@@ -63,9 +63,7 @@ public class DinoAIRideGround extends DinoAIRide
     	super.shouldExecute();
     	if ( hasEquipped(rider, Fossil.whip) )
     		this.lastTimeSeenWhip=0;
-    	else
-    		return false;
-    	
+
     	return this.lastTimeSeenWhip != -1;
     	
     }
@@ -79,11 +77,13 @@ public class DinoAIRideGround extends DinoAIRide
     @Override
     public void updateTask()
     {
+    	if(rider != null)
+    	{
         super.updateTask();
         float speedX = rider.moveForward / PLAYER_SPEED;
         float speedY = rider.moveStrafing / PLAYER_SPEED;
 
-        if (hasEquipped(rider, Fossil.whip) || this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1)
+        if (hasEquipped(rider, Fossil.whip) || (this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1))
         {
             float speedPlayer = Math.max(Math.abs(speedX), Math.abs(speedY));
             Vec3 look = rider.getLookVec();
@@ -99,8 +99,9 @@ public class DinoAIRideGround extends DinoAIRide
             {
                 dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
             }
-            
+
             this.lastTimeSeenWhip++;
         }
+    	}
     }
 }
