@@ -77,9 +77,9 @@ public class DinoAIRideGround extends DinoAIRide
     @Override
     public void updateTask()
     {
+        super.updateTask();
     	if(rider != null)
     	{
-        super.updateTask();
         float speedX = rider.moveForward / PLAYER_SPEED;
         float speedY = rider.moveStrafing / PLAYER_SPEED;
 

@@ -239,36 +239,7 @@ public class EntityDeinonychus extends EntityDinosaur
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1)
-    {
-        par1 = ForgeHooks.onLivingFall(this, par1);
-        if (par1 <= 0) return;
-        super.fall(par1);
-        PotionEffect potioneffect = this.getActivePotionEffect(Potion.jump);
-        float f1 = potioneffect != null ? (float)(potioneffect.getAmplifier() + 1) : 0.0F;
-        int i = MathHelper.ceiling_float_int(par1 - 3.0F - f1);
-
-        if (i > 0)
-        {
-            if (i > 8)
-            {
-                this.playSound("damage.fallbig", 1.0F, 1.0F);
-            }
-            else
-            {
-                this.playSound("damage.fallsmall", 1.0F, 1.0F);
-            }
-
-            this.attackEntityFrom(DamageSource.fall, (float)i);
-            int j = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY - 0.20000000298023224D - (double)this.yOffset), MathHelper.floor_double(this.posZ));
-
-            if (j > 0)
-            {
-                StepSound stepsound = Block.blocksList[j].stepSound;
-                this.playSound(stepsound.getStepSound(), stepsound.getVolume() * 0.5F, stepsound.getPitch() * 0.75F);
-            }
-        }
-    }
+    protected void fall(float par1){}
     
     /**
      * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently

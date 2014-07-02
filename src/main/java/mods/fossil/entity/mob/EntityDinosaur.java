@@ -650,7 +650,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     protected boolean isMovementCeased()
     {
-        return (this.OrderStatus == EnumOrderType.Stay || this.isSitting());
+        return this.OrderStatus == EnumOrderType.Stay;
     }
 
     public Vec3 getBlockToEat(int SEARCH_RANGE)

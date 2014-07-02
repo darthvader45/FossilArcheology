@@ -13,9 +13,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.6.4 Build 6.0"
+version = ""
 group= "mod.fossil.fossil" // https://github.com/FossilsArcheologyRevival/FossilArcheology
-archivesBaseName = "fossil"
+archivesBaseName = "Fossils_Archeology_Revival-1.6.4"
 
 minecraft {
 	version = "1.6.4-9.11.1.964"
