@@ -244,10 +244,9 @@ public class ModelBrachiosaurus extends ModelDinosaurs
 	        this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
 	        this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
 	        this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-	        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.2F + var2);
-	        this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.15F + var2);
-	        this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
-	        this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.05F + var2);
+	        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
+	        this.Tail1.rotateAngleY = 0.06F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+	        this.Tail2.rotateAngleY = 0.07F * MathHelper.sin(var3 * (float)0.1F + (var2));
     	}
     	else
     	{
@@ -260,7 +259,6 @@ public class ModelBrachiosaurus extends ModelDinosaurs
             this.Tail.rotateAngleY =0;
             this.Tail1.rotateAngleY = 0;
             this.Tail2.rotateAngleY = 0;
-            this.Tail3.rotateAngleY = 0;
     	}
     }
 }

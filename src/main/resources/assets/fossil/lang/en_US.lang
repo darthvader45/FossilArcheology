@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD15 June 27 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD16 June 28 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -149,6 +149,7 @@ item.rawCompsognathus.name=Compsognathus Meat
 item.rawAnkylosaurus.name=Ankylosaurus Meat
 item.rawPachycephalosaurus.name=Pachycephalosaurus Meat
 item.rawDeinonychus.name=Deinonychus Meat
+item.rawGallimimus.name=Gallimimus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
 item.eggTRex.name=TRex Egg
@@ -166,6 +167,7 @@ item.eggCultivatedDodo.name=Cultivated Dodo Egg
 item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
 item.eggDeinonychus.name=Deinonychus Egg
+item.eggGallimimus.name=Gallimimus Egg
 item.eggCoelacanth.name=Living Coelacanth
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
@@ -182,6 +184,7 @@ item.dnaCompsognathus.name=Compsognathus DNA
 item.dnaAnkylosaurus.name=Ankylosaurus DNA
 item.dnaPachycephalosaurus.name=Pachycephalosaurus DNA
 item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaGallimimus.name=Gallimimus DNA
 item.dnaCoelacanth.name=Coelacanth DNA
 item.dnaPig.name=Pig DNA
 item.dnaSheep.name=Sheep DNA
@@ -259,6 +262,7 @@ Dino.Compsognathus=Compsognathus
 Dino.Ankylosaurus=Ankylosaurus
 Dino.Pachycephalosaurus=Pachycephalosaurus
 Dino.Deinonychus=Deinonychus
+Dino.Gallimimus=Gallimimus
 
 #Non-dinosaur names
 animal.mammoth=Mammoth

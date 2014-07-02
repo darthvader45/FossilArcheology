@@ -1,21 +1,26 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
 import java.util.Vector;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIHunt;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.block.Block;
+import net.minecraft.block.StepSound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -33,9 +38,13 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -69,11 +78,8 @@ public class EntityDeinonychus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.6F));
+        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEat(this, 24));
@@ -84,6 +90,11 @@ public class EntityDeinonychus extends EntityDinosaur
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
+        this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
+        
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         }
 
     protected void applyEntityAttributes()
@@ -92,6 +103,12 @@ public class EntityDeinonychus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(baseSpeed);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
+    }
+  
+    @Override
+    public void entityInit(){
+    	super.entityInit();
     }
 
     /*protected void entityInit()
@@ -125,6 +142,10 @@ public class EntityDeinonychus extends EntityDinosaur
             {
             default: case 1:
                     return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Adult.png";
+            case 2: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Adult.png";
+            case 3: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Adult.png";
             }
         }
         else if (this.isTeen()) {
@@ -132,6 +153,10 @@ public class EntityDeinonychus extends EntityDinosaur
             {
             default: case 1:
                     return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Teen.png";
+            case 2: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Teen.png";
+            case 3: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Teen.png";
             }
         }
         else {
@@ -139,6 +164,10 @@ public class EntityDeinonychus extends EntityDinosaur
             {
             default: case 1:
                     return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Baby.png";
+            case 2: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Baby.png";
+            case 3: 
+            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Baby.png";
             }
         }
     }
@@ -208,6 +237,11 @@ public class EntityDeinonychus extends EntityDinosaur
     }
 
     /**
+     * Called when the mob is falling. Calculates and applies fall damage.
+     */
+    protected void fall(float par1){}
+    
+    /**
      * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
      * use in wolves.
      */
@@ -275,7 +309,7 @@ public class EntityDeinonychus extends EntityDinosaur
             this.setAngry(true);
         }
     }
-
+    
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */

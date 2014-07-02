@@ -131,7 +131,7 @@ public class ContainerCultivate extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             }
     		// itemstack is in player inventory, try to place in appropriate furnace slot
-    		else if (par2 < INPUT_END+1) // if it's not in the INPUT
+    		else if (par2 > INPUT_END+1) // if it's not in the INPUT
     		{
     			// if it can be smelted, place in the input slots
     			if (itemstack1 != null)

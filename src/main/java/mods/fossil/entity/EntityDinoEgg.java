@@ -610,7 +610,48 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         
                     case Deinonychus:
                         var5 = new EntityDeinonychus(this.worldObj);
+                    	if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS))
+                        		{
+                        			((EntityDeinonychus)var5).setSubSpecies(1); //Grey
+                        		}
+                        	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                        			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
+                            	{
+                            		((EntityDeinonychus)var5).setSubSpecies(2); //Black
+                            	}
+                        	else
+                            	{
+                            		((EntityDeinonychus)var5).setSubSpecies(3); //Brown
+                            	}
                         break;
+                        
+                    case Gallimimus:
+                    	var5 = new EntityGallimimus(this.worldObj);
+                    	
+                    	if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.PLAINS)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
+                    		{
+                    			((EntityGallimimus)var5).setSubSpecies(1); //Green
+                    		}
+                    	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                    			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
+                        	{
+                        		((EntityGallimimus)var5).setSubSpecies(2); //Blue
+                        	}
+                    	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND))
+                        	{
+                        		((EntityGallimimus)var5).setSubSpecies(3); //Orange
+                        	}
+                    	else
+                    	{
+                    		((EntityGallimimus)var5).setSubSpecies(4); //Brown
+                    	}
+                    	break;
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", player);

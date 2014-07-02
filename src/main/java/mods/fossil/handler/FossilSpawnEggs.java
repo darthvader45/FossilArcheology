@@ -10,7 +10,7 @@ public class FossilSpawnEggs
     static int startEntityId = 300;
 
     public static void addSpawnEggs()
-    {
+    {														//bg		//fg
         registerEntityEgg(EntityTriceratops.class, 			0x62d84e, 0xebffd5);
         registerEntityEgg(EntityVelociraptor.class, 		0xbfa487, 0x936d2e);
         registerEntityEgg(EntityTRex.class, 				0x763c11, 0xffebc4);
@@ -33,7 +33,8 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityDodo.class, 				0x784830, 0xb59586);
         registerEntityEgg(EntityAnkylosaurus.class, 		0xffebc4, 0x763c11);
         registerEntityEgg(EntityPachycephalosaurus.class, 	0xdac49d, 0xa86722);
-        registerEntityEgg(EntityDeinonychus.class, 			0xffffff, 0x000000);
+        registerEntityEgg(EntityDeinonychus.class, 			0x6a6a6a, 0x2f302e);
+        registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
     }
 

@@ -2,10 +2,14 @@ package mods.fossil.client.model;
 
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityAnkylosaurus;
+import mods.fossil.entity.mob.EntityDeinonychus;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
+import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelDeinonychus extends ModelBase
@@ -220,30 +224,83 @@ private ModelRenderer UpperJaw;
 	  this.Head.rotateAngleX =  1.68542955F;
 	  
 	  if(!isModelized){
-	  // + 1.68542955F
-	  //this.Head.rotateAngleX = (var4 / (180F / (float)Math.PI)) + 96.5679999F;
-	  //Fossil.Console("rotateAngleX: " Math.toDegrees(this.Head.rotateAngleX));
 	  this.Head.rotateAngleZ = var4 / (180F / (float)Math.PI);
-	  
-      this.RightLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-      this.LeftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-      
-      
-      this.Tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
-      this.Tail2.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
-      this.Tail3.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + var2);
+      this.Tail1.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+      this.Tail2.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + var2);
 	  }
 	  else {
-		  this.Head.rotateAngleZ = 0;
-		  
-	      this.RightLeg.rotateAngleX = 0;
-	      this.LeftLeg.rotateAngleX = 0;
-	      
-	      
-	      this.Tail1.rotateAngleY = 0;
-	      this.Tail2.rotateAngleY = 0;
-	      this.Tail3.rotateAngleY = 0;
+		  this.modelPose();
 	  }
+  }
+
+  public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4)
+  {
+	  EntityDeinonychus entity = (EntityDeinonychus)par1EntityLiving;
+
+	  if (entity.isSitting() || entity.OrderStatus == EnumOrderType.Stay)
+		  this.sitPose();
+	  else
+		  this.standingPose(par2, par3);
+  }
+  
+  //////// poses ////////////
+  private void modelPose(){
+	  this.Head.rotateAngleZ = 0;
+	  
+      this.RightLeg.rotateAngleX = 0;
+      this.LeftLeg.rotateAngleX = 0;
+      
+      
+      this.Tail1.rotateAngleY = 0;
+      this.Tail2.rotateAngleY = 0;
+  }
+  
+  private void sitPose(){
+	  this.Body.rotationPointY = 18F;
+	  
+	  //Arms
+	  this.RightUpperArm.rotateAngleX = this.LeftUpperArm.rotateAngleX = (float)Math.toRadians(45);
+	  this.RightLowerArm.rotateAngleX = this.LeftLowerArm.rotateAngleX = 0;
+	  this.RightLowerArm.rotateAngleZ =  (float)Math.toRadians(45);
+	  this.LeftLowerArm.rotateAngleZ = -(float)Math.toRadians(45);
+	  
+	  //Legs
+	  this.RightLeg.rotationPointY = this.LeftLeg.rotationPointY = -0.5F;
+	  this.RightLeg.rotateAngleX = (float)Math.toRadians(-45);
+	  this.LeftLeg.rotateAngleX = (float)Math.toRadians(-45);
+	  this.RightLowerLeg.rotateAngleX = (float)Math.toRadians(45);
+	  this.LeftLowerLeg.rotateAngleX = (float)Math.toRadians(45);
+	  this.RightLowerLeg.rotationPointY = this.LeftLowerLeg.rotationPointY = 2F;
+	  this.RightLowerLeg.rotationPointZ = this.LeftLowerLeg.rotationPointZ = 4.5F; 
+	  this.RightFoot.rotateAngleX = this.LeftFoot.rotateAngleX = 0;
+	  
+	  //Tail
+	  this.Tail2.rotateAngleX = (float)Math.toRadians(10);
+  }
+  
+  private void standingPose(float speed, float range){
+	  this.Body.rotationPointY = 9.5F;
+	  
+	  
+	  //Arms
+	  this.RightUpperArm.rotateAngleX = this.LeftUpperArm.rotateAngleX = 0.174532925F;
+	  this.RightLowerArm.rotateAngleX = this.LeftLowerArm.rotateAngleX = 0.437152618F;
+	  this.RightLowerArm.rotateAngleZ = 0;
+	  this.LeftLowerArm.rotateAngleZ = 0;
+	  
+	  //Legs
+	  this.RightLeg.rotationPointY = this.LeftLeg.rotationPointY = 1.5F;
+      this.RightLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.4F * range;
+      this.LeftLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.4F * range;
+	  this.RightLowerLeg.rotateAngleX = 1.14355718F;
+	  this.LeftLowerLeg.rotateAngleX = 1.14355718F;
+	  this.RightLowerLeg.rotationPointY = this.LeftLowerLeg.rotationPointY = 4F;
+	  this.RightLowerLeg.rotationPointZ = this.LeftLowerLeg.rotationPointZ = 1.5F;
+	  this.RightFoot.rotateAngleX = this.LeftFoot.rotateAngleX = -1.14355718F;
+	  
+	  //Tail
+	  this.Tail2.rotateAngleX = -0.034906585F;
+	  
   }
 
 }

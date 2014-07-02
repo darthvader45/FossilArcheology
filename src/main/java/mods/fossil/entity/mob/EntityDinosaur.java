@@ -153,34 +153,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
     	this.jump();
     }
-    /*
-    public void updateSize()
-    {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
-        
-        
-    	if(this.getDinoAge() <= this.adultAge){
-	        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-	        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-	        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.baseSpeed + (speedStep * this.getDinoAge()));
-	
-	        if (this.isTeen()) {
-	        	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
-	        }
-	        else if (this.isAdult()){
-	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(2.0D);
-	        }
-	        else {
-	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
-	        }
-    	}
-    }
-    */
     
     /**
      * Get dinosaur's knockback value
@@ -662,10 +634,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Tells if the dino is sitting
      */
+    /*
     public boolean isSitting()
     {
         return this.OrderStatus == EnumOrderType.Stay;
     }
+    */
     
     public boolean canBePushed(){
     	return !this.isSitting();
@@ -1432,10 +1406,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable()
                             && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null
                             && player.username.equalsIgnoreCase(this.getOwnerName())) {
+                    	this.setSitting(false);
+                    	this.OrderStatus = EnumOrderType.FreeMove;
                         setRidingPlayer(player);
                     }
 
-                    if (this.SelfType.OrderItem != null && var2.itemID == this.SelfType.OrderItem.itemID && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()))
+                    if (this.SelfType.OrderItem != null && var2.itemID == this.SelfType.OrderItem.itemID && this.isTamed() && player.username.equalsIgnoreCase(this.getOwnerName()) && !player.isRiding())
                     {
                         //THIS DINOS ITEM TO BE CONTROLLED WITH
                         if (!this.worldObj.isRemote)
@@ -1451,6 +1427,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                                 this.getNavigator().clearPathEntity();
                                 this.setPathToEntity(null);
                                 this.setSitting(true);
+                            }
+                            else if (this.OrderStatus == EnumOrderType.Follow || this.OrderStatus == EnumOrderType.FreeMove)
+                            {
+                            	this.setSitting(false);
                             }
                         }
 

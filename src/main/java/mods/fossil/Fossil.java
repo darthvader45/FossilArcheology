@@ -177,7 +177,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.1";
+    public static final String modversion = "1.6.4 Build 6.2";
 
     /*
      * Set mod state here
@@ -1116,7 +1116,7 @@ public class Fossil
         }
 
 
-        EntityRegistry.addSpawn(EntityCoelacanth.class, 3, 2, 8, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
+        EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FAILURESAURUS));
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", StatCollector.translateToLocal(LocalizationStrings.MOB_BONES));

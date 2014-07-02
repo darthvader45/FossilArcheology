@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockTar extends Block
 {
     public BlockTar(int i, Material par2Material)
@@ -34,15 +37,18 @@ public class BlockTar extends Block
     }
     
 
-
-    public void randomDisplayTick(World world, int i, int j, int k, Random random)
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        double var6 = (double)((float)i + random.nextFloat());
-        double var8 = (double)j - 0.05D;
-        double var10 = (double)((float)k + random.nextFloat());
+        double var6 = (double)((float)x + random.nextFloat());
+        double var8 = (double)y - 0.05D;
+        double var10 = (double)((float)z + random.nextFloat());
         FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D);
-//        FossilFX.spawnParticle("flies", i+0.5, j+1.0, k+0.5, 0.0D, 1.5D, 0.0D);
-        world.playSound((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "fossil:tar", random.nextFloat() * 0.3F + 0.1F, random.nextFloat() * 1.0F + 0.0F, false);
+//        world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), "fossil:tar", random.nextFloat() * 0.1F + 0.1F, random.nextFloat() * 1.0F + 0.0F, false);
+        if (random.nextInt(200) == 0)
+        {
+        world.playSound((double)x, (double)y, (double)z, "fossil:tar", 0.1F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.15F, false);
+        }
     }
 
     /**

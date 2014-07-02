@@ -73,9 +73,6 @@ public class FossilStructureGenerator extends StructureGeneratorBase
             case AcademyUtil.CUSTOM_CHEST:
                 return Block.chest.blockID;
 
-            case AcademyUtil.CUSTOM_DISPENSER:
-                return Block.dispenser.blockID;
-
             case AcademyUtil.ITEM_FRAME: // same as PAINTING
                 return Block.torchWood.blockID;
 
@@ -307,20 +304,6 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         }
                         
                     }
-                }
-
-                break;
-
-            case AcademyUtil.CUSTOM_DISPENSER:
-                // We're going to take advantage of addItemToTileInventory's return value to fill
-                // the container to the brim; note that this way is better than the for loop from
-                // above because it doesn't waste processing time - it stops as soon as it is full
-                boolean addmore = true;
-
-                while (addmore)
-                {
-                    // Here we use customData as the itemID to place
-                    addmore = addItemToTileInventory(world, new ItemStack(customData1, 64, 0), x, y, z);
                 }
 
                 break;
