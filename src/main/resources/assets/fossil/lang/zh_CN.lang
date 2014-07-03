@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD5 June 28 2014
+#Updated for Build 6 DEV (1.6.4) HEAD16 July 3 2014
 #Simplified Chinese (zh_CN) Localization File
 
 #创造模式标签
@@ -9,35 +9,35 @@ itemgroup.FFood=古代食物
 itemgroup.FItems=古代物品
 itemgroup.FMaterial=古代材料
 itemgroup.FTools=古代工具
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=古代雕像
 
 #Achievements
 achievement.FirstEgg=第一只恐龙!
 achievement.AllEggs=龙蛋收藏家
 achievement.FoundFossils=掘骨者
 achievement.pigBossOnEarth=你犯规我要告诉马麻!!
-achievement.Permafrost=Try not to get a cold!
-achievement.ArchWorkbench=Let's get the party started!
-achievement.Analyzer=For SCIENCE!
-achievement.CultVat=Genetic manipulation.
-achievement.Sifter=Cuz' baby I'm a Gold Digger!
-achievement.Dinopedia=Fill all the pages!
-achievement.IceAge=I do not know how you'll give birth...
-achievement.TheKing=Ruler of the Late Cretaceous.
+achievement.Permafrost=尽量不要感冒!
+achievement.ArchWorkbench=让我们开始派对吧!
+achievement.Analyzer=为了科学!
+achievement.CultVat=基因操作.
+achievement.Sifter=宝贝，因为我是一个淘金者!
+achievement.Dinopedia=填补完百科所有条目!
+achievement.IceAge=我不知道你该怎么生仔...
+achievement.TheKing=晚白垩世统治者.
 
 #Achievement Descriptions
 achievement.FirstEgg.desc=你带回了你的第一只恐龙!
 achievement.AllEggs.desc=你已发现所有的恐龙蛋!
 achievement.FoundFossils.desc=你已发现一些化石!
 achievement.pigBossOnEarth.desc=把阿努召唤到地面世界
-achievement.Permafrost=What wonders could be inside it?
-achievement.ArchWorkbench=First step in becoming an archaeologist.
-achievement.Analyzer=Discovering the past!
-achievement.CultVat=Bring history back to live!
-achievement.Sifter=Even if I have to go through all the dirt!
-achievement.Dinopedia=Find all the dinos!
-achievement.IceAge=However I want the ice age back!
-achievement.TheKing=Long live the king!
+achievement.Permafrost=这里面究竟有什么?
+achievement.ArchWorkbench=成为一名考古学家的第一步.
+achievement.Analyzer=探索过去!
+achievement.CultVat=让历史重生!
+achievement.Sifter=即使我必须经受所有污秽!
+achievement.Dinopedia=发现所有恐龙!
+achievement.IceAge=但是我想要冰河时代回来!
+achievement.TheKing=国王万岁!
 
 #方块
 tile.fossil.name=化石
@@ -76,7 +76,7 @@ tile.ancientWoodPlate.name=古代木板
 tile.ancientWoodStairs.name=古代木头楼梯
 tile.ancientStoneStairs.name=古代石头楼梯
 tile.figurine.name=木质雕像
-tile.sifter.name=Sifter
+tile.sifter.name=筛子
 
 #物品
 item.bioFossil.name=活体化石
@@ -148,8 +148,8 @@ item.rawSpinosaurus.name=脊龙肉
 item.rawCompsognathus.name=美颌龙肉
 item.rawAnkylosaurus.name=背甲龙肉
 item.rawPachycephalosaurus.name=肿头龙肉
-item.rawDeinonychus.name=Deinonychus Meat
-item.rawGallimimus.name=Gallimimus Meat
+item.rawDeinonychus.name=恐爪龙肉
+item.rawGallimimus.name=似鸡龙肉
 item.eggTriceratops.name=三角龙蛋
 item.eggVelociraptor.name=迅猛龙蛋
 item.eggTRex.name=霸王龙蛋
@@ -166,9 +166,9 @@ item.eggDodo.name=渡渡鸟蛋
 item.eggCultivatedDodo.name=人工养殖渡渡鸟蛋
 item.eggAnkylosaurus.name=背甲龙蛋
 item.eggPachycephalosaurus.name=肿头龙蛋
-item.eggDeinonychus.name=Deinonychus Egg
-item.eggGallimimus.name=Gallimimus Egg
-item.eggCoelacanth.name=Living Coelacanth
+item.eggDeinonychus.name=恐爪龙蛋
+item.eggGallimimus.name=似鸡龙蛋
+item.eggCoelacanth.name=活腔棘鱼
 item.dnaTriceratops.name=三角龙DNA
 item.dnaVelociraptor.name=迅猛龙DNA
 item.dnaTRex.name=霸王龙DNA
@@ -183,9 +183,9 @@ item.dnaSpinosaurus.name=脊龙DNA
 item.dnaCompsognathus.name=美颌龙DNA
 item.dnaAnkylosaurus.name=背甲龙DNA
 item.dnaPachycephalosaurus.name=肿头龙DNA
-item.dnaDeinonychus.name=Deinonychus DNA
-item.dnaGallimimus.name=Gallimimus DNA
-item.dnaCoelacanth.name=Coelacanth DNA
+item.dnaDeinonychus.name=恐爪龙DNA
+item.dnaGallimimus.name=似鸡龙DNA
+item.dnaCoelacanth.name=腔棘鱼DNA
 item.dnaPig.name=猪DNA
 item.dnaSheep.name=羊DNA
 item.dnaCow.name=牛DNA
@@ -202,7 +202,7 @@ item.embryoSmilodon.name=剑齿虎胚胎
 item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鸟胚胎
 item.archNotebook.name=考古手册
-item.potteryShard.name=Pottery Shard
+item.potteryShard.name=陶片
 
 #前缀/后缀
 dnaName.head=
@@ -261,8 +261,8 @@ Dino.Spinosaurus=脊龙
 Dino.Compsognathus=美颌龙
 Dino.Ankylosaurus=背甲龙
 Dino.Pachycephalosaurus=肿头龙
-Dino.Deinonychus=Deinonychus
-Dino.Gallimimus=Gallimimus
+Dino.Deinonychus=恐爪龙
+Dino.Gallimimus=似鸡龙
 
 #动物名称.
 animal.mammoth=猛犸象
@@ -271,7 +271,7 @@ animal.pregnant.cow=受孕牛
 animal.pregnant.pig=受孕猪   
 animal.pregnant.sheep=受孕羊  
 animal.dodo=渡渡鸟
-animal.coelacanth=Coelacanth
+animal.coelacanth=腔棘鱼
 
 #百科文本.恐龙信息.
 pedia.text.owner=主人:
