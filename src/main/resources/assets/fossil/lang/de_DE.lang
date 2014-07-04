@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD1 June 29 2014
+﻿#Updated for Build 6 DEV (1.6.4) HEAD16 Jule 03 2014
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Antike Nahrungsmittel
 itemgroup.FItems=Antike Gegenstände
 itemgroup.FMaterial=Antikes Material
 itemgroup.FTools=Antike Hilfsmittel
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Antike Figuren
 
 #Achievements
 achievement.FirstEgg=Erster Dinosaurier!
@@ -46,7 +46,7 @@ tile.skullLantern.name=Schädel Laterne
 tile.analyzer.name=Analysator
 tile.cultureVat.name=Kultivierungsbehälter
 tile.fossilworkbench.name=Archeologie Werkbank
-tile.drum.name=Trommel
+tile.fossil_drum.name=Trommel
 tile.feederIdle.name=Fütterer
 tile.feederActive.name=Fütterer
 tile.permafrost.name=Dauerfrost
