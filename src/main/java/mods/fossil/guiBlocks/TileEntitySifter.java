@@ -118,15 +118,6 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
     }
 
     /**
-     * Sets the custom display name to use when opening a GUI linked to this tile entity.
-     */
-    public void setGuiDisplayName(String par1Str)
-    {
-        this.customName = par1Str;
-    }
-
-
-    /**
      * Reads a tile entity from NBT.
      */
     public void readFromNBT(NBTTagCompound var1)

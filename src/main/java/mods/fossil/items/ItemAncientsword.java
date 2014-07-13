@@ -60,7 +60,7 @@ public class ItemAncientsword extends ItemSword
            }
     	}
     	
-    	par1ItemStack.damageItem(1, targetentity);
+    	par1ItemStack.damageItem(1, player);
     	
 		return true;
     }

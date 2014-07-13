@@ -4,10 +4,12 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.guiBlocks.ContainerAnalyzer;
 import mods.fossil.guiBlocks.TileEntityAnalyzer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiAnalyzer extends GuiContainer
@@ -21,10 +23,13 @@ public class GuiAnalyzer extends GuiContainer
         this.analyzerInventory = (TileEntityAnalyzer)var2;
     }
 
-    protected void drawGuiContainerForegroundLayer()
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME, 19, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        String customName = this.analyzerInventory.isInvNameLocalized() ? this.analyzerInventory.getInvName() : I18n.getString(this.analyzerInventory.getInvName());
+        this.fontRenderer.drawString(customName, this.xSize / 2 - this.fontRenderer.getStringWidth(customName) / 2, 6, 4210752);
+        
+        this.fontRenderer.drawString(I18n.getString("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**

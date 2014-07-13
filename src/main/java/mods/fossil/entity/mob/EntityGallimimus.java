@@ -46,7 +46,7 @@ public class EntityGallimimus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -59,6 +59,7 @@ public class EntityGallimimus extends EntityDinosaur
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDilophosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDeinonychus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 4.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
@@ -125,7 +126,7 @@ public class EntityGallimimus extends EntityDinosaur
 
     public void updateRiderPosition()
     {
-    	super.updateRiderPosition();
+ //   	super.updateRiderPosition();
         if (this.riddenByEntity != null)
         {
             this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
