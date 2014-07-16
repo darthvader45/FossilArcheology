@@ -4,34 +4,34 @@
 
 [Imgur album of current and past banners](http://imgur.com/a/hBe0h)
 
-Forked from [Flammarilva](https://github.com/fls81245) 's Fossil And Archeology mod.
+Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology mod.
 
-### Fossils and Archeology Revival Contributors
+## Fossils and Archeology Revival Contributors
 
-###### Programmers
-[Shadowbeast007](https://github.com/Shadowbeast) 
-[Microjunk](https://github.com/Microjunk) 
-[4f6f3b](https://github.com/4f6f3b)
-[Totara](https://github.com/TotaraStudios) 
-Cannibal Vox
+###### Programmers  
+[Shadowbeast007](https://github.com/Shadowbeast)  
+[Microjunk](https://github.com/Microjunk)  
+[4f6f3b](https://github.com/4f6f3b)  
+[Totara](https://github.com/TotaraStudios)  
+[Cannibal Vox](https://github.com/CannibalVox)  
 
-###### Texture/Model Artists
-[tyranno66](https://github.com/tyranno66)
+###### Texture/Model Artists  
+[tyranno66](https://github.com/tyranno66)  
 [Chellre](https://github.com/Chellre)  
-ExDragonith
-Raptorfarian
-Bluestreak52
-Coldrake
+ExDragonith  
+Raptorfarian  
+[Bluestreak52](https://github.com/Bluestreak52)  
+Coldrake  
 
-###### Audio Artists
-whitejoshman
+###### Audio Artists  
+whitejoshman  
 
-###### Language Contributors
-Octo-Docto (Spanish)
-[Gusanito](https://github.com/Gusanito) (Spanish)
-Retro_King (German)
-[crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese) 
-[sb023612](https://github.com/sb023612) (Simplified Chinese)
+###### Language Contributors  
+Octo-Docto (Spanish)  
+[Gusanito](https://github.com/Gusanito) (Spanish)  
+Retro_King (German)  
+[crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)  
+[sb023612](https://github.com/sb023612) (Simplified Chinese)  
 
 ###### Special Thanks
 Flammarilva (original mod creator) and the rest of Team July
