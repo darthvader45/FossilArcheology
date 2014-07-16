@@ -8,6 +8,9 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
+import mods.fossil.fossilAI.DinoAIWander;
+import mods.fossil.fossilAI.WaterDinoAIEat;
+import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
@@ -17,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -79,13 +83,16 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
       //  this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-       // this.tasks.addTask(9, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-        //this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         
-        this.tasks.addTask(7, new WaterDinoAIWander(this, 2.0D));
+        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false));
+        
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
@@ -96,6 +103,11 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
 
+    @Override
+    public boolean isAIEnabled()
+    {
+        return !this.isModelized();
+    }
     /**
      * Returns the texture's file path as a String.
      */
@@ -159,189 +171,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public void onUpdate()
     {
         super.onUpdate();
-        /*if (this.isInWater())
-        {
-            if (!this.hasPath() && this.riddenByEntity == null)
-            {
-                this.motionX *= 0.8D;
-                this.motionZ *= 0.8D;
-            }
-
-            /*if (this.riddenByEntity != null)
-            {
-                EntityPlayerSP var1 = (EntityPlayerSP)this.riddenByEntity;
-
-                if (var1.movementInput.moveForward + var1.movementInput.moveStrafe == 0.0F)
-                {
-                    this.motionX *= 0.8D;
-                    this.motionZ *= 0.8D;
-                }
-            }*/
-        /*if ((!this.isOnSurface() && (double)this.TargetY > this.posY || (double)this.TargetY < this.posY) && !this.isCollidedVertically)
-        {
-            if ((double)this.TargetY > this.posY)
-            {
-                this.motionY += 0.02D;
-            }
-            else
-            {
-                this.motionY -= 0.1D;
-            }
-
-            if (this.motionY > 0.4D)
-            {
-                this.motionY = 0.4D;
-            }
-
-            if (this.motionY < -2.0D)
-            {
-                this.motionY = -2.0D;
-            }
-        }
-
-        if (Math.abs(this.posY - (double)this.TargetY) <= 0.125D)
-        {
-            this.motionY = 0.0D;
-        }*/
-        //}
     }
-
-    /**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
-    /*public void moveEntityWithHeading(float var1, float var2)
-    {
-        double var3;
-
-        if (this.isInWater())
-        {
-            if (this.isOnSurface() && this.motionY > 0.0D)
-            {
-                this.motionY = 0.0D;
-            }
-
-            var3 = this.posY;
-            this.moveFlying(var1, var2, 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var3, this.motionZ))
-            {
-                this.motionY = 0.30000001192092896D;
-            }
-        }
-        else if (this.handleLavaMovement())
-        {
-            var3 = this.posY;
-            this.moveFlying(var1, var2, 0.02F);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.5D;
-            this.motionY *= 0.5D;
-            this.motionZ *= 0.5D;
-            this.motionY -= 0.02D;
-
-            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var3, this.motionZ))
-            {
-                this.motionY = 0.30000001192092896D;
-            }
-        }
-        else
-        {
-            float var8 = 0.91F;
-
-            if (this.onGround)
-            {
-                var8 = 0.5460001F;
-                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var4 > 0)
-                {
-                    var8 = Block.blocksList[var4].slipperiness * 0.91F;
-                }
-            }
-
-            float var9 = 0.1627714F / (var8 * var8 * var8);
-            float var5 = this.onGround ? this.landMovementFactor * var9 : this.jumpMovementFactor;
-            this.moveFlying(var1, var2, var5);
-            var8 = 0.91F;
-
-            if (this.onGround)
-            {
-                var8 = 0.5460001F;
-                int var6 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-
-                if (var6 > 0)
-                {
-                    var8 = Block.blocksList[var6].slipperiness * 0.91F;
-                }
-            }
-
-            if (this.isOnLadder())
-            {
-                float var11 = 0.15F;
-
-                if (this.motionX < (double)(-var11))
-                {
-                    this.motionX = (double)(-var11);
-                }
-
-                if (this.motionX > (double)var11)
-                {
-                    this.motionX = (double)var11;
-                }
-
-                if (this.motionZ < (double)(-var11))
-                {
-                    this.motionZ = (double)(-var11);
-                }
-
-                if (this.motionZ > (double)var11)
-                {
-                    this.motionZ = (double)var11;
-                }
-
-                this.fallDistance = 0.0F;
-
-                if (this.motionY < -0.15D)
-                {
-                    this.motionY = -0.15D;
-                }
-
-                if (this.isSneaking() && this.motionY < 0.0D)
-                {
-                    this.motionY = 0.0D;
-                }
-            }
-
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-            if (this.isCollidedHorizontally && this.isOnLadder())
-            {
-                this.motionY = 0.2D;
-            }
-
-            if (!this.isInWater())
-            {
-                this.motionY -= 0.08D;
-            }
-
-            this.motionY *= 0.9800000190734863D;
-            this.motionX *= (double)var8;
-            this.motionZ *= (double)var8;
-        }
-
-        this.prevLegYaw = this.legYaw;
-        var3 = this.posX - this.prevPosX;
-        double var10 = this.posZ - this.prevPosZ;
-        float var7 = MathHelper.sqrt_double(var3 * var3 + var10 * var10) * 4.0F;
-
-        if (var7 > 1.0F)
-        {
-            var7 = 1.0F;
-        }
-
-        this.legYaw += (var7 - this.legYaw) * 0.4F;
-        this.legSwing += this.legYaw;
-    }*/
 
     /**
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
@@ -465,11 +295,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
     }
 
-    /*public boolean isSelfSitting()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-    }*/
-
     public void setSelfAngry(boolean var1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
@@ -485,34 +310,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
             //this.moveSpeed = 0.5F;
         }
     }
-
-    /*public void setSelfSitting(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-        if (var1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
-        }
-    }*/
-
-    /*public void setTamed(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-        if (var1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 4)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -5)));
-        }
-    }*/
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
@@ -564,26 +361,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
             this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
         }
     }
-
-    /*public boolean HandleEating(int var1)
-    {
-        if (this.getHunger() >= this.getHungerLimit())
-        {
-            return false;
-        }
-        else
-        {
-            this.increaseHunger(var1);
-            this.showHeartsOrSmokeFX(false);
-
-            if (this.getHunger() >= this.getHungerLimit())
-            {
-                this.setHunger(this.getHungerLimit());
-            }
-
-            return true;
-        }
-    }*/
 
     private boolean FindFish(int var1)
     {
@@ -829,162 +606,12 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         return new EntityPlesiosaur(this.worldObj);
     }
 
-    /*public void updateSize()
-    {
-        this.setSize((float)(1.0D + 0.3D * (double)((float)this.getDinoAge())), (float)(1.0D + 0.3D * (double)((float)this.getDinoAge())));
-    }
-
-    public float getGLX()
-    {
-        return (float)(1.0D + 0.3D * (double)((float)this.getDinoAge()));
-    }
-
-    public float getGLY()
-    {
-        return (float)(1.0D + 0.3D * (double)((float)this.getDinoAge()));
-    }*/
-
-    /*public EntityAgeable func_90011_a(EntityAgeable var1)
-    {
-        return this.spawnBabyAnimal(var1);
-    }*/
-
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return this.spawnBabyAnimal(var1);
     }
-    /**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-    	if(!this.isModelized()){
-	        double var9;
-	
-	        if (this.isInWater())
-	        {
-	            var9 = this.posY;
-	            this.moveFlying(par1, par2, this.isAIEnabled() ? 0.04F : 0.02F);
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.800000011920929D;
-	            this.motionY *= 0.800000011920929D;
-	            this.motionZ *= 0.800000011920929D;
-	//           if(this.riddenByEntity==null)
-	            this.motionY += 0.02D;//TODO + -> - gravity is on it if not ridden, then handling the riding...going straight forward
-	
-	            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-	            {
-	                this.motionY = 0.30000001192092896D;
-	            }
-	        }
-	        else if (this.handleLavaMovement())
-	        {
-	            var9 = this.posY;
-	            this.moveFlying(par1, par2, 0.02F);
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.5D;
-	            this.motionY *= 0.5D;
-	            this.motionZ *= 0.5D;
-	            this.motionY -= 0.02D;
-	
-	            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-	            {
-	                this.motionY = 0.30000001192092896D;
-	            }
-	        }
-	        else
-	        {
-	            float var3 = 0.91F;
-	
-	            if (this.onGround)
-	            {
-	                var3 = 0.54600006F;
-	                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-	
-	                if (var4 > 0)
-	                {
-	                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
-	                }
-	            }
-	
-	            float var8 = 0.16277136F / (var3 * var3 * var3);
-	            float var5;
-	
-	            if (this.onGround)
-	            {
-	                if (this.isAIEnabled())
-	                {
-	                    var5 = this.getAIMoveSpeed();
-	                }
-	                else
-	                {
-	                    var5 = 1.0F;//this.landMovementFactor;
-	                }
-	
-	                var5 *= var8;
-	            }
-	            else
-	            {
-	                var5 = this.jumpMovementFactor;
-	            }
-	
-	            this.moveFlying(par1, par2, var5);
-	            var3 = 0.91F;
-	
-	            if (this.onGround)
-	            {
-	                var3 = 0.54600006F;
-	                int var6 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-	
-	                if (var6 > 0)
-	                {
-	                    var3 = Block.blocksList[var6].slipperiness * 0.91F;
-	                }
-	            }
-	
-	//            System.out.println(String.valueOf(this.motionY));
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	
-	            if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded))
-	            {
-	                if (this.posY > 0.0D)
-	                {
-	                    this.motionY = -0.1D;
-	                }
-	                else
-	                {
-	                    this.motionY = 0.0D;
-	                }
-	            }
-	            else
-	            {
-	                if (!this.isInWater())
-	                {
-	                    this.motionY -= 0.08D;
-	                }
-	            }
-	
-	            this.motionY *= 0.9800000190734863D;
-	            this.motionX *= (double)var3;
-	            this.motionZ *= (double)var3;
-	        }
-	
-	        //this.prevLegYaw = this.legYaw;
-	        var9 = this.posX - this.prevPosX;
-	        double var12 = this.posZ - this.prevPosZ;
-	        float var11 = MathHelper.sqrt_double(var9 * var9 + var12 * var12) * 4.0F;
-	
-	        if (var11 > 1.0F)
-	        {
-	            var11 = 1.0F;
-	        }
-	
-	        //this.legYaw += (var11 - this.legYaw) * 0.4F;
-	        //this.legSwing += this.legYaw;
-    	}
-    }
-    
+
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */

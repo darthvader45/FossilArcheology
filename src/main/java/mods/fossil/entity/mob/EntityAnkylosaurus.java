@@ -126,11 +126,16 @@ public class EntityAnkylosaurus extends EntityDinosaur
         return this.getEyeHeight();
     }
 
+    public float getMountHeight()
+    {
+        return this.height;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
     

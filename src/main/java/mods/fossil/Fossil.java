@@ -177,7 +177,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.2";
+    public static final String modversion = "1.6.4 Build 6.2.2";
 
     /*
      * Set mod state here
@@ -1115,7 +1115,7 @@ public class Fossil
             EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
         }
 
-
+/*
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});
         LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FAILURESAURUS));
@@ -1134,6 +1134,7 @@ public class Fossil
         {
             LanguageRegistry.instance().addStringLocalization("entity.fossil." + EnumDinoType.values()[i].name() + ".name", StatCollector.translateToLocal(EnumDinoType.values()[i].name()));
         }
+        */
 
         FossilSpawnEggs.addSpawnEggs();
         //make the dino types complete by registering the dinos items
@@ -1176,7 +1177,7 @@ public class Fossil
         FossilRecipeHandler.addRecipe();
         GameRegistry.registerPickupHandler(new FossilPickupHandler());
         GameRegistry.registerCraftingHandler(new FossilCraftingHandler());
-        proxy.registerChestLoot();
+        proxy.onInit(event);
 
         
 

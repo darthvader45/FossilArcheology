@@ -3,7 +3,11 @@ package mods.fossil.entity.mob;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
@@ -18,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -28,7 +33,6 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public class EntityCoelacanth extends EntityWaterMob {
 
-    public static boolean isOwned;
 	public float squidPitch;
     public float prevSquidPitch;
     public float squidYaw;
@@ -86,11 +90,14 @@ public class EntityCoelacanth extends EntityWaterMob {
     {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte)par1));
     }
+    
+
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25D);
     }
     
     private void setPedia()
@@ -149,8 +156,6 @@ public class EntityCoelacanth extends EntityWaterMob {
         
         if (var2 == null)
         {
-
-        	
         	ItemStack var3 = new ItemStack(Fossil.livingCoelacanth, 1, getSkin());
             
 
@@ -195,6 +200,11 @@ public class EntityCoelacanth extends EntityWaterMob {
        		 	p0.PrintPictXY(swamp, ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); break;
         	default:
        		 	p0.PrintPictXY(ocean, ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); break;
+        }
+
+        if (this.hasCustomNameTag())
+        {
+            p0.AddStringLR("No Despawn", true);
         }
  //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
     }
@@ -342,7 +352,7 @@ public class EntityCoelacanth extends EntityWaterMob {
 
             for (int var4 = 0; var4 < var3.size(); ++var4)
             {
-                if (var3.get(var4) instanceof EntityNautilus)
+                if (var3.get(var4) instanceof EntityCoelacanth)
                 {
                     if (!var1)
                     {
@@ -357,7 +367,7 @@ public class EntityCoelacanth extends EntityWaterMob {
                     else
                     {
                         //damage them
-                        EntityNautilus var5 = (EntityNautilus)((EntityNautilus)var3.get(var4));
+                        EntityCoelacanth var5 = (EntityCoelacanth)((EntityCoelacanth)var3.get(var4));
                         var5.attackEntityFrom(DamageSource.starve, 100);
                     }
                 }
@@ -388,18 +398,5 @@ public class EntityCoelacanth extends EntityWaterMob {
 
             this.BreedTick = 3000;
         }
-    }
-    
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    protected boolean canDespawn()
-    {
-        if (this.isOwned)
-        {
-            return false;
-        }
-
-        return true;
     }
 }

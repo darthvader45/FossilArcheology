@@ -20,7 +20,7 @@ public enum EnumDinoFoodMob
     Sheep(EntitySheep.class, 35, 3),
     Squid(EntitySquid.class, 30, 3),
     Mob(EntityMob.class, 20, 1),
-    Nautilus(null, 100, 5),
+    Nautilus(EntityNautilus.class, 100, 5),
     Triceratops(null, 50, 3),
     Velociraptor(null, 20, 3),
     TRex(null, 70, 5),

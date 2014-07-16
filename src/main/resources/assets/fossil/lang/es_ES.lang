@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD15 June 28 2014 
+﻿#Updated for Build 6 (1.6.4) HEAD16 July 15 2014  
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -66,7 +66,7 @@ tile.volcanicRockHot.name=Roca Volcánica Caliente
 tile.sarracina.name=Sarracenia
 tile.fernBlock.name=Semillas de Helecho
 tile.volcanicBrick.name=Ladrillos de Roca Volcánica
-tile.amberOre.name=Mineral de Ámbar
+tile.amberOre.name=Mineral de Ambar
 tile.ancientStone.name=Piedra Antigua
 tile.ancientStonebrick.name=Ladrillos de Piedra Antigua
 tile.ancientWood.name=Madera Antigua
@@ -272,6 +272,33 @@ animal.pregnant.sheep=Oveja Embarazada
 animal.dodo=Dodo
 animal.coelacanth=Coelacanth
 
+#Dinosaur Names
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velocirraptor
+entity.fossil.TRex.name=Tiranosaurio
+entity.fossil.Pterosaur.name=Pterosaurio
+entity.fossil.Plesiosaur.name=Plesiosaurio
+entity.fossil.Mosasaurus.name=Mosasaurio
+entity.fossil.Stegosaurus.name=Estegosaurio
+entity.fossil.Dilophosaurus.name=Dilofosaurio
+entity.fossil.Brachiosaurus.name=Brachiosaurio
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Espinosaurio
+entity.fossil.Compsognathus.name=Compsognato
+entity.fossil.Ankylosaurus.name=Anquilosaurio
+entity.fossil.Pachycephalosaurus.name=Paquicefalosaurio
+entity.fossil.Deinonychus.name=Deinonico
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names
+entity.fossil.Mammoth.name=Mamút
+entity.fossil.Smilodon.name=Tigres Dientes de Sable
+entity.fossil.Pregnant.cow.name=Vaca Embarazada
+entity.fossil.Pregnant.pig.name=Cerdo Embarazado   
+entity.fossil.Pregnant.sheep.name=Oveja Embarazada
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
 #Pedia text
 pedia.text.owner=Dueño:
 pedia.text.chest=* Cofres
@@ -341,6 +368,12 @@ mob.bones=Huesitos
 mob.fpz=Cerdos Zombis Amistosos
 mob.failuresaurus=Faileosaurio
 boss.Anu=Anu
+
+#Hostile mob names
+entity.fossil.Bones.name=Huesitos
+entity.fossil.FriendlyPigZombie.name=Cerdos Zombis Amistosos
+entity.fossil.Failuresaurus.name=Faileosaurio
+entity.fossil.Anu.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record

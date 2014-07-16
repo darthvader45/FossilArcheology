@@ -420,11 +420,6 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
         if (var1.itemID == Fossil.dnaDodo.itemID)
         {
-            return new ItemStack(Fossil.dodoEgg, 1);
-        }
-
-        if (var1.itemID == Fossil.dnaDodo.itemID)
-        {
             return new ItemStack(Fossil.cultivatedDodoEgg, 1);
         }
 

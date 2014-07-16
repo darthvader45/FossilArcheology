@@ -47,7 +47,7 @@ public class ModelStegosaurus extends ModelDinosaurs
     setTextureOffset("Tail3Plates.Tail3Plates", 0, 0);
     setTextureOffset("Tail1Plates.Tail1Plates", 12, 13);
     setTextureOffset("UpperBody.UpperBody", 46, 14);
-    setTextureOffset("UpperLegFrontLeft.UpperLegFrontLeft", 20, 0);
+    setTextureOffset("UpperLegFrontLeft.UpperLegFrontLeft", 44, 0);
     setTextureOffset("LowerLegFrontLeft.LowerLegFrontLeft", 12, 0);
     setTextureOffset("UpperLegFrontRight.UpperLegFrontRight", 54, 0);
     setTextureOffset("LowerLegFrontRight.LowerLegFrontRight", 20, 0);

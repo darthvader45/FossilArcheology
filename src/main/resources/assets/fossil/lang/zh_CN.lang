@@ -1,4 +1,4 @@
-#Updated for Build 6 DEV (1.6.4) HEAD16 July 3 2014
+#Updated for Build 6 DEV (1.6.4) HEAD17 July 15 2014 
 #Simplified Chinese (zh_CN) Localization File
 
 #创造模式标签
@@ -273,6 +273,33 @@ animal.pregnant.sheep=受孕羊
 animal.dodo=渡渡鸟
 animal.coelacanth=腔棘鱼
 
+#恐龙名称.
+entity.fossil.Triceratops.name=三角龙
+entity.fossil.Velociraptor.name=迅猛龙
+entity.fossil.TRex.name=霸王龙
+entity.fossil.Pterosaur.name=翼龙
+entity.fossil.Plesiosaur.name=蛇颈龙
+entity.fossil.Mosasaurus.name=沧龙
+entity.fossil.Stegosaurus.name=剑龙
+entity.fossil.Dilophosaurus.name=双脊龙
+entity.fossil.Brachiosaurus.name=腕龙
+entity.fossil.Nautilus.name=鹦鹉螺
+entity.fossil.Spinosaurus.name=脊龙
+entity.fossil.Compsognathus.name=美颌龙
+entity.fossil.Ankylosaurus.name=背甲龙
+entity.fossil.Pachycephalosaurus.name=肿头龙
+entity.fossil.Deinonychus.name=恐爪龙
+entity.fossil.Gallimimus.name=似鸡龙
+
+#动物名称.
+entity.fossil.Mammoth.name=猛犸象
+entity.fossil.Smilodon.name=剑齿虎
+entity.fossil.Pregnant.cow.name=受孕牛
+entity.fossil.Pregnant.pig.name=受孕猪   
+entity.fossil.Pregnant.sheep.name=受孕羊  
+entity.fossil.Dodo.name=渡渡鸟
+entity.fossil.Coelacanth.name=腔棘鱼
+
 #百科文本.恐龙信息.
 pedia.text.owner=主人:
 pedia.text.chest=* 箱子
@@ -342,6 +369,12 @@ mob.bones=骨架
 mob.fpz=僵尸猪人伙伴
 mob.failuresaurus=畸龙
 boss.Anu=阿努
+
+#昵称
+entity.fossil.Bones.name=骨架
+entity.fossil.FriendlyPigZombie.name=僵尸猪人伙伴
+entity.fossil.Failuresaurus.name=畸龙
+entity.fossil.Anu.name=阿努
 
 #Records
 item.record_bones.name=化石唱片

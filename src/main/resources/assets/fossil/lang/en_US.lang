@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD16 June 28 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD17 July 15 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -273,6 +273,33 @@ animal.pregnant.sheep=Pregnant Sheep
 animal.dodo=Dodo
 animal.coelacanth=Coelacanth
 
+#Dinosaur Names Clean
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.TRex.name=Tyrannosaurus
+entity.fossil.Pterosaur.name=Pterosaur
+entity.fossil.Plesiosaur.name=Plesiosaur
+entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Stegosaurus.name=Stegosaurus
+entity.fossil.Dilophosaurus.name=Dilophosaurus
+entity.fossil.Brachiosaurus.name=Brachiosaurus
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Spinosaurus
+entity.fossil.Compsognathus.name=Compsognathus
+entity.fossil.Ankylosaurus.name=Ankylosaurus
+entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names Clean
+entity.fossil.Mammoth.name=Mammoth
+entity.fossil.Smilodon.name=Smilodon
+entity.fossil.PregnantCow.name=Pregnant Cow
+entity.fossil.PregnantPig.name=Pregnant Pig   
+entity.fossil.PregnantSheep.name=Pregnant Sheep  
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
 #Pedia text
 pedia.text.owner=Owner:
 pedia.text.chest=* Chests
@@ -342,6 +369,12 @@ mob.bones=Bones
 mob.fpz=Friendly Pig Zombies
 mob.failuresaurus=Failursaurus
 boss.Anu=Anu
+
+#Hostile mob names
+entity.fossil.Bones.name=Bones
+entity.fossil.FriendlyPigZombie.name=Friendly Pig Zombies
+entity.fossil.Failuresaurus.name=Failursaurus
+entity.fossil.Anu.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record

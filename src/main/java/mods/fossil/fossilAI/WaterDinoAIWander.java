@@ -1,15 +1,15 @@
 package mods.fossil.fossilAI;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntitySwimmingDino;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class WaterDinoAIWander extends EntityAIBase
@@ -19,7 +19,9 @@ public class WaterDinoAIWander extends EntityAIBase
     private double zPosition;
     private double speed;
     
-    private EntityDinosaur entity;
+    private ArrayList collidingBoundingBoxes = new ArrayList();
+    
+    private EntitySwimmingDino entity;
     
     private float randomMotionVecX;
     private float randomMotionVecY;
@@ -37,11 +39,11 @@ public class WaterDinoAIWander extends EntityAIBase
     private double deltaZ;
     private double length;
     
-    private Random rand = new Random();
+
     
     private World worldObj;
 
-    public WaterDinoAIWander(EntityDinosaur dinosaur, double speed)
+    public WaterDinoAIWander(EntitySwimmingDino dinosaur, double speed)
     {
         this.entity = dinosaur;
         this.speed = speed;
@@ -53,7 +55,7 @@ public class WaterDinoAIWander extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-    	return !this.entity.isDead;
+    	return !this.entity.isDead && this.entity.isInsideOfMaterial(Material.water);
     }
 
     /**
@@ -79,24 +81,34 @@ public class WaterDinoAIWander extends EntityAIBase
 
         if (d3 < 1.0D || d3 > 3600.0D)
         {
-            if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
-            {
-                this.waypointX = this.entity.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-                this.waypointY = this.entity.posY - (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 8.0F);
-                this.waypointZ = this.entity.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            }
+          //  if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
+          //  {
+                this.waypointX = this.entity.posX + (double)((this.entity.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+                this.waypointY = this.entity.posY + (double)((this.entity.rand.nextFloat() * 2.0F - 1.0F) * 8.0F);
+                this.waypointZ = this.entity.posZ + (double)((this.entity.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+          //  }
         }
 
         if (this.courseChangeCooldown-- <= 0)
         {
-            this.courseChangeCooldown += this.rand.nextInt(10) + 2;
+            this.courseChangeCooldown += this.entity.rand.nextInt(10) + 5;
             d3 = (double)MathHelper.sqrt_double(d3);
 
             if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
             {
                 this.entity.motionX += d0 / d3 * 0.1D;
                 this.entity.motionZ += d2 / d3 * 0.1D;
-                this.entity.motionY += d1 / d3 * 0.1D;
+                
+                if (this.entity.isInsideOfMaterial(Material.water))
+                {
+                	this.entity.motionY += d1 / d3 * 0.1D;
+                }
+                else
+                {
+                    this.entity.motionY -= 0.08D;
+                    this.entity.motionY *= 0.9800000190734863D;	
+                }
+                
             }
             else
             {
@@ -113,7 +125,7 @@ public class WaterDinoAIWander extends EntityAIBase
 
     /**
      * True if the Mosasaur has an unobstructed line of travel to the waypoint.
-     */
+     */	
     private boolean isCourseTraversable(double par1, double par3, double par5, double par7)
     {
         double d4 = (this.waypointX - this.entity.posX) / par7;
@@ -121,22 +133,21 @@ public class WaterDinoAIWander extends EntityAIBase
         double d6 = (this.waypointZ - this.entity.posZ) / par7;
         AxisAlignedBB axisalignedbb = this.entity.boundingBox.copy();
         axisalignedbb.offset(d4, d5, d6);
-
-    	while (this.entity.worldObj.isAABBInMaterial(axisalignedbb, Material.air))
-    	{
-        axisalignedbb.offset(d4, d5, d6);
-        d5 -= 1;      		
-    	}
     	
         for (int i = 1; (double)i < par7; ++i)
         {
+        	
+        	
             axisalignedbb.offset(d4, d5, d6);
-            if (!this.entity.worldObj.getCollidingBoundingBoxes(entity, axisalignedbb).isEmpty())
+            
+            if (!this.entity.worldObj.getCollidingBoundingBoxes(this.entity, axisalignedbb).isEmpty())
             {
                 return false;
             }
         }
     	
-        return true;
+        return this.entity.worldObj.isAnyLiquid(axisalignedbb);
     }
+    
+
 }

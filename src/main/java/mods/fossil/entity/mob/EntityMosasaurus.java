@@ -1,14 +1,23 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
+
 import mods.fossil.client.DinoSound;
 import mods.fossil.fossilAI.DinoAIEat;
+import mods.fossil.fossilAI.DinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
+import mods.fossil.fossilAI.WaterDinoAIEat;
+import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -17,6 +26,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityMosasaurus extends EntitySwimmingDino implements IMob
@@ -32,6 +42,8 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     private double deltaY;
     private double deltaZ;
     private double length;
+    
+
 
     public static final double baseHealth = EnumDinoType.Mosasaurus.Health0;
     public static final double baseDamage = EnumDinoType.Mosasaurus.Strength0;
@@ -56,11 +68,15 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.maxSize = 3.0F;
         this.experienceValue = 5;
         
+
+        
+        this.getNavigator().setCanSwim(true);
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
       // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(3, new WaterDinoAIAttack(this, 1.2D));
-        this.tasks.addTask(4, new DinoAIEat(this, 60));
+        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false));
     }
 
     public boolean canBreatheUnderwater()
@@ -75,12 +91,14 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
             return super.getModelTexture();
         }
 
-        if (this.isAdult())
+        switch (this.getSubSpecies())
         {
-            return "fossil:textures/mob/Mosasaurus.png";
-        }
+        case 1: 
+            return "fossil:textures/mob/Mosasaur_Blue.png";
 
-        return "fossil:textures/mob/Mosasaurus.png";
+        case 2: default:
+        	return "fossil:textures/mob/Mosasaur_Green.png";
+        }
     }
     
     @Override
@@ -92,10 +110,19 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     	if(this.isModelized())
     		return null;
     	
-    	if(this.isInWater())
+    	if(!this.isInWater())
         return DinoSound.mosasaurus_living;
     	else
     	return DinoSound.mosasaurus_outside;	
+    }
+    
+    @Override
+    public String getAttackSound()
+    {
+    	if(this.isModelized())
+    		return null;
+    	
+    	return DinoSound.mosasaurus_attack;
     }
 
     /**
@@ -142,7 +169,12 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(baseDamage);
     }
-
+    
+    public float getEyeHeight()
+    {
+        return this.height * 0.8F;
+    }
+    
     @Override
     public boolean attackEntityAsMob(Entity victim)
     {
@@ -238,5 +270,17 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
 	        }
     	}
+    }
+    
+    @Override
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
+    {
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        Random random = new Random();
+        this.setSubSpecies(random.nextInt(2) + 1);
+        this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
+        return par1EntityLivingData;
     }
 }

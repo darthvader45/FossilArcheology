@@ -179,7 +179,6 @@ public class ItemLivingCoelacanth extends Item
         Object var8;
 
             var8 = new EntityCoelacanth(var0);
-            ((EntityCoelacanth)var8).isOwned = true;
             ((EntityCoelacanth)var8).setSkin(meta);
             
 

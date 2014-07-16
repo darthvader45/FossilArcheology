@@ -206,11 +206,16 @@ public class EntityBrachiosaurus extends EntityDinosaur
         }
     }
 
+    public float getMountHeight()
+    {
+        return this.height/2;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
     

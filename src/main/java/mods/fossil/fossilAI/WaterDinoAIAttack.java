@@ -40,6 +40,13 @@ public class WaterDinoAIAttack extends EntityAIBase
     private Random rand = new Random();
     
     private World worldObj;
+	private double movePosX;
+	private double movePosY;
+	private double movePosZ;
+	private Vec3 entityVector;
+	private Vec3 targetVector;
+	private Vec3 moveVector;
+	private Vec3 normalizedVector;
 
     public WaterDinoAIAttack(EntityDinosaur dinosaur, double speed)
     {
@@ -53,7 +60,11 @@ public class WaterDinoAIAttack extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-    	return !this.entity.isDead;
+    	double distance = 64.0D;
+    	this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
+    	
+    	return (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
+                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance);
     }
 
     /**
@@ -61,7 +72,11 @@ public class WaterDinoAIAttack extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        return !this.entity.isDead;
+    	double distance = 64.0D;
+    	this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
+    	
+        return (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
+                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance);
     }
 
     /**
@@ -70,41 +85,7 @@ public class WaterDinoAIAttack extends EntityAIBase
     @Override
     public void updateTask()
     {
-        
-        double d4 = 64.0D;
-        double d0 = this.waypointX - this.entity.posX;
-        double d1 = this.waypointY - this.entity.posY;
-        double d2 = this.waypointZ - this.entity.posZ;
-        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-
-        if (d3 < 1.0D || d3 > 3600.0D)
-        {
-            if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
-            {
-                this.waypointX = this.entity.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-                this.waypointY = this.entity.posY - (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 4.0F);
-                this.waypointZ = this.entity.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            }
-        }
-
-        if (this.courseChangeCooldown-- <= 0)
-        {
-            this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-            d3 = (double)MathHelper.sqrt_double(d3);
-
-            if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3))
-            {
-                this.entity.motionX += d0 / d3 * 0.1D;
-                this.entity.motionZ += d2 / d3 * 0.1D;
-                this.entity.motionY += d1 / d3 * 0.1D;
-            }
-            else
-            {
-                this.waypointX = this.entity.posX;
-                this.waypointY = this.entity.posY;
-                this.waypointZ = this.entity.posZ;
-            }
-        }
+    	double distance = 64.0D;
 
         if (this.targetedEntity != null && this.targetedEntity.isDead)
         {
@@ -115,12 +96,14 @@ public class WaterDinoAIAttack extends EntityAIBase
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
         if (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
-                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < d4 * d4)
+                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance)
         {
+        	
             // Simple "pathfinding" to attack closest player.
             this.deltaX = this.targetedEntity.posX - this.entity.posX;
             this.deltaY = this.targetedEntity.posY - this.entity.posY;
             this.deltaZ = this.targetedEntity.posZ - this.entity.posZ;
+            /*
             this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
             deltaX /= length + 1.2D;
             deltaY /= length + 1.2D;
@@ -134,11 +117,37 @@ public class WaterDinoAIAttack extends EntityAIBase
             double d5 = this.targetedEntity.posX - this.entity.posX;
             double d6 = this.targetedEntity.posY - this.entity.posY;
             double d7 = this.targetedEntity.posZ - this.entity.posZ;
-            this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(d5, d7)) * 180.0F / (float)Math.PI;
+            */
+            //rotate entity to face target
+            this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
+ 
+            
+            
+            this.entityVector = this.entity.getPosition(1.0F);
+            this.targetVector = Vec3.createVectorHelper(this.targetedEntity.posX, this.targetedEntity.posY, this.targetedEntity.posZ);
+            
+            this.moveVector = targetVector.subtract(entityVector);
+            
+            this.normalizedVector = this.moveVector.normalize();
+            
+            this.movePosX = normalizedVector.xCoord;
+            this.movePosY = normalizedVector.yCoord;
+            this.movePosZ = normalizedVector.zCoord;
+            
+            /*
+            this.entity.motionX = -moveVector.xCoord;
+            this.entity.motionZ = -moveVector.zCoord;
+            
+            System.out.println(this.entity.motionX);
+            */
+           // this.entity.posY -= this.movePosZ;
+            
+           // this.entity.moveEntityWithHeading(1.0F, 1.0F);
+            
+            this.entity.addVelocity( -moveVector.xCoord * 0.015, -moveVector.yCoord * 0.017,  -moveVector.zCoord * 0.015);
 
             if (this.entity.canEntityBeSeen(this.targetedEntity))
             {
-                // 	this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1007, (int)this.posX, (int)this.entity.posY, (int)this.entity.posZ, 0);
                 this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
                 Vec3 vec3 = this.entity.getLook(1.0F);
             }
@@ -147,35 +156,5 @@ public class WaterDinoAIAttack extends EntityAIBase
         {
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float)Math.PI;
         }
-    }
-    
-
-    /**
-     * True if the Mosasaur has an unobstructed line of travel to the waypoint.
-     */
-    private boolean isCourseTraversable(double par1, double par3, double par5, double par7)
-    {
-        double d4 = (this.waypointX - this.entity.posX) / par7;
-        double d5 = (this.waypointY - this.entity.posY) / par7;
-        double d6 = (this.waypointZ - this.entity.posZ) / par7;
-        AxisAlignedBB axisalignedbb = this.entity.boundingBox.copy();
-        axisalignedbb.offset(d4, d5, d6);
-
-    	while (this.entity.worldObj.isAABBInMaterial(axisalignedbb, Material.water))
-    	{
-        axisalignedbb.offset(d4, d5, d6);
-        d5 -= 1;      		
-    	}
-    	
-        for (int i = 1; (double)i < par7; ++i)
-        {
-            axisalignedbb.offset(d4, d5, d6);
-            if (!this.entity.worldObj.getCollidingBoundingBoxes(entity, axisalignedbb).isEmpty())
-            {
-                return false;
-            }
-        }
-    	
-        return true;
     }
 }

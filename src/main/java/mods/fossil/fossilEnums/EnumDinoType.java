@@ -452,6 +452,7 @@ public enum EnumDinoType
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Coelacanth);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
+        Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
         
         Stegosaurus.setItems(Item.stick);  //,			Fossil.rawStegosaurus, 	Fossil.dnaStegosaurus, 	Fossil.eggStegosaurus);
         Stegosaurus.setDimensions(1.2F, 0.5F, 1.0F, 0.7F, 1.2F, 0.36F);
@@ -582,6 +583,8 @@ public enum EnumDinoType
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.ChickenCooked);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.DinoMeatCooked);
+        Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.Seeds);
+        Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.melonSeeds);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.Triceratops);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.Stegosaurus);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);

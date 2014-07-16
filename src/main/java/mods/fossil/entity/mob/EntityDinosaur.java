@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
+import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.EntityDinoEgg;
@@ -425,6 +426,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     		return null;
         return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
     }
+    
+    public String getAttackSound()
+    {
+    	if(this.isModelized())
+    		return null;
+    	
+    	return null;
+    }
+    
     @Override
     /**
      * Returns the sound this mob makes when it is hurt.
@@ -733,15 +743,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             if (this.BreedTick == 0)
             {
                 int PartnerCount = 0;
-                List var2 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
+                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
 
-                for (int var3 = 0; var3 < var2.size(); var3++)
+                for (int i = 0; i < list.size(); i++)
                 {
-                    if (var2.get(var3) instanceof EntityDinosaur)
+                    if (list.get(i) instanceof EntityDinosaur)
                     {
-                        EntityDinosaur var4 = (EntityDinosaur)var2.get(var3);
+                        EntityDinosaur partner = (EntityDinosaur)list.get(i);
 
-                        if (var4.SelfType == this.SelfType && var4.isAdult())//only adults mate
+                        if (partner.SelfType == this.SelfType && partner.isAdult())//only adults mate
                         {
                             ++PartnerCount;
                         }
@@ -760,14 +770,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
                 if ((new Random()).nextInt(60) < PartnerCount)
                 {
-                	Fossil.Console("HANDLE BREED");
                     EntityDinoEgg var5 = null;
-                    var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
+                    var5 = new EntityDinoEgg(worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
                     if (this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
                     {
-                        this.worldObj.spawnEntityInWorld((Entity)var5);
+                        worldObj.spawnEntityInWorld((Entity)var5);
                     }
 
                     //this.showHeartsOrSmokeFX(true);

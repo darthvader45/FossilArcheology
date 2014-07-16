@@ -45,8 +45,8 @@ public class ModelAnkylosaurus extends ModelDinosaurs
         Head.mirror = true;
         setRotation(Head, 0F, 0F, 0F);
         Head_Block = new ModelRenderer(this, 24, 0);
-        Head_Block.addBox(-3.0F, 8.9F, -6.9F, 6, 2, 5);
-        Head.setRotationPoint(0F, 10.5F, -8F);
+        Head_Block.addBox(-3.0F, -0.9F, -4.9F, 6, 2, 5);
+        Head_Block.setRotationPoint(0F, 10.5F, -8F);
         Head_Block.setTextureSize(128, 64);
         Head_Block.mirror = true;
         setRotation(Head_Block, 0.1745329F, 0F, 0F);
@@ -93,7 +93,7 @@ public class ModelAnkylosaurus extends ModelDinosaurs
         BodySpikes.mirror = true;
         setRotation(BodySpikes, 0F, 0F, 0F);
         Neck = new ModelRenderer(this, 46, 0);
-        Neck.addBox(0F, -9F, 0F, 4, 5, 2);
+        Neck.addBox(0F, -9F, -2.5F, 4, 5, 2);
         Neck.setRotationPoint(-2F, 8F, -8F);
         Neck.setTextureSize(128, 64);
         Neck.mirror = true;

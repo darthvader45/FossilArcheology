@@ -151,7 +151,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 // Here we use customData to subtype custom_chest:
                 if (customData1 == AcademyUtil.RARE_LOOT_F1)
                 {
-                    for (int iterate = 0; iterate < rand.nextInt(3) + 3; iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(3) + 1; iterate++)
                     {
                         int i = (new Random()).nextInt(EnumDinoType.values().length + 1); //+1 for the sapling
                         Item i0 = null;
@@ -169,7 +169,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 
                         if (loot < 80)
                         {
-                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(3)), x, y, z);
                         }
                     }
                 }
@@ -218,7 +218,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 
                 if (customData1 == AcademyUtil.RARE_LOOT_F2)
                 {
-                    for (int iterate = 0; iterate < rand.nextInt(1) + 3; iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(2) + 1; iterate++)
                     {
                         int i = (new Random()).nextInt(10); //+1 for the sapling
                         Item i0 = null;

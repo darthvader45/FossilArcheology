@@ -17,6 +17,8 @@ public enum EnumDinoFoodItem
     PumpkinPie(Item.pumpkinPie, 20, 4),
     Sugar(Item.sugar, 10, 2),
     Bread(Item.bread, 25, 2),
+    Seeds(Item.seeds, 5, 1),
+    melonSeeds(Item.melonSeeds, 5, 1),
 
 	/*
 	 * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,

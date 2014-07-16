@@ -5,7 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockFossil extends BlockStone
@@ -63,12 +66,12 @@ public class BlockFossil extends BlockStone
             return Fossil.blockSkull.blockID;
         }
 
-        if (i < 250)
+        if (i < 350)
         {
             return Fossil.biofossil.itemID;
         }
 
-        if (i < 450)
+        if (i < 550)
         {
             return Fossil.relic.itemID;
         }
@@ -101,8 +104,26 @@ public class BlockFossil extends BlockStone
         {
             return this.quantityDropped(par2Random);
         }
-    }    
+    }
+    
+    @Override
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+    {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
+        int count = quantityDropped(metadata, fortune, world.rand);
+        for(int i = 0; i < count; i++)
+        {
+            int id = idDropped(metadata, world.rand, fortune);
+            if (id > 0)
+            {
+                ret.add(new ItemStack(id, 1, damageDropped(metadata)));
+                ret.add(new ItemStack(Fossil.biofossil.itemID, 1, 0));
+            }
+        }
+        return ret;
+    }
+    
     @Override
     public void registerIcons(IconRegister par1IconRegister)
     {
