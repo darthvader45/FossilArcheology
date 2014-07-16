@@ -138,18 +138,21 @@ public class WaterDinoAIHunt extends EntityAITarget
  
             
             
-            this.entityVector = this.dinosaur.getPosition(1.0F);
-            this.targetVector = Vec3.createVectorHelper(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ);
+            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
+            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
             
-            this.moveVector = targetVector.subtract(entityVector);
             
-            this.normalizedVector = this.moveVector.normalize();
+            //this.moveVector = targetVector.subtract(entityVector);
             
-            this.movePosX = normalizedVector.xCoord;
-            this.movePosY = normalizedVector.yCoord;
-            this.movePosZ = normalizedVector.zCoord;
+            //this.normalizedVector = this.moveVector.normalize();
             
-            this.dinosaur.addVelocity( -moveVector.xCoord * 0.015, -moveVector.yCoord * 0.017,  -moveVector.zCoord * 0.015);
+            
+            
+            this.movePosX = this.deltaX;
+            this.movePosY = this.deltaY;
+            this.movePosZ = this.deltaZ;
+            
+            this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
 
             if (this.dinosaur.canEntityBeSeen(this.targetEntity))
             {

@@ -369,18 +369,21 @@ public class WaterDinoAIEat extends EntityAIBase
  
             
             
-            this.entityVector = this.dinosaur.getPosition(1.0F);
-            this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
+            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
+            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
             
-            this.moveVector = targetVector.subtract(entityVector);
             
-            this.normalizedVector = this.moveVector.normalize();
+            //this.moveVector = targetVector.subtract(entityVector);
             
-            this.movePosX = normalizedVector.xCoord;
-            this.movePosY = normalizedVector.yCoord;
-            this.movePosZ = normalizedVector.zCoord;
+            //this.normalizedVector = this.moveVector.normalize();
             
-            this.dinosaur.addVelocity( -moveVector.xCoord * 0.012, -moveVector.yCoord * 0.012,  -moveVector.zCoord * 0.012);
+            
+            
+            this.movePosX = this.deltaX;
+            this.movePosY = this.deltaY;
+            this.movePosZ = this.deltaZ;
+            
+            this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
     }
 
 }
