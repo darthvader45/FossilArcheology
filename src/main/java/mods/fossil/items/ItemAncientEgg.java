@@ -131,7 +131,6 @@ public class ItemAncientEgg extends Item
         if (var1 == EnumDinoType.Nautilus)
         {
             var8 = new EntityNautilus(var0);
-            ((EntityNautilus)var8).isOwned = true;
         }
         else
         {

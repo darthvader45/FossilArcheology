@@ -46,7 +46,7 @@ public class EntityGallimimus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
+        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -54,11 +54,15 @@ public class EntityGallimimus extends EntityDinosaur
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         
+        this.tasks.addTask(6, new DinoAIEat(this, 24));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+        
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDilophosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDeinonychus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 4.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
@@ -125,7 +129,7 @@ public class EntityGallimimus extends EntityDinosaur
 
     public void updateRiderPosition()
     {
-    	super.updateRiderPosition();
+ //   	super.updateRiderPosition();
         if (this.riddenByEntity != null)
         {
             this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);

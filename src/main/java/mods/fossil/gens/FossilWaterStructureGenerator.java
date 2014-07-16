@@ -139,7 +139,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 if (customData1 == ShipWreckUtil.RARE_LOOT)
                 {
                     //How many times to iterate through the list for loot
-                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
+                    for (int iterate = 0; iterate < rand.nextInt(4) + 1; iterate++)
                     {
                         int loot = rand.nextInt(100);
                         
@@ -163,11 +163,14 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 80)
                         {
-                        	addItemToTileInventory(world, new ItemStack(Item.goldNugget, rand.nextInt(32)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Item.diamond, rand.nextInt(8)), x, y, z);
                         }
                         else if (loot < 90)
                         {
-                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(16)), x, y, z);
+                        	if(new Random().nextFloat() > 0.3)
+                        	addItemToTileInventory(world, new ItemStack(Fossil.diamondjavelin, rand.nextInt(16)), x, y, z);
+                        	else
+                        	addItemToTileInventory(world, new ItemStack(Fossil.ancientJavelin, rand.nextInt(16)), x, y, z);
                         }
                         else if (loot < 101)
                         {
@@ -202,15 +205,18 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 85)
                         {
-                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(8)), x, y, z);
+                        	if(new Random().nextFloat() < 0.7)
+                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(16)), x, y, z);
+                        	else
+                        		addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(16)), x, y, z);	
                         }
                         else if (loot < 95)
                         {
-                            addItemToTileInventory(world, new ItemStack(Item.swordIron, rand.nextInt(1)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Item.swordIron, rand.nextInt(2)), x, y, z);
                         }
                         else
                         {
-                        	addItemToTileInventory(world, new ItemStack(Item.ingotIron, rand.nextInt(8)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Item.ingotIron, rand.nextInt(32)), x, y, z);
                         }
                     }
                 }

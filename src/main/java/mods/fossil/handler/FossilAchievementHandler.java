@@ -62,7 +62,7 @@ public class FossilAchievementHandler
         addAchievementDesc("Dinopedia", "Find all the dinos!");
 
         IceAge = new Achievement(Fossil.a_iceAgeID, "IceAge", 3, 1, Item.book, Analyzer).registerAchievement();
-        addAchievementName("IceAge", "I do not know how you’ll give birth...");
+        addAchievementName("IceAge", "I do not know how you'll give birth...");
         addAchievementDesc("IceAge", "However I want the ice age back!");
         
         TheKing = new Achievement(Fossil.a_theKingID, "TheKing", 5, -1, Item.book, null).registerAchievement().setSpecial();

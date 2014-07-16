@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD1 June 29 2014
+﻿#Updated for Build 6 DEV (1.6.4) HEAD17 July 15 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Antike Nahrungsmittel
 itemgroup.FItems=Antike Gegenstände
 itemgroup.FMaterial=Antikes Material
 itemgroup.FTools=Antike Hilfsmittel
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Antike Figuren
 
 #Achievements
 achievement.FirstEgg=Erster Dinosaurier!
@@ -46,7 +46,7 @@ tile.skullLantern.name=Schädel Laterne
 tile.analyzer.name=Analysator
 tile.cultureVat.name=Kultivierungsbehälter
 tile.fossilworkbench.name=Archeologie Werkbank
-tile.drum.name=Trommel
+tile.fossil_drum.name=Trommel
 tile.feederIdle.name=Fütterer
 tile.feederActive.name=Fütterer
 tile.permafrost.name=Dauerfrost
@@ -273,6 +273,33 @@ animal.pregnant.sheep=Schwangeres Schaf
 animal.dodo=Dodo
 animal.coelacanth=Coelacanth
 
+#Dinosaur Names
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.TRex.name=Tyrannosaurus
+entity.fossil.Pterosaur.name=Pterosaur
+entity.fossil.Plesiosaur.name=Plesiosaur
+entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Stegosaurus.name=Stegosaurus
+entity.fossil.Dilophosaurus.name=Dilophosaurus
+entity.fossil.Brachiosaurus.name=Brachiosaurus
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Spinosaurus
+entity.fossil.Compsognathus.name=Compsognathus
+entity.fossil.Ankylosaurus.name=Ankylosaurus
+entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names
+entity.fossil.Mammoth.name=Mammut
+entity.fossil.Smilodon.name=Smilodon
+entity.fossil.Pregnant.cow.name=Schwangere Kuh
+entity.fossil.Pregnant.pig.name=Schwangeres Schwein
+entity.fossil.Pregnant.sheep.name=Schwangeres Schaf
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
 #Pedia text
 pedia.text.owner=Besitzer:
 pedia.text.chest=* Truhen
@@ -342,6 +369,12 @@ mob.bones=Knochen
 mob.fpz=Freundliche Zombie Pigman
 mob.failuresaurus=Fehlersaurus
 boss.Anu=Anu
+
+#Hostile mob names
+entity.fossil.Bones.name=Knochen
+entity.fossil.FriendlyPigZombie.name=Freundliche Zombie Pigman
+entity.fossil.Failuresaurus.name=Fehlersaurus
+entity.fossil.Anu.name=Anu
 
 #Records
 item.record_bones.name=Fossil Schallplatte

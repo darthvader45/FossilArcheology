@@ -92,10 +92,10 @@ public class ModelCoelacanth extends ModelBase
   public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
   {
     this.setRotationAngles(var2, var3, var4, var5, var6, var7, (EntityCoelacanth)var1);
-    setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
+    this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
     
-    tail.render(var7);
-    head.render(var7);
+    this.tail.render(var7);
+    this.head.render(var7);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

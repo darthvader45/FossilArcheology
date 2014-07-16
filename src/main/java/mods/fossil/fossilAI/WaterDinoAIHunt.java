@@ -5,6 +5,8 @@ import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Vec3;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 
-public class DinoAIHunt extends EntityAITarget
+public class WaterDinoAIHunt extends EntityAITarget
 {
     private EntityDinosaur dinosaur;
     private DinoAINearestAttackableTargetSorter targetSorter;
@@ -25,9 +27,19 @@ public class DinoAIHunt extends EntityAITarget
 
     private EntityLivingBase targetEntity;
 	private int attackCountdown;
+	private double deltaX;
+	private double deltaY;
+	private double deltaZ;
+	private Vec3 entityVector;
+	private Vec3 targetVector;
+	private Vec3 moveVector;
+	private Vec3 normalizedVector;
+	private double movePosX;
+	private double movePosY;
+	private double movePosZ;
 	private int SEARCH_RANGE;
 
-    public DinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4)
+    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4)
     {
         super(dinosaur, par4);
         this.dinosaur = dinosaur;
@@ -36,6 +48,11 @@ public class DinoAIHunt extends EntityAITarget
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
     }
 
+    public boolean isInterruptible()
+    {
+        return true;
+    }
+    
     @Override
     public boolean shouldExecute()
     {
@@ -76,7 +93,7 @@ public class DinoAIHunt extends EntityAITarget
      */
     public boolean continueExecuting()
     {
-        return !this.targetEntity.isEntityAlive() ? false : (this.dinosaur.getDistanceSqToEntity(this.targetEntity) > 225.0D ? false : !this.dinosaur.getNavigator().noPath() || this.shouldExecute());
+        return !this.targetEntity.isEntityAlive() ? false : (this.dinosaur.getDistanceSqToEntity(this.targetEntity) > SEARCH_RANGE ? false :  this.shouldExecute());
     }
     
     /**
@@ -93,7 +110,7 @@ public class DinoAIHunt extends EntityAITarget
      */
     public void updateTask()
     {
-
+    	double distance = SEARCH_RANGE;
         this.dinosaur.getLookHelper().setLookPositionWithEntity(this.targetEntity, 30.0F, 30.0F);
         double d0 = (double)(this.dinosaur.width * 2.0F * this.dinosaur.width * 2.0F);
         double d1 = this.dinosaur.getDistanceSq(this.targetEntity.posX, this.targetEntity.boundingBox.minY, this.targetEntity.posZ);
@@ -108,7 +125,43 @@ public class DinoAIHunt extends EntityAITarget
             d2 = 1.3D;
         }
 
-        this.dinosaur.getNavigator().tryMoveToEntityLiving(this.targetEntity, d2);
+
+        if (this.dinosaur.isInWater() && this.targetEntity != null && this.targetEntity.isInWater()
+                &&  this.targetEntity.getDistanceSqToEntity(this.dinosaur) < distance * distance)
+        {
+        	
+            this.deltaX = this.targetEntity.posX - this.dinosaur.posX;
+            this.deltaY = this.targetEntity.posY - this.dinosaur.posY;
+            this.deltaZ = this.targetEntity.posZ - this.dinosaur.posZ;
+            //rotate entity to face target
+            this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
+ 
+            
+            
+            this.entityVector = this.dinosaur.getPosition(1.0F);
+            this.targetVector = Vec3.createVectorHelper(this.targetEntity.posX, this.targetEntity.posY, this.targetEntity.posZ);
+            
+            this.moveVector = targetVector.subtract(entityVector);
+            
+            this.normalizedVector = this.moveVector.normalize();
+            
+            this.movePosX = normalizedVector.xCoord;
+            this.movePosY = normalizedVector.yCoord;
+            this.movePosZ = normalizedVector.zCoord;
+            
+            this.dinosaur.addVelocity( -moveVector.xCoord * 0.015, -moveVector.yCoord * 0.017,  -moveVector.zCoord * 0.015);
+
+            if (this.dinosaur.canEntityBeSeen(this.targetEntity))
+            {
+                this.dinosaur.worldObj.playSoundAtEntity((EntityPlayer)null, this.dinosaur.getAttackSound(), 1F, 1F);
+                Vec3 vec3 = this.dinosaur.getLook(1.0F);
+            }
+        }
+        else
+        {
+            this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(this.dinosaur.motionX, this.dinosaur.motionZ)) * 180.0F / (float)Math.PI;
+        }
+        
         this.attackCountdown = Math.max(this.attackCountdown - 1, 0);
 
         if (d1 <= d0)
@@ -119,6 +172,7 @@ public class DinoAIHunt extends EntityAITarget
                 this.dinosaur.attackEntityAsMob(this.targetEntity);
             }
         }
+        
     }
     
 }

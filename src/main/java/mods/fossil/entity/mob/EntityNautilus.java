@@ -1,6 +1,8 @@
 package mods.fossil.entity.mob;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -9,10 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityNautilus extends EntityWaterMob
 {
@@ -31,7 +37,6 @@ public class EntityNautilus extends EntityWaterMob
     private float randomMotionVecY = 0.0F;
     private float randomMotionVecZ = 0.0F;
     public int BreedTick = 3000;
-    public boolean isOwned = false;
 
     public EntityNautilus(World var1)
     {
@@ -39,7 +44,6 @@ public class EntityNautilus extends EntityWaterMob
         this.setSize(0.95F, 0.95F);
         this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
         //this.experienceValue=1;
-        this.isOwned = false;
     }
 
     protected void applyEntityAttributes()
@@ -307,17 +311,5 @@ public class EntityNautilus extends EntityWaterMob
 
             this.BreedTick = 3000;
         }
-    }
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    protected boolean canDespawn()
-    {
-        if (this.isOwned)
-        {
-            return false;
-        }
-
-        return true;
     }
 }

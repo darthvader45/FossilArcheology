@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,9 +21,9 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 {
 
     
-    private static final int[] slots_top = new int[] {}; // input
+    private static final int[] slots_sides = new int[] {}; // input
     private static final int[] slots_bottom = new int[] {1,2,3,4,5};  //output
-    private static final int[] slots_sides = new int[] {0};//fuel
+    private static final int[] slots_top = new int[] {0};//fuel
     
     private String customName;
     
@@ -116,15 +117,6 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
     {
         return this.customName != null && this.customName.length() > 0;
     }
-
-    /**
-     * Sets the custom display name to use when opening a GUI linked to this tile entity.
-     */
-    public void setGuiDisplayName(String par1Str)
-    {
-        this.customName = par1Str;
-    }
-
 
     /**
      * Reads a tile entity from NBT.
@@ -460,7 +452,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
      */
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+    	return par1 == 0 ? isItemFuel(par2ItemStack) : false;
     }
 
     /**
@@ -469,7 +461,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
      */
     public int[] getAccessibleSlotsFromSide(int par1)
     {
-        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+    	return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
     }
 
     /**

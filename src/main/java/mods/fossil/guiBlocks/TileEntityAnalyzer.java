@@ -327,17 +327,17 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                     var1 = new ItemStack(Item.dyePowder, 3, 15);
                 }
 
-                if (var2 > 45 && var2 <= 85)
+                if (var2 > 45 && var2 <= 80)
                 {
                     var1 = new ItemStack(Block.sand, 3);
                 }
 
-                if (var2 > 85 && var2 <= 90)
+                if (var2 > 85 && var2 <= 85)
                 {
                     var1 = new ItemStack(Fossil.fernSeed, 3);
                 }
 
-                if (var2 > 90)
+                if (var2 > 85)
                 {
                     int i = (new Random()).nextInt(EnumDinoType.values().length + 2); //+1 for the sapling, +2 for coelacanth
                     Item i0 = null;

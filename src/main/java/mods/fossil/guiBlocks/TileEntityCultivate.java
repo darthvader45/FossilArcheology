@@ -1,6 +1,7 @@
 package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -25,6 +26,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     public int currentItemBurnTime = 0;
     public int furnaceCookTime = 0;
 
+    private String customName;
+    
     /**
      * Returns the number of slots in the inventory.
      */
@@ -93,7 +96,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
      */
     public String getInvName()
     {
-        return "Cultivate";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME + ".name";
     }
 
     /**
@@ -119,6 +122,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         this.furnaceBurnTime = var1.getShort("BurnTime");
         this.furnaceCookTime = var1.getShort("CookTime");
         this.currentItemBurnTime = this.getItemBurnTime(this.cultivateItemStacks[1]);
+        
+        if (var1.hasKey("CustomName"))
+        {
+            this.customName = var1.getString("CustomName");
+        }
     }
 
     /**
@@ -140,6 +148,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
                 this.cultivateItemStacks[var3].writeToNBT(var4);
                 var2.appendTag(var4);
             }
+        }
+        
+        if (this.isInvNameLocalized())
+        {
+        	var1.setString("CustomName", this.customName);
         }
 
         var1.setTag("Items", var2);
@@ -407,11 +420,6 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
         if (var1.itemID == Fossil.dnaDodo.itemID)
         {
-            return new ItemStack(Fossil.dodoEgg, 1);
-        }
-
-        if (var1.itemID == Fossil.dnaDodo.itemID)
-        {
             return new ItemStack(Fossil.cultivatedDodoEgg, 1);
         }
 
@@ -443,7 +451,12 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
     @Override
     public boolean isInvNameLocalized()
     {
-        return false;
+        return this.customName != null && this.customName.length() > 0;
+    }
+    
+    public void setGuiDisplayName(String par1Str)
+    {
+        this.customName = par1Str;
     }
 
     /**

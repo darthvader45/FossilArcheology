@@ -53,7 +53,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
         */
         Upper_Jaw = new ModelRenderer(this, 0, 10);
         Upper_Jaw.addBox(-2F, 0F, -7F, 4, 3, 7);
-        Upper_Jaw.setRotationPoint(0.F, -1.5F, -5F);
+        Upper_Jaw.setRotationPoint(0.5F, -1.5F, -5F);
         Upper_Jaw.setTextureSize(64, 64);
         Upper_Jaw.mirror = true;
         setRotation(Upper_Jaw, 0F, 0F, 0F);
@@ -67,7 +67,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
         */
         Lower_Jaw = new ModelRenderer(this, 0, 20);
         Lower_Jaw.addBox(-1.5F, 0F, -6F, 3, 1, 6);
-        Lower_Jaw.setRotationPoint(0F, 1.5F, -5F);
+        Lower_Jaw.setRotationPoint(0.5F, 1.5F, -5F);
         Lower_Jaw.setTextureSize(64, 64);
         Lower_Jaw.mirror = true;
         setRotation(Lower_Jaw, 0F, 0F, 0F);
@@ -109,7 +109,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
  */
         Crest = new ModelRenderer(this, 0, 10);
         Crest.addBox(0F, 0F, 0F, 1, 1, 2);
-        Crest.setRotationPoint(-0.5F, -2.5F, -7F);
+        Crest.setRotationPoint(0F, -2.5F, -7F);
         Crest.setTextureSize(64, 64);
         Crest.mirror = true;
         setRotation(Crest, 0F, 0F, 0F);

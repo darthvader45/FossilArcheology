@@ -114,7 +114,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
      */
     public String getInvName()
     {
-        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.FEEDER_IDLE_NAME + ".name";
+        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.FEEDER_ACTIVE_NAME + ".name";
     }
 
 

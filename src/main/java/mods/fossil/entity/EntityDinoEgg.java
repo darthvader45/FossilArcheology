@@ -551,6 +551,18 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                     case Mosasaurus:
                         var5 = new EntityMosasaurus(this.worldObj);
+
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
+                        {
+                            ((EntityMosasaurus)var5).setSubSpecies(1);
+                        }
+                        else
+                        {
+                            ((EntityMosasaurus)var5).setSubSpecies(2);
+                        }
+
                         break;
 
                     case Stegosaurus:

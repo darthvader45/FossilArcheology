@@ -24,7 +24,7 @@ public class FossilRecipeHandler
             GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Item.stick});
         GameRegistry.addRecipe(new ItemStack(Fossil.drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
-        GameRegistry.addRecipe(new ItemStack(Fossil.feederIdle, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.feederActive, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemAxe), new Object[] {Item.axeGold, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemAxe), new Object[] {Item.axeDiamond, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemPickaxe), new Object[] {Item.pickaxeGold, Fossil.gem});

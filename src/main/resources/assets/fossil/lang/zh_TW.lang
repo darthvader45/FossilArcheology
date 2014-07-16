@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD5 June 28 2014
+﻿#Updated for Build 6 (1.6.4) HEAD6 July 15 2014 
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -46,7 +46,7 @@ tile.skullLantern.name=頭骨燈籠
 tile.analyzer.name=分析儀
 tile.cultureVat.name=培養槽
 tile.fossilworkbench.name=考古工作桌
-tile.drum.name=命令鼓
+tile.fossil_drum.name=命令鼓
 tile.feederIdle.name=餵食器
 tile.feederActive.name=餵食器
 tile.permafrost.name=永久凍土
@@ -272,6 +272,33 @@ animal.pregnant.sheep=受孕羊
 animal.dodo=渡渡鳥
 animal.coelacanth=Coelacanth
 
+#恐龍名稱.
+entity.fossil.Triceratops.name=三角龍
+entity.fossil.Velociraptor.name=迅猛龍
+entity.fossil.TRex.name=霸王龍
+entity.fossil.Pterosaur.name=翼龍
+entity.fossil.Plesiosaur.name=蛇頸龍
+entity.fossil.Mosasaurus.name=滄龍
+entity.fossil.Stegosaurus.name=劍龍
+entity.fossil.Dilophosaurus.name=雙脊龍
+entity.fossil.Brachiosaurus.name=腕龍
+entity.fossil.Nautilus.name=鹦鹉螺
+entity.fossil.Spinosaurus.name=脊龍
+entity.fossil.Compsognathus.name=美颌龍
+entity.fossil.Ankylosaurus.name=背甲龍
+entity.fossil.Pachycephalosaurus.name=腫頭龍
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#動物名稱.
+entity.fossil.Mammoth.name=猛犸象
+entity.fossil.Smilodon.name=劍齒虎
+entity.fossil.Pregnant.cow.name=受孕牛
+entity.fossil.Pregnant.pig.name=受孕豬   
+entity.fossil.Pregnant.sheep.name=受孕羊  
+entity.fossil.Dodo.name=渡渡鳥
+entity.fossil.Coelacanth.name=Coelacanth
+
 #百科文本.恐龍信息.
 pedia.text.owner=主人:
 pedia.text.chest=* 箱子
@@ -341,6 +368,12 @@ mob.bones=骨架
 mob.fpz=僵屍豬人夥伴
 mob.failuresaurus=畸龍
 boss.Anu=阿努
+
+#昵稱
+entity.fossil.Bones.name=骨架
+entity.fossil.FriendlyPigZombie.name=僵屍豬人夥伴
+entity.fossil.Failuresaurus.name=畸龍
+entity.fossil.Anu.name=阿努
 
 #Records
 item.record_bones.name=化石唱片

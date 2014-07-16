@@ -8,10 +8,12 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -27,10 +29,13 @@ public class GuiFeeder extends GuiContainer
         this.FeederInventory = (TileEntityFeeder)var2;
     }
 
-    protected void drawGuiContainerForegroundLayer()
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRenderer.drawString(LocalizationStrings.FEEDER_IDLE_NAME, 8, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        String customName = this.FeederInventory.isInvNameLocalized() ? this.FeederInventory.getInvName() : I18n.getString(this.FeederInventory.getInvName());
+        this.fontRenderer.drawString(customName, this.xSize / 6 - this.fontRenderer.getStringWidth(customName) / 2, 6, 4210752);
+        
+        this.fontRenderer.drawString(I18n.getString("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
@@ -57,7 +62,6 @@ public class GuiFeeder extends GuiContainer
         short var8 = 240;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)var7 / 1.0F, (float)var8 / 1.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.drawGuiContainerForegroundLayer();
         InventoryPlayer var9 = this.mc.thePlayer.inventory;
 
         if (var9.getItemStack() != null)
