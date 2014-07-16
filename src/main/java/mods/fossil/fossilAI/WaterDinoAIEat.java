@@ -367,8 +367,6 @@ public class WaterDinoAIEat extends EntityAIBase
             //rotate entity to face target
             this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
  
-            
-            
             //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
             //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
             

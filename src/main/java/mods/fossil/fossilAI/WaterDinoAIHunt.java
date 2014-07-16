@@ -146,8 +146,6 @@ public class WaterDinoAIHunt extends EntityAITarget
             
             //this.normalizedVector = this.moveVector.normalize();
             
-            
-            
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
