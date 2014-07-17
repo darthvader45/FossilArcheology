@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD16 July 15 2014  
+﻿#Updated for Build 6 (1.6.4) HEAD17 July 17 2014  
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Comida Antigua
 itemgroup.FItems=Objetos Antiguos
 itemgroup.FMaterial=Materiales Antiguos
 itemgroup.FTools=Herramientas Antiguas
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Coleccionables
 
 #Achievements
 achievement.FirstEgg=¡Tu primer dinosaurio!
@@ -38,6 +38,10 @@ achievement.Sifter=Even if I have to go through all the dirt!
 achievement.Dinopedia=Find all the dinos!
 achievement.IceAge=However I want the ice age back!
 achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fósil
@@ -77,6 +81,9 @@ tile.ancientWoodStairs.name=Escaleras de Madera Antigua
 tile.ancientStoneStairs.name=Escaleras de Piedra Antigua
 tile.figurine.name=Estatuilla de Madera
 tile.sifter.name=Cedazo
+tile.volcanicStairs.name=Escaleras Volcánica
+tile.volcanicSlab.name=Losa Volcánica
+tile.volcanicSlabDouble.name=Losa Doble Volcánica
 
 #Items
 item.bioFossil.name=Bio-Fósil

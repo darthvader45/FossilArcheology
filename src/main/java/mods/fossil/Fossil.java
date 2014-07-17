@@ -34,12 +34,16 @@ import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
+import mods.fossil.blocks.BlockVolcanicSlab;
+import mods.fossil.blocks.BlockVolcanicStairs;
 import mods.fossil.client.DinoSoundHandler;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilMessageHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
+import mods.fossil.enchantments.EnchantmentArcheology;
+import mods.fossil.enchantments.EnchantmentPaleontology;
 import mods.fossil.entity.BehaviorDodoEggDispense;
 import mods.fossil.entity.BehaviorJavelinDispense;
 import mods.fossil.entity.EntityAncientJavelin;
@@ -91,6 +95,7 @@ import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
 import mods.fossil.handler.FossilRecipeHandler;
 import mods.fossil.handler.FossilSpawnEggs;
+import mods.fossil.handler.FossilToolEvent;
 import mods.fossil.handler.FossilTradeHandler;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
@@ -134,6 +139,8 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -177,7 +184,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.2.3";
+    public static final String modversion = "1.6.4 Build 6.3a4";
 
     /*
      * Set mod state here
@@ -273,6 +280,9 @@ public class Fossil
     public static Block figurineBlock;
     public static Block blockSifterIdle;
     public static Block blockSifterActive;
+    public static Block volcanicStairs;
+    public static Block volcanicSingleSlab;
+    public static Block volcanicDoubleSlab;
 
     //Items
     public static Item biofossil;
@@ -459,6 +469,9 @@ public class Fossil
     public static int figurineBlockID;
     public static int blockSifterIdleID;
     public static int blockSifterActiveID;
+    public static int volcanicStairsID;
+    public static int volcanicSingleSlabID;
+    public static int volcanicDoubleSlabID;
     
     //Items
     public static int biofossilID;
@@ -597,7 +610,9 @@ public class Fossil
     static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
     static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
     static EnumArmorMaterial RELIC = EnumHelper.addArmorMaterial("Relic", 5, new int[]{1, 3, 2, 1}, 15);
-    		
+    
+    public static final Enchantment paleontology = new EnchantmentPaleontology(90, 17, EnumEnchantmentType.digger);
+    public static final Enchantment archeology = new EnchantmentArcheology(91, 17, EnumEnchantmentType.digger);   		
     
     @Mod.EventHandler
     public void PreInit(FMLPreInitializationEvent event)
@@ -674,6 +689,9 @@ public class Fossil
             figurineBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.FIGURINE_NAME, 3043).getInt();
             blockSifterIdleID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SIFTER_IDLE, 3044).getInt();
             blockSifterActiveID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_SIFTER_ACTIVE, 3045).getInt();
+            volcanicStairsID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_STAIRS, 3046).getInt();
+            volcanicSingleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME, 3047).getInt();
+            volcanicDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME, 3048).getInt();
             
             //Items
             biofossilID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt();
@@ -910,6 +928,9 @@ public class Fossil
         figurineBlock = new BlockFigurine(figurineBlockID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
         blockSifterIdle = new BlockSifter(blockSifterIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE).setCreativeTab(this.tabFBlocks);
         blockSifterActive = new BlockSifter(blockSifterActiveID, true).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
+        volcanicStairs = new BlockVolcanicStairs(volcanicStairsID, volcanicBrick).setUnlocalizedName(LocalizationStrings.VOLCANIC_STAIRS);
+        volcanicDoubleSlab = (BlockHalfSlab)(new BlockVolcanicSlab(volcanicDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
+        volcanicSingleSlab = (BlockHalfSlab)(new BlockVolcanicSlab(volcanicSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
         Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -1074,6 +1095,9 @@ public class Fossil
         //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(figurineBlock, BlockFigurineItem.class, modid + (figurineBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(blockSifterIdle, LocalizationStrings.BLOCK_SIFTER_IDLE);
+        GameRegistry.registerBlock(volcanicStairs, LocalizationStrings.VOLCANIC_STAIRS);
+        GameRegistry.registerBlock(volcanicSingleSlab, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(volcanicDoubleSlab, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
 
         
         for (int i = 0; i < 16; ++i)
@@ -1085,11 +1109,6 @@ public class Fossil
         LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 0), "Living Coelacanth");
         LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 1), "Living Coelacanth");
         LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 2), "Living Coelacanth");
-        
-
-        LanguageRegistry.instance().addStringLocalization(((BlockPalaeSlab)palaeSingleSlab).getFullSlabName(0) + ".name", "Palaeoraphe Slab");
-        LanguageRegistry.instance().addStringLocalization(((BlockAncientWoodSlab)ancientWoodSingleSlab).getFullSlabName(0) + ".name", "Ancient Wood Slab");
-        LanguageRegistry.instance().addStringLocalization(((BlockAncientStoneSlab)ancientStoneSingleSlab).getFullSlabName(0) + ".name", "Ancient Stone Slab");
         
         EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
@@ -1114,27 +1133,8 @@ public class Fossil
         {
             EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
         }
-
-/*
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Failuresaurus.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FAILURESAURUS));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Bones.name", StatCollector.translateToLocal(LocalizationStrings.MOB_BONES));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.FriendlyPigZombie.name", StatCollector.translateToLocal(LocalizationStrings.MOB_FPZ));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PigBoss.name", StatCollector.translateToLocal(LocalizationStrings.BOSS_ANU));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantSheep.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_SHEEP));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantCow.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_COW));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.PregnantPig.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_PREGNANT_PIG));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Smilodon.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Mammoth.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Dodo.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO));
-        LanguageRegistry.instance().addStringLocalization("entity.fossil.Coelacanth.name", StatCollector.translateToLocal(LocalizationStrings.ANIMAL_COELACANTH));
-
-        for (int i = 0; i < EnumDinoType.values().length; i++)
-        {
-            LanguageRegistry.instance().addStringLocalization("entity.fossil." + EnumDinoType.values()[i].name() + ".name", StatCollector.translateToLocal(EnumDinoType.values()[i].name()));
-        }
-        */
 
         FossilSpawnEggs.addSpawnEggs();
         //make the dino types complete by registering the dinos items
@@ -1178,6 +1178,7 @@ public class Fossil
         GameRegistry.registerPickupHandler(new FossilPickupHandler());
         GameRegistry.registerCraftingHandler(new FossilCraftingHandler());
         proxy.onInit(event);
+        MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
 
         
 
@@ -1207,8 +1208,8 @@ public class Fossil
     @Mod.EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
-        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
-        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
+//        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
+//        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
+//        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
     }
 }

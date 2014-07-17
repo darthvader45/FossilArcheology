@@ -118,7 +118,7 @@ public class BlockFossil extends BlockStone
             if (id > 0)
             {
                 ret.add(new ItemStack(id, 1, damageDropped(metadata)));
-                ret.add(new ItemStack(Fossil.biofossil.itemID, 1, 0));
+//                ret.add(new ItemStack(Fossil.biofossil.itemID, 1, 0));
             }
         }
         return ret;

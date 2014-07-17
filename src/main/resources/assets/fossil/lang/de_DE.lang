@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD17 July 15 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD18 July 17 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Antike Nahrungsmittel
 itemgroup.FItems=Antike Gegenstände
 itemgroup.FMaterial=Antikes Material
 itemgroup.FTools=Antike Hilfsmittel
-itemgroup.FFigurines=Antike Figuren
+itemgroup.FFigurines=Sammlerstücke
 
 #Achievements
 achievement.FirstEgg=Erster Dinosaurier!
@@ -38,6 +38,10 @@ achievement.Sifter=Auch wenn man durch den ganzen Dreck muss!
 achievement.Dinopedia=Finde alle Dinos!
 achievement.IceAge=Ich will die Eiszeit zurück!
 achievement.TheKing=Lang lebe der König!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
@@ -77,6 +81,9 @@ tile.ancientWoodStairs.name=Antike Holztreppe
 tile.ancientStoneStairs.name=Antike Steintreppe
 tile.figurine.name=Hölzerne Figur
 tile.sifter.name=Sichter
+tile.volcanicStairs.name=Vulkanische Treppe
+tile.volcanicSlab.name=Vulkanische Stufe
+tile.volcanicSlabDouble.name=Vulkanische Doppelstufe
 
 #Items
 item.bioFossil.name=Bio-Fossil

@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD6 July 15 2014 
+﻿#Updated for Build 6 (1.6.4) HEAD7 July 17 2014 
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -9,7 +9,7 @@ itemgroup.FFood=古代食物
 itemgroup.FItems=古代物品
 itemgroup.FMaterial=古代材料
 itemgroup.FTools=古代工具
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Collectables
 
 #Achievements
 achievement.FirstEgg=第一只恐龍!
@@ -38,6 +38,10 @@ achievement.Sifter=Even if I have to go through all the dirt!
 achievement.Dinopedia=Find all the dinos!
 achievement.IceAge=However I want the ice age back!
 achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
 
 #方塊
 tile.fossil.name=化石
@@ -77,6 +81,9 @@ tile.ancientWoodStairs.name=古代木頭樓梯
 tile.ancientStoneStairs.name=古代石頭樓梯
 tile.figurine.name=木質雕像
 tile.sifter.name=Sifter
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
 
 #物品
 item.bioFossil.name=活體化石

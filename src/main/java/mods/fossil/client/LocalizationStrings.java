@@ -17,6 +17,9 @@ public class LocalizationStrings
 	public static final String ACHIEVEMENT_ICEAGE = "IceAge";
 	public static final String ACHIEVEMENT_THEKING = "TheKing";
 	
+	//Enchantments
+	public static final String ENCHANTMENT_PALEONTOLOGY = "paleontology";
+	
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
@@ -65,6 +68,9 @@ public class LocalizationStrings
     public static final String FIGURINE_NAME = "figurine";
 	public static final String BLOCK_SIFTER_IDLE = "sifter";
 	public static final String BLOCK_SIFTER_ACTIVE = "sifterActive";
+    public static final String VOLCANIC_STAIRS = "volcanicStairs";
+    public static final String VOLCANIC_SINGLESLAB_NAME = "volcanicSlab";
+    public static final String VOLCANIC_DOUBLESLAB_NAME = "volcanicSlabDouble";
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
