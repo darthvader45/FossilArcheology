@@ -148,6 +148,7 @@ public class LocalizationStrings
     public static final String DNA_MAMMOTH_NAME = "dnaMammoth";
     public static final String DNA_DODO_NAME = "dnaDodo";
     public static final String DNA_COELACANTH_NAME = "dnaCoelacanth";
+    public static final String DNA_HORSE_NAME = "dnaHorse";
 
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
@@ -157,6 +158,7 @@ public class LocalizationStrings
     public static final String EMBRYO_SMILODON_NAME = "embryoSmilodon";
     public static final String EMBRYO_MAMMOTH_NAME = "embryoMammoth";
     public static final String EMBRYO_DODO_NAME = "embryoDodo";
+    public static final String EMBRYO_HORSE_NAME = "embryoHorse";    
     
     //Other
     public static final String LIVING_COELACANTH_NAME = "eggCoelacanth";
@@ -199,6 +201,7 @@ public class LocalizationStrings
     public static final String PEDIA_EMBRYO_SMILODON = "pedia.embryo.smilodon";
     public static final String PEDIA_EMBRYO_MAMMOTH = "pedia.embryo.mammoth";
     public static final String PEDIA_EMBRYO_DODO = "pedia.embryo.dodo";
+    public static final String PEDIA_EMBRYO_HORSE = "pedia.embryo.horse";
 
     //Dino Egg Messages
     public static final String DINOEGG_HATCHED = "dinoegg.hatched";
@@ -224,6 +227,7 @@ public class LocalizationStrings
     public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken";
     public static final String ANIMAL_DODO = "animal.dodo";
     public static final String ANIMAL_COELACANTH = "animal.coelacanth";
+    public static final String ANIMAL_PREGNANT_HORSE = "animal.horse";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";
@@ -248,6 +252,7 @@ public class LocalizationStrings
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+
     
     //Dinosaur name strings are handled through DinoEnum.
 

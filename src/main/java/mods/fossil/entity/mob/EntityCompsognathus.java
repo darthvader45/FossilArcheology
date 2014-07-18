@@ -63,6 +63,7 @@ public class EntityCompsognathus extends EntityDinosaur
         this.maxSize = 0.65F;
         
         this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setCanSwim(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));

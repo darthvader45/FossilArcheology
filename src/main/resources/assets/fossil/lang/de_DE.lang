@@ -235,6 +235,7 @@ item.dnaChicken.name=Huhn DNA
 item.dnaSmilodon.name=Smilodon DNA
 item.dnaMammoth.name=Mammut DNA
 item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Pferd DNA
 item.embryoPig.name=Schwein Embryo
 item.embryoSheep.name=Schaf Embryo
 item.embryoCow.name=Kuh Embryo
@@ -242,6 +243,7 @@ item.embryoChicken.name=Huhn Embryo
 item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammut Embryo
 item.embryoDodo.name=Dodo Embryo
+item.embryoHorse.name=Pferd Embryo
 item.archNotebook.name=Archaeologie Notizbuch
 item.potteryShard.name=Keramikscherbe
 
@@ -312,6 +314,7 @@ animal.smilodon=Smilodon
 animal.pregnant.cow=Schwangere Kuh
 animal.pregnant.pig=Schwangeres Schwein
 animal.pregnant.sheep=Schwangeres Schaf
+animal.pregnant.horse=Schwangere Pferd
 animal.dodo=Dodo
 animal.coelacanth=Coelacanth
 
@@ -336,9 +339,10 @@ entity.fossil.Gallimimus.name=Gallimimus
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mammut
 entity.fossil.Smilodon.name=Smilodon
-entity.fossil.Pregnant.cow.name=Schwangere Kuh
-entity.fossil.Pregnant.pig.name=Schwangeres Schwein
-entity.fossil.Pregnant.sheep.name=Schwangeres Schaf
+entity.fossil.PregnantCow.name=Schwangere Kuh
+entity.fossil.PregnantPig.name=Schwangeres Schwein
+entity.fossil.PregnantSheep.name=Schwangeres Schaf
+entity.fossil.PregnantHorse.name=Schwangere Pferd
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 
@@ -366,6 +370,7 @@ pedia.embryo.Chicken=Huhn
 pedia.embryo.Smilodon=Smilodon
 pedia.embryo.Mammoth=Mammut
 pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Pferd
 
 #Anu speaking lines
 anuSpeaker.self=Anu:

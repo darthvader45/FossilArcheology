@@ -353,6 +353,16 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
             {
                 return 1000;
             }
+            
+            if (var2 == Fossil.dodoEgg.itemID)
+            {
+                return 1000;
+            }
+            
+            if (var2 == Fossil.dodoWing.itemID)
+            {
+                return 1500;
+            }
 
             if (var2 == Item.slimeBall.itemID)
             {
@@ -398,6 +408,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
             return new ItemStack(Fossil.embryoCow, 1);
         }
 
+        if (var1.itemID == Fossil.dnaHorse.itemID)
+        {
+            return new ItemStack(Fossil.embryoHorse, 1);
+        }
+        
         if (var1.itemID == Fossil.dnaChicken.itemID)
         {
             return new ItemStack(Fossil.embryoChicken, 1);

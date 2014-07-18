@@ -127,17 +127,17 @@ public class ContainerAnalyzer extends Container
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int getSlot)
     {
         ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(par2);
+        Slot slot = (Slot)this.inventorySlots.get(getSlot);
 
         if (slot != null && slot.getHasStack())
         {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (par2 > INPUT_END && par2 < OUTPUT_END+1) // If slot is equal to Output.
+            if (getSlot > INPUT_END && getSlot < OUTPUT_END+1) // If slot is equal to Output.
             {
             	//Place INTO inventory, only check output.
                 if (!this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+36+1, true)) // 13 is first slot after the outputs, 49 is last inventory slot
@@ -148,7 +148,7 @@ public class ContainerAnalyzer extends Container
                 slot.onSlotChange(itemstack1, itemstack);
             }
     		// itemstack is in player inventory, try to place in appropriate furnace slot
-    		else if (par2 > INPUT_END) // if it's not in the INPUT
+    		else if (getSlot > INPUT_END) // if it's not in the INPUT
     		{
     			// if it can be smelted, place in the input slots
     			if (itemstack1 != null)
@@ -161,7 +161,7 @@ public class ContainerAnalyzer extends Container
     			}
     		}
 			// item in player's inventory, but not in action bar
-			else if(par2 >= OUTPUT_END+1 && par2 < OUTPUT_END+28)
+			else if(getSlot >= OUTPUT_END+1 && getSlot < OUTPUT_END+28)
 			{
 				// place in action bar
 				if (!this.mergeItemStack(itemstack1, OUTPUT_END+28, OUTPUT_END+37, false))
@@ -170,7 +170,7 @@ public class ContainerAnalyzer extends Container
 				}
 			}
 			// item in action bar - place in player inventory
-			else if (par2 >= OUTPUT_END+28 && par2 < OUTPUT_END+37 && !this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+28, false))
+			else if (getSlot >= OUTPUT_END+28 && getSlot < OUTPUT_END+37 && !this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+28, false))
 			{
 				return null;
 			}

@@ -1,5 +1,7 @@
 package mods.fossil.entity.mob;
 
+import java.util.Random;
+
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
@@ -20,7 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class EntityPregnantPig extends EntityPig implements IViviparous, IEntityAdditionalSpawnData
+public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEntityAdditionalSpawnData
 {
     public int EmbryoProgress = 0;
     //public final int EmbryoGrowTime = 3000;
@@ -28,7 +30,7 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
     //public String InsideText = "Embyo inside:";
     //public String GrowingText = "Growing progress:";
 
-    public EntityPregnantPig(World var1)
+    public EntityPregnantHorse(World var1)
     {
         super(var1);
     }
@@ -89,12 +91,22 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
      */
     public void onLivingUpdate()
     {
-        EntityPig var1 = new EntityPig(this.worldObj);
+        EntityHorse parentEntity = new EntityHorse(this.worldObj);
+        float rnd = new Random().nextInt(100);
 
         if (this.Embryo == null)
         {
             this.setDead();
-            this.worldObj.spawnEntityInWorld(var1);
+            this.worldObj.spawnEntityInWorld(parentEntity);
+            parentEntity.setHorseType(this.getHorseType());
+            parentEntity.setHorseVariant(this.getHorseVariant());
+            parentEntity.setHorseTamed(this.isTame());
+            parentEntity.setHorseSaddled(this.isHorseSaddled());
+    		parentEntity.setOwnerName(this.getOwnerName());
+    		parentEntity.setHorseTamed(this.isTame());
+    		parentEntity.setTemper(this.getTemper());
+    		parentEntity.setHealth(this.getHealth());
+    		parentEntity.setGrowingAge(this.getGrowingAge());  
         }
 
         ++this.EmbryoProgress;
@@ -103,45 +115,70 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
 
         if (this.EmbryoProgress == this.Embryo.GrowTime) //var10000 == 3000)
         {
-            Object var2;
+            Object birthEntity;
 
-            switch (this.Embryo)//EntityPregnantPig$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
+            switch (this.Embryo)//EntityPregnantCow$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
             {
                 case Pig:
-                    var2 = new EntityPig(this.worldObj);
+                    birthEntity = new EntityPig(this.worldObj);
                     break;
 
                 case Sheep:
-                    var2 = new EntitySheep(this.worldObj);
+                    birthEntity = new EntitySheep(this.worldObj);
                     break;
 
                 case Cow:
-                    var2 = new EntityCow(this.worldObj);
+                    birthEntity = new EntityCow(this.worldObj);
                     break;
 
                 case Chicken:
-                    var2 = new EntityChicken(this.worldObj);
+                    birthEntity = new EntityChicken(this.worldObj);
                     break;
                     
                 case Horse:
-                	var2 = new EntityHorse(this.worldObj);
+                	if(rnd < 1)
+                	{
+                		birthEntity = new EntityHorse(this.worldObj);
+                		((EntityHorse)birthEntity).setHorseType(3);
+                        if (this.getOwnerName() != null)
+                        {
+                		((EntityHorse)birthEntity).setOwnerName(this.getOwnerName());
+                		((EntityHorse)birthEntity).setHorseTamed(true);
+                        }
+                		break;
+                	}
+                	else if(rnd < 2)
+                	{
+                		birthEntity = new EntityHorse(this.worldObj);
+                		((EntityHorse)birthEntity).setHorseType(4);
+                        if (this.getOwnerName() != null)
+                        {
+                		((EntityHorse)birthEntity).setOwnerName(this.getOwnerName());
+                		((EntityHorse)birthEntity).setHorseTamed(true);
+                        }
+                		break;
+                	}
+                	else
+                	{
+                	birthEntity = super.createChild(new EntityHorse(this.worldObj));//new EntityHorse(this.worldObj);
                 	break;
+                	}
 
                 case Smilodon:
-                    var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
+                    birthEntity = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
                     break;
 
                 case Mammoth:
-                    var2 = new EntityMammoth(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
+                    birthEntity = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
                     break;
 
                 default:
-                    var2 = new EntityPig(this.worldObj);
+                    birthEntity = new EntityPig(this.worldObj);
             }
 
-            ((EntityAnimal)var2).setGrowingAge(-24000);
-            ((EntityAnimal)var2).setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-            var1.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+            ((EntityAnimal)birthEntity).setGrowingAge(-24000);
+            ((EntityAnimal)birthEntity).setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+            parentEntity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
 
             for (int var3 = 0; var3 < 7; ++var3)
             {
@@ -155,9 +192,18 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
 
             if (!this.worldObj.isRemote)
             {
-                this.worldObj.spawnEntityInWorld((Entity)var2);
-                this.worldObj.spawnEntityInWorld(var1);
-            }
+                this.worldObj.spawnEntityInWorld((Entity)birthEntity);
+                this.worldObj.spawnEntityInWorld(parentEntity);
+                parentEntity.setHorseType(this.getHorseType());
+                parentEntity.setHorseVariant(this.getHorseVariant());
+                parentEntity.setHorseTamed(this.isTame());
+                parentEntity.setHorseSaddled(this.isHorseSaddled());
+        		parentEntity.setOwnerName(this.getOwnerName());
+        		parentEntity.setHorseTamed(this.isTame());
+        		parentEntity.setTemper(this.getTemper());
+        		parentEntity.setHealth(this.getHealth());
+        		parentEntity.setGrowingAge(this.getGrowingAge());            
+        	}
         }
         else
         {
@@ -170,7 +216,7 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
         int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
         p0.reset();
         p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false);
+        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
         p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
         p0.AddStringLR(String.valueOf(quot) + "/100", false);
         /*

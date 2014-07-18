@@ -92,7 +92,7 @@ public class FossilToolEvent {
 					{
 						switch(paleontologyBonus){
 						case 1:
-							if(player.worldObj.rand.nextFloat() < 0.70)
+							if(player.worldObj.rand.nextFloat() < 0.50)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.icedMeat, 1));
@@ -102,7 +102,7 @@ public class FossilToolEvent {
 								break;
 							}
 						case 2:
-							if(player.worldObj.rand.nextFloat() < 0.80)
+							if(player.worldObj.rand.nextFloat() < 0.70)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.icedMeat, 1));
@@ -130,13 +130,13 @@ public class FossilToolEvent {
 			if(hasArcheologyBonus == true)
 			{
 				
-				float rand = player.worldObj.rand.nextFloat();
+				float rand = player.worldObj.rand.nextInt(1000);
 	
 					if(block == Fossil.blockFossil)
 					{
 						switch(archeologyBonus){
 						case 1:
-							if(rand < 0.70)
+							if(rand < 500)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.relic, 1));
@@ -146,7 +146,7 @@ public class FossilToolEvent {
 								break;
 							}
 						case 2:
-							if(rand < 0.80)
+							if(rand < 700)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.relic, 1));
@@ -156,13 +156,13 @@ public class FossilToolEvent {
 								break;
 							}
 						case 3:
-							if(rand < 0.90)
+							if(rand < 900)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.relic, 1));
 								break;
 							}
-							else if(rand < 0.95)
+							else if(rand < 904)
 							{
 								event.drops.remove(0);
 								event.drops.add(new ItemStack(Fossil.gem, 1));

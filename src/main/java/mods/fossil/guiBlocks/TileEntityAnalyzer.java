@@ -389,6 +389,14 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 var1 = new ItemStack(Fossil.dnaCow, 2);
             }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.leather)
+            {
+            	if(new Random().nextFloat() > 0.5)
+                var1 = new ItemStack(Fossil.dnaCow, 1);
+            	else
+            	var1 = new ItemStack(Fossil.dnaHorse, 1);
+            }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.egg)
             {
@@ -398,6 +406,21 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.chickenRaw)
             {
                 var1 = new ItemStack(Fossil.dnaChicken, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoWing)
+            {
+                var1 = new ItemStack(Fossil.dnaDodo, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
+            {
+                var1 = new ItemStack(Fossil.dnaDodo, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
+            {
+                var1 = new ItemStack(Fossil.dnaDodo, 1);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.icedMeat)
@@ -450,9 +473,22 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                     var1 = new ItemStack(Fossil.stoneboard, 1);
                 }
 
-                if (var2 > 70 && var2 <= 96)
+                if (var2 > 70 && var2 <= 88)
                 {
                     var1 = new ItemStack(Item.flint, 2);
+                }
+                
+                if (var2 > 88 && var2 <= 92)
+                {
+                    var1 = new ItemStack(Fossil.potteryShards, 1);
+                }
+                
+                if (var2 > 92 && var2 <= 96)
+                {
+                	if (new Random().nextFloat() < 0.7)
+                	var1 = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+10);
+                	else
+                	var1 = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+5);
                 }
 
                 if (var2 > 96)
@@ -571,6 +607,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
      */
     public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
-        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
+        return par3 != 0 || par1 != 1;
     }
 }

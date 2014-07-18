@@ -50,7 +50,7 @@ public class EnchantmentArcheology  extends Enchantment {
     public boolean canApplyTogether(Enchantment enchantment)
     {
     //    return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != archeology.effectId;
-        return super.canApplyTogether(enchantment) && enchantment.effectId != silkTouch.effectId || enchantment.effectId != Fossil.paleontology.effectId;
+        return super.canApplyTogether(enchantment) && enchantment.effectId != silkTouch.effectId && enchantment.effectId != Fossil.paleontology.effectId;
     }
     
     

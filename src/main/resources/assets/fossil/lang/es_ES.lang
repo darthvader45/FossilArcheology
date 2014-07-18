@@ -235,6 +235,7 @@ item.dnaChicken.name=ADN de Pollo
 item.dnaSmilodon.name=ADN de Tigre Dientes de Sable
 item.dnaMammoth.name=ADN de Mamút
 item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Horse DNA
 item.embryoPig.name=Embrión de Cerdo
 item.embryoSheep.name=Embrión de Oveja
 item.embryoCow.name=Embrión de Vaca
@@ -242,6 +243,7 @@ item.embryoChicken.name=Embrión de Pollo
 item.embryoSmilodon.name=Embrión de Tigre Dientes de Sable
 item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Embrión de Dodo
+item.embryoHorse.name=Horse Embryo
 item.archNotebook.name=Cuaderno de Arqueología
 item.potteryShard.name=Pottery Shard
 
@@ -309,8 +311,9 @@ Dino.Gallimimus=Gallimimus
 animal.mammoth=Mamút
 animal.smilodon=Tigres Dientes de Sable
 animal.pregnant.cow=Vaca Embarazada
-animal.pregnant.pig=Cerdo Embarazado   
+animal.pregnant.pig=Cerdo Embarazado
 animal.pregnant.sheep=Oveja Embarazada
+animal.pregnant.horse=Pregnant Horse
 animal.dodo=Dodo
 animal.coelacanth=Coelacanth
 
@@ -335,9 +338,10 @@ entity.fossil.Gallimimus.name=Gallimimus
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mamút
 entity.fossil.Smilodon.name=Tigres Dientes de Sable
-entity.fossil.Pregnant.cow.name=Vaca Embarazada
-entity.fossil.Pregnant.pig.name=Cerdo Embarazado   
-entity.fossil.Pregnant.sheep.name=Oveja Embarazada
+entity.fossil.PregnantCow.name=Vaca Embarazada
+entity.fossil.PregnantPig.name=Cerdo Embarazado   
+entity.fossil.PregnantSheep.name=Oveja Embarazada
+entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 
@@ -365,6 +369,7 @@ pedia.embryo.Chicken=Pollo
 pedia.embryo.SaberCat=Tigres Dientes de Sable
 pedia.embryo.Mammoth=Mamút
 pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 

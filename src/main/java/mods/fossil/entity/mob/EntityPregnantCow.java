@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -12,6 +13,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -89,6 +91,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
     public void onLivingUpdate()
     {
         EntityCow var1 = new EntityCow(this.worldObj);
+        
 
         if (this.Embryo == null)
         {
@@ -103,6 +106,7 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
         if (this.EmbryoProgress == this.Embryo.GrowTime) //var10000 == 3000)
         {
             Object var2;
+            EntityAgeable horse = new EntityHorse(this.worldObj);
 
             switch (this.Embryo)//EntityPregnantCow$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
             {
@@ -121,6 +125,10 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
                 case Chicken:
                     var2 = new EntityChicken(this.worldObj);
                     break;
+                    
+                case Horse:
+                	var2 = new EntityHorse(this.worldObj);
+                	break;
 
                 case Smilodon:
                     var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);

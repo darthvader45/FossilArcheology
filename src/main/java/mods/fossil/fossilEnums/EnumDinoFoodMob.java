@@ -16,6 +16,7 @@ public enum EnumDinoFoodMob
     Player(EntityPlayer.class, 30, 2),
     Chicken(EntityChicken.class, 20, 2),
     Cow(EntityCow.class, 50, 5),
+    Horse(EntityHorse.class, 50, 3),
     Pig(EntityPig.class, 30, 3),
     Sheep(EntitySheep.class, 35, 3),
     Squid(EntitySquid.class, 30, 3),

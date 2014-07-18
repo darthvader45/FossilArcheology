@@ -68,6 +68,7 @@ import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPigBoss;
 import mods.fossil.entity.mob.EntityPregnantCow;
+import mods.fossil.entity.mob.EntityPregnantHorse;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.entity.mob.EntitySmilodon;
@@ -188,7 +189,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3a4";
+    public static final String modversion = "1.6.4 Build 6.3a8";
 
     /*
      * Set mod state here
@@ -379,6 +380,7 @@ public class Fossil
     public static Item dnaMammoth;
     public static Item dnaDodo;
     public static Item dnaCoelacanth;
+    public static Item dnaHorse;
 
     //Mob DNA
     //public static Item mobDNA;
@@ -400,7 +402,7 @@ public class Fossil
     public static Item embryoChicken;
     public static Item embryoSmilodon;
     public static Item embryoMammoth;
-//    public static Item embryoDodo;
+    public static Item embryoHorse;
 
     //Item Food
     public static Item cookedChickenSoup;
@@ -572,6 +574,7 @@ public class Fossil
     public static int dnaMammothID;
     public static int dnaDodoID;
     public static int dnaCoelacanthID;
+    public static int dnaHorseID;
 
     //Mob DNA
     //public static int mobDNAID;
@@ -599,6 +602,7 @@ public class Fossil
     public static int embryoChickenID;
     public static int embryoSmilodonID;
     public static int embryoMammothID;
+    public static int embryoHorseID;
 //   public static int embryoDodoID;
     //public static int embryoPigZombieID;
     //public static int embryoZombieID;
@@ -795,11 +799,7 @@ public class Fossil
             dnaDodoID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_DODO_NAME, 10083).getInt();
             dnaCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COELACANTH_NAME, 10084).getInt();
             livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10085).getInt();
-            
-            //MobDNA
-            //mobDNAID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10083).getInt();
-            //dnaPigZombieID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10084).getInt();
-            //dnaZombieID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10085).getInt();
+            dnaHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_HORSE_NAME, 10086).getInt();
             //dnaGhastID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10086).getInt();
             //dnaWitherID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10087).getInt();
             //dnaSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10088).getInt();
@@ -820,7 +820,7 @@ public class Fossil
             embryoChickenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt();
             embryoSmilodonID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SMILODON_NAME, 10112).getInt();
             embryoMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt();
-//        embryoDodoID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_DODO_NAME, 10114).getInt();
+            embryoHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_HORSE_NAME, 10114).getInt();
             //embryoPigZombieID = config.getItem(Configuration.CATEGORY_ITEM, "embryoPigZombie", 10114).getInt();
             //embryoZombieID = config.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt();
             //embryoGhastID = config.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt();
@@ -1028,6 +1028,7 @@ public class Fossil
         dnaMammoth = new ForgeItem(dnaMammothID, "Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(this.tabFMaterial);
         dnaDodo = new ForgeItem(dnaDodoID, "Dodo_DNA").setUnlocalizedName(LocalizationStrings.DNA_DODO_NAME).setCreativeTab(this.tabFMaterial);
         dnaCoelacanth = new ForgeItem(dnaCoelacanthID, "Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
+        dnaHorse = new ForgeItem(dnaHorseID, "Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(this.tabFMaterial);
         
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
@@ -1037,6 +1038,7 @@ public class Fossil
         embryoChicken = new ItemEmbryoSyringe(embryoChickenID, 3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(this.tabFItems);
         embryoSmilodon = new ItemEmbryoSyringe(embryoSmilodonID, 4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
         embryoMammoth = new ItemEmbryoSyringe(embryoMammothID, 5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
+        embryoHorse = new ItemEmbryoSyringe(embryoHorseID, 6).setUnlocalizedName(LocalizationStrings.EMBRYO_HORSE_NAME).setCreativeTab(this.tabFItems);
 
         //Item Food
         //Moved to fossilEnums.EnumDinoType
@@ -1138,6 +1140,7 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {

@@ -235,7 +235,7 @@ item.dnaChicken.name=鸡DNA
 item.dnaSmilodon.name=剑齿虎DNA
 item.dnaMammoth.name=猛犸象DNA
 item.dnaDodo.name=渡渡鸟DNA
-
+item.dnaHorse.name=Horse DNA
 item.embryoPig.name=猪胚胎
 item.embryoSheep.name=羊胚胎
 item.embryoCow.name=牛胚胎
@@ -243,6 +243,7 @@ item.embryoChicken.name=鸡胚胎
 item.embryoSmilodon.name=剑齿虎胚胎
 item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鸟胚胎
+item.embryoHorse.name=Horse Embryo
 item.archNotebook.name=考古手册
 item.potteryShard.name=陶片
 
@@ -310,8 +311,9 @@ Dino.Gallimimus=似鸡龙
 animal.mammoth=猛犸象
 animal.smilodon=剑齿虎
 animal.pregnant.cow=受孕牛
-animal.pregnant.pig=受孕猪   
-animal.pregnant.sheep=受孕羊  
+animal.pregnant.pig=受孕猪
+animal.pregnant.sheep=受孕羊
+animal.pregnant.horse=Pregnant Horse
 animal.dodo=渡渡鸟
 animal.coelacanth=腔棘鱼
 
@@ -336,9 +338,10 @@ entity.fossil.Gallimimus.name=似鸡龙
 #动物名称.
 entity.fossil.Mammoth.name=猛犸象
 entity.fossil.Smilodon.name=剑齿虎
-entity.fossil.Pregnant.cow.name=受孕牛
-entity.fossil.Pregnant.pig.name=受孕猪   
-entity.fossil.Pregnant.sheep.name=受孕羊  
+entity.fossil.PregnantCow.name=受孕牛
+entity.fossil.PregnantPig.name=受孕猪
+entity.fossil.PregnantSheep.name=受孕羊
+entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=渡渡鸟
 entity.fossil.Coelacanth.name=腔棘鱼
 
@@ -366,6 +369,7 @@ pedia.embryo.Chicken=鸡
 pedia.embryo.Smilodon=剑齿虎
 pedia.embryo.Mammoth=猛犸象
 pedia.embryo.Dodo=渡渡鸟
+pedia.embryo.Horse=Horse
 
 #阿努对白
 anuSpeaker.self=阿努: 
