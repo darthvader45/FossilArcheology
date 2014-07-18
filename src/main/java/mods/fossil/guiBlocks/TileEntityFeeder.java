@@ -20,8 +20,10 @@ import net.minecraftforge.common.ForgeDirection;
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory
 {
 	
-    private static final int[] slots_carn = new int[] {0}; // input
-    private static final int[] slots_herb = new int[] {1};  //output
+    private static final int[] slots_carn = new int[] {0}; // input 1
+    private static final int[] slots_herb = new int[] {1};  //input 2
+    private static final int[] unused = new int[] {};  //input 2    
+    
     
     private ItemStack[] feederItemStacks = new ItemStack[2];
     public int MeatCurrent = 0;
@@ -433,10 +435,17 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int par1, ItemStack itemstack)
     {
-    	return false;
-        //return (par1 == 0 ? isItemFuel(par2ItemStack) : true) ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+ //   	return par1 == 2 ? false : (par1 == 1 ? (EnumDinoFoodItem.foodtype(itemstack.itemID) == EnumDinoFoodItem.ISCARNIVOROUS 
+ //   			|| EnumDinoFoodItem.foodtype(itemstack.itemID) == EnumDinoFoodItem.ISHERBIVOROUS) : true);
+		if(par1 == 1 & EnumDinoFoodItem.foodtype(itemstack.itemID) == EnumDinoFoodItem.ISHERBIVOROUS)
+				return true;
+		
+		if (par1 == 0 && EnumDinoFoodItem.foodtype(itemstack.itemID) == EnumDinoFoodItem.ISCARNIVOROUS)
+				return true;
+		
+		return false;
     }
     
     //(EnumDinoFoodItem.foodtype(this.feederItemStacks[1].itemID) == EnumDinoFoodItem.ISHERBIVOROUS || EnumDinoFoodBlock.getBlockFood(this.feederItemStacks[1].itemID) > 0)
@@ -447,7 +456,12 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
      */
     public int[] getAccessibleSlotsFromSide(int par1)
     {
-        return par1 == 0 ? slots_carn : slots_herb;
+    	if (par1 == 3)
+    		return slots_carn;
+    	if (par1 == 2)
+    		return slots_herb;
+    	else
+    		return unused;
     }
 
     /**
