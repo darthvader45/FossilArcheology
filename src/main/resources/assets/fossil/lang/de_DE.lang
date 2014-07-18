@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD18 July 17 2014 
+﻿#Updated for Build 6 DEV (1.6.4) HEAD19 July 17 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -40,8 +40,8 @@ achievement.IceAge=Ich will die Eiszeit zurück!
 achievement.TheKing=Lang lebe der König!
 
 #Enchantments
-enchantment.paleontology=Paleontology
-enchantment.archeology=Archeology
+enchantment.paleontology=Paläontologie
+enchantment.archeology=Archäologie
 
 #Blocks
 tile.fossil.name=Fossil
@@ -84,6 +84,39 @@ tile.sifter.name=Sichter
 tile.volcanicStairs.name=Vulkanische Treppe
 tile.volcanicSlab.name=Vulkanische Stufe
 tile.volcanicSlabDouble.name=Vulkanische Doppelstufe
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Makellose Steve Figur
+tile.figurine.figurine_skeleton_pristine.name=Makellose Skeleton Figur
+tile.figurine.figurine_zombie_pristine.name=Makellose Zombie Figur
+tile.figurine.figurine_pigzombie_pristine.name=Makellose Enderman Figur
+tile.figurine.figurine_enderman_pristine.name=Makellose Zombie Pigman Figur
+tile.figurine.figurine_steve_damaged.name=Beschädigte Steve Figur
+tile.figurine.figurine_skeleton_damaged.name=Beschädigte Skeleton Figur
+tile.figurine.figurine_zombie_damaged.name=Beschädigte Zombie Figur
+tile.figurine.figurine_pigzombie_damaged.name=Beschädigte Enderman Figur
+tile.figurine.figurine_enderman_damaged.name=Beschädigte Zombie Pigman Figur
+tile.figurine.figurine_steve_broken.name=Zerbrochene Steve Figur
+tile.figurine.figurine_skeleton_broken.name=Zerbrochene Skeleton Figur
+tile.figurine.figurine_zombie_broken.name=Zerbrochene Zombie Figur
+tile.figurine.figurine_pigzombie_broken.name=Zerbrochene Enderman Figur
+tile.figurine.figurine_enderman_broken.name=Zerbrochene Zombie Pigman Figur
+tile.figurine.figurine_mysterious.name=Mysteriöse Figur
+tile.vaseVolute.damaged_volute.name=Zerbrochene Volutenkrater
+tile.vaseVolute.restored_volute.name=Restaurierte Volutenkrater
+tile.vaseVolute.blackFigure_volute.name=Schwarzfigurige Volutenkrater
+tile.vaseVolute.redFigure_volute.name=Rotfigurige Volutenkrater
+tile.vaseVolute.porcelain_volute.name=Porzellan Volutenkrater
+tile.vaseAmphora.damaged_amphora.name=Zerbrochene Amphore
+tile.vaseAmphora.restored_amphora.name=Restaurierte Amphore
+tile.vaseAmphora.blackFigure_amphora.name=Schwarzfigurige Amphore
+tile.vaseAmphora.redFigure_amphora.name=Rotfigurige Amphore
+tile.vaseAmphora.porcelain_amphora.name=Porzellan Amphore
+tile.vaseKylix.damaged_kylix.name=Zerbrochene Kylix
+tile.vaseKylix.restored_kylix.name=Restaurierte Kylix
+tile.vaseKylix.blackFigure_kylix.name=Schwarzfigurige Kylix
+tile.vaseKylix.redFigure_kylix.name=Rotfigurige Kylix
+tile.vaseKylix.porcelain_kylix.name=Porzellan Kylix
 
 #Items
 item.bioFossil.name=Bio-Fossil
@@ -175,7 +208,9 @@ item.eggAnkylosaurus.name=Ankylosaurus Ei
 item.eggPachycephalosaurus.name=Pachycephalosaurus Ei
 item.eggDeinonychus.name=Deinonychus Ei
 item.eggGallimimus.name=Gallimimus Ei
-item.eggCoelacanth.name=Lebendiger Coelacanth
+item.eggCoelacanth.first.name=Ozeane Coelacanth
+item.eggCoelacanth.second.name=Fluss Coelacanth
+item.eggCoelacanth.third.name=Sumpf Coelacanth
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
 item.dnaTRex.name=TRex DNA

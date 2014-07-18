@@ -71,6 +71,9 @@ public class LocalizationStrings
     public static final String VOLCANIC_STAIRS = "volcanicStairs";
     public static final String VOLCANIC_SINGLESLAB_NAME = "volcanicSlab";
     public static final String VOLCANIC_DOUBLESLAB_NAME = "volcanicSlabDouble";
+	public static final String VASE_VOLUTE = "vaseVolute";
+	public static final String VASE_AMPHORA = "vaseAmphora";
+	public static final String VASE_KYLIX = "vaseKylix";
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
@@ -245,16 +248,6 @@ public class LocalizationStrings
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
-
-    //Dinosaur status
-
-    
-    
-    
-    
-    
-    
-    
     
     //Dinosaur name strings are handled through DinoEnum.
 

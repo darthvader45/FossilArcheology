@@ -52,8 +52,12 @@ import mods.fossil.client.renderer.entity.RenderTRex;
 import mods.fossil.client.renderer.entity.RenderTriceratops;
 import mods.fossil.client.renderer.entity.RenderVelociraptor;
 import mods.fossil.client.renderer.item.ItemFigurineRenderer;
+import mods.fossil.client.renderer.item.ItemVaseAmphoraRenderer;
+import mods.fossil.client.renderer.item.ItemVaseKylixRenderer;
+import mods.fossil.client.renderer.item.ItemVaseVoluteRenderer;
 import mods.fossil.client.renderer.tileentity.RenderTNClock;
 import mods.fossil.client.renderer.tileentity.TileEntityFigurineRenderer;
+import mods.fossil.client.renderer.tileentity.TileEntityVaseRenderer;
 import mods.fossil.entity.EntityAncientJavelin;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
@@ -87,6 +91,7 @@ import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
+import mods.fossil.guiBlocks.TileEntityVase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.RenderPig;
@@ -135,6 +140,9 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityDeinonychus.class, new RenderDeinonychus(new ModelDeinonychus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityGallimimus.class, new RenderGallimimus(new ModelGallimimus(), 0.5F));
         MinecraftForgeClient.registerItemRenderer(Fossil.figurineBlock.blockID, new ItemFigurineRenderer());
+        MinecraftForgeClient.registerItemRenderer(Fossil.vaseVoluteBlock.blockID, new ItemVaseVoluteRenderer());
+        MinecraftForgeClient.registerItemRenderer(Fossil.vaseAmphoraBlock.blockID, new ItemVaseAmphoraRenderer());
+        MinecraftForgeClient.registerItemRenderer(Fossil.vaseKylixBlock.blockID, new ItemVaseKylixRenderer());
         //MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderCoelacanth(new ModelCoelacanth(), 0.5F));
         
@@ -146,6 +154,7 @@ public class ClientProxy extends CommonProxy
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVase.class, new TileEntityVaseRenderer());
        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySifter.class, new TileEntitySifterRenderer());
     }
 

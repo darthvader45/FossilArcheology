@@ -75,7 +75,7 @@ public class EntityTRex extends EntityDinosaur
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        
+
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
         
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -576,7 +576,7 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean isWeak()
     {
-        return (this.getHealth() < 8) && (this.getDinoAge() > 5) && !this.isTamed();
+        return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
         //return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
     }
 

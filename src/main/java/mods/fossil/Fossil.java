@@ -31,6 +31,12 @@ import mods.fossil.blocks.BlockPalmSapling;
 import mods.fossil.blocks.BlockPermafrost;
 import mods.fossil.blocks.BlockSarracenia;
 import mods.fossil.blocks.BlockTar;
+import mods.fossil.blocks.BlockVaseAmphora;
+import mods.fossil.blocks.BlockVaseAmphoraItem;
+import mods.fossil.blocks.BlockVaseKylix;
+import mods.fossil.blocks.BlockVaseKylixItem;
+import mods.fossil.blocks.BlockVaseVolute;
+import mods.fossil.blocks.BlockVaseVoluteItem;
 import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
@@ -87,6 +93,7 @@ import mods.fossil.guiBlocks.TileEntityFeeder;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntitySifter;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
+import mods.fossil.guiBlocks.TileEntityVase;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionHandler;
@@ -128,10 +135,10 @@ import mods.fossil.items.forge.ForgeSword;
 import mods.fossil.tabs.TabFArmor;
 import mods.fossil.tabs.TabFBlocks;
 import mods.fossil.tabs.TabFCombat;
+import mods.fossil.tabs.TabFFigurines;
 import mods.fossil.tabs.TabFFood;
 import mods.fossil.tabs.TabFItems;
 import mods.fossil.tabs.TabFMaterial;
-import mods.fossil.tabs.TabFFigurines;
 import mods.fossil.tabs.TabFTools;
 import mods.fossil.util.FossilBonemealEvent;
 import net.minecraft.block.Block;
@@ -146,11 +153,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
@@ -283,6 +287,10 @@ public class Fossil
     public static Block volcanicStairs;
     public static Block volcanicSingleSlab;
     public static Block volcanicDoubleSlab;
+    public static Block vaseAmphoraBlock;
+    public static Block vaseKylixBlock;
+    public static Block vaseVoluteBlock;
+    
 
     //Items
     public static Item biofossil;
@@ -472,6 +480,10 @@ public class Fossil
     public static int volcanicStairsID;
     public static int volcanicSingleSlabID;
     public static int volcanicDoubleSlabID;
+    public static int vaseAmphoraBlockID;
+    public static int vaseKylixBlockID;
+    public static int vaseVoluteBlockID;
+    
     
     //Items
     public static int biofossilID;
@@ -692,6 +704,9 @@ public class Fossil
             volcanicStairsID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_STAIRS, 3046).getInt();
             volcanicSingleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME, 3047).getInt();
             volcanicDoubleSlabID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME, 3048).getInt();
+            vaseVoluteBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VASE_VOLUTE, 3049).getInt();
+            vaseAmphoraBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VASE_AMPHORA, 3050).getInt();
+            vaseKylixBlockID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.VASE_KYLIX, 3051).getInt();            
             
             //Items
             biofossilID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BIO_FOSSIL_NAME, 10000).getInt();
@@ -931,6 +946,9 @@ public class Fossil
         volcanicStairs = new BlockVolcanicStairs(volcanicStairsID, volcanicBrick).setUnlocalizedName(LocalizationStrings.VOLCANIC_STAIRS);
         volcanicDoubleSlab = (BlockHalfSlab)(new BlockVolcanicSlab(volcanicDoubleSlabID, true)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
         volcanicSingleSlab = (BlockHalfSlab)(new BlockVolcanicSlab(volcanicSingleSlabID, false)).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName(LocalizationStrings.VOLCANIC_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
+        vaseVoluteBlock = new BlockVaseVolute(vaseVoluteBlockID).setUnlocalizedName(LocalizationStrings.VASE_VOLUTE);
+        vaseAmphoraBlock = new BlockVaseAmphora(vaseAmphoraBlockID).setUnlocalizedName(LocalizationStrings.VASE_AMPHORA);
+        vaseKylixBlock = new BlockVaseKylix(vaseKylixBlockID).setUnlocalizedName(LocalizationStrings.VASE_KYLIX);       
         
         Block.fire.setBurnProperties(Fossil.ferns.blockID, 30, 60);
         Block.fire.setBurnProperties(Fossil.palmLeaves.blockID, 30, 60);
@@ -1098,17 +1116,9 @@ public class Fossil
         GameRegistry.registerBlock(volcanicStairs, LocalizationStrings.VOLCANIC_STAIRS);
         GameRegistry.registerBlock(volcanicSingleSlab, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
         GameRegistry.registerBlock(volcanicDoubleSlab, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
-
-        
-        for (int i = 0; i < 16; ++i)
-        {
-        	ItemStack figurineStack = new ItemStack(figurineBlock, 1, i);
-            LanguageRegistry.addName(figurineStack, BlockFigurine.figurineTypes[i]);
-        }
-        
-        LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 0), "Living Coelacanth");
-        LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 1), "Living Coelacanth");
-        LanguageRegistry.addName(new ItemStack(livingCoelacanth, 1, 2), "Living Coelacanth");
+        GameRegistry.registerBlock(vaseVoluteBlock, BlockVaseVoluteItem.class, modid + (vaseVoluteBlock.getUnlocalizedName().substring(5)));
+        GameRegistry.registerBlock(vaseAmphoraBlock, BlockVaseAmphoraItem.class, modid + (vaseAmphoraBlock.getUnlocalizedName().substring(5)));
+        GameRegistry.registerBlock(vaseKylixBlock, BlockVaseKylixItem.class, modid + (vaseKylixBlock.getUnlocalizedName().substring(5)));
         
         EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
@@ -1169,6 +1179,7 @@ public class Fossil
         GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
         GameRegistry.registerTileEntity(TileEntitySifter.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
         GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");
+        GameRegistry.registerTileEntity(TileEntityVase.class, "vaseType");
         //TickRegistry.registerTickHandler(new RenderHUD(), Side.CLIENT);
         RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
         proxy.registerTileEntitySpecialRenderer();
