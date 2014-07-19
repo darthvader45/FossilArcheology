@@ -218,7 +218,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         if (this.modelizedDrop())
         {

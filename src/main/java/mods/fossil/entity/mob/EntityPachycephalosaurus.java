@@ -243,11 +243,13 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         Entity var3 = var1.getEntity();
         this.setSitting(false);
 
+        super.attackEntityFrom(var1, var2);
+        
         if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
         {
             var2 = (var2 + 1) / 2;

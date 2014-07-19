@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -29,7 +30,7 @@ public class EntityTRex extends EntityDinosaur
     /*private float field_25048_b;
     private float field_25054_c;
     private boolean field_25052_g;*/
-    public boolean Screaming = false;
+    public boolean Screaming;
     public int SkillTick = 0;
     public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
@@ -181,7 +182,7 @@ public class EntityTRex extends EntityDinosaur
         return 50;
     }
 
-    private void handleScream()
+    public void handleScream()
     {
         EntityLivingBase var1 = this.getAttackTarget();
 
@@ -215,52 +216,39 @@ public class EntityTRex extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    @Override
+    public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
         if (this.isEntityInvulnerable())
         {
             return false;
         }
-        else if (var1.getEntity() == this)
+        else if (damageSource.getEntity() == this)
         {
             return false;
         }
         else
         {
-            Entity var3 = var1.getEntity();
+            Entity entity = damageSource.getEntity();
 
-            if (var1.damageType.equals("arrow") && this.getDinoAge() >= 3)
+            if (damageSource.damageType.equals("arrow") && this.getDinoAge() >= 3)
             {
                 return false;
             }
-            else if (var2 < 6 && var3 != null && this.getDinoAge() >= 3)
+           
+            if (var2 < 6 && entity != null && this.getDinoAge() >= 3)
             {
                 return false;
-            }
-            else if (var2 == 20 && var3 == null)
-            {
-                return super.attackEntityFrom(var1, 200);
-            }
-            else
-            {
-                if (var3 != attackingPlayer)
-                {
-                    findPlayerToAttack();
-                }
-                else
-                {
-                    this.setTarget((EntityLiving)var3);
-                }
-
-                return super.attackEntityFrom(var1, var2);
             }
         }
+        return super.attackEntityFrom(damageSource, var2);
     }
 
     public boolean isAngry()
     {
         return true;
     }
+    
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
@@ -306,47 +294,19 @@ public class EntityTRex extends EntityDinosaur
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    /*
-    protected void attackEntity(Entity var1, float var2)
+    protected void attackEntity(Entity entity, float var2)
     {
-        this.faceEntity(var1, 30.0F, 30.0F);
+    	super.attackEntity(entity, var2);
 
-        if (!this.hasPath())
+        if (var2 < 5.0F && !this.Screaming)
         {
-            this.setPathToEntity(this.worldObj.getPathEntityToEntity(this, this.getEntityToAttack(), var2, true, false, true, false));
-        }
-
-        if ((double)var2 > (double)this.width * 1.6D)
-        {
-            if (this.onGround)
+            if (this.getDinoAge() >= 3)
             {
-                double var3 = var1.posX - this.posX;
-                double var5 = var1.posZ - this.posZ;
-                float var7 = MathHelper.sqrt_double(var3 * var3 + var5 * var5);
-                this.motionX = var3 / (double)var7 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-                this.motionZ = var5 / (double)var7 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-
-                if (this.getDinoAge() <= 3)
-                {
-                    this.motionY = 0.4000000059604645D;
-                }
-
-                if (var2 < 5.0F && !this.Screaming)
-                {
-                    if (this.getDinoAge() >= 3)
-                    {
-                        this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
-                    }
-                    this.Screaming = true;
-                }
+                this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
             }
-        }
-        else
-        {
-            var1.attackEntityFrom(DamageSource.causeMobDamage(this), this.getAttackStrength());
+            this.Screaming = true;
         }
     }
-    */
 
     /**
      * This method gets called when the entity kills another one.
@@ -355,10 +315,7 @@ public class EntityTRex extends EntityDinosaur
     {
         super.onKillEntity(var1);
 
-     //   if (this.getDinoAge() >= 3)
-     //   {
             this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
-     //   }
     }
 
     /**
@@ -433,11 +390,16 @@ public class EntityTRex extends EntityDinosaur
         return !this.isEntityInsideOpaqueBlock();
     }
 
+    public float getMountHeight()
+    {
+        return this.height;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRideHeight(), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
@@ -521,7 +483,7 @@ public class EntityTRex extends EntityDinosaur
             case 1:
             	return Fossil.modid + ":textures/mob/TRex_Green_Weak.png";
             default:
-            	return Fossil.modid + ":textures/mob/TRexWeak.png";
+            	return Fossil.modid + ":textures/mob/TRex_Weak.png";
             }
 
         }
@@ -542,7 +504,7 @@ public class EntityTRex extends EntityDinosaur
         case 1:
         	return Fossil.modid + ":textures/mob/TRex_Green_Tame.png";
         default:
-        	return Fossil.modid + ":textures/mob/TRex.png";
+        	return Fossil.modid + ":textures/mob/TRex_Tame.png";
         }
     }
 
@@ -693,6 +655,8 @@ public class EntityTRex extends EntityDinosaur
     {
         return null;
     }
+    
+    
     
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.

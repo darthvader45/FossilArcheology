@@ -221,44 +221,47 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    @Override
+    public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
         if (this.isEntityInvulnerable())
         {
             return false;
         }
-        else if (var1.getEntity() == this)
+        else if (damageSource.getEntity() == this)
         {
             return false;
         }
         else
         {
-            Entity var3 = var1.getEntity();
+            Entity entity = damageSource.getEntity();
 
-            if (var1.damageType.equals("arrow") && this.getDinoAge() >= 3)
+            if (damageSource.damageType.equals("arrow") && this.getDinoAge() >= 3)
             {
                 return false;
             }
-            else if (var2 < 6 && var3 != null && this.getDinoAge() >= 3)
+           
+            else if (var2 < 6 && entity != null && this.getDinoAge() >= 3)
             {
                 return false;
             }
-            else if (var2 == 20 && var3 == null)
+            
+            else if (var2 == 20 && entity == null)
             {
-                return super.attackEntityFrom(var1, 200);
+                return super.attackEntityFrom(damageSource, 200);
             }
             else
             {
-                if (var3 != attackingPlayer)
+                if (entity != attackingPlayer)
                 {
                     findPlayerToAttack();
                 }
                 else
                 {
-                    this.setTarget((EntityLiving)var3);
+                    this.setTarget((EntityLiving)entity);
                 }
 
-                return super.attackEntityFrom(var1, var2);
+                return super.attackEntityFrom(damageSource, var2);
             }
         }
     }

@@ -22,6 +22,7 @@ public class FossilAchievementHandler
     public static Achievement Dinopedia;
     public static Achievement IceAge;
     public static Achievement TheKing;
+    public static Achievement pigBossOnEarth;
 
     public static void loadAchievements()
     {   
@@ -68,6 +69,10 @@ public class FossilAchievementHandler
         TheKing = new Achievement(Fossil.a_theKingID, "TheKing", 5, -1, Item.book, null).registerAchievement().setSpecial();
         addAchievementName("TheKing", "Ruler of the Late Cretaceous.");
         addAchievementDesc("TheKing", "Long live the king!");
+        
+        pigBossOnEarth = new Achievement(Fossil.a_pigBossOnEarthID, "pigBossOnEarth", 8, -2, Item.book, null).registerAchievement().setSpecial();
+        addAchievementName("pigBossOnEarth", "Hail Anu");
+        addAchievementDesc("pigBossOnEarth", "You summoned Anu!");
 
 
         AchievementPage FossilsAchievementPage = new AchievementPage("Fossils",
@@ -81,7 +86,8 @@ public class FossilAchievementHandler
                 Sifter,
                 Dinopedia,
                 IceAge,
-                TheKing
+                TheKing,
+                pigBossOnEarth
         		);
         AchievementPage.registerAchievementPage(FossilsAchievementPage);
     }

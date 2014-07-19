@@ -189,7 +189,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3a8";
+    public static final String modversion = "1.6.4 Build 6.3a11";
 
     /*
      * Set mod state here
@@ -430,6 +430,7 @@ public class Fossil
     public static int a_dinopediaID;
     public static int a_iceAgeID;
     public static int a_theKingID;
+    public static int a_pigBossOnEarthID;
     
     //Blocks
     public static int blockFossilID;
@@ -622,7 +623,7 @@ public class Fossil
 
     public static int fossilRecordID;
 
-    static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 35, new int[] {4, 9, 7, 6}, 15);
+    static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[] {2, 7, 6, 2}, 15);
     static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
     static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
     static EnumArmorMaterial RELIC = EnumHelper.addArmorMaterial("Relic", 5, new int[]{1, 3, 2, 1}, 15);
@@ -657,6 +658,7 @@ public class Fossil
             a_dinopediaID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_DINOPEDIA, 5020).getInt();
             a_iceAgeID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ICEAGE, 5021).getInt();
             a_theKingID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_THEKING, 5022).getInt();
+            a_pigBossOnEarthID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PIGBOSS, 5023).getInt();
             
             //Blocks
             blockFossilID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt();

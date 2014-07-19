@@ -420,7 +420,7 @@ boss.Anu=阿努
 entity.fossil.Bones.name=骨架
 entity.fossil.FriendlyPigZombie.name=僵尸猪人伙伴
 entity.fossil.Failuresaurus.name=畸龙
-entity.fossil.Anu.name=阿努
+entity.fossil.PigBoss.name=阿努
 
 #Records
 item.record_bones.name=化石唱片

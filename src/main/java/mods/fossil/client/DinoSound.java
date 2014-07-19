@@ -19,6 +19,10 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "brachiosaurus_living2.ogg",
         SOUND_RESOURCE_LOCATION + "brachiosaurus_living1.ogg",
         SOUND_RESOURCE_LOCATION + "brachiosaurus_hurt1.ogg",
+        SOUND_RESOURCE_LOCATION + "compsognathus_living_tamed.ogg",
+        SOUND_RESOURCE_LOCATION + "compsognathus_living.ogg",
+        SOUND_RESOURCE_LOCATION + "compsognathus_hurt.ogg",
+        SOUND_RESOURCE_LOCATION + "compsognathus_death.ogg",
         SOUND_RESOURCE_LOCATION + "deinonychus_call1.ogg",
         SOUND_RESOURCE_LOCATION + "deinonychus_call2.ogg",
         SOUND_RESOURCE_LOCATION + "deinonychus_death.ogg",
@@ -137,11 +141,11 @@ public class DinoSound
     public static final String brachiosaurus_hurt = SOUND_PREFIX + "brachiosaurus_hurt";
     
     //compsognathus
-    public static final String compsognathus_death = SOUND_PREFIX + "velociraptor_death";
-    public static final String compsognathus_living_tame = SOUND_PREFIX + "velociraptor_living_tame";
-    public static final String compsognathus_living_wild = SOUND_PREFIX + "velociraptor_living_wild";
-    public static final String compsognathus_hurt = SOUND_PREFIX + "velociraptor_hurt";
-    public static final String compsognathus_attack = SOUND_PREFIX + "velociraptor_attack";
+    public static final String compsognathus_death = SOUND_PREFIX + "compsognathus_death";
+    public static final String compsognathus_living_tame = SOUND_PREFIX + "compsognathus_living_tamed";
+    public static final String compsognathus_living_wild = SOUND_PREFIX + "compsognathus_living";
+    public static final String compsognathus_hurt = SOUND_PREFIX + "compsognathus_hurt";
+    public static final String compsognathus_attack = SOUND_PREFIX + "compsognathus_living_wild";
     
     //deinonychus
     public static final String deinonychus_death = SOUND_PREFIX + "deinonychus_death";

@@ -208,7 +208,7 @@ public class EntityPterosaur extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         return this.modelizedDrop() ? true : super.attackEntityFrom(var1, var2);
     }

@@ -7,6 +7,7 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -260,7 +261,6 @@ public class EntityCompsognathus extends EntityDinosaur
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
-    	super.attackEntityFrom(par1DamageSource, par2);
         if (this.isEntityInvulnerable())
         {
             return false;
@@ -269,6 +269,7 @@ public class EntityCompsognathus extends EntityDinosaur
         {
             Entity entity = par1DamageSource.getEntity();
             this.aiSit.setSitting(false);
+            this.SetOrder(EnumOrderType.FreeMove);
 
             if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
             {

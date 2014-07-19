@@ -421,7 +421,7 @@ boss.Anu=Anu
 entity.fossil.Bones.name=Bones
 entity.fossil.FriendlyPigZombie.name=Friendly Pig Zombies
 entity.fossil.Failuresaurus.name=Failursaurus
-entity.fossil.Anu.name=Anu
+entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record

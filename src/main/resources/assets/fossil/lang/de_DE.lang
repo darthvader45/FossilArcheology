@@ -421,7 +421,7 @@ boss.Anu=Anu
 entity.fossil.Bones.name=Knochen
 entity.fossil.FriendlyPigZombie.name=Freundliche Zombie Pigman
 entity.fossil.Failuresaurus.name=Fehlersaurus
-entity.fossil.Anu.name=Anu
+entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Schallplatte

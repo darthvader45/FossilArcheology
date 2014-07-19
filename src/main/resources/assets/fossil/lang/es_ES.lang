@@ -420,7 +420,7 @@ boss.Anu=Anu
 entity.fossil.Bones.name=Huesitos
 entity.fossil.FriendlyPigZombie.name=Cerdos Zombis Amistosos
 entity.fossil.Failuresaurus.name=Faileosaurio
-entity.fossil.Anu.name=Anu
+entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record
