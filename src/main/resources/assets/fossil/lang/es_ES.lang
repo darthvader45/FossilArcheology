@@ -290,34 +290,6 @@ status.GemErrorTamed=Este Tiranosaurio ya ha sido domado.
 status.essenceFail=El aroma a pollo no tuvo efecto.
 
 #Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velocirraptor
-Dino.TRex=Tiranosaurio
-Dino.Pterosaur=Pterosaurio
-Dino.Plesiosaur=Plesiosaurio
-Dino.Mosasaurus=Mosasaurio
-Dino.Stegosaurus=Estegosaurio
-Dino.Dilophosaurus=Dilofosaurio
-Dino.Brachiosaurus=Brachiosaurio
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Espinosaurio
-Dino.Compsognathus=Compsognato
-Dino.Ankylosaurus=Anquilosaurio
-Dino.Pachycephalosaurus=Paquicefalosaurio
-Dino.Deinonychus=Deinonico
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mamút
-animal.smilodon=Tigres Dientes de Sable
-animal.pregnant.cow=Vaca Embarazada
-animal.pregnant.pig=Cerdo Embarazado
-animal.pregnant.sheep=Oveja Embarazada
-animal.pregnant.horse=Pregnant Horse
-animal.dodo=Dodo
-animal.coelacanth=Coelacanth
-
-#Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velocirraptor
 entity.fossil.TRex.name=Tiranosaurio
@@ -409,12 +381,6 @@ drum.ordering=Ordenando a
 drum.tRex1=Ordenando a los Tiranosaurios a desayunar.
 drum.tRex2=Ordenando a los Tiranosaurios a almorzar.
 drum.tRex3=Ordenando a los Tiranosaurios a cenar.
-
-#Hostile mob names
-mob.bones=Huesitos
-mob.fpz=Cerdos Zombis Amistosos
-mob.failuresaurus=Faileosaurio
-boss.Anu=Anu
 
 #Hostile mob names
 entity.fossil.Bones.name=Huesitos

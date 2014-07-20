@@ -477,7 +477,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                 if (FMLCommonHandler.instance().getSide().isServer())
                 {
-                    Fossil.ShowMessage(var1 + StatCollector.translateToLocal("Dino." + this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
+                    Fossil.ShowMessage(var1 + StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString() + ".name")/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
                 }
             }
 
@@ -785,7 +785,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }*/
         p0.reset();
         p0.PrintItemXY(it0, 185, 7);
-        p0.PrintStringLR(StatCollector.translateToLocal("Dino." + this.DinoInside.toString()), false, 1, 40, 90, 245);
+        p0.PrintStringLR(StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString() + ".name"), false, 1, 40, 90, 245);
         int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
         String stat;
 

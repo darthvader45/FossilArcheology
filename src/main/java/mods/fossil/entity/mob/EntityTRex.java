@@ -2,6 +2,8 @@ package mods.fossil.entity.mob;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
@@ -37,6 +39,7 @@ public class EntityTRex extends EntityDinosaur
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
+	private int Timer;
     
     public static final double baseHealth = EnumDinoType.TRex.Health0;
     public static final double baseDamage = EnumDinoType.TRex.Strength0;
@@ -124,7 +127,6 @@ public class EntityTRex extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-
         //this.blockBreakingBehavior.execute();
         //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         //    BlockInteractive();
@@ -161,6 +163,7 @@ public class EntityTRex extends EntityDinosaur
         }
     }
     */
+
     
 
     public float getEyeHeight()
@@ -181,28 +184,35 @@ public class EntityTRex extends EntityDinosaur
     {
         return 50;
     }
-
-    public void handleScream()
+    
+    @SideOnly(Side.CLIENT)
+    public int getTimer()
     {
-        EntityLivingBase var1 = this.getAttackTarget();
-
-        if (var1 == null)
+        return this.Timer;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void handleHealthUpdate(byte par1)
+    {
+        if (par1 == 4)
         {
-            this.Screaming = false;
+        	this.Timer = 20;
         }
-        else
-        {
-            double var2 = this.getDistanceSqToEntity(var1);
 
-            if (var2 <= (double)(this.width * 4.0F * this.width * 4.0F))
-            {
-                this.Screaming = true;
-            }
-            else
-            {
-                this.Screaming = false;
-            }
-        }
+    }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	if(this.isModelized())
+    		return null;
+    	if(this.isWeak())
+    	return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_weak";
+    	
+        return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
     }
 
     /**
@@ -271,8 +281,10 @@ public class EntityTRex extends EntityDinosaur
             knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
         }
         boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
+        
         if (random.nextInt(10) == 1)
-        this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
+        	this.openMouth(true);
+        
         if (attacked)
         {
             if (knockback > 0)
@@ -291,31 +303,33 @@ public class EntityTRex extends EntityDinosaur
         return attacked;
     }
     
+    public void openMouth(boolean shouldScream)
+    {
+    	this.Timer = 20;
+    	this.worldObj.setEntityState(this, (byte)4);
+    	
+    	if(shouldScream)
+        this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getSoundPitch());
+    }
+    
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
     protected void attackEntity(Entity entity, float var2)
     {
     	super.attackEntity(entity, var2);
-
-        if (var2 < 5.0F && !this.Screaming)
-        {
-            if (this.getDinoAge() >= 3)
-            {
-                this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
-            }
-            this.Screaming = true;
-        }
     }
 
     /**
      * This method gets called when the entity kills another one.
      */
-    public void onKillEntity(EntityLiving var1)
+    @Override
+    public void onKillEntity(EntityLivingBase var1)
     {
+    	this.openMouth(true);
         super.onKillEntity(var1);
 
-            this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
+        
     }
 
     /**
@@ -367,6 +381,11 @@ public class EntityTRex extends EntityDinosaur
 
                     return false;
                 }
+            }
+            
+            if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))
+            {
+            	return false;
             }
 
             if (!Fossil.DebugMode())
@@ -458,11 +477,25 @@ public class EntityTRex extends EntityDinosaur
      */
     public void onLivingUpdate()
     {
-        if (!this.isWeak())
-        {
-            this.handleScream();
-        }
 
+        if(this.Screaming) {
+        	System.out.println("Screaming"+this.Screaming);
+    	System.out.println("TImer: "+this.Timer);        
+        }
+        
+        if (this.Timer > 0)
+        {
+            --this.Timer;
+        }
+        /*
+        if (!this.worldObj.isRemote)
+        {
+            this.Timer = Math.max(0, this.Timer - 1);
+            
+
+            this.Screaming = this.Timer > 0 ? true :false;
+            }
+            */
         super.onLivingUpdate();
     }
 

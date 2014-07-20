@@ -291,34 +291,6 @@ status.GemErrorTamed=Dieser T-Rex wurde schon abgerichtet.
 status.essencefail=Essenz des Hühnchens hat keinen Effekt.
 
 #Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velociraptor
-Dino.TRex=Tyrannosaurus
-Dino.Pterosaur=Pterosaur
-Dino.Plesiosaur=Plesiosaur
-Dino.Mosasaurus=Mosasaurus
-Dino.Stegosaurus=Stegosaurus
-Dino.Dilophosaurus=Dilophosaurus
-Dino.Brachiosaurus=Brachiosaurus
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Spinosaurus
-Dino.Compsognathus=Compsognathus
-Dino.Ankylosaurus=Ankylosaurus
-Dino.Pachycephalosaurus=Pachycephalosaurus
-Dino.Deinonychus=Deinonychus
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mammut
-animal.smilodon=Smilodon
-animal.pregnant.cow=Schwangere Kuh
-animal.pregnant.pig=Schwangeres Schwein
-animal.pregnant.sheep=Schwangeres Schaf
-animal.pregnant.horse=Schwangere Pferd
-animal.dodo=Dodo
-animal.coelacanth=Coelacanth
-
-#Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
 entity.fossil.TRex.name=Tyrannosaurus
@@ -410,12 +382,6 @@ drum.ordering=Ordering
 drum.tRex1=Schicke T-Rexes zum Frühstück.
 drum.tRex2=Schicke T-Rexes zum Mittagessen.
 drum.tRex3=Schicke T-Texes zum Abendessen.
-
-#Hostile mob names
-mob.bones=Knochen
-mob.fpz=Freundliche Zombie Pigman
-mob.failuresaurus=Fehlersaurus
-boss.Anu=Anu
 
 #Hostile mob names
 entity.fossil.Bones.name=Knochen

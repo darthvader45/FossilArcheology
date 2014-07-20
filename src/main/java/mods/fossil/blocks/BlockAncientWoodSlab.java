@@ -12,6 +12,9 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockAncientWoodSlab extends BlockHalfSlab
 {
     public static final String[] woodType = { "ancientWood" };
@@ -70,5 +73,14 @@ public class BlockAncientWoodSlab extends BlockHalfSlab
         {
             par3List.add(new ItemStack(par1, 1, 0));
         }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    /**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World par1World, int par2, int par3, int par4)
+    {
+        return Fossil.ancientWoodSingleSlab.blockID;
     }
 }

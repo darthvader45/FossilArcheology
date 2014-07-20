@@ -290,34 +290,6 @@ status.GemErrorTamed=这头霸王龙已被驯服
 status.EssenceFail=鸡精没有起效
 
 #恐龙名称.
-Dino.Triceratops=三角龙
-Dino.Velociraptor=迅猛龙
-Dino.TRex=霸王龙
-Dino.Pterosaur=翼龙
-Dino.Plesiosaur=蛇颈龙
-Dino.Mosasaurus=沧龙
-Dino.Stegosaurus=剑龙
-Dino.Dilophosaurus=双脊龙
-Dino.Brachiosaurus=腕龙
-Dino.Nautilus=鹦鹉螺
-Dino.Spinosaurus=脊龙
-Dino.Compsognathus=美颌龙
-Dino.Ankylosaurus=背甲龙
-Dino.Pachycephalosaurus=肿头龙
-Dino.Deinonychus=恐爪龙
-Dino.Gallimimus=似鸡龙
-
-#动物名称.
-animal.mammoth=猛犸象
-animal.smilodon=剑齿虎
-animal.pregnant.cow=受孕牛
-animal.pregnant.pig=受孕猪
-animal.pregnant.sheep=受孕羊
-animal.pregnant.horse=Pregnant Horse
-animal.dodo=渡渡鸟
-animal.coelacanth=腔棘鱼
-
-#恐龙名称.
 entity.fossil.Triceratops.name=三角龙
 entity.fossil.Velociraptor.name=迅猛龙
 entity.fossil.TRex.name=霸王龙
@@ -409,12 +381,6 @@ drum.ordering=正在命令
 drum.tRex1=正在命令半径50格内的暴龙来吃早餐
 drum.tRex2=正在命令半径50格内的暴龙来吃午餐
 drum.tRex3=正在命令半径50格内的暴龙来吃晚餐
-
-#昵称
-mob.bones=骨架
-mob.fpz=僵尸猪人伙伴
-mob.failuresaurus=畸龙
-boss.Anu=阿努
 
 #昵称
 entity.fossil.Bones.name=骨架

@@ -241,29 +241,12 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                 return false;
             }
            
-            else if (var2 < 6 && entity != null && this.getDinoAge() >= 3)
+            if (var2 < 6 && entity != null && this.getDinoAge() >= 3)
             {
                 return false;
             }
-            
-            else if (var2 == 20 && entity == null)
-            {
-                return super.attackEntityFrom(damageSource, 200);
-            }
-            else
-            {
-                if (entity != attackingPlayer)
-                {
-                    findPlayerToAttack();
-                }
-                else
-                {
-                    this.setTarget((EntityLiving)entity);
-                }
-
-                return super.attackEntityFrom(damageSource, var2);
-            }
         }
+        return super.attackEntityFrom(damageSource, var2);
     }
 
 
@@ -390,17 +373,9 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                 }
             }
 			*/
-            if (var2.itemID == Fossil.whip.itemID && this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null)
+            if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))
             {
-                if (var1.username.equalsIgnoreCase(this.getOwnerName()))
-                {
-                    var1.rotationYaw = this.rotationYaw;
-                    var1.mountEntity(this);
-                    this.setPathToEntity((PathEntity)null);
-                    this.renderYawOffset = this.rotationYaw;
-                }
-
-                return true;
+            	return false;
             }
 
             if (var2.itemID == Fossil.chickenEss.itemID)
@@ -410,21 +385,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
                     Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
                     return true;
                 }
-            }
-        }
-        else
-        {
-            if (this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == var1))
-            {
-                if (var1.username.equalsIgnoreCase(this.getOwnerName()))
-                {
-                    var1.rotationYaw = this.rotationYaw;
-                    var1.mountEntity(this);
-                    this.setPathToEntity((PathEntity)null);
-                    this.renderYawOffset = this.rotationYaw;
-                }
-
-                return true;
             }
         }
 

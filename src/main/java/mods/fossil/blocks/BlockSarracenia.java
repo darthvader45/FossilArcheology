@@ -20,11 +20,11 @@ public class BlockSarracenia extends BlockFlower
         this.setTickRandomly(true);
     }
 
-    public void randomDisplayTick(World world, int i, int j, int k, Random random)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        FossilFX.spawnParticle("flies", i + 0.5, j + 1.0, k + 0.5, 0.0D, 1.5D, 0.0D);
-        FossilFX.spawnParticle("flies", i + 0.5, j + 0.5, k, 0.0D, 1.5D, 0.0D);
-        FossilFX.spawnParticle("flies", i, j + 0.5, k + 0.5, 0.0D, 1.5D, 0.0D);
+        FossilFX.spawnParticle("flies", x + 0.5, y + 1.0, z + 0.5, 0.0D, 1.5D, 0.0D);
+        FossilFX.spawnParticle("flies", x + 0.5, y + 0.5, z, 0.0D, 1.5D, 0.0D);
+        FossilFX.spawnParticle("flies", x, y + 0.5, z + 0.5, 0.0D, 1.5D, 0.0D);
     }
 
     /**

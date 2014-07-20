@@ -176,7 +176,7 @@ item.dodoWingCooked.name=Cooked Dodo Wing
 item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
-item.rawTRex.name=TRex Meat
+item.rawTRex.name=Tyrannosaurus Meat
 item.rawPterosaur.name=Pterosaur Meat
 item.rawNautilus.name=Nautilus Meat
 item.rawPlesiosaur.name=Plesiosaur Meat
@@ -192,7 +192,7 @@ item.rawDeinonychus.name=Deinonychus Meat
 item.rawGallimimus.name=Gallimimus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
-item.eggTRex.name=TRex Egg
+item.eggTRex.name=Tyrannosaurus Egg
 item.eggPterosaur.name=Pterosaur Egg
 item.eggNautilus.name=Living Nautilus
 item.eggPlesiosaur.name=Plesiosaur Egg
@@ -213,7 +213,7 @@ item.eggCoelacanth.second.name=River Coelacanth
 item.eggCoelacanth.third.name=Swamp Coelacanth
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
-item.dnaTRex.name=TRex DNA
+item.dnaTRex.name=Tyrannosaurus DNA
 item.dnaPterosaur.name=Pterosaur DNA
 item.dnaNautilus.name=Nautilus DNA
 item.dnaPlesiosaur.name=Plesiosaur DNA
@@ -289,34 +289,6 @@ status.GemErrorYoung=This T-Rex is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
 status.GemErrorTamed=This T-Rex has already been tamed.
 status.essencefail=Essence of Chicken had no effect.
-
-#Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velociraptor
-Dino.TRex=Tyrannosaurus
-Dino.Pterosaur=Pterosaur
-Dino.Plesiosaur=Plesiosaur
-Dino.Mosasaurus=Mosasaurus
-Dino.Stegosaurus=Stegosaurus
-Dino.Dilophosaurus=Dilophosaurus
-Dino.Brachiosaurus=Brachiosaurus
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Spinosaurus
-Dino.Compsognathus=Compsognathus
-Dino.Ankylosaurus=Ankylosaurus
-Dino.Pachycephalosaurus=Pachycephalosaurus
-Dino.Deinonychus=Deinonychus
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mammoth
-animal.smilodon=Smilodon
-animal.pregnant.cow=Pregnant Cow
-animal.pregnant.pig=Pregnant Pig
-animal.pregnant.sheep=Pregnant Sheep
-animal.pregnant.horse=Pregnant Horse
-animal.dodo=Dodo
-animal.coelacanth=Coelacanth
 
 #Dinosaur Names Clean
 entity.fossil.Triceratops.name=Triceratops
@@ -410,12 +382,6 @@ drum.ordering=Ordering
 drum.tRex1=Ordering T-Rexes to breakfast.
 drum.tRex2=Ordering T-Rexes to lunch.
 drum.tRex3=Ordering T-Rexes to dinner.
-
-#Hostile mob names
-mob.bones=Bones
-mob.fpz=Friendly Pig Zombies
-mob.failuresaurus=Failursaurus
-boss.Anu=Anu
 
 #Hostile mob names
 entity.fossil.Bones.name=Bones

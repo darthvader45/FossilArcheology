@@ -121,7 +121,7 @@ public class TileEntityDrum extends TileEntity
             {
                 if (EnumDinoType.values()[i].OrderItem != null && EnumDinoType.values()[i].OrderItem.itemID == var1)
                 {
-                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("dino." + EnumDinoType.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
+                    Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("entity.fossil." + EnumDinoType.values()[i].toString() + ".name") + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
                 }
             }		//Output: Ordering Triceratops: Stay
 

@@ -219,15 +219,15 @@ public class LocalizationStrings
     public static final String ORDER_FREEMOVE = "order.freeMove";
 
     //Animal names
-    public static final String ANIMAL_MAMMOTH = "animal.mammoth";
-    public static final String ANIMAL_SMILODON = "animal.smilodon";
-    public static final String ANIMAL_PREGNANT_COW = "animal.pregnant.cow";
-    public static final String ANIMAL_PREGNANT_PIG = "animal.pregnant.pig";
-    public static final String ANIMAL_PREGNANT_SHEEP = "animal.pregnant.sheep";
-    public static final String ANIMAL_PREGNANT_CHICKEN = "animal.pregnant.chicken";
-    public static final String ANIMAL_DODO = "animal.dodo";
-    public static final String ANIMAL_COELACANTH = "animal.coelacanth";
-    public static final String ANIMAL_PREGNANT_HORSE = "animal.horse";
+    public static final String ANIMAL_MAMMOTH = "entity.fossil.mammoth.name";
+    public static final String ANIMAL_SMILODON = "entity.fossil.smilodon.name";
+    public static final String ANIMAL_PREGNANT_COW = "entity.fossil.PregnantCow.name";
+    public static final String ANIMAL_PREGNANT_PIG = "entity.fossil.PregnantPig.name";
+    public static final String ANIMAL_PREGNANT_SHEEP = "entity.fossil.PregnantSheep.name";
+    public static final String ANIMAL_PREGNANT_CHICKEN = "entity.fossil.PregnantChicken.name";
+    public static final String ANIMAL_DODO = "entity.fossil.dodo.name";
+    public static final String ANIMAL_COELACANTH = "entity.fossil.coelacanth.name";
+    public static final String ANIMAL_PREGNANT_HORSE = "entity.fossil.PregnantHorse.name";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";
@@ -244,10 +244,10 @@ public class LocalizationStrings
     public static final String DRUM_TREX = "drum.tRex";
 
     //Mob names
-    public static final String MOB_FPZ = "mob.fpz";
-    public static final String MOB_FAILURESAURUS = "mob.failuresaurus";
-    public static final String BOSS_ANU = "boss.Anu";
-    public static final String MOB_BONES = "mob.bones";
+    public static final String MOB_FPZ = "entity.fossil.FriendlyPigZombie.name";
+    public static final String MOB_FAILURESAURUS = "entity.fossil.Failuresaurus.name";
+    public static final String BOSS_ANU = "entity.fossil.PigBoss.name";
+    public static final String MOB_BONES = "entity.fossil.Bones.name";
 
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";

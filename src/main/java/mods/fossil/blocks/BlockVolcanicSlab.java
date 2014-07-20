@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
@@ -36,6 +37,16 @@ public class BlockVolcanicSlab extends BlockHalfSlab
     {
         return Fossil.volcanicSingleSlab.blockID;
     }
+    
+    @SideOnly(Side.CLIENT)
+    /**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World par1World, int par2, int par3, int par4)
+    {
+        return Fossil.volcanicSingleSlab.blockID;
+    }
+    
     /*
     	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
     	{

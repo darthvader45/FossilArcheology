@@ -515,7 +515,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal("Dino." + this.SelfType.toString()), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintStringXY(StatCollector.translateToLocal("entity.fossil." + this.SelfType.toString() + ".name"), p0.rightIndent, 34, 0, 0, 0);
         p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
         p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
         p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
@@ -832,13 +832,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
             }
 
-            setLastAttacker(victim);
-            // play eating sound
-            // float volume = getSoundVolume() * 0.7f;
-            //float pitch = getSoundPitch();
-            //worldObj.playSoundAtEntity(this, "random.eat", volume, pitch);
+            this.setLastAttacker(victim);
         }
-
         return attacked;
     }
 

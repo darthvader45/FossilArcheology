@@ -244,15 +244,17 @@ protected void setRotationAngles(float var1, float var2, float var3, float var4,
 
 public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
 {
-    this.partialTicks = par4;
-    
     EntityTRex entity = (EntityTRex)par1EntityLivingBase;
-    this.isScreaming = entity.Screaming;
-    
-    if (this.isScreaming) {
-    	System.out.println("SDFS");
-    	this.roarPose(1);
+    int isRoaring = entity.getTimer();
+    this.partialTicks = par4;
+
+    if (isRoaring > 0) {
+    	this.mouthOpen(10);
     }
+	else
+	{
+		this.mouthClosed(10);
+	}
 
 }
 
@@ -270,11 +272,16 @@ public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par
 	}
 	
 	public void weakPose() {
-		
+			
 	}
 	
-	public void roarPose(float var1) {
-		this.LowerJaw.rotateAngleX = (float)Math.toRadians(110);
+	public void mouthClosed(float var1) {
+		this.LowerJaw.rotateAngleX = 0;
 	}
+	
+	public void mouthOpen(float var1) {
+		this.LowerJaw.rotateAngleX = (float)Math.toRadians(30);
+	}
+	
 }
 

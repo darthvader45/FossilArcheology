@@ -99,6 +99,7 @@ import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionHandler;
 import mods.fossil.handler.FossilCraftingHandler;
+import mods.fossil.handler.FossilLivingEvent;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
 import mods.fossil.handler.FossilRecipeHandler;
@@ -189,7 +190,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3a11";
+    public static final String modversion = "1.6.4 Build 6.3a12d";
 
     /*
      * Set mod state here
@@ -221,7 +222,7 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return false;
+        return true;
     }
     
     public static final double MESSAGE_DISTANCE = 25.0D;
@@ -1195,6 +1196,8 @@ public class Fossil
         GameRegistry.registerCraftingHandler(new FossilCraftingHandler());
         proxy.onInit(event);
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
+        
 
         
 
