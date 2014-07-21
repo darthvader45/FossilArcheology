@@ -190,7 +190,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3a12d";
+    public static final String modversion = "1.6.4 Build 6.3a14";
 
     /*
      * Set mod state here
@@ -222,7 +222,7 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return true;
+        return false;
     }
     
     public static final double MESSAGE_DISTANCE = 25.0D;

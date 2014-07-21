@@ -7,82 +7,74 @@ import net.minecraft.entity.Entity;
 public class ModelVaseKylix extends ModelBase
 {
   //fields
-    ModelRenderer stand;
-    ModelRenderer body;
-    ModelRenderer lefthandle;
-    ModelRenderer righthandle;
-    ModelRenderer backLip;
-    ModelRenderer frontLip;
-    ModelRenderer leftLip;
-    ModelRenderer rightLip;
+    ModelRenderer Base;
+    ModelRenderer Body;
+    ModelRenderer Neck;
+    ModelRenderer RightLip;
+    ModelRenderer LeftLip;
+    ModelRenderer FrontLip;
+    ModelRenderer BackLip;
   
   public ModelVaseKylix()
   {
-    textureWidth = 64;
+    textureWidth = 32;
     textureHeight = 32;
     
-      stand = new ModelRenderer(this, 0, 0);
-      stand.addBox(-3F, 0F, -3F, 6, 1, 6);
-      stand.setRotationPoint(0F, 23F, 0F);
-      stand.setTextureSize(64, 32);
-      stand.mirror = true;
-      setRotation(stand, 0F, 0F, 0F);
-      body = new ModelRenderer(this, 0, 13);
-      body.addBox(-4F, -9F, -4F, 8, 9, 8);
-      body.setRotationPoint(0F, 23F, 0F);
-      body.setTextureSize(64, 32);
-      body.mirror = true;
-      setRotation(body, 0F, 0F, 0F);
-      lefthandle = new ModelRenderer(this, 35, 0);
-      lefthandle.addBox(-2F, -8F, 0F, 4, 9, 1);
-      lefthandle.setRotationPoint(0F, 18F, 4F);
-      lefthandle.setTextureSize(64, 32);
-      lefthandle.mirror = true;
-      setRotation(lefthandle, 0F, 0F, 0F);
-      righthandle = new ModelRenderer(this, 35, 0);
-      righthandle.addBox(-2F, -8F, -1F, 4, 9, 1);
-      righthandle.setRotationPoint(0F, 18F, -4F);
-      righthandle.setTextureSize(64, 32);
-      righthandle.mirror = true;
-      setRotation(righthandle, 0F, 0F, 0F);
-      backLip = new ModelRenderer(this, 44, 14);
-      backLip.addBox(-1F, 0F, 0F, 2, 1, 8);
-      backLip.setRotationPoint(3F, 13F, -4F);
-      backLip.setTextureSize(64, 32);
-      backLip.mirror = true;
-      setRotation(backLip, 0F, 0F, 0F);
-      frontLip = new ModelRenderer(this, 44, 14);
-      frontLip.addBox(-1F, 0F, 0F, 2, 1, 8);
-      frontLip.setRotationPoint(-3F, 13F, -4F);
-      frontLip.setTextureSize(64, 32);
-      frontLip.mirror = true;
-      setRotation(frontLip, 0F, 0F, 0F);
-      leftLip = new ModelRenderer(this, 52, 0);
-      leftLip.addBox(-2F, 0F, 0F, 4, 1, 2);
-      leftLip.setRotationPoint(0F, 13F, 2F);
-      leftLip.setTextureSize(64, 32);
-      leftLip.mirror = true;
-      setRotation(leftLip, 0F, 0F, 0F);
-      rightLip = new ModelRenderer(this, 52, 0);
-      rightLip.addBox(-2F, 0F, -2F, 4, 1, 2);
-      rightLip.setRotationPoint(0F, 13F, -2F);
-      rightLip.setTextureSize(64, 32);
-      rightLip.mirror = true;
-      setRotation(rightLip, 0F, 0F, 0F);
+      Base = new ModelRenderer(this, 0, 27);
+      Base.addBox(-2F, 0F, -2F, 4, 1, 4);
+      Base.setRotationPoint(0F, 23F, 0F);
+      Base.setTextureSize(32, 32);
+      Base.mirror = true;
+      setRotation(Base, 0F, 0F, 0F);
+      Body = new ModelRenderer(this, 0, 19);
+      Body.addBox(-1F, 0F, -1F, 2, 5, 2);
+      Body.setRotationPoint(0F, 18F, 0F);
+      Body.setTextureSize(32, 32);
+      Body.mirror = true;
+      setRotation(Body, 0F, 0F, 0F);
+      Neck = new ModelRenderer(this, 0, 9);
+      Neck.addBox(-4F, 0F, -4F, 8, 1, 8);
+      Neck.setRotationPoint(0F, 17F, 0F);
+      Neck.setTextureSize(32, 32);
+      Neck.mirror = true;
+      setRotation(Neck, 0F, 0F, 0F);
+      RightLip = new ModelRenderer(this, 0, 0);
+      RightLip.addBox(0F, 0F, -4F, 1, 1, 8);
+      RightLip.setRotationPoint(3F, 16F, 0F);
+      RightLip.setTextureSize(32, 32);
+      RightLip.mirror = true;
+      setRotation(RightLip, 0F, 0F, 0F);
+      LeftLip = new ModelRenderer(this, 0, 0);
+      LeftLip.addBox(-1F, 0F, -4F, 1, 1, 8);
+      LeftLip.setRotationPoint(-3F, 16F, 0F);
+      LeftLip.setTextureSize(32, 32);
+      LeftLip.mirror = true;
+      setRotation(LeftLip, 0F, 0F, 0F);
+      FrontLip = new ModelRenderer(this, 11, 0);
+      FrontLip.addBox(-3F, 0F, -1F, 6, 1, 1);
+      FrontLip.setRotationPoint(0F, 16F, -3F);
+      FrontLip.setTextureSize(32, 32);
+      FrontLip.mirror = true;
+      setRotation(FrontLip, 0F, 0F, 0F);
+      BackLip = new ModelRenderer(this, 11, 0);
+      BackLip.addBox(-3F, 0F, 0F, 6, 1, 1);
+      BackLip.setRotationPoint(0F, 16F, 3F);
+      BackLip.setTextureSize(32, 32);
+      BackLip.mirror = true;
+      setRotation(BackLip, 0F, 0F, 0F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    stand.render(f5);
-//    body.render(f5);
-//    lefthandle.render(f5);
-//    righthandle.render(f5);
-//    backLip.render(f5);
-//    frontLip.render(f5);
-//    leftLip.render(f5);
-//    rightLip.render(f5);
+    setRotationAngles(f, f1, f2, f3, f4, f5);
+    Base.render(f5);
+    Body.render(f5);
+    Neck.render(f5);
+    RightLip.render(f5);
+    LeftLip.render(f5);
+    FrontLip.render(f5);
+    BackLip.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -92,9 +84,7 @@ public class ModelVaseKylix extends ModelBase
     model.rotateAngleZ = z;
   }
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-  {
-      super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-  }
+  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {}
 
 }
+

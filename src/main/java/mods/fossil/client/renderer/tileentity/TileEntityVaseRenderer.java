@@ -81,11 +81,7 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
 
             switch (vaseType)
             {
-            case 0: default: this.proxyVase = this.modelVolute; break;
-            case 1: this.proxyVase = this.modelAmphora; break;
-            case 2: this.proxyVase = this.modelKylix; break;
-            }
-            
+            case 0: default: this.proxyVase = this.modelVolute; 
             // gets the texture for model
             switch (meta)
             {
@@ -94,7 +90,96 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                     this.bindTexture(damaged_volute);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
+                case 1:
+                    this.bindTexture(restored_volute);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 2:
+                    this.bindTexture(damaged_volute);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 3:
+                    this.bindTexture(redFigure_volute);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 4:
+                    this.bindTexture(blackFigure_volute);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 5:
+                    this.bindTexture(porcelain_volute);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                
             }
+            break;
+            case 1: this.proxyVase = this.modelAmphora; 
+            // gets the texture for model
+            switch (meta)
+            {
+                case 0:
+                default:
+                    this.bindTexture(damaged_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 1:
+                    this.bindTexture(restored_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 2:
+                    this.bindTexture(damaged_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 3:
+                    this.bindTexture(redFigure_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 4:
+                    this.bindTexture(blackFigure_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 5:
+                    this.bindTexture(porcelain_amphora);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                
+            }
+            break;
+            case 2: this.proxyVase = this.modelKylix; 
+            // gets the texture for model
+            switch (meta)
+            {
+                case 0:
+                default:
+                    this.bindTexture(damaged_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 1:
+                    this.bindTexture(restored_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 2:
+                    this.bindTexture(damaged_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 3:
+                    this.bindTexture(redFigure_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 4:
+                    this.bindTexture(blackFigure_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                case 5:
+                    this.bindTexture(porcelain_kylix);
+                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+                    break;
+                
+            }
+            break;
+            }
+            
+
 
             // renders the model
             //this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);

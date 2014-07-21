@@ -66,27 +66,32 @@ public class BlockAncientWoodPlate extends Block
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        int l = par1World.getBlockId(par2, par3 - 1, par4);
-        Block block = Block.blocksList[l];
+        return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
+    }
 
-        if (block == null)
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor blockID
+     */
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+        this.func_111046_k(par1World, par2, par3, par4);
+    }
+
+    private boolean func_111046_k(World par1World, int par2, int par3, int par4)
+    {
+        if (!this.canBlockStay(par1World, par2, par3, par4))
         {
+            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+            par1World.setBlockToAir(par2, par3, par4);
             return false;
         }
-
-        if (block == this && (par1World.getBlockMetadata(par2, par3 - 1, par4) & 7) == 7)
+        else
         {
             return true;
         }
-
-        if (!block.isLeaves(par1World, par2, par3 - 1, par4) && !Block.blocksList[l].isOpaqueCube())
-        {
-            return false;
-        }
-
-        return par1World.getBlockMaterial(par2, par3 - 1, par4).blocksMovement();
     }
-
+    
     /**
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.

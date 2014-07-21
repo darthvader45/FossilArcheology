@@ -165,6 +165,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
  Tail2.render(f5);
  Leg1.render(f5);
  Foot1.render(f5);
+ Foot2.render(f5);
  Thigh2.render(f5);
  Leg2.render(f5);
  Foot1.render(f5);
