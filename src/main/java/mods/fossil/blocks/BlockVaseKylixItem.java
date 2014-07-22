@@ -13,7 +13,7 @@ public class BlockVaseKylixItem extends ItemBlockWithMetadata
 	public BlockVaseKylixItem(int id, Block block)
     {
         super(id, block);
-        
+        setHasSubtypes(true);
     }
 
     @Override
@@ -21,5 +21,11 @@ public class BlockVaseKylixItem extends ItemBlockWithMetadata
     {
         return getUnlocalizedName() + "." + BlockVaseKylix.shortname[itemstack.getItemDamage()];
 
+    }
+    
+    @Override
+    public int getMetadata(int meta)
+    {
+    	return meta;
     }
 }

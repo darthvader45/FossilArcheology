@@ -219,14 +219,14 @@ public class LocalizationStrings
     public static final String ORDER_FREEMOVE = "order.freeMove";
 
     //Animal names
-    public static final String ANIMAL_MAMMOTH = "entity.fossil.mammoth.name";
-    public static final String ANIMAL_SMILODON = "entity.fossil.smilodon.name";
+    public static final String ANIMAL_MAMMOTH = "entity.fossil.Mammoth.name";
+    public static final String ANIMAL_SMILODON = "entity.fossil.Smilodon.name";
     public static final String ANIMAL_PREGNANT_COW = "entity.fossil.PregnantCow.name";
     public static final String ANIMAL_PREGNANT_PIG = "entity.fossil.PregnantPig.name";
     public static final String ANIMAL_PREGNANT_SHEEP = "entity.fossil.PregnantSheep.name";
     public static final String ANIMAL_PREGNANT_CHICKEN = "entity.fossil.PregnantChicken.name";
-    public static final String ANIMAL_DODO = "entity.fossil.dodo.name";
-    public static final String ANIMAL_COELACANTH = "entity.fossil.coelacanth.name";
+    public static final String ANIMAL_DODO = "entity.fossil.Dodo.name";
+    public static final String ANIMAL_COELACANTH = "entity.fossil.Coelacanth.name";
     public static final String ANIMAL_PREGNANT_HORSE = "entity.fossil.PregnantHorse.name";
 
     //Trex scarab messages

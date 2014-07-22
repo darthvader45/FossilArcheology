@@ -13,7 +13,7 @@ public class BlockVaseVoluteItem extends ItemBlockWithMetadata
 	public BlockVaseVoluteItem(int id, Block block)
     {
         super(id, block);
-        
+        setHasSubtypes(true);
     }
 
     @Override
@@ -21,5 +21,11 @@ public class BlockVaseVoluteItem extends ItemBlockWithMetadata
     {
         return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
 
+    }
+    
+    @Override
+    public int getMetadata(int meta)
+    {
+    	return meta;
     }
 }

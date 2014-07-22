@@ -95,22 +95,17 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
                 case 2:
-                    this.bindTexture(damaged_volute);
-                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-                    break;
-                case 3:
                     this.bindTexture(redFigure_volute);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 4:
+                case 3:
                     this.bindTexture(blackFigure_volute);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 5:
+                case 4:
                     this.bindTexture(porcelain_volute);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-                    break;
-                
+                    break;             
             }
             break;
             case 1: this.proxyVase = this.modelAmphora; 
@@ -127,22 +122,17 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
                 case 2:
-                    this.bindTexture(damaged_amphora);
-                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-                    break;
-                case 3:
                     this.bindTexture(redFigure_amphora);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 4:
+                case 3:
                     this.bindTexture(blackFigure_amphora);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 5:
+                case 4:
                     this.bindTexture(porcelain_amphora);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                
             }
             break;
             case 2: this.proxyVase = this.modelKylix; 
@@ -159,22 +149,17 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
                 case 2:
-                    this.bindTexture(damaged_kylix);
-                    this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-                    break;
-                case 3:
                     this.bindTexture(redFigure_kylix);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 4:
+                case 3:
                     this.bindTexture(blackFigure_kylix);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                case 5:
+                case 4:
                     this.bindTexture(porcelain_kylix);
                     this.proxyVase.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
                     break;
-                
             }
             break;
             }

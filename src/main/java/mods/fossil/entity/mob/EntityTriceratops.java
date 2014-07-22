@@ -224,16 +224,16 @@ public class EntityTriceratops extends EntityDinosaur
         return (float)this.getDinoAge() / 2.7F;
     }
 
-    public float getRidingHeight()
+    public float getMountHeight()
     {
-        return this.getEyeHeight();// + 0.1F;
+        return this.height*0.6F;
     }
-
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRidingHeight(), this.posZ - 1);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 

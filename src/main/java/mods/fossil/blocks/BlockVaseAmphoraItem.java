@@ -13,7 +13,7 @@ public class BlockVaseAmphoraItem extends ItemBlockWithMetadata
 	public BlockVaseAmphoraItem(int id, Block block)
     {
         super(id, block);
-        
+        setHasSubtypes(true);
     }
 
     @Override
@@ -21,5 +21,11 @@ public class BlockVaseAmphoraItem extends ItemBlockWithMetadata
     {
         return getUnlocalizedName() + "." + BlockVaseAmphora.shortname[itemstack.getItemDamage()];
 
+    }
+    
+    @Override
+    public int getMetadata(int meta)
+    {
+    	return meta;
     }
 }

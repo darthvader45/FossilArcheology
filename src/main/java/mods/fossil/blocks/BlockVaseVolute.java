@@ -191,7 +191,7 @@ public class BlockVaseVolute extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconregister)
     {
-        icons = new Icon[16];
+        icons = new Icon[shortname.length];
 
         for (int i = 0; i < shortname.length; ++i)
         {
