@@ -222,7 +222,7 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return false;
+        return true;
     }
     
     public static final double MESSAGE_DISTANCE = 25.0D;
@@ -996,7 +996,7 @@ public class Fossil
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
         cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
        // archNotebook = new ForgeItem(archNotebookID, "Arch_Notebook").setUnlocalizedName(LocalizationStrings.ARCH_NOTEBOOK_NAME).setCreativeTab(this.tabFItems);
-        potteryShards = new ForgeItem(potteryShardsID, "AncientPotteryFragment2").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
+        potteryShards = new ForgeItem(potteryShardsID, "PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
        // brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
         livingCoelacanth = new ItemLivingCoelacanth(livingCoelacanthID, 1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
        

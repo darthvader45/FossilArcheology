@@ -262,6 +262,7 @@ public class BlockCultivate extends BlockContainer
             if (var8 >= 10)
             {
                 var9 = new EntityFailuresaurus(var1);
+                ((EntityFailuresaurus)var9).setSkin(new Random().nextInt(3));
             }
 
             ((EntityLiving)var9).setLocationAndAngles((double)var2, (double)var3, (double)var4, var1.rand.nextFloat() * 360.0F, 0.0F);
