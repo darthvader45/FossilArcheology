@@ -427,7 +427,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         }
 
-        if (this.DinoInside == EnumDinoType.Mosasaurus)
+        if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
         {
             if (this.inWater)
             {
@@ -464,7 +464,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             {
                 String var6;
 
-                if (this.DinoInside == EnumDinoType.Mosasaurus)
+                if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
                 {
                     var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_DRY);
                 }
@@ -563,6 +563,10 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                             ((EntityMosasaurus)var5).setSubSpecies(2);
                         }
 
+                        break;
+                        
+                    case Liopleurodon:
+                        var5 = new EntityLiopleurodon(this.worldObj);
                         break;
 
                     case Stegosaurus:
@@ -682,8 +686,10 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 }
 
                 ((EntityLiving)var5).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-
-                if (this.worldObj.checkNoEntityCollision(((EntityLiving)var5).boundingBox) && this.worldObj.getCollidingBoundingBoxes((Entity)var5, ((EntityLiving)var5).boundingBox).size() == 0 && (!this.worldObj.isAnyLiquid(((EntityLiving)var5).boundingBox) || this.DinoInside == EnumDinoType.Mosasaurus))
+                if (this.worldObj.checkNoEntityCollision(((EntityLiving)var5).boundingBox) 
+                		&& this.worldObj.getCollidingBoundingBoxes((Entity)var5, ((EntityLiving)var5).boundingBox).size() == 0 
+                && (!this.worldObj.isAnyLiquid(((EntityLiving)var5).boundingBox) 
+                		|| this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon))
                 {
                     //if (!this.worldObj.isRemote)
                     {
@@ -789,7 +795,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
         String stat;
 
-        if (this.DinoInside == EnumDinoType.Mosasaurus)
+        if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
         {
             if (this.getBirthTick() >= 0)
             {

@@ -38,6 +38,7 @@ public enum EnumDinoType
     Pachycephalosaurus(EntityPachycephalosaurus.class, 			  C.TAME 				| C.HERBIVORE),
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
     Gallimimus(EntityGallimimus.class,							  C.TAME	| C.RIDE	| C.HERB_CARN),
+    Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     ;
 
 
@@ -448,11 +449,26 @@ public enum EnumDinoType
         Mosasaurus.setExperience(1F, 1F);
         Mosasaurus.FoodItemList.addItem(EnumDinoFoodItem.Nautilus);
         Mosasaurus.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        Mosasaurus.FoodItemList.addItem(EnumDinoFoodItem.Coelacanth);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Squid);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Coelacanth);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
         Mosasaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
+        
+        Liopleurodon.setItems(null);  //,				Fossil.rawLiopleurodon, 	Fossil.dnaLiopleurodon, 	Fossil.eggLiopleurodon);
+        Liopleurodon.setDimensions(0.05F, 0.15F, 0.5F, 0.45F, 0.4F, 0.25F);
+        Liopleurodon.setAges(6, 13, -1);
+        Liopleurodon.setProperties(10.0D, 40.0D, 2.0D, 12.0D, 0.3D, 0.4D, 500);
+        Liopleurodon.setExperience(1F, 1F);
+        Liopleurodon.FoodItemList.addItem(EnumDinoFoodItem.Nautilus);
+        Liopleurodon.FoodItemList.addItem(EnumDinoFoodItem.Plesiosaur);
+        Liopleurodon.FoodItemList.addItem(EnumDinoFoodItem.Coelacanth);
+        Liopleurodon.FoodMobList.addMob(EnumDinoFoodMob.Squid);
+        Liopleurodon.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
+        Liopleurodon.FoodMobList.addMob(EnumDinoFoodMob.Coelacanth);
+        Liopleurodon.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
+        Liopleurodon.FoodMobList.addMob(EnumDinoFoodMob.Cow);
         
         Stegosaurus.setItems(Item.stick);  //,			Fossil.rawStegosaurus, 	Fossil.dnaStegosaurus, 	Fossil.eggStegosaurus);
         Stegosaurus.setDimensions(1.2F, 0.5F, 1.0F, 0.7F, 1.2F, 0.36F);

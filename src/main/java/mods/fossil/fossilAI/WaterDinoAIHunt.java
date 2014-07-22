@@ -38,10 +38,12 @@ public class WaterDinoAIHunt extends EntityAITarget
 	private double movePosY;
 	private double movePosZ;
 	private int SEARCH_RANGE;
+	private double speed;
 
-    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4)
+    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed)
     {
         super(dinosaur, par4);
+        this.speed = speed;
         this.dinosaur = dinosaur;
         this.targetClass = _class;
         this.SEARCH_RANGE = range;
@@ -150,7 +152,7 @@ public class WaterDinoAIHunt extends EntityAITarget
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
             
-            this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
+            this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
 
             if (this.dinosaur.canEntityBeSeen(this.targetEntity))
             {

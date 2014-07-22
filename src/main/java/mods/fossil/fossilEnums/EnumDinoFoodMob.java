@@ -28,6 +28,7 @@ public enum EnumDinoFoodMob
     Pterosaur(null, 35, 2),
     Plesiosaur(null, 50, 3),
     Mosasaurus(null, 50, 3),
+    Liopleurodon(null, 50, 3),
     Stegosaurus(null, 50, 3),
     Dilophosaurus(null, 25, 2),
     Brachiosaurus(null, 80, 5),
@@ -68,6 +69,7 @@ public enum EnumDinoFoodMob
         Pterosaur.setDetails(EntityPterosaur.class);
         Plesiosaur.setDetails(EntityPlesiosaur.class);
         Mosasaurus.setDetails(EntityMosasaurus.class);
+        Liopleurodon.setDetails(EntityLiopleurodon.class);
         Stegosaurus.setDetails(EntityStegosaurus.class);
         Dilophosaurus.setDetails(EntityDilophosaurus.class);
         Brachiosaurus.setDetails(EntityBrachiosaurus.class);

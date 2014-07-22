@@ -34,7 +34,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class EntityMosasaurus extends EntitySwimmingDino implements IMob
+public class EntityLiopleurodon extends EntitySwimmingDino implements IMob
 {
     private Entity targetedEntity;
 
@@ -50,38 +50,37 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     
 
 
-    public static final double baseHealth = EnumDinoType.Mosasaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Mosasaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Mosasaurus.Speed0;
+    public static final double baseHealth = EnumDinoType.Liopleurodon.Health0;
+    public static final double baseDamage = EnumDinoType.Liopleurodon.Strength0;
+    public static final double baseSpeed = EnumDinoType.Liopleurodon.Speed0;
     
-    public static final double maxHealth = EnumDinoType.Mosasaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Mosasaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Mosasaurus.SpeedMax;
+    public static final double maxHealth = EnumDinoType.Liopleurodon.HealthMax;
+    public static final double maxDamage = EnumDinoType.Liopleurodon.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Liopleurodon.SpeedMax;
 
-    public EntityMosasaurus(World par1World)
+    public EntityLiopleurodon(World par1World)
     {
-        super(par1World, EnumDinoType.Mosasaurus);
+        super(par1World, EnumDinoType.Liopleurodon);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
+        this.adultAge = EnumDinoType.Liopleurodon.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 0.5F);
         // Size of dinosaur at day 0.
-        this.minSize = 1.0F;
+        this.minSize = 0.8F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 3.0F;
+        this.maxSize = 1.8F;
         this.experienceValue = 5;
         
-
         
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
       // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
-        this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.022D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
+        this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.066D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
-        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.023D));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.046D));
     }
 
     public boolean canBreatheUnderwater()
@@ -95,15 +94,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         {
             return super.getModelTexture();
         }
-
-        switch (this.getSubSpecies())
-        {
-        case 1: 
-            return "fossil:textures/mob/Mosasaur_Blue.png";
-
-        case 2: default:
-        	return "fossil:textures/mob/Mosasaur_Green.png";
-        }
+        	return "fossil:textures/mob/Liopleurodon_Black.png";
     }
     
     @Override
@@ -116,9 +107,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     		return null;
     	
     	if(!this.isInWater())
-        return DinoSound.mosasaurus_living;
+        return DinoSound.liopleurodon_living;
     	else
-    	return DinoSound.mosasaurus_outside;	
+    	return DinoSound.liopleurodon_outside;	
     }
     
     @Override
@@ -127,13 +118,11 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     	if(this.isModelized())
     		return null;
     	
-    	return DinoSound.mosasaurus_attack;
+    	return DinoSound.liopleurodon_attack;
     }
 
     /**
      * Returns true if the Entity AI code should be run
-     *
-     * Overriding because Mosasaur are dumb.
      */
     @Override
     public boolean isAIEnabled()
@@ -241,9 +230,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         return 1;
     }
     
-    public EntityMosasaurus spawnBabyAnimal(EntityAnimal var1)
+    public EntityLiopleurodon spawnBabyAnimal(EntityAnimal var1)
     {
-        return new EntityMosasaurus(this.worldObj);
+        return new EntityLiopleurodon(this.worldObj);
     }
     
     public boolean interact(EntityPlayer var1)

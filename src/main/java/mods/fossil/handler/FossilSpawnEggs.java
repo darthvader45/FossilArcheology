@@ -35,6 +35,8 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityDeinonychus.class, 			0x6a6a6a, 0x2f302e);
         registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
+        registerEntityEgg(EntityLiopleurodon.class, 		0x000000, 0xffffff);
+
     }
 
     public static int getUniqueEntityId()

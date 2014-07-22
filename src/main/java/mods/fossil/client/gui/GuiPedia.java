@@ -12,6 +12,7 @@ import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityMammoth;
+import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantHorse;
 import mods.fossil.entity.mob.EntityPregnantPig;
@@ -249,6 +250,11 @@ public class GuiPedia extends GuiContainer
         if (Fossil.ToPedia instanceof EntityCoelacanth)
         {
             ((EntityCoelacanth)Fossil.ToPedia).ShowPedia(this);
+        }
+        
+        if (Fossil.ToPedia instanceof EntityNautilus)
+        {
+            ((EntityNautilus)Fossil.ToPedia).ShowPedia(this);
         }
     	}
     }

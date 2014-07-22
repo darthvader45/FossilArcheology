@@ -90,9 +90,10 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
-        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
         
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
