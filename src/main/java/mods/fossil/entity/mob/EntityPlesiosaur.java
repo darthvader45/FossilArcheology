@@ -19,6 +19,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
@@ -87,7 +88,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        tasks.addTask(1, new DinoAIRideGround(this, 2)); // mutex all
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
@@ -109,6 +110,12 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     {
         return !this.isModelized();
     }
+    
+    @Override
+    public boolean shouldDismountInWater(Entity rider){
+        return false;
+    }
+    
     /**
      * Returns the texture's file path as a String.
      */
