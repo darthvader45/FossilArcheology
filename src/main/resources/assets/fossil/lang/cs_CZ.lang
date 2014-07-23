@@ -292,11 +292,11 @@ entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 
 #Non-dinosaur names Clean
-entity.fossil.Mammoth.name=Mammoth
+entity.fossil.Mammoth.name=Mamut
 entity.fossil.Smilodon.name=Šavlozubý tygr
-entity.fossil.PregnantCow.name=Pregnant Cow
-entity.fossil.PregnantPig.name=Pregnant Pig   
-entity.fossil.PregnantSheep.name=Pregnant Sheep  
+entity.fossil.PregnantCow.name=Březí kráva  
+entity.fossil.PregnantPig.name=Březí Prase  
+entity.fossil.PregnantSheep.name=Březí ovce  
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Latimérie
 
