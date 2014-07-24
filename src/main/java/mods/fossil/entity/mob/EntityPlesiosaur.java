@@ -73,7 +73,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
          */
         this.adultAge = EnumDinoType.Plesiosaur.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.0F);
+        this.setSize(1.0F, 1.0F);
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
@@ -138,7 +138,8 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     {
         return true;
     }
-
+    
+    /*
     protected void updateEntityActionState()
     {
         if (!this.isModelized())
@@ -165,7 +166,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
             }
         }
     }
-
+*/
     
     public boolean isOnSurface()
     {
