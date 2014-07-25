@@ -1,15 +1,40 @@
 package mods.fossil.client;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import mods.fossil.client.gui.*;
-import mods.fossil.guiBlocks.*;
+import mods.fossil.client.gui.ContainerQuagga;
+import mods.fossil.client.gui.GuiAnalyzer;
+import mods.fossil.client.gui.GuiCultivate;
+import mods.fossil.client.gui.GuiFeeder;
+import mods.fossil.client.gui.GuiNotebook;
+import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.client.gui.GuiQuagga;
+import mods.fossil.client.gui.GuiSifter;
+import mods.fossil.client.gui.GuiTimeMachine;
+import mods.fossil.client.gui.GuiWorktable;
+import mods.fossil.entity.mob.EntityQuagga;
+import mods.fossil.guiBlocks.ContainerAnalyzer;
+import mods.fossil.guiBlocks.ContainerCultivate;
+import mods.fossil.guiBlocks.ContainerFeeder;
+import mods.fossil.guiBlocks.ContainerNotebook;
+import mods.fossil.guiBlocks.ContainerPedia;
+import mods.fossil.guiBlocks.ContainerSifter;
+import mods.fossil.guiBlocks.ContainerTimeMachine;
+import mods.fossil.guiBlocks.ContainerWorktable;
+import mods.fossil.guiBlocks.TileEntityAnalyzer;
+import mods.fossil.guiBlocks.TileEntityCultivate;
+import mods.fossil.guiBlocks.TileEntityFeeder;
+import mods.fossil.guiBlocks.TileEntitySifter;
+import mods.fossil.guiBlocks.TileEntityTimeMachine;
+import mods.fossil.guiBlocks.TileEntityWorktable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class FossilGuiHandler implements IGuiHandler
 {
-    @Override
+    private EntityQuagga quagga;
+
+	@Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
@@ -39,6 +64,10 @@ public class FossilGuiHandler implements IGuiHandler
             
             case 7:
             	return new ContainerSifter(player.inventory, (TileEntitySifter) tile_entity);
+            	
+            case 8:
+            	quagga = (EntityQuagga)world.getEntityByID(x);
+            	return new ContainerQuagga(player.inventory, quagga.quaggaChest, quagga);
         }
 
         return null;
@@ -73,7 +102,11 @@ public class FossilGuiHandler implements IGuiHandler
                 return new GuiNotebook();
                 
             case 7:
-            	return new GuiSifter(player.inventory, (TileEntitySifter) tile_entity);
+            	return new GuiSifter(player.inventory, (TileEntitySifter)	 tile_entity);
+            	
+            case 8:
+            	quagga = (EntityQuagga)world.getEntityByID(x);
+                return new GuiQuagga(player.inventory, quagga.quaggaChest, quagga);
         }
 
         return null;

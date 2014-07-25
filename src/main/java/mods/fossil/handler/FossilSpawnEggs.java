@@ -36,6 +36,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
         registerEntityEgg(EntityLiopleurodon.class, 		0x000000, 0xffffff);
+        registerEntityEgg(EntityQuagga.class, 				0xffffff, 0x000000);
 
     }
 

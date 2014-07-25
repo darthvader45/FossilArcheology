@@ -454,6 +454,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 {
                     var1 = new ItemStack(Item.porkRaw, 1);
                 }
+                
+                if (var2 >= 60 && var2 < 70)
+                {
+                    var1 = new ItemStack(Fossil.dnaQuagga, 1);
+                }
 
                 if (var1 == null)
                 {
