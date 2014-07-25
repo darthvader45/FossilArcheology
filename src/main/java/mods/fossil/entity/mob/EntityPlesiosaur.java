@@ -3,6 +3,8 @@ package mods.fossil.entity.mob;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIFishing;
@@ -14,6 +16,7 @@ import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
+import mods.fossil.util.MathX;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -21,6 +24,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -33,6 +37,7 @@ import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
@@ -61,6 +66,9 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public static final double maxHealth = EnumDinoType.Plesiosaur.HealthMax;
     public static final double maxDamage = EnumDinoType.Plesiosaur.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Plesiosaur.SpeedMax;
+    
+    private WaterDinoAIWander aiWaterDinoWander = new WaterDinoAIWander(this, 1.0D);
+    private DinoAIWander aiDinoWander = new DinoAIWander(this, 1.0D);
 
     public EntityPlesiosaur(World var1)
     {
@@ -84,17 +92,16 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
       //  this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-        this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 2)); // mutex all
+        tasks.addTask(1, new DinoAIRideGround(this, 3)); // mutex all
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
-        
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
+
+
+       // this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+      //  this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
@@ -180,6 +187,15 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public void onUpdate()
     {
         super.onUpdate();
+        
+        if(this.isInWater()){
+        	this.tasks.removeTask(this.aiDinoWander);
+        	this.tasks.addTask(6, this.aiWaterDinoWander);
+        }
+        else {
+        	this.tasks.removeTask(this.aiWaterDinoWander);
+        	this.tasks.addTask(6, this.aiDinoWander);
+        }
     }
 
     /**
@@ -363,11 +379,16 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         }
     }
 
+    public float getMountHeight()
+    {
+        return this.height/2;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
@@ -404,41 +425,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         }
     }
 
-    public void FaceToCoord(int var1, int var2, int var3)
-    {
-        double var4 = (double)var1;
-        double var6 = (double)var3;
-        float var8 = (float)(Math.atan2(var6, var4) * 180.0D / Math.PI) - 90.0F;
-        this.rotationYaw = this.updateRotation(this.rotationYaw, var8, 360.0F);
-    }
-
-    private float updateRotation(float var1, float var2, float var3)
-    {
-        float var4;
-
-        for (var4 = var2 - var1; var4 < -180.0F; var4 += 360.0F)
-        {
-            ;
-        }
-
-        while (var4 >= 180.0F)
-        {
-            var4 -= 360.0F;
-        }
-
-        if (var4 > var3)
-        {
-            var4 = var3;
-        }
-
-        if (var4 < -var3)
-        {
-            var4 = -var3;
-        }
-
-        return var1 + var4;
-    }
-
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
@@ -456,7 +442,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
      */
     public boolean isInWater()
     {
-        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
+        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.4000000059604645D, 0.0D).contract(0.001D, 0.001D, 0.001D), Material.water, this);
     }
 
     public float HandleRiding(float Speed, float SpeedBoosted)
@@ -620,7 +606,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     {
         return this.spawnBabyAnimal(var1);
     }
-
+    
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */
