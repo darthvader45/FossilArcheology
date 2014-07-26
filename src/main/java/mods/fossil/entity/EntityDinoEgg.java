@@ -104,7 +104,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }
         else
         {
-            this.HatchTime = 3000;
+        	this.HatchTime = 3000;
         }
 
         this.dataWatcher.addObject(HATCHING_INDEX, new Integer(0));
@@ -668,6 +668,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		((EntityGallimimus)var5).setSubSpecies(4); //Brown
                     	}
                     	break;
+                    	
+                    	/*
+                    case Gastornis:
+                        var5 = new EntityGastornis(this.worldObj);
+                        break;
+                        */
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", player);
@@ -675,14 +681,17 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         this.setDead();
                         return;
                 }
-
-                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
-                {
-                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
-                    // Tameable and player next to it
-                    ((EntityDinosaur)var5).setOwner(player.username);
-                    ((EntityDinosaur)var5).setTamed(true);
-                	}
+                
+        
+                if(var5 instanceof EntityDinosaur){
+	                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
+	                {
+	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
+	                    // Tameable and player next to it
+	                    ((EntityDinosaur)var5).setOwner(player.username);
+	                    ((EntityDinosaur)var5).setTamed(true);
+	                	}
+	                }
                 }
 
                 ((EntityLiving)var5).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);

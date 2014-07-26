@@ -12,6 +12,7 @@ import mods.fossil.client.model.ModelDilophosaurus;
 import mods.fossil.client.model.ModelDodo;
 import mods.fossil.client.model.ModelFailuresaurus;
 import mods.fossil.client.model.ModelGallimimus;
+import mods.fossil.client.model.ModelGastornis;
 import mods.fossil.client.model.ModelLiopleurodon;
 import mods.fossil.client.model.ModelMammoth;
 import mods.fossil.client.model.ModelMosasaurus;
@@ -38,6 +39,7 @@ import mods.fossil.client.renderer.entity.RenderDodo;
 import mods.fossil.client.renderer.entity.RenderFPZ;
 import mods.fossil.client.renderer.entity.RenderFailuresaurus;
 import mods.fossil.client.renderer.entity.RenderGallimimus;
+import mods.fossil.client.renderer.entity.RenderGastornis;
 import mods.fossil.client.renderer.entity.RenderJavelin;
 import mods.fossil.client.renderer.entity.RenderLiopleurodon;
 import mods.fossil.client.renderer.entity.RenderMammoth;
@@ -79,6 +81,7 @@ import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityGastornis;
 import mods.fossil.entity.mob.EntityLiopleurodon;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityMosasaurus;
@@ -153,6 +156,7 @@ public class ClientProxy extends CommonProxy
         //MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderCoelacanth(new ModelCoelacanth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderGastornis(new ModelGastornis(), 0.5F));
         
     	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
     }

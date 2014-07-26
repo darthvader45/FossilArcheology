@@ -15,6 +15,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -105,7 +106,8 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
     		parentEntity.setOwnerName(this.getOwnerName());
     		parentEntity.setHorseTamed(this.isTame());
     		parentEntity.setTemper(this.getTemper());
-    		parentEntity.setHealth(this.getHealth());
+    		parentEntity.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
+    		parentEntity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
     		parentEntity.setGrowingAge(this.getGrowingAge());  
         }
 
@@ -205,7 +207,8 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
         		parentEntity.setOwnerName(this.getOwnerName());
         		parentEntity.setHorseTamed(this.isTame());
         		parentEntity.setTemper(this.getTemper());
-        		parentEntity.setHealth(this.getHealth());
+        		parentEntity.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
+        		parentEntity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
         		parentEntity.setGrowingAge(this.getGrowingAge());            
         	}
         }

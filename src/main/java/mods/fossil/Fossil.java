@@ -64,6 +64,7 @@ import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
+import mods.fossil.entity.mob.EntityGastornis;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPigBoss;
@@ -191,7 +192,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3a20_debug";
+    public static final String modversion = "1.6.4 Build 6.3rc2";
 
     /*
      * Set mod state here
@@ -223,9 +224,9 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return true;
+        return false;
     }
-    
+
     public static final double MESSAGE_DISTANCE = 25.0D;
 
     public static CreativeTabs tabFBlocks = new TabFBlocks(CreativeTabs.getNextID(), "Fossil Blocks");
@@ -598,7 +599,6 @@ public class Fossil
     //public static int eggNewID;
     //public static int eggNewID;
     //public static int eggNewID;
-    //public static int eggNewID;
 
     //Embryos
     //public static int embyoSyringeID;
@@ -809,7 +809,6 @@ public class Fossil
             livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10085).getInt();
             dnaHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_HORSE_NAME, 10086).getInt();
             dnaQuaggaID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_QUAGGA_NAME, 10087).getInt();
-            //dnaGhastID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10086).getInt();
             //dnaWitherID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10087).getInt();
             //dnaSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10088).getInt();
             //dnaSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10089).getInt();
@@ -831,7 +830,6 @@ public class Fossil
             embryoMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt();
             embryoHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_HORSE_NAME, 10114).getInt();
             embryoQuaggaID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_QUAGGA_NAME, 10114).getInt();
-            //embryoZombieID = config.getItem(Configuration.CATEGORY_ITEM, "embryoZombie", 10115).getInt();
             //embryoGhastID = config.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt();
             //embryoWitherID = config.getItem(Configuration.CATEGORY_ITEM, "embryoWither", 10117).getInt();
             //embryoSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "embryoSkeleton", 10118).getInt();
@@ -863,6 +861,8 @@ public class Fossil
             FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
             FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
             FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
+            FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
+            FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
             //FossilOptions.FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
             FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Academy", 1).getInt(1);
             FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Shipwreck", 1).getInt(1);
@@ -1039,7 +1039,7 @@ public class Fossil
         dnaCoelacanth = new ForgeItem(dnaCoelacanthID, "Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
         dnaHorse = new ForgeItem(dnaHorseID, "Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(this.tabFMaterial);
         dnaQuagga = new ForgeItem(dnaQuaggaID, "Quagga_DNA").setUnlocalizedName(LocalizationStrings.DNA_QUAGGA_NAME).setCreativeTab(this.tabFMaterial);
-        
+
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
         embryoPig = new ItemEmbryoSyringe(embryoPigID, 0).setUnlocalizedName(LocalizationStrings.EMBRYO_PIG_NAME).setCreativeTab(this.tabFItems);
@@ -1156,7 +1156,7 @@ public class Fossil
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
-            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
+            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 4, true);
         }
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});

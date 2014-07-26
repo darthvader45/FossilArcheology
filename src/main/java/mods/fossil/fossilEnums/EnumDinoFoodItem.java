@@ -58,6 +58,7 @@ public enum EnumDinoFoodItem
     DinoMeatCooked(Fossil.cookedDinoMeat, 50, 5),
     DodoWing(Fossil.dodoWing, 20, 2),
     DodoWingCooked(Fossil.dodoWingCooked, 30, 3),
+    //Gastornis(EnumDinoType.Gastornis.DropItem, 40, 4);
     ;
     public Item item;
     public int FoodValue;

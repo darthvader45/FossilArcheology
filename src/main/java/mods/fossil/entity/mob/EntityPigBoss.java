@@ -180,7 +180,12 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
             this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
         }
 
-        this.BlockTimeInteract();
+        if(!worldObj.isRemote)
+        {
+	        	if(Fossil.FossilOptions.Anu_Allowed_Overworld && !this.worldObj.provider.isHellWorld)
+	                this.BlockTimeInteract();
+        }
+
         super.onUpdate();
     }
 
@@ -192,6 +197,13 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     {
         super.onLivingUpdate();
 
+        if(!worldObj.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Anu_Spawn)
+	        	this.setDead();
+        	if(!Fossil.FossilOptions.Anu_Allowed_Overworld && !this.worldObj.provider.isHellWorld)
+	            this.setDead();
+        }
 
         if (this.FireballCount < 50)
         {

@@ -138,7 +138,9 @@ public class LocalizationStrings
     public static final String ITEM_FIGURINE_NAME = "itemfigurine";
     public static final String POTTERY_SHARDS = "potteryShard";
     public static final String BROKEN_HEAD_RELIC = "brokenHeadRelic";
-
+    public static final String GASTORNIS_EGG_NAME = "eggGastornis";
+    public static final String CULTIVATED_GASTORNIS_EGG_NAME = "eggCultivatedGastornis";    
+    
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
     public static final String DNA_SHEEP_NAME = "dnaSheep";
@@ -150,6 +152,7 @@ public class LocalizationStrings
     public static final String DNA_COELACANTH_NAME = "dnaCoelacanth";
     public static final String DNA_HORSE_NAME = "dnaHorse";
     public static final String DNA_QUAGGA_NAME = "dnaQuagga";
+    public static final String DNA_GASTORNIS_NAME = "dnaGastornis";
 
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
@@ -161,6 +164,9 @@ public class LocalizationStrings
     public static final String EMBRYO_DODO_NAME = "embryoDodo";
     public static final String EMBRYO_HORSE_NAME = "embryoHorse";
     public static final String EMBRYO_QUAGGA_NAME = "embryoQuagga";
+    
+    //Non Dino Eggs
+    public static final String  EGG_GASTORNIS_NAME = "eggGastornis";
     
     //Other
     public static final String LIVING_COELACANTH_NAME = "eggCoelacanth";
@@ -231,6 +237,7 @@ public class LocalizationStrings
     public static final String ANIMAL_DODO = "entity.fossil.Dodo.name";
     public static final String ANIMAL_COELACANTH = "entity.fossil.Coelacanth.name";
     public static final String ANIMAL_PREGNANT_HORSE = "entity.fossil.PregnantHorse.name";
+    public static final String ANIMAL_QUAGGA = "entity.fossil.Quagga.name";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";
@@ -255,6 +262,8 @@ public class LocalizationStrings
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+
+
 
 
     

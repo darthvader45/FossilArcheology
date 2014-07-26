@@ -41,6 +41,7 @@ public enum EnumDinoFoodMob
     Dodo(EntityDodo.class, 20, 2),
     Coelacanth(EntityCoelacanth.class, 20, 2),
     Quagga(EntityQuagga.class, 50, 3),
+    Gastornis(EntityGastornis.class, 60, 3)
     ;
     public Class preyClass;
     public int FoodValue;

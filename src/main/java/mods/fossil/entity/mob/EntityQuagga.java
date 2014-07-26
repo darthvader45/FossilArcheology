@@ -1,6 +1,8 @@
 package mods.fossil.entity.mob;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.QuaggaAITaming;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
@@ -12,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAIRunAroundLikeCrazy;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -20,6 +23,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,8 +38,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -87,6 +93,9 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.func_110226_cD();
+        
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 200, true));
+
     }
 
     protected void entityInit()
@@ -95,6 +104,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         this.dataWatcher.addObject(16, Integer.valueOf(0));
         this.dataWatcher.addObject(21, String.valueOf(""));
         this.dataWatcher.addObject(22, Integer.valueOf(0));
+    }
+    
+    private void setPedia()
+    {
+        Fossil.ToPedia = (Object)this;
     }
 
     /**
@@ -108,7 +122,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         }
         else
         {
-            return StatCollector.translateToLocal("fossil.entity.quagga.name");
+            return StatCollector.translateToLocal("entity.fossil.Quagga.name");
         }
     }
 
@@ -414,7 +428,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
     {
     	InventoryBasic animalchest = this.quaggaChest;
       //  AnimalChest animalchest = this.quaggaChest;
-        this.quaggaChest = new AnimalChest("HorseChest", this.func_110225_cC());
+        this.quaggaChest = new AnimalChest("QuaggaChest", this.func_110225_cC());
         this.quaggaChest.func_110133_a(this.getEntityName());
 
         if (animalchest != null)
@@ -658,6 +672,12 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         {
             return super.interact(player);
         }
+        else if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem().itemID == Fossil.dinoPedia.itemID)
+        {
+            this.setPedia();
+            player.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+            return true;
+        }
         else if (this.isTame() && this.isAdultHorse() && player.isSneaking())
         {
             this.openGUI(player);
@@ -828,7 +848,6 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
                 }
                 else
                 {
-                	System.out.println("Mounting");
                     this.mountQuagga(player);
                     return true;
                 }
@@ -1477,5 +1496,72 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
     public boolean isOnLadder()
     {
         return false;
+    }
+    
+    protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
+
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia(GuiPedia p0)
+    {
+    
+    	
+        p0.reset();
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
+
+        
+        /* LEFT PAGE
+         * 
+         * OWNER:
+         * (+2) OWNER NAME 
+         * RIDEABLE
+         * ORDER
+         * ABLE TO FLY
+         * ABLE TO CHEST
+         * DANGEROUS
+         * 
+         * 
+         */
+        
+        /* RIGHT PAGE
+         * 
+         * CUSTOM NAME
+         * DINOSAUR NAME
+         * DINO AGE
+         * HEALTH
+         * HUNGER
+         * 
+         */
+        if (this.hasCustomNameTag())
+        {
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+        }
+
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+
+        //Display Health
+        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
+
+        //Display owner name
+        if (this.isTame())
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+            String s0 = this.getOwnerName();
+
+            if (s0.length() > 11)
+            {
+                s0 = this.getOwnerName().substring(0, 11);
+            }
+
+            p0.AddStringLR(s0, true);
+        }
+
+        //Display if Rideable
+        
+        if (this.isAdultHorse())
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);   
+
+        //TODO show all blocks the dino can eat
     }
 }

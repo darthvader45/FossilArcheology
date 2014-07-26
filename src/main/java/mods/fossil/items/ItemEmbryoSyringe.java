@@ -10,6 +10,7 @@ import mods.fossil.fossilInterface.IViviparous;
 import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
@@ -101,7 +102,8 @@ public class ItemEmbryoSyringe extends Item
         		((EntityHorse)pregnantEntity).setOwnerName(((EntityHorse)thisEntity).getOwnerName());
         		((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
         		((EntityHorse)pregnantEntity).setTemper(((EntityHorse)thisEntity).getTemper());
-        		((EntityHorse)pregnantEntity).setHealth(((EntityHorse)thisEntity).getHealth());
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue()));
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()));
         		((EntityHorse)pregnantEntity).setGrowingAge(((EntityHorse)thisEntity).getGrowingAge());
             }
 
@@ -109,6 +111,11 @@ public class ItemEmbryoSyringe extends Item
             {
                 EnumAnimalType e0 = EnumAnimalType.Chicken;
 
+                if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
+                    e0 = EnumAnimalType.Quagga;
+                else
+                	return false;
+                
                 if (itemstack.itemID == Fossil.embryoChicken.itemID)
                 {
                     e0 = EnumAnimalType.Chicken;
@@ -144,7 +151,6 @@ public class ItemEmbryoSyringe extends Item
                     e0 = EnumAnimalType.Sheep;
                 }
 
-//                if(var1.itemID==Fossil.embryoDodo.itemID)e0=EnumAnimalType.Dodo;
                 ((IViviparous)pregnantEntity).SetEmbryo(e0);
                 ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
                 thisEntity.setDead();

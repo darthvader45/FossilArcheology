@@ -99,7 +99,7 @@ public class BlockVaseVolute extends BlockContainer
      */
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
+        this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.9F, 0.9F);
     }
 
     /**
@@ -157,7 +157,7 @@ public class BlockVaseVolute extends BlockContainer
     public int getDamageValue(World par1World, int par2, int par3, int par4)
     {
         TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
-        return tileentity != null && tileentity instanceof TileEntityVase ? ((TileEntityVase)tileentity).getVaseType() : super.getDamageValue(par1World, par2, par3, par4);
+        return tileentity != null && tileentity instanceof TileEntityVase ? ((TileEntityVase)tileentity).getVaseTypeMeta() : super.getDamageValue(par1World, par2, par3, par4);
     }
     
     /**
