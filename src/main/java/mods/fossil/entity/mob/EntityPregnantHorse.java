@@ -15,7 +15,9 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,6 +32,7 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
     public EnumAnimalType Embryo = null;
     //public String InsideText = "Embyo inside:";
     //public String GrowingText = "Growing progress:";
+	public Attribute horseJumpStrength;
 
     public EntityPregnantHorse(World var1)
     {
@@ -176,6 +179,11 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
                     
                 case Quagga:
                     birthEntity = new EntityQuagga(this.worldObj);
+                    
+                    double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int)((EntityQuagga)birthEntity).randomHealthStat();
+                    ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d0 / 3.0D);
+                    double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga)birthEntity).randomSpeedStat();
+                    ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d2 / 3.0D);
                     break;
 
                 default:

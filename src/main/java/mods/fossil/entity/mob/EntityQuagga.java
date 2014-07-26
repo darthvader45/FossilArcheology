@@ -1470,17 +1470,17 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         }
     }
 
-    private float randomHealthStat()
+    public float randomHealthStat()
     {
         return 15.0F + (float)this.rand.nextInt(8) + (float)this.rand.nextInt(9);
     }
 
-    private double randomJumpStat()
+    public double randomJumpStat()
     {
         return 0.4000000059604645D + this.rand.nextDouble() * 0.2D + this.rand.nextDouble() * 0.2D + this.rand.nextDouble() * 0.2D;
     }
 
-    private double randomSpeedStat()
+    public double randomSpeedStat()
     {
         return (0.44999998807907104D + this.rand.nextDouble() * 0.3D + this.rand.nextDouble() * 0.3D + this.rand.nextDouble() * 0.3D) * 0.25D;
     }

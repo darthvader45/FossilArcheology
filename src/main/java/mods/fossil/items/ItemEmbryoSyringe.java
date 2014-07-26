@@ -109,12 +109,10 @@ public class ItemEmbryoSyringe extends Item
 
             if (pregnantEntity != null)
             {
-                EnumAnimalType e0 = EnumAnimalType.Chicken;
+                EnumAnimalType e0 = null;
 
                 if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
                     e0 = EnumAnimalType.Quagga;
-                else
-                	return false;
                 
                 if (itemstack.itemID == Fossil.embryoChicken.itemID)
                 {
@@ -150,17 +148,21 @@ public class ItemEmbryoSyringe extends Item
                 {
                     e0 = EnumAnimalType.Sheep;
                 }
-
-                ((IViviparous)pregnantEntity).SetEmbryo(e0);
-                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
-                thisEntity.setDead();
-
-                if (!thisEntity.worldObj.isRemote)
+                if (e0 != null)
                 {
-                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
+	                ((IViviparous)pregnantEntity).SetEmbryo(e0);
+	                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
+	                thisEntity.setDead();
+	
+	                if (!thisEntity.worldObj.isRemote)
+	                {
+	                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
+	                }
+	
+	                --itemstack.stackSize;
                 }
-
-                --itemstack.stackSize;
+                else
+                	return false;
             }
 
             player.triggerAchievement(FossilAchievementHandler.IceAge);
