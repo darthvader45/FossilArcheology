@@ -196,8 +196,14 @@ protected void setRotationAngles(float var1, float var2, float var3,
     }
     else
     {
-        this.head.rotateAngleX =  0;
+        this.head.rotateAngleX =  (float)Math.toRadians(30);
         this.head.rotateAngleY = 0;
+        
+    	this.Neck1.rotateAngleX = (float)Math.toRadians(-60);
+    	this.Neck2.rotateAngleX = (float)Math.toRadians(10);
+    	this.Neck3.rotateAngleX = (float)Math.toRadians(10);
+    	this.Neck4.rotateAngleX = (float)Math.toRadians(20);
+        
     	this.rightarm.rotateAngleX = (float)Math.toRadians(25.0);
     	this.rightarm.rotateAngleY = (float)Math.toRadians(45.0);
     	
