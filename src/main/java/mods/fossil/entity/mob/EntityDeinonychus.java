@@ -282,16 +282,6 @@ public class EntityDeinonychus extends EntityDinosaur
             return super.attackEntityFrom(par1DamageSource, par2);
         }
     }
-
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
-     * (Animals, Spiders at day, peaceful PigZombies).
-     */
-    
-    protected Entity findPlayerToAttack()
-    {
-        return null;
-    }
     
     /**
      * Sets the active target the Task system uses for tracking

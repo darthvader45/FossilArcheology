@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD16 July 15 2014  
+﻿#Updated for 1.6.4 Build 6.3 HEAD19 July 25 2014  
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Comida Antigua
 itemgroup.FItems=Objetos Antiguos
 itemgroup.FMaterial=Materiales Antiguos
 itemgroup.FTools=Herramientas Antiguas
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Coleccionables
 
 #Achievements
 achievement.FirstEgg=¡Tu primer dinosaurio!
@@ -38,6 +38,10 @@ achievement.Sifter=Even if I have to go through all the dirt!
 achievement.Dinopedia=Find all the dinos!
 achievement.IceAge=However I want the ice age back!
 achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fósil
@@ -77,6 +81,42 @@ tile.ancientWoodStairs.name=Escaleras de Madera Antigua
 tile.ancientStoneStairs.name=Escaleras de Piedra Antigua
 tile.figurine.name=Estatuilla de Madera
 tile.sifter.name=Cedazo
+tile.volcanicStairs.name=Escaleras Volcánica
+tile.volcanicSlab.name=Losa Volcánica
+tile.volcanicSlabDouble.name=Losa Doble Volcánica
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fósil
@@ -141,6 +181,7 @@ item.rawPterosaur.name=Carne de Pterosaurio
 item.rawNautilus.name=Carne de Nautilus
 item.rawPlesiosaur.name=Carne de Plesiosaurio
 item.rawMosasaurus.name=Carne de Mosasaurio
+item.rawLiopleurodon.name=Carne de Liopleurodon
 item.rawStegosaurus.name=Carne de Estegosaurio
 item.rawDilophosaurus.name=Carne de Dilofosaurio
 item.rawBrachiosaurus.name=Carne de Brachiosaurio
@@ -157,6 +198,7 @@ item.eggPterosaur.name=Huevo de Pterosaurio
 item.eggNautilus.name=Nautilus
 item.eggPlesiosaur.name=Huevo de Plesiosaurio
 item.eggMosasaurus.name=Huevo de Mosasaurio
+item.eggLiopleurodon.name=Huevo de Liopleurodon
 item.eggStegosaurus.name=Huevo de Estegosaurio
 item.eggDilophosaurus.name=Huevo de Dilofosaurio
 item.eggBrachiosaurus.name=Huevo de Brachiosaurio
@@ -168,7 +210,9 @@ item.eggAnkylosaurus.name=Huevo de Anquilosaurio
 item.eggPachycephalosaurus.name=Huevo de Paquicefalosaurio
 item.eggDeinonychus.name=Huevo de Deinonico
 item.eggGallimimus.name=Gallimimus Egg
-item.eggCoelacanth.name=Coelacanth
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
 item.dnaTriceratops.name=ADN de Triceratops
 item.dnaVelociraptor.name=ADN de Velocirraptor
 item.dnaTRex.name=ADN de Tiranosaurio
@@ -176,6 +220,7 @@ item.dnaPterosaur.name=ADN de Pterosaurio
 item.dnaNautilus.name=ADN de Nautilus
 item.dnaPlesiosaur.name=ADN de Plesiosaurio
 item.dnaMosasaurus.name=ADN de Mosasaurio
+item.dnaLiopleurodon.name=ADN de Liopleurodon
 item.dnaStegosaurus.name=ADN de Estegosaurio
 item.dnaDilophosaurus.name=ADN de Dilofosaurio
 item.dnaBrachiosaurus.name=ADN de Brachiosaurio
@@ -193,6 +238,8 @@ item.dnaChicken.name=ADN de Pollo
 item.dnaSmilodon.name=ADN de Tigre Dientes de Sable
 item.dnaMammoth.name=ADN de Mamút
 item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Embrión de Cerdo
 item.embryoSheep.name=Embrión de Oveja
 item.embryoCow.name=Embrión de Vaca
@@ -200,6 +247,8 @@ item.embryoChicken.name=Embrión de Pollo
 item.embryoSmilodon.name=Embrión de Tigre Dientes de Sable
 item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Embrión de Dodo
+item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Cuaderno de Arqueología
 item.potteryShard.name=Pottery Shard
 
@@ -235,7 +284,7 @@ status.NoSpace= no tiene espacio para crecer.
 status.StarveEsc.head=
 status.StarveEsc= te ha dejado por el hambre.
 status.SJLBite= se comió el Siu-Jiu-Le y escapó.
-status.ShewTime= necesita tiempo para masticar.
+status.ChewTime= necesita tiempo para masticar.
 status.Full.head= This 
 status.Full= está lleno.
 status.Nervous.Head=Tú hiciste poco 
@@ -243,34 +292,7 @@ status.Nervous= depende de ti para cazar por sí mismo.
 status.GemErrorYoung=Este tiranosaurio es aún muy joven.
 status.GemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
 status.GemErrorTamed=Este Tiranosaurio ya ha sido domado.
-status.essenceFail=El aroma a pollo no tuvo efecto.
-
-#Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velocirraptor
-Dino.TRex=Tiranosaurio
-Dino.Pterosaur=Pterosaurio
-Dino.Plesiosaur=Plesiosaurio
-Dino.Mosasaurus=Mosasaurio
-Dino.Stegosaurus=Estegosaurio
-Dino.Dilophosaurus=Dilofosaurio
-Dino.Brachiosaurus=Brachiosaurio
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Espinosaurio
-Dino.Compsognathus=Compsognato
-Dino.Ankylosaurus=Anquilosaurio
-Dino.Pachycephalosaurus=Paquicefalosaurio
-Dino.Deinonychus=Deinonico
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mamút
-animal.smilodon=Tigres Dientes de Sable
-animal.pregnant.cow=Vaca Embarazada
-animal.pregnant.pig=Cerdo Embarazado   
-animal.pregnant.sheep=Oveja Embarazada
-animal.dodo=Dodo
-animal.coelacanth=Coelacanth
+status.essencefail=El aroma a pollo no tuvo efecto.
 
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
@@ -279,6 +301,7 @@ entity.fossil.TRex.name=Tiranosaurio
 entity.fossil.Pterosaur.name=Pterosaurio
 entity.fossil.Plesiosaur.name=Plesiosaurio
 entity.fossil.Mosasaurus.name=Mosasaurio
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=Estegosaurio
 entity.fossil.Dilophosaurus.name=Dilofosaurio
 entity.fossil.Brachiosaurus.name=Brachiosaurio
@@ -293,11 +316,13 @@ entity.fossil.Gallimimus.name=Gallimimus
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mamút
 entity.fossil.Smilodon.name=Tigres Dientes de Sable
-entity.fossil.Pregnant.cow.name=Vaca Embarazada
-entity.fossil.Pregnant.pig.name=Cerdo Embarazado   
-entity.fossil.Pregnant.sheep.name=Oveja Embarazada
+entity.fossil.PregnantCow.name=Vaca Embarazada
+entity.fossil.PregnantPig.name=Cerdo Embarazado   
+entity.fossil.PregnantSheep.name=Oveja Embarazada
+entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Dueño:
@@ -323,6 +348,8 @@ pedia.embryo.Chicken=Pollo
 pedia.embryo.SaberCat=Tigres Dientes de Sable
 pedia.embryo.Mammoth=Mamút
 pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -364,16 +391,10 @@ drum.tRex2=Ordenando a los Tiranosaurios a almorzar.
 drum.tRex3=Ordenando a los Tiranosaurios a cenar.
 
 #Hostile mob names
-mob.bones=Huesitos
-mob.fpz=Cerdos Zombis Amistosos
-mob.failuresaurus=Faileosaurio
-boss.Anu=Anu
-
-#Hostile mob names
 entity.fossil.Bones.name=Huesitos
 entity.fossil.FriendlyPigZombie.name=Cerdos Zombis Amistosos
 entity.fossil.Failuresaurus.name=Faileosaurio
-entity.fossil.Anu.name=Anu
+entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record

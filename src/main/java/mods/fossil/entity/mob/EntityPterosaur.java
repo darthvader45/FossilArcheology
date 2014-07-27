@@ -108,32 +108,6 @@ public class EntityPterosaur extends EntityDinosaur
                 return "fossil:textures/mob/Pterosaur2.png";
         }
     }
-    
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return DinoSound.pterosaur_living;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return DinoSound.pterosaur_hurt;
-    }
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return DinoSound.pterosaur_death;
-    }
 
     protected void applyEntityAttributes()
     {
@@ -234,7 +208,7 @@ public class EntityPterosaur extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         return this.modelizedDrop() ? true : super.attackEntityFrom(var1, var2);
     }

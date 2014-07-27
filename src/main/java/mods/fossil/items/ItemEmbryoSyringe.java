@@ -2,6 +2,7 @@ package mods.fossil.items;
 
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityPregnantCow;
+import mods.fossil.entity.mob.EntityPregnantHorse;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.fossilEnums.EnumAnimalType;
@@ -9,13 +10,16 @@ import mods.fossil.fossilInterface.IViviparous;
 import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemEmbryoSyringe extends Item
 {
@@ -58,77 +62,110 @@ public class ItemEmbryoSyringe extends Item
     /**
      * dye sheep, place saddles, etc ...
      */
-    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase thisEntity)
     {
-        if (par3EntityLivingBase instanceof EntityAnimal && ((EntityAnimal)par3EntityLivingBase).getGrowingAge() == 0)
+        if (thisEntity instanceof EntityAnimal && ((EntityAnimal)thisEntity).getGrowingAge() == 0)
         {
-            Object var3 = null;
+            Object pregnantEntity = null;
 
-            if (par3EntityLivingBase instanceof EntityPig)
+            if (thisEntity instanceof EntityPig)
             {
-                var3 = new EntityPregnantPig(par3EntityLivingBase.worldObj);
+                pregnantEntity = new EntityPregnantPig(thisEntity.worldObj);
             }
 
-            if (par3EntityLivingBase instanceof EntityCow)
+            if (thisEntity instanceof EntityCow)
             {
-                var3 = new EntityPregnantCow(par3EntityLivingBase.worldObj);
+                pregnantEntity = new EntityPregnantCow(thisEntity.worldObj);
             }
 
-            if (par3EntityLivingBase instanceof EntitySheep)
+            if (thisEntity instanceof EntitySheep)
             {
-                var3 = new EntityPregnantSheep(par3EntityLivingBase.worldObj);
-                ((EntitySheep)var3).setFleeceColor(((EntitySheep)par3EntityLivingBase).getFleeceColor());
-                ((EntitySheep)var3).setSheared(((EntitySheep)par3EntityLivingBase).getSheared());
+                pregnantEntity = new EntityPregnantSheep(thisEntity.worldObj);
+                ((EntitySheep)pregnantEntity).setFleeceColor(((EntitySheep)thisEntity).getFleeceColor());
+                ((EntitySheep)pregnantEntity).setSheared(((EntitySheep)thisEntity).getSheared());
+            }
+            
+            if (thisEntity instanceof EntityHorse)
+            {
+            	
+                if ( ((EntityHorse)thisEntity).getHorseType() != 0 )
+                {
+                	return false;
+                }
+                pregnantEntity = new EntityPregnantHorse(thisEntity.worldObj);
+
+                
+                ((EntityHorse)pregnantEntity).setHorseType(((EntityHorse)thisEntity).getHorseType());
+                ((EntityHorse)pregnantEntity).setHorseVariant(((EntityHorse)thisEntity).getHorseVariant());
+                ((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
+                ((EntityHorse)pregnantEntity).setHorseSaddled(((EntityHorse)thisEntity).isHorseSaddled());
+        		((EntityHorse)pregnantEntity).setOwnerName(((EntityHorse)thisEntity).getOwnerName());
+        		((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
+        		((EntityHorse)pregnantEntity).setTemper(((EntityHorse)thisEntity).getTemper());
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue()));
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()));
+        		((EntityHorse)pregnantEntity).setGrowingAge(((EntityHorse)thisEntity).getGrowingAge());
             }
 
-            if (var3 != null)
+            if (pregnantEntity != null)
             {
-                EnumAnimalType e0 = EnumAnimalType.Chicken;
+                EnumAnimalType e0 = null;
 
-                if (par1ItemStack.itemID == Fossil.embryoChicken.itemID)
+                if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
+                    e0 = EnumAnimalType.Quagga;
+                
+                if (itemstack.itemID == Fossil.embryoChicken.itemID)
                 {
                     e0 = EnumAnimalType.Chicken;
                 }
 
-                if (par1ItemStack.itemID == Fossil.embryoCow.itemID)
+                if (itemstack.itemID == Fossil.embryoCow.itemID)
                 {
                     e0 = EnumAnimalType.Cow;
                 }
+                
+                if (itemstack.itemID == Fossil.embryoHorse.itemID)
+                {
+                    e0 = EnumAnimalType.Horse;
+                }
 
-                if (par1ItemStack.itemID == Fossil.embryoMammoth.itemID)
+                if (itemstack.itemID == Fossil.embryoMammoth.itemID)
                 {
                     e0 = EnumAnimalType.Mammoth;
                 }
 
-                if (par1ItemStack.itemID == Fossil.embryoPig.itemID)
+                if (itemstack.itemID == Fossil.embryoPig.itemID)
                 {
                     e0 = EnumAnimalType.Pig;
                 }
 
-                if (par1ItemStack.itemID == Fossil.embryoSmilodon.itemID)
+                if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
                 {
                     e0 = EnumAnimalType.Smilodon;
                 }
 
-                if (par1ItemStack.itemID == Fossil.embryoSheep.itemID)
+                if (itemstack.itemID == Fossil.embryoSheep.itemID)
                 {
                     e0 = EnumAnimalType.Sheep;
                 }
-
-//                if(var1.itemID==Fossil.embryoDodo.itemID)e0=EnumAnimalType.Dodo;
-                ((IViviparous)var3).SetEmbryo(e0);
-                ((EntityAnimal)var3).setLocationAndAngles(par3EntityLivingBase.posX, par3EntityLivingBase.posY, par3EntityLivingBase.posZ, par3EntityLivingBase.rotationYaw, par3EntityLivingBase.rotationPitch);
-                par3EntityLivingBase.setDead();
-
-                if (!par3EntityLivingBase.worldObj.isRemote)
+                if (e0 != null)
                 {
-                    par3EntityLivingBase.worldObj.spawnEntityInWorld((EntityAnimal)var3);
+	                ((IViviparous)pregnantEntity).SetEmbryo(e0);
+	                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
+	                thisEntity.setDead();
+	
+	                if (!thisEntity.worldObj.isRemote)
+	                {
+	                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
+	                }
+	
+	                --itemstack.stackSize;
                 }
-
-                --par1ItemStack.stackSize;
+                else
+                	return false;
             }
 
-            par2EntityPlayer.triggerAchievement(FossilAchievementHandler.IceAge);
+            player.triggerAchievement(FossilAchievementHandler.IceAge);
             return true;
         }
 

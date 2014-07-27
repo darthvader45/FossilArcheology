@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -123,6 +124,10 @@ public class EntityPregnantSheep extends EntitySheep implements IViviparous, IEn
                 case Chicken:
                     var2 = new EntityChicken(this.worldObj);
                     break;
+                    
+                case Horse:
+                	var2 = new EntityHorse(this.worldObj);
+                	break;
 
                 case Smilodon:
                     var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);

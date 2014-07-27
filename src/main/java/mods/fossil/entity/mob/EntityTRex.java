@@ -2,6 +2,8 @@ package mods.fossil.entity.mob;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
@@ -17,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -29,13 +32,14 @@ public class EntityTRex extends EntityDinosaur
     /*private float field_25048_b;
     private float field_25054_c;
     private boolean field_25052_g;*/
-    public boolean Screaming = false;
+    public boolean Screaming;
     public int SkillTick = 0;
     public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
     //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
+	private int Timer;
     
     public static final double baseHealth = EnumDinoType.TRex.Health0;
     public static final double baseDamage = EnumDinoType.TRex.Strength0;
@@ -75,7 +79,7 @@ public class EntityTRex extends EntityDinosaur
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        
+
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
         
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -123,7 +127,6 @@ public class EntityTRex extends EntityDinosaur
     public void onUpdate()
     {
         super.onUpdate();
-
         //this.blockBreakingBehavior.execute();
         //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
         //    BlockInteractive();
@@ -160,6 +163,7 @@ public class EntityTRex extends EntityDinosaur
         }
     }
     */
+
     
 
     public float getEyeHeight()
@@ -180,28 +184,35 @@ public class EntityTRex extends EntityDinosaur
     {
         return 50;
     }
-
-    private void handleScream()
+    
+    @SideOnly(Side.CLIENT)
+    public int getTimer()
     {
-        EntityLivingBase var1 = this.getAttackTarget();
-
-        if (var1 == null)
+        return this.Timer;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void handleHealthUpdate(byte par1)
+    {
+        if (par1 == 4)
         {
-            this.Screaming = false;
+        	this.Timer = 20;
         }
-        else
-        {
-            double var2 = this.getDistanceSqToEntity(var1);
 
-            if (var2 <= (double)(this.width * 4.0F * this.width * 4.0F))
-            {
-                this.Screaming = true;
-            }
-            else
-            {
-                this.Screaming = false;
-            }
-        }
+    }
+    
+    @Override
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+    	if(this.isModelized())
+    		return null;
+    	if(this.isWeak())
+    	return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_weak";
+    	
+        return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
     }
 
     /**
@@ -215,52 +226,39 @@ public class EntityTRex extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    @Override
+    public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
         if (this.isEntityInvulnerable())
         {
             return false;
         }
-        else if (var1.getEntity() == this)
+        else if (damageSource.getEntity() == this)
         {
             return false;
         }
         else
         {
-            Entity var3 = var1.getEntity();
+            Entity entity = damageSource.getEntity();
 
-            if (var1.damageType.equals("arrow") && this.getDinoAge() >= 3)
+            if (damageSource.damageType.equals("arrow") && this.getDinoAge() >= 3)
             {
                 return false;
             }
-            else if (var2 < 6 && var3 != null && this.getDinoAge() >= 3)
+           
+            if (var2 < 6 && entity != null && this.getDinoAge() >= 3)
             {
                 return false;
-            }
-            else if (var2 == 20 && var3 == null)
-            {
-                return super.attackEntityFrom(var1, 200);
-            }
-            else
-            {
-                if (var3 != attackingPlayer)
-                {
-                    findPlayerToAttack();
-                }
-                else
-                {
-                    this.setTarget((EntityLiving)var3);
-                }
-
-                return super.attackEntityFrom(var1, var2);
             }
         }
+        return super.attackEntityFrom(damageSource, var2);
     }
 
     public boolean isAngry()
     {
         return true;
     }
+    
     /**
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
@@ -283,8 +281,10 @@ public class EntityTRex extends EntityDinosaur
             knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
         }
         boolean attacked = victim.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
+        
         if (random.nextInt(10) == 1)
-        this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
+        	this.openMouth(true);
+        
         if (attacked)
         {
             if (knockback > 0)
@@ -303,62 +303,33 @@ public class EntityTRex extends EntityDinosaur
         return attacked;
     }
     
+    public void openMouth(boolean shouldScream)
+    {
+    	this.Timer = 20;
+    	this.worldObj.setEntityState(this, (byte)4);
+    	
+    	if(shouldScream)
+        this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getSoundPitch());
+    }
+    
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    /*
-    protected void attackEntity(Entity var1, float var2)
+    protected void attackEntity(Entity entity, float var2)
     {
-        this.faceEntity(var1, 30.0F, 30.0F);
-
-        if (!this.hasPath())
-        {
-            this.setPathToEntity(this.worldObj.getPathEntityToEntity(this, this.getEntityToAttack(), var2, true, false, true, false));
-        }
-
-        if ((double)var2 > (double)this.width * 1.6D)
-        {
-            if (this.onGround)
-            {
-                double var3 = var1.posX - this.posX;
-                double var5 = var1.posZ - this.posZ;
-                float var7 = MathHelper.sqrt_double(var3 * var3 + var5 * var5);
-                this.motionX = var3 / (double)var7 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-                this.motionZ = var5 / (double)var7 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-
-                if (this.getDinoAge() <= 3)
-                {
-                    this.motionY = 0.4000000059604645D;
-                }
-
-                if (var2 < 5.0F && !this.Screaming)
-                {
-                    if (this.getDinoAge() >= 3)
-                    {
-                        this.worldObj.playSoundAtEntity(this, "TRex_scream", this.getSoundVolume() * 2.0F, 1.0F);
-                    }
-                    this.Screaming = true;
-                }
-            }
-        }
-        else
-        {
-            var1.attackEntityFrom(DamageSource.causeMobDamage(this), this.getAttackStrength());
-        }
+    	super.attackEntity(entity, var2);
     }
-    */
 
     /**
      * This method gets called when the entity kills another one.
      */
-    public void onKillEntity(EntityLiving var1)
+    @Override
+    public void onKillEntity(EntityLivingBase var1)
     {
+    	this.openMouth(true);
         super.onKillEntity(var1);
 
-     //   if (this.getDinoAge() >= 3)
-     //   {
-            this.worldObj.playSoundAtEntity(this, DinoSound.trex_scream, this.getSoundVolume(), this.getDinoAge());
-     //   }
+        
     }
 
     /**
@@ -411,6 +382,11 @@ public class EntityTRex extends EntityDinosaur
                     return false;
                 }
             }
+            
+            if (this.SelfType.FoodItemList.CheckItemById(var2.itemID) || this.SelfType.FoodBlockList.CheckBlockById(var2.itemID))
+            {
+            	return false;
+            }
 
             if (!Fossil.DebugMode())
             {
@@ -433,11 +409,16 @@ public class EntityTRex extends EntityDinosaur
         return !this.isEntityInsideOpaqueBlock();
     }
 
+    public float getMountHeight()
+    {
+        return this.height;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getRideHeight(), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
@@ -496,11 +477,25 @@ public class EntityTRex extends EntityDinosaur
      */
     public void onLivingUpdate()
     {
-        if (!this.isWeak())
-        {
-            this.handleScream();
-        }
 
+        if(this.Screaming) {
+        	System.out.println("Screaming"+this.Screaming);
+    	System.out.println("TImer: "+this.Timer);        
+        }
+        
+        if (this.Timer > 0)
+        {
+            --this.Timer;
+        }
+        /*
+        if (!this.worldObj.isRemote)
+        {
+            this.Timer = Math.max(0, this.Timer - 1);
+            
+
+            this.Screaming = this.Timer > 0 ? true :false;
+            }
+            */
         super.onLivingUpdate();
     }
 
@@ -521,7 +516,7 @@ public class EntityTRex extends EntityDinosaur
             case 1:
             	return Fossil.modid + ":textures/mob/TRex_Green_Weak.png";
             default:
-            	return Fossil.modid + ":textures/mob/TRexWeak.png";
+            	return Fossil.modid + ":textures/mob/TRex_Weak.png";
             }
 
         }
@@ -542,7 +537,7 @@ public class EntityTRex extends EntityDinosaur
         case 1:
         	return Fossil.modid + ":textures/mob/TRex_Green_Tame.png";
         default:
-        	return Fossil.modid + ":textures/mob/TRex.png";
+        	return Fossil.modid + ":textures/mob/TRex_Tame.png";
         }
     }
 
@@ -576,7 +571,7 @@ public class EntityTRex extends EntityDinosaur
      */
     public boolean isWeak()
     {
-        return (this.getHealth() < 8) && (this.getDinoAge() > 5) && !this.isTamed();
+        return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
         //return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
     }
 
@@ -693,6 +688,8 @@ public class EntityTRex extends EntityDinosaur
     {
         return null;
     }
+    
+    
     
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.

@@ -7,6 +7,7 @@ import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -63,6 +64,7 @@ public class EntityCompsognathus extends EntityDinosaur
         this.maxSize = 0.65F;
         
         this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setCanSwim(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));
@@ -259,7 +261,6 @@ public class EntityCompsognathus extends EntityDinosaur
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
-    	super.attackEntityFrom(par1DamageSource, par2);
         if (this.isEntityInvulnerable())
         {
             return false;
@@ -268,6 +269,7 @@ public class EntityCompsognathus extends EntityDinosaur
         {
             Entity entity = par1DamageSource.getEntity();
             this.aiSit.setSitting(false);
+            this.SetOrder(EnumOrderType.FreeMove);
 
             if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
             {

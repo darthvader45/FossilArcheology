@@ -515,7 +515,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal("Dino." + this.SelfType.toString()), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintStringXY(StatCollector.translateToLocal("entity.fossil." + this.SelfType.toString() + ".name"), p0.rightIndent, 34, 0, 0, 0);
         p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
         p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
         p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
@@ -771,12 +771,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 if ((new Random()).nextInt(60) < PartnerCount)
                 {
                     EntityDinoEgg var5 = null;
-                    var5 = new EntityDinoEgg(worldObj, this.SelfType);
+                    var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
                     if (this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
                     {
-                        worldObj.spawnEntityInWorld((Entity)var5);
+                    	this.worldObj.spawnEntityInWorld((Entity)var5);
                     }
 
                     //this.showHeartsOrSmokeFX(true);
@@ -832,13 +832,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
             }
 
-            setLastAttacker(victim);
-            // play eating sound
-            // float volume = getSoundVolume() * 0.7f;
-            //float pitch = getSoundPitch();
-            //worldObj.playSoundAtEntity(this, "random.eat", volume, pitch);
+            this.setLastAttacker(victim);
         }
-
         return attacked;
     }
 
@@ -1621,4 +1616,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
 		return false;
     }
+
+    /*
+     * Call this function when a player is riding a dinosaur and right clicks with whip.
+     * Override in dinosaur classes to create unique actions.
+     */
+	public void onWhipRightClick() {}
+	
 }

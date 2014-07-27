@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
@@ -81,5 +82,14 @@ public class BlockAncientStoneSlab extends BlockHalfSlab
         {
             par3List.add(new ItemStack(par1, 1, 0));
         }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    /**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World par1World, int par2, int par3, int par4)
+    {
+        return Fossil.ancientStoneSingleSlab.blockID;
     }
 }

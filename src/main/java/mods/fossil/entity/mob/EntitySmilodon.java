@@ -404,7 +404,7 @@ public class EntitySmilodon extends EntityPrehistoric
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         Entity var3 = var1.getEntity();
         this.aiSit.setSitting(false);

@@ -120,37 +120,25 @@ public class WaterDinoAIAttack extends EntityAIBase
             */
             //rotate entity to face target
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
+            Vec3 vec3 = this.entity.getLook(1.0F);
  
             
             
-            this.entityVector = this.entity.getPosition(1.0F);
-            this.targetVector = Vec3.createVectorHelper(this.targetedEntity.posX, this.targetedEntity.posY, this.targetedEntity.posZ);
+            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
+            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
             
-            this.moveVector = targetVector.subtract(entityVector);
             
-            this.normalizedVector = this.moveVector.normalize();
+            //this.moveVector = targetVector.subtract(entityVector);
             
-            this.movePosX = normalizedVector.xCoord;
-            this.movePosY = normalizedVector.yCoord;
-            this.movePosZ = normalizedVector.zCoord;
+            //this.normalizedVector = this.moveVector.normalize();
             
-            /*
-            this.entity.motionX = -moveVector.xCoord;
-            this.entity.motionZ = -moveVector.zCoord;
+            this.movePosX = this.deltaX;
+            this.movePosY = this.deltaY;
+            this.movePosZ = this.deltaZ;
             
-            System.out.println(this.entity.motionX);
-            */
-           // this.entity.posY -= this.movePosZ;
-            
-           // this.entity.moveEntityWithHeading(1.0F, 1.0F);
-            
-            this.entity.addVelocity( -moveVector.xCoord * 0.015, -moveVector.yCoord * 0.017,  -moveVector.zCoord * 0.015);
+            this.entity.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
+            this.entity.worldObj.playSoundAtEntity(this.entity, this.entity.getAttackSound(), 1F, 1F);
 
-            if (this.entity.canEntityBeSeen(this.targetedEntity))
-            {
-                this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
-                Vec3 vec3 = this.entity.getLook(1.0F);
-            }
         }
         else
         {

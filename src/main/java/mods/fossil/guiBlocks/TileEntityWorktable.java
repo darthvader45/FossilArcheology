@@ -2,6 +2,7 @@ package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -343,122 +344,140 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
         return var1 == Fossil.brokenSword.itemID ? new ItemStack(Fossil.ancientSword) : (var1 == Fossil.brokenhelmet.itemID ? new ItemStack(Fossil.ancienthelmet) : (var1 == Fossil.gemAxe.itemID ? new ItemStack(Fossil.gemAxe) : (var1 == Fossil.gemPickaxe.itemID ? new ItemStack(Fossil.gemPickaxe) : (var1 == Fossil.gemSword.itemID ? new ItemStack(Fossil.gemSword) : (var1 == Fossil.gemHoe.itemID ? new ItemStack(Fossil.gemHoe) : (var1 == Fossil.gemShovel.itemID ? new ItemStack(Fossil.gemShovel) : null))))));
     }*/
 
-    private ItemStack CheckSmelt(ItemStack var1)
+    private ItemStack CheckSmelt(ItemStack itemstack)
     {
-        ItemStack n = null;
+        ItemStack output = null;
 
-        if (var1.getItem().itemID == Fossil.brokenSword.itemID)
+        if (itemstack.getItem().itemID == Fossil.brokenSword.itemID)
         {
             return new ItemStack(Fossil.ancientSword);
         }
 
-        if (var1.getItem().itemID == Fossil.brokenhelmet.itemID)
+        if (itemstack.getItem().itemID == Fossil.brokenhelmet.itemID)
         {
             return new ItemStack(Fossil.ancienthelmet);
         }
 
-        if (var1.getItem().itemID == Fossil.ancientSword.itemID)
+        if (itemstack.getItem().itemID == Fossil.ancientSword.itemID)
         {
-            n = new ItemStack(Fossil.ancientSword);
+            output = new ItemStack(Fossil.ancientSword);
         }
 
-        if (var1.getItem().itemID == Fossil.ancienthelmet.itemID)
+        if (itemstack.getItem().itemID == Fossil.ancienthelmet.itemID)
         {
-            n = new ItemStack(Fossil.ancienthelmet);
+            output = new ItemStack(Fossil.ancienthelmet);
         }
 
-        if (var1.getItem().itemID == Fossil.gemAxe.itemID)
+        if (itemstack.getItem().itemID == Fossil.gemAxe.itemID)
         {
-            n = new ItemStack(Fossil.gemAxe);
+            output = new ItemStack(Fossil.gemAxe);
         }
 
-        if (var1.getItem().itemID == Fossil.gemPickaxe.itemID)
+        if (itemstack.getItem().itemID == Fossil.gemPickaxe.itemID)
         {
-            n = new ItemStack(Fossil.gemPickaxe);
+            output = new ItemStack(Fossil.gemPickaxe);
         }
 
-        if (var1.getItem().itemID == Fossil.gemSword.itemID)
+        if (itemstack.getItem().itemID == Fossil.gemSword.itemID)
         {
-            n = new ItemStack(Fossil.gemSword);
+            output = new ItemStack(Fossil.gemSword);
         }
 
-        if (var1.getItem().itemID == Fossil.gemHoe.itemID)
+        if (itemstack.getItem().itemID == Fossil.gemHoe.itemID)
         {
-            n = new ItemStack(Fossil.gemHoe);
+            output = new ItemStack(Fossil.gemHoe);
         }
 
-        if (var1.getItem().itemID == Fossil.gemShovel.itemID)
+        if (itemstack.getItem().itemID == Fossil.gemShovel.itemID)
         {
-            n = new ItemStack(Fossil.gemShovel);
+            output = new ItemStack(Fossil.gemShovel);
         }
 
-        if (n != null)
+        if (output != null)
         {
-            if (var1.getItemDamage() / var1.getMaxDamage() >= 0.1F)
+            if (itemstack.getItemDamage() / itemstack.getMaxDamage() >= 0.1F)
             {
-                n.setItemDamage(var1.getItemDamage() - (int)(0.1 * var1.getMaxDamage()));
+                output.setItemDamage(itemstack.getItemDamage() - (int)(0.1 * itemstack.getMaxDamage()));
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
+            return output;
         }
 
-        if (var1.getItem().itemID == Fossil.woodjavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.woodjavelin.itemID)
         {
-            n = new ItemStack(Fossil.woodjavelin, 1);
+            output = new ItemStack(Fossil.woodjavelin, 1);
         }
 
-        if (var1.getItem().itemID == Fossil.stonejavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.stonejavelin.itemID)
         {
-            n = new ItemStack(Fossil.stonejavelin, 1);
+            output = new ItemStack(Fossil.stonejavelin, 1);
         }
 
-        if (var1.getItem().itemID == Fossil.ironjavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.ironjavelin.itemID)
         {
-            n = new ItemStack(Fossil.ironjavelin, 1);
+            output = new ItemStack(Fossil.ironjavelin, 1);
         }
 
-        if (var1.getItem().itemID == Fossil.goldjavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.goldjavelin.itemID)
         {
-            n = new ItemStack(Fossil.goldjavelin, 1);
+            output = new ItemStack(Fossil.goldjavelin, 1);
         }
 
-        if (var1.getItem().itemID == Fossil.diamondjavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.diamondjavelin.itemID)
         {
-            n = new ItemStack(Fossil.diamondjavelin, 1);
+            output = new ItemStack(Fossil.diamondjavelin, 1);
         }
 
-        if (n != null)
+        if (output != null)
         {
-            if (var1.getItemDamage() > 5)
+            if (itemstack.getItemDamage() > 5)
             {
-                n.setItemDamage(var1.getItemDamage() - 5);
+                output.setItemDamage(itemstack.getItemDamage() - 5);
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
+            return output;
         }
 
-        if (var1.getItem().itemID == Fossil.ancientJavelin.itemID)
+        if (itemstack.getItem().itemID == Fossil.ancientJavelin.itemID)
         {
-            n = new ItemStack(Fossil.ancientJavelin, 1);
+            output = new ItemStack(Fossil.ancientJavelin, 1);
 
-            if (var1.getItemDamage() > 3)
+            if (itemstack.getItemDamage() > 3)
             {
-                n.setItemDamage(var1.getItemDamage() - 3);
+                output.setItemDamage(itemstack.getItemDamage() - 3);
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
+            return output;
+        }
+        
+        if (itemstack.getItem().itemID == new ItemStack(Fossil.vaseKylixBlock).getItem().itemID && itemstack.getItemDamage() == 0)
+        {
+            output = new ItemStack(Fossil.vaseKylixBlock, 1, 1);
+            return output;
+        }
+        
+        if (itemstack.getItem().itemID == new ItemStack(Fossil.vaseAmphoraBlock).getItem().itemID && itemstack.getItemDamage() == 0)
+        {
+            output = new ItemStack(Fossil.vaseAmphoraBlock, 1, 1);
+            return output;
+        }
+        
+        if (itemstack.getItem().itemID == new ItemStack(Fossil.vaseVoluteBlock).getItem().itemID && itemstack.getItemDamage() == 0)
+        {
+            output = new ItemStack(Fossil.vaseVoluteBlock, 1, 1);
+            return output;
         }
 
         return null;

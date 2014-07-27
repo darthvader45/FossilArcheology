@@ -16,6 +16,8 @@ public class FossilOptions
     public static boolean Dinos_Starve;
     public static boolean Dino_Block_Breaking;
     public static boolean Skull_Overlay;
+    public static boolean Anu_Spawn;
+    public static boolean Anu_Allowed_Overworld;
     public static boolean LoginMessage;
     public static boolean FossilDebug;
     public static int Debug_Gen_Rate_Academy;
@@ -32,6 +34,8 @@ public class FossilOptions
         Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
         Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
+        Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
+        Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
         FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
         Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_RateAcademy", 1).getInt(1);
         Debug_Gen_Rate_Shipwreck = config.get("debug", "Debug_Gen_RateShipwreck", 1).getInt(1);

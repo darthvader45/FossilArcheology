@@ -2,7 +2,9 @@ package mods.fossil.entity.mob;
 
 import java.util.Random;
 
+import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
@@ -10,6 +12,7 @@ import mods.fossil.fossilAI.WaterDinoAIEat;
 import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -25,8 +28,10 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class EntityMosasaurus extends EntitySwimmingDino implements IMob
@@ -74,9 +79,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
       // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
-        this.tasks.addTask(3, new WaterDinoAIAttack(this, 1.2D));
+        this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.022D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
-        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.023D));
     }
 
     public boolean canBreatheUnderwater()
@@ -239,6 +244,28 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     public EntityMosasaurus spawnBabyAnimal(EntityAnimal var1)
     {
         return new EntityMosasaurus(this.worldObj);
+    }
+    
+    public boolean interact(EntityPlayer var1)
+    {
+        ItemStack var2 = var1.inventory.getCurrentItem();
+
+        if (var2 != null)
+        {
+            if (!Fossil.DebugMode())
+            {
+                if (var2.itemID == Fossil.chickenEss.itemID)
+                {
+                    if (!this.worldObj.isRemote)
+                    {
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), var1);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return super.interact(var1);
     }
     
     /**

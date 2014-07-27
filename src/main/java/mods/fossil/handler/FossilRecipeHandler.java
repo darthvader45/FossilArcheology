@@ -21,7 +21,9 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
-            GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});
+        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});
+        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', Fossil.dodoEgg});
+        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', Fossil.cultivatedDodoEgg});
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Item.stick});
         GameRegistry.addRecipe(new ItemStack(Fossil.drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
         GameRegistry.addRecipe(new ItemStack(Fossil.feederActive, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
@@ -84,6 +86,27 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.femurs, 1), new Object[] {"###", "* *", "# #", '#', Item.bone, '*', Fossil.legBone});
         GameRegistry.addRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"# #", " # ", "###", '#', Item.bone});
         GameRegistry.addRecipe(new ItemStack(Fossil.skullHelmet, 1), new Object[] {"#X#", "# #", '#', Item.bone, 'X', Fossil.skull});
+        
+        //Craft damaged vases
+        GameRegistry.addRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1), new Object[] {"X X", "X X", "XXX", 'X', Fossil.potteryShards});
+        GameRegistry.addRecipe(new ItemStack(Fossil.vaseAmphoraBlock, 1), new Object[] {"XX ", "XX ", "XX ", 'X', Fossil.potteryShards});
+        GameRegistry.addRecipe(new ItemStack(Fossil.vaseAmphoraBlock, 1), new Object[] {" XX", " XX", " XX", 'X', Fossil.potteryShards});
+        GameRegistry.addRecipe(new ItemStack(Fossil.vaseKylixBlock, 1), new Object[] {"   ", "XXX", " X ", 'X', Fossil.potteryShards});
+        GameRegistry.addRecipe(new ItemStack(Fossil.vaseKylixBlock, 1), new Object[] {"XXX", " X ", "   ", 'X', Fossil.potteryShards});
+        
+        //Shapeless vase recipies for dying them metadata > 1 = dye colors
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1, 2), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 0),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseVoluteBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1, 3), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseVoluteBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1, 4), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Fossil.vaseVoluteBlock, 1, 1)});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseAmphoraBlock, 1, 2), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 0),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseAmphoraBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseAmphoraBlock, 1, 3), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseAmphoraBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseAmphoraBlock, 1, 4), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Fossil.vaseAmphoraBlock, 1, 1)});
+
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseKylixBlock, 1, 2), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 0),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseKylixBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseKylixBlock, 1, 3), new Object[] {new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Item.dyePowder, 1, 14),  new ItemStack(Fossil.vaseKylixBlock, 1, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.vaseKylixBlock, 1, 4), new Object[] {new ItemStack(Item.dyePowder, 1, 4), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Fossil.vaseKylixBlock, 1, 1)});
+        
         GameRegistry.addSmelting(Fossil.rawChickenSoup.itemID, new ItemStack(Fossil.cookedChickenSoup), 3.0F);
         GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem.itemID, new ItemStack(Fossil.sjl), 3.0F);
 

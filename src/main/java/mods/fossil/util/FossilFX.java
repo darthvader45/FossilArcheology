@@ -11,7 +11,7 @@ public class FossilFX
     private static World theWorld = mc.theWorld;
     private static TextureManager renderEngine = mc.renderEngine;
 
-    public static EntityFX spawnParticle(String particleName, double par2, double par4, double par6, double par8, double par10, double par12)
+    public static EntityFX spawnParticle(String particleName, double x, double y, double z, double par8, double par10, double par12)
     {
         if (mc != null && mc.renderViewEntity != null && mc.effectRenderer != null)
         {
@@ -22,9 +22,9 @@ public class FossilFX
                 var14 = 2;
             }
 
-            double var15 = mc.renderViewEntity.posX - par2;
-            double var17 = mc.renderViewEntity.posY - par4;
-            double var19 = mc.renderViewEntity.posZ - par6;
+            double var15 = mc.renderViewEntity.posX - x;
+            double var17 = mc.renderViewEntity.posY - y;
+            double var19 = mc.renderViewEntity.posZ - z;
             EntityFX var21 = null;
             double var22 = 16.0D;
 
@@ -38,11 +38,11 @@ public class FossilFX
             }
             else if (particleName.equals("flies"))//if the name of the particle to be spawned equals test spawn our particle note the name here is the name that you use when you call spawn particle
             {
-                var21 = new FliesFX(theWorld, par2, par4, par6, (float)par8, (float)par10, (float)par12);
+                var21 = new FliesFX(theWorld, x, y, z, (float)par8, (float)par10, (float)par12);
             }
             else if (particleName.equals("tarBubble"))//if the name of the particle to be spawned equals test spawn our particle note the name here is the name that you use when you call spawn particle
             {
-                var21 = new TarBubblesFX(theWorld, par2, par4, par6);
+                var21 = new TarBubblesFX(theWorld, x, y, z);
             }
 
             mc.effectRenderer.addEffect((EntityFX)var21);

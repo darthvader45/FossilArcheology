@@ -377,7 +377,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                     }
                     else
                     {
-                        i0 = EnumDinoType.values()[i - 1].DNAItem;
+                        i0 = Fossil.biofossil;
                     }
 
                     result = new ItemStack(i0, 1);

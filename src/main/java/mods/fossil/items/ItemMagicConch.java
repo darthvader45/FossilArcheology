@@ -51,7 +51,7 @@ public class ItemMagicConch extends Item
        // String var6 = "Head";
       //  String var7 = "Middle";
       //  String var8 = "Tail";
-        String var9 = StatCollector.translateToLocal("Dino.Plesiosaur");//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
+        String var9 = StatCollector.translateToLocal("entity.fossil.Plesiosaur.name");//EntityDinosaur.GetNameByEnum(EnumDinoType.Plesiosaur, true);
         String var10 = StatCollector.translateToLocal("mGCName.head");
         //String var11 = StatCollector.translateToLocal("Drum.Msg.Middle");
         //String var12 = StatCollector.translateToLocal("Drum.Msg.Tail");

@@ -273,13 +273,24 @@ public class EntityDodo extends EntityAnimal
     }
 
     private static final ResourceLocation dodoeggicon = new ResourceLocation("fossil:textures/items/Egg_Cultivated_Dodo.png");
-
+    
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
         p0.reset();
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO), 97, 23, 40, 90, 245);
-//        p0.PrintItemXY(Fossil.dodoEgg, 120, 7);
-        p0.PrintPictXY(dodoeggicon, 120, 7, 4, 4);
+        
+        if (this.hasCustomNameTag())
+        {
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+        }
+
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_DODO), p0.rightIndent, 34, 0, 0, 0);        
+        p0.PrintPictXY(dodoeggicon, ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16);
+
+        if (this.hasCustomNameTag())
+        {
+            p0.AddStringLR("No Despawn", true);
+        }
+ //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
     }
 }

@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD17 July 15 2014 
+﻿#Updated for 1.6.4 Build 6.3 HEAD21 July 25 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -9,7 +9,7 @@ itemgroup.FFood=Ancient Foods
 itemgroup.FItems=Ancient Items
 itemgroup.FMaterial=Ancient Materials
 itemgroup.FTools=Ancient Tools
-itemgroup.FFigurines=Ancient Figurines
+itemgroup.FFigurines=Collectables
 
 #Achievements
 achievement.FirstEgg=First Dinosaur!
@@ -38,6 +38,10 @@ achievement.Sifter=Even if I have to go through all the dirt!
 achievement.Dinopedia=Find all the dinos!
 achievement.IceAge=However I want the ice age back!
 achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
@@ -77,6 +81,42 @@ tile.ancientWoodStairs.name=Ancient Wooden Stairs
 tile.ancientStoneStairs.name=Ancient Stone Stairs
 tile.figurine.name=Wooden Figurine
 tile.sifter.name=Sifter
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fossil
@@ -136,11 +176,12 @@ item.dodoWingCooked.name=Cooked Dodo Wing
 item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
-item.rawTRex.name=TRex Meat
+item.rawTRex.name=Tyrannosaurus Meat
 item.rawPterosaur.name=Pterosaur Meat
 item.rawNautilus.name=Nautilus Meat
 item.rawPlesiosaur.name=Plesiosaur Meat
 item.rawMosasaurus.name=Mosasaurus Meat
+item.rawLiopleurodon.name=Liopleurodon Meat
 item.rawStegosaurus.name=Stegosaurus Meat
 item.rawDilophosaurus.name=Dilophosaurus Meat
 item.rawBrachiosaurus.name=Brachiosaurus Meat
@@ -152,11 +193,12 @@ item.rawDeinonychus.name=Deinonychus Meat
 item.rawGallimimus.name=Gallimimus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
-item.eggTRex.name=TRex Egg
+item.eggTRex.name=Tyrannosaurus Egg
 item.eggPterosaur.name=Pterosaur Egg
 item.eggNautilus.name=Living Nautilus
 item.eggPlesiosaur.name=Plesiosaur Egg
 item.eggMosasaurus.name=Mosasaurus Egg
+item.eggLiopleurodon.name=Liopleurodon Egg
 item.eggStegosaurus.name=Stegosaurus Egg
 item.eggDilophosaurus.name=Dilophosaurus Egg
 item.eggBrachiosaurus.name=Brachiosaurus Egg
@@ -168,14 +210,17 @@ item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
 item.eggDeinonychus.name=Deinonychus Egg
 item.eggGallimimus.name=Gallimimus Egg
-item.eggCoelacanth.name=Living Coelacanth
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
-item.dnaTRex.name=TRex DNA
+item.dnaTRex.name=Tyrannosaurus DNA
 item.dnaPterosaur.name=Pterosaur DNA
 item.dnaNautilus.name=Nautilus DNA
 item.dnaPlesiosaur.name=Plesiosaur DNA
 item.dnaMosasaurus.name=Mosasaurus DNA
+item.dnaLiopleurodon.name=Liopleurodon DNA
 item.dnaStegosaurus.name=Stegosaurus DNA
 item.dnaDilophosaurus.name=Dilophosaurus DNA
 item.dnaBrachiosaurus.name=Brachiosaurus DNA
@@ -193,6 +238,8 @@ item.dnaChicken.name=Chicken DNA
 item.dnaSmilodon.name=Smilodon DNA
 item.dnaMammoth.name=Mammoth DNA
 item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Pig Embryo
 item.embryoSheep.name=Sheep Embryo
 item.embryoCow.name=Cow Embryo
@@ -200,9 +247,10 @@ item.embryoChicken.name=Chicken Embryo
 item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
+item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Archaeology Notebook
 item.potteryShard.name=Pottery Shard
-
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -247,39 +295,13 @@ status.GemErrorTamed=This T-Rex has already been tamed.
 status.essencefail=Essence of Chicken had no effect.
 
 #Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velociraptor
-Dino.TRex=Tyrannosaurus
-Dino.Pterosaur=Pterosaur
-Dino.Plesiosaur=Plesiosaur
-Dino.Mosasaurus=Mosasaurus
-Dino.Stegosaurus=Stegosaurus
-Dino.Dilophosaurus=Dilophosaurus
-Dino.Brachiosaurus=Brachiosaurus
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Spinosaurus
-Dino.Compsognathus=Compsognathus
-Dino.Ankylosaurus=Ankylosaurus
-Dino.Pachycephalosaurus=Pachycephalosaurus
-Dino.Deinonychus=Deinonychus
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mammoth
-animal.smilodon=Smilodon
-animal.pregnant.cow=Pregnant Cow
-animal.pregnant.pig=Pregnant Pig   
-animal.pregnant.sheep=Pregnant Sheep  
-animal.dodo=Dodo
-animal.coelacanth=Coelacanth
-
-#Dinosaur Names Clean
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
 entity.fossil.TRex.name=Tyrannosaurus
 entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur
 entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=Stegosaurus
 entity.fossil.Dilophosaurus.name=Dilophosaurus
 entity.fossil.Brachiosaurus.name=Brachiosaurus
@@ -291,14 +313,16 @@ entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 
-#Non-dinosaur names Clean
+#Non-dinosaur names
 entity.fossil.Mammoth.name=Mammoth
 entity.fossil.Smilodon.name=Smilodon
 entity.fossil.PregnantCow.name=Pregnant Cow
-entity.fossil.PregnantPig.name=Pregnant Pig   
-entity.fossil.PregnantSheep.name=Pregnant Sheep  
+entity.fossil.PregnantPig.name=Pregnant Pig
+entity.fossil.PregnantSheep.name=Pregnant Sheep
+entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Owner:
@@ -324,6 +348,8 @@ pedia.embryo.Chicken=Chicken
 pedia.embryo.Smilodon=Smilodon
 pedia.embryo.Mammoth=Mammoth
 pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -365,16 +391,10 @@ drum.tRex2=Ordering T-Rexes to lunch.
 drum.tRex3=Ordering T-Rexes to dinner.
 
 #Hostile mob names
-mob.bones=Bones
-mob.fpz=Friendly Pig Zombies
-mob.failuresaurus=Failursaurus
-boss.Anu=Anu
-
-#Hostile mob names
 entity.fossil.Bones.name=Bones
 entity.fossil.FriendlyPigZombie.name=Friendly Pig Zombies
 entity.fossil.Failuresaurus.name=Failursaurus
-entity.fossil.Anu.name=Anu
+entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record

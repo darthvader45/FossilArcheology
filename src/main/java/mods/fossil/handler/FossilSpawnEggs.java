@@ -15,14 +15,13 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityVelociraptor.class, 		0xbfa487, 0x936d2e);
         registerEntityEgg(EntityTRex.class, 				0x763c11, 0xffebc4);
         registerEntityEgg(EntityFailuresaurus.class, 		0x61ffbd, 0xf4eee6);
-//		registerEntityEgg(EntityPigBoss.class, 				0xffffff, 0x000000);
+		registerEntityEgg(EntityPigBoss.class, 				0x000000, 0xff0000);
 //		registerEntityEgg(EntityFriendlyPigZombie.class, 	0xffffff, 0x000000);
         registerEntityEgg(EntityPterosaur.class, 			0xe4cae2, 0x751075);
         registerEntityEgg(EntityNautilus.class, 			0xd4aba9, 0x97312f);
         registerEntityEgg(EntityPlesiosaur.class, 			0xa4362e, 0xcd6052);
         registerEntityEgg(EntityMosasaurus.class, 			0x9cbd8c, 0x357510);
         registerEntityEgg(EntityStegosaurus.class, 			0xbfc9a9, 0x5e7510);
-//		registerEntityEgg(EntityPregnantPig.class, 			0xffffff, 0x000000);
         registerEntityEgg(EntityDilophosaurus.class,		0x474807, 0x9f9e4e);
         registerEntityEgg(EntitySmilodon.class, 			0xefa745, 0xf9f4df);
         registerEntityEgg(EntityBones.class, 				0xffffff, 0x000000);
@@ -36,6 +35,10 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityDeinonychus.class, 			0x6a6a6a, 0x2f302e);
         registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
+        registerEntityEgg(EntityLiopleurodon.class, 		0x000000, 0xffffff);
+        registerEntityEgg(EntityQuagga.class, 				0x8c4b2e, 0xc6a999);
+        //registerEntityEgg(EntityGastornis.class, 			0xffffff, 0x000000);
+
     }
 
     public static int getUniqueEntityId()

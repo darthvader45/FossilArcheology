@@ -12,6 +12,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -26,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -96,49 +98,35 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity var1)
+    public boolean attackEntityAsMob(Entity entity)
     {
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
-
-        if (this.rand.nextInt(16) < 9 && var1 instanceof EntityLiving)
+        boolean attacked = entity.attackEntityFrom(DamageSource.causeMobDamage(this), 
+        		(float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
+        
+        if (attacked)
         {
-            this.headButt();
+	        if (this.rand.nextInt(16) < 8)
+	        {
+	            this.headButt(entity, this.rand.nextInt(2)+1);
+	        }
+	        this.setLastAttacker(entity);
         }
 
-        return super.attackEntityAsMob(var1);
+        return attacked;
     }
 
-    public void knockBack(Entity var1, int var2, double var3, double var5)
+    private void headButt(Entity target, int amount)
     {
-        super.knockBack(var1, var2, var3, var5);
-    }
+    	this.playSound("mob.irongolem.throw", 3.0F, 0.2F);
 
-    private void headButt()
-    {
-        List var1 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D));
+        int offsetX = target.posX > this.posX ? amount : -amount;
+        int offsetZ = target.posZ > this.posZ ? amount : -amount;
 
-        if (!var1.isEmpty())
-        {
-            this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "mob.irongolem.throw", 6.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 1.0F) * 0.7F);
-
-            for (int var2 = 0; var2 < var1.size(); ++var2)
-            {
-                EntityLiving var3 = (EntityLiving)var1.get(var2);
-                double var4 = this.posX - var3.posX;
-                double var6;
-
-                for (var6 = this.posZ - var3.posZ; var4 * var4 + var6 * var6 < 1.0E-4D; var6 = (Math.random() - Math.random()) * 0.01D)
-                {
-                    var4 = (Math.random() - Math.random()) * 0.01D;
-                }
-
-                if (var3 != this)
-                {
-                    var3.knockBack(this, 0, var4 * 25.0D, var6 * 25.0D);
-                }
-            }
-        }
+        target.motionZ = (double)(offsetZ);
+        target.motionZ = (double)(offsetX);
+        //target.setVelocity((double)(offsetX), target.motionY, (double)(offsetZ));
     }
 
     /**
@@ -207,11 +195,6 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     {
         super.onUpdate();
 
-        if (this.attackTimer > 0)
-        {
-            --this.attackTimer;
-        }
-
         if (this.looksWithInterest)
         {
             this.numTicksToChaseTarget = 10;
@@ -243,11 +226,13 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
+    public boolean attackEntityFrom(DamageSource var1, float var2)
     {
         Entity var3 = var1.getEntity();
         this.setSitting(false);
 
+        super.attackEntityFrom(var1, var2);
+        
         if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
         {
             var2 = (var2 + 1) / 2;
@@ -308,8 +293,26 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         //Add special item interaction code here
         return super.interact(var1);
     }
+    
+    /**
+     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+     * use this to react to sunlight and start to burn.
+     */
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+/*
+        if (this.attackTimer > 0)
+        {
+            --this.attackTimer;
+        }
+*/
+    }
+    
+    @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte var1)
     {
+    	
         if (var1 == 4)
         {
             this.attackTimer = 10;

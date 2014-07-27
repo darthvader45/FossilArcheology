@@ -11,12 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -126,6 +128,13 @@ public class EntityNautilus extends EntityWaterMob
     {
         ItemStack var2 = var1.inventory.getCurrentItem();
 
+        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem().itemID == Fossil.dinoPedia.itemID)
+        {
+            this.setPedia();
+            var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+            return true;
+        }
+        
         if (var2 == null)
         {
             ItemStack var3 = new ItemStack(EnumDinoType.Nautilus.EggItem/*Fossil.shellNautilusFossil.ancientegg*/, 1);
@@ -143,6 +152,11 @@ public class EntityNautilus extends EntityWaterMob
         }
 
         return false;
+    }
+    
+    private void setPedia()
+    {
+        Fossil.ToPedia = (Object)this;
     }
 
     /**
@@ -311,5 +325,24 @@ public class EntityNautilus extends EntityWaterMob
 
             this.BreedTick = 3000;
         }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia(GuiPedia p0)
+    {
+        p0.reset();
+        
+        if (this.hasCustomNameTag())
+        {
+            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+        }
+
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + "Nautilus" + "_Egg.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
+        p0.PrintStringXY(StatCollector.translateToLocal("entity.fossil.Nautilus.name"), p0.rightIndent, 34, 0, 0, 0);
+        if (this.hasCustomNameTag())
+        {
+            p0.AddStringLR("No Despawn", true);
+        }
+ //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
     }
 }

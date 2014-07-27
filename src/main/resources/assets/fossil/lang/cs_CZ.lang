@@ -1,4 +1,4 @@
-#Created for Build 6 DEV (1.6.4) July 23 2014 
+#Updated for 1.6.4 Build 6.3 HEAD1 July 25 2014 
 #Czech (cs_CZ) Localization File
 
 #Tab Groups
@@ -39,6 +39,10 @@ achievement.Dinopedia=Najdi všechny dinosaury!
 achievement.IceAge=Přál bych si dobu ledovou zpět!
 achievement.TheKing=Ať žije král!
 
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
+
 #Blocks
 tile.fossil.name=Fosilie
 tile.skullBlock.name=Lebka
@@ -77,6 +81,42 @@ tile.ancientWoodStairs.name=Starodávné dřevěné schody
 tile.ancientStoneStairs.name=Starodávné kamenné schody
 tile.figurine.name=Dřevěná figurka
 tile.sifter.name=Sítko
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fosílie
@@ -141,6 +181,7 @@ item.rawPterosaur.name=Maso Pterosaura
 item.rawNautilus.name=Maso Nautila
 item.rawPlesiosaur.name=Maso Plesiosaura
 item.rawMosasaurus.name=Maso Mosasaura
+item.rawLiopleurodon.name=Liopleurodon Meat
 item.rawStegosaurus.name=Maso Stegosaura
 item.rawDilophosaurus.name=Maso Dilophosaura
 item.rawBrachiosaurus.name=Maso Brachiosaura
@@ -157,6 +198,7 @@ item.eggPterosaur.name=Vejce Pterosaura
 item.eggNautilus.name=Vejce živého Nautila
 item.eggPlesiosaur.name=Vejce Plesiosaura
 item.eggMosasaurus.name=Vejce Mosasaura
+item.eggLiopleurodon.name=Liopleurodon Egg
 item.eggStegosaurus.name=Vejce Stegosaura
 item.eggDilophosaurus.name=Vejce Dilophosaura
 item.eggBrachiosaurus.name=Vejce Brachiosaura
@@ -168,7 +210,9 @@ item.eggAnkylosaurus.name=Vejce Ankylosaura
 item.eggPachycephalosaurus.name=Vejce Pachycephalosaura
 item.eggDeinonychus.name=Vejce Deinonychuse
 item.eggGallimimus.name=Vejce Gallimimuse
-item.eggCoelacanth.name=Živá Latimérie
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
 item.dnaTriceratops.name=DNA Triceratopse
 item.dnaVelociraptor.name=DNA Velociraptora
 item.dnaTRex.name=DNA T-Rexe
@@ -176,6 +220,7 @@ item.dnaPterosaur.name=DNA Pterosaura
 item.dnaNautilus.name=DNA Nautila
 item.dnaPlesiosaur.name=DNA Plesiosaura
 item.dnaMosasaurus.name=DNA Mosasaura
+item.dnaLiopleurodon.name=Liopleurodon DNA
 item.dnaStegosaurus.name=DNA Stegosaura
 item.dnaDilophosaurus.name=DNA Dilophosaura
 item.dnaBrachiosaurus.name=DNA Brachiosaura
@@ -193,6 +238,8 @@ item.dnaChicken.name=Slepičí DNA
 item.dnaSmilodon.name=DNA šavlozubého tygra
 item.dnaMammoth.name=Mamutí DNA
 item.dnaDodo.name=DNA Doda
+item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Prasečí embryo
 item.embryoSheep.name=Ovčí embryo
 item.embryoCow.name=Kraví embryo
@@ -200,9 +247,10 @@ item.embryoChicken.name=Slepičí embryo
 item.embryoSmilodon.name=Embryo šavlozubého tygra
 item.embryoMammoth.name=Mamutí embryo
 item.embryoDodo.name=Embryo Doda
+item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Archeologovy poznámky
 item.potteryShard.name=Střep keramiky
-
 
 #Dinosaur related chat messages
 dnaName.head=DNA 
@@ -247,39 +295,13 @@ status.GemErrorTamed=Tento T-Rex již byl ochočen.
 status.essencefail=Slepičí essence nemá žádný efekt.
 
 #Dinosaur Names
-Dino.Triceratops=Triceratops
-Dino.Velociraptor=Velociraptor
-Dino.TRex=Tyrannosaurus
-Dino.Pterosaur=Pterosaur
-Dino.Plesiosaur=Plesiosaur
-Dino.Mosasaurus=Mosasaurus
-Dino.Stegosaurus=Stegosaurus
-Dino.Dilophosaurus=Dilophosaurus
-Dino.Brachiosaurus=Brachiosaurus
-Dino.Nautilus=Nautilus
-Dino.Spinosaurus=Spinosaurus
-Dino.Compsognathus=Compsognathus
-Dino.Ankylosaurus=Ankylosaurus
-Dino.Pachycephalosaurus=Pachycephalosaurus
-Dino.Deinonychus=Deinonychus
-Dino.Gallimimus=Gallimimus
-
-#Non-dinosaur names
-animal.mammoth=Mamut
-animal.smilodon=Šavlozubý tygr
-animal.pregnant.cow=Březí kráva  
-animal.pregnant.pig=Březí Prase  
-animal.pregnant.sheep=Březí ovce  
-animal.dodo=Dodo
-animal.coelacanth=Latimérie
-
-#Dinosaur Names Clean
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
 entity.fossil.TRex.name=Tyrannosaurus
 entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur
 entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=Stegosaurus
 entity.fossil.Dilophosaurus.name=Dilophosaurus
 entity.fossil.Brachiosaurus.name=Brachiosaurus
@@ -291,14 +313,16 @@ entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 
-#Non-dinosaur names Clean
+#Non-dinosaur names
 entity.fossil.Mammoth.name=Mamut
 entity.fossil.Smilodon.name=Šavlozubý tygr
-entity.fossil.PregnantCow.name=Březí kráva  
-entity.fossil.PregnantPig.name=Březí Prase  
-entity.fossil.PregnantSheep.name=Březí ovce  
+entity.fossil.PregnantCow.name=Březí kráva
+entity.fossil.PregnantPig.name=Březí Prase
+entity.fossil.PregnantSheep.name=Březí ovce
+entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Latimérie
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Majitel:
@@ -324,6 +348,8 @@ pedia.embryo.Chicken=Slepice
 pedia.embryo.Smilodon=Šavlozubý tygr
 pedia.embryo.Mammoth=Mamut
 pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -363,12 +389,6 @@ drum.ordering=Přikazuji
 drum.tRex1=Příkaz T-Rexum ke snídani.
 drum.tRex2=Příkaz T-Rexum k obědu.
 drum.tRex3=Příkaz T-Rexum k večeři.
-
-#Hostile mob names
-mob.bones=Kostěnec
-mob.fpz=Přátelské prasečí zombie
-mob.failuresaurus=Selhalosaurus
-boss.Anu=Anu
 
 #Hostile mob names
 entity.fossil.Bones.name=Kostěnec

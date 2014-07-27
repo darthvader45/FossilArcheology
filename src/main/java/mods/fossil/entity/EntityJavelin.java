@@ -398,7 +398,6 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
             case 4:
                 var2 = new ItemStack(Fossil.goldjavelin, 1);
         }*/
-        System.out.println("pickup1: " + damaged);
         ItemStack var2 = new ItemStack(GetJavelinByMaterial(), 1);
         var2.setItemDamage(var2.getMaxDamage() - damaged);
         return var1.inventory.addItemStackToInventory(var2);
