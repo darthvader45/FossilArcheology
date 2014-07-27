@@ -180,7 +180,7 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
                 case Quagga:
                     birthEntity = new EntityQuagga(this.worldObj);
                     
-                    double d0 = this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int)((EntityQuagga)birthEntity).randomHealthStat();
+                    int d0 = (int)(this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int)((EntityQuagga)birthEntity).randomHealthStat());
                     ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d0 / 3.0D);
                     double d2 = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga)birthEntity).randomSpeedStat();
                     ((EntityQuagga)birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d2 / 3.0D);
